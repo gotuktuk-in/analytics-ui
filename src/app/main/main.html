@@ -1,0 +1,78 @@
+<nav id="load" class="navbar navbar-static-top navbar-inverse" role="navigation"
+     ng-class="{'navbar-header-toggle' : toggle}">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="#" class="tg-menu" ng-click="toggle = !toggle" ng-class="{'red' : toggle}"><i class="fa fa-bars"></i></a>
+      <a class="navbar-brand">
+        <img src="assets/images/tuktuk-logo.png" title="Tuktuk" height="65px">
+      </a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse" ng-class="!navCollapsed && 'in'">
+      <ul class="nav navbar-nav navbar-right top-nav">
+        <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
+          <a href="#" id="vehicle" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
+            Auto<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="vehicle">
+            <li><a href="#">Bike</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
+          <a href="#" id="city" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
+            Indore<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="city">
+            <li><a href="#">Bhopal</a></li>
+            <li><a href="#">Pune</a></li>
+            <li><a href="#">Mumbai</a></li>
+          </ul>
+        </li>
+
+        <li class="bdr-left">
+          <a href="#" class="fa fa-bell"><span class="badge">4</span></a>
+        </li>
+        <li class="">
+          <a href="#" class="fa fa-commenting"><span class="badge">4</span></a>
+        </li>
+        <li class="dropdown" uib-dropdown is-open="status.isopen">
+          <a href="#" id="admin" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
+            Admin <img src="assets/images/rider.jpg" class="img-cirlce"> <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="admin">
+            <li><a href="#">Edit</a></li>
+            <li><a href="#">Logout</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Settings</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="sidenav" ng-class="{'open' : toggle}">
+  <ul class="nav nav-stacked">
+    <li class="active"><a href="#"> <span class="fa fa-map"></span> Maps</a></li>
+    <li><a href="#"> <span class="fa fa-paper-plane"></span> Trips</a></li>
+    <li><a href="#"> <span class="fa fa-car"></span> Drivers</a></li>
+    <li><a href="#"> <span class="fa fa-users"></span> Riders</a></li>
+    <li><a href="#"> <span class="fa fa-barcode"></span> Promotions</a></li>
+    <li><a href="#"> <span class="fa fa-user"></span> Users</a></li>
+    <li><a href="#"> <span class="fa fa-bell"></span> Notifications</a></li>
+    <li><a href="#"> <span class="fa fa-cog"></span> Settings</a></li>
+  </ul>
+</div>
+
+<div class="content" ng-class="{'sidenav-open' : toggle}">
+  <div class="content-div">
+    <ng-map center="[22.717081666666665, 75.87155666666666]" style="height:100%"></ng-map>
+  </div>
+</div>
+
