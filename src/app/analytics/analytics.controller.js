@@ -3,18 +3,10 @@
 
   angular
     .module('tuktukV2Dahboard')
-    .controller('MainController', MainController);
+    .controller('AnalyticsController', AnalyticsController);
 
   /** @ngInject */
-  function MainController($scope, $log, $rootScope) {
-    $scope.status = {
-      isopen: false
-    };
-
-    $scope.toggled = function(open) {
-      $log.log('Dropdown is now: ', open);
-    };
-/*
+  function AnalyticsController($scope, $log, $rootScope) {
 
     var map;
     function initMap() {
@@ -24,8 +16,13 @@
       });
     }
 
+    $scope.status = {
+      isopen: false
+    };
 
-*/
+    $scope.toggled = function(open) {
+      $log.log('Dropdown is now: ', open);
+    };
 
   }
 })();
