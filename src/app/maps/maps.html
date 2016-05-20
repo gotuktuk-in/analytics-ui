@@ -1,9 +1,9 @@
 <div class="content">
   {{fenceData}}
   <div class="content-div">
-    <ng-map center="[22.717081666666665, 75.87155666666666]" style="height:100%">
+    <ng-map center="[22.717081666666665, 75.87155666666666]" style="height:100%" zoom="12">
 
-      <map-data  load-geo-json='fenceData'>
+      <map-data  load-geo-json="http://111.118.241.68:8088/rest/v1/geofence">
       </map-data>
     </ng-map>
   </div>
