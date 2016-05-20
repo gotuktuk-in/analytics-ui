@@ -8,6 +8,13 @@
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
+        .state('login', {
+            url: '/login',
+            templateUrl: 'app/login/login.html',
+            //controller: 'MainController',
+            //controllerAs: 'loginctrl'
+        })
+
       .state('home', {
         url: '/',
         templateUrl: 'app/main/main.html',
