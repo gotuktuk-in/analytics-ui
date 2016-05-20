@@ -214,6 +214,9 @@ h4, .h4 {
     -webkit-transition: all 0.4s;
     transition: all 0.4s;
 }
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #5bc0de;
+}
 .well {
     background-color: rgb(255, 255, 255);
     border: 1px solid rgba(227, 227, 227, 0.3);
