@@ -205,6 +205,114 @@ h4, .h4 {
     padding: 3px 6px;
 }
 
+/***Login*******************************************/
+.btn {
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.box button:hover{
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.well {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(227, 227, 227, 0.3);
+    border-radius: 0;
+    box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
+    padding: 50px 50px;
+    width: 30%;
+}
+.well .btn.form-control {
+    font-size: 16px;
+    height: 42px;
+    text-transform: uppercase;
+}
+.group 			  {
+    position:relative;
+    margin-bottom: 35px;
+}
+.inputMaterial 				{
+    font-size:18px;
+    padding:10px 10px 10px 5px;
+    display:block;
+    width:100%;
+    border:none;
+    border-bottom:1px solid #757575;
+}
+
+.inputMaterial:focus 		{ outline:none;}
+
+/* LABEL ======================================= */
+
+label 				 {
+    color:#999;
+    font-size:14px;
+    font-weight:normal;
+    position:absolute;
+    pointer-events:none;
+    left:5px;
+    top:10px;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+}
+
+/* active state */
+.inputMaterial:focus ~ label, .inputMaterial:valid ~ label 		{
+    top:-20px;
+    font-size:14px;
+    color: #009688;
+}
+
+/* BOTTOM BARS ================================= */
+.bar 	{ position:relative; display:block; width:100%; }
+.bar:before, .bar:after 	{
+    content:'';
+    height:2px;
+    width:0;
+    bottom:0px;
+    position:absolute;
+    background: #aebdc1;
+    transition:0.2s ease all;
+    -moz-transition:0.2s ease all;
+    -webkit-transition:0.2s ease all;
+}
+.bar:before {
+    left:50%;
+}
+.bar:after {
+    right:50%;
+}
+
+/* active state */
+.inputMaterial:focus ~ .bar:before, .inputMaterial:focus ~ .bar:after {
+    width:50%;
+}
+
+
+/* active state */
+.inputMaterial:focus ~ .highlight {
+    -webkit-animation:inputHighlighter 0.3s ease;
+    -moz-animation:inputHighlighter 0.3s ease;
+    animation:inputHighlighter 0.3s ease;
+}
+
+/* ANIMATIONS ================ */
+@-webkit-keyframes inputHighlighter {
+    from { background:#5264AE; }
+    to 	{ width:0; background:transparent; }
+}
+@-moz-keyframes inputHighlighter {
+    from { background:#5264AE; }
+    to 	{ width:0; background:transparent; }
+}
+@keyframes inputHighlighter {
+    from { background:#5264AE; }
+    to 	{ width:0; background:transparent; }
+}
+
+
 @media only screen and (min-width: 992px) {
 
 }
@@ -228,5 +336,14 @@ h4, .h4 {
 
     .sidenav {
         top: 10px;
+    }
+    .well {
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgba(227, 227, 227, 0.3);
+        border-radius: 0;
+        box-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
+        margin: 30px auto;
+        padding: 40px 20px;
+        width: 85%;
     }
 }
