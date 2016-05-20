@@ -7,13 +7,16 @@
                 <div style="height: 60px;">
                 <div class="pull-right">
                     <div class="col-xs-6">
-                        <input type="text" class="form-control" placeholder="Date Picker">
+                        <input class="form-control" type="daterange" ng-model="dates" separator="/" format="YYYY-MM-DD" opens="left">
                     </div>
                     <div class="col-xs-6">
-                        <select class="form-control">
+                        <select ng-model="vm.selectedFrequency" class="form-control"
+                                ng-change="vm.changeFrequency()"
+                                ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value"></select>
+                       <!-- <select class="form-control">
                             <option>Per Hour</option>
                             <option>Per Day</option>
-                        </select>
+                        </select>-->
                     </div>
                 </div>
                 <h3 style="margin-top: 0">Trips</h3>
@@ -24,10 +27,8 @@
                             <div class="panel-body">
                                 <h4 style="margin-top: 0">Requests</h4>
                                 <br>
-
-
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-striped">
+                                    <table ng-table="vm.requestTableParams" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
                                             <th>Hour/Day</th>
@@ -36,12 +37,12 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
+                                        <tr ng-repeat="row in $data track by $index">
                                             <td>6:00-7:00</td>
                                             <td>100</td>
                                             <td>70</td>
                                         </tr>
-                                        <tr>
+                                       <!-- <tr>
                                             <td>7:00-8:00</td>
                                             <td>100</td>
                                             <td>70</td>
@@ -65,7 +66,7 @@
                                             <td>12:00-13:00</td>
                                             <td>100</td>
                                             <td>70</td>
-                                        </tr>
+                                        </tr>-->
 
                                         </tbody>
                                     </table>

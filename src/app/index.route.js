@@ -12,13 +12,14 @@
         url: '/',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
-        controllerAs: 'main'
+        controllerAs: 'main',
+            abstract:true
       })
      .state('home.analytics', {
         url: 'analytics',
         templateUrl: 'app/analytics/analytics.html',
         controller: 'AnalyticsController',
-        controllerAs: 'analytics'
+        controllerAs: 'vm'
       })
       .state('home.maps', {
             url: 'maps',
@@ -27,7 +28,7 @@
             controllerAs: 'maps'
         });
 
-  //  $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/analytics');
   }
 
 })();
