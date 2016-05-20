@@ -18,9 +18,9 @@ function MapService($q, $resource, API) {
         "",
         {id:"@id"},
         {
-            overview: {
+            geofence: {
                 method: 'GET',
-                url:   url + 'drivers/dashboard/overview'
+                url:   url + 'geofence'
             },
 
             registerList: {

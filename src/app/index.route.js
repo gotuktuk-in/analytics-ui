@@ -14,7 +14,6 @@
             //controller: 'MainController',
             //controllerAs: 'loginctrl'
         })
-
       .state('home', {
         url: '/',
         templateUrl: 'app/main/main.html',

@@ -1,6 +1,11 @@
 <div class="content">
+  {{fenceData}}
   <div class="content-div">
-    <ng-map center="[22.717081666666665, 75.87155666666666]" style="height:100%"></ng-map>
+    <ng-map center="[22.717081666666665, 75.87155666666666]" style="height:100%">
+
+      <map-data  load-geo-json='fenceData'>
+      </map-data>
+    </ng-map>
   </div>
 </div>
 
