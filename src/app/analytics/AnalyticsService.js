@@ -18,6 +18,11 @@ function AnalyticsService($q, $resource, API) {
         "",
         {id:"@id"},
         {
+            getTrips: {
+                method: 'GET',
+                url:   url + 'trip/hour',
+                isArray:true
+            },
             overview: {
                 method: 'GET',
                 url:   url + 'rider/day'
