@@ -1,6 +1,93 @@
 <div class="content">
+
+
+
+    <div class="tabs-view">
+      <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}" class="btn btn-default tabs-toggle-btn" title="Show More...">
+        <i class="fa fa-angle-double-right"></i>
+      </button>
+      <div class="tabs-toggle" ng-class="{'tabs-show' : tabView}">
+        <uib-tabset active="active">
+          <uib-tab index="0" heading="Drivers">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="pentagon total">
+                  <div class="text-center">
+                    <h4>Total</h4>
+                    <span>350</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="pentagon occupied">
+                  <div class="text-center">
+                    <h4>Occupied</h4>
+                    <span>75</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="pentagon available">
+                  <div class="text-center">
+                    <h4>Available</h4>
+                    <span>275</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </uib-tab>
+          <uib-tab index="1" heading="Trips">Static content</uib-tab>
+        </uib-tabset>
+      </div>
+    </div>
+
+
+    <div class="info-window">
+      <div class="iw-wrapper">
+        <div class="iw-header">
+          <h3>Praveen Sonvane</h3>
+          <img src="assets/images/rider.jpg" class="iw-driver">
+        </div>
+        <div class="iw-content">
+          <table class="table">
+            <tbody>
+            <tr>
+              <td><i class="fa fa-mobile-phone"></i> Phone#</td>
+              <td>9893098930</td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-taxi"></i> Vehicle#</td>
+              <td>MP09T38541</td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-user"></i> ID#</td>
+              <td>9893098930</td>
+            </tr>
+            <tr>
+              <td><i class="fa fa-map-marker"></i> Location <span>(12:00am)</span></td>
+              <td>Jhabua Tower, RNT Marg, Indore</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td align="right"><a href="#">More..</a> </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+  {{fenceData}}
   <div class="content-div">
-    <ng-map center="[22.717081666666665, 75.87155666666666]" style="height:100%"></ng-map>
+    <ng-map center="[22.717081666666665, 75.87155666666666]" style="height:100%" zoom="12">
+
+      <map-data  load-geo-json="http://111.118.241.68:8088/rest/v1/geofence">
+      </map-data>
+    </ng-map>
   </div>
 </div>
 

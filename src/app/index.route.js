@@ -12,9 +12,8 @@
             url: '/login',
             templateUrl: 'app/login/login.html',
             controller: 'LoginController',
-            controllerAs: 'loginctrl'
+            controllerAs: 'vm'
         })
-
       .state('home', {
         url: '/',
         templateUrl: 'app/main/main.html',
@@ -33,7 +32,13 @@
             templateUrl: 'app/maps/maps.html',
             controller: 'MapsController',
             controllerAs: 'maps'
-        });
+        })
+  .state('home.drivers', {
+          url: 'drivers',
+          templateUrl: 'app/drivers/drivers.html',
+          controller: 'DriversController',
+          controllerAs: 'drivers'
+      });
 
     $urlRouterProvider.otherwise('/analytics');
   }
