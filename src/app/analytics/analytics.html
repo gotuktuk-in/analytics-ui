@@ -28,7 +28,8 @@
                                 <h4 style="margin-top: 0">Requests</h4>
                                 <br>
                                 <div class="table-responsive">
-                                    <table ng-table="vm.requestTableParams" class="table table-bordered table-striped">
+                                    <nvd3 options="options" data="data"></nvd3>
+                                    <!--<table ng-table="vm.requestTableParams" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
                                             <th>Hour/Day</th>
@@ -37,37 +38,11 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr ng-repeat="row in $data track by $index">
-                                            <td>6:00-7:00</td>
+                                        <tr ng-repeat="row in vm.trips track by $index">
+                                            <td>{{row.duration}}</td>
                                             <td>100</td>
                                             <td>70</td>
                                         </tr>
-                                       <!-- <tr>
-                                            <td>7:00-8:00</td>
-                                            <td>100</td>
-                                            <td>70</td>
-                                        </tr>
-                                        <tr>
-                                            <td>8:00-9:00</td>
-                                            <td>100</td>
-                                            <td>70</td>
-                                        </tr>
-                                        <tr>
-                                            <td>9:00-10:00</td>
-                                            <td>100</td>
-                                            <td>70</td>
-                                        </tr>
-                                        <tr>
-                                            <td>11:00-12:00</td>
-                                            <td>100</td>
-                                            <td>70</td>
-                                        </tr>
-                                        <tr>
-                                            <td>12:00-13:00</td>
-                                            <td>100</td>
-                                            <td>70</td>
-                                        </tr>-->
-
                                         </tbody>
                                     </table>
                                     <nav>
@@ -80,7 +55,7 @@
                                             <li><a href="#">5</a></li>
                                             <li><a aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
                                         </ul>
-                                    </nav>
+                                    </nav>-->
                                 </div>
                             </div>
                         </div>
