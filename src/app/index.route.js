@@ -31,7 +31,7 @@
             url: 'maps',
             templateUrl: 'app/maps/maps.html',
             controller: 'MapsController',
-            controllerAs: 'maps'
+            controllerAs: 'vm'
         })
   .state('home.drivers', {
           url: 'drivers',
