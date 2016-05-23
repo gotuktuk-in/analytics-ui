@@ -32,7 +32,13 @@
             templateUrl: 'app/maps/maps.html',
             controller: 'MapsController',
             controllerAs: 'maps'
-        });
+        })
+  .state('home.drivers', {
+          url: 'drivers',
+          templateUrl: 'app/drivers/drivers.html',
+          controller: 'DriversController',
+          controllerAs: 'drivers'
+      });
 
     $urlRouterProvider.otherwise('/analytics');
   }
