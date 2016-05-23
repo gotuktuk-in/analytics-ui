@@ -13,6 +13,10 @@
         console.log('vm.fenceURL ', vm.fenceURL)
         NgMap.getMap().then(function (map) {
             vm.map = map;
+            map.data.setStyle({
+                fillColor: 'green',
+                strokeWeight: 1
+            });
             MapService.geofence({}, function (response) {
                     vm.fenceData = angular.fromJson(response.geo)
                     console.log("vm.fenceData ", vm.fenceData)
