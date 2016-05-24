@@ -29,7 +29,7 @@
             {{selectedCity.name}}<span class="caret"></span>
           </a>
           <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="city">
-            <li ng-click="ChangeCity(city)" ng-repeat="city in cities"><a >{{city.name}}</a></li>
+            <li  ng-click="ChangeCity(city)" ng-repeat="city in cities"><a >{{city.name}}</a></li>
           </ul>
         </li>
 
@@ -40,7 +40,7 @@
           <a  class="fa fa-commenting"><span class="badge">4</span></a>
         </li>-->
         <li class="dropdown" uib-dropdown is-open="status.isopen">
-          <a ng-click="logout()"  id="admin" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
+          <a href="#" ng-click="logout()"  id="admin" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
             Admin | Logout <!--<img src="assets/images/rider.jpg" class="img-cirlce"> <span class="caret"></span>-->
           </a><!--
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="admin">
