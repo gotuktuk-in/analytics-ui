@@ -21,6 +21,7 @@ function MapService($q, $resource, API) {
             geofence: {
                 method: 'GET',
                 url:   url + 'geofence'
+                //http://111.118.241.68:8088/rest/v1/geofence
             },
 
             registerList: {

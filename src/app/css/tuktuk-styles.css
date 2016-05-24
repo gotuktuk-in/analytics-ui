@@ -64,6 +64,7 @@ h4, .h4 {
     line-height: 38px;
     padding: 10px;
     color: #333;
+    cursor: pointer;
 }
 
 .navbar-toggle {
@@ -97,10 +98,10 @@ h4, .h4 {
 }
 
 .sidenav {
-    width: 0;
+    width: 250px;
     overflow: hidden;
     position: fixed;
-    left: 0;
+    left: -250px;
     top: 0px;
     bottom: 0;
     transition: all 0.2s ease-in-out;
@@ -112,7 +113,7 @@ h4, .h4 {
 }
 
 .sidenav.open {
-    width: 250px;
+    left:0px;
 }
 
 .navbar-static-top {
@@ -178,13 +179,14 @@ h4, .h4 {
     color: #888;
 }
 
-.top-nav li a span {
-}
-
-.top-nav li a:hover,
-.top-nav li a:focus {
-    background-color: transparent !important;
+.top-nav > li > a:hover,
+.top-nav > li > a:focus {
+    background-color: transparent;
     color: #333 !important;
+}
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
+    border: solid 1px #ccc;
+    border: solid 1px rgba(0,0,0,0.15);
 }
 
 .img-cirlce {
