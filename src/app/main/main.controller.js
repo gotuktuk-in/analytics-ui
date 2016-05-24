@@ -10,15 +10,15 @@
 
     $scope.cities = StaticDataService.cities
     $scope.vehicleTypes = StaticDataService.vehicleTypes
-    $scope.selectedCity = StaticDataService.cities[0]
-    $scope.selectedVehicle = StaticDataService.vehicleTypes[0]
+    $rootScope.selectedCity = StaticDataService.cities[0]
+    $rootScope.selectedVehicle = StaticDataService.vehicleTypes[0]
 
     $scope.ChangeCity = function (cityObj) {
-      $scope.selectedCity = cityObj;
+      $rootScope.selectedCity = cityObj;
     }
 
     $scope.ChangeVehicle = function (vehicleObj) {
-      $scope.selectedVehicle = vehicleObj;
+      $rootScope.selectedVehicle = vehicleObj;
     }
 
     $scope.status = {

@@ -22,6 +22,10 @@ function LoginService($q, $resource, API) {
                 method: 'POST',
                 url:   url + 'login'
             },
+            logout: {
+                method: 'POST',
+                url:   url + 'logout'
+            },
 
 
         }
