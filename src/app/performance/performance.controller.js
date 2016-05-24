@@ -7,7 +7,9 @@
 
   /** @ngInject */
   function PerformanceController($scope, $log, $rootScope, PerformanceService, PerformanceHandler, NgTableParams, API, $resource) {
+
     var vm = this
+
     $scope.dates = {};
     $scope.dates.startDate = moment().subtract(30, 'days').format("YYYY-MM-DD")
     $scope.dates.endDate = moment().format("YYYY-MM-DD")

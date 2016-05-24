@@ -42,7 +42,7 @@ h4, .h4 {
     color: #666;
 }
 
-.dropdown .dropdown-menu > li > a {
+.top-nav .dropdown .dropdown-menu > li > a {
     line-height: 20px;
     font-size: 12px;
     text-transform: uppercase;
@@ -217,13 +217,13 @@ h4, .h4 {
     transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
 }
-.dropdown-menu {
+.top-nav .dropdown-menu {
     display: inline-block;
     visibility: hidden;
     opacity: 0;
     top: 0%;
 }
-.open > .dropdown-menu {
+.top-nav .open > .dropdown-menu {
     visibility: visible;
     opacity: 1;
     top: 100%;
@@ -400,19 +400,19 @@ label 				 {
     display: block;
     font-size: 14px;
 }
-.available {
+.tabs-toggle .available {
     background-color: #7ed321;
     color: #FFF;
 }
-.available:before {
+.tabs-toggle .available:before {
     border-top: 25px solid #7ed321;
 }
-.available h4 {
+.tabs-toggle .available h4 {
     font-size: 14px;
     margin: 16px 0px 0px;
     color: #FFF;
 }
-.available span {
+.tabs-toggle .available span {
     display: block;
     font-size: 14px;
 }
