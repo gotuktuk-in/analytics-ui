@@ -17,21 +17,19 @@
       <ul class="nav navbar-nav navbar-right top-nav">
         <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
           <a  id="vehicle" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
-            Auto<span class="caret"></span>
+            {{selectedVehicle.name}}<span class="caret"></span>
           </a>
           <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="vehicle">
-            <li><a >Bike</a></li>
+            <li ng-click="ChangeVehicle(vehicle)" ng-repeat="vehicle in vehicleTypes"><a >{{vehicle.name}}</a></li>
           </ul>
         </li>
 
         <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
           <a  id="city" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
-            Indore<span class="caret"></span>
+            {{selectedCity.name}}<span class="caret"></span>
           </a>
           <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="city">
-            <li><a >Bhopal</a></li>
-            <li><a >Pune</a></li>
-            <li><a >Mumbai</a></li>
+            <li ng-click="ChangeCity(city)" ng-repeat="city in cities"><a >{{city.name}}</a></li>
           </ul>
         </li>
 

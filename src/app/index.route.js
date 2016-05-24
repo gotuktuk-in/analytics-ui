@@ -22,7 +22,7 @@
             abstract:true
       })
      .state('home.analytics', {
-        url: 'analytics',
+        url: 'analytics/:city/:vehicleType',
         templateUrl: 'app/analytics/analytics.html',
         controller: 'AnalyticsController',
         controllerAs: 'vm'
@@ -40,7 +40,7 @@
           controllerAs: 'drivers'
       });
 
-    $urlRouterProvider.otherwise('/analytics');
+    $urlRouterProvider.otherwise('/login');
   }
 
 })();
