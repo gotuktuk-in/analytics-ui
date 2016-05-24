@@ -3,10 +3,10 @@
 
   angular
     .module('tuktukV2Dahboard')
-    .controller('AnalyticsController', AnalyticsController);
+    .controller('PerformanceController', PerformanceController);
 
   /** @ngInject */
-  function AnalyticsController($scope, $log, $rootScope, AnalyticsService ,AnalyticsHandler, NgTableParams, API, $resource) {
+  function PerformanceController($scope, $log, $rootScope, PerformanceService, PerformanceHandler, NgTableParams, API, $resource) {
     var vm = this
     $scope.dates = {};
     $scope.dates.startDate = moment().subtract(30, 'days').format("YYYY-MM-DD")
@@ -35,11 +35,11 @@
       startDate =  moment($scope.dates.startDate).startOf('day').format("YYYYMMDDHH").toString()
       endDate =  moment($scope.dates.endDate).endOf('day').format("YYYYMMDDHH").toString()
 
-      AnalyticsService.getTrips({startDate:startDate, endDate:endDate,city:"indore",count:1,page:1}, {}, function (response) {
+      PerformanceService.getTrips({startDate:startDate, endDate:endDate,city:"indore",count:1,page:1}, {}, function (response) {
 
-        AnalyticsHandler.trips = response;
-        console.log('get Trips ',AnalyticsHandler.getTrips())
-        vm.trips = AnalyticsHandler.getTrips();
+        PerformanceHandler.trips = response;
+        console.log('get Trips ',PerformanceHandler.getTrips())
+        vm.trips = PerformanceHandler.getTrips();
       }, function (err) {
         console.log(err)
         $scope.error = true;

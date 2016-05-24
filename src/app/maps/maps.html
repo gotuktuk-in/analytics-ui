@@ -11,7 +11,7 @@
                 <div class="pentagon total">
                   <div class="text-center">
                     <h4>Total</h4>
-                    <span>350</span>
+                    <span>{{vm.allDrivers.total}}</span>
                   </div>
                 </div>
               </div>
@@ -19,7 +19,7 @@
                 <div class="pentagon occupied">
                   <div class="text-center">
                     <h4>Occupied</h4>
-                    <span>75</span>
+                    <span>{{vm.allDrivers.occupied.drivers.total}}</span>
                   </div>
                 </div>
               </div>
@@ -27,7 +27,7 @@
                 <div class="pentagon available">
                   <div class="text-center">
                     <h4>Available</h4>
-                    <span>275</span>
+                    <span>{{vm.allDrivers.available.drivers.total}}</span>
                   </div>
                 </div>
               </div>
@@ -39,10 +39,10 @@
     </div>
 
 
-    <div class="info-window">
+    <div ng-if="false" class="info-window">
       <div class="iw-wrapper">
         <div class="iw-header">
-          <h3>Praveen Sonvane</h3>
+          <h3>Smriti Irani</h3>
           <img src="assets/images/rider.jpg" class="iw-driver">
         </div>
         <div class="iw-content">
@@ -76,8 +76,33 @@
 
   <div class="content-div">
     <ng-map center="[22.717081666666665, 75.87155666666666]" style="height:100%" zoom="12">
-      <map-data  add-geo-json={{vm.fenceData}}>
+      <map-data  load-geo-json="http://111.118.241.68:8088/rest/v1/geofence">
       </map-data>
+      <div>
+        <marker ng-repeat="driver in vm.allDrivers.available.drivers track by $index"icon="{
+        url:'assets/images/icons/marker-green.svg',
+        scaledSize:[30,30],
+        origin: [0,0],
+        anchor: [15,15]
+      }"
+                id="custom-marker-{{$index}}"
+                on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)"
+                position="{{driver.marker}}">
+        </marker>
+      </div>
+      <div>
+        <marker ng-repeat="driver in vm.allDrivers.occupied.drivers track by $index" icon="{
+        url:'assets/images/icons/marker-red.svg',
+        scaledSize:[30,30],
+        origin: [0,0],
+        anchor: [15,15]
+      }"
+                id="custom-marker-{{$index}}"
+                on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)"
+                position="{{driver.marker}}">
+        </marker>
+      </div>
+
     </ng-map>
   </div>
 </div>

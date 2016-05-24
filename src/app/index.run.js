@@ -6,10 +6,12 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log, UserService, toastr, $state, $rootScope, LoginService) {
+  function runBlock($log, UserService, toastr, $state, $rootScope, LoginService, $templateCache) {
 
     $log.debug('runBlock end');
-
+   /* $rootScope.$on('$viewContentLoaded', function() {
+      $templateCache.removeAll();
+    });*/
     $rootScope.logout = function()
     {
       LoginService.logout({},function(response){
@@ -28,7 +30,7 @@
       if(UserService.getUser() != null && (toState.name=="login"))
       {
         $rootScope.isAuthenticated = true;
-        $state.go("home.analytics")
+        $state.go("home.performance")
         e.preventDefault();
         //   return
 
