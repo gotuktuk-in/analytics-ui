@@ -77,15 +77,9 @@
       </div>
     </div>
 
-
-
-
-
-  {{fenceData}}
   <div class="content-div">
     <ng-map center="[22.717081666666665, 75.87155666666666]" style="height:100%" zoom="12">
-
-      <map-data  add-geo-json="'vm.fenceData'">
+      <map-data  add-geo-json={{vm.fenceData}}>
       </map-data>
     </ng-map>
   </div>

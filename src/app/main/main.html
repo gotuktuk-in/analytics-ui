@@ -16,22 +16,20 @@
     <div id="navbar" class="navbar-collapse collapse" ng-class="!navCollapsed && 'in'">
       <ul class="nav navbar-nav navbar-right top-nav">
         <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
-          <a  id="vehicle" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
-            Auto<span class="caret"></span>
+          <a href="#"  id="vehicle" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
+            {{selectedVehicle.name}}<span class="caret"></span>
           </a>
           <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="vehicle">
-            <li><a >Bike</a></li>
+            <li ng-click="ChangeVehicle(vehicle)" ng-repeat="vehicle in vehicleTypes"><a >{{vehicle.name}}</a></li>
           </ul>
         </li>
 
         <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
-          <a  id="city" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
-            Indore<span class="caret"></span>
+          <a href="#" id="city" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
+            {{selectedCity.name}}<span class="caret"></span>
           </a>
           <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="city">
-            <li><a >Bhopal</a></li>
-            <li><a >Pune</a></li>
-            <li><a >Mumbai</a></li>
+            <li ng-click="ChangeCity(city)" ng-repeat="city in cities"><a >{{city.name}}</a></li>
           </ul>
         </li>
 
@@ -42,15 +40,15 @@
           <a  class="fa fa-commenting"><span class="badge">4</span></a>
         </li>-->
         <li class="dropdown" uib-dropdown is-open="status.isopen">
-          <a  id="admin" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
+          <a href="#"  id="admin" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
             Admin | Logout <!--<img src="assets/images/rider.jpg" class="img-cirlce"> <span class="caret"></span>-->
-          </a>
+          </a><!--
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="admin">
             <li><a >Edit</a></li>
             <li><a >Logout</a></li>
             <li role="separator" class="divider"></li>
             <li><a >Settings</a></li>
-          </ul>
+          </ul>-->
         </li>
       </ul>
     </div>

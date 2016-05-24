@@ -6,7 +6,7 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($scope, $log, $rootScope, $http, $state, LoginService, toastr) {
+  function LoginController($scope, $log, $rootScope, $http, $state, LoginService, toastr, StaticDataService) {
 
     $scope.loginUser = function () {
       LoginService.doLogin($scope.user,
@@ -17,7 +17,7 @@
               //CommonService.setUser(response)
               $rootScope.isAuthenticated = true;
 
-              $state.go("home.analytics")
+              $state.go("home.analytics" ,{city: StaticDataService.cities[0].value, vehicleType:StaticDataService.vehicleTypes[0].value})
               toastr.success("You are successfully logged in.");
             }
             else
