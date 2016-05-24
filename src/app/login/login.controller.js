@@ -6,7 +6,7 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($scope, $log, $rootScope, $http, $state, UserService, toastr, StaticDataService) {
+  function LoginController($scope, $log, $rootScope, $http, $state, LoginService, UserService, toastr, StaticDataService) {
 
     $scope.loginUser = function () {
       LoginService.doLogin($scope.user,

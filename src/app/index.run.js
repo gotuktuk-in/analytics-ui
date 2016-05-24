@@ -22,6 +22,18 @@
       $state.go("login")
       $rootScope.isAuthenticated = false;
     }
+
+    $rootScope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
+      console.log("to "+toState.name +" $state.current.name "+ $state.current.name)
+      if(UserService.getUser() != null && (toState.name=="login"))
+      {
+        $rootScope.isAuthenticated = true;
+        $state.go("home.analytics")
+        e.preventDefault();
+        //   return
+
+      }
+    });
   }
 
 })();

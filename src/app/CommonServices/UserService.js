@@ -12,7 +12,7 @@ angular
     .module('tuktukV2Dahboard')
     .service('UserService', UserService)
 
-function UserService($q, $resource, API) {
+function UserService($http,$cookies, $resource, $rootScope, API) {
     this.user
     this.setUser = function (user) {
         this.user = user;
