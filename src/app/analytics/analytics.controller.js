@@ -6,8 +6,9 @@
     .controller('AnalyticsController', AnalyticsController);
 
   /** @ngInject */
-  function AnalyticsController($scope, $log, $rootScope, AnalyticsService ,AnalyticsHandler, NgTableParams, API, $resource) {
+  function AnalyticsController($scope, $filter, $log, $rootScope, AnalyticsService ,AnalyticsHandler, NgTableParams, API, $resource) {
     var vm = this
+
     $scope.dates = {};
     $scope.dates.startDate = moment().subtract(30, 'days').format("YYYY-MM-DD")
     $scope.dates.endDate = moment().format("YYYY-MM-DD")
