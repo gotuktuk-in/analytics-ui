@@ -45,6 +45,7 @@ h4, .h4 {
 .dropdown .dropdown-menu > li > a {
     line-height: 20px;
     font-size: 12px;
+    text-transform: uppercase;
 }
 
 .navbar-header-toggle {
@@ -177,6 +178,11 @@ h4, .h4 {
     padding-top: 0;
     text-transform: uppercase;
     color: #888;
+    border-width: 1px;
+    border-color: transparent;
+    border-style: solid;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
 }
 
 .top-nav > li > a:hover,
@@ -185,8 +191,15 @@ h4, .h4 {
     color: #333 !important;
 }
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus{
-    border: solid 1px #ccc;
     border: solid 1px rgba(0,0,0,0.15);
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+}
+.caret {
+    margin-left: 6px;
+    color: #666;
 }
 
 .img-cirlce {
@@ -199,7 +212,22 @@ h4, .h4 {
 .navbar-nav > li > a.fa-bell, .navbar-nav > li > a.fa-commenting {
     font-size: 16px;
 }
-
+.navbar-nav > li > .dropdown-menu {
+    margin-top: -1px;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+}
+.dropdown-menu {
+    display: inline-block;
+    visibility: hidden;
+    opacity: 0;
+    top: 0%;
+}
+.open > .dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+    top: 100%;
+}
 .badge {
     font-size: 11px;
     font-weight: normal;
