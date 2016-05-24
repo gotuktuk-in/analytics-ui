@@ -8,7 +8,7 @@
     /** @ngInject */
     function MapsController($scope, $log, $rootScope, MapService, NgMap, API) {
         var vm = this
-        vm.fenceData;
+        vm.fenceData = {"type":"FeatureCollection","features":[]}
         vm.fenceURL =API+ 'geofence'
         console.log('vm.fenceURL ', vm.fenceURL)
         NgMap.getMap().then(function (map) {
@@ -17,13 +17,13 @@
                 fillColor: 'green',
                 strokeWeight: 1
             });
-            MapService.geofence({}, function (response) {
-                    vm.fenceData = angular.fromJson(response.geo)
+            /*MapService.geofence({}, function (response) {
+                   vm.fenceData =toString(response)// angular.toJson(response)
                     console.log("vm.fenceData ", vm.fenceData)
                 }, function (error) {
                     console.log("error ", error)
                 }
-            )
+            )*/
         });
         $scope.status = {
             isopen: false
