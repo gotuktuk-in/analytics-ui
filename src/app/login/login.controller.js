@@ -6,17 +6,16 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($scope, $log, $rootScope, $http, $state, LoginService, toastr, StaticDataService) {
+  function LoginController($scope, $log, $rootScope, $http, $state, UserService, toastr, StaticDataService) {
 
     $scope.loginUser = function () {
       LoginService.doLogin($scope.user,
           function (response) {
             console.log(response)
             if (response.success) {
+              UserService.setUser(response)
               $http.defaults.headers.common.Authorization = 'Basic '+response.token ;
-              //CommonService.setUser(response)
-              $rootScope.isAuthenticated = true;
-
+             $rootScope.isAuthenticated = true;
               $state.go("home.analytics" ,{city: StaticDataService.cities[0].value, vehicleType:StaticDataService.vehicleTypes[0].value})
               toastr.success("You are successfully logged in.");
             }
