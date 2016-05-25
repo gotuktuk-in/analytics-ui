@@ -16,11 +16,11 @@ function PerformanceService($q, $resource, API) {
   var url = API;
     return $resource(
         "",
-        {id:"@id"},
+        {frequency:"@frequency", vehicle:"@vehicle"},
         {
             getTrips: {
                 method: 'GET',
-                url:   url + 'trip/hour',
+                url:   url + 'trip/:frequency/:vehicle',
                 isArray:true
             },
             overview: {

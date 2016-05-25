@@ -28,7 +28,7 @@
         controllerAs: 'vm'
       })
       .state('home.maps', {
-            url: 'maps',
+            url: 'maps/:city/:vehicleType',
             templateUrl: 'app/maps/maps.html',
             controller: 'MapsController',
             controllerAs: 'vm'
