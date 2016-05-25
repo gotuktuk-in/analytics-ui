@@ -14,9 +14,11 @@ angular
 
 function ChartConfigService($q, $resource, API) {
       var factory = {}
+        factory.lineChartConfig ={refreshDataOnly: false}
         factory.cumulativeLineChartOptions = {
             chart: {
-                type: 'cumulativeLineChart',
+                type: 'lineChart',
+            //    forceY : [0, 5],
                 height: 450,
                 margin : {
                     top: 20,
@@ -26,30 +28,33 @@ function ChartConfigService($q, $resource, API) {
                 },
                 x: function(d){ return d[0]; },
               //  y: function(d){ return d[1]/100; },
-                y: function(d){ return d[1]; },
+                y: function(d){return d[1]; },
              //   average: function(d) { return d.mean/100; },
 
                 color: d3.scale.category10().range(),
                 duration: 300,
                 useInteractiveGuideline: true,
                 clipVoronoi: false,
-
+                showYAxis:true,
                 xAxis: {
-                    axisLabel: 'X Axis',
+                    axisLabel: 'Date',
                     tickFormat: function(d) {
-                        return d3.time.format('%m/%d/%y')(new Date(d))
+                        console.log("d ", d)
+                     //   return d3.time.format('%d %B %y')(new Date(d))
+                        return d3.time.format('%I %p')(new Date(d))
                     },
-                    showMaxMin: false,
+                    showMaxMin: true,
                     staggerLabels: true
                 },
 
                 yAxis: {
-                    axisLabel: 'Y Axis',
+                    axisLabel: 'Trips',
                     tickFormat: function(d){
-                        return d3.format(',')(d);
+                        return d;
                        // return d3.format(',.1%')(d);
                     },
-                    axisLabelDistance: 20
+                    showMaxMin: true,
+                    axisLabelDistance: 200
                 }
             }
         };
