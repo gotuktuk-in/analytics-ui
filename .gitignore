@@ -9,4 +9,4 @@ node_modules/
 .idea/libraries/analytics_ui_node_modules.xml
 .tmp
 .tmp/
-.tmp/serve/index.html
+.tmp/serve/
