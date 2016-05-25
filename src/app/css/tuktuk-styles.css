@@ -545,13 +545,18 @@ label 				 {
 
 }
 .flx-container .flx-cnt-right div h4 {
-    font-size: 15px;
+    font-size: 16px;
     margin: 0px;
+    color: #333;
+    font-family: "allerregular";
 }
 .flx-container .flx-cnt-right div span {
     font-size: 11px;
     text-transform: uppercase;
     color: #999;
+    display: inline-block;
+    line-height: 14px;
+    margin-top: 6px;
 }
 .tab-container {
     padding: 30px 40px;
@@ -599,7 +604,7 @@ label 				 {
 
 .flx-performance { height: 100px;}
 .flx-performance .flx-cnt-right {flex: 1 auto;}
-.flx-performance .flx-cnt-right div {text-align: center; padding: 35px 20px;}
+.flx-performance .flx-cnt-right div {text-align: left; padding:25px 40px;}
 
 
 
