@@ -583,8 +583,11 @@ label 				 {
     box-shadow: none;
 }
 
-/***************************Drivers End/
+/***************************Drivers End*/
 
+.flx-performance { height: 100px;}
+.flx-performance .flx-cnt-right {flex: 1 auto;}
+.flx-performance .flx-cnt-right div {text-align: center; padding: 35px 20px;}
 
 
 /* active state */
