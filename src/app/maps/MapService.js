@@ -18,7 +18,7 @@ function MapService($q, $resource, API) {
         "",
         {id:"@id"},
         {
-            geofence: {
+            getDrivers: {
                 method: 'GET',
                 url:   url + 'map/driver'
                 //http://111.118.241.68:8088/rest/v1/geofence

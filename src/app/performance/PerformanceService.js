@@ -10,9 +10,9 @@
 
 angular
     .module('tuktukV2Dahboard')
-    .factory('AnalyticsService', AnalyticsService)
+    .factory('PerformanceService', PerformanceService)
 
-function AnalyticsService($q, $resource, API) {
+function PerformanceService($q, $resource, API) {
   var url = API;
     return $resource(
         "",

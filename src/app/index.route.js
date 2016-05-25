@@ -21,10 +21,10 @@
         controllerAs: 'main',
             abstract:true
       })
-     .state('home.analytics', {
-        url: 'analytics/:city/:vehicleType',
-        templateUrl: 'app/analytics/analytics.html',
-        controller: 'AnalyticsController',
+     .state('home.performance', {
+        url: 'performance/:city/:vehicleType',
+        templateUrl: 'app/performance/performance.html',
+        controller: 'PerformanceController',
         controllerAs: 'vm'
       })
       .state('home.maps', {

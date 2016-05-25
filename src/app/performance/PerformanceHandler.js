@@ -10,9 +10,9 @@
 
 angular
     .module('tuktukV2Dahboard')
-    .factory('AnalyticsHandler', AnalyticsHandler)
+    .factory('PerformanceHandler', PerformanceHandler)
 
-function AnalyticsHandler() {
+function PerformanceHandler() {
     var factory = {}
     factory.trips = []
     factory.getTrips = function()

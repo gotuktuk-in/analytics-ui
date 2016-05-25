@@ -16,7 +16,7 @@ function UserService($http,$cookies, $resource, $rootScope, API) {
     this.user
     this.setUser = function (user) {
         this.user = user;
-        $cookies.putObject("tuktuk.analytics.admin", this.user)
+        $cookies.putObject("tuktuk.performance.admin", this.user)
         $rootScope.isAuthenticated = true
     }
     this.getUser = function () {
@@ -25,7 +25,7 @@ function UserService($http,$cookies, $resource, $rootScope, API) {
         }
         else {
 
-            this.user = $cookies.getObject('tuktuk.analytics.admin')
+            this.user = $cookies.getObject('tuktuk.performance.admin')
             if (this.user == undefined || this.user == 'undefined') {
                 this.user = null
             }
@@ -34,7 +34,7 @@ function UserService($http,$cookies, $resource, $rootScope, API) {
     }
     this.clearUser = function () {
         this.user = null;
-        $cookies.remove('tuktuk.analytics.admin')
+        $cookies.remove('tuktuk.performance.admin')
         $http.defaults.headers.common.Authorization = '';
     }
 
