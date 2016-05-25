@@ -6,9 +6,11 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log, UserService, toastr, $state, $rootScope, LoginService, $templateCache) {
+  function runBlock($log, UserService,StaticDataService, toastr, $state, $rootScope, LoginService, $templateCache) {
 
     $log.debug('runBlock end');
+      $rootScope.city = StaticDataService.cities[0].value
+      $rootScope.vehicleType = StaticDataService.vehicleTypes[0].value
    /* $rootScope.$on('$viewContentLoaded', function() {
       $templateCache.removeAll();
     });*/

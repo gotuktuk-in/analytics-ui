@@ -16,7 +16,8 @@
               UserService.setUser(response)
               $http.defaults.headers.common.Authorization = 'Basic '+response.token ;
              $rootScope.isAuthenticated = true;
-              $state.go("home.performance" ,{city: StaticDataService.cities[0].value, vehicleType:StaticDataService.vehicleTypes[0].value})
+
+              $state.go("home.performance" ,{city:  $rootScope.city , vehicleType:$rootScope.vehicleType})
               toastr.success("You are successfully logged in.");
             }
             else
