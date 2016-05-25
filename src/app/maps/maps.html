@@ -1,4 +1,82 @@
 <div class="content">
+
+
+
+
+
+  <div class="content-div">
+
+    <ng-map center="[22.717081666666665, 75.87155666666666]" style="height:100%" zoom="12">
+      <map-data  load-geo-json="http://111.118.241.68:8088/rest/v1/geofence">
+      </map-data>
+      <div>
+        <marker ng-repeat="driver in vm.allDrivers.available.drivers track by $index"icon="{
+        url:'assets/images/icons/marker-green.svg',
+        scaledSize:[30,30],
+        origin: [0,0],
+        anchor: [15,15]
+      }"
+                id="custom-marker-{{$index}}"
+                on-click="vm.map.showInfoWindow('foo-iw', 'custom-marker-'+$index)"
+                position="{{driver.marker}}">
+        </marker>
+      </div>
+      <div>
+        <marker ng-repeat="driver in vm.allDrivers.occupied.drivers track by $index" icon="{
+        url:'assets/images/icons/marker-red.svg',
+        scaledSize:[30,30],
+        origin: [0,0],
+        anchor: [15,15]
+      }"
+                id="custom-marker-{{$index}}"
+                on-click="vm.map.showInfoWindow('foo-iw', 'custom-marker-'+$index)"
+                position="{{driver.marker}}">
+        </marker>
+      </div>
+
+      <info-window id="foo-iw">
+
+          <div ng-non-bindable>
+            <div class="info-window" id="info-window">
+              <div class="iw-wrapper">
+                <div class="iw-header">
+                  <h3>Smriti Irani</h3>
+                  <img src="assets/images/rider.jpg" class="iw-driver">
+                </div>
+                <div class="iw-content">
+                  <table class="table">
+                    <tbody>
+                    <tr>
+                      <td><i class="fa fa-mobile-phone"></i> Phone#</td>
+                      <td>9893098930</td>
+                    </tr>
+                    <tr>
+                      <td><i class="fa fa-taxi"></i> Vehicle#</td>
+                      <td>MP09T38541</td>
+                    </tr>
+                    <tr>
+                      <td><i class="fa fa-user"></i> ID#</td>
+                      <td>9893098930</td>
+                    </tr>
+                    <tr>
+                      <td><i class="fa fa-map-marker"></i> Location <span>(12:00am)</span></td>
+                      <td>Jhabua Tower, RNT Marg, Indore</td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td align="right"><a href="#">More..</a> </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+      </info-window>
+
+    </ng-map>
     <div class="tabs-view">
       <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}" class="btn btn-default tabs-toggle-btn" title="Show More...">
         <i class="fa fa-angle-double-right"></i>
@@ -37,73 +115,6 @@
         </uib-tabset>
       </div>
     </div>
-
-
-    <div ng-if="false" class="info-window">
-      <div class="iw-wrapper">
-        <div class="iw-header">
-          <h3>Smriti Irani</h3>
-          <img src="assets/images/rider.jpg" class="iw-driver">
-        </div>
-        <div class="iw-content">
-          <table class="table">
-            <tbody>
-            <tr>
-              <td><i class="fa fa-mobile-phone"></i> Phone#</td>
-              <td>9893098930</td>
-            </tr>
-            <tr>
-              <td><i class="fa fa-taxi"></i> Vehicle#</td>
-              <td>MP09T38541</td>
-            </tr>
-            <tr>
-              <td><i class="fa fa-user"></i> ID#</td>
-              <td>9893098930</td>
-            </tr>
-            <tr>
-              <td><i class="fa fa-map-marker"></i> Location <span>(12:00am)</span></td>
-              <td>Jhabua Tower, RNT Marg, Indore</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td align="right"><a href="#">More..</a> </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-  <div class="content-div">
-    <ng-map center="[22.717081666666665, 75.87155666666666]" style="height:100%" zoom="12">
-      <map-data  load-geo-json="http://111.118.241.68:8088/rest/v1/geofence">
-      </map-data>
-      <div>
-        <marker ng-repeat="driver in vm.allDrivers.available.drivers track by $index"icon="{
-        url:'assets/images/icons/marker-green.svg',
-        scaledSize:[30,30],
-        origin: [0,0],
-        anchor: [15,15]
-      }"
-                id="custom-marker-{{$index}}"
-                on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)"
-                position="{{driver.marker}}">
-        </marker>
-      </div>
-      <div>
-        <marker ng-repeat="driver in vm.allDrivers.occupied.drivers track by $index" icon="{
-        url:'assets/images/icons/marker-red.svg',
-        scaledSize:[30,30],
-        origin: [0,0],
-        anchor: [15,15]
-      }"
-                id="custom-marker-{{$index}}"
-                on-click="vm.map.showInfoWindow('foo', 'custom-marker-'+$index)"
-                position="{{driver.marker}}">
-        </marker>
-      </div>
-
-    </ng-map>
   </div>
 </div>
 

@@ -29,5 +29,14 @@
             )
         }
 
+        vm.showDetail = function(e, shop) {
+            vm.shop = shop;
+            vm.map.showInfoWindow('foo-iw', shop.id);
+        };
+
+        vm.hideDetail = function() {
+            vm.map.hideInfoWindow('foo-iw');
+        };
+
     }
 })();

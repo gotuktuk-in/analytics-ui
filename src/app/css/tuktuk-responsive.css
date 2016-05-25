@@ -10,21 +10,35 @@
 
 @media only screen and (max-width: 991px) {
     .sidenav-open, .navbar-header-toggle {
-        padding-left:0px;
+        padding-left:0px!important;
     }
-    .sidenav {
-        z-index: 8;
+    .navbar-static-top {
+        z-index: 15!important;
     }
     .navbar-inverse .navbar-toggle .icon-bar {
         background-color: #666;
     }
     .navbar-collapse.in ul li a {
         padding: 10px 20px;
+        border-width: 0px;
     }
     .sidenav {top:10px;}
     .flx-container {
         height: auto;
     }
+
+
+    .top-nav .dropdown-menu {
+        display: none!important;
+    }
+    .top-nav .open > .dropdown-menu {
+        display: block!important; }
+    .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+        box-shadow: none!important;
+        border: none!important;
+
+    }
+
     .flx-container .flx-cnt-right div {
         flex: 1 50%;
         padding: 5% 5%;
@@ -87,5 +101,8 @@
         font-weight: bold;
     }
     .global-tbl td:before { content: attr(data-title); }
+    .well {width: 90%;}
+    .content .tabs-view {min-width: 300px;}
+    .tabs-view .col-md-4 {margin-bottom: 30px;}
 
 }
