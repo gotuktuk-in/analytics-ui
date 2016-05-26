@@ -6,7 +6,7 @@
     .controller('PerformanceController', PerformanceController);
 
   /** @ngInject */
-  function PerformanceController($scope, ChartConfigService, $log, $rootScope, PerformanceService, PerformanceHandler, NgTableParams, API, $resource) {
+  function PerformanceController($scope,StaticDataService, ChartConfigService, $log, $rootScope, PerformanceService, PerformanceHandler) {
 
     var vm = this;
 
@@ -22,7 +22,7 @@
     vm.trips = [];
     vm.drivers = [];
     vm.riders = [];
-
+    vm.ranges = StaticDataService.ranges
     this.changeFrequency = function()
     {
         console.log("Frequency changed ",vm.selectedFrequency.value )
@@ -30,23 +30,32 @@
       if(vm.selectedFrequency.value=='hour')
       {
         d3.time.format('%I %p')
-        vm.tripChartOptions.chart.xAxis.tickFormat(d3.time.format('%I %p'));
+       // vm.tripChartOptions.chart.xAxis.tickFormat(d3.time.format('%I %p'));
       }
       else
       {
+
         d3.time.format('%d %B %y')
-        vm.tripChartOptions.chart.xAxis.tickFormat(d3.time.format('%d %B %y'));
+      //  vm.tripChartOptions.chart.xAxis.tickFormat(d3.time.format('%d %B %y'));
       }
+      getDataFor(vm.selectedFrequency.value)
     }
     $scope.$watch('dates', function(newValue, oldValue) {
-      getData()
+      getDataFor(vm.selectedFrequency.value)
     })
-    function getData()
+    function getDataFor(forFrequency)
     {
-      startDate =  moment($scope.dates.startDate).startOf('day').format("YYYYMMDDHH").toString()
-      endDate =  moment($scope.dates.endDate).endOf('day').format("YYYYMMDDHH").toString()
-
-      PerformanceService.getTrips({startDate:startDate, city:$rootScope.city, endDate:endDate, count:1, page:1}, {vehicle:$rootScope.vehicleType,frequency:vm.selectedFrequency.value}, function (response) {
+      if(forFrequency=='hour')
+      {
+        startDate =  moment($scope.dates.startDate).startOf('day').format("YYYYMMDDHH").toString()
+        endDate =  moment($scope.dates.endDate).endOf('day').format("YYYYMMDDHH").toString()
+      }
+      else
+      {
+        startDate =  moment($scope.dates.startDate).startOf('day').format("YYYYMMDD").toString()
+        endDate =  moment($scope.dates.endDate).endOf('day').format("YYYYMMDD").toString()
+      }
+     PerformanceService.getTrips({startDate:startDate, city:$rootScope.city, endDate:endDate, count:1, page:1}, {vehicle:$rootScope.vehicleType,frequency:vm.selectedFrequency.value}, function (response) {
         PerformanceHandler.trips = response[0].trip;
         vm.trips = PerformanceHandler.getTrips();
         vm.trips.overview = response[0].overview;

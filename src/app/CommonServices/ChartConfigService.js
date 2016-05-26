@@ -17,7 +17,7 @@ function ChartConfigService($q, $resource, API) {
         factory.lineChartConfig ={refreshDataOnly: false}
         factory.lineChartOptions = {
             chart: {
-                type: 'lineChart',
+                type: 'lineWithFocusChart',
             //    forceY : [0, 5],
                 height: 450,
                 margin : {
@@ -46,8 +46,19 @@ function ChartConfigService($q, $resource, API) {
                      //   return d3.time.format('%d %B %y')(new Date(d))
                         return d3.time.format('%I %p')(new Date(d))
                     },
+
                     showMaxMin: true,
-                    staggerLabels: true
+                    staggerLabels: false
+                },
+                x2Axis: {
+                    axisLabel: 'Date',
+                    tickFormat: function(d) {
+                        //   return d3.time.format('%d %B %y')(new Date(d))
+                        return d3.time.format('%I %p')(new Date(d))
+                    },
+
+                    showMaxMin: true,
+                    staggerLabels: false
                 },
 
                 yAxis: {
