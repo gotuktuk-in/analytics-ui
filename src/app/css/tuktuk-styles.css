@@ -458,11 +458,9 @@ label 				 {
     transform: rotate(180deg);
 }
 .ng-map-info-window {
-    width: 400px!important;
-    margin: 0px!important;
-    padding: 0px!important;
+   width: 350px!important;
 }
-.ng-map-info-window .gm-style-iw {left:0px!important; top:0px!important; width: auto!important;  width: 400px!important;}
+.ng-map-info-window .gm-style-iw {width: 300px!important;}
 
 .info-window {
      background-color: #ffffff;
@@ -493,7 +491,7 @@ label 				 {
     width: 80px;
 }
 .info-window .iw-content {
-    padding: 45px 30px;
+    padding: 45px 0px 0px;
     color: #5c5c5c;
 }
 
