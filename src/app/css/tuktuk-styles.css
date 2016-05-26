@@ -606,6 +606,7 @@ label 				 {
 .flx-performance .flx-cnt-right {flex: 1 auto;}
 .flx-performance .flx-cnt-right div {text-align: left; padding:25px 40px;}
 
+.cstm-width {min-width: 190px; max-width: 210px;}
 
 
 /* active state */

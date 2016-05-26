@@ -29,45 +29,109 @@
     </div>
 </div>
 <br><br>
-<div class="container-fluid">
 
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 style="margin-top: 0">Trips</h3>
+        </div>
+        <div class="col-md-6 text-right">
+            <form class="form-inline">
+                <div class="form-group ">
+                    <input class="form-control cstm-width" type="daterange" ng-model="dates" separator="/" format="YYYY-MM-DD" opens="left">
+                </div>
+                <div class="form-group ">
+                    <select ng-model="vm.selectedFrequency" class="form-control"
+                            ng-change="vm.changeFrequency()"
+                            ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+        <br>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-12">
-                <div style="height: 60px;">
-                <div class="pull-right">
-                    <div class="col-xs-6">
-                        <input class="form-control" type="daterange" ng-model="dates" separator="/" format="YYYY-MM-DD" opens="left">
-                    </div>
-                    <div class="col-xs-6">
-                        <select ng-model="vm.selectedFrequency" class="form-control"
-                                ng-change="vm.changeFrequency()"
-                                ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value"></select>
-                       <!-- <select class="form-control">
-                            <option>Per Hour</option>
-                            <option>Per Day</option>
-                        </select>-->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <br>
+                    <div class="table-responsive">
+                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                     </div>
                 </div>
-                <h3 style="margin-top: 0">Trips</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!---Driver--->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 style="margin-top: 0">Driver</h3>
+        </div>
+        <div class="col-md-6 text-right">
+            <!--<form class="form-inline">
+                <div class="form-group ">
+                    <input class="form-control cstm-width" type="daterange" ng-model="dates" separator="/" format="YYYY-MM-DD" opens="left">
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <h4 style="margin-top: 0">Requests</h4>
-                                <br>
-                                <div class="table-responsive">
-                                    <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
-                                </div>
-                            </div>
-                        </div>
-
+                <div class="form-group ">
+                    <select ng-model="vm.selectedFrequency" class="form-control"
+                            ng-change="vm.changeFrequency()"
+                            ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
+                    </select>
+                </div>
+            </form>-->
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <br>
+                    <div class="table-responsive">
+                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                     </div>
-
                 </div>
-             </div>
+            </div>
         </div>
     </div>
 </div>
 
+<!--Rider-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 style="margin-top: 0">Rider</h3>
+        </div>
+        <div class="col-md-6 text-right">
+            <!--<form class="form-inline">
+                <div class="form-group ">
+                    <input class="form-control cstm-width" type="daterange" ng-model="dates" separator="/" format="YYYY-MM-DD" opens="left">
+                </div>
+                <div class="form-group ">
+                    <select ng-model="vm.selectedFrequency" class="form-control"
+                            ng-change="vm.changeFrequency()"
+                            ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
+                    </select>
+                </div>
+            </form>-->
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <br>
+                    <div class="table-responsive">
+                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

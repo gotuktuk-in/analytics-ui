@@ -105,4 +105,16 @@
     .content .tabs-view {min-width: 300px;}
     .tabs-view .col-md-4 {margin-bottom: 30px;}
 
+    .flx-performance {
+        height: auto!important;
+    }
+    .flx-performance .flx-cnt-right div {
+        text-align: left;
+        padding: 15px 20px!important;
+    }
+    .cstm-width {
+        min-width: inherit!important;
+        max-width: inherit!important;
+    }
+
 }
