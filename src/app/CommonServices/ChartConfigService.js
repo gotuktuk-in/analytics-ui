@@ -15,7 +15,7 @@ angular
 function ChartConfigService($q, $resource, API) {
       var factory = {}
         factory.lineChartConfig ={refreshDataOnly: false}
-        factory.cumulativeLineChartOptions = {
+        factory.lineChartOptions = {
             chart: {
                 type: 'lineChart',
             //    forceY : [0, 5],
@@ -43,7 +43,6 @@ function ChartConfigService($q, $resource, API) {
                 xAxis: {
                     axisLabel: 'Date',
                     tickFormat: function(d) {
-                        console.log("d ", d)
                      //   return d3.time.format('%d %B %y')(new Date(d))
                         return d3.time.format('%I %p')(new Date(d))
                     },
