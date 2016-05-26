@@ -23,29 +23,17 @@ function PerformanceService($q, $resource, API) {
                 url:   url + 'trip/:frequency/:vehicle',
                 isArray:true
             },
-            overview: {
+            getDrivers: {
                 method: 'GET',
-                url:   url + 'rider/day'
+                url:   url + 'driver/:frequency/:vehicle',
+                isArray:true
             },
-
-            registerList: {
+            getRiders: {
                 method: 'GET',
-                url:   url + 'rider/hour',
+                url:   url + 'rider/:frequency/:vehicle',
                 isArray:true
             },
 
-            inprocessList: {
-                method: 'GET',
-                url:   url + 'rider/inprocess',
-                //isArray:true
-
-            },
-          deleteInProcessDriver: {
-            method: 'DELETE',
-            url:   url + 'rider/:id',
-            //isArray:true
-
-          },
         }
     );
 }

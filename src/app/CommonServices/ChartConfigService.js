@@ -15,16 +15,27 @@ angular
 function ChartConfigService($q, $resource, API) {
       var factory = {}
         factory.lineChartConfig ={refreshDataOnly: false}
-        factory.cumulativeLineChartOptions = {
+        factory.lineChartOptions = {
             chart: {
-                type: 'lineChart',
-            //    forceY : [0, 5],
-                height: 450,
-                margin : {
+                 type: 'lineWithFocusChart',
+                height: '400',
+                legend: {
+       				 vers: 'furious',
+       				 //padding: { top: 20 },
+       				 maxKeyLength:400,
+       				margin : {
                     top: 20,
-                    right: 20,
-                    bottom: 60,
-                    left: 65
+                    right: 50,
+                    bottom: 50,
+                    left: 50
+                }
+     			 },
+      			legendPosition: 'top',
+                margin : {
+                    top: 50,
+                    right: 50,
+                    bottom: 100,
+                    left: 80
                 },
                 x: function(d){
                     return d[0];
@@ -42,13 +53,24 @@ function ChartConfigService($q, $resource, API) {
                 showYAxis:true,
                 xAxis: {
                     axisLabel: 'Date',
+                     rotateLabels: '-90',
                     tickFormat: function(d) {
-                        console.log("d ", d)
                      //   return d3.time.format('%d %B %y')(new Date(d))
                         return d3.time.format('%I %p')(new Date(d))
                     },
+
                     showMaxMin: true,
-                    staggerLabels: true
+                    staggerLabels: false
+                },
+                x2Axis: {
+                    axisLabel: 'Date',
+                    tickFormat: function(d) {
+                        //   return d3.time.format('%d %B %y')(new Date(d))
+                        return d3.time.format('%I %p')(new Date(d))
+                    },
+
+                    showMaxMin: true,
+                    staggerLabels: false
                 },
 
                 yAxis: {
