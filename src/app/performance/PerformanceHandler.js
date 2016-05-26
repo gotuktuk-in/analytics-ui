@@ -77,8 +77,9 @@ function PerformanceHandler() {
         var year        = dateString.substring(0,4);
         var month       = dateString.substring(4,6);
         var day         = dateString.substring(6,8);
+        var hour         = dateString.substring(8,10);
 
-        var newDate        = new Date(year, month-1, day);
+        var newDate        = new Date(year, month-1, day, hour);
         return newDate
       //  return moment().unix(newDate)
 

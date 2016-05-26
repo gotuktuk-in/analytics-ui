@@ -26,9 +26,13 @@ function ChartConfigService($q, $resource, API) {
                     bottom: 60,
                     left: 65
                 },
-                x: function(d){ return d[0]; },
+                x: function(d){
+                    return d[0];
+                },
               //  y: function(d){ return d[1]/100; },
-                y: function(d){return d[1]; },
+                y: function(d){
+                    return d[1];
+                },
              //   average: function(d) { return d.mean/100; },
 
                 color: d3.scale.category10().range(),
