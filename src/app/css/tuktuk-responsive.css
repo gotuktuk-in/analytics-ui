@@ -112,6 +112,7 @@
         text-align: left;
         padding: 15px 20px!important;
     }
+    .ng-map-info-window {width: 310px!important;}
     .cstm-width {
         min-width: inherit!important;
         max-width: inherit!important;

@@ -18,24 +18,28 @@
                 fillOpacity:.1
             });
         });
+
+
+
         getDrivers()
         function getDrivers(){
             MapService.getDrivers({}, function (response) {
                vm.allDrivers = response;
-              console.log("vm.drivers ", vm.drivers);
+              console.log("vm.drivers ", vm.allDrivers);
                 }, function (error) {
                     console.log("error ", error)
                 }
             )
         }
 
-        vm.showDetail = function(e, shop) {
-            vm.shop = shop;
-            vm.map.showInfoWindow('foo-iw', shop.id);
+
+        vm.showDetail = function(e, driver) {
+            vm.driver = driver;
+            vm.map.showInfoWindow('iw-drivers', driver);
         };
 
         vm.hideDetail = function() {
-            vm.map.hideInfoWindow('foo-iw');
+            vm.map.hideInfoWindow('iw-drivers');
         };
 
     }
