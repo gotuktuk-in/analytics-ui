@@ -20,7 +20,7 @@ function ChartConfigService($q, $resource, API) {
                  type: 'lineWithFocusChart',
                 height: '400',
                 legend: {
-       				 vers: 'furious',
+       				 vers: 'classic',
        				 //padding: { top: 20 },
        				 maxKeyLength:400,
        				margin : {
