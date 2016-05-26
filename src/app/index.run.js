@@ -6,8 +6,11 @@
     .run(runBlock);
 
   /** @ngInject */
-  function runBlock($log, UserService,StaticDataService, toastr, $state, $rootScope, LoginService, $templateCache) {
-
+  function runBlock($log, UserService,StaticDataService, $http, toastr, $state, $rootScope, LoginService, $templateCache) {
+if(UserService.getUser() != null)
+      {
+      $http.defaults.headers.common.Authorization = 'Basic ' + UserService.getUser().token ;
+      }
     $log.debug('runBlock end');
       $rootScope.city = StaticDataService.cities[0].value
       $rootScope.vehicleType = StaticDataService.vehicleTypes[0].value
