@@ -6,8 +6,9 @@
         .controller('MapsController', MapsController);
 
     /** @ngInject */
-    function MapsController($scope, $log, $rootScope, MapService, NgMap, API) {
+    function MapsController($scope, $log, $rootScope, MapService, NgMap, AUTH_API) {
         var vm = this
+        vm.API_URL = AUTH_API
         vm.allDrivers = []
         NgMap.getMap().then(function (map) {
             vm.map = map;

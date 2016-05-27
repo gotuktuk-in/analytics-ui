@@ -40,7 +40,7 @@
           controllerAs: 'drivers'
       });
 
-    $urlRouterProvider.otherwise('/login');
+  //  $urlRouterProvider.otherwise('/login');
   }
 
 })();

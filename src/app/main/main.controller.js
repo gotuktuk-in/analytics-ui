@@ -6,19 +6,24 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($scope, $log, $rootScope,  StaticDataService) {
+  function MainController($scope, $log, $rootScope,$state, $stateParams, StaticDataService) {
 
     $scope.cities = StaticDataService.cities
     $scope.vehicleTypes = StaticDataService.vehicleTypes
-    $rootScope.selectedCity = StaticDataService.cities[0]
+    $rootScope.selectedCity =StaticDataService.cities[0]
     $rootScope.selectedVehicle = StaticDataService.vehicleTypes[0]
 
     $scope.ChangeCity = function (cityObj) {
       $rootScope.selectedCity = cityObj;
+      $rootScope.city = cityObj.value
+      $state.go($state.current.name ,{city:  $rootScope.city , vehicleType:$rootScope.vehicleType})
     }
 
     $scope.ChangeVehicle = function (vehicleObj) {
+
       $rootScope.selectedVehicle = vehicleObj;
+      $rootScope.vehicleType = vehicleObj.value
+      $state.go($state.current.name ,{city:  $rootScope.city , vehicleType:$rootScope.vehicleType})
     }
 
     $scope.status = {

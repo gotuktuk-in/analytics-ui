@@ -6,7 +6,7 @@
         .controller('PerformanceController', PerformanceController);
 
     /** @ngInject */
-    function PerformanceController($scope, StaticDataService, ChartConfigService, $log, $rootScope, PerformanceService, PerformanceHandler) {
+    function PerformanceController($scope, StaticDataService, ChartConfigService, $stateParams, $rootScope, PerformanceService, PerformanceHandler) {
 
         var vm = this;
 
