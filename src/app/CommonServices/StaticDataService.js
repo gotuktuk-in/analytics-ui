@@ -17,7 +17,6 @@ function StaticDataService($q, $resource, API) {
     factory.cities = [{name: "Indore", value: "indore"}, {name: "Bhopal", value: "bhopal"}];
     factory.vehicleTypes = [{name: "Auto", value: "auto"}, {name: "Bike", value: "bike"}];
     factory.ranges = {
-        'Today': [moment(), moment()],
         'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
         'Last 7 Days': [moment().subtract(6, 'days'), moment()],
         'Last 30 Days': [moment().subtract(29, 'days'), moment()],

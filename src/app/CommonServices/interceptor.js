@@ -21,12 +21,13 @@ angular.module('httpInterceptor', [])
             return {
                 'request': function(config) {
                     // same as above
-                    // loadingScreen.show();
+                    loadingScreen.show();
                     return config || $q.when(config);
                 },
                 // optional method
                 'requestError': function(rejection) {
                     // do something on error
+                    loadingScreen.hide();
                     if (canRecover(rejection)) {
                         return responseOrNewPromise
                     }
@@ -34,7 +35,7 @@ angular.module('httpInterceptor', [])
                 },
                 'response': function(successResponse) {
                     // same as above
-                    // loadingScreen.hide();
+                     loadingScreen.hide();
 
                     if (successResponse.config.method.toUpperCase() != 'GET') {
                         $rootScope.isPageLoading = false;
@@ -47,7 +48,7 @@ angular.module('httpInterceptor', [])
                 // optional method
                 'responseError': function(errorResponse) {
                     // do something on error
-                    // loadingScreen.hide();
+                     loadingScreen.hide();
                     switch (errorResponse.status) {
                         case 401:
                           //  console.log("There is an 401 error. signin again." + $rootScope.LOGIN_URL)

@@ -28,7 +28,7 @@
         <div style="padding:20px 0 0; margin:0; text-align:right;">
           			<form class="form-inline"  style="padding:0; margin:0;">
                 <div class="form-group "  style="padding:0; margin:0;">
-                    <input class="form-control cstm-width" type="daterange" ng-model="dates" separator="/" format="DD-mm-YYYY" opens="left" ranges="vm.ranges">
+                    <input ng-change="vm.getAllData()" class="form-control cstm-width" type="daterange" ng-model="tripDates" separator="/" format="DD-mm-YYYY" opens="left" ranges="vm.ranges">
                 </div>
             </form>
         		</div>
@@ -36,22 +36,6 @@
     </div>
 </div>
 		</div>
-		<!-- 
-<div class="col-lg-1"></div>
-		<div class="col-md-3">
-			<div class="flx-container flx-performance">
-    		<div class="flx-cnt-right" style=" border:none; border-left:solid 0px #e2e2e2;">
-				<div style="padding:50px 0 0; margin:0; text-align:right;">
-          			<form class="form-inline"  style="padding:0; margin:0;">
-                <div class="form-group "  style="padding:0; margin:0;">
-                    <input class="form-control cstm-width" type="daterange" ng-model="dates" separator="/" format="DD-mm-YYYY" opens="left" ranges="vm.ranges">
-                </div>
-            </form>
-        		</div>
-    		</div>
-			</div>
-		</div>
- -->
 	</div>
 </div>
 <br><br>
@@ -62,7 +46,11 @@
         </div>
         <div class="col-md-6 text-right">
             <form class="form-inline">
-                <div class="form-group">
+
+                <!--<div class="form-group ">
+                    <input ng-change="vm.getTrips()" class="form-control cstm-width" type="daterange" ng-model="tripDates" separator="/" format="DD-MMM-YY" opens="left" ranges="vm.ranges">
+                </div>-->
+                <div class="form-group ">
                     <select ng-model="vm.selectedFrequency" class="form-control"
                             ng-change="vm.changeFrequency()"
                             ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
@@ -95,17 +83,17 @@
             <h3 style="margin-top: 0">Driver</h3>
         </div>
         <div class="col-md-6 text-right">
-            <!--<form class="form-inline">
-                <div class="form-group ">
-                    <input class="form-control cstm-width" type="daterange" ng-model="dates" separator="/" format="YYYY-MM-DD" opens="left">
-                </div>
+            <form class="form-inline">
+                <!--<div class="form-group ">
+                    <input ng-change="vm.getDrivers()"class="form-control cstm-width" type="daterange" ng-model="driverDates" separator="/" format="DD-MMM-YY" opens="right" ranges="vm.ranges"/>
+                </div>-->
                 <div class="form-group ">
                     <select ng-model="vm.selectedFrequency" class="form-control"
                             ng-change="vm.changeFrequency()"
                             ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
                     </select>
                 </div>
-            </form>-->
+            </form>
         </div>
     </div>
 			    <br>
@@ -131,17 +119,17 @@
             <h3 style="margin-top: 0">Rider</h3>
         </div>
         <div class="col-md-6 text-right">
-            <!--<form class="form-inline">
-                <div class="form-group ">
-                    <input class="form-control cstm-width" type="daterange" ng-model="dates" separator="/" format="YYYY-MM-DD" opens="left">
-                </div>
+            <form class="form-inline">
+                <!--<div class="form-group ">
+                    <input ng-change="vm.getRiders()" class="form-control cstm-width" type="daterange" ng-model="riderDates" separator="/" format="DD-MMM-YY" opens="left" ranges="vm.ranges">
+                </div>-->
                 <div class="form-group ">
                     <select ng-model="vm.selectedFrequency" class="form-control"
                             ng-change="vm.changeFrequency()"
                             ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
                     </select>
                 </div>
-            </form>-->
+            </form>
         </div>
     </div>
     			<br>
