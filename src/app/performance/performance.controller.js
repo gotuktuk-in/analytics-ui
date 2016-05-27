@@ -11,9 +11,13 @@
         var vm = this;
 
         var startDate, endDate;
-        $scope.dates = {};
-        $scope.dates.startDate = moment().subtract(30, 'days').format("YYYY-MM-DD");
-        $scope.dates.endDate = moment().format("YYYY-MM-DD");
+        vm.ranges = StaticDataService.ranges
+        $scope.tripDates = {};
+        $scope.tripDates.startDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.tripDates.endDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.tripDates
+        $scope.driverDates = angular.copy($scope.tripDates)
+        $scope.riderDates = angular.copy($scope.tripDates)
         vm.timeFrequency = [{label: "Per Hour", value: "hour"}, {label: "Per Day", value: "day"}];
         vm.selectedFrequency = vm.timeFrequency[0];
         vm.config = ChartConfigService.lineChartConfig;
@@ -22,7 +26,7 @@
         vm.trips = [];
         vm.drivers = [];
         vm.riders = [];
-        vm.ranges = StaticDataService.ranges
+
         this.changeFrequency = function () {
             console.log("Frequency changed ", vm.selectedFrequency.value)
             vm.tripChartOptions.chart.xAxis.axisLabel = vm.selectedFrequency.label
@@ -38,21 +42,29 @@
             }
             getDataFor(vm.selectedFrequency.value)
         }
-        $scope.$watch('dates', function (newValue, oldValue) {
+     /*   $scope.$watch('dates', function (newValue, oldValue) {
             getDataFor(vm.selectedFrequency.value)
-        })
-        function getDataFor(forFrequency) {
-            if (forFrequency == 'hour') {
-                startDate = moment($scope.dates.startDate).startOf('day').format("YYYYMMDDHH").toString()
-                endDate = moment($scope.dates.endDate).endOf('day').format("YYYYMMDDHH").toString()
+        })*/
+
+        function getFormatedDate(date) {
+            var obj = {}
+            if ( vm.selectedFrequency.value == 'hour') {
+                obj.startDate = moment(date.startDate).startOf('day').format("YYYYMMDDHH").toString()
+                obj.endDate = moment(date.endDate).endOf('day').format("YYYYMMDDHH").toString()
             }
             else {
-                startDate = moment($scope.dates.startDate).startOf('day').format("YYYYMMDD").toString()
-                endDate = moment($scope.dates.endDate).endOf('day').format("YYYYMMDD").toString()
+                obj.startDate = moment(date.startDate).startOf('day').format("YYYYMMDD").toString()
+                obj.endDate = moment(date.endDate).endOf('day').format("YYYYMMDD").toString()
             }
+            return obj;
+        }
+
+        vm.getTrips = function () {
+            startDate = getFormatedDate($scope.tripDates).startDate;
+            endDate = getFormatedDate($scope.tripDates).endDate;
             PerformanceService.getTrips({
-                startDate: startDate,
                 city: $rootScope.city,
+                startDate: startDate,
                 endDate: endDate,
                 count: 1,
                 page: 1
@@ -64,10 +76,13 @@
                 console.log(err)
                 $scope.error = true;
             });
-
+        }
+        vm.getDrivers = function () {
+            startDate = getFormatedDate($scope.driverDates).startDate;
+            endDate = getFormatedDate($scope.driverDates).endDate;
             PerformanceService.getDrivers({
-                startDate: startDate,
                 city: $rootScope.city,
+                startDate: startDate,
                 endDate: endDate,
                 count: 1,
                 page: 1
@@ -79,25 +94,28 @@
                 console.log(err)
                 $scope.error = true;
             });
-
+        }
+        vm.getRiders = function () {
+            startDate = getFormatedDate($scope.riderDates).startDate;
+            endDate = getFormatedDate($scope.riderDates).endDate;
             PerformanceService.getRiders({
-                startDate: startDate,
                 city: $rootScope.city,
+                startDate: startDate,
                 endDate: endDate,
                 count: 1,
                 page: 1
             }, {vehicle: $rootScope.vehicleType, frequency: vm.selectedFrequency.value}, function (response) {
                 PerformanceHandler.riders = response[0].riders
                 vm.riders = PerformanceHandler.getRiders();
-                vm.riders.overview =  response[0].overview
+                vm.riders.overview = response[0].overview
                 console.log('vm.riders ', PerformanceHandler.riders)
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
             });
-
         }
-
-
+        vm.getTrips()
+        vm.getDrivers()
+        vm.getRiders()
     }
 })();
