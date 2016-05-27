@@ -3,15 +3,15 @@
     <div class="flx-cnt-right">
         <div>
             <h4>{{ vm.trips.overview.cum_trip_request}}</h4>
-            <span>Cumulative number of trip requests</span>
+            <span>Total Trip Requests</span>
 
         </div>
         <div>
             <h4>{{ vm.trips.overview.cum_successful_trip}}</h4>
-            <span>Cumulative number of successful trips</span>
+            <span>Total Successful Trips</span>
 
         </div>
-        <div>
+      <!--  <div>
             <h4>{{ vm.trips.overview.cum_fare| number:2}}</h4>
             <span>Cumulative fare</span>
 
@@ -20,10 +20,10 @@
             <h4>{{ vm.trips.overview.cum_avg_burn | number:2}}</h4>
             <span>Cumulative average burn</span>
 
-        </div>
+        </div>-->
         <div>
-            <h4>&nbsp;{{ vm.trips.overview.cum_new_riders}}</h4>
-            <span>Cumulative new riders</span>
+            <h4>&nbsp;{{ vm.riders.overview.cum_new_rider}}</h4>
+            <span>New Riders</span>
 
         </div>
     </div>
@@ -41,7 +41,7 @@
         <div class="col-md-6 text-right">
             <form class="form-inline">
                 <div class="form-group ">
-                    <input class="form-control cstm-width" type="daterange" ng-model="dates" separator="/" format="YYYY-MM-DD" opens="left" ranges="vm.ranges">
+                    <input class="form-control cstm-width" type="daterange" ng-model="dates" separator="/" format="DD-mm-YYYY" opens="left" ranges="vm.ranges">
                 </div>
                 <div class="form-group ">
                     <select ng-model="vm.selectedFrequency" class="form-control"

@@ -89,6 +89,7 @@
             }, {vehicle: $rootScope.vehicleType, frequency: vm.selectedFrequency.value}, function (response) {
                 PerformanceHandler.riders = response[0].riders
                 vm.riders = PerformanceHandler.getRiders();
+                vm.riders.overview =  response[0].overview
                 console.log('vm.riders ', PerformanceHandler.riders)
             }, function (err) {
                 console.log(err)

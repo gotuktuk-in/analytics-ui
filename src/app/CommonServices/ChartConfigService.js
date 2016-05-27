@@ -17,7 +17,7 @@ function ChartConfigService($q, $resource, API) {
         factory.lineChartConfig ={refreshDataOnly: false}
         factory.lineChartOptions = {
             chart: {
-                 type: 'lineWithFocusChart',
+                 type: 'lineChart',
                 height: '400',
                 legend: {
        				 vers: 'classic',
