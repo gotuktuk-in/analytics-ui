@@ -40,7 +40,9 @@
                     return d3.time.format('%d %B %y')(new Date(d));
                 };
             }
-            getDataFor(vm.selectedFrequency.value)
+            vm.getTrips()
+            vm.getDrivers()
+            vm.getRiders()
         }
      /*   $scope.$watch('dates', function (newValue, oldValue) {
             getDataFor(vm.selectedFrequency.value)

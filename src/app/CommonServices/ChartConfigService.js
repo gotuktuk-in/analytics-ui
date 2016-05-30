@@ -52,7 +52,8 @@ function ChartConfigService($q, $resource, API) {
                 clipVoronoi: false,
                 showYAxis:true,
                 xAxis: {
-                    axisLabel: 'Date',
+                    tickSize:'10',
+                    axisLabel: 'Per Hour',
                      rotateLabels: '-90',
                     tickFormat: function(d) {
                      //   return d3.time.format('%d %B %y')(new Date(d))
@@ -60,7 +61,8 @@ function ChartConfigService($q, $resource, API) {
                     },
 
                     showMaxMin: true,
-                    staggerLabels: false
+                    staggerLabels: false,
+                    axisLabelDistance: 200
                 },
                 x2Axis: {
                     axisLabel: 'Date',
