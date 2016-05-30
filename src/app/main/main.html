@@ -1,7 +1,9 @@
 <nav id="load" class="navbar navbar-static-top navbar-inverse" role="navigation"
      ng-class="{'navbar-header-toggle' : toggle}">
   <div class="container-fluid">
-    <div class="navbar-header">
+  <div class="row">
+        <div class="col-md-4">
+			<div class="navbar-header">
       <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
         <span class="sr-only">Toggle navigation</span>
         <span class="fa fa-cog"></span>
@@ -10,12 +12,21 @@
       </button>
       <a  class="tg-menu" ng-click="toggle = !toggle" ng-class="{'red' : toggle}"><i class="fa fa-bars"></i></a>
       <a class="navbar-brand">
-        <img src="assets/images/tuktuk-logo.png" title="Tuktuk" height="65px">
+        <img src="assets/images/tuktuk-logo.png" title="Tuktuk" height="55px">
       </a>
     </div>
-    <div id="navbar" class="navbar-collapse collapse" ng-class="!navCollapsed && 'in'">
-      <ul class="nav navbar-nav navbar-right top-nav">
-        <li class="dropdown" uib-dropdown on-toggle="toggled(open)">
+    	</div>
+    	<div class="col-md-8">
+    	<div class="col-md-6 text-center">
+    		<div style="padding:23px; font-size: 14px; color:#9d9d9d; text-transform:uppercase">
+    			<span style="padding:5px 10px;" >{{selectedVehicle.name}}</span> | <span style="padding:5px 10px;">{{selectedCity.name}}</span>
+    		</div>
+    		</div>
+    	<div class="col-md-6">
+    		<div id="navbar" class="navbar-collapse collapse" ng-class="!navCollapsed && 'in'">
+      		<ul class="nav navbar-nav navbar-right top-nav">
+        <!-- 
+<li class="dropdown" uib-dropdown on-toggle="toggled(open)">
           <a href="#"  id="vehicle" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
             {{selectedVehicle.name}}<span class="caret"></span>
           </a>
@@ -32,6 +43,7 @@
             <li  ng-click="ChangeCity(city)" ng-repeat="city in cities"><a >{{city.name}}</a></li>
           </ul>
         </li>
+ -->
 
        <!-- <li class="bdr-left">
           <a  class="fa fa-bell"><span class="badge">4</span></a>
@@ -39,10 +51,9 @@
         <li class="">
           <a  class="fa fa-commenting"><span class="badge">4</span></a>
         </li>-->
-        <li class="dropdown" uib-dropdown is-open="status.isopen">
-          <a href="#" ng-click="logout()"  id="admin" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
-            Admin | Logout <!--<img src="assets/images/rider.jpg" class="img-cirlce"> <span class="caret"></span>-->
-          </a><!--
+        <li class="dropdown" uib-dropdown is-open="status.isopen">Admin (
+          <a href="#" ng-click="logout()"  id="admin" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled" style="color:red;">Logout <!--<img src="assets/images/rider.jpg" class="img-cirlce"> <span class="caret"></span>-->
+          </a> )<!--
           <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="admin">
             <li><a >Edit</a></li>
             <li><a >Logout</a></li>
@@ -51,7 +62,9 @@
           </ul>-->
         </li>
       </ul>
+      </div>
     </div>
+    	</div>
   </div>
 </nav>
 

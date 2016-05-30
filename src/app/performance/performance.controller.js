@@ -11,52 +11,99 @@
         var vm = this;
 
         var startDate, endDate;
-        $scope.dates = {};
-        $scope.dates.startDate = moment().subtract(30, 'days').format("YYYY-MM-DD");
-        $scope.dates.endDate = moment().format("YYYY-MM-DD");
+        vm.ranges = StaticDataService.ranges
+        $scope.tripDates = {};
+        $scope.tripDates.startDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.tripDates.endDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
+
+        $scope.driverDates = angular.copy($scope.tripDates)
+        $scope.riderDates = angular.copy($scope.tripDates)
         vm.timeFrequency = [{label: "Per Hour", value: "hour"}, {label: "Per Day", value: "day"}];
-        vm.selectedFrequency = vm.timeFrequency[0];
+        vm.tripFrequency = vm.timeFrequency[0];
+        vm.driverFrequency = vm.timeFrequency[0];
+        vm.riderFrequency = vm.timeFrequency[0];
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
         vm.driverChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+        vm.riderChartOptions = angular.copy(ChartConfigService.lineChartOptions);
         vm.trips = [];
         vm.drivers = [];
         vm.riders = [];
-        vm.ranges = StaticDataService.ranges
-        this.changeFrequency = function () {
-            console.log("Frequency changed ", vm.selectedFrequency.value)
-            vm.tripChartOptions.chart.xAxis.axisLabel = vm.selectedFrequency.label
-            if (vm.selectedFrequency.value == 'hour') {
-                vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-                    return d3.time.format('%I %p')(new Date(d));
-                };
+
+        this.changeFrequency = function (section, freqModel) {
+            console.log("Frequency changed ", freqModel.value)
+            switch(section) {
+                case 'driver':
+                    vm.driverChartOptions.chart.xAxis.axisLabel = freqModel.label
+                    if (freqModel.value == 'hour') {
+                        vm.driverChartOptions.chart.xAxis.tickFormat = function (d) {
+                            return d3.time.format('%I %p')(new Date(d));
+                        };
+                    }
+                    else {
+                        vm.driverChartOptions.chart.xAxis.tickFormat = function (d) {
+                            return d3.time.format('%d %B %y')(new Date(d));
+                        };
+                    }
+                    vm.getDrivers()
+
+                    break;
+                case 'rider':
+                    vm.riderChartOptions.chart.xAxis.axisLabel = freqModel.label
+                    if (freqModel.value == 'hour') {
+                        vm.riderChartOptions.chart.xAxis.tickFormat = function (d) {
+                            return d3.time.format('%I %p')(new Date(d));
+                        };
+                    }
+                    else {
+                        vm.riderChartOptions.chart.xAxis.tickFormat = function (d) {
+                            return d3.time.format('%d %B %y')(new Date(d));
+                        };
+                    }
+                    vm.getRiders()
+                    break;
+                default:
+                    vm.tripChartOptions.chart.xAxis.axisLabel = freqModel.label
+                    if (freqModel.value == 'hour') {
+                        vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
+                            return d3.time.format('%I %p')(new Date(d));
+                        };
+                    }
+                    else {
+                        vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
+                            return d3.time.format('%d %B %y')(new Date(d));
+                        };
+                    }
+                    vm.getTrips()
             }
-            else {
-                vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-                    return d3.time.format('%d %B %y')(new Date(d));
-                };
-            }
-            getDataFor(vm.selectedFrequency.value)
         }
-        $scope.$watch('dates', function (newValue, oldValue) {
+     /*   $scope.$watch('dates', function (newValue, oldValue) {
             getDataFor(vm.selectedFrequency.value)
-        })
-        function getDataFor(forFrequency) {
-            if (forFrequency == 'hour') {
-                startDate = moment($scope.dates.startDate).startOf('day').format("YYYYMMDDHH").toString()
-                endDate = moment($scope.dates.endDate).endOf('day').format("YYYYMMDDHH").toString()
+        })*/
+
+        function getFormatedDate(date, freq) {
+            var obj = {}
+            if ( freq.value == 'hour') {
+                obj.startDate = moment(date.startDate).startOf('day').format("YYYYMMDDHH").toString()
+                obj.endDate = moment(date.endDate).endOf('day').format("YYYYMMDDHH").toString()
             }
             else {
-                startDate = moment($scope.dates.startDate).startOf('day').format("YYYYMMDD").toString()
-                endDate = moment($scope.dates.endDate).endOf('day').format("YYYYMMDD").toString()
+                obj.startDate = moment(date.startDate).startOf('day').format("YYYYMMDD").toString()
+                obj.endDate = moment(date.endDate).endOf('day').format("YYYYMMDD").toString()
             }
+            return obj;
+        }
+
+        vm.getTrips = function () {
+            startDate = getFormatedDate($scope.tripDates,  vm.tripFrequency).startDate;
+            endDate = getFormatedDate($scope.tripDates,  vm.tripFrequency).endDate;
             PerformanceService.getTrips({
-                startDate: startDate,
                 city: $rootScope.city,
+                startDate: startDate,
                 endDate: endDate,
                 count: 1,
                 page: 1
-            }, {vehicle: $rootScope.vehicleType, frequency: vm.selectedFrequency.value}, function (response) {
+            }, {vehicle: $rootScope.vehicleType, frequency: vm.tripFrequency.value}, function (response) {
                 PerformanceHandler.trips = response[0].trip;
                 vm.trips = PerformanceHandler.getTrips();
                 vm.trips.overview = response[0].overview;
@@ -64,14 +111,17 @@
                 console.log(err)
                 $scope.error = true;
             });
-
+        }
+        vm.getDrivers = function () {
+            startDate = getFormatedDate($scope.tripDates,  vm.driverFrequency).startDate;
+            endDate = getFormatedDate($scope.tripDates,  vm.driverFrequency).endDate;
             PerformanceService.getDrivers({
-                startDate: startDate,
                 city: $rootScope.city,
+                startDate: startDate,
                 endDate: endDate,
                 count: 1,
                 page: 1
-            }, {vehicle: $rootScope.vehicleType, frequency: vm.selectedFrequency.value}, function (response) {
+            }, {vehicle: $rootScope.vehicleType, frequency:  vm.driverFrequency.value}, function (response) {
                 PerformanceHandler.drivers = response
                 vm.drivers = PerformanceHandler.getDrivers();
                 console.log('vm.drivers ', vm.drivers)
@@ -79,24 +129,33 @@
                 console.log(err)
                 $scope.error = true;
             });
-
+        }
+        vm.getRiders = function () {
+            startDate = getFormatedDate($scope.tripDates,  vm.riderFrequency).startDate;
+            endDate = getFormatedDate($scope.tripDates, vm.riderFrequency).endDate;
             PerformanceService.getRiders({
-                startDate: startDate,
                 city: $rootScope.city,
+                startDate: startDate,
                 endDate: endDate,
                 count: 1,
                 page: 1
-            }, {vehicle: $rootScope.vehicleType, frequency: vm.selectedFrequency.value}, function (response) {
+            }, {vehicle: $rootScope.vehicleType, frequency: vm.riderFrequency.value}, function (response) {
                 PerformanceHandler.riders = response[0].riders
                 vm.riders = PerformanceHandler.getRiders();
+                vm.riders.overview = response[0].overview
                 console.log('vm.riders ', PerformanceHandler.riders)
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
             });
-
         }
-
+        vm.getAllData = function()
+        {
+            vm.getTrips()
+            vm.getDrivers()
+            vm.getRiders()
+        }
+        vm.getAllData()
 
     }
 })();

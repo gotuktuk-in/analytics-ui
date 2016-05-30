@@ -27,7 +27,7 @@ h4, .h4 {
 .navbar-inverse {
     background-color: #FFF;
     color: #333;
-    min-height: 70px;
+    min-height: 65px;
     border-bottom: solid 1px rgba(0, 0, 0, 0.2);
     margin-bottom: 0;
 }
@@ -174,7 +174,7 @@ h4, .h4 {
     border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.navbar-nav > li > a {
+.navbar-nav > li, .navbar-nav > li > a{
     font-size: 14px;
     line-height: 40px;
     padding-bottom: 0;
@@ -186,8 +186,11 @@ h4, .h4 {
     border-style: solid;
     transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
+    display:inline-block !important;
 }
-
+.navbar-nav > li > a{
+    padding: 0;
+}
 .top-nav > li > a:hover,
 .top-nav > li > a:focus {
     background-color: transparent;
@@ -497,7 +500,7 @@ label 				 {
 
 /**********************Drivers***/
 .flx-container {
-    height: 250px;
+/*     height: 250px; */
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -537,13 +540,18 @@ label 				 {
 
 .flx-container .flx-cnt-right div {
     flex: 1 16%;
-    border-left:solid 1px #e2e2e2;
-    border-bottom:solid 1px #e2e2e2;
+    border-right:solid 1px #f5f5f5;
     padding: 35px 25px;
 
 }
+.flx-container .flx-cnt-right div:last-child {
+    flex: 1 16%;
+    border-right:solid 0px #e2e2e2;
+    
+
+}
 .flx-container .flx-cnt-right div h4 {
-    font-size: 16px;
+    font-size: 30px;
     margin: 0px;
     color: #333;
     font-family: "allerregular";
@@ -600,9 +608,9 @@ label 				 {
 
 /***************************Drivers End*/
 
-.flx-performance { height: 100px;}
-.flx-performance .flx-cnt-right {flex: 1 auto;}
-.flx-performance .flx-cnt-right div {text-align: left; padding:25px 40px;}
+/* .flx-performance { height: 100px;} */
+.flx-performance .flx-cnt-right {flex: 1 auto; border:0px solid #e2e2e2; min-height: 140px;}
+.flx-performance .flx-cnt-right div {padding:32px 40px;}
 
 .cstm-width {min-width: 190px; max-width: 210px;}
 
