@@ -1,12 +1,4 @@
-.tmp/serve/
+.tmp
 bower_components/
 node_modules/
-dist/
-.idea/
-
-.idea/jsLibraryMappings.xml
-
-.idea/libraries/analytics_ui_node_modules.xml
-.tmp
-.tmp/
-.tmp/serve/
+.idea
