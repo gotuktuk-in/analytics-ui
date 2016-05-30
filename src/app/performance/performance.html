@@ -1,49 +1,41 @@
-<br>
-<div class="container-fluid">
+<div class="container-fluid" ng-class="{'container-toggle' : toggle}">
     <div class="row">
-        <div class="col-md-12">
+    <form class="form-inline date-selection" ng-class="{'date-toggle' : toggle}">
+                <div class="form-group ">
+                    <input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange" ng-model="tripDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
+                </div>
+		</form>
+		<br>
+        <div class="col-md-6 col-md-offset-6">
 			<div class="flx-container flx-performance">
     	<div class="flx-cnt-right">
-        <div class="text-center">
-            <h4>
-            	<span class="fa fa-map" style="font-size:30px; margin-bottom:15px"></span>
-            	<br>
-            	{{ vm.trips.overview.cum_trip_request}}</h4>
-            	<span>Total Trip Requests</span>
-
+        <div class="text-left">
+            
+            <span class="pull-left" style="padding:4px 10px 4px 0"><img src="assets/images/trip-req.svg" title="Tuktuk" height="45"></span>
+            <span><h4>{{ vm.trips.overview.cum_trip_request}}</h4></span>
+            <br>
+            <span>Bookings</span>
+            
         </div>
-        <div class="text-center">
-        <span class="fa fa-map-pin" style="font-size:30px; margin-bottom:15px"></span>
-            <h4>{{ vm.trips.overview.cum_successful_trip}}</h4>
-            <span>Total Successful Trips</span>
-
+        <div class="text-left">
+        	<span class="pull-left" style="padding:4px 10px 4px 0"><img src="assets/images/trip-suc.svg" title="Tuktuk" height="45"></span>
+        	<span><h4>{{ vm.trips.overview.cum_successful_trip}}</h4></span>
+        	<br>
+            <span>Successful</span>
         </div>
-        <div class="text-center">
-        <span class="fa fa-user" style="font-size:30px; margin-bottom:15px"></span>
-            <h4>{{ vm.riders.overview.cum_new_rider}}</h4>
+        <div class="text-left">
+        	<span class="pull-left" style="padding:4px 10px 4px 0"><img src="assets/images/new-rider.svg" title="Tuktuk" height="45"></span>
+        	<span><h4>{{ vm.riders.overview.cum_new_rider}}</h4></span>
+        	<br>
             <span>New Riders</span>
-
-        </div>
-        <div class="text-center" style="padding-right:0;">
-        <div style="padding:20px 0 0; margin:0; text-align:right;">
-          			<form class="form-inline"  style="padding:0; margin:0;">
-                <div class="form-group "  style="padding:0; margin:0;">
-                    <input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange" ng-model="tripDates" separator=" - " format="DD MMM YY" opens="left" ranges="vm.ranges">
-                </div>
-            </form>
-        		</div>
         </div>
     </div>
 </div>
 		</div>
 	</div>
-</div>
-<br><br>
-<div class="container-fluid">
+
     <div class="row">
-        <div class="col-md-6">
-            <h3 style="margin-top: 0">Trips</h3>
-        </div>
+        <div class="col-md-6"></div>
         <div class="col-md-6 text-right">
             <form class="form-inline">
 
@@ -51,6 +43,10 @@
                     <input ng-change="vm.getTrips()" class="form-control cstm-width" type="daterange" ng-model="tripDates" separator="/" format="DD-MMM-YY" opens="left" ranges="vm.ranges">
                 </div>-->
                 <div class="form-group " style="margin-top:15px">
+                	<div class="radio">
+						<label><input type="radio" name="optradio">Per Day</label>
+  						<label><input type="radio" name="optradio">Per Hour</label>
+					</div>
                     <select ng-model="vm.tripFrequency" class="form-control"
                             ng-change="vm.changeFrequency('trip', vm.tripFrequency)"
                             ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
@@ -64,6 +60,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
+                <h4 style="margin-top: 0">Trips</h4>
                     <br>
                     <div class="table-responsive">
                         <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
@@ -72,22 +69,22 @@
             </div>
         </div>
     </div>
-</div>
-<div class="container-fluid">
+
 	<div class="row">
         <div class="col-md-6">
 			<!---Driver--->
 			    <div class="row">
-        <div class="col-md-6">
-        <br>
-            <h3 style="margin-top: 0">Driver</h3>
-        </div>
+        <div class="col-md-6"></div>
         <div class="col-md-6 text-right">
             <form class="form-inline">
                 <!--<div class="form-group ">
                     <input ng-change="vm.getDrivers()"class="form-control cstm-width" type="daterange" ng-model="driverDates" separator="/" format="DD-MMM-YY" opens="right" ranges="vm.ranges"/>
                 </div>-->
                 <div class="form-group " style="margin-top:15px">
+                <div class="radio">
+						<label><input type="radio" name="optradio">Per Day</label>
+  						<label><input type="radio" name="optradio">Per Hour</label>
+					</div>
                     <select ng-model="vm.driverFrequency" class="form-control"
                             ng-change="vm.changeFrequency('driver',vm.driverFrequency)"
                             ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
@@ -101,6 +98,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
+                <h4 style="margin-top: 0">Driver</h4>
                     <br>
                     <div class="table-responsive">
                         <nvd3 options="vm.driverChartOptions" data="vm.drivers" config="vm.config"></nvd3>
@@ -114,16 +112,17 @@
 		<div class="col-md-6">
 			<!--Rider-->
     			<div class="row">
-        <div class="col-md-6">
-        <br>
-            <h3 style="margin-top: 0">Rider</h3>
-        </div>
+        <div class="col-md-6"></div>
         <div class="col-md-6 text-right">
             <form class="form-inline">
                 <!--<div class="form-group ">
                     <input ng-change="vm.getRiders()" class="form-control cstm-width" type="daterange" ng-model="riderDates" separator="/" format="DD-MMM-YY" opens="left" ranges="vm.ranges">
                 </div>-->
                 <div class="form-group " style="margin-top:15px">
+                <div class="radio">
+						<label><input type="radio" name="optradio">Per Day</label>
+  						<label><input type="radio" name="optradio">Per Hour</label>
+					</div>
                     <select ng-model="vm.riderFrequency" class="form-control"
                             ng-change="vm.changeFrequency('rider', vm.riderFrequency)"
                             ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
@@ -137,6 +136,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
+                <h4 style="margin-top: 0">Rider</h4>
                     <br>
                     <div class="table-responsive">
                         <nvd3 options="vm.riderChartOptions" data="vm.riders" config="vm.config"></nvd3>

@@ -25,11 +25,13 @@ h4, .h4 {
 }
 
 .navbar-inverse {
-    background-color: #FFF;
-    color: #333;
-    min-height: 65px;
-    border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+    background: #fff none repeat scroll 0 0;
+    border-bottom: medium none;
+    color: #eee;
+    font-weight: 100;
+    height: 67px;
     margin-bottom: 0;
+    position: fixed;
 }
 
 .navbar-brand {
@@ -53,21 +55,65 @@ h4, .h4 {
     transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
 }
+.container-toggle {
+    padding-left: 295px;
+    transition: all 0.2s ease-in-out 0s;
+}
+.map-toggle {
+    padding-left: 250px;
+    transition: all 0.2s ease-in-out 0s;
+}
+.form-control { border-radius: 0px;}
+.date-toggle {
+    margin-left: 20px !important;
+    transition: all 0.2s ease-in-out 0s;
+}
+.daterangepicker {
+    border-radius: 0;
+    padding: 18px;
 
+}
+.daterangepicker .calendar-date, .daterangepicker td.start-date.end-date {
+    border-radius: 0px;
+}
+.range_inputs{margin-top:10px;}
+.daterangepicker button.applyBtn {margin-right:10px}
+.daterangepicker .btn-sm, .daterangepicker .btn-group-sm > .btn,
+.daterangepicker .input-mini {border-radius: 0 !important;}
+.daterangepicker, .daterangepicker .calendar th, .daterangepicker .calendar td {
+     font-family: 'aller_lightregular', sans-serif;
+     font-size:12px;
+}
+.daterangepicker .ranges li {
+	background:none;
+	border:none;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 2px;
+    padding: 4px 10px;
+}
+.daterangepicker .ranges li:last-child {
+    margin-bottom: 14px;
+}
+.daterangepicker .ranges li.active, .daterangepicker .ranges li:hover {
+    background: #eee;
+    border: 0px solid #08c;
+    color: #333;
+}
 .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
     margin: 0px;
 }
 
 .tg-menu {
+    color: #ccc;
+    cursor: pointer;
     display: block;
     float: left;
-    font-size: 21px;
-    line-height: 38px;
-    padding: 10px;
-    color: #333;
-    cursor: pointer;
+    font-size: 28px;
+    line-height: 0;
+    padding: 20px 15px;
 }
-
 .navbar-toggle {
     margin-top: 12px;
     border: none;
@@ -96,7 +142,15 @@ h4, .h4 {
     transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
 }
-
+.date-selection {
+    background: #fff none repeat scroll 0 0;
+    margin-left: 55px;
+    padding: 15px 0;
+    position: fixed;
+    z-index: 100;
+}
+.form-inline .radio label{margin:0 10px;}
+.form-inline .radio input[type="radio"]{margin:0 5px 0 10px;}
 .sidenav-open {
     padding-left: 250px;
 }
@@ -125,11 +179,16 @@ h4, .h4 {
 }
 
 .nav-stacked {
-    padding: 69px 0;
+    padding: 0
     z-index: 9;
 
 }
-
+.nav-stacked > li + li {
+    margin-top: 0;
+}
+.nav-stacked li {
+    text-transform: uppercase;
+}
 .nav-stacked li a {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: #ffffff;
@@ -155,7 +214,7 @@ h4, .h4 {
 
 .content-div {
     height: 100%;
-    padding-top: 70px;
+    /* padding-top: 70px; */
     position: absolute;
     top: 0;
     width: 100%;
@@ -288,6 +347,7 @@ h4, .h4 {
 
 /* LABEL ======================================= */
 
+/* 
 label 				 {
     color:#999;
     font-size:14px;
@@ -300,6 +360,7 @@ label 				 {
     -moz-transition:0.2s ease all;
     -webkit-transition:0.2s ease all;
 }
+ */
 
 /* active state */
 .inputMaterial:focus ~ label, .inputMaterial:valid ~ label 		{
@@ -540,29 +601,29 @@ label 				 {
 
 .flx-container .flx-cnt-right div {
     flex: 1 16%;
-    border-right:solid 1px #f5f5f5;
-    padding: 35px 25px;
-
+    border-right:solid 1px #eee;
+    margin-left: 7%;
+}
+.flx-container .flx-cnt-right div:first-child {
+    border-right:solid 1px #eee;
+    margin: 0 7%;
 }
 .flx-container .flx-cnt-right div:last-child {
-    flex: 1 16%;
-    border-right:solid 0px #e2e2e2;
-    
-
+    border-right:solid 0px #eee;
+    margin-left: 7%;
 }
 .flx-container .flx-cnt-right div h4 {
-    font-size: 30px;
-    margin: 0px;
     color: #333;
     font-family: "allerregular";
+    font-size: 24px;
+    line-height: 32px;
+    margin: 0;
 }
 .flx-container .flx-cnt-right div span {
     font-size: 11px;
     text-transform: uppercase;
     color: #999;
     display: inline-block;
-    line-height: 14px;
-    margin-top: 6px;
 }
 .tab-container {
     padding: 30px 40px;
@@ -609,8 +670,8 @@ label 				 {
 /***************************Drivers End*/
 
 /* .flx-performance { height: 100px;} */
-.flx-performance .flx-cnt-right {flex: 1 auto; border:0px solid #e2e2e2; min-height: 140px;}
-.flx-performance .flx-cnt-right div {padding:32px 40px;}
+.flx-performance .flx-cnt-right {flex: 1 auto; border:0px solid #e2e2e2; min-height: 70px;}
+/* .flx-performance .flx-cnt-right div {padding:32px 40px;} */
 
 .cstm-width {min-width: 190px; max-width: 210px;}
 
