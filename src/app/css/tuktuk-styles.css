@@ -174,7 +174,7 @@ h4, .h4 {
     border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.navbar-nav > li > a {
+.navbar-nav > li, .navbar-nav > li > a{
     font-size: 14px;
     line-height: 40px;
     padding-bottom: 0;
@@ -186,8 +186,11 @@ h4, .h4 {
     border-style: solid;
     transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
+    display:inline-block !important;
 }
-
+.navbar-nav > li > a{
+    padding: 0;
+}
 .top-nav > li > a:hover,
 .top-nav > li > a:focus {
     background-color: transparent;
@@ -548,7 +551,7 @@ label 				 {
 
 }
 .flx-container .flx-cnt-right div h4 {
-    font-size: 16px;
+    font-size: 30px;
     margin: 0px;
     color: #333;
     font-family: "allerregular";
