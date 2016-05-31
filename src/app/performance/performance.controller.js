@@ -34,44 +34,44 @@
             console.log("Frequency changed ", freqModel.value)
             switch(section) {
                 case 'driver':
-                    vm.driverChartOptions.chart.xAxis.axisLabel = freqModel.label
-                    if (freqModel.value == 'hour') {
+                    vm.driverChartOptions.chart.xAxis.axisLabel = freqModel
+                    if (freqModel == 'hour') {
                         vm.driverChartOptions.chart.xAxis.tickFormat = function (d) {
                             return d3.time.format('%I %p')(new Date(d));
                         };
                     }
                     else {
                         vm.driverChartOptions.chart.xAxis.tickFormat = function (d) {
-                            return d3.time.format('%d %B %y')(new Date(d));
+                            return d3.time.format('%d %b %y')(new Date(d));
                         };
                     }
                     vm.getDrivers()
 
                     break;
                 case 'rider':
-                    vm.riderChartOptions.chart.xAxis.axisLabel = freqModel.label
-                    if (freqModel.value == 'hour') {
+                    vm.riderChartOptions.chart.xAxis.axisLabel = freqModel
+                    if (freqModel == 'hour') {
                         vm.riderChartOptions.chart.xAxis.tickFormat = function (d) {
                             return d3.time.format('%I %p')(new Date(d));
                         };
                     }
                     else {
                         vm.riderChartOptions.chart.xAxis.tickFormat = function (d) {
-                            return d3.time.format('%d %B %y')(new Date(d));
+                            return d3.time.format('%d %b %y')(new Date(d));
                         };
                     }
                     vm.getRiders()
                     break;
                 default:
-                    vm.tripChartOptions.chart.xAxis.axisLabel = freqModel.label
-                    if (freqModel.value == 'hour') {
+                    vm.tripChartOptions.chart.xAxis.axisLabel = freqModel
+                    if (freqModel == 'hour') {
                         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
                             return d3.time.format('%I %p')(new Date(d));
                         };
                     }
                     else {
                         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-                            return d3.time.format('%d %B %y')(new Date(d));
+                            return d3.time.format('%d %b %y')(new Date(d));
                         };
                     }
                     vm.getTrips()
