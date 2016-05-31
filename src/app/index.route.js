@@ -41,7 +41,13 @@
                 templateUrl: 'app/drivers/drivers.html',
                 controller: 'DriversController',
                 controllerAs: 'drivers'
-            });
+            })
+            .state('home.live', {
+                    url: '/live',
+                    templateUrl: 'app/live/live.html',
+                    controller: 'LiveController',
+                    controllerAs: 'live'
+                });
 
 
     }

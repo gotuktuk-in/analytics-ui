@@ -771,23 +771,27 @@ icon-beat {  0% {
 .inpt-style input[type="radio"]:checked + i:before { color: rgba(0, 128, 0, 0.5); }
 
 
-
-
-
-
-
-
-
-
-
-
-
 /* .flx-performance { height: 100px;} */
 .flx-performance .flx-cnt-right {flex: 1 auto; border:0px solid #e2e2e2; min-height: 70px;}
 /* .flx-performance .flx-cnt-right div {padding:32px 40px;} */
 
 .cstm-width {min-width: 190px; max-width: 210px;}
 
+
+/*************************LIVE******************/
+.live-flx-box {border-bottom: 1px solid #e2e2e2;}
+.live-flx-box .lv-driver{flex: 1 1 18%; padding: 30px 10px 10px 50px;}
+.live-flx-box .lv-rider{flex: 1 1 13%; padding: 30px 10px 10px 30px; border-left:solid 1px #e2e2e2; border-right:solid 1px #e2e2e2; }
+.live-flx-box .lv-booking{ flex: 1 1 60%; padding: 30px 10px 10px 30px;}
+
+.live-flx-box .lv-driver p, .live-flx-box .lv-rider p {display: inline-block; text-align: left; width: 49%; font-size: 12px;}
+.live-flx-box .lv-driver p span, .live-flx-box .lv-rider p span {display: block; font-size: 18px;}
+.live-flx-box .lv-booking div {min-height:90px; padding:0 10px 0px 20px; display: inline-block; width:19%; font-size: 12px; vertical-align: top; border-right:solid 1px #e2e2e2;}
+.live-flx-box .lv-booking div:nth-of-type(1){padding-left: 0px;}
+.live-flx-box .lv-booking div:last-child {border-right:none;}
+.live-flx-box .lv-booking div span {display: block; font-size: 18px;}
+.live-flx-box .lv-booking .sub-flx b {display: block; font-style: normal; margin-bottom: 10px;}
+.live-flx-box .lv-booking .sub-flx p {display: inline-block; width: 45%;}
 
 /* active state */
 .inputMaterial:focus ~ .highlight {
