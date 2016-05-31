@@ -33,7 +33,8 @@
                 url: '/maps/:city/:vehicleType',
                 templateUrl: 'app/maps/maps.html',
                 controller: 'MapsController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                cache: false
             })
             .state('home.drivers', {
                 url: '/drivers',

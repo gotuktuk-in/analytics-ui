@@ -12,7 +12,7 @@ angular
     .module('tuktukV2Dahboard')
     .factory('MapService', MapService)
 
-function MapService($q, $resource, API) {
+function MapService($q, $resource, API, AUTH_API) {
   var url = API;
     return $resource(
         "",
@@ -21,6 +21,11 @@ function MapService($q, $resource, API) {
             getDrivers: {
                 method: 'GET',
                 url:   url + 'map/driver'
+                //http://111.118.241.68:8088/rest/v1/geofence
+            },
+            loadGeoJson: {
+                method: 'GET',
+                url:   AUTH_API + 'geofence'
                 //http://111.118.241.68:8088/rest/v1/geofence
             },
 
