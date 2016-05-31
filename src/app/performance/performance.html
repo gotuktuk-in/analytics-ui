@@ -44,13 +44,14 @@
                 </div>-->
                 <div class="form-group " style="margin-top:15px">
                 	<div class="radio inpt-style">
-						<label><input type="radio" name="optradio"> <i></i> <span>Per Day</span></label>
-  						<label><input type="radio" name="optradio"><i></i> <span>Per Hour</span></label>
+                        <label><input type="radio"  ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)" name="optradio" ng-model="vm.tripFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
+						<label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)" name="optradio" ng-model="vm.tripFrequency.value" value="day"> <i></i> <span>Per Day</span></label>
+
 					</div>
-                    <select ng-model="vm.tripFrequency" class="form-control"
+                 <!--   <select ng-model="vm.tripFrequency" class="form-control"
                             ng-change="vm.changeFrequency('trip', vm.tripFrequency)"
                             ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
-                    </select>
+                    </select>-->
                 </div>
             </form>
         </div>
@@ -81,14 +82,14 @@
                     <input ng-change="vm.getDrivers()"class="form-control cstm-width" type="daterange" ng-model="driverDates" separator="/" format="DD-MMM-YY" opens="right" ranges="vm.ranges"/>
                 </div>-->
                 <div class="form-group " style="margin-top:15px">
-                <div class="radio">
-						<label><input type="radio" name="optradio">Per Day</label>
-  						<label><input type="radio" name="optradio">Per Hour</label>
+                <div class="radio inpt-style">
+                    <label><input type="radio" name="optradio" ng-change="vm.changeFrequency('driver',vm.driverFrequency.value)" ng-model="vm.driverFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
+                    <label><input type="radio" name="optradio" ng-change="vm.changeFrequency('driver',vm.driverFrequency.value)" ng-model="vm.driverFrequency.value" value="day"> <i></i> <span>Per Day</span></label>
 					</div>
-                    <select ng-model="vm.driverFrequency" class="form-control"
+                  <!--  <select ng-model="vm.driverFrequency" class="form-control"
                             ng-change="vm.changeFrequency('driver',vm.driverFrequency)"
                             ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
-                    </select>
+                    </select>-->
                 </div>
             </form>
         </div>
@@ -119,14 +120,14 @@
                     <input ng-change="vm.getRiders()" class="form-control cstm-width" type="daterange" ng-model="riderDates" separator="/" format="DD-MMM-YY" opens="left" ranges="vm.ranges">
                 </div>-->
                 <div class="form-group " style="margin-top:15px">
-                <div class="radio">
-						<label><input type="radio" name="optradio">Per Day</label>
-  						<label><input type="radio" name="optradio">Per Hour</label>
+                <div class="radio inpt-style">
+                    <label><input type="radio" name="optradio" ng-change="vm.changeFrequency('rider', vm.riderFrequency.value)" ng-model="vm.riderFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
+                    <label><input type="radio" name="optradio" ng-change="vm.changeFrequency('rider', vm.riderFrequency.value)" ng-model="vm.riderFrequency.value" value="day"> <i></i> <span>Per Day</span></label>
 					</div>
-                    <select ng-model="vm.riderFrequency" class="form-control"
-                            ng-change="vm.changeFrequency('rider', vm.riderFrequency)"
-                            ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
-                    </select>
+                       <!-- <select ng-model="vm.riderFrequency" class="form-control"
+                                ng-change="vm.changeFrequency('rider', vm.riderFrequency)"
+                                ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
+                        </select>-->
                 </div>
             </form>
         </div>

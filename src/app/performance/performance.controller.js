@@ -19,9 +19,9 @@
         $scope.driverDates = angular.copy($scope.tripDates)
         $scope.riderDates = angular.copy($scope.tripDates)
         vm.timeFrequency = [{label: "Per Hour", value: "hour"}, {label: "Per Day", value: "day"}];
-        vm.tripFrequency = vm.timeFrequency[0];
-        vm.driverFrequency = vm.timeFrequency[0];
-        vm.riderFrequency = vm.timeFrequency[0];
+        vm.tripFrequency = {value:"hour"};
+        vm.driverFrequency = {value:"hour"};
+        vm.riderFrequency = {value:"hour"};
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
         vm.driverChartOptions = angular.copy(ChartConfigService.lineChartOptions);
