@@ -784,16 +784,18 @@ icon-beat {  0% {
 .live-flx-box .lv-rider{flex: 1 1 13%; padding: 30px 10px 10px 30px; border-left:solid 1px #e2e2e2; border-right:solid 1px #e2e2e2; }
 .live-flx-box .lv-booking{ flex: 1 1 60%; padding: 30px 10px 10px 30px;}
 
-.live-flx-box .lv-driver p, .live-flx-box .lv-rider p {display: inline-block; text-align: left; width: 49%; font-size: 12px;}
-.live-flx-box .lv-driver p span, .live-flx-box .lv-rider p span {display: block; font-size: 18px;}
-.live-flx-box .lv-booking div {min-height:90px; padding:0 10px 0px 20px; display: inline-block; width:19%; font-size: 12px; vertical-align: top; border-right:solid 1px #e2e2e2;}
+.live-flx-box .lv-driver p, .live-flx-box .lv-rider p {display: inline-block; text-align: left; width: 49%; font-size: 11px; color: #999; text-transform: uppercase;}
+.live-flx-box .lv-driver p span, .live-flx-box .lv-rider p span {display: block; font-size: 18px; color: #333; font-family: "allerregular"}
+.live-flx-box .lv-booking div {min-height:90px; text-transform: uppercase; padding:0 10px 0px 20px; display: inline-block; width:19%; font-size: 12px; vertical-align: top; border-right:solid 1px #e2e2e2;}
 .live-flx-box .lv-booking div:nth-of-type(1){padding-left: 0px;}
 .live-flx-box .lv-booking div:last-child {border-right:none;}
-.live-flx-box .lv-booking div span {display: block; font-size: 18px;}
+.live-flx-box .lv-booking div span {display: block; font-size: 18px; font-family: "allerregular"; color: #333;}
 .live-flx-box .lv-booking .sub-flx b {display: block; font-style: normal; margin-bottom: 10px;}
-.live-flx-box .lv-booking .sub-flx p {display: inline-block; width: 45%;}
+.live-flx-box .lv-booking .sub-flx p {display: inline-block; width: 45%; color: #999; font-size: 11px; text-transform: uppercase;}
+.lv-driver h4, .lv-rider h4, .lv-booking h4 {font-size: 22px; margin-bottom: 12px; color: #666;}
+.lv-driver h4 i, .lv-rider h4 i, .lv-booking h4 i {font-size: 32px; color: #666; vertical-align: middle;}
 
-/* active state */
+    /* active state */
 .inputMaterial:focus ~ .highlight {
     -webkit-animation:inputHighlighter 0.3s ease;
     -moz-animation:inputHighlighter 0.3s ease;
