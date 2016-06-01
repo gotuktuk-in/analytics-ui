@@ -14,7 +14,9 @@
         $rootScope.city = StaticDataService.cities[0].value
         $rootScope.vehicleType = StaticDataService.vehicleTypes[0].value
         /* $rootScope.$on('$viewContentLoaded', function() {
-         $templateCache.removeAll();
+             var currentPageTemplate = $state.current.templateUrl;
+             $templateCache.remove(currentPageTemplate);
+             $state.reload();
          });*/
         $rootScope.logout = function () {
             LoginService.logout({}, function (response) {

@@ -53,7 +53,7 @@ function ChartConfigService($q, $resource, API) {
                 showYAxis:true,
                 xAxis: {
                     tickSize:'10',
-                    axisLabel: 'Per Hour',
+                   // axisLabel: 'Per Hour',
                      rotateLabels: '-90',
                     tickFormat: function(d) {
                      //   return d3.time.format('%d %B %y')(new Date(d))
