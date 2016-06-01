@@ -47,7 +47,13 @@
                     templateUrl: 'app/live/live.html',
                     controller: 'LiveController',
                     controllerAs: 'live'
-                });
+             })
+            .state('home.trips', {
+                url: '/trips',
+                templateUrl: 'app/trips/trips.html',
+                controller: 'TripsController',
+                controllerAs: 'trips'
+            });
 
 
     }
