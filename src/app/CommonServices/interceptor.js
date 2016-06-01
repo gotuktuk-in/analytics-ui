@@ -22,6 +22,11 @@ angular.module('httpInterceptor', [])
                 'request': function(config) {
                     // same as above
                     loadingScreen.show();
+                    if(config.params && config.params.startDate && config.params.endDate)
+                    {
+                        config.params.startDate = moment(config.params.startDate).startOf('day').format("YYYYMMDDHH").toString();
+                        config.params.endDate = moment(config.params.endDate).endOf('day').format("YYYYMMDDHH").toString()
+                    }
                     return config || $q.when(config);
                 },
                 // optional method

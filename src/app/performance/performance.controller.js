@@ -77,30 +77,11 @@
                     vm.getTrips()
             }
         }
-     /*   $scope.$watch('dates', function (newValue, oldValue) {
-            getDataFor(vm.selectedFrequency.value)
-        })*/
-
-        function getFormatedDate(date, freq) {
-            var obj = {}
-            if ( freq.value == 'hour') {
-                obj.startDate = moment(date.startDate).startOf('day').format("YYYYMMDDHH").toString()
-                obj.endDate = moment(date.endDate).endOf('day').format("YYYYMMDDHH").toString()
-            }
-            else {
-                obj.startDate = moment(date.startDate).startOf('day').format("YYYYMMDD").toString()
-                obj.endDate = moment(date.endDate).endOf('day').format("YYYYMMDD").toString()
-            }
-            return obj;
-        }
-
         vm.getTrips = function () {
-            startDate = getFormatedDate($scope.tripDates,  vm.tripFrequency).startDate;
-            endDate = getFormatedDate($scope.tripDates,  vm.tripFrequency).endDate;
             PerformanceService.getTrips({
                 city: $rootScope.city,
-                startDate: startDate,
-                endDate: endDate,
+                startDate: $scope.tripDates.startDate,
+                endDate: $scope.tripDates.endDate,
                 count: 1,
                 page: 1
             }, {vehicle: $rootScope.vehicleType, frequency: vm.tripFrequency.value}, function (response) {
@@ -113,12 +94,10 @@
             });
         }
         vm.getDrivers = function () {
-            startDate = getFormatedDate($scope.tripDates,  vm.driverFrequency).startDate;
-            endDate = getFormatedDate($scope.tripDates,  vm.driverFrequency).endDate;
             PerformanceService.getDrivers({
                 city: $rootScope.city,
-                startDate: startDate,
-                endDate: endDate,
+                startDate: $scope.driverDates.startDate,
+                endDate: $scope.driverDates.endDate,
                 count: 1,
                 page: 1
             }, {vehicle: $rootScope.vehicleType, frequency:  vm.driverFrequency.value}, function (response) {
@@ -131,12 +110,10 @@
             });
         }
         vm.getRiders = function () {
-            startDate = getFormatedDate($scope.tripDates,  vm.riderFrequency).startDate;
-            endDate = getFormatedDate($scope.tripDates, vm.riderFrequency).endDate;
             PerformanceService.getRiders({
                 city: $rootScope.city,
-                startDate: startDate,
-                endDate: endDate,
+                startDate: $scope.riderDates.startDate,
+                endDate: $scope.riderDates.endDate,
                 count: 1,
                 page: 1
             }, {vehicle: $rootScope.vehicleType, frequency: vm.riderFrequency.value}, function (response) {

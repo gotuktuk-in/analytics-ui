@@ -43,7 +43,7 @@
                 controllerAs: 'drivers'
             })
             .state('home.live', {
-                    url: '/live',
+                    url: '/live/:city/:vehicleType',
                     templateUrl: 'app/live/live.html',
                     controller: 'LiveController',
                     controllerAs: 'live'
