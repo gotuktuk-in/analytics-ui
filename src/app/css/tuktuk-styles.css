@@ -1,6 +1,7 @@
 body {
     background-color: #fff;
-    font-family: 'aller_lightregular', sans-serif;
+    /* font-family: 'aller_lightregular', sans-serif; */
+    font-family: Arial, sans-serif;
     font-size: 13px;
     color: #333;
 }
@@ -11,7 +12,7 @@ a:focus {
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: 'aller_lightregular', sans-serif;
+    /* font-family: 'aller_lightregular', sans-serif; */
     font-weight: 100;
 }
 
@@ -23,7 +24,18 @@ h4, .h4 {
 .panel {
     border-radius: 0;
 }
-
+.text-danger {
+    color: #d9534f;
+}
+.text-success {
+    color: #5cb85c;
+}
+.text-warning {
+    color: #f0ad4e;
+}
+.text-info {
+    color: #337ab7;
+}
 .navbar-inverse {
     background: #fff none repeat scroll 0 0;
     border-bottom: medium none;
@@ -81,7 +93,7 @@ h4, .h4 {
 .daterangepicker .btn-sm, .daterangepicker .btn-group-sm > .btn,
 .daterangepicker .input-mini {border-radius: 0 !important;}
 .daterangepicker, .daterangepicker .calendar th, .daterangepicker .calendar td {
-     font-family: 'aller_lightregular', sans-serif;
+     /* font-family: 'aller_lightregular', sans-serif; */
      font-size:12px;
 }
 .daterangepicker .ranges li {
@@ -544,7 +556,7 @@ h4, .h4 {
     font-size: 20px;
     color: #f6f6f6;
     text-align: center;
-    font-family: "aller_lightregular";
+    /* font-family: "aller_lightregular"; */
 }
 .info-window .iw-header .iw-driver {
     border-radius: 100%;
@@ -597,32 +609,67 @@ h4, .h4 {
     flex-flow: row wrap;
 }
 
-.flx-container .flx-cnt-right div {
+.flx-performance .flx-cnt-right div {
     flex: 1 16%;
     border-right:solid 1px #eee;
     margin-left: 7%;
 }
-.flx-container .flx-cnt-right div:first-child {
+.flx-performance .flx-cnt-right div:first-child {
     border-right:solid 1px #eee;
     margin: 0 7%;
 }
-.flx-container .flx-cnt-right div:last-child {
+.flx-performance .flx-cnt-right div:last-child {
     border-right:solid 0px #eee;
     margin-left: 7%;
 }
-.flx-container .flx-cnt-right div h4 {
+.flx-performance .flx-cnt-right div h4 {
     color: #333;
-    font-family: "allerregular";
+   /*  font-family: "allerregular"; */
     font-size: 24px;
     line-height: 32px;
     margin: 0;
 }
-.flx-container .flx-cnt-right div span {
+.flx-performance .flx-cnt-right div span {
     font-size: 11px;
-    text-transform: uppercase;
+    text-transform: none;
     color: #999;
     display: inline-block;
 }
+
+.flx-live.flx-container .flx-cnt-right span b{
+	font-weight: normal;
+}
+.flx-live.flx-container .flx-cnt-right span b.title{
+	display: inline-block;
+	min-width: 60px;
+}
+.flx-live .flx-cnt-right div {
+    flex: 1 16%;
+    border-right:solid 1px #eee;
+    margin-left: 7%;
+}
+.flx-live .flx-cnt-right div:first-child {
+    border-right:solid 1px #eee;
+    margin: 0 2%;
+}
+.flx-live .flx-cnt-right div:last-child {
+    border-right:solid 0px #eee;
+    margin-left: 7%;
+}
+.flx-live .flx-cnt-right div h4 {
+    color: #333;
+    /* font-family: "allerregular"; */
+    font-size: 24px;
+    line-height: 32px;
+    margin: 0;
+}
+.flx-live .flx-cnt-right div span {
+    font-size: 11px;
+    text-transform: none;
+    color: #999;
+    display: inline-block;
+}
+
 .tab-container {
     padding: 30px 40px;
 }
