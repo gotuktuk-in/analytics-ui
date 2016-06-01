@@ -24,7 +24,7 @@ function LoginService($q, $resource, API, AUTH_API) {
                 url:   authURL + 'login'
             },
             logout: {
-                method: 'POST',
+                method: 'GET',
                 url:   url + 'logout'
             },
 

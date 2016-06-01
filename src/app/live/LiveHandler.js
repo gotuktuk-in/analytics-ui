@@ -18,19 +18,18 @@ function LiveHandler() {
     factory.drivers = []
     factory.riders = []
     factory.filteredTrips = [
-        {"key": "Requests", "values": []},
-        {"key": "Unique Requests", "values": []},
+        {"key": "Total Booking", "values": []},
+        {"key": "Total Successful Booking", "values": []},
 
-        {"key": "Cancelled Requests", "values": []},
-        {"key": "Unique Cancelled Requests", "values": []},
+        {"key": "Unique Successful Booking", "values": []},
+        {"key": "In-Progress", "values": []},
 
-        {"key": "Successful Requests", "values": []},
-        {"key": "Unique Successful Requests", "values": []},
+        {"key": "Total Cancelled", "values": []},
+        {"key": "Unique Cancelled", "values": []},
 
-        {"key": "Cancelled trips (by rider)", "values": []},
-        {"key": "Cancelled trips (by driver)", "values": []},
+        {"key": "Total Failed", "values": []},
+        {"key": "Unique Failed", "values": []},
 
-        {"key": "tCash", "values": []},
     ]
 
     factory.filteredDrivers = [
@@ -43,35 +42,32 @@ function LiveHandler() {
         {"key": "New Riders", "values": []},
     ]
     factory.getTrips = function () {
-        var requests = [], unique_requests = [], cancelled_requests = [], unique_cancelled_requests = [],
-            successful_requests = [], unique_successful_requests = [], cancelled_trips_rider = [], cancelled_trips_driver = [], tCash = []
+        var booking = [], successful_total = [], successful_unique_riders = [], in_process = [],
+            cancelled_total = [], cancelled_unique_rider = [], failed_total = [], failed_unique_rider = [];
         _.each(factory.trips, function (value) {
 
             var longDate = factory.getLongDate(value.id)
 
-            requests.push([longDate, value.requests.total])
-            unique_requests.push([longDate, value.requests.unique_riders])
+            booking.push([longDate, value.booking])
+            successful_total.push([longDate, value.successful.total])
 
-            cancelled_requests.push([longDate, value.cancelled.total])
-            unique_cancelled_requests.push([longDate, value.cancelled.unique])
+            successful_unique_riders.push([longDate, value.successful.unique_riders])
+            in_process.push([longDate, value.in_process])
 
-            successful_requests.push([longDate, value.success.total])
-            unique_successful_requests.push([longDate, value.success.unique_riders])
+            cancelled_total.push([longDate, value.cancelled.total])
+            cancelled_unique_rider.push([longDate, value.cancelled.unique_riders])
 
-            cancelled_trips_rider.push([longDate, value.cancelled.cancelled_by_riders])
-            cancelled_trips_driver.push([longDate, value.cancelled.cancelled_by_drivers])
-
-            tCash.push([longDate, value.tcash_used])
+            failed_total.push([longDate, value.failed.total])
+            failed_unique_rider.push([longDate, value.failed.unique_rider])
         });
-        factory.filteredTrips[0].values = requests;
-        factory.filteredTrips[1].values = unique_requests;
-        factory.filteredTrips[2].values = cancelled_requests;
-        factory.filteredTrips[3].values = unique_cancelled_requests;
-        factory.filteredTrips[4].values = successful_requests;
-        factory.filteredTrips[5].values = unique_successful_requests;
-        factory.filteredTrips[6].values = cancelled_trips_rider;
-        factory.filteredTrips[7].values = cancelled_trips_driver;
-        factory.filteredTrips[8].values = tCash;
+        factory.filteredTrips[0].values = booking;
+        factory.filteredTrips[1].values = successful_total;
+        factory.filteredTrips[2].values = successful_unique_riders;
+        factory.filteredTrips[3].values = in_process;
+        factory.filteredTrips[4].values = cancelled_total;
+        factory.filteredTrips[5].values = cancelled_unique_rider;
+        factory.filteredTrips[6].values = failed_total;
+        factory.filteredTrips[7].values = failed_unique_rider;
         return factory.filteredTrips
     }
     factory.getDrivers = function () {

@@ -26,6 +26,8 @@
         city: $rootScope.city,
         vehicle: $rootScope.vehicleType
       }, function (response) {
+        LiveHandler.trips = response.trip
+        vm.trips = LiveHandler.getTrips()
         vm.trips.overview =response.overview;
        console.log('response ', response)
       }, function (err) {
