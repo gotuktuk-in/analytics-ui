@@ -46,7 +46,7 @@
                     url: '/live/:city/:vehicleType',
                     templateUrl: 'app/live/live.html',
                     controller: 'LiveController',
-                    controllerAs: 'live'
+                    controllerAs: 'vm'
                 });
 
 

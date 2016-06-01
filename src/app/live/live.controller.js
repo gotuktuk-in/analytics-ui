@@ -6,25 +6,52 @@
     .controller('LiveController', LiveController);
 
   /** @ngInject */
-  function LiveController($scope, $log, $rootScope,$state, $stateParams, PerformanceService) {
+  function LiveController($scope, $log, $rootScope,$state, $stateParams,ChartConfigService, LiveService) {
     var vm = this;
-    $scope.dates = {};
-    $scope.dates.startDate = moment().format("YYYY-MM-DD");
-    $scope.dates.endDate = moment().format("YYYY-MM-DD");
-    vm.getTrips = function () {
-      PerformanceService.getTrips({
+    vm.config = ChartConfigService.lineChartConfig;
+    vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+    vm.driverChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+    vm.riderChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+    vm.trips = [];
+    vm.drivers = [];
+    vm.riders = [];
+
+   function getLive () {
+
+      LiveService.getTrips({
         city: $rootScope.city,
-        startDate:  $scope.dates.startDate,
-        endDate:  $scope.dates.endDate,
-        count: 1,
-        page: 1
-      }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
+        vehicle: $rootScope.vehicleType
+      }, function (response) {
+        vm.trips.overview =response.overview;
        console.log('response ', response)
       }, function (err) {
         console.log(err)
         $scope.error = true;
       });
+
+     LiveService.getDrivers({
+       city: $rootScope.city,
+       vehicle: $rootScope.vehicleType
+     }, function (response) {
+       vm.drivers.overview = response.overview;
+       console.log('response ', response)
+     }, function (err) {
+       console.log(err)
+       $scope.error = true;
+     });
+
+     LiveService.getRiders({
+       city: $rootScope.city,
+       vehicle: $rootScope.vehicleType
+     }, function (response) {
+       vm.riders.overview =response.overview;
+       console.log('response ', response)
+     }, function (err) {
+       console.log(err)
+       $scope.error = true;
+     });
+
     }
-    vm.getTrips()
+    getLive()
   }
 })();
