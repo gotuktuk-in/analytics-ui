@@ -6,8 +6,12 @@
     .controller('LiveController', LiveController);
 
   /** @ngInject */
-  function LiveController($scope, $log, $rootScope,$state, $stateParams,ChartConfigService, LiveService) {
+  function LiveController($scope, $log, $rootScope,$state, $stateParams,ChartConfigService, LiveService, LiveHandler) {
     var vm = this;
+
+    $scope.dates = {};
+    $scope.dates.startDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
+    $scope.dates.endDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
     vm.config = ChartConfigService.lineChartConfig;
     vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
     vm.driverChartOptions = angular.copy(ChartConfigService.lineChartOptions);
@@ -33,6 +37,8 @@
        city: $rootScope.city,
        vehicle: $rootScope.vehicleType
      }, function (response) {
+       LiveHandler.drivers = response.drivers
+       vm.drivers = LiveHandler.getDrivers()
        vm.drivers.overview = response.overview;
        console.log('response ', response)
      }, function (err) {
@@ -44,6 +50,8 @@
        city: $rootScope.city,
        vehicle: $rootScope.vehicleType
      }, function (response) {
+       LiveHandler.riders = response.riders
+       vm.riders = LiveHandler.getRiders()
        vm.riders.overview =response.overview;
        console.log('response ', response)
      }, function (err) {

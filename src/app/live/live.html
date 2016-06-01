@@ -2,7 +2,7 @@
     <div class="row">
         <form class="form-inline date-selection" ng-class="{'date-toggle' : toggle}">
             <div class="form-group ">
-                <input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange" ng-model="tripDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
+                <input ng-disabled="true" class="form-control cstm-width text-center" type="daterange" ng-model="dates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
                     </div>
                     <div style="background-color: rgb(48, 176, 58); height: 12px; width: 12px; border-radius: 100%; position: absolute; top: 26px; right: -17px;"></div>
         </form>
@@ -14,9 +14,9 @@
                     <span class="pull-left" style="padding:4px 10px 4px 0; height:100%">
                         <img src="assets/images/driver.svg" title="Tuktuk" height="45">
                     </span>
-                    <span><h4>{{400}} <span style="line-height:0">Drivers</span></h4></span>
+                    <span><h4>{{ vm.drivers.overview.total_drivers}} <span style="line-height:0">Drivers</span></h4></span>
                     <br>
-                    <span><b>100</b> Free . <b>300</b> Occupied . <b>100%</b> Online</span>
+                    <span><b ng-bind="vm.drivers.overview.free_drivers">0</b> Free . <b  ng-bind="vm.drivers.overview.occupied_drivers">0</b> Occupied . <b>{{vm.drivers.overview.online_drivers_percentage | number:2}}%</b> Online</span>
                     
                 </div>
                 <div class="text-left">
@@ -25,11 +25,11 @@
                             </span>
                     <span><h4>{{800}} <span style="line-height:0">Bookings</span></h4></span>
                     <br>
-                    <span><b class="title text-success">Successful:</b> <b>300</b> Total . <b>100</b> Unique</span>
+                    <span><b class="title text-success">Successful:</b> <b>{{ vm.riders.overview.total_riders}} </b> Total . <b>{{ vm.riders.overview.total_riders}} </b> Unique</span>
                     <br>
-                    <span><b class="title text-warning">Cancelled:</b> <b>300</b> Total . <b>100</b> Unique</span>
+                    <span><b class="title text-warning">Cancelled:</b> <b>{{ vm.riders.overview.total_riders}} </b> Total . <b>{{ vm.riders.overview.total_riders}} </b> Unique</span>
                     <br>
-                    <span><b class="title text-danger">Failed:</b> <b>300</b> Total . <b>100</b> Unique</span>
+                    <span><b class="title text-danger">Failed:</b> <b>{{ vm.riders.overview.total_riders}} </b> Total . <b>{{ vm.riders.overview.total_riders}} </b> Unique</span>
                     <br>
                     <span><b class="title text-info">In Progress:</b> <b>300</b></span>
                     </div>
@@ -37,9 +37,9 @@
                     <span class="pull-left" style="padding:4px 10px 4px 0; height:100%">
                         <img src="assets/images/new-rider.svg" title="Tuktuk" height="45">
                             </span>
-                    <span><h4>{{500}} <span style="line-height:0">Riders</span></h4></span>
+                    <span><h4>{{ vm.riders.overview.total_riders}} <span style="line-height:0">Riders</span></h4></span>
                     <br>
-                    <span><b>100</b> New</span>
+                    <span><b>{{ vm.riders.overview.new_riders_reg}}</b> New</span>
                     
                 </div>
                 </div>

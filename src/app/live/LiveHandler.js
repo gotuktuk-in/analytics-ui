@@ -34,14 +34,13 @@ function LiveHandler() {
     ]
 
     factory.filteredDrivers = [
-        {"key": "New Drivers", "values": []},
-        {"key": "Active Drivers", "values": []},
-        {"key": "Average Rides Per Drivers", "values": []},
+        {"key": "Total Drivers", "values": []},
+        {"key": "Free Drivers", "values": []},
+        {"key": "Occupied Driver", "values": []},
     ]
     factory.filteredRiders = [
-        {"key": "New Riders", "values": []},
-        {"key": "Active Riders", "values": []},
         {"key": "Total Riders", "values": []},
+        {"key": "New Riders", "values": []},
     ]
     factory.getTrips = function () {
         var requests = [], unique_requests = [], cancelled_requests = [], unique_cancelled_requests = [],
@@ -76,30 +75,28 @@ function LiveHandler() {
         return factory.filteredTrips
     }
     factory.getDrivers = function () {
-        var new_drivers = [], active_drivers = [], average_rides_per_drivers = []//, total_availability=[]
+        var total_count = [],free_driver = [],occupied_driver = [];
         _.each(factory.drivers, function (value) {
             var longDate = factory.getLongDate(value.id)
-            new_drivers.push([longDate, value.total_offline]);
-            active_drivers.push([longDate, value.total_online]);
-            average_rides_per_drivers.push([longDate, value.average_rides_per_driver]);
+            total_count.push([longDate, value.total_count]);
+            free_driver.push([longDate, value.free_driver]);
+            occupied_driver.push([longDate, value.occupied_driver]);
         })
-        factory.filteredDrivers[0].values = new_drivers
-        factory.filteredDrivers[1].values = active_drivers
-        factory.filteredDrivers[2].values = average_rides_per_drivers
+        factory.filteredDrivers[0].values = total_count
+        factory.filteredDrivers[1].values = free_driver
+        factory.filteredDrivers[2].values = occupied_driver
 
         return factory.filteredDrivers
     }
     factory.getRiders = function () {
-        var new_riders = [], active_riders = [], total_riders=[]
+        var total_riders = [], new_rider_reg = [];
         _.each(factory.riders, function (value) {
             var longDate = factory.getLongDate(value.id)
-            new_riders.push([longDate, value.newly_reg_riders]);
-            active_riders.push([longDate, value.active_riders]);
             total_riders.push([longDate, value.total_riders]);
+            new_rider_reg.push([longDate, value.new_rider_reg]);
         })
-        factory.filteredRiders[0].values = new_riders;
-        factory.filteredRiders[1].values = active_riders;
-        factory.filteredRiders[2].values = total_riders;
+        factory.filteredRiders[0].values = total_riders;
+        factory.filteredRiders[1].values = new_rider_reg;
         return factory.filteredRiders;
     }
     factory.getLongDate = function (date) {
