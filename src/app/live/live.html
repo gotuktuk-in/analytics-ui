@@ -1,44 +1,47 @@
 <div class="container-fluid" ng-class="{'container-toggle' : toggle}">
     <div class="row">
-        <div class="col-md-12">
-            <div class="live-flx-box flx-container">
-                <div class="lv-driver">
-                    <h4><i class="fa fa-cab"></i> Drivers</h4>
-                    <p><span>{{400}}</span> Total </p>
-                    <p><span>{{400}}</span> Free</p>
-                    <p><span>{{400}}</span> Occupied</p>
-                    <p><span>{{400}}</span> % Online </p>
+        <form class="form-inline date-selection" ng-class="{'date-toggle' : toggle}">
+            <div class="form-group ">
+                <input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange" ng-model="tripDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
+                    </div>
+                    <div style="background-color: rgb(48, 176, 58); height: 12px; width: 12px; border-radius: 100%; position: absolute; top: 26px; right: -17px;"></div>
+        </form>
+        <br>
+        <div class="col-md-9  col-md-offset-3">
+            <div class="flx-live flx-container">
+                <div class="flx-cnt-right">
+                <div class="text-left">
+                    <span class="pull-left" style="padding:4px 10px 4px 0; height:100%">
+                        <img src="assets/images/driver.svg" title="Tuktuk" height="45">
+                    </span>
+                    <span><h4>{{400}} <span style="line-height:0">Drivers</span></h4></span>
+                    <br>
+                    <span><b>100</b> Free . <b>300</b> Occupied . <b>100%</b> Online</span>
+                    
                 </div>
-                <div class="lv-rider">
-                    <h4><i class="fa fa-user"></i> Riders</h4>
-                    <p><span>{{400}}</span> Total</p>
-                    <p><span>{{400}}</span> New</p>
+                <div class="text-left">
+                    <span class="pull-left" style="padding:4px 10px 4px 0; height:100%">
+                        <img src="assets/images/trip-req.svg" title="Tuktuk" height="45">
+                            </span>
+                    <span><h4>{{800}} <span style="line-height:0">Bookings</span></h4></span>
+                    <br>
+                    <span><b class="title text-success">Successful:</b> <b>300</b> Total . <b>100</b> Unique</span>
+                    <br>
+                    <span><b class="title text-warning">Cancelled:</b> <b>300</b> Total . <b>100</b> Unique</span>
+                    <br>
+                    <span><b class="title text-danger">Failed:</b> <b>300</b> Total . <b>100</b> Unique</span>
+                    <br>
+                    <span><b class="title text-info">In Progress:</b> <b>300</b></span>
+                    </div>
+                <div class="text-left">
+                    <span class="pull-left" style="padding:4px 10px 4px 0; height:100%">
+                        <img src="assets/images/new-rider.svg" title="Tuktuk" height="45">
+                            </span>
+                    <span><h4>{{500}} <span style="line-height:0">Riders</span></h4></span>
+                    <br>
+                    <span><b>100</b> New</span>
+                    
                 </div>
-                <div class="lv-booking">
-                    <h4><img src="assets/images/booking.png" alt="" height="38px"> Booking</h4>
-                    <div class="sub-flx">
-                        <b>Total Booking</b>
-                        <span>{{400}}</span>
-                    </div>
-                    <div class="sub-flx">
-                        <b class="text-info">In Progress</b>
-                        <span>{{400}}</span>
-                    </div>
-                    <div class="sub-flx">
-                        <b class="text-success">Successful</b>
-                        <p><span>{{45}}</span> Total</p>
-                        <p><span>{{12}}</span> Unique</p>
-                    </div>
-                    <div class="sub-flx">
-                        <b class="text-warning">Cancelled</b>
-                        <p><span>{{45}}</span> Total</p>
-                        <p><span>{{12}}</span> Unique</p>
-                    </div>
-                    <div class="sub-flx">
-                        <b class="text-danger">Failed</b>
-                        <p><span>{{45}}</span> Total</p>
-                        <p><span>{{45}}</span> Unique </p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -47,22 +50,7 @@
     <div class="row">
         <div class="col-md-6"></div>
         <div class="col-md-6 text-right">
-            <form class="form-inline">
-
-                <!--<div class="form-group ">
-                    <input ng-change="vm.getTrips()" class="form-control cstm-width" type="daterange" ng-model="tripDates" separator="/" format="DD-MMM-YY" opens="left" ranges="vm.ranges">
-                </div>-->
-                <div class="form-group " style="margin-top:15px">
-                    <div class="radio inpt-style">
-                        <label><input type="radio" name="optradio"> <i></i> <span>Per Day</span></label>
-                        <label><input type="radio" name="optradio"><i></i> <span>Per Hour</span></label>
-                    </div>
-                    <select ng-model="vm.tripFrequency" class="form-control"
-                            ng-change="vm.changeFrequency('trip', vm.tripFrequency)"
-                            ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
-                    </select>
-                </div>
-            </form>
+           
         </div>
     </div>
     <br>
@@ -86,21 +74,7 @@
             <div class="row">
                 <div class="col-md-6"></div>
                 <div class="col-md-6 text-right">
-                    <form class="form-inline">
-                        <!--<div class="form-group ">
-                            <input ng-change="vm.getDrivers()"class="form-control cstm-width" type="daterange" ng-model="driverDates" separator="/" format="DD-MMM-YY" opens="right" ranges="vm.ranges"/>
-                        </div>-->
-                        <div class="form-group " style="margin-top:15px">
-                            <div class="radio">
-                                <label><input type="radio" name="optradio">Per Day</label>
-                                <label><input type="radio" name="optradio">Per Hour</label>
-                            </div>
-                            <select ng-model="vm.driverFrequency" class="form-control"
-                                    ng-change="vm.changeFrequency('driver',vm.driverFrequency)"
-                                    ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
-                            </select>
-                        </div>
-                    </form>
+                   
                 </div>
             </div>
             <br>
@@ -124,21 +98,7 @@
             <div class="row">
                 <div class="col-md-6"></div>
                 <div class="col-md-6 text-right">
-                    <form class="form-inline">
-                        <!--<div class="form-group ">
-                            <input ng-change="vm.getRiders()" class="form-control cstm-width" type="daterange" ng-model="riderDates" separator="/" format="DD-MMM-YY" opens="left" ranges="vm.ranges">
-                        </div>-->
-                        <div class="form-group " style="margin-top:15px">
-                            <div class="radio">
-                                <label><input type="radio" name="optradio">Per Day</label>
-                                <label><input type="radio" name="optradio">Per Hour</label>
-                            </div>
-                            <select ng-model="vm.riderFrequency" class="form-control"
-                                    ng-change="vm.changeFrequency('rider', vm.riderFrequency)"
-                                    ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
-                            </select>
-                        </div>
-                    </form>
+                  
                 </div>
             </div>
             <br>
