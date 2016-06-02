@@ -43,10 +43,10 @@ function PerformanceHandler() {
         {"key": "Active Riders", "values": []},
         {"key": "Total Riders", "values": []},
     ]
-    factory.getTrips = function () {
+    factory.getTrips = function (data) {
         var requests = [], unique_requests = [], cancelled_requests = [], unique_cancelled_requests = [],
             successful_requests = [], unique_successful_requests = [], cancelled_trips_rider = [], cancelled_trips_driver = [], tCash = []
-        _.each(factory.trips, function (value) {
+        _.each(data, function (value) {
 
             var longDate = factory.getLongDate(value.id)
 
@@ -75,9 +75,9 @@ function PerformanceHandler() {
         factory.filteredTrips[8].values = tCash;
         return factory.filteredTrips
     }
-    factory.getDrivers = function () {
+    factory.getDrivers = function (data) {
         var new_drivers = [], active_drivers = [], average_rides_per_drivers = []//, total_availability=[]
-        _.each(factory.drivers, function (value) {
+        _.each(data, function (value) {
             var longDate = factory.getLongDate(value.id)
             new_drivers.push([longDate, value.total_offline]);
             active_drivers.push([longDate, value.total_online]);
@@ -89,9 +89,9 @@ function PerformanceHandler() {
 
         return factory.filteredDrivers
     }
-    factory.getRiders = function () {
+    factory.getRiders = function (data) {
         var new_riders = [], active_riders = [], total_riders=[]
-        _.each(factory.riders, function (value) {
+        _.each(data, function (value) {
             var longDate = factory.getLongDate(value.id)
             new_riders.push([longDate, value.newly_reg_riders]);
             active_riders.push([longDate, value.active_riders]);

@@ -85,8 +85,8 @@
                 count: 1,
                 page: 1
             }, {vehicle: $rootScope.vehicleType, frequency: vm.tripFrequency.value}, function (response) {
-                PerformanceHandler.trips = response[0].trip;
-                vm.trips = PerformanceHandler.getTrips();
+               // PerformanceHandler.trips = response[0].trip;
+                vm.trips = PerformanceHandler.getTrips(response[0].trip);
                 vm.trips.overview = response[0].overview;
             }, function (err) {
                 console.log(err)
@@ -101,8 +101,8 @@
                 count: 1,
                 page: 1
             }, {vehicle: $rootScope.vehicleType, frequency:  vm.driverFrequency.value}, function (response) {
-                PerformanceHandler.drivers = response
-                vm.drivers = PerformanceHandler.getDrivers();
+             //   PerformanceHandler.drivers = response
+                vm.drivers = PerformanceHandler.getDrivers(response);
                 console.log('vm.drivers ', vm.drivers)
             }, function (err) {
                 console.log(err)
@@ -117,8 +117,8 @@
                 count: 1,
                 page: 1
             }, {vehicle: $rootScope.vehicleType, frequency: vm.riderFrequency.value}, function (response) {
-                PerformanceHandler.riders = response[0].riders
-                vm.riders = PerformanceHandler.getRiders();
+               // PerformanceHandler.riders = response[0].riders
+                vm.riders = PerformanceHandler.getRiders(response[0].riders);
                 vm.riders.overview = response[0].overview
                 console.log('vm.riders ', PerformanceHandler.riders)
             }, function (err) {

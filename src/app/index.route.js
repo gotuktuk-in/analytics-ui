@@ -52,7 +52,7 @@
                 url: '/trips',
                 templateUrl: 'app/trips/trips.html',
                 controller: 'TripsController',
-                controllerAs: 'trips'
+                controllerAs: 'vm'
             });
 
     }
