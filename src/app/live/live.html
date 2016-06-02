@@ -14,32 +14,32 @@
                     <span class="pull-left" style="padding:4px 10px 4px 0; height:100%">
                         <img src="assets/images/driver.svg" title="Tuktuk" height="45">
                     </span>
-                    <span><h4>{{ vm.drivers.overview.total_drivers}} <span style="line-height:0">Drivers</span></h4></span>
+                    <span><h4>{{ vm.overview.driver.total_drivers}} <span style="line-height:0">Drivers</span></h4></span>
                     <br>
-                    <span><b ng-bind="vm.drivers.overview.free_drivers">0</b> Free . <b  ng-bind="vm.drivers.overview.occupied_drivers">0</b> Occupied . <b>{{vm.drivers.overview.online_drivers_percentage | number:2}}%</b> Online</span>
+                    <span><b ng-bind="vm.overview.driver.free_drivers">0</b> Free . <b  ng-bind="vm.overview.driver.occupied_drivers">0</b> Occupied . <b>{{vm.overview.driver.online_drivers_percentage | number:2}}%</b> Online</span>
                     
                 </div>
                 <div class="text-left">
                     <span class="pull-left" style="padding:4px 10px 4px 0; height:100%">
                         <img src="assets/images/trip-req.svg" title="Tuktuk" height="45">
                             </span>
-                    <span><h4>{{vm.trips.overview.total_booking}} <span style="line-height:0">Bookings</span></h4></span>
+                    <span><h4>{{vm.overview.trip.total_booking}} <span style="line-height:0">Bookings</span></h4></span>
                     <br>
-                    <span><b class="title text-success">Successful:</b> <b>{{ vm.trips.overview.successful.total}} </b> Total . <b>{{ vm.trips.overview.successful.unique_riders}} </b> Unique</span>
+                    <span><b class="title text-success">Successful:</b> <b>{{vm.overview.trip.successful.total}} </b> Total . <b>{{ vm.overview.trip.successful.unique_riders}} </b> Unique</span>
                     <br>
-                    <span><b class="title text-warning">Cancelled:</b> <b>{{ vm.trips.overview.cancelled.total}} </b> Total . <b>{{ vm.trips.overview.cancelled.unique_rider}} </b> Unique</span>
+                    <span><b class="title text-warning">Cancelled:</b> <b>{{vm.overview.trip.cancelled.total}} </b> Total . <b>{{ vm.overview.trip.cancelled.unique_rider}} </b> Unique</span>
                     <br>
-                    <span><b class="title text-danger">Failed:</b> <b>{{ vm.trips.overview.failed.total}} </b> Total . <b>{{ vm.trips.overview.failed.unique_rider}} </b> Unique</span>
+                    <span><b class="title text-danger">Failed:</b> <b>{{vm.overview.trip.failed.total}} </b> Total . <b>{{ vm.overview.trip.failed.unique_rider}} </b> Unique</span>
                     <br>
-                    <span><b class="title text-info">In Progress:</b> <b>{{ vm.trips.overview.in_process}}</b></span>
+                    <span><b class="title text-info">In Progress:</b> <b>{{ vm.overview.trip.in_process}}</b></span>
                     </div>
                 <div class="text-left">
                     <span class="pull-left" style="padding:4px 10px 4px 0; height:100%">
                         <img src="assets/images/new-rider.svg" title="Tuktuk" height="45">
                             </span>
-                    <span><h4>{{ vm.riders.overview.total_riders}} <span style="line-height:0">Riders</span></h4></span>
+                    <span><h4>{{ vm.overview.rider.total_riders}} <span style="line-height:0">Riders</span></h4></span>
                     <br>
-                    <span><b>{{ vm.riders.overview.new_riders_reg}}</b> New</span>
+                    <span><b>{{ vm.overview.rider.new_riders_reg}}</b> New</span>
                     
                 </div>
                 </div>

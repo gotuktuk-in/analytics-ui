@@ -18,6 +18,10 @@ function LiveService($q, $resource, API) {
         "",
         {},
         {
+            getOverview: {
+                method: 'GET',
+                url:   url + 'overview/live/',
+            },
             getTrips: {
                 method: 'GET',
                 url:   url + 'trip/live/',

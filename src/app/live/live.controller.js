@@ -6,7 +6,7 @@
     .controller('LiveController', LiveController);
 
   /** @ngInject */
-  function LiveController($scope, $log, $rootScope,$state, $stateParams,ChartConfigService, PerformanceService, PerformanceHandler) {
+  function LiveController($scope, $log, $rootScope,$state, $stateParams,ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
     var vm = this;
 
     $scope.dates = {};
@@ -21,6 +21,17 @@
     vm.riders = [];
 
    function getLive() {
+     LiveService.getOverview({
+       city: $rootScope.city,
+       vehicle: $rootScope.vehicleType,
+     }, function (response) {
+       //  PerformanceHandler.trips = response[0].trip
+       vm.overview = response;
+       console.log('response ',  vm.overview )
+     }, function (err) {
+       console.log(err)
+       $scope.error = true;
+     });
 
       PerformanceService.getTrips({
         city: $rootScope.city,
@@ -31,7 +42,6 @@
       }, {vehicle: $rootScope.vehicleType, frequency:'hour'}, function (response) {
       //  PerformanceHandler.trips = response[0].trip
         vm.trips = PerformanceHandler.getTrips(response[0].trip)
-       console.log('response ', response)
       }, function (err) {
         console.log(err)
         $scope.error = true;
@@ -46,7 +56,6 @@
      }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
       // PerformanceHandler.drivers = response
        vm.drivers = PerformanceHandler.getDrivers(response)
-       console.log('response ', response)
      }, function (err) {
        console.log(err)
        $scope.error = true;
@@ -61,7 +70,6 @@
      }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
      //  PerformanceHandler.riders = response[0].riders
        vm.riders = PerformanceHandler.getRiders(response[0].riders)
-       console.log('response ', response)
      }, function (err) {
        console.log(err)
        $scope.error = true;
