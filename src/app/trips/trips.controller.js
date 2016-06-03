@@ -13,8 +13,8 @@
         var startDate, endDate;
         vm.ranges = StaticDataService.ranges
         $scope.tripDates = {};
-        $scope.tripDates.startDate = moment().subtract(1, 'days').startOf('day').format("YYYY-MM-DD");
-        $scope.tripDates.endDate = moment().subtract(1, 'days').endOf('day').format("YYYY-MM-DD");
+        $scope.tripDates.startDate = StaticDataService.ranges.Yesterday[0]//moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.tripDates.endDate = StaticDataService.ranges.Yesterday[1]//moment().subtract(1, 'days').format("YYYY-MM-DD");
 
         vm.timeFrequency = [{label: "Per Hour", value: "hour"}, {label: "Per Day", value: "day"}];
         vm.tripFrequency = {value: "hour"};
@@ -38,7 +38,7 @@
                 };
             }
             vm.getTrips()
-           
+
         }
         vm.getTrips = function () {
             PerformanceService.getTrips({
@@ -70,13 +70,11 @@
                 // ajax request to api
                 var start = ((params.page() - 1) * 10) + 1;
                 console.log("**************************")
-                var startDate = moment($scope.tripDates.startDate).unix()
-                var endDate = moment($scope.tripDates.endDate).unix()
                 var dataObj = {}
                 dataObj.start = start;
                 dataObj.count = params.count();
-                dataObj.startDate = moment($scope.tripDates.startDate).unix();
-                dataObj.endDate = moment($scope.tripDates.endDate).unix();
+                dataObj.startDate = moment($scope.tripDates.startDate).startOf('day').unix();
+                dataObj.endDate = moment($scope.tripDates.endDate).endOf('day').unix();
 
                 if (params.orderBy().length > 0) {
                     var orderby = params.orderBy()[0].substr(0, 1);
