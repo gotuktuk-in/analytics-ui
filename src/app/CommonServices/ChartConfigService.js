@@ -57,7 +57,7 @@ function ChartConfigService($q, $resource, API) {
                      rotateLabels: '-90',
                     tickFormat: function(d) {
                      //   return d3.time.format('%d %B %y')(new Date(d))
-                        return d3.time.format('%I %p')(new Date(d))
+                        return d3.time.format('%d %b %I %p')(new Date(d))
                     },
 
                     showMaxMin: true,
@@ -78,7 +78,7 @@ function ChartConfigService($q, $resource, API) {
                 yAxis: {
                     axisLabel: 'Trips',
                     tickFormat: function(d){
-                        return d;
+                        return d3.round(d);
                        // return d3.format(',.1%')(d);
                     },
                     showMaxMin: true,

@@ -35,8 +35,8 @@
 
       PerformanceService.getTrips({
         city: $rootScope.city,
-        startDate: $scope.dates.startDate,
-        endDate: $scope.dates.endDate,
+        startTime: $scope.dates.startDate,
+        endTime: $scope.dates.endDate,
         count: 1,
         page: 1
       }, {vehicle: $rootScope.vehicleType, frequency:'hour'}, function (response) {
@@ -49,8 +49,8 @@
 
      PerformanceService.getDrivers({
        city: $rootScope.city,
-       startDate: $scope.dates.startDate,
-       endDate: $scope.dates.endDate,
+       startTime: $scope.dates.startDate,
+       endTime: $scope.dates.endDate,
        count: 1,
        page: 1
      }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
@@ -63,8 +63,8 @@
 
      PerformanceService.getRiders({
        city: $rootScope.city,
-       startDate: $scope.dates.startDate,
-       endDate: $scope.dates.endDate,
+       startTime: $scope.dates.startDate,
+       endTime: $scope.dates.endDate,
        count: 1,
        page: 1
      }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {

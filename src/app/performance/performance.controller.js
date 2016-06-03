@@ -37,7 +37,7 @@
                     vm.driverChartOptions.chart.xAxis.axisLabel = freqModel
                     if (freqModel == 'hour') {
                         vm.driverChartOptions.chart.xAxis.tickFormat = function (d) {
-                            return d3.time.format('%I %p')(new Date(d));
+                            return d3.time.format('%d %b %I %p')(new Date(d));
                         };
                     }
                     else {
@@ -52,7 +52,7 @@
                     vm.riderChartOptions.chart.xAxis.axisLabel = freqModel
                     if (freqModel == 'hour') {
                         vm.riderChartOptions.chart.xAxis.tickFormat = function (d) {
-                            return d3.time.format('%I %p')(new Date(d));
+                            return d3.time.format('%d %b %I %p')(new Date(d));
                         };
                     }
                     else {
@@ -66,7 +66,7 @@
                     vm.tripChartOptions.chart.xAxis.axisLabel = freqModel
                     if (freqModel == 'hour') {
                         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-                            return d3.time.format('%I %p')(new Date(d));
+                            return d3.time.format('%d %b %I %p')(new Date(d));
                         };
                     }
                     else {
@@ -80,8 +80,8 @@
         vm.getTrips = function () {
             PerformanceService.getTrips({
                 city: $rootScope.city,
-                startDate: $scope.tripDates.startDate,
-                endDate: $scope.tripDates.endDate,
+                startTime: $scope.tripDates.startDate,
+                endTime: $scope.tripDates.endDate,
                 count: 1,
                 page: 1
             }, {vehicle: $rootScope.vehicleType, frequency: vm.tripFrequency.value}, function (response) {
@@ -96,8 +96,8 @@
         vm.getDrivers = function () {
             PerformanceService.getDrivers({
                 city: $rootScope.city,
-                startDate: $scope.driverDates.startDate,
-                endDate: $scope.driverDates.endDate,
+                startTime: $scope.driverDates.startDate,
+                endTime: $scope.driverDates.endDate,
                 count: 1,
                 page: 1
             }, {vehicle: $rootScope.vehicleType, frequency:  vm.driverFrequency.value}, function (response) {
@@ -112,8 +112,8 @@
         vm.getRiders = function () {
             PerformanceService.getRiders({
                 city: $rootScope.city,
-                startDate: $scope.riderDates.startDate,
-                endDate: $scope.riderDates.endDate,
+                startTime: $scope.riderDates.startDate,
+                endTime: $scope.riderDates.endDate,
                 count: 1,
                 page: 1
             }, {vehicle: $rootScope.vehicleType, frequency: vm.riderFrequency.value}, function (response) {

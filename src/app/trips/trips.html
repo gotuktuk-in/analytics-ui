@@ -1,42 +1,53 @@
 <div class="container-fluid" ng-class="{'container-toggle' : toggle}">
     <div class="row">
-    <form class="form-inline date-selection" ng-class="{'date-toggle' : toggle}">
-                <div class="form-group ">
-                    <input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange" ng-model="tripDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
-                </div>
-		</form>
-		<br>
-	</div>
+        <form class="form-inline date-selection" ng-class="{'date-toggle' : toggle}">
+            <div class="form-group ">
+                <input ng-change="vm.getTrips()" class="form-control cstm-width text-center" type="daterange"
+                       ng-model="tripDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
+            </div>
+        </form>
+        <br>
+    </div>
 
     <div class="row">
         <div class="col-md-6"></div>
         <div class="col-md-6 text-right">
             <form class="form-inline">
-
-                <!--<div class="form-group ">
-                    <input ng-change="vm.getTrips()" class="form-control cstm-width" type="daterange" ng-model="tripDates" separator="/" format="DD-MMM-YY" opens="left" ranges="vm.ranges">
-                </div>-->
                 <div class="form-group " style="margin-top:15px">
-                	<div class="radio inpt-style">
-                        <label><input type="radio"  ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)" name="optradio" ng-model="vm.tripFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
-						<label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)" name="optradio" ng-model="vm.tripFrequency.value" value="day"> <i></i> <span>Per Day</span></label>
+                    <div class="radio inpt-style">
+                        <label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"
+                                      name="optradio" ng-model="vm.tripFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
+                        <label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"
+                                      name="optradio" ng-model="vm.tripFrequency.value" value="day"> <i></i> <span>Per Day</span></label>
 
-					</div>
-                 <!--   <select ng-model="vm.tripFrequency" class="form-control"
-                            ng-change="vm.changeFrequency('trip', vm.tripFrequency)"
-                            ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
-                    </select>-->
+                    </div>
                 </div>
             </form>
         </div>
     </div>
-        <br>
+    <br>
+   <!-- <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 style="margin-top: 0">Heatmap</h4>
+                    <br>
+
+                    <div class="table-responsive">
+                        <div id="chart"></div>
+                      &lt;!&ndash;  <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>&ndash;&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                <h4 style="margin-top: 0">Trips</h4>
+                    <h4 style="margin-top: 0">Trips</h4>
                     <br>
+
                     <div class="table-responsive">
                         <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                     </div>
@@ -44,82 +55,180 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4 style="margin-top: 0">Trips Table</h4>
+                    <br>
 
-	<div class="row">
+                    <div class="table-responsive">
+                        <table ng-table="tableParams" class="table table-bordered  table-condensed">
+
+                            <tr class="truncate"
+                                ng-repeat="row in $data track by $index">
+                                <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
+                                    <a target="_blank"
+                                       ui-sref="trips.tripsdetails({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">{{row.id}}
+                                    </a>
+                                </td>
+                                <td data-title="'Date & Time'" sortable="'requestOn'" style="width: 150px;">
+                                    <div>{{(row.requestOn)*1000 | date:"dd/MMM/yyyy 'at' h:mma"}}</div>
+                                </td>
+                                <td data-title="'Status'" sortable="'tripState'" style="width: 100px;">
+                                    <div ng-if="row.tripState == 20" class="text-primary">Requested</div>
+                                    <div ng-if="row.tripState == 22">Allocated</div>
+                                    <div ng-if="row.tripState == 30">For Trip</div>
+                                    <div ng-if="row.tripState == 40">At Pickup</div>
+                                    <div ng-if="row.tripState == 60">At Destination</div>
+                                    <div ng-if="row.tripState == 50" class="text-info">In trip</div>
+                                    <div ng-if="row.tripState == 61" class="text-success">Successful</div>
+                                    <div ng-if="row.tripState == 70" class="text-warning">Can by Driver</div>
+                                    <div ng-if="row.tripState == 71" class="text-warning">Can by Rider</div>
+                                    <div ng-if="row.tripState == 80">No Drv Avlble</div>
+                                    <div ng-if="row.tripState == 81" class="text-danger">Failed (No Drivers Accepted)</div>
+                                    <div ng-if="row.tripState == 82">Terminated</div>
+                                </td>
+                                <td data-title="'Driver Info'">
+                                    <div><b><a
+                                            ui-sref="drivers.driverRiderHistory({id:row.driverInfo.id})">{{row.driverInfo.name}}</a></b><br>
+                                        <span class="small">{{row.driverInfo.phone}}</span>
+                                        <span class="small">{{row.driverInfo.vehicle}}</span>
+                                    </div>
+                                </td>
+                                <td data-title="'VType'" sortable="'vehicleType'" align="center">
+                                    <div>{{row.vehicleType}}</div>
+                                </td>
+                                <td data-title="'Rider  Info'">
+                                    <div>{{row.riderInfo.name}}<br>{{row.riderInfo.phone}}</div>
+                                </td>
+                                <td data-title="'Pickup'" style="width:150px;">
+                                    <div class="truncate truncate-pick-drop">{{row.pickUp.line1 + ' ' + row.pickUp.line2}} {{row.drop.city + '
+                                        ' +row.pickUp.state + ' ' +
+                                        row.pickUp.country}}
+                                    </div>
+                                </td>
+                                <td data-title="'Drop'" style="width:150px;">
+                                    <div class="truncate truncate-pick-drop">{{row.drop.line1 + ' ' + row.drop.line2}} {{row.drop.city + ' '
+                                        +row.drop.state + ' ' +
+                                        row.drop.country}}
+                                    </div>
+                                </td>
+
+                                <td data-title="'Time'" sortable="'time'" style="width:110px;">
+                                    <div>{{getTimeDiff(row.pickupOn,row.dropOn)}}</div>
+                                    <!--<div>{{getTimeDiff(row.pickupOn,row.dropOn)| secondsToDateTime}}</div>-->
+                                </td>
+
+                                <td data-title="'Dist(KM)'" sortable="'disPickupDrop'" align="center">
+                                    <div>{{(row.disPickupDrop)/1000 | number:2}}</div>
+                                </td>
+                                <td data-title="'Amt(Rs.)'" sortable="'amount'" align="right">
+                                    <div class="truncate truncate-amt"><b>{{row.amount.total}}</b>
+                                        <span class="small">Cash: {{row.amount.cash | number:2}}</span>
+                                        <span class="small">Citrus: {{row.amount.citrus | number:2}}</span>
+                                        <span class="small">Discount: {{row.amount.discount | number:2}} </span>
+                                    </div>
+                                </td>
+                                <td data-title="'Rating'" sortable="'riderFeedbackRating'" align="center">
+                                    <div>{{row.riderFeedbackRating | number:1}}</div>
+                                </td>
+                                <td data-title="'Show'" align="center">
+                                    <button class="btn btn-xs btn-link" ng-click="showMore(row)"><i
+                                            ng-class="{'glyphicon-chevron-up':row.showMore,'glyphicon-chevron-down':!row.showMore}"
+                                            class="glyphicon glyphicon-chevron-down"></i></button>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table table-bordered table-striped table-condensed" ng-show="tblNoData">
+                            <tr>
+                                <td colspan="11">No data found</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="row">
         <div class="col-md-6">
-			<!---Driver--->
-			    <div class="row">
-        <div class="col-md-6"></div>
-        <div class="col-md-6 text-right">
-            <form class="form-inline">
-                <!--<div class="form-group ">
-                    <input ng-change="vm.getDrivers()"class="form-control cstm-width" type="daterange" ng-model="driverDates" separator="/" format="DD-MMM-YY" opens="right" ranges="vm.ranges"/>
-                </div>-->
-                <div class="form-group " style="margin-top:15px">
-                <div class="radio inpt-style">
-                    <label><input type="radio" name="optradio" ng-change="vm.changeFrequency('driver',vm.driverFrequency.value)" ng-model="vm.driverFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
-                    <label><input type="radio" name="optradio" ng-change="vm.changeFrequency('driver',vm.driverFrequency.value)" ng-model="vm.driverFrequency.value" value="day"> <i></i> <span>Per Day</span></label>
-					</div>
-                  <!--  <select ng-model="vm.driverFrequency" class="form-control"
-                            ng-change="vm.changeFrequency('driver',vm.driverFrequency)"
-                            ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
-                    </select>-->
-                </div>
-            </form>
-        </div>
-    </div>
-			    <br>
-			    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                <h4 style="margin-top: 0">Driver</h4>
-                    <br>
-                    <div class="table-responsive">
-                        <nvd3 options="vm.driverChartOptions" data="vm.drivers" config="vm.config"></nvd3>
-                    </div>
+            &lt;!&ndash;-Driver-&ndash;&gt;
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6 text-right">
+                    <form class="form-inline">
+                        <div class="form-group " style="margin-top:15px">
+                            <div class="radio inpt-style">
+                                <label><input type="radio" name="optradio"
+                                              ng-change="vm.changeFrequency('driver',vm.driverFrequency.value)"
+                                              ng-model="vm.driverFrequency.value" value="hour"><i></i>
+                                    <span>Per Hour</span></label>
+                                <label><input type="radio" name="optradio"
+                                              ng-change="vm.changeFrequency('driver',vm.driverFrequency.value)"
+                                              ng-model="vm.driverFrequency.value" value="day"> <i></i>
+                                    <span>Per Day</span></label>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </div>
-    </div>
-		</div>
+            <br>
 
-		<div class="col-md-6">
-			<!--Rider-->
-    			<div class="row">
-        <div class="col-md-6"></div>
-        <div class="col-md-6 text-right">
-            <form class="form-inline">
-                <!--<div class="form-group ">
-                    <input ng-change="vm.getRiders()" class="form-control cstm-width" type="daterange" ng-model="riderDates" separator="/" format="DD-MMM-YY" opens="left" ranges="vm.ranges">
-                </div>-->
-                <div class="form-group " style="margin-top:15px">
-                <div class="radio inpt-style">
-                    <label><input type="radio" name="optradio" ng-change="vm.changeFrequency('rider', vm.riderFrequency.value)" ng-model="vm.riderFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
-                    <label><input type="radio" name="optradio" ng-change="vm.changeFrequency('rider', vm.riderFrequency.value)" ng-model="vm.riderFrequency.value" value="day"> <i></i> <span>Per Day</span></label>
-					</div>
-                       <!-- <select ng-model="vm.riderFrequency" class="form-control"
-                                ng-change="vm.changeFrequency('rider', vm.riderFrequency)"
-                                ng-options="frequency.label for frequency in vm.timeFrequency track by frequency.value">
-                        </select>-->
-                </div>
-            </form>
-        </div>
-    </div>
-    			<br>
-    			<div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                <h4 style="margin-top: 0">Rider</h4>
-                    <br>
-                    <div class="table-responsive">
-                        <nvd3 options="vm.riderChartOptions" data="vm.riders" config="vm.config"></nvd3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h4 style="margin-top: 0">Driver</h4>
+                            <br>
+
+                            <div class="table-responsive">
+                                <nvd3 options="vm.driverChartOptions" data="vm.drivers" config="vm.config"></nvd3>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-		</div>
-	</div>
+
+        <div class="col-md-6">
+            &lt;!&ndash;Rider&ndash;&gt;
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6 text-right">
+                    <form class="form-inline">
+
+                        <div class="form-group " style="margin-top:15px">
+                            <div class="radio inpt-style">
+                                <label><input type="radio" name="optradio"
+                                              ng-change="vm.changeFrequency('rider', vm.riderFrequency.value)"
+                                              ng-model="vm.riderFrequency.value" value="hour"><i></i>
+                                    <span>Per Hour</span></label>
+                                <label><input type="radio" name="optradio"
+                                              ng-change="vm.changeFrequency('rider', vm.riderFrequency.value)"
+                                              ng-model="vm.riderFrequency.value" value="day"> <i></i>
+                                    <span>Per Day</span></label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h4 style="margin-top: 0">Rider</h4>
+                            <br>
+
+                            <div class="table-responsive">
+                                <nvd3 options="vm.riderChartOptions" data="vm.riders" config="vm.config"></nvd3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
 </div>

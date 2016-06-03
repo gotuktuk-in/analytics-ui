@@ -10,28 +10,28 @@
 
 angular
     .module('tuktukV2Dahboard')
-    .factory('PerformanceService', PerformanceService)
+    .factory('TripsService', TripsService)
 
-function PerformanceService($q, $resource, API, StaticDataService) {
+function TripsService($q, $resource, API) {
   var url = API;
     return $resource(
         "",
         {frequency:"@frequency", vehicle:"@vehicle"},
         {
-            getTrips: {
+            getAllTrips: {
                 method: 'GET',
-                url:   url + 'trip/:frequency/:vehicle',
-                isArray:true,
+                url:   url + 'trips',
+             //   isArray:true
             },
-            getDrivers: {
+            getTripDetail: {
                 method: 'GET',
-                url:   url + 'driver/:frequency/:vehicle',
-                isArray:true,
+                url:   url + 'trips/info',
+                isArray:true
             },
             getRiders: {
                 method: 'GET',
                 url:   url + 'rider/:frequency/:vehicle',
-                isArray:true,
+                isArray:true
             },
 
         }
