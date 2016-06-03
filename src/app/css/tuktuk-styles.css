@@ -157,7 +157,7 @@ h4, .h4 {
 .date-selection {
     background: #fff none repeat scroll 0 0;
     margin-left: 55px;
-    padding: 15px 0;
+    padding: 15px 15px 15px 0;
     position: fixed;
     z-index: 100;
 }
@@ -179,7 +179,7 @@ h4, .h4 {
     box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
     -webkit-box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
     background: #313131;
-    z-index: 11;
+    z-index: 2147483647;
 }
 
 .sidenav.open {
@@ -641,20 +641,20 @@ h4, .h4 {
 }
 .flx-live.flx-container .flx-cnt-right span b.title{
 	display: inline-block;
-	min-width: 60px;
+	min-width: 80px;
 }
 .flx-live .flx-cnt-right div {
     flex: 1 16%;
     border-right:solid 1px #eee;
-    margin-left: 7%;
+    margin-left: 4%;
 }
 .flx-live .flx-cnt-right div:first-child {
     border-right:solid 1px #eee;
-    margin: 0 2%;
+    margin: 0 1%;
 }
 .flx-live .flx-cnt-right div:last-child {
     border-right:solid 0px #eee;
-    margin-left: 7%;
+    margin-left: 4%;
 }
 .flx-live .flx-cnt-right div h4 {
     color: #333;
@@ -663,13 +663,19 @@ h4, .h4 {
     line-height: 32px;
     margin: 0;
 }
+.container-toggle .text-left.middlebox h4 {
+   /*  line-height: 60px; */
+}
+.container-toggle div.text-left.middlebox span.pull-left, div.text-left.middlebox span.pull-left{height:100%}
 .flx-live .flx-cnt-right div span {
-    font-size: 11px;
+    font-size: 14px;
     text-transform: none;
     color: #999;
     display: inline-block;
 }
-
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #f9f9f9;
+}
 .tab-container {
     padding: 30px 40px;
 }

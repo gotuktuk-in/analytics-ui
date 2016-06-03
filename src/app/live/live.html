@@ -7,39 +7,39 @@
                     <div style="background-color: rgb(48, 176, 58); height: 12px; width: 12px; border-radius: 100%; position: absolute; top: 26px; right: -17px;"></div>
         </form>
         <br>
-        <div class="col-md-9  col-md-offset-3">
+        <div class="col-md-10  col-md-offset-2">
             <div class="flx-live flx-container">
                 <div class="flx-cnt-right">
                 <div class="text-left">
-                    <span class="pull-left" style="padding:4px 10px 4px 0; height:100%">
+                    <span class="pull-left" style="padding:4px 10px 4px 0;">
                         <img src="assets/images/driver.svg" title="Tuktuk" height="45">
                     </span>
                     <span><h4>{{ vm.overview.driver.total_drivers}} <span style="line-height:0">Drivers</span></h4></span>
                     <br>
-                    <span><b ng-bind="vm.overview.driver.free_drivers">0</b> Free . <b  ng-bind="vm.overview.driver.occupied_drivers">0</b> Occupied . <b>{{vm.overview.driver.online_drivers_percentage | number:2}}%</b> Online</span>
+                    <span><b ng-bind="vm.overview.driver.free_drivers" style="color:#000">0</b> Free . <b  ng-bind="vm.overview.driver.occupied_drivers" style="color:#000">0</b> Occupied . <b style="color:#000">{{vm.overview.driver.online_drivers_percentage | number:2}}%</b> Online</span>
                     
                 </div>
-                <div class="text-left">
-                    <span class="pull-left" style="padding:4px 10px 4px 0; height:100%">
+                <div class="text-left middlebox">
+                    <span class="pull-left" style="padding:4px 10px 4px 0;">
                         <img src="assets/images/trip-req.svg" title="Tuktuk" height="45">
                             </span>
                     <span><h4>{{vm.overview.trip.total_booking}} <span style="line-height:0">Bookings</span></h4></span>
                     <br>
-                    <span><b class="title text-success">Successful:</b> <b>{{vm.overview.trip.successful.total}} </b> Total . <b>{{ vm.overview.trip.successful.unique_riders}} </b> Unique</span>
+                    <span><b class="title text-success">Successful:</b> <b style="color:#000">{{vm.overview.trip.successful.total}} </b> Total . <b style="color:#000">{{ vm.overview.trip.successful.unique_riders}} </b> Unique</span>
                     <br>
-                    <span><b class="title text-warning">Cancelled:</b> <b>{{vm.overview.trip.cancelled.total}} </b> Total . <b>{{ vm.overview.trip.cancelled.unique_rider}} </b> Unique</span>
+                    <span><b class="title text-warning">Cancelled:</b> <b style="color:#000">{{vm.overview.trip.cancelled.total}} </b> Total . <b style="color:#000">{{ vm.overview.trip.cancelled.unique_rider}} </b> Unique</span>
                     <br>
-                    <span><b class="title text-danger">Failed:</b> <b>{{vm.overview.trip.failed.total}} </b> Total . <b>{{ vm.overview.trip.failed.unique_rider}} </b> Unique</span>
+                    <span><b class="title text-danger">Failed:</b> <b style="color:#000">{{vm.overview.trip.failed.total}} </b> Total . <b style="color:#000">{{ vm.overview.trip.failed.unique_rider}} </b> Unique</span>
                     <br>
-                    <span><b class="title text-info">In Progress:</b> <b>{{ vm.overview.trip.in_process}}</b></span>
+                    <span><b class="title text-info">In Progress:</b> <b style="color:#000">{{ vm.overview.trip.in_process}}</b></span>
                     </div>
                 <div class="text-left">
-                    <span class="pull-left" style="padding:4px 10px 4px 0; height:100%">
+                    <span class="pull-left" style="padding:4px 10px 4px 0;">
                         <img src="assets/images/new-rider.svg" title="Tuktuk" height="45">
                             </span>
                     <span><h4>{{ vm.overview.rider.total_riders}} <span style="line-height:0">Riders</span></h4></span>
                     <br>
-                    <span><b>{{ vm.overview.rider.new_riders_reg}}</b> New</span>
+                    <span><b style="color:#000">{{ vm.overview.rider.new_riders_reg}}</b> New</span>
                     
                 </div>
                 </div>
@@ -59,7 +59,6 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h4 style="margin-top: 0">Trips</h4>
-                    <br>
                     <div class="table-responsive">
                         <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                     </div>
@@ -83,7 +82,6 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h4 style="margin-top: 0">Driver</h4>
-                            <br>
                             <div class="table-responsive">
                                 <nvd3 options="vm.driverChartOptions" data="vm.drivers" config="vm.config"></nvd3>
                             </div>
@@ -107,7 +105,6 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h4 style="margin-top: 0">Rider</h4>
-                            <br>
                             <div class="table-responsive">
                                 <nvd3 options="vm.riderChartOptions" data="vm.riders" config="vm.config"></nvd3>
                             </div>

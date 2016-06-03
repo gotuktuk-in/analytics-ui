@@ -24,7 +24,7 @@ function ChartConfigService($q, $resource, API) {
        				 //padding: { top: 20 },
        				 maxKeyLength:400,
        				margin : {
-                    top: 20,
+                    top: 1,
                     right: 50,
                     bottom: 50,
                     left: 50
@@ -32,10 +32,10 @@ function ChartConfigService($q, $resource, API) {
      			 },
       			legendPosition: 'top',
                 margin : {
-                    top: 50,
-                    right: 50,
+                    top: 10,
+                    right: 20,
                     bottom: 100,
-                    left: 80
+                    left: 20
                 },
                 x: function(d){
                     return d[0];
