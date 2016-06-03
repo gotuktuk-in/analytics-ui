@@ -38,7 +38,8 @@
         startTime: $scope.dates.startDate,
         endTime: $scope.dates.endDate,
         count: 1,
-        page: 1
+        page: 1,
+        rate: 'hour'
       }, {vehicle: $rootScope.vehicleType, frequency:'hour'}, function (response) {
       //  PerformanceHandler.trips = response[0].trip
         vm.trips = PerformanceHandler.getTrips(response[0].trip)
@@ -52,7 +53,8 @@
        startTime: $scope.dates.startDate,
        endTime: $scope.dates.endDate,
        count: 1,
-       page: 1
+       page: 1,
+       rate: 'hour'
      }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
       // PerformanceHandler.drivers = response
        vm.drivers = PerformanceHandler.getDrivers(response)
@@ -66,7 +68,8 @@
        startTime: $scope.dates.startDate,
        endTime: $scope.dates.endDate,
        count: 1,
-       page: 1
+       page: 1,
+       rate: 'hour'
      }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
      //  PerformanceHandler.riders = response[0].riders
        vm.riders = PerformanceHandler.getRiders(response[0].riders)
