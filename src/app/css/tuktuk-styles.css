@@ -643,18 +643,21 @@ h4, .h4 {
 	display: inline-block;
 	min-width: 80px;
 }
-.flx-live .flx-cnt-right div {
-    flex: 1 16%;
+
+.flx-live .flx-cnt-right .first-box {
+	flex: 1 20%;
     border-right:solid 1px #eee;
-    margin-left: 4%;
+   	margin:0 6%;
 }
-.flx-live .flx-cnt-right div:first-child {
+.flx-live .flx-cnt-right .middle-box {
+    flex: 1 20%;
     border-right:solid 1px #eee;
-    margin: 0 1%;
+    margin:0 4%;
 }
-.flx-live .flx-cnt-right div:last-child {
+.flx-live .flx-cnt-right .last-box{
+	flex: 1 5%;
     border-right:solid 0px #eee;
-    margin-left: 4%;
+    margin:0 2%;
 }
 .flx-live .flx-cnt-right div h4 {
     color: #333;
@@ -663,10 +666,6 @@ h4, .h4 {
     line-height: 32px;
     margin: 0;
 }
-.container-toggle .text-left.middlebox h4 {
-   /*  line-height: 60px; */
-}
-.container-toggle div.text-left.middlebox span.pull-left, div.text-left.middlebox span.pull-left{height:100%}
 .flx-live .flx-cnt-right div span {
     font-size: 14px;
     text-transform: none;
