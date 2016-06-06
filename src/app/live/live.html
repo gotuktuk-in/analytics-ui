@@ -2,7 +2,8 @@
    <div class="row">
       <form class="form-inline date-selection">
          <div class="form-group ">
-            <input ng-disabled="true" class="form-control cstm-width text-center" type="daterange" ng-model="dates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
+            <input class="form-control cstm-width text-center" type="text" ng-model="today">
+            <!--<input ng-disabled="true" class="form-control cstm-width text-center" type="daterange" ng-model="dates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">-->
          </div>
          <div style="background-color: rgb(48, 176, 58); height: 12px; width: 12px; border-radius: 100%; position: absolute; top: 26px; right: -17px;"></div>
       </form>
@@ -145,9 +146,8 @@
          </div>
       </div>
    </div>
-<!-- 
    <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
          <!~~-Driver~~->
          <div class="row">
             <div class="col-md-6"></div>
@@ -158,16 +158,18 @@
             <div class="col-md-12">
                <div class="panel panel-default">
                   <div class="panel-body">
-                     <h4 style="margin-top: 0">Driver</h4>
+                     <h4 style="margin-top: 0">Heat Map</h4>
                      <div class="table-responsive">
-                        <nvd3 options="vm.driverChartOptions" data="vm.drivers" config="vm.config"></nvd3>
+                        <ng-map zoom="13" center="37.774546, -122.433523" map-type-id="SATELLITE">
+                           <heatmap-layer id="foo" data="taxiData"></heatmap-layer>
+                        </ng-map>
                      </div>
                   </div>
                </div>
             </div>
          </div>
       </div>
-      <div class="col-md-6">
+      <!--<div class="col-md-6">
          <!~~Rider~~>
          <div class="row">
             <div class="col-md-6"></div>
@@ -186,7 +188,6 @@
                </div>
             </div>
          </div>
-      </div>
+      </div>-->
    </div>
- -->
 </div>

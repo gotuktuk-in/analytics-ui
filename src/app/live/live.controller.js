@@ -8,17 +8,16 @@
     /** @ngInject */
     function LiveController($scope, $log, $rootScope, $state, $stateParams, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
         var vm = this;
-
+        $scope.today = moment().format("dddd, MMMM Do YYYY")
         $scope.dates = {};
         $scope.dates.startDate = moment().format("YYYY-MM-DD");
         $scope.dates.endDate = moment().format("YYYY-MM-DD");
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
-        vm.driverChartOptions = angular.copy(ChartConfigService.lineChartOptions);
-        vm.riderChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+        vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
+            return d3.time.format('%I %p')(new Date(d));
+        };
         vm.trips = [];
-        vm.drivers = [];
-        vm.riders = [];
 
         function getLive() {
             LiveService.getOverview({
