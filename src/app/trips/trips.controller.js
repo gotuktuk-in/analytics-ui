@@ -46,7 +46,8 @@
                 startTime: $scope.tripDates.startDate,
                 endTime: $scope.tripDates.endDate,
                 count: 1,
-                page: 1
+                page: 1,
+                rate: vm.tripFrequency.value
             }, {vehicle: $rootScope.vehicleType, frequency: vm.tripFrequency.value}, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
                 vm.trips = PerformanceHandler.getTrips(response[0].trip)
@@ -63,7 +64,17 @@
         function setDate() {
 
         }
-
+        $scope.getTimeDiff = function (dt1, dt2) {
+            if(dt2)
+            {
+                var diff = (dt2 - dt1);
+                return diff
+            }
+            else
+            {
+                return '0'
+            }
+        }
         $scope.tableParams = new NgTableParams({page: 1, count: 10}, {
             counts: [],
             getData: function (params) {

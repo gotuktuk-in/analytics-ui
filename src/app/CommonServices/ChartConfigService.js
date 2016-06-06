@@ -35,7 +35,7 @@ function ChartConfigService($q, $resource, API) {
                     top: 10,
                     right: 20,
                     bottom: 100,
-                    left: 20
+                    left: 50
                 },
                 x: function(d){
                     return d[0];

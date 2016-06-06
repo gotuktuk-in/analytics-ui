@@ -24,8 +24,17 @@ angular.module('httpInterceptor', [])
                     loadingScreen.show();
                     if(config.params && config.params.startTime && config.params.endTime)
                     {
-                        config.params.startTime = moment(config.params.startTime).startOf('day').format("YYYYMMDDHH").toString();
-                        config.params.endTime = moment(config.params.endTime).endOf('day').format("YYYYMMDDHH").toString()
+                        if(config.params.rate=='hour')
+                        {
+                            config.params.startTime = moment(config.params.startTime).startOf('day').format("YYYYMMDDHH").toString();
+                            config.params.endTime = moment(config.params.endTime).endOf('day').format("YYYYMMDDHH").toString()
+                        }
+                        else
+                        {
+                            config.params.startTime = moment(config.params.startTime).startOf('day').format("YYYYMMDD").toString();
+                            config.params.endTime = moment(config.params.endTime).endOf('day').format("YYYYMMDD").toString()
+                        }
+
 
                     }
                     return config || $q.when(config);

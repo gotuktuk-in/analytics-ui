@@ -83,7 +83,8 @@
                 startTime: $scope.tripDates.startDate,
                 endTime: $scope.tripDates.endDate,
                 count: 1,
-                page: 1
+                page: 1,
+                rate: vm.tripFrequency.value
             }, {vehicle: $rootScope.vehicleType, frequency: vm.tripFrequency.value}, function (response) {
                // PerformanceHandler.trips = response[0].trip;
                 vm.trips = PerformanceHandler.getTrips(response[0].trip);
@@ -96,10 +97,11 @@
         vm.getDrivers = function () {
             PerformanceService.getDrivers({
                 city: $rootScope.city,
-                startTime: $scope.driverDates.startDate,
-                endTime: $scope.driverDates.endDate,
+                startTime: $scope.tripDates.startDate,
+                endTime: $scope.tripDates.endDate,
                 count: 1,
-                page: 1
+                page: 1,
+                rate:  vm.driverFrequency.value
             }, {vehicle: $rootScope.vehicleType, frequency:  vm.driverFrequency.value}, function (response) {
              //   PerformanceHandler.drivers = response
                 vm.drivers = PerformanceHandler.getDrivers(response);
@@ -112,10 +114,11 @@
         vm.getRiders = function () {
             PerformanceService.getRiders({
                 city: $rootScope.city,
-                startTime: $scope.riderDates.startDate,
-                endTime: $scope.riderDates.endDate,
+                startTime: $scope.tripDates.startDate,
+                endTime: $scope.tripDates.endDate,
                 count: 1,
-                page: 1
+                page: 1,
+                rate: vm.riderFrequency.value
             }, {vehicle: $rootScope.vehicleType, frequency: vm.riderFrequency.value}, function (response) {
                // PerformanceHandler.riders = response[0].riders
                 vm.riders = PerformanceHandler.getRiders(response[0].riders);
