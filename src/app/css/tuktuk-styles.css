@@ -585,7 +585,23 @@ div.box.box-container div.row div.box {padding:20px 0;}
     color: #5c5c5c;
 }
 /* live */
-span.img-top{padding:10px;}
+.panel-default {
+    border-color: #eee;
+}
+.box{
+	padding:15px;
+}
+.box h4{
+	font-size:22px;
+	margin-bottom:0px;
+}
+.box span{
+	color:#999;
+}
+span.img-top{
+	padding:10px;
+	display:none;
+}
 .col-xs-6:nth-child(1){
     background: #fcfcfc none repeat scroll 0 0;
     border-top:1px solid #eee;
