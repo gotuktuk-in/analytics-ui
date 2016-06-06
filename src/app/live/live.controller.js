@@ -14,6 +14,7 @@
         $scope.dates.endDate = moment().format("YYYY-MM-DD");
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+
         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
             return d3.time.format('%I %p')(new Date(d));
         };

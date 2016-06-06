@@ -19,6 +19,7 @@ function ChartConfigService($q, $resource, API) {
             chart: {
                  type: 'lineChart',
                 height: '400',
+                interpolate: 'basis',
                 legend: {
        				 vers: 'classic',
        				 //padding: { top: 20 },
