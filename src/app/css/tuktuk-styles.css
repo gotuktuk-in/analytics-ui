@@ -592,8 +592,12 @@ div.box.box-container div.row div.box {padding:20px 0;}
 	padding:15px;
 }
 .box h4{
-	font-size:22px;
+	font-size:18px;
 	margin-bottom:0px;
+}
+.box h4.title{
+	font-size:18px;
+	color:orange;
 }
 .box span{
 	color:#999;
@@ -602,31 +606,20 @@ span.img-top{
 	padding:10px;
 	display:none;
 }
-.col-xs-6:nth-child(1){
-    background: #fcfcfc none repeat scroll 0 0;
-    border-top:1px solid #eee;
-    border-left:1px solid #eee;
+.col-xs-6{
+    border:1px solid #eee;
+    margin:0;
+    padding:0;
 }
-.col-xs-6:nth-child(2){
-    background: #fefefe none repeat scroll 0 0;
-    border-top:1px solid #eee;
-    border-left:1px solid #eee;
-    border-right:1px solid #eee;
+.col-xs-4, .col-xs-3 {
+    min-height: 90px;
+    margin:0;
+    padding:0;
 }
-.col-xs-6:nth-child(3){
-    background: #fefefe none repeat scroll 0 0;
-    border-top:1px solid #eee;
-    border-left:1px solid #eee;
-    border-bottom:1px solid #eee;
+.col-xs-4 .box, .col-xs-3 .box{
+    background:;
+    min-height: 90px;
 }
-.col-xs-6:nth-child(4){
-    background: #fcfcfc none repeat scroll 0 0;
-    border-top:1px solid #eee;
-    border-left:1px solid #eee;
-    border-bottom:1px solid #eee;
-    border-right:1px solid #eee;
-}
-
 /**********************Drivers***/
 .flx-container {
 /*     height: 250px; */

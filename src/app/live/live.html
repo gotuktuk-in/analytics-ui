@@ -26,7 +26,7 @@
                            </td>
                            <td>
                               
-                                 <h4>DRIVERS</h4>
+                                 <h4 class="title">DRIVERS</h4>
                               
                               
                            </td>
@@ -121,6 +121,7 @@
                </div>
                </div>
                <div class="col-xs-6">
+				<div class="col-xs-4">
                   <div class="box">
                      <table>
                         <tr>
@@ -130,78 +131,237 @@
                               </span>
                            </td>
                            <td>
-                              <span>
-                                 <h4><span style="line-height:0">Bookings:</span> {{vm.overview.trip.total_booking}} 
-                                    
-                                 </h4>
+                                 <h4 class="title">BOOKINGS</h4>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+				<div class="col-xs-4">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left img-top">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
                               </span>
-                              <span>
-                              <i class="title text-success">Successful:</i> <b>{{vm.overview.trip.successful.total}}/{{ vm.overview.trip.successful.unique_riders}}</b>,
+                           </td>
+                           <td>
+                                 <h4>{{vm.overview.trip.total_booking}}</h4>
+                                  <span>Total</span>
+                              
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+				<div class="col-xs-4">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left img-top">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
                               </span>
-                              <span>
-                              <i class="title text-warning">Cancelled:</i> <b>{{vm.overview.trip.cancelled.total}}/{{ vm.overview.trip.cancelled.unique_rider}}</b>,
-                              </span>
-                              <span>
-                              <i class="title text-danger">Failed:</i> <b>{{vm.overview.trip.failed.total}}/{{ vm.overview.trip.failed.unique_rider}}</b>,
-                              </span>
-                              <span>
-                              <i class="title text-info">In Progress:</i> <b>{{ vm.overview.trip.in_process}}</b>,
-                              </span>
-                              <span>
-                              <i class="title text-default">Fulfillment:</i> <b>{{ vm.overview.trip.in_process}} %</b>
+                           </td>
+                           <td>
+                                 <h4>{{ vm.overview.trip.in_process}} %</h4>
+                                 <span>Fulfilment</span>
+                                 
                               </span>  
                            </td>
                         </tr>
                      </table>
                   </div>
                </div>
-               <div class="col-xs-6">
+				<div class="col-xs-3">
                   <div class="box">
                      <table>
                         <tr>
                            <td style="vertical-align:top">
                               <span class="pull-left img-top">
-                              <img src="assets/images/tcash.png" title="Tuktuk" width="45">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
                               </span>
                            </td>
                            <td>
-                              <span>
-                                 <h4><span style="line-height:0">tCASH</span>
-                                    
-                                 </h4>
-                              </span>
-                              <span>
-                              <i class="title text-default">Total Amount Used:</i> <b>590/- in 5 Trips</b>, 
-                              <i class="title text-default">Total Trips Affected:</i> <b>10</b>
-                              </span>
+                              
+                              <h4>
+                               {{vm.overview.trip.successful.total}}/{{ vm.overview.trip.successful.unique_riders}}
+                              </h4>
+                              <span>Successful</span>
+                              
                            </td>
                         </tr>
                      </table>
                   </div>
                </div>
-               <div class="col-xs-6">
+				<div class="col-xs-3">
                   <div class="box">
                      <table>
                         <tr>
                            <td style="vertical-align:top">
                               <span class="pull-left img-top">
-                              <img src="assets/images/new-rider.svg" title="Tuktuk" width="45">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
                               </span>
                            </td>
                            <td>
-                              <span>
-                                 <h4><span style="line-height:0">Riders</span>
-                                    
-                                 </h4>
-                              </span>
-                              <span>
-                              <i class="title text-default">Total:</i> <b>400</b>, 
-                              <i class="title text-default">New:</i> <b>250</b>
-                              </span>
+                              
+                              <h4>{{vm.overview.trip.cancelled.total}}/{{ vm.overview.trip.cancelled.unique_rider}}</h4>
+                              <span class="title text-warning">Cancelled</span>
+                               
                            </td>
                         </tr>
                      </table>
                   </div>
+               </div>
+				<div class="col-xs-3">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left img-top">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              
+                              <h4>{{vm.overview.trip.failed.total}}/{{ vm.overview.trip.failed.unique_rider}}</h4>
+                              <span>Failed</span> 
+                               
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+				<div class="col-xs-3">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left img-top">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              
+                               <h4>{{ vm.overview.trip.in_process}}</h4>
+                               <span>In Progress</span>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               
+               </div>
+               <div class="col-xs-6">
+               <div class="col-xs-4">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left img-top">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              
+                               <h4 class="title">tCASH</h4>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="col-xs-4">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left img-top">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              
+                               <h4>590/- in 5 Trips</h4>
+                               <span>Total Amount Used</span>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="col-xs-4">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left img-top">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              
+                               <h4>10</h4>
+                               <span>Total Trips Affected</span>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               </div>
+               <div class="col-xs-6">
+               <div class="col-xs-4">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left img-top">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              
+                               <h4 class="title">RIDERS</h4>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="col-xs-4">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left img-top">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              
+                               <h4>10</h4>
+                               <span>Total</span>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="col-xs-4">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left img-top">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              
+                               <h4>10</h4>
+                               <span>New</span>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
                </div>
             </div>
         </div>
