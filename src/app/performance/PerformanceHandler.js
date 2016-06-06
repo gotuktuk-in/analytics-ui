@@ -19,13 +19,13 @@ function PerformanceHandler() {
     factory.riders = []
     factory.filteredTrips = [
         {"key": "Requests", "values": []},
-        {"key": "Unique Requests", "values": []},
+        {"key": "Requests (U)", "values": []},
 
         {"key": "Cancelled Requests", "values": []},
-        {"key": "Unique Cancelled Requests", "values": []},
+        {"key": "Cancelled Requests (U)", "values": []},
 
         {"key": "Successful Requests", "values": []},
-        {"key": "Unique Successful Requests", "values": []},
+        {"key": "Successful Requests (U)", "values": []},
 
         {"key": "Cancelled trips (by rider)", "values": []},
         {"key": "Cancelled trips (by driver)", "values": []},
