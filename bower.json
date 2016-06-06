@@ -24,7 +24,8 @@
     "ng-table": "^0.8.3",
     "ng-bs-daterangepicker": "^0.0.5",
     "underscore": "^1.8.3",
-    "angular-nvd3": "^1.0.7"
+    "angular-nvd3": "^1.0.7",
+    "flexboxgrid": "^6.3.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.3"

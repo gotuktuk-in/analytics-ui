@@ -1,16 +1,18 @@
 body {
     background-color: #fff;
     /* font-family: 'aller_lightregular', sans-serif; */
-    font-family: Arial, sans-serif;
+    font-family: arial, sans-serif;
+    letter-spacing:-0.3px;
     font-size: 13px;
     color: #333;
 }
-
 a:focus {
     outline: none;
     outline-offset: 0;
 }
-
+i {
+    font-style: normal;
+}
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     /* font-family: 'aller_lightregular', sans-serif; */
     font-weight: 100;
@@ -20,7 +22,8 @@ h4, .h4 {
     color: #444;
     font-size: 16px;
 }
-
+div.box.box-container div.row div.box table tbody tr td span h4{margin-bottom:0px;}
+div.box.box-container div.row div.box {padding:20px 0;}
 .panel {
     border-radius: 0;
 }
@@ -124,7 +127,7 @@ h4, .h4 {
     float: left;
     font-size: 28px;
     line-height: 0;
-    padding: 20px 15px;
+    padding: 20px 5px;
 }
 .navbar-toggle {
     margin-top: 12px;
@@ -156,7 +159,7 @@ h4, .h4 {
 }
 .date-selection {
     background: #fff none repeat scroll 0 0;
-    margin-left: 55px;
+    margin-left: 60px;
     padding: 15px 15px 15px 0;
     position: fixed;
     z-index: 100;

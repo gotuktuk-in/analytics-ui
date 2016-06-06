@@ -1,133 +1,190 @@
 <div class="container-fluid">
-    <div class="row">
-        <form class="form-inline date-selection">
-            <div class="form-group ">
-                <input ng-disabled="true" class="form-control cstm-width text-center" type="daterange" ng-model="dates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
-                    </div>
-                    <div style="background-color: rgb(48, 176, 58); height: 12px; width: 12px; border-radius: 100%; position: absolute; top: 26px; right: -17px;"></div>
-        </form>
-        <br>
-        <div class="col-md-10  col-md-offset-2" style="float: right; max-width: 1200px;">
-            <div class="flx-live flx-container">
-                <div class="flx-cnt-right">
-                <div class="text-left first-box">
-                <table>
-                	<tr>
-     			   		<td style="vertical-align:top"><span class="pull-left" style="padding:4px 10px 4px 0;">
-                        <img src="assets/images/driver.svg" title="Tuktuk" height="45">
-                    </span></td>
-     			   		<td><span><h4>{{ vm.overview.driver.total_drivers}} <span style="line-height:0">Drivers</span></h4></span>
-                    <br>
-                    <span><b ng-bind="vm.overview.driver.free_drivers" style="color:#000">0</b> Free . <b  ng-bind="vm.overview.driver.occupied_drivers" style="color:#000">0</b> Occupied . <b style="color:#000">{{vm.overview.driver.online_drivers_percentage | number:2}}%</b> Online</span>
-                    
-                		</td>
-   					 </tr>
-                </table>
-                    
-                    </div>
-                <div class="text-left middle-box">
-                <table>
-                	<tr>
-     			   		<td style="vertical-align:top"><span class="pull-left" style="padding:4px 10px 4px 0;">
-                        <img src="assets/images/trip-req.svg" title="Tuktuk" height="45">
-                            </span></td>
-     			   		<td> <span><h4>{{vm.overview.trip.total_booking}} <span style="line-height:0">Bookings</span></h4></span>
-                    <br>
-                    <span><b class="title text-success">Successful:</b> <b style="color:#000">{{vm.overview.trip.successful.total}} </b> Total . <b style="color:#000">{{ vm.overview.trip.successful.unique_riders}} </b> Unique</span>
-                    <br>
-                    <span><b class="title text-warning">Cancelled:</b> <b style="color:#000">{{vm.overview.trip.cancelled.total}} </b> Total . <b style="color:#000">{{ vm.overview.trip.cancelled.unique_rider}} </b> Unique</span>
-                    <br>
-                    <span><b class="title text-danger">Failed:</b> <b style="color:#000">{{vm.overview.trip.failed.total}} </b> Total . <b style="color:#000">{{ vm.overview.trip.failed.unique_rider}} </b> Unique</span>
-                    <br>
-                    <span><b class="title text-info">In Progress:</b> <b style="color:#000">{{ vm.overview.trip.in_process}}</b></span>
-                    </td>
-   					 </tr>
-                </table>
-                    
-                   </div>
-                <div class="text-left last-box">
-                 <table>
-                	<tr>
-     			   		<td style="vertical-align:top"> <span class="pull-left" style="padding:4px 10px 4px 0;">
-                        <img src="assets/images/new-rider.svg" title="Tuktuk" height="45">
-                            </span>
-                    </td>
-     			   		<td><span><h4>{{ vm.overview.rider.total_riders}} <span style="line-height:0">Riders</span></h4></span>
-     			   		<br>
-     			   		<span><b style="color:#000">{{ vm.overview.rider.new_riders_reg}}</b> New</span></td>
-   					 </tr>
-                </table>
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6"></div>
-        <div class="col-md-6 text-right">
-           
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h4 style="margin-top: 0">Trips</h4>
-                    <div class="table-responsive">
-                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <!---Driver--->
+   <div class="row">
+      <form class="form-inline date-selection">
+         <div class="form-group ">
+            <input ng-disabled="true" class="form-control cstm-width text-center" type="daterange" ng-model="dates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
+         </div>
+         <div style="background-color: rgb(48, 176, 58); height: 12px; width: 12px; border-radius: 100%; position: absolute; top: 26px; right: -17px;"></div>
+      </form>
+   </div>
+   <br>
+   <br>
+   <br>
+   <br>
+   <div class="row">
+      <div class="col-xs-12">
+         <div class="box box-container">
             <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6 text-right">
-                   
-                </div>
+               <div class="col-xs-6">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left" style="padding:4px 10px 4px 0;">
+                              <img src="assets/images/driver.svg" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                                 <h4><span style="line-height:0">Drivers:</span> {{ vm.overview.driver.total_drivers}} 
+                                    
+                                 </h4>
+                              </span>
+                              <span>
+                              Free: <b style="color:#000">{{vm.overview.driver.free_drivers}}</b>, 
+                              Occupied: <b style="color:#000">{{vm.overview.driver.occupied_drivers}}</b>, 
+                              Online: <b style="color:#000">{{vm.overview.driver.online_drivers_percentage | number:2}}%</b>, 
+                              Utilization: <b style="color:#000">{{vm.overview.driver.online_drivers_percentage | number:2}}%</b>
+                              </span>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="col-xs-6">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left" style="padding:4px 10px 4px 0;">
+                              <img src="assets/images/trip-req.svg" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                                 <h4><span style="line-height:0">Bookings:</span> {{vm.overview.trip.total_booking}} 
+                                    
+                                 </h4>
+                              </span>
+                              <span>
+                              <i class="title text-success">Successful:</i> <b>{{vm.overview.trip.successful.total}}/{{ vm.overview.trip.successful.unique_riders}}</b>,
+                              </span>
+                              <span>
+                              <i class="title text-warning">Cancelled:</i> <b>{{vm.overview.trip.cancelled.total}}/{{ vm.overview.trip.cancelled.unique_rider}}</b>,
+                              </span>
+                              <span>
+                              <i class="title text-danger">Failed:</i> <b>{{vm.overview.trip.failed.total}}/{{ vm.overview.trip.failed.unique_rider}}</b>,
+                              </span>
+                              <span>
+                              <i class="title text-info">In Progress:</i> <b>{{ vm.overview.trip.in_process}}</b>,
+                              </span>
+                              <span>
+                              <i class="title text-default">Fulfillment:</i> <b>{{ vm.overview.trip.in_process}} %</b>
+                              </span>  
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="col-xs-6">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left" style="padding:4px 10px 4px 0;">
+                              <img src="assets/images/tcash.png" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                                 <h4><span style="line-height:0">tCASH</span>
+                                    
+                                 </h4>
+                              </span>
+                              <span>
+                              <i class="title text-default">Total Amount Used:</i> <b>590/- in 5 Trips</b>, 
+                              <i class="title text-default">Total Trips Affected:</i> <b>10</b>
+                              </span>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
+               <div class="col-xs-6">
+                  <div class="box">
+                     <table>
+                        <tr>
+                           <td style="vertical-align:top">
+                              <span class="pull-left" style="padding:4px 10px 4px 0;">
+                              <img src="assets/images/new-rider.svg" title="Tuktuk" width="45">
+                              </span>
+                           </td>
+                           <td>
+                              <span>
+                                 <h4><span style="line-height:0">Riders</span>
+                                    
+                                 </h4>
+                              </span>
+                              <span>
+                              <i class="title text-default">Total:</i> <b>400</b>, 
+                              <i class="title text-default">New:</i> <b>250</b>
+                              </span>
+                           </td>
+                        </tr>
+                     </table>
+                  </div>
+               </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h4 style="margin-top: 0">Driver</h4>
-                            <div class="table-responsive">
-                                <nvd3 options="vm.driverChartOptions" data="vm.drivers" config="vm.config"></nvd3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-6 text-right"></div>
+   </div>
+   <br>
+   <div class="row">
+      <div class="col-md-12">
+         <div class="panel panel-default">
+            <div class="panel-body">
+               <h4 style="margin-top: 0">Trips</h4>
+               <div class="table-responsive">
+                  <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+               </div>
             </div>
-        </div>
-
-        <div class="col-md-6">
-            <!--Rider-->
-            <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6 text-right">
-                  
-                </div>
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-6">
+         <!---Driver--->
+         <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 text-right"></div>
+         </div>
+         <br>
+         <div class="row">
+            <div class="col-md-12">
+               <div class="panel panel-default">
+                  <div class="panel-body">
+                     <h4 style="margin-top: 0">Driver</h4>
+                     <div class="table-responsive">
+                        <nvd3 options="vm.driverChartOptions" data="vm.drivers" config="vm.config"></nvd3>
+                     </div>
+                  </div>
+               </div>
             </div>
-            <br>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h4 style="margin-top: 0">Rider</h4>
-                            <div class="table-responsive">
-                                <nvd3 options="vm.riderChartOptions" data="vm.riders" config="vm.config"></nvd3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+         </div>
+      </div>
+      <div class="col-md-6">
+         <!--Rider-->
+         <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-6 text-right"></div>
+         </div>
+         <br>
+         <div class="row">
+            <div class="col-md-12">
+               <div class="panel panel-default">
+                  <div class="panel-body">
+                     <h4 style="margin-top: 0">Rider</h4>
+                     <div class="table-responsive">
+                        <nvd3 options="vm.riderChartOptions" data="vm.riders" config="vm.config"></nvd3>
+                     </div>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>
