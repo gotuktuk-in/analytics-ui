@@ -1,25 +1,31 @@
-<h1 class="logoLogin"><img src="assets/images/tuktuk-logo.png" title="Tuktuk" height="75px"></h1>
-<div class="well">
+<style>
+body {
+    background-color: #333;
+    background-image:url("../../assets/images/blur-bg.jpg");
+    background-size:cover;
+    background-attachment: fixed;
+    
+}
+</style>
+<div class="well login-bg">
   <div class="row">
     <div class=" col-md-12">
-
-      <br>
-      <form name="login" novalidate>
+    	<div class="col-md-12">
+    		<h1 class="logo-login"><img src="assets/images/gotuktuk-play-logo.png" title="Tuktuk" height="64"></h1>
+    	</div>
+    	<div class="col-md-12">
+    	<form name="login" novalidate>
         <div class="group">
-          <input class="inputMaterial" type="text" ng-model="user.username" required>
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Username</label>
+          <input class="inputMaterial" type="text" ng-model="user.username" required placeholder="Username">
+
         </div>
         <div class="help-block animated slideInUp" ng-messages="login.username.$error"
              ng-if="login.username.$touched">
           <p ng-message="required"> Please enter username.</p>
         </div>
         <div class="group">
-          <input class="inputMaterial" type="password" ng-model="user.password" required>
-          <span class="highlight"></span>
-          <span class="bar"></span>
-          <label>Password</label>
+          <input class="inputMaterial" type="password" ng-model="user.password" required placeholder="Password">
+
         </div>
         <div class="help-block animated slideInUp" ng-messages="login.password.$error"
              ng-if="login.password.$touched">
@@ -30,6 +36,7 @@
         </div>
 
       </form>
+    	</div>
     </div>
   </div>
 </div>

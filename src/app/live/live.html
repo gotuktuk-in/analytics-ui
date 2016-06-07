@@ -1,3 +1,14 @@
+<!-- 
+<style>
+body {
+    background-color: #333;
+    background-image:url("../../assets/images/blur-bg.jpg");
+    background-size:cover;
+    background-attachment: fixed;
+    
+}
+</style>
+ -->
 <div class="container-fluid">
    <div class="row">
       <form class="form-inline date-selection">
@@ -145,7 +156,7 @@
          <div class="panel panel-default">
             <div class="panel-body">
                <h4 style="margin-top: 0" class="title">Trips</h4>
-               <div class="table-responsive">
+               <div>
                   <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                </div>
             </div>
