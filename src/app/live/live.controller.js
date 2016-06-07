@@ -8,16 +8,19 @@
     /** @ngInject */
     function LiveController($scope, $log, $rootScope, $state, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
         var vm = this;
-		//range slider , Failed(2), Cancel(2), Success.
-		vm.heatMapFilers = [{name:"Request" , value:'20'},{name:"Failed" , value:'72,82'}, {name:"Cancel" , value:'70,71'}, {name:"Success" , value:'61'}]
+        //range slider , Failed(2), Cancel(2), Success.
+        vm.heatMapFilers = [{name: "Request", value: '20'}, {name: "Failed", value: '72,82'}, {
+            name: "Cancel",
+            value: '70,71'
+        }, {name: "Success", value: '61'}]
         vm.selected = vm.heatMapFilers[0]
         $scope.rangSlider = {
-    			max: 24,
-    			min: 1,
-				};
-				
-		//range slider end
-       
+            max: 24,
+            min: 1,
+        };
+
+        //range slider end
+
         $scope.today = moment().format("dddd, MMMM Do YYYY")
         $scope.dates = {};
         $scope.dates.startDate = moment().format("YYYY-MM-DD");
@@ -30,11 +33,7 @@
         };
         vm.trips = [];
         var heatmap
-        NgMap.getMap().then(function(map) {
-            vm.map = map;
-           // heatmap = vm.map.heatmapLayers.foo;
-           // heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-        });
+
         function getLive() {
             LiveService.getOverview({
                 city: $rootScope.city,
@@ -69,7 +68,7 @@
                 }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
                     // PerformanceHandler.drivers = response
                     vm.drivers = PerformanceHandler.getDrivers(response)
-                    vm.trips = _.union( vm.trips, vm.drivers)
+                    vm.trips = _.union(vm.trips, vm.drivers)
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by rider)'}));
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by driver)'}));
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'tCash'}));
@@ -100,28 +99,45 @@
                 'rgba(191, 0, 31, 1)',
                 'rgba(255, 0, 0, 1)'
             ]
-            vm.heatMapData = [
-                new google.maps.LatLng(37.782551, -122.445368),
-                new google.maps.LatLng(37.782745, -122.444586),
-                new google.maps.LatLng(37.782842, -122.443688),
-                new google.maps.LatLng(37.782919, -122.442815),
-                new google.maps.LatLng(37.782992, -122.442112)]
-            function loadHeatMap()
-            {
+
+            $scope.heatMapData = [];
+            function loadHeatMap() {
 
                 LiveService.heatmap({
                     city: $rootScope.city,
                     vehicle: $rootScope.vehicleType,
-                    from:  moment($scope.dates.startDate).unix()
+                    from: moment($scope.dates.startDate).unix(),
+                    state:'70,71'
                 }, function (response) {
                     //  PerformanceHandler.trips = response[0].trip
-                   // vm.heatMapData = _.map( response , function(obj){ return [obj.locPickupRequest.lt, obj.locPickupRequest.ln] });
-                    console.log('response ', vm.heatMapData)
+                    var transformedData = [];
+                    _.forEach(response, function (item) {
+                        transformedData.push(new google.maps.LatLng(item.locPickupRequest.lt - 0, item.locPickupRequest.ln - 0));
+                    })
+                    //$scope.heatMapData = transformedData;
+                    NgMap.getMap().then(function (map) {
+                        vm.map = map;
+                        heatmap = vm.map.heatmapLayers.foo;
+                        var pointArray = new google.maps.MVCArray(transformedData);
+                        heatmap = new google.maps.visualization.HeatmapLayer({
+                            data: pointArray
+                        });
+                        heatmap.setMap(vm.map);
+                    });
+
+
+                    //$scope.heatMapData = _.map(response,
+                    //    function (obj) {
+                    //        return new google.maps.LatLng(obj.locPickupRequest.lt - 0, obj.locPickupRequest.ln - 0)
+                    //        //  [obj.locPickupRequest.lt, obj.locPickupRequest.ln]
+                    //    });
+                    //console.log('response ', $scope.heatMapData)
                 }, function (err) {
                     console.log(err)
                     $scope.error = true;
                 });
             }
+
             loadHeatMap()
         }
 
