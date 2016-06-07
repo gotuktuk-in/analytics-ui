@@ -32,8 +32,8 @@
         var heatmap
         NgMap.getMap().then(function(map) {
             vm.map = map;
-            heatmap = vm.map.heatmapLayers.foo;
-            heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+           // heatmap = vm.map.heatmapLayers.foo;
+           // heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
         });
         function getLive() {
             LiveService.getOverview({
