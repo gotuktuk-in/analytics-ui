@@ -588,38 +588,42 @@ div.box.box-container div.row div.box {padding:20px 0;}
 .panel-default {
     border-color: #eee;
 }
+.no-lt-bdr{border-left: none !important;}
+.no-rt-bdr{border-right: none !important;}
+.no-tp-bdr{border-top: none !important;}
+.no-bt-bdr{border-bottom: none !important;}
+
+.lt-bdr{border-left: 1px solid #eee !important;}
+.rt-bdr{border-right: 1px solid #eee !important;}
+.tp-bdr{border-top: 1px solid #eee !important;}
+.bt-bdr{border-bottom: 1px solid #eee !important;}
 .box{
-	padding:15px;
+	padding:12px 15px;
 }
 .box h4{
 	font-size:18px;
+	margin-top:0px;
 	margin-bottom:0px;
 }
-.box h4.title{
-	font-size:18px;
+h4.title{
+	font-size:15px;
 	color:orange;
+	text-transform:uppercase;
 }
-.box span{
-	color:#999;
+.box span {
+    color: #999;
+    font-size: 11px;
+    text-transform: uppercase;
 }
 span.img-top{
 	padding:10px;
 	display:none;
 }
-.col-xs-6{
-    border:1px solid #eee;
-    margin:0;
-    padding:0;
+.hide-bdr{box-shadow: 0 0 0 #fff !important; border:none !important;}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+    display: inline !important;
 }
-.col-xs-4, .col-xs-3 {
-    min-height: 90px;
-    margin:0;
-    padding:0;
-}
-.col-xs-4 .box, .col-xs-3 .box{
-    background:;
-    min-height: 90px;
-}
+.ngrs-range-slider {border:none;box-shadow: 0 0 0 #fff}
 /**********************Drivers***/
 .flx-container {
 /*     height: 250px; */

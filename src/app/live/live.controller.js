@@ -7,6 +7,16 @@
 
     /** @ngInject */
     function LiveController($scope, $log, $rootScope, $state, $stateParams, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
+      
+		//range slider
+		
+       $scope.rangSlider = {
+    			max: 24,
+    			min: 1,
+				};
+				
+		//range slider end
+       
         var vm = this;
         $scope.today = moment().format("dddd, MMMM Do YYYY")
         $scope.dates = {};
