@@ -156,14 +156,14 @@
                <div class="panel panel-default">
                   <div class="panel-body">
                   <div class="pull-right">
-                     	<select>
-                     		<option>Request</option>
-                     	</select>
+                      <select name="mySelect" id="mySelect"
+                              ng-options="option.name for option in vm.heatMapFilers track by option.value"
+                              ng-model="vm.selected"></select>
                      </div>
                      <h4 style="margin-top: 0" class="title">Heat Map</h4>
                      <div style="min-height:332px">
                         <ng-map zoom="13" center="37.774546, -122.433523" map-type-id="SATELLITE">
-                           <heatmap-layer id="foo" data="taxiData"></heatmap-layer>
+                           <heatmap-layer id="foo" data={{vm.heatMapData}}></heatmap-layer>
                         </ng-map>
                      </div>
                      <div range-slider min="1" max="24" model-min="rangSlider.min" model-max="rangSlider.max" attach-handle-values="true"></div>

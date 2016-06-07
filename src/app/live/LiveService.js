@@ -37,6 +37,7 @@ function LiveService($q, $resource, API) {
             heatmap: {
             method: 'GET',
             url:   url + 'trips/heatmap',
+                isArray:true
         },
 
         }

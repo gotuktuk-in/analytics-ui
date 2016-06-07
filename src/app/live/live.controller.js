@@ -6,18 +6,18 @@
         .controller('LiveController', LiveController);
 
     /** @ngInject */
-    function LiveController($scope, $log, $rootScope, $state, $stateParams, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
-      
-		//range slider
-		
-       $scope.rangSlider = {
+    function LiveController($scope, $log, $rootScope, $state, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
+        var vm = this;
+		//range slider , Failed(2), Cancel(2), Success.
+		vm.heatMapFilers = [{name:"Request" , value:'20'},{name:"Failed" , value:'72,82'}, {name:"Cancel" , value:'70,71'}, {name:"Success" , value:'61'}]
+        vm.selected = vm.heatMapFilers[0]
+        $scope.rangSlider = {
     			max: 24,
     			min: 1,
 				};
 				
 		//range slider end
        
-        var vm = this;
         $scope.today = moment().format("dddd, MMMM Do YYYY")
         $scope.dates = {};
         $scope.dates.startDate = moment().format("YYYY-MM-DD");
@@ -29,7 +29,12 @@
             return d3.time.format('%I %p')(new Date(d));
         };
         vm.trips = [];
-
+        var heatmap
+        NgMap.getMap().then(function(map) {
+            vm.map = map;
+            heatmap = vm.map.heatmapLayers.foo;
+            heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+        });
         function getLive() {
             LiveService.getOverview({
                 city: $rootScope.city,
@@ -79,7 +84,45 @@
                 $scope.error = true;
             });
 
+            var gradient = [
+                'rgba(0, 255, 255, 0)',
+                'rgba(0, 255, 255, 1)',
+                'rgba(0, 191, 255, 1)',
+                'rgba(0, 127, 255, 1)',
+                'rgba(0, 63, 255, 1)',
+                'rgba(0, 0, 255, 1)',
+                'rgba(0, 0, 223, 1)',
+                'rgba(0, 0, 191, 1)',
+                'rgba(0, 0, 159, 1)',
+                'rgba(0, 0, 127, 1)',
+                'rgba(63, 0, 91, 1)',
+                'rgba(127, 0, 63, 1)',
+                'rgba(191, 0, 31, 1)',
+                'rgba(255, 0, 0, 1)'
+            ]
+            vm.heatMapData = [
+                new google.maps.LatLng(37.782551, -122.445368),
+                new google.maps.LatLng(37.782745, -122.444586),
+                new google.maps.LatLng(37.782842, -122.443688),
+                new google.maps.LatLng(37.782919, -122.442815),
+                new google.maps.LatLng(37.782992, -122.442112)]
+            function loadHeatMap()
+            {
 
+                LiveService.heatmap({
+                    city: $rootScope.city,
+                    vehicle: $rootScope.vehicleType,
+                    from:  moment($scope.dates.startDate).unix()
+                }, function (response) {
+                    //  PerformanceHandler.trips = response[0].trip
+                   // vm.heatMapData = _.map( response , function(obj){ return [obj.locPickupRequest.lt, obj.locPickupRequest.ln] });
+                    console.log('response ', vm.heatMapData)
+                }, function (err) {
+                    console.log(err)
+                    $scope.error = true;
+                });
+            }
+            loadHeatMap()
         }
 
         getLive()
