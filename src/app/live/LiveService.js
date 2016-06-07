@@ -34,6 +34,10 @@ function LiveService($q, $resource, API) {
                 method: 'GET',
                 url:   url + 'rider/live/',
             },
+            heatmap: {
+            method: 'GET',
+            url:   url + 'trips/heatmap',
+        },
 
         }
     );

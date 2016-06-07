@@ -17,7 +17,7 @@
               $http.defaults.headers.common.Authorization = 'Basic '+response.token ;
              $rootScope.isAuthenticated = true;
 
-              $state.go("home.performance" ,{city:  $rootScope.city , vehicleType:$rootScope.vehicleType})
+              $state.go("home.live" ,{city:  $rootScope.city , vehicleType:$rootScope.vehicleType})
               toastr.success("You are successfully logged in.");
             }
             else
