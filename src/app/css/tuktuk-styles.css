@@ -366,15 +366,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-image: none;
 }
 .inputMaterial {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-color: -moz-use-text-color -moz-use-text-color #222;
-    border-image: none;
-    border-style: none none solid;
-    border-width: medium medium 1px;
+	border:0px solid #222;
+	border-bottom:1px solid #222;
+	background:rgba(0,0,0,0.3);
     color: #fff;
     display: block;
     font-size: 18px;
