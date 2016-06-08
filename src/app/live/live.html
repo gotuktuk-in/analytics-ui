@@ -167,17 +167,19 @@ body {
                <div class="panel panel-default">
                   <div class="panel-body">
                   <div class="pull-right">
+                      <!--<div ng-dropdown-multiselect="" options="vm.heatMapFilers" selected-model="vm.selected" extra-settings="ddSettings"></div>-->
+
                       <select name="mySelect" id="mySelect"
-                              ng-options="option.name for option in vm.heatMapFilers track by option.value"
-                              ng-model="vm.selected"></select>
+                              ng-options="option.label for option in vm.heatMapFilers track by option.id"
+                              ng-model="vm.selected" ng-change="vm.loadHeatMap()"></select>
                      </div>
                      <h4 style="margin-top: 0" class="title">Heat Map</h4>
                      <div style="min-height:332px">
-                        <ng-map zoom="13" center="[22.717081666666665, 75.87155666666666]" map-type-id="SATELLITE">
+                        <ng-map zoom="13" center="[22.717081666666665, 75.87155666666666]" disable-default-u-i="true">
                            <heatmap-layer id="foo" data="heatMapData"></heatmap-layer>
                         </ng-map>
                      </div>
-                     <div range-slider min="1" max="24" model-min="rangSlider.min" model-max="rangSlider.max" attach-handle-values="true"></div>
+                     <div range-slider on-handle-up="vm.loadHeatMap()" min="1" max="24" model-min="rangSlider.min" model-max="rangSlider.max" attach-handle-values="true"></div>
                    </div>
                   
                </div>

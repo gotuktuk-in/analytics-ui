@@ -9,16 +9,16 @@
     function LiveController($scope, $log, $rootScope, $state, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
         var vm = this;
         //range slider , Failed(2), Cancel(2), Success.
-        vm.heatMapFilers = [{name: "Request", value: '20'}, {name: "Failed", value: '72,82'}, {
-            name: "Cancel",
-            value: '70,71'
-        }, {name: "Success", value: '61'}]
+        vm.heatMapFilers = [{label: "Request", id: '20'}, {label: "Failed", id: '72,82'}, {
+            label: "Cancel",
+            id: '70,71'
+        }, {label: "Success", id: '61'}]
         vm.selected = vm.heatMapFilers[0]
         $scope.rangSlider = {
             max: 24,
             min: 1,
         };
-
+        $scope.ddSettings =  {enableSearch: false};
         //range slider end
 
         $scope.today = moment().format("dddd, MMMM Do YYYY")
@@ -101,13 +101,16 @@
             ]
 
             $scope.heatMapData = [];
-            function loadHeatMap() {
+            vm.loadHeatMap= function () {
 
+                var from =  moment($scope.dates.startDate).hour($scope.rangSlider.min).unix()
+                var to =  moment($scope.dates.startDate).hour($scope.rangSlider.max).unix()
                 LiveService.heatmap({
                     city: $rootScope.city,
                     vehicle: $rootScope.vehicleType,
-                    from: moment($scope.dates.startDate).unix(),
-                    state:'70,71'
+                    from: from,
+                    to: to,
+                    state: vm.selected.id
                 }, function (response) {
                     //  PerformanceHandler.trips = response[0].trip
                     var transformedData = [];
@@ -138,7 +141,7 @@
                 });
             }
 
-            loadHeatMap()
+            vm.loadHeatMap()
         }
 
         getLive()
