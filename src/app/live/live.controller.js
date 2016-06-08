@@ -29,7 +29,7 @@
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
 
         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-            return d3.time.format('%I %p')(new Date(d));
+            return d3.time.format('%I %p')(new Date(d).addHours(1));
         };
         vm.trips = [];
         var heatmap

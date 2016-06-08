@@ -62,7 +62,7 @@ function ChartConfigService($q, $resource, API) {
                      rotateLabels: '-90',
                     tickFormat: function(d) {
                      //   return d3.time.format('%d %B %y')(new Date(d))
-                        return d3.time.format('%d %b %I %p')(new Date(d).addHours(1))
+                      return d3.time.format('%d %b %I %p')(new Date(d))
                     },
 
                     showMaxMin: true,
