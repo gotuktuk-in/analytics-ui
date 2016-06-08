@@ -13,10 +13,10 @@ body {
    <div class="row">
       <form class="form-inline date-selection">
          <div class="form-group ">
-            <input class="form-control cstm-width text-center hide-bdr" type="text" ng-model="today">
+            <input class="form-control cstm-width text-left today-date-range hide-bdr" type="text" ng-model="today">
             <!--<input ng-disabled="true" class="form-control cstm-width text-center" type="daterange" ng-model="dates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">-->
          </div>
-         <div class="live"> Live</div>
+         <div class="live"> LIVE</div>
       </form>
    </div>
    <br>
@@ -24,121 +24,119 @@ body {
    <br>
    <br>
    <div class="row overview-box">
-		<div class="col-lg-12 col-sm-12 col-md-12">
-               <div class="col-md-4 col-sm-12 lt-bdr tp-bdr bt-bdr">
-            	<div class="col-md-4 col-xs-4">
-                  <div class="box">
+   	<div class="col-md-12 col-sm-12 col-xs-12">
+               <div class="col-md-12 col-sm-6 col-xs-12 border section mr-bt no-mr-lt no-pd-lt">
+            	<div class="col-md-2 col-sm-12 col-xs-12 no-mr-lt no-pd-lt">
+                  <div class="box box-heading box-1 text-center">
                      <h4 class="title">DRIVERS</h4>
                   </div>
                </div>
-               <div class="col-md-4 col-xs-4">
+               <div class="col-md-2 col-sm-12 col-xs-2">
                   <div class="box">
                      <h4>{{ vm.overview.driver.total_drivers}}</h4>
                            		<span>Total</span>
                   </div>
                </div>
-               <div class="col-md-4 col-xs-4">
-                  <div class="box">
-                     <h4>{{vm.overview.driver.online_drivers_percentage | number:2}}%</h4>
-                              <span>Utilization</span>
-                  </div>
-               </div>
-               <div class="col-md-4 col-xs-4">
+               <div class="col-md-2 col-sm-12 col-xs-2">
                   <div class="box">
                       <h4>{{vm.overview.driver.free_drivers}}</h4>
                               <span>Free</span>
                   </div>
                </div>
-               <div class="col-md-4 col-xs-4">
+               <div class="col-md-2 col-sm-12 col-xs-2">
                   <div class="box">
                      <h4>{{vm.overview.driver.occupied_drivers}}</h4>
                               <span>Occupied</span>
                   </div>
                </div>
-               <div class="col-md-4 col-xs-4">
+               <div class="col-md-2 col-sm-12 col-sm-12 col-xs-2">
                   <div class="box">
                       <h4>{{vm.overview.driver.online_drivers_percentage | number:2}}%</h4>
                               <span>Online</span>
                   </div>
                </div>
-               </div>
-               <div class="col-md-8 col-sm-12 lt-bdr tp-bdr rt-bdr bt-bdr">
-				<div class="col-md-3 col-xs-3">
+               <div class="col-md-2 col-sm-12 col-xs-2">
                   <div class="box">
+                     <h4>{{vm.overview.driver.online_drivers_percentage | number:2}}%</h4>
+                              <span>Utilization</span>
+                  </div>
+               </div>
+               </div>
+               <div class="col-md-12 col-sm-6 col-xs-12 border section mr-bt no-mr-lt no-pd-lt">
+            	<div class="col-md-2 col-sm-12 col-xs-2 no-mr-lt no-pd-lt">
+                  <div class="box box-heading box-2 text-center">
                      <h4 class="title">BOOKINGS</h4>
                   </div>
                </div>
-				<div class="col-md-3 col-xs-3">
+				<div class="col-md-2 col-sm-12 col-xs-2">
                   <div class="box">
-                      <h4>{{vm.overview.trip.total_booking}}</h4>
+                      <h4>{{vm.overview.trip.total_booking}} / u</h4>
                                   <span>Total</span>
                   </div>
                </div>
-				<div class="col-md-3 col-xs-3">
-                  <div class="box">
-                     <h4>{{ vm.overview.trip.in_process}} %</h4>
-                                 <span>Fulfilment</span>
-                  </div>
-               </div>
-				<div class="col-md-3 col-xs-3">
+
+				<div class="col-md-2 col-sm-12 col-xs-2">
                   <div class="box">
                      <h4>
-                               {{vm.overview.trip.successful.total}}/{{ vm.overview.trip.successful.unique_riders}}
+                               {{vm.overview.trip.successful.total}} / {{ vm.overview.trip.successful.unique_riders}}
                               </h4>
                               <span>Successful</span>
                   </div>
                </div>
-				<div class="col-md-3 col-xs-3">
+				<div class="col-md-2 col-sm-12 col-xs-2">
                   <div class="box">
-                     <h4>{{vm.overview.trip.cancelled.total}}/{{ vm.overview.trip.cancelled.unique_rider}}</h4>
+                     <h4>{{vm.overview.trip.cancelled.total}} / {{ vm.overview.trip.cancelled.unique_rider}}</h4>
                               <span class="title text-warning">Cancelled</span>
                   </div>
                </div>
-				<div class="col-md-3 col-xs-3">
+				<div class="col-md-2 col-sm-12 col-xs-2">
                   <div class="box">
-                     <h4>{{vm.overview.trip.failed.total}}/{{ vm.overview.trip.failed.unique_rider}}</h4>
+                     <h4>{{vm.overview.trip.failed.total}} / {{ vm.overview.trip.failed.unique_rider}}</h4>
                               <span>Failed</span> 
                   </div>
                </div>
-				<div class="col-md-3 col-xs-3">
+               <div class="col-md-2 col-sm-12 col-xs-2">
                   <div class="box">
-                     <h4>{{ vm.overview.trip.in_process}}</h4>
-                               <span>In Progress</span>
+                     <h4>{{ vm.overview.trip.in_process}} / {{ vm.overview.trip.in_process}}%</h4>
+                               <span>in Prog / Fulfilment</span>
                   </div>
                </div>
+              
                </div>
-               <div class="col-md-4 col-sm-12 lt-bdr bt-bdr">
-               <div class="col-xs-4">
-                  <div class="box">
+               <div class="col-md-6 col-sm-12 col-xs-12 border section mr-bt no-mr-lt no-pd-lt" style="width:49.6%">
+            	<div class="col-md-4 col-sm-12 col-xs-4 no-mr-lt no-pd-lt">
+                  <div class="box box-heading box-3 text-center">
                      <h4 class="title">RIDERS</h4>
                   </div>
                </div>
-               <div class="col-xs-4">
+               <div class="col-md-4 col-sm-12 col-xs-4">
                   <div class="box">
                      <h4>10</h4>
                                <span>Total</span>
                   </div>
                </div>
-               <div class="col-xs-4">
+               <div class="col-md-4 col-sm-12 col-xs-4">
                   <div class="box">
                      <h4>10</h4>
                                <span>New</span>
                   </div>
                </div>
+               
+                
                </div>
-               <div class="col-md-8 col-sm-12 lt-bdr rt-bdr bt-bdr">
-               <div class="col-md-3">
-                  <div class="box">
+               <div class="col-md-6 col-sm-12 col-xs-12 border section mr-bt no-mr-lt no-pd-lt pull-right" style="width:49.6%">
+               <div class="col-md-4 col-sm-12 col-xs-4 no-mr-lt no-pd-lt">
+                  <div class="box box-heading box-4 text-center">
                      <h4 class="title">tCASH</h4>
                   </div>
                </div>
-               <div class="col-md-3">
+               <div class="col-md-4 col-sm-12 col-xs-4">
                   <div class="box">
                      <h4>590/- in 5 Trips</h4>
                                <span>Total Amount Used</span>
                   </div>
                </div>
-               <div class="col-md-3">
+               <div class="col-md-4 col-sm-12 col-xs-4">
                   <div class="box">
                      <h4>10</h4>
                      <span>Total Trips Affected</span>
@@ -146,16 +144,15 @@ body {
                </div>
                 
                </div>
-            </div>
         </div>
-   <br>
+    </div>
 
 
    <div class="row">
       <div class="col-md-6 col-sm-12 col-xs-12">
          <div class="panel panel-default">
-            <div class="panel-body">
-               <h4 style="margin-top: 0" class="title">Trips</h4>
+         <div class="panel-heading"><h4 style="margin-top: 0" class="title">Trips</h4></div>
+            <div class="panel-body">          
                <div>
                   <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                </div>
