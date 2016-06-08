@@ -14,6 +14,10 @@ angular
 
 function ChartConfigService($q, $resource, API) {
       var factory = {}
+    Date.prototype.addHours= function(h){
+        this.setHours(this.getHours()+h);
+        return this;
+    }
         factory.lineChartConfig ={refreshDataOnly: false}
         factory.lineChartOptions = {
             chart: {
@@ -58,7 +62,7 @@ function ChartConfigService($q, $resource, API) {
                      rotateLabels: '-90',
                     tickFormat: function(d) {
                      //   return d3.time.format('%d %B %y')(new Date(d))
-                        return d3.time.format('%d %b %I %p')(new Date(d))
+                        return d3.time.format('%d %b %I %p')(new Date(d).addHours(1))
                     },
 
                     showMaxMin: true,
