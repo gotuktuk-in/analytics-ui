@@ -6,8 +6,8 @@ body {
     letter-spacing:-0.3px;
     font-size: 13px;
     color: #333;
+    min-width:320px
 }
-
 a:focus {
     outline: none;
     outline-offset: 0;
@@ -23,6 +23,9 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 h4, .h4 {
     font-size: 16px;
 }
+button, input, optgroup, select, textarea {
+    color: #333;
+}
 .panel-heading {
     border-radius: 0;
 }
@@ -33,7 +36,7 @@ div.panel.panel-default div.panel-heading h4.title{margin-bottom:0;}
     height: 12px;
     line-height: 12px;
     position: absolute;
-    right: 56px;
+    right: 50px;
     text-indent: 17px;
     top: 20px;
     width: 12px;
@@ -143,7 +146,7 @@ div.box.box-container div.row div.box {padding:20px 0;}
     float: left;
     font-size: 28px;
     line-height: 0;
-    padding: 15px 5px;
+    padding: 15px;
 }
 .navbar-toggle {
     margin-top: 12px;
@@ -175,8 +178,7 @@ div.box.box-container div.row div.box {padding:20px 0;}
 }
 .date-selection {
     background: #fff none repeat scroll 0 0;
-    margin-left: 49px;
-    padding: 10px 75px 10px 0;
+    padding: 10px 60px 10px 60px;
     position: fixed;
     z-index: 100;
 }
@@ -607,7 +609,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .panel-body {
     padding: 10px;
 }
-.today-date-range{padding:0; width:300px;}
+.form-group {
+    margin-bottom: 0;
+}
+.today-date-range{padding:0; width:244px;}
 .border{border: 1px solid #eee !important;}
 .no-lt-bdr{border-left: none !important;}
 .no-rt-bdr{border-right: none !important;}
@@ -629,6 +634,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 .box.box-1, .box.box-2, .box.box-3, .box.box-4{
 	max-width:225px;
+	min-width:200px;
 }
 .box.box-1{
 	background-color: #ec407a;
@@ -676,6 +682,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
    	 	color: #fff;
     	line-height: 15px;  
 	}
+	.date-selection {
+    	border-bottom: 1px solid #ccc;
+    	width: 100%;
+	}
 }
 @media only screen and (max-width: 64em) {
 .box.box-1, .box.box-2, .box.box-3, .box.box-4{
@@ -687,6 +697,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	.box-heading h4.title{
    	 	color: #fff;
     	line-height: 15px;  
+	}
+	.date-selection {
+    	border-bottom: 1px solid #eee;
+    	width: 100%;
 	}
 }
 
