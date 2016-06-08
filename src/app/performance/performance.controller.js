@@ -37,7 +37,7 @@
                     vm.driverChartOptions.chart.xAxis.axisLabel = freqModel
                     if (freqModel == 'hour') {
                         vm.driverChartOptions.chart.xAxis.tickFormat = function (d) {
-                            return d3.time.format('%d %b %I %p')(new Date(d));
+                            return d3.time.format('%d %b %I %p')(new Date(d).addHours(1));
                         };
                     }
                     else {
@@ -52,7 +52,7 @@
                     vm.riderChartOptions.chart.xAxis.axisLabel = freqModel
                     if (freqModel == 'hour') {
                         vm.riderChartOptions.chart.xAxis.tickFormat = function (d) {
-                            return d3.time.format('%d %b %I %p')(new Date(d));
+                            return d3.time.format('%d %b %I %p')(new Date(d).addHours(1));
                         };
                     }
                     else {
@@ -66,7 +66,7 @@
                     vm.tripChartOptions.chart.xAxis.axisLabel = freqModel
                     if (freqModel == 'hour') {
                         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-                            return d3.time.format('%d %b %I %p')(new Date(d));
+                            return d3.time.format('%d %b %I %p')(new Date(d).addHours(1));
                         };
                     }
                     else {

@@ -6,19 +6,19 @@
         .controller('LiveController', LiveController);
 
     /** @ngInject */
-    function LiveController($scope, $log, $rootScope, $state, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
+    function LiveController($scope, $log, $rootScope, $state,$timeout, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
         var vm = this;
         //range slider , Failed(2), Cancel(2), Success.
-        vm.heatMapFilers = [{name: "Request", value: '20'}, {name: "Failed", value: '72,82'}, {
-            name: "Cancel",
-            value: '70,71'
-        }, {name: "Success", value: '61'}]
+        vm.heatMapFilers = [{label: "In-Process", id: '20,22,30,40,50'}, {label: "Failed", id: '72,82'}, {
+            label: "Cancel",
+            id: '70,71'
+        }, {label: "Success", id: '61'}]
         vm.selected = vm.heatMapFilers[0]
         $scope.rangSlider = {
             max: 24,
             min: 1,
         };
-
+        $scope.ddSettings =  {enableSearch: false};
         //range slider end
 
         $scope.today = moment().format("dddd, MMMM Do YYYY")
@@ -29,7 +29,7 @@
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
 
         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-            return d3.time.format('%I %p')(new Date(d));
+            return d3.time.format('%I %p')(new Date(d).addHours(1));
         };
         vm.trips = [];
         var heatmap
@@ -73,6 +73,7 @@
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by driver)'}));
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'tCash'}));
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'New Drivers'}));
+                    vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Active Drivers'}));
 
                 }, function (err) {
                     console.log(err)
@@ -101,13 +102,16 @@
             ]
 
             $scope.heatMapData = [];
-            function loadHeatMap() {
+            vm.loadHeatMap= function () {
 
+                var from =  moment($scope.dates.startDate).hour($scope.rangSlider.min).unix()
+                var to =  moment($scope.dates.startDate).hour($scope.rangSlider.max).unix()
                 LiveService.heatmap({
                     city: $rootScope.city,
                     vehicle: $rootScope.vehicleType,
-                    from: moment($scope.dates.startDate).unix(),
-                    state:'70,71'
+                    from: from,
+                    to: to,
+                    state: vm.selected.id
                 }, function (response) {
                     //  PerformanceHandler.trips = response[0].trip
                     var transformedData = [];
@@ -138,9 +142,17 @@
                 });
             }
 
-            loadHeatMap()
+            vm.loadHeatMap()
         }
 
         getLive()
+
+        vm.refreshPage = function()
+        {
+            vm.loadHeatMap()
+            getLive()
+        }
+
+
     }
 })();

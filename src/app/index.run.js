@@ -34,7 +34,7 @@
             console.log("to - " + toState.name + " $state.current.name - " + $state.current.name)
             if (UserService.getUser() != null && (toState.name == "login")) {
                 $rootScope.isAuthenticated = true;
-                $state.go("home.performance" ,{city:  $rootScope.city , vehicleType:$rootScope.vehicleType})
+                $state.go("home.live" ,{city:  $rootScope.city , vehicleType:$rootScope.vehicleType})
                 e.preventDefault();
                 //   returna
 

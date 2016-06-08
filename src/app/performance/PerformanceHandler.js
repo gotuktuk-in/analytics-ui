@@ -21,11 +21,11 @@ function PerformanceHandler() {
         {"key": "Requests", "values": []},
         {"key": "Requests (U)", "values": []},
 
-        {"key": "Cancelled Requests", "values": []},
-        {"key": "Cancelled Requests (U)", "values": []},
+        {"key": "Cancelled", "values": []},
+        {"key": "Cancelled (U)", "values": []},
 
-        {"key": "Successful Requests", "values": []},
-        {"key": "Successful Requests (U)", "values": []},
+        {"key": "Fulfilment", "values": []},
+        {"key": "Fulfilment (U)", "values": []},
 
         {"key": "Cancelled trips (by rider)", "values": []},
         {"key": "Cancelled trips (by driver)", "values": []},
@@ -36,7 +36,7 @@ function PerformanceHandler() {
     factory.filteredDrivers = [
         {"key": "New Drivers", "values": []},
         {"key": "Active Drivers", "values": []},
-        {"key": "Average Rides Per Drivers", "values": []},
+        {"key": "Avg Trip/Driver", "values": []},
     ]
     factory.filteredRiders = [
         {"key": "New Riders", "values": []},

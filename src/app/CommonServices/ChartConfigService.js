@@ -14,6 +14,10 @@ angular
 
 function ChartConfigService($q, $resource, API) {
       var factory = {}
+    Date.prototype.addHours= function(h){
+        this.setHours(this.getHours()+h);
+        return this;
+    }
         factory.lineChartConfig ={refreshDataOnly: false}
         factory.lineChartOptions = {
             chart: {
@@ -25,15 +29,15 @@ function ChartConfigService($q, $resource, API) {
        				 //padding: { top: 20 },
        				 maxKeyLength:400,
        				margin : {
-                    top: 1,
-                    right: 50,
-                    bottom: 50,
+                    top: 5,
+                    right: 15,
+                    bottom: 20,
                     left: 50
                 }
      			 },
       			legendPosition: 'top',
                 margin : {
-                    top: 10,
+                    top: 0,
                     right: 20,
                     bottom: 100,
                     left: 50
@@ -58,12 +62,12 @@ function ChartConfigService($q, $resource, API) {
                      rotateLabels: '-90',
                     tickFormat: function(d) {
                      //   return d3.time.format('%d %B %y')(new Date(d))
-                        return d3.time.format('%d %b %I %p')(new Date(d))
+                      return d3.time.format('%d %b %I %p')(new Date(d))
                     },
 
                     showMaxMin: true,
                     staggerLabels: false,
-                    axisLabelDistance: 200
+                    axisLabelDistance: 200,
                 },
                 x2Axis: {
                     axisLabel: 'Date',

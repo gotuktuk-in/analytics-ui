@@ -29,7 +29,7 @@
             vm.tripChartOptions.chart.xAxis.axisLabel = freqModel
             if (freqModel == 'hour') {
                 vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-                    return d3.time.format('%d %b %I %p')(new Date(d));
+                    return d3.time.format('%d %b %I %p')(new Date(d).addHours(1));
                 };
             }
             else {

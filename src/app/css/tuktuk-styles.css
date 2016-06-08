@@ -1,13 +1,13 @@
 
 body {
-    background-color: #fff;
+    background-color: #f9f9f9;
     /* font-family: 'aller_lightregular', sans-serif; */
     font-family: arial, sans-serif;
     letter-spacing:-0.3px;
     font-size: 13px;
     color: #333;
+    min-width:320px
 }
-
 a:focus {
     outline: none;
     outline-offset: 0;
@@ -21,20 +21,32 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 h4, .h4 {
-    color: #444;
     font-size: 16px;
 }
+button, input, optgroup, select, textarea {
+    color: #333;
+}
+.panel-heading {
+    border-radius: 0;
+}
+div.panel.panel-default div.panel-heading h4.title{margin-bottom:0;}
 .live {
     background-color: rgb(48, 176, 58);
     border-radius: 100%;
     height: 12px;
     line-height: 12px;
     position: absolute;
-    right: 37px;
+    left: 240px;
     text-indent: 17px;
-    top: 26px;
+    top: 21px;
     width: 12px;
 }
+.reload{
+position:fixed;
+		right:15px;
+		top:17px;
+		z-index:999999999;
+	}
 div.box.box-container div.row div.box table tbody tr td span h4{margin-bottom:0px;}
 div.box.box-container div.row div.box {padding:20px 0;}
 .panel {
@@ -57,7 +69,7 @@ div.box.box-container div.row div.box {padding:20px 0;}
     border-bottom: medium none;
     color: #eee;
     font-weight: 100;
-    height: 67px;
+    height: 54px;
     margin-bottom: 0;
     position: fixed;
 }
@@ -140,7 +152,7 @@ div.box.box-container div.row div.box {padding:20px 0;}
     float: left;
     font-size: 28px;
     line-height: 0;
-    padding: 20px 5px;
+    padding: 15px;
 }
 .navbar-toggle {
     margin-top: 12px;
@@ -172,8 +184,7 @@ div.box.box-container div.row div.box {padding:20px 0;}
 }
 .date-selection {
     background: #fff none repeat scroll 0 0;
-    margin-left: 49px;
-    padding: 16px 60px 17px 0;
+    padding: 10px 60px 10px 60px;
     position: fixed;
     z-index: 100;
 }
@@ -601,6 +612,14 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .panel-default {
     border-color: #eee;
 }
+.panel-body {
+    padding: 10px;
+}
+.form-group {
+    margin-bottom: 0;
+}
+.today-date-range{padding:0; width:244px;}
+.border{border: 1px solid #eee !important;}
 .no-lt-bdr{border-left: none !important;}
 .no-rt-bdr{border-right: none !important;}
 .no-tp-bdr{border-top: none !important;}
@@ -610,17 +629,89 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .rt-bdr{border-right: 1px solid #eee !important;}
 .tp-bdr{border-top: 1px solid #eee !important;}
 .bt-bdr{border-bottom: 1px solid #eee !important;}
+.mr-bt{margin-bottom:20px !important;}
+.no-mr{margin:0 !important;}
+.no-pd{padding:0 !important;}
+.no-mr-lt{margin-left:0 !important;}
+.no-pd-lt{padding-left:0 !important;}
+.overview-box .section{background:#fff;}
 .box{
-	padding:12px 15px;
+	padding:12px 0;
+}
+.box.box-1, .box.box-2, .box.box-3, .box.box-4{
+	max-width:225px;
+	min-width:200px;
+}
+.box.box-1{
+	background-color: #ec407a;
+}
+.box.box-2{
+	background-color: #42a5f5;
+}
+ 
+ .box.box-3{
+	background-color: #66bb6a;
+}
+ 
+ .box.box-4{
+	background-color: #47639e;
+}
+ 
+.box.box-heading {
+    min-height: 65px;
 }
 .box h4{
 	font-size:18px;
 	margin-top:0px;
 	margin-bottom:0px;
 }
+.box-heading h4.title {
+    color: #fff;
+    line-height: 41px;
+    /* padding: 0 0 0 10px; */
+}
+.panel-default > .panel-heading {
+    color: #fff;
+    background-color: #424242;
+    border:none;
+    margin: 10px 10px 0 10px;
+}
+@media only screen and (max-width: 48em) {
+
+.box.box-1, .box.box-2, .box.box-3, .box.box-4{
+	max-width:100%;
+}
+	.box.box-heading{
+   	 	min-height: 15px;
+	}
+	.box-heading h4.title{
+   	 	color: #fff;
+    	line-height: 15px;  
+	}
+	.date-selection {
+    	border-bottom: 1px solid #ccc;
+    	width: 100%;
+	}
+}
+@media only screen and (max-width: 64em) {
+.box.box-1, .box.box-2, .box.box-3, .box.box-4{
+	max-width:100%;
+}
+	.box.box-heading{
+   	 	min-height: 15px;
+	}
+	.box-heading h4.title{
+   	 	color: #fff;
+    	line-height: 15px;  
+	}
+	.date-selection {
+    	border-bottom: 1px solid #eee;
+    	width: 100%;
+	}
+}
+
 h4.title{
 	font-size:15px;
-	color:orange;
 	text-transform:uppercase;
 }
 .box span {
