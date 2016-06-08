@@ -21,8 +21,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 h4, .h4 {
-    color: #444;
     font-size: 16px;
+}
+.panel-heading {
+    border-radius: 0;
 }
 div.panel.panel-default div.panel-heading h4.title{margin-bottom:0;}
 .live {
@@ -617,6 +619,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .tp-bdr{border-top: 1px solid #eee !important;}
 .bt-bdr{border-bottom: 1px solid #eee !important;}
 .mr-bt{margin-bottom:20px !important;}
+.no-mr{margin:0 !important;}
+.no-pd{padding:0 !important;}
 .no-mr-lt{margin-left:0 !important;}
 .no-pd-lt{padding-left:0 !important;}
 .overview-box .section{background:#fff;}
@@ -624,7 +628,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	padding:12px 0;
 }
 .box.box-1, .box.box-2, .box.box-3, .box.box-4{
-	
+	max-width:225px;
 }
 .box.box-1{
 	background-color: #ec407a;
@@ -645,7 +649,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     min-height: 65px;
 }
 .box h4{
-	font-size:21px;
+	font-size:18px;
 	margin-top:0px;
 	margin-bottom:0px;
 }
@@ -654,11 +658,17 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     line-height: 41px;
     /* padding: 0 0 0 10px; */
 }
+.panel-default > .panel-heading {
+    color: #fff;
+    background-color: #424242;
+    border:none;
+    margin: 10px 10px 0 10px;
+}
 @media only screen and (max-width: 48em) {
-	.col-xs, .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-offset-1, .col-xs-offset-2, .col-xs-offset-3, .col-xs-offset-4, .col-xs-offset-5, .col-xs-offset-6, .col-xs-offset-7, .col-xs-offset-8, .col-xs-offset-9, .col-xs-offset-10, .col-xs-offset-11, .col-xs-offset-12 {
-    	padding-right: 0;
-    	padding-left: 0;
-	}
+
+.box.box-1, .box.box-2, .box.box-3, .box.box-4{
+	max-width:100%;
+}
 	.box.box-heading{
    	 	min-height: 15px;
 	}
@@ -668,10 +678,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	}
 }
 @media only screen and (max-width: 64em) {
-	.col-xs, .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-offset-1, .col-xs-offset-2, .col-xs-offset-3, .col-xs-offset-4, .col-xs-offset-5, .col-xs-offset-6, .col-xs-offset-7, .col-xs-offset-8, .col-xs-offset-9, .col-xs-offset-10, .col-xs-offset-11, .col-xs-offset-12 {
-    	padding-right: 0;
-    	padding-left: 0;
-	}
+.box.box-1, .box.box-2, .box.box-3, .box.box-4{
+	max-width:100%;
+}
 	.box.box-heading{
    	 	min-height: 15px;
 	}
@@ -683,7 +692,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 h4.title{
 	font-size:15px;
-	color:orange;
 	text-transform:uppercase;
 }
 .box span {
