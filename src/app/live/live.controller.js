@@ -9,7 +9,7 @@
     function LiveController($scope, $log, $rootScope, $state, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
         var vm = this;
         //range slider , Failed(2), Cancel(2), Success.
-        vm.heatMapFilers = [{label: "Request", id: '20'}, {label: "Failed", id: '72,82'}, {
+        vm.heatMapFilers = [{label: "In-Process", id: '20,22,30,40,50'}, {label: "Failed", id: '72,82'}, {
             label: "Cancel",
             id: '70,71'
         }, {label: "Success", id: '61'}]
