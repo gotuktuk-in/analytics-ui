@@ -36,11 +36,17 @@ div.panel.panel-default div.panel-heading h4.title{margin-bottom:0;}
     height: 12px;
     line-height: 12px;
     position: absolute;
-    right: 50px;
+    left: 240px;
     text-indent: 17px;
-    top: 20px;
+    top: 21px;
     width: 12px;
 }
+.reload{
+position:fixed;
+		right:15px;
+		top:17px;
+		z-index:999999999;
+	}
 div.box.box-container div.row div.box table tbody tr td span h4{margin-bottom:0px;}
 div.box.box-container div.row div.box {padding:20px 0;}
 .panel {
