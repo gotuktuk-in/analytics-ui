@@ -29,15 +29,15 @@ function ChartConfigService($q, $resource, API) {
        				 //padding: { top: 20 },
        				 maxKeyLength:400,
        				margin : {
-                    top: 1,
-                    right: 50,
-                    bottom: 50,
+                    top: 5,
+                    right: 15,
+                    bottom: 20,
                     left: 50
                 }
      			 },
       			legendPosition: 'top',
                 margin : {
-                    top: 10,
+                    top: 0,
                     right: 20,
                     bottom: 100,
                     left: 50
