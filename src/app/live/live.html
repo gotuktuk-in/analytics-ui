@@ -9,7 +9,7 @@ body {
 }
 </style>
  -->
-<div class="container-fluid">
+<div class="container-fluid" ng-if="vm.overview">
 
     <div class="row">
         <form class="form-inline date-selection">
@@ -25,7 +25,7 @@ body {
     <br>
     <br>
     <div class="row overview-box">
-    <span class="reload"><i class="fa fa-refresh" aria-hidden="true"></i>
+    <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>
 </span>
         <div class="col-md-12 col-sm-12 col-xs-12 text-center">
             <div class="panel panel-default">
@@ -79,7 +79,7 @@ body {
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{vm.overview.trip.total_booking}} / u</h4>
+                            <h4>{{vm.overview.trip.total_booking}} / {{vm.overview.trip.unique_booking}}</h4>
                             <span>Total</span>
                         </div>
                     </div>
@@ -148,7 +148,7 @@ body {
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{vm.overview.tcash.total_amount}}/- in 5 Trips</h4>
+                            <h4>{{vm.overview.tcash.total_amount}}/- in {{vm.overview.tcash.trip_affected}} Trips</h4>
                             <span>Total Amount Used</span>
                         </div>
                     </div>

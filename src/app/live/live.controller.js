@@ -146,9 +146,13 @@
         }
 
         getLive()
-        $timeout(10000, function(){
+
+        vm.refreshPage = function()
+        {
             vm.loadHeatMap()
             getLive()
-        })
+        }
+
+
     }
 })();
