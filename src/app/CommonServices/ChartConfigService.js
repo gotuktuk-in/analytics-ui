@@ -67,7 +67,7 @@ function ChartConfigService($q, $resource, API) {
 
                     showMaxMin: true,
                     staggerLabels: false,
-                    axisLabelDistance: 200
+                    axisLabelDistance: 200,
                 },
                 x2Axis: {
                     axisLabel: 'Date',
