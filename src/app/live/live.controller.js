@@ -122,8 +122,8 @@
                 'rgba(191, 0, 31, 1)',
                 'rgba(255, 0, 0, 1)'
             ]
-            google.maps.event.addDomListener(window, 'resize', resizeMap);
-            function resizeMap()
+           // google.maps.event.addDomListener(window, 'resize', resizeMap);
+            vm.resizeMap = function ()
             {
                 google.maps.event.trigger(vm.map, 'resize')
             }
