@@ -127,7 +127,7 @@
             {
                 google.maps.event.trigger(vm.map, 'resize')
             }
-            $scope.heatMapData = [];
+            vm.heatMapDataLength ;
             vm.loadHeatMap= function () {
 
                 var from =  moment($scope.dates.startDate).hour($scope.rangSlider.min).unix()
@@ -140,6 +140,7 @@
                     state: vm.selected.id
                 }, function (response) {
                     //  PerformanceHandler.trips = response[0].trip
+                    vm.heatMapDataLength  = response.length;
                     var transformedData = [];
                     var pointArray = []
                     _.forEach(response, function (item) {
