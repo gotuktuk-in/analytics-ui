@@ -9,20 +9,20 @@
     function LiveController($scope, $log, $rootScope, $state,$timeout, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
         var vm = this;
         //range slider , Failed(2), Cancel(2), Success.
-        vm.heatMapFilers = [{label: "In-Process", id: '20,22,30,40,50'}, {label: "Failed", id: '72,82'}, {
+        vm.heatMapFilers = [{label: "In-Process", id: '20,22,30,40,50'}, {label: "Failed", id: '72,80,81,82'}, {
             label: "Cancel",
             id: '70,71'
         }, {label: "Success", id: '61'}]
         vm.selected = vm.heatMapFilers[0]
         $scope.rangSlider = {
             max: 24,
-            min: 1,
+            min: 0,
         };
         $scope.slider = {
-  			minValue: 1,
+  			minValue: 0,
   			maxValue: 24,
   			options: {
-    			floor: 1,
+    			floor: 0,
     			ceil: 24,
                 //precision:2,
                     showTicksValues: 1,
@@ -122,12 +122,12 @@
                 'rgba(191, 0, 31, 1)',
                 'rgba(255, 0, 0, 1)'
             ]
-            google.maps.event.addDomListener(window, 'resize', resizeMap);
-            function resizeMap()
+           // google.maps.event.addDomListener(window, 'resize', resizeMap);
+            vm.resizeMap = function ()
             {
                 google.maps.event.trigger(vm.map, 'resize')
             }
-            $scope.heatMapData = [];
+            vm.heatMapDataLength ;
             vm.loadHeatMap= function () {
 
                 var from =  moment($scope.dates.startDate).hour($scope.rangSlider.min).unix()
@@ -140,6 +140,7 @@
                     state: vm.selected.id
                 }, function (response) {
                     //  PerformanceHandler.trips = response[0].trip
+                    vm.heatMapDataLength  = response.length;
                     var transformedData = [];
                     var pointArray = []
                     _.forEach(response, function (item) {
@@ -173,7 +174,7 @@
                 });
             }
 
-           // vm.loadHeatMap()
+            vm.loadHeatMap()
         }
 
         getLive()
