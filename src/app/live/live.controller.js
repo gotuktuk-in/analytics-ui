@@ -101,6 +101,21 @@
                 'rgba(191, 0, 31, 1)',
                 'rgba(255, 0, 0, 1)'
             ]
+            
+            
+            function initialize() {
+        populateTable();
+        var mapDiv = document.getElementById('map-canvas');
+        var map = new google.maps.Map(mapDiv, {
+          center: new google.maps.LatLng(37.4419, -122.1419),
+          zoom: 13,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        var marker = new google.maps.Marker({position: new google.maps.LatLng(37.4419, -122.1419), map: map});
+        for (eventName in events) {
+          setupListener(map, eventName);
+        }
+      }
 
             $scope.heatMapData = [];
             vm.loadHeatMap= function () {

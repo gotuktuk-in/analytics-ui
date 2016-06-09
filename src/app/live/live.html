@@ -173,8 +173,6 @@ body {
                         <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                     </div>
                     <a ngsf-toggle-fullscreen show-if-fullscreen-enabled>
-                        <i show-if-fullscreen=false>Fullscreen</i>
-                        <i show-if-fullscreen=true>Exit Fullscreen</i>
                     </a>
                 </div>
             </div>
@@ -184,8 +182,13 @@ body {
             <div class="panel panel-default">
             <div class="panel-heading">
                     <div class="pull-right">
+                    
                        <select name="mySelect" id="mySelect" ng-options="option.label for option in vm.heatMapFilers track by option.id" ng-model="vm.selected" ng-change="vm.loadHeatMap()"></select>
-                        <span>{{heatMapData.length}}</span>
+                        <span style="padding:0 10px 0 5px">{{heatMapData.length}}</span>
+                        <a ngsf-toggle-fullscreen show-if-fullscreen-enabled style="color:#ccc;">
+                        <i class="fa fa-arrows-alt" show-if-fullscreen=false></i>
+                        <i class="fa fa-arrows-inwards-alt" show-if-fullscreen=true></i>
+                    </a>
                     </div>
                     <h4 style="margin-top: 0" class="title">Heat Map</h4></div>
                 <div class="panel-body">
@@ -196,10 +199,6 @@ body {
                         </ng-map>
                     </div>
                     <div range-slider on-handle-up="vm.loadHeatMap()" min="1" max="24" model-min="rangSlider.min" model-max="rangSlider.max" attach-handle-values="true"></div>
-                    <a ngsf-toggle-fullscreen show-if-fullscreen-enabled>
-                        <i show-if-fullscreen=false>Fullscreen</i>
-                        <i show-if-fullscreen=true>Exit Fullscreen</i>
-                    </a>
                 </div>
 
             </div>
