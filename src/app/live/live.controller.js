@@ -24,8 +24,19 @@
   			options: {
     			floor: 1,
     			ceil: 24,
-    			showTicksValues: 1
-  			}
+                //precision:2,
+                    showTicksValues: 4,
+                translate: function(value) {
+                    return  value + 'h';
+                },
+                    keyboardSupport:false,
+                    onEnd :function(sliderId, modelValue, highValue, pointerType){
+                //    console.log(sliderId, modelValue, highValue, pointerType)
+                    $scope.rangSlider.min = modelValue;
+                    $scope.rangSlider.max = highValue;
+                    vm.loadHeatMap()
+                }
+            }
 		};
 
         $scope.ddSettings =  {enableSearch: false};
