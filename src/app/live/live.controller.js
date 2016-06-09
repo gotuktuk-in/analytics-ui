@@ -116,14 +116,19 @@
                 }, function (response) {
                     //  PerformanceHandler.trips = response[0].trip
                     var transformedData = [];
+                    var pointArray = []
                     _.forEach(response, function (item) {
                         transformedData.push(new google.maps.LatLng(item.locPickupRequest.lt - 0, item.locPickupRequest.ln - 0));
                     })
                     //$scope.heatMapData = transformedData;
                     NgMap.getMap().then(function (map) {
                         vm.map = map;
-                        heatmap = vm.map.heatmapLayers.foo;
-                        var pointArray = new google.maps.MVCArray(transformedData);
+                     //   heatmap = vm.map.heatmapLayers.foo;
+                        if(heatmap )
+                        {
+                            heatmap.setMap(null);
+                        }
+                        pointArray = new google.maps.MVCArray(transformedData);
                         heatmap = new google.maps.visualization.HeatmapLayer({
                             data: pointArray
                         });
