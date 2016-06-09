@@ -25,9 +25,8 @@ function ChartConfigService($q, $resource, API) {
                 height: '400',
                 interpolate: 'basis',
                 legend: {
-       				 vers: 'classic',
-       				 //padding: { top: 20 },
-       				 maxKeyLength:400,
+       				vers: 'classic',
+       				maxKeyLength:400,
        				margin : {
                     top: 5,
                     right: 15,

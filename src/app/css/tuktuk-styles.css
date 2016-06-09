@@ -12,6 +12,10 @@ a:focus {
     outline: none;
     outline-offset: 0;
 }
+h4 small, .h4 small, h5 small, .h5 small, h6 small, .h6 small, h4 .small, .h4 .small, h5 .small, .h5 .small, h6 .small, .h6 .small {
+    font-size: 65%;
+    color:#666;
+}
 i {
     font-style: normal;
 }
@@ -658,16 +662,20 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
  
 .box.box-heading {
-    min-height: 65px;
+    min-height: 80px;
 }
 .box h4{
-	font-size:18px;
+	font-size:22px;
 	margin-top:0px;
 	margin-bottom:0px;
 }
+.box h4.number {
+	/* line-height:30px */
+	margin-top: 10px;
+}
 .box-heading h4.title {
     color: #fff;
-    line-height: 41px;
+    line-height: 56px;
     /* padding: 0 0 0 10px; */
 }
 .panel-default > .panel-heading {
@@ -716,7 +724,7 @@ h4.title{
 }
 .box span {
     color: #999;
-    font-size: 11px;
+    font-size: 10px;
     text-transform: uppercase;
 }
 span.img-top{
