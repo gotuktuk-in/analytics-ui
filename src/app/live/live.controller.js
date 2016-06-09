@@ -74,6 +74,7 @@
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'tCash'}));
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'New Drivers'}));
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Active Drivers'}));
+                    vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Avg Trip/Driver'}));
 
                 }, function (err) {
                     console.log(err)
