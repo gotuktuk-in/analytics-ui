@@ -37,31 +37,31 @@ body {
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{ vm.overview.driver.total_drivers}}</h4>
+                            <h4 class="number">{{ vm.overview.driver.total_drivers}}</h4>
                             <span>Total</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{vm.overview.driver.free_drivers}}</h4>
+                            <h4 class="number">{{vm.overview.driver.free_drivers}}</h4>
                             <span>Free</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{vm.overview.driver.occupied_drivers}}</h4>
+                            <h4 class="number">{{vm.overview.driver.occupied_drivers}}</h4>
                             <span>Occupied</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{vm.overview.driver.online_drivers_percentage | number:2}}%</h4>
+                            <h4 class="number">{{vm.overview.driver.online_drivers_percentage | number:2}}%</h4>
                             <span>Online</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{vm.overview.driver.online_drivers_percentage | number:2}}%</h4>
+                            <h4 class="number">{{vm.overview.driver.utilization_percentage | number:2}}%</h4>
                             <span>Utilization</span>
                         </div>
                     </div>
@@ -79,35 +79,34 @@ body {
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{vm.overview.trip.total_booking}} / {{vm.overview.trip.unique_booking}}</h4>
+                            <h4 class="number">{{vm.overview.trip.total_booking}}<small> / {{vm.overview.trip.unique_booking}}</small></h4>
                             <span>Total / U</span>
                         </div>
                     </div>
 
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>
-                               {{vm.overview.trip.successful.total}} / {{ vm.overview.trip.successful.unique_riders}}
+                            <h4 class="number">{{vm.overview.trip.successful.total}} <small> / {{ vm.overview.trip.successful.unique_riders}} / {{ vm.overview.trip.in_process}}%</small>
                               </h4>
-                            <span>Successful / U</span>
+                            <span>Successful / U / Fulfilment</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{vm.overview.trip.cancelled.total}} / {{ vm.overview.trip.cancelled.unique_rider}}</h4>
+                            <h4 class="number">{{vm.overview.trip.cancelled.total}}<small> / {{ vm.overview.trip.cancelled.unique_rider}}</small></h4>
                             <span class="title text-warning">Cancelled / U</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{vm.overview.trip.failed.total}} / {{ vm.overview.trip.failed.unique_rider}}</h4>
+                            <h4 class="number">{{vm.overview.trip.failed.total}}<small> / {{ vm.overview.trip.failed.unique_rider}}</small></h4>
                             <span>Failed</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{ vm.overview.trip.in_process}} / {{ vm.overview.trip.in_process}}%</h4>
-                            <span>in Prog / Fulfilment</span>
+                            <h4 class="number">{{ vm.overview.trip.in_process}}</h4>
+                            <span>in Prog</span>
                         </div>
                     </div>
 
@@ -124,13 +123,13 @@ body {
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{vm.overview.rider.new_riders_reg}}</h4>
+                            <h4 class="number">{{vm.overview.rider.total_riders}}</h4>
                             <span>Total</span>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4>{{vm.overview.rider.new_riders_reg}}</h4>
+                            <h4 class="number">{{vm.overview.rider.new_riders_reg}}</h4>
                             <span>New</span>
                         </div>
                     </div>
@@ -148,13 +147,21 @@ body {
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
                         <div class="box">
+<<<<<<< HEAD
                             <h4>{{vm.overview.tcash.total_amount}}/-</h4>
+=======
+                            <h4 class="number">{{vm.overview.tcash.total_amount}}/-</h4>
+>>>>>>> development
                             <span>Total Amount</span>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
                         <div class="box">
+<<<<<<< HEAD
                             <h4>{{vm.overview.tcash.trip_affected}}</h4>
+=======
+                            <h4 class="number">{{vm.overview.tcash.trip_affected}}</h4>
+>>>>>>> development
                             <span>Trips Affected</span>
                         </div>
                     </div>
@@ -165,7 +172,7 @@ body {
     </div>
 
     <div class="row">
-        <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12" ngsf-fullscreen>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 style="margin-top: 0" class="title">Trips</h4></div>
@@ -173,27 +180,41 @@ body {
                     <div>
                         <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                     </div>
+                    <a ngsf-toggle-fullscreen show-if-fullscreen-enabled>
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12"  ngsf-fullscreen>
 
             <div class="panel panel-default">
             <div class="panel-heading">
                     <div class="pull-right">
+                    
                        <select name="mySelect" id="mySelect" ng-options="option.label for option in vm.heatMapFilers track by option.id" ng-model="vm.selected" ng-change="vm.loadHeatMap()"></select>
+                        <span style="padding:0 10px 0 5px">{{heatMapData.length}}</span>
+                        <a ngsf-toggle-fullscreen show-if-fullscreen-enabled style="color:#ccc;">
+                        <i class="fa fa-arrows-alt" show-if-fullscreen=false></i>
+                        <i class="fa fa-arrows-inwards-alt" show-if-fullscreen=true></i>
+                    </a>
                     </div>
                     <h4 style="margin-top: 0" class="title">Heat Map</h4></div>
                 <div class="panel-body">
                     
-                    <div style="min-height:332px">
-                        <ng-map zoom="13" center="[22.717081666666665, 75.87155666666666]" disable-default-u-i="true">
+                    <div>
+                        <ng-map zoom="13" center="[22.717081666666665, 75.87155666666666]">
                             <heatmap-layer id="foo" data="heatMapData"></heatmap-layer>
                         </ng-map>
                     </div>
-                    <div range-slider on-handle-up="vm.loadHeatMap()" min="1" max="24" model-min="rangSlider.min" model-max="rangSlider.max" attach-handle-values="true"></div>
-                </div>
+                    
 
+<rzslider rz-slider-model="slider.minValue"
+          rz-slider-high="slider.maxValue"
+          rz-slider-options="slider.options">
+          </rzslider>
+          
+                </div>
+<br><br>
             </div>
         </div>
     </div>

@@ -18,6 +18,27 @@
             max: 24,
             min: 1,
         };
+        $scope.slider = {
+  			minValue: 1,
+  			maxValue: 24,
+  			options: {
+    			floor: 1,
+    			ceil: 24,
+                //precision:2,
+                    showTicksValues: 1,
+                	translate: function(value) {
+                    return  value + 'h';
+                },
+                    keyboardSupport:false,
+                    onEnd :function(sliderId, modelValue, highValue, pointerType){
+                //    console.log(sliderId, modelValue, highValue, pointerType)
+                    $scope.rangSlider.min = modelValue;
+                    $scope.rangSlider.max = highValue;
+                    vm.loadHeatMap()
+                }
+            }
+		};
+
         $scope.ddSettings =  {enableSearch: false};
         //range slider end
 
@@ -74,6 +95,7 @@
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'tCash'}));
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'New Drivers'}));
                     vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Active Drivers'}));
+                    vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Avg Trip/Driver'}));
 
                 }, function (err) {
                     console.log(err)
@@ -100,7 +122,11 @@
                 'rgba(191, 0, 31, 1)',
                 'rgba(255, 0, 0, 1)'
             ]
-
+            google.maps.event.addDomListener(window, 'resize', resizeMap);
+            function resizeMap()
+            {
+                google.maps.event.trigger(vm.map, 'resize')
+            }
             $scope.heatMapData = [];
             vm.loadHeatMap= function () {
 
@@ -115,14 +141,19 @@
                 }, function (response) {
                     //  PerformanceHandler.trips = response[0].trip
                     var transformedData = [];
+                    var pointArray = []
                     _.forEach(response, function (item) {
                         transformedData.push(new google.maps.LatLng(item.locPickupRequest.lt - 0, item.locPickupRequest.ln - 0));
                     })
                     //$scope.heatMapData = transformedData;
                     NgMap.getMap().then(function (map) {
                         vm.map = map;
-                        heatmap = vm.map.heatmapLayers.foo;
-                        var pointArray = new google.maps.MVCArray(transformedData);
+                     //   heatmap = vm.map.heatmapLayers.foo;
+                        if(heatmap )
+                        {
+                            heatmap.setMap(null);
+                        }
+                        pointArray = new google.maps.MVCArray(transformedData);
                         heatmap = new google.maps.visualization.HeatmapLayer({
                             data: pointArray
                         });
@@ -142,7 +173,7 @@
                 });
             }
 
-            vm.loadHeatMap()
+           // vm.loadHeatMap()
         }
 
         getLive()

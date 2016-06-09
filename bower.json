@@ -26,7 +26,9 @@
     "underscore": "^1.8.3",
     "angular-nvd3": "^1.0.7",
     "angular-rangeslider": "^0.0.14",
-    "angularjs-dropdown-multiselect": "^1.5.2"
+    "angularjs-dropdown-multiselect": "^1.5.2",
+    "angular-screenfull": "^0.1.1",
+    "angularjs-slider": "^4.0.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.5.3"

@@ -2,7 +2,7 @@ angular.module('httpInterceptor', [])
     .config(['$provide', '$httpProvider', '$compileProvider', function($provide, $httpProvider, $compileProvider) {
         var elementsList = $();
         var numLoadings = 0;
-        var loadingScreen = $('<div style="position:fixed;top:0px;left:0;z-index:200000000;background-color:#fff;width:100%; height:100%"><div class="text-center" style="padding:10%"><img src="assets/images/ring.svg" title="Tuktuk" height="100px"></div></div>').appendTo($('body')).hide();
+        var loadingScreen = $('<div style="position: absolute;top: 30%;left: 45%;z-index: 200000000;width: 150px;height: 130px;display: block; background-color: rgba(0, 0, 0,0.4);"><div class="text-center" style="padding:10%"><img src="assets/images/ring.svg" title="Tuktuk" height="100px"></div></div>').appendTo($('body')).hide();
         var showMessage = function(content, cl, time) {
             $('<div/>')
                 .addClass('alert')
@@ -17,7 +17,7 @@ angular.module('httpInterceptor', [])
                 .text(content);
         };
         // alternatively, register the interceptor via an anonymous factory
-        $httpProvider.interceptors.push(['$q', '$rootScope', '$location', function($q, $rootScope, $location) {
+        $httpProvider.interceptors.push(['$q', '$rootScope', '$location', '$cookies', function($q, $rootScope, $location, $cookies) {
             return {
                 'request': function(config) {
                     // same as above
@@ -68,7 +68,10 @@ angular.module('httpInterceptor', [])
                         case 401:
                           //  console.log("There is an 401 error. signin again." + $rootScope.LOGIN_URL)
                            // console.log("LOGOUT_URL " + $rootScope.LOGOUT_URL)
+                             $cookies.remove('tuktuk.performance.admin')
+        					//$http.defaults.headers.common.Authorization = '';
                             $location.path("#/login") //$rootScope.LOGIN_URL;
+                            
                             break;
                         case 403:
                             //  showMessage('You don\'t have the right to do this', 'alert-danger ', 5000);
