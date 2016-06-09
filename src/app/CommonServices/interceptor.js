@@ -2,7 +2,7 @@ angular.module('httpInterceptor', [])
     .config(['$provide', '$httpProvider', '$compileProvider', function($provide, $httpProvider, $compileProvider) {
         var elementsList = $();
         var numLoadings = 0;
-        var loadingScreen = $('<div style="position:fixed;top:0px;left:0;z-index:200000000;background-color:#fff;width:100%; height:100%"><div class="text-center" style="padding:10%"><img src="assets/images/ring.svg" title="Tuktuk" height="100px"></div></div>').appendTo($('body')).hide();
+        var loadingScreen = $('<div style="position: absolute;top: 30%;left: 45%;z-index: 200000000;width: 150px;height: 130px;display: block; background-color: rgba(0, 0, 0,0.4);"><div class="text-center" style="padding:10%"><img src="assets/images/ring.svg" title="Tuktuk" height="100px"></div></div>').appendTo($('body')).hide();
         var showMessage = function(content, cl, time) {
             $('<div/>')
                 .addClass('alert')
