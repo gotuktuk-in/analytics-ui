@@ -142,7 +142,7 @@
                 });
             }
 
-            vm.loadHeatMap()
+           // vm.loadHeatMap()
         }
 
         getLive()
