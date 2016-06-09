@@ -86,9 +86,9 @@ body {
 
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{vm.overview.trip.successful.total}} <small> / {{ vm.overview.trip.successful.unique_riders}} / {{ vm.overview.trip.fulfillment}}%</small>
+                            <h4 class="number">{{vm.overview.trip.successful.total}} <small> / {{ vm.overview.trip.successful.unique_riders}} / {{ vm.overview.trip.fulfillment | number:2}}%</small>
                               </h4>
-                            <span>Successful / U / Fulfilment</span>
+                            <span>Fulfilled / U / Fulfilment</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
