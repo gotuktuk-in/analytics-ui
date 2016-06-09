@@ -24,8 +24,8 @@ function PerformanceHandler() {
         {"key": "Cancelled", "values": []},
         {"key": "Cancelled (U)", "values": []},
 
-        {"key": "Fulfilment", "values": []},
-        {"key": "Fulfilment (U)", "values": []},
+        {"key": "fulfilled", "values": []},
+        {"key": "fulfilled (U)", "values": []},
 
         {"key": "Cancelled trips (by rider)", "values": []},
         {"key": "Cancelled trips (by driver)", "values": []},
