@@ -1,58 +1,77 @@
-(function() {
-  'use strict';
+(function () {
+    'use strict';
 
-  angular
-    .module('tuktukV2Dahboard')
-    .controller('DriversController', DriversController);
+    angular
+        .module('tuktukV2Dahboard')
+        .controller('DriversController', DriversController);
 
-  /** @ngInject */
-  function DriversController($scope, $log, $rootScope, $window, DriversService, NgTableParams, API, $resource) {
+    /** @ngInject */
+    function DriversController($scope, $log, $rootScope, $window, DriversService, NgTableParams, LiveService, $resource) {
 
-    var vm = this
-    $scope.dates = {};
-    $scope.dates.startDate = moment().subtract(30, 'days').format("YYYY-MM-DD")
-    $scope.dates.endDate = moment().format("YYYY-MM-DD")
-    //$scope.dates = { startDate: moment('2013-09-20'), endDate: moment('2013-09-25') };
-    vm.timeFrequency = [{label:"Per Hour", value:"hour"},{label:"Per Day", value:"day"}]
-    vm.selectedFrequency = vm.timeFrequency[0]
+        var vm = this
+        var today = moment()
+        var currentDate = moment()
+        var current = moment()
+        vm.live = true
+        $scope.date = moment().format("dddd, MMMM Do YYYY")
+        /*    $scope.dates = {};
+         $scope.dates.startDate = moment().format("YYYY-MM-DD");
+         $scope.dates.endDate = moment().format("YYYY-MM-DD");*/
+        vm.changeDate = function (to) {
 
-    var RiderAPI = API + "rider"
-    var DriverAPI = API + "driver"
-    var TripAPI ;
+            if (to == 'next') {
+                current =  moment(current).add(1, 'day')
+                $scope.date = moment(current).format("dddd, MMMM Do YYYY")
 
-    var startDate, endDate;
-    this.changeFrequency = function()
-    {
+            }
+            else {
+                current =  moment(current).subtract(1, 'day')
+                $scope.date = moment(current).format("dddd, MMMM Do YYYY")
 
+                console.log('$scope.date ', $scope.date)
+              //  console.log('currentDate ',moment(today).unix() )
+            }
+          //  currentDate = angular.copy($scope.date)
+          //  $scope.date = moment(currentDate).format("dddd, MMMM Do YYYY")
+
+
+
+            if( moment(current).unix() == moment(today).unix())
+            {
+                vm.live = true;
+            }
+            else { vm.live = false; }
+            vm.getTopDrivers()
+        }
+        function getLive() {
+            LiveService.getOverview({
+                city: $rootScope.city,
+                vehicle: $rootScope.vehicleType,
+            }, function (response) {
+                //  PerformanceHandler.trips = response[0].trip
+                vm.overview = response;
+            }, function (err) {
+                console.log(err)
+                $scope.error = true;
+            });
+        }
+        vm.getTopDrivers = function() {
+
+            DriversService.getTopDrivers({
+                city: $rootScope.city,
+                vehicle: $rootScope.vehicleType,
+                from: moment( current).startOf('day').format("YYYYMMDD").toString(),
+                to: moment( current).endOf('day').format("YYYYMMDD").toString(),
+                orderby:'DESC',
+                field:'earning'
+            }, function (response) {
+                vm.topDrivers = response;
+            }, function (err) {
+                console.log(err)
+                $scope.error = true;
+            });
+        }
+        getLive()
+        vm.getTopDrivers()
     }
-    $scope.$watch('dates', function(newValue, oldValue) {
-      // console.log(new, old);
-      vm.requestTableParams.page(1)
-      vm.requestTableParams.reload();
-    })
-    vm.requestTableParams = new NgTableParams({}, {
-      getData: function(params) {
-        // ajax request to api
-        startDate = $scope.dates.startDate;
-        endDate = $scope.dates.endDate;
-        if(vm.selectedFrequency.value=='hour')
-        {
-          startDate =  moment(startDate).startOf('day').format("YYYYMMDDHH").toString()
-          endDate =  moment(endDate).endOf('day').format("YYYYMMDDHH").toString()
-          TripAPI = $resource(API + "driver/hour?startDate="+startDate+"&endDate="+endDate+"&city=indore")
-        }
-        else
-        {
-          startDate =  moment(startDate).startOf('day').format("YYYYMMDD").toString()
-          endDate =  moment(endDate).endOf('day').format("YYYYMMDD").toString()
-          TripAPI = $resource(API + "driver/day?startDate="+startDate+"&endDate="+endDate+"&city=indore")
-        }
-        return TripAPI.query(params.url()).$promise.then(function(data) {
-          params.total(data); // recal. page nav controls
-          return data;
-        });
-      }
-    });
-
-  }
 })();

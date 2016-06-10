@@ -36,16 +36,16 @@
                 controllerAs: 'vm',
                 cache: false
             })
-            .state('home.drivers', {
-                url: '/drivers',
-                templateUrl: 'app/drivers/drivers.html',
-                controller: 'DriversController',
-                controllerAs: 'drivers'
-            })
             .state('home.live', {
                     url: '/live/:city/:vehicleType',
                     templateUrl: 'app/live/live.html',
                     controller: 'LiveController',
+                    controllerAs: 'vm'
+                })
+            .state('home.drivers', {
+                    url: '/drivers/:city/:vehicleType',
+                    templateUrl: 'app/drivers/drivers.html',
+                    controller: 'DriversController',
                     controllerAs: 'vm'
                 })
             .state('home.trips', {
