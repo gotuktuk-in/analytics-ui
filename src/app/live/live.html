@@ -183,7 +183,7 @@ body {
             <div class="panel-heading">
                     <div class="pull-right">
                     
-                       <select name="mySelect" id="mySelect" ng-options="option.label for option in vm.heatMapFilers track by option.id" ng-model="vm.selected" ng-change="vm.loadHeatMap(); vm.getLive()"></select>
+                       <select name="mySelect" id="mySelect" ng-options="option.label for option in vm.heatMapFilers track by option.id" ng-model="vm.selected" ng-change="vm.loadHeatMap();"></select>
                         <span style="padding:0 10px 0 5px">{{vm.heatMapDataLength}}</span>
                         <a ngsf-toggle-fullscreen show-if-fullscreen-enabled style="color:#ccc;">
                         <i class="fa fa-arrows-alt" show-if-fullscreen=false></i>

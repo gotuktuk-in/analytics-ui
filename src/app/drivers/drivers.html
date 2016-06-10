@@ -1,15 +1,15 @@
 <div class="container-fluid">
 
     <div class="row">
-        <form class="form-inline date-selection">
+        <form class="form-inline date-selection date-selection-dr ">
 
-        <span ng-click="vm.changeDate('prev')">&#10094;</span>
+        <span ng-click="vm.changeDate('prev')" style=" position: absolute; left: 63px; top: 18px;">&#10094;</span>
 
             <div class="form-group ">
                 <input class="form-control cstm-width text-left today-date-range hide-bdr" type="text" ng-model="date">
                 <!--<input ng-disabled="true" class="form-control cstm-width text-center" type="daterange" ng-model="dates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">-->
             </div>
-            <span ng-click="vm.changeDate('next')"  ng-if="!vm.live">&#10095;</span>
+            <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="position: absolute;right: 50px;top: 18px;">&#10095;</span>
             <div class="live" ng-if="vm.live"> LIVE</div>
 
 
@@ -27,7 +27,7 @@
                 <div class="panel-body">
                     <div class="col-md-2 col-sm-4 col-xs-12 no-mr no-pd">
                         <div class="box box-heading box-1 text-center">
-                            <h4 class="title">DRIVERS<sup style="font-size:9px; padding:5px"><span style="font-size:6px; margin-right:2px;">&#127934;</span> LIVE</sup></h4>
+                            <h4 class="title">DRIVERS<sup ng-if="!vm.live" style="font-size:9px; padding:5px"><span style="font-size:6px; margin-right:2px;">&#127934;</span> LIVE</sup></h4>
 
                         </div>
                     </div>
@@ -91,9 +91,9 @@
                         <table class="table table-responsive table-bordered table-striped global-tbl text-center">
                             <thead>
                                 <tr>
-                                    <th width="120">#ID</th>
-                                    <th width="200">Name</th>
-                                    <th width="120">Earning(Rs.)</th>
+                                    <th width="120" style="text-align:left;">#ID</th>
+                                    <th width="200" style="text-align:left;">Name</th>
+                                    <th width="120" style="text-align:right;">Earning(Rs.)</th>
                                     <th width="120">Rides</th>
                                     <th style="text-align:left;">Online</th>
 
@@ -101,12 +101,12 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="driver in vm.topDrivers">
-                                    <td>{{driver.driver_id}}</td>
-                                    <td>{{driver.name}}</td>
-                                    <td>{{driver.earning}}</td>
+                                    <td  class="text-left">{{driver.driver_id}}</td>
+                                    <td  class="text-left">{{driver.name}}</td>
+                                    <td  class="text-right">{{driver.earning}}</td>
                                     <td>{{driver.rides}}</td>
                                     <td class="text-left">
-                                    <div style="max-height: 169px; overflow: auto; display: block;height: 60px;">
+                                    <div style="max-height: 80px; overflow: auto; display: block;">
                                     <span ng-repeat="time in driver.online" class="label label-primary">{{time.start*1000 | date:'h:mma'}} - {{time.end*1000 | date:'h:mma'}}</span>
                                    </div>
                                     </td>

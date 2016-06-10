@@ -156,6 +156,10 @@ div.box.box-container div.row div.box {padding:20px 0;}
      /* font-family: 'aller_lightregular', sans-serif; */
      font-size:12px;
 }
+.date-selection-dr {
+    padding: 10px 60px 10px 88px !important;
+}
+
 .daterangepicker .ranges li {
 	background:none;
 	border:none;
