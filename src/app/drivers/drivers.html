@@ -9,7 +9,7 @@
                 <input class="form-control cstm-width text-left today-date-range hide-bdr" type="text" ng-model="date">
                 <!--<input ng-disabled="true" class="form-control cstm-width text-center" type="daterange" ng-model="dates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">-->
             </div>
-            <span ng-click="vm.changeDate('next')" ng-disabled="vm.online">&#10095;</span>
+            <span ng-click="vm.changeDate('next')"  ng-if="!vm.live">&#10095;</span>
             <div class="live" ng-if="vm.live"> LIVE</div>
 
 
@@ -107,7 +107,7 @@
                                     <td>{{driver.rides}}</td>
                                     <td class="text-left">
                                     <div style="max-height: 169px; overflow: auto; display: block;height: 60px;">
-                                    <span ng-repeat="time in driver.online" class="label label-primary">{{time.start | date:'h:mma'}} - {{time.end| date:'h:mma'}}</span>
+                                    <span ng-repeat="time in driver.online" class="label label-primary">{{time.start*1000 | date:'h:mma'}} - {{time.end*1000 | date:'h:mma'}}</span>
                                    </div>
                                     </td>
                                 </tr>

@@ -9,29 +9,39 @@
     function DriversController($scope, $log, $rootScope, $window, DriversService, NgTableParams, LiveService, $resource) {
 
         var vm = this
+        var today = moment()
         var currentDate = moment()
+        var current = moment()
         vm.live = true
-        $scope.date = moment(currentDate).format("dddd, MMMM Do YYYY")
+        $scope.date = moment().format("dddd, MMMM Do YYYY")
         /*    $scope.dates = {};
          $scope.dates.startDate = moment().format("YYYY-MM-DD");
          $scope.dates.endDate = moment().format("YYYY-MM-DD");*/
         vm.changeDate = function (to) {
-            console.log('$scope.date ', moment().unix($scope.date))
-            console.log('currentDate ', moment().unix(currentDate))
-            if( moment().unix($scope.date != moment().unix(currentDate)))
-            {
-                vm.live = false;
-            }
+
             if (to == 'next') {
-                $scope.date = moment(currentDate).add(1, 'day')//.format("dddd, MMMM Do YYYY")
+                current =  moment(current).add(1, 'day')
+                $scope.date = moment(current).format("dddd, MMMM Do YYYY")
 
             }
             else {
-                $scope.date = moment(currentDate).subtract(1, 'day')//.format("dddd, MMMM Do YYYY")
+                current =  moment(current).subtract(1, 'day')
+                $scope.date = moment(current).format("dddd, MMMM Do YYYY")
+
+                console.log('$scope.date ', $scope.date)
+              //  console.log('currentDate ',moment(today).unix() )
             }
-            currentDate = $scope.date
-            $scope.date = moment(currentDate).format("dddd, MMMM Do YYYY")
-            getTopDrivers()
+          //  currentDate = angular.copy($scope.date)
+          //  $scope.date = moment(currentDate).format("dddd, MMMM Do YYYY")
+
+
+
+            if( moment(current).unix() == moment(today).unix())
+            {
+                vm.live = true;
+            }
+            else { vm.live = false; }
+            vm.getTopDrivers()
         }
         function getLive() {
             LiveService.getOverview({
@@ -40,27 +50,28 @@
             }, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
                 vm.overview = response;
-                console.log('response ', vm.overview)
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
             });
         }
-        function getTopDrivers() {
+        vm.getTopDrivers = function() {
+
             DriversService.getTopDrivers({
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
-                from: moment( currentDate).startOf('day').format("YYYYMMDD").toString(),
-                to: moment( currentDate).startOf('day').format("YYYYMMDD").toString()
+                from: moment( current).startOf('day').format("YYYYMMDD").toString(),
+                to: moment( current).endOf('day').format("YYYYMMDD").toString(),
+                orderby:'DESC',
+                field:'earning'
             }, function (response) {
                 vm.topDrivers = response;
-                console.log('response ', vm.topDrivers)
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
             });
         }
         getLive()
-        getTopDrivers()
+        vm.getTopDrivers()
     }
 })();
