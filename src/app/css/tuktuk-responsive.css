@@ -1,40 +1,7 @@
-
-@media only screen and (max-width: 1366px) {
-
-}
-
-
-@media only screen and (min-width: 992px) {
-
-}
-
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 767px) {
    
 
-    .flx-container .flx-cnt-right div {
-        flex: 1 50%;
-        padding: 5% 5%;
-    }
-    .flx-container .flx-cnt-left .info-window {
-        height: 175px;
-    }
-    .info-window .iw-header {
-        padding: 0px 10px;
-    }
-    .flx-container .info-window .iw-header .iw-driver {
-        height: 80px;
-        width: 80px;
-    }
-    .info-window .iw-content {
-        padding: 10px;
-    }
-    .flx-container .flx-cnt-left .info-window .iw-content h3 {
-        margin: 0px;
-        font-size: 18px;
-    }
-    .flx-container .flx-cnt-left .info-window .iw-content h4 {
-        font-size: 14px;
-    }
+
     .tab-container {
         padding: 20px 10px;
     }

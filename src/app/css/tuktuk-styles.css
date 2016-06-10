@@ -67,6 +67,12 @@ div.panel.panel-default div.panel-heading h4.title{margin-bottom:0;}
 .rzslider .rz-pointer.rz-active::after {
     background-color: #eee;
 }
+.label {
+    font-weight: normal;
+    margin: 0 2px 2px 0;
+    display:inline-block;
+    white-space: normal;
+}
 .reload{
 		position:fixed;
 		right:15px;
