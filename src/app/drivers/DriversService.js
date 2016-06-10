@@ -18,9 +18,10 @@ function DriversService($q, $resource, API) {
         "",
         {id:"@id"},
         {
-            getdrivers: {
+            getTopDrivers: {
                 method: 'GET',
-                url:   url + 'driver/day'
+                url:   url + 'drivers/topdrivers',
+                isArray:true
             },
 
 
