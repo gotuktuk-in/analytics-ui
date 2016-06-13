@@ -12,13 +12,26 @@ body {
 <div class="container-fluid" ng-if="vm.overview">
 
     <div class="row">
-        <form class="form-inline date-selection">
+        <form class="form-inline date-selection date-selection-dr ">
+
+            <span ng-click="vm.changeDate('prev')" style=" position: absolute; left: 63px; top: 18px;">&#10094;</span>
+
+            <div class="form-group ">
+                <input class="form-control cstm-width text-left today-date-range hide-bdr" type="text" ng-model="date">
+            </div>
+            <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="position: absolute;right: 50px;top: 18px;">&#10095;</span>
+
+            <div class="live" ng-if="vm.live"> LIVE</div>
+
+
+        </form>
+        <!--<form class="form-inline date-selection">
             <div class="form-group ">
                 <input class="form-control cstm-width text-left today-date-range hide-bdr" type="text" ng-model="today">
-                <!--<input ng-disabled="true" class="form-control cstm-width text-center" type="daterange" ng-model="dates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">-->
+                &lt;!&ndash;<input ng-disabled="true" class="form-control cstm-width text-center" type="daterange" ng-model="dates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">&ndash;&gt;
             </div>
             <div class="live"> LIVE</div>
-        </form>
+        </form>-->
     </div>
     <br>
     <br>
@@ -195,7 +208,7 @@ body {
                     
                     <div>
                         <ng-map zoom="13" center="[22.717081666666665, 75.87155666666666]"  on-resized="vm.resizeMap()" trigger-resize="true">
-                            <heatmap-layer id="foo" data="heatMapData"></heatmap-layer>
+                            <heatmap-layer id="foo" ></heatmap-layer>
                         </ng-map>
                     </div>
                     

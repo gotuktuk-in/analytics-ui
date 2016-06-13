@@ -6,9 +6,12 @@
         .controller('LiveController', LiveController);
 
     /** @ngInject */
-    function LiveController($scope, $log, $rootScope, $state,$timeout, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
+    function LiveController($scope, $log, $rootScope, $state, $timeout, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
         var vm = this;
         //range slider , Failed(2), Cancel(2), Success.
+
+        var today = moment()
+        var  heatmap;
         vm.heatMapFilers = [{label: "In-Process", id: '20,22,30,40,50'}, {label: "Failed", id: '72,80,81,82'}, {
             label: "Cancel",
             id: '70,71'
@@ -19,33 +22,30 @@
             min: 0,
         };
         $scope.slider = {
-  			minValue: 0,
-  			maxValue: 24,
-  			options: {
-    			floor: 0,
-    			ceil: 24,
+            minValue: 0,
+            maxValue: 24,
+            options: {
+                floor: 0,
+                ceil: 24,
                 //precision:2,
-                    showTicksValues: 1,
-                	translate: function(value) {
-                    return  value + 'h';
+                showTicksValues: 1,
+                translate: function (value) {
+                    return value + 'h';
                 },
-                    keyboardSupport:false,
-                    onEnd :function(sliderId, modelValue, highValue, pointerType){
-                //    console.log(sliderId, modelValue, highValue, pointerType)
+                keyboardSupport: false,
+                onEnd: function (sliderId, modelValue, highValue, pointerType) {
+                    //    console.log(sliderId, modelValue, highValue, pointerType)
                     $scope.rangSlider.min = modelValue;
                     $scope.rangSlider.max = highValue;
                     vm.loadHeatMap()
                 }
             }
-		};
+        };
 
-        $scope.ddSettings =  {enableSearch: false};
+        $scope.ddSettings = {enableSearch: false};
         //range slider end
 
-        $scope.today = moment().format("dddd, MMMM Do YYYY")
-        $scope.dates = {};
-        $scope.dates.startDate = moment().format("YYYY-MM-DD");
-        $scope.dates.endDate = moment().format("YYYY-MM-DD");
+        $scope.date = moment().format("dddd, MMMM Do YYYY")
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
 
@@ -53,12 +53,53 @@
             return d3.time.format('%I %p')(new Date(d).addHours(1));
         };
         vm.trips = [];
-        var heatmap
+        var current = moment()
+        vm.live = true
+        vm.changeDate = function (to) {
 
-        function getLive() {
+            if (to == 'next') {
+                current = moment(current).add(1, 'day')
+                $scope.date = moment(current).format("dddd, MMMM Do YYYY")
+
+            }
+            else {
+                current = moment(current).subtract(1, 'day')
+                $scope.date = moment(current).format("dddd, MMMM Do YYYY")
+
+                console.log('$scope.date ', $scope.date)
+            }
+            if (moment(current).unix() == moment(today).unix()) {
+                vm.live = true;
+                getOverviewLive()
+            }
+            else {
+                vm.live = false;
+                getOverviewBack()
+            }
+            getLive()
+            vm.loadHeatMap()
+        }
+
+        function getOverviewLive()
+        {
             LiveService.getOverview({
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
+            }, function (response) {
+                vm.overview = response;
+                console.log('response ', vm.overview)
+            }, function (err) {
+                console.log(err)
+                $scope.error = true;
+            });
+        }
+        function getOverviewBack()
+        {
+            LiveService.getOverview({
+                city: $rootScope.city,
+                vehicle: $rootScope.vehicleType,
+                startTime: moment(current).startOf('day'),
+                endTime: moment(current).endOf('day'),
             }, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
                 vm.overview = response;
@@ -67,11 +108,12 @@
                 console.log(err)
                 $scope.error = true;
             });
-
-            PerformanceService.getTrips({
+        }
+        function getLive() {
+           PerformanceService.getTrips({
                 city: $rootScope.city,
-                startTime: $scope.dates.startDate,
-                endTime: $scope.dates.endDate,
+                startTime: moment(current).startOf('day'),
+                endTime: moment(current).endOf('day'),
                 count: 1,
                 page: 1,
                 rate: 'hour'
@@ -81,8 +123,8 @@
 
                 PerformanceService.getDrivers({
                     city: $rootScope.city,
-                    startTime: $scope.dates.startDate,
-                    endTime: $scope.dates.endDate,
+                    startTime: moment(current).startOf('day'),
+                    endTime: moment(current).endOf('day'),
                     count: 1,
                     page: 1,
                     rate: 'hour'
@@ -122,16 +164,16 @@
                 'rgba(191, 0, 31, 1)',
                 'rgba(255, 0, 0, 1)'
             ]
-           // google.maps.event.addDomListener(window, 'resize', resizeMap);
-            vm.resizeMap = function ()
-            {
+            // google.maps.event.addDomListener(window, 'resize', resizeMap);
+            vm.resizeMap = function () {
                 google.maps.event.trigger(vm.map, 'resize')
             }
-            vm.heatMapDataLength ;
-            vm.loadHeatMap= function () {
+            vm.heatMapDataLength;
 
-                var from =  moment($scope.dates.startDate).hour($scope.rangSlider.min).unix()
-                var to =  moment($scope.dates.startDate).hour($scope.rangSlider.max).unix()
+            vm.loadHeatMap = function () {
+
+                var from = moment(current).hour($scope.rangSlider.min).unix()
+                var to = moment(current).hour($scope.rangSlider.max).unix()
                 LiveService.heatmap({
                     city: $rootScope.city,
                     vehicle: $rootScope.vehicleType,
@@ -140,18 +182,18 @@
                     state: vm.selected.id
                 }, function (response) {
                     //  PerformanceHandler.trips = response[0].trip
-                    vm.heatMapDataLength  = response.length;
+                    vm.heatMapDataLength = response.length;
                     var transformedData = [];
                     var pointArray = []
                     _.forEach(response, function (item) {
                         transformedData.push(new google.maps.LatLng(item.locPickupRequest.lt - 0, item.locPickupRequest.ln - 0));
                     })
                     //$scope.heatMapData = transformedData;
+
                     NgMap.getMap().then(function (map) {
                         vm.map = map;
-                     //   heatmap = vm.map.heatmapLayers.foo;
-                        if(heatmap )
-                        {
+                        //   heatmap = vm.map.heatmapLayers.foo;
+                        if (heatmap) {
                             heatmap.setMap(null);
                         }
                         pointArray = new google.maps.MVCArray(transformedData);
@@ -174,15 +216,24 @@
                 });
             }
 
-            vm.loadHeatMap()
+
         }
 
         getLive()
-
-        vm.refreshPage = function()
-        {
-            vm.loadHeatMap()
+        getOverviewLive()
+        vm.loadHeatMap()
+        vm.refreshPage = function () {
             getLive()
+            vm.loadHeatMap()
+          //  vm.loadHeatMap()
+            if(vm.live)
+            {
+                getOverviewLive()
+            }
+            else {
+                getOverviewBack()
+            }
+
         }
 
 

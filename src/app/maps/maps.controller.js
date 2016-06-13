@@ -41,7 +41,10 @@
 
         getDrivers()
         function getDrivers(){
-            MapService.getDrivers({}, function (response) {
+            MapService.getDrivers({
+                    city: $rootScope.city,
+                    vehicle: $rootScope.vehicleType
+                }, function (response) {
                vm.allDrivers = response;
               console.log("vm.drivers ", vm.allDrivers);
                 }, function (error) {
@@ -51,9 +54,9 @@
         }
 
 
-        vm.showDetail = function(e, driver) {
+        vm.showDetail = function(e, driver, index) {
             vm.driver = driver;
-            vm.map.showInfoWindow('iw-drivers', driver);
+            vm.map.showInfoWindow('iw-drivers', index);
         };
 
         vm.hideDetail = function() {
