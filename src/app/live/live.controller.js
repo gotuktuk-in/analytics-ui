@@ -11,6 +11,7 @@
         //range slider , Failed(2), Cancel(2), Success.
 
         var today = moment()
+        var  heatmap;
         vm.heatMapFilers = [{label: "In-Process", id: '20,22,30,40,50'}, {label: "Failed", id: '72,80,81,82'}, {
             label: "Cancel",
             id: '70,71'
@@ -52,7 +53,7 @@
             return d3.time.format('%I %p')(new Date(d).addHours(1));
         };
         vm.trips = [];
-        var heatmap, current;
+        var current = moment()
         vm.live = true
         vm.changeDate = function (to) {
 
@@ -69,17 +70,36 @@
             }
             if (moment(current).unix() == moment(today).unix()) {
                 vm.live = true;
+                getOverviewLive()
             }
             else {
                 vm.live = false;
+                getOverviewBack()
             }
             getLive()
             vm.loadHeatMap()
         }
-        function getLive() {
+
+        function getOverviewLive()
+        {
             LiveService.getOverview({
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
+            }, function (response) {
+                vm.overview = response;
+                console.log('response ', vm.overview)
+            }, function (err) {
+                console.log(err)
+                $scope.error = true;
+            });
+        }
+        function getOverviewBack()
+        {
+            LiveService.getOverview({
+                city: $rootScope.city,
+                vehicle: $rootScope.vehicleType,
+                startTime: moment(current).startOf('day'),
+                endTime: moment(current).endOf('day'),
             }, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
                 vm.overview = response;
@@ -88,8 +108,9 @@
                 console.log(err)
                 $scope.error = true;
             });
-
-            PerformanceService.getTrips({
+        }
+        function getLive() {
+           PerformanceService.getTrips({
                 city: $rootScope.city,
                 startTime: moment(current).startOf('day'),
                 endTime: moment(current).endOf('day'),
@@ -148,6 +169,7 @@
                 google.maps.event.trigger(vm.map, 'resize')
             }
             vm.heatMapDataLength;
+
             vm.loadHeatMap = function () {
 
                 var from = moment(current).hour($scope.rangSlider.min).unix()
@@ -167,6 +189,7 @@
                         transformedData.push(new google.maps.LatLng(item.locPickupRequest.lt - 0, item.locPickupRequest.ln - 0));
                     })
                     //$scope.heatMapData = transformedData;
+
                     NgMap.getMap().then(function (map) {
                         vm.map = map;
                         //   heatmap = vm.map.heatmapLayers.foo;
@@ -193,14 +216,24 @@
                 });
             }
 
-            vm.loadHeatMap()
+
         }
 
         getLive()
-
+        getOverviewLive()
+        vm.loadHeatMap()
         vm.refreshPage = function () {
-            vm.loadHeatMap()
             getLive()
+            vm.loadHeatMap()
+          //  vm.loadHeatMap()
+            if(vm.live)
+            {
+                getOverviewLive()
+            }
+            else {
+                getOverviewBack()
+            }
+
         }
 
 
