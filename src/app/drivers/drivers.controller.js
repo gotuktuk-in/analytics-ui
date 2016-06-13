@@ -32,7 +32,8 @@
                 vm.live = true;
             }
             else { vm.live = false; }
-            vm.getTopDrivers()
+            $scope.tableParams.reload()
+            $scope.tableParams.page(1)
         }
         function getLive() {
             LiveService.getOverview({
