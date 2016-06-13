@@ -88,8 +88,8 @@
                 <div class="panel-body">
 
                     <div>
-                        <table class="table table-responsive table-bordered table-striped global-tbl text-center">
-                            <thead>
+                        <table ng-table="tableParams" class="table table-responsive table-bordered table-striped global-tbl text-center">
+                            <!--<thead>
                                 <tr>
                                     <th width="120" style="text-align:left;">#ID</th>
                                     <th width="200" style="text-align:left;">Name</th>
@@ -98,16 +98,16 @@
                                     <th style="text-align:left;">Online</th>
 
                                 </tr>
-                            </thead>
+                            </thead>-->
                             <tbody>
-                                <tr ng-repeat="driver in vm.topDrivers">
-                                    <td  class="text-left">{{driver.driver_id}}</td>
-                                    <td  class="text-left">{{driver.name}}</td>
-                                    <td  class="text-right">{{driver.earning}}</td>
-                                    <td>{{driver.rides}}</td>
+                                <tr ng-repeat="row in $data track by $index">
+                                    <td  data-title="'#ID'" sortable="'driver_id'" class="text-left">{{row.driver_id}}</td>
+                                    <td  data-title="'Name'" sortable="'name'" class="text-left">{{row.name}}</td>
+                                    <td  data-title="'Earning(Rs.)'" sortable="'earning'" class="text-right">{{row.earning}}</td>
+                                    <td data-title="'Rides'" sortable="'rides'">{{row.rides}}</td>
                                     <td class="text-left">
                                     <div style="max-height: 80px; overflow: auto; display: block;">
-                                    <span ng-repeat="time in driver.online" class="label label-primary">{{time.start*1000 | date:'h:mma'}} - {{time.end*1000 | date:'h:mma'}}</span>
+                                    <span data-title="'Online'" ng-repeat="time in row.online" class="label label-primary">{{time.start*1000 | date:'h:mma'}} - {{time.end*1000 | date:'h:mma'}}</span>
                                    </div>
                                     </td>
                                 </tr>
