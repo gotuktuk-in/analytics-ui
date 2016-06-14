@@ -1,12 +1,12 @@
 <div class="container-fluid">
     <div class="row">
-        <form class="form-inline date-selection">
+        <form class="form-inline date-selection date-selection-dr">
             <div class="form-group ">
                 <input ng-change="vm.getTrips()" class="form-control cstm-width text-center" type="daterange"
                        ng-model="tripDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
             </div>
         </form>
-        <br>
+        <br><br><br>
     </div>
 
     <div class="row">
@@ -44,13 +44,10 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
+            <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">Trips</h4></div>
                 <div class="panel-body">
-                    <h4 style="margin-top: 0">Trips</h4>
-                    <br>
-
-                    <div class="table-responsive">
                         <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
-                    </div>
                 </div>
             </div>
         </div>
@@ -58,10 +55,9 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
+            <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">Trips Table</h4></div>
                 <div class="panel-body">
-                    <h4 style="margin-top: 0">Trips Table</h4>
-                    <br>
-
                     <div class="table-responsive">
                         <table ng-table="tableParams" class="table table-bordered  table-condensed">
 
