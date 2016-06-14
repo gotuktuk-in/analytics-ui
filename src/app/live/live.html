@@ -100,8 +100,8 @@ body {
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
-                        <div class="box" uib-popover-template="'myPopoverTemplate.html'" popover-trigger="mouseenter">
-                            <h4 class="number">{{vm.overview.trip.cancelled.total}}<small> / {{ vm.overview.trip.cancelled.total_unique_rider}}</small></h4>
+                        <div class="box">
+                            <h4 class="number"  uib-popover-template="'myPopoverTemplate.html'" popover-trigger="mouseenter">{{vm.overview.trip.cancelled.total}}<small> / {{ vm.overview.trip.cancelled.total_unique_rider}}</small></h4>
                             <span class="title text-warning">Cancelled / U</span>
 
                             <!--<button uib-popover-template="'myPopoverTemplate.html'" type="button" class="btn btn-default">Popover With Template</button>-->
@@ -228,9 +228,13 @@ body {
 
 <script type="text/ng-template" id="myPopoverTemplate.html">
 
-    <div class="form-group">
-        <div>Rider Cancelled/u</div>{{vm.overview.trip.cancelled.rider_cancelled}} / {{vm.overview.trip.cancelled.unique_rider_cancelled}}
-        <div>Driver Cancelled/u</div>{{vm.overview.trip.cancelled.driver_cancelled}} / {{vm.overview.trip.cancelled.unique_rider_cancelled_by_driver}}
+    <div class="box text-center">
+    	<h4 class="number no-mr">{{vm.overview.trip.cancelled.rider_cancelled}} <small>/ {{vm.overview.trip.cancelled.unique_rider_cancelled}}</small></h4>
+		<span>Rider Cancelled / u</span>
+		
+		<h4 class="number no-mr">{{vm.overview.trip.cancelled.driver_cancelled}} <small>/ {{vm.overview.trip.cancelled.unique_rider_cancelled_by_driver}}</small></h4>
+		<span>Driver Cancelled / u</span>
+
 
     </div>
 </script>

@@ -1,4 +1,4 @@
-
+*{font-family: open sans, sans-serif !important;}
 body {
     background-color: #f9f9f9;
     /* font-family: 'aller_lightregular', sans-serif; */
@@ -39,13 +39,6 @@ h4, .h4 {
     top: 7px;
     width: 8px;
 }
-.toggle-menu-close {
-    background: #fff;
-    cursor: pointer;
-    padding: 15px;
-    position: absolute;
-    right: -54px;
-}
 .rzslider .rz-pointer {
     background-color: #0db9f0;
     border-radius: 16px;
@@ -65,12 +58,11 @@ div.panel.panel-default div.panel-heading h4.title{margin-bottom:0;}
     border-radius: 100%;
     height: 12px;
     line-height: 12px;
-    position: fixed;
-    left: 49%;
+    position: absolute;
+    left: 264px;
     text-indent: 17px;
     top: 21px;
     width: 12px;
-    z-index:9999999;
 }
 .rzslider .rz-pointer.rz-active::after {
     background-color: #eee;
@@ -165,8 +157,7 @@ div.box.box-container div.row div.box {padding:20px 0;}
      font-size:12px;
 }
 .date-selection-dr {
-margin-left: 90px;
-    padding: 10px 60px 10px 0 !important;
+    padding: 10px 60px 10px 88px !important;
 }
 
 .daterangepicker .ranges li {
@@ -228,13 +219,12 @@ margin-left: 90px;
     -webkit-transition: all 0.2s ease-in-out;
 }
 .date-selection {
+    background: #fff none repeat scroll 0 0;
     padding: 10px 60px 10px 60px;
     position: fixed;
-    z-index: 9999;
+    z-index: 100;
 }
-.form-inline .form-control {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-}
+
 .form-inline .radio label{margin:0px;}
 .form-inline .radio input[type="radio"]{margin:0 5px 0 10px;}
 .sidenav-open {
@@ -243,7 +233,7 @@ margin-left: 90px;
 
 .sidenav {
     width: 250px;
-    /* overflow: hidden; */
+    overflow: hidden;
     position: fixed;
     left: -350px;
     top: 0px;
@@ -260,11 +250,9 @@ margin-left: 90px;
     left:0px;
 }
 
-/* 
 .navbar-static-top {
     z-index: 99999999;
 }
- */
 
 .nav-stacked {
     padding: 0;
