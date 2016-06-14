@@ -22,6 +22,11 @@ angular.module('httpInterceptor', [])
                 'request': function(config) {
                     // same as above
                     loadingScreen.show();
+                    var hide = (config.url.indexOf('.html')); // is this isn't -1, it means we should hide the request from the loading indicator
+                    if(hide == -1)
+                    {
+                        $rootScope.isPageLoading = false;
+                    }
                     if(config.params && config.params.startTime && config.params.endTime)
                     {
                         if(config.params.rate=='hour')
@@ -50,14 +55,11 @@ angular.module('httpInterceptor', [])
                 },
                 'response': function(successResponse) {
                     // same as above
-                     loadingScreen.hide();
-
-                    if (successResponse.config.method.toUpperCase() != 'GET') {
-                        $rootScope.isPageLoading = false;
-                        //console.log("----- "+successResponse.data.responseHeader.message)
-                        // showMessage(successResponse.data.responseHeader.message, 'alert-success', 5000);
-                    }
-
+                        var hide = (successResponse.config.url.indexOf('.html')); // is this isn't -1, it means we should hide the request from the loading indicator
+                        if(hide == -1)
+                        {
+                            loadingScreen.hide();
+                        }
                     return successResponse;
                 },
                 // optional method
