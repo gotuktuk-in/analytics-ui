@@ -10,21 +10,17 @@ body {
 </style>
  -->
 <div class="container-fluid" ng-if="vm.overview">
-
+<div class="live" ng-if="vm.live"> LIVE</div>
     <div class="row">
         <form class="form-inline date-selection date-selection-dr ">
 
-            <span ng-click="vm.changeDate('prev')" style=" position: absolute; left: 63px; top: 18px;">&#10094;</span>
+            <span ng-click="vm.changeDate('prev')" style="position: absolute; left: -18px; top: 17px;">&#10094;</span>
 
             <div class="form-group ">
-                <input class="form-control cstm-width text-left today-date-range hide-bdr" type="text" ng-model="date">
+                <input class="form-control cstm-width text-center today-date-range hide-bdr" type="text" ng-model="date">
             </div>
-            <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="position: absolute;right: 50px;top: 18px;">&#10095;</span>
-
-            <div class="live" ng-if="vm.live"> LIVE</div>
-
-
-        </form>
+            <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="position: absolute; top: 17px; right: 37px;">&#10095;</span>
+            </form>
         <!--<form class="form-inline date-selection">
             <div class="form-group ">
                 <input class="form-control cstm-width text-left today-date-range hide-bdr" type="text" ng-model="today">
@@ -85,7 +81,7 @@ body {
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <div class="col-md-2  col-sm-4 col-xs-12 no-mr no-pd">
+                    <div class="col-md-2 col-sm-4 col-xs-12 no-mr no-pd">
                         <div class="box box-heading box-2 text-center">
                             <h4 class="title">BOOKINGS</h4>
                         </div>
@@ -96,7 +92,6 @@ body {
                             <span>Total / U</span>
                         </div>
                     </div>
-
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
                             <h4 class="number">{{vm.overview.trip.successful.total}} <small> / {{ vm.overview.trip.successful.unique_riders}} / {{ vm.overview.trip.fulfillment | number:2}}%</small>
@@ -110,19 +105,24 @@ body {
                             <span class="title text-warning">Cancelled / U</span>
                         </div>
                     </div>
+                    <div class="col-md-1 col-sm-4 col-xs-6">
+                        <div class="box">
+                            <h4 class="number">{{vm.overview.trip.cancelled.total}}<small> / {{ vm.overview.trip.cancelled.unique_rider}}</small></h4>
+                            <span class="title text-warning" popover-placement="bottom"  popover-trigger="mouseenter" uib-popover="{{ vm.overview.trip.cancelled.unique_rider}}">Can before Alloc / U</span>
+                        </div>
+                    </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
                             <h4 class="number">{{vm.overview.trip.failed.total}}<small> / {{ vm.overview.trip.failed.unique_rider}}</small></h4>
                             <span>Failed / U</span>
                         </div>
                     </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
                             <h4 class="number">{{ vm.overview.trip.in_process}}</h4>
                             <span>in Prog</span>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
