@@ -100,15 +100,17 @@ body {
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
-                        <div class="box">
-                            <h4 class="number">{{vm.overview.trip.cancelled.total}}<small> / {{ vm.overview.trip.cancelled.unique_rider}}</small></h4>
+                        <div class="box" uib-popover-template="'myPopoverTemplate.html'" popover-trigger="mouseenter">
+                            <h4 class="number">{{vm.overview.trip.cancelled.total}}<small> / {{ vm.overview.trip.cancelled.total_unique_rider}}</small></h4>
                             <span class="title text-warning">Cancelled / U</span>
+
+                            <!--<button uib-popover-template="'myPopoverTemplate.html'" type="button" class="btn btn-default">Popover With Template</button>-->
                         </div>
                     </div>
                     <div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{vm.overview.trip.cancelled.total}}<small> / {{ vm.overview.trip.cancelled.unique_rider}}</small></h4>
-                            <span class="title text-warning" popover-placement="bottom"  popover-trigger="mouseenter" uib-popover="{{ vm.overview.trip.cancelled.unique_rider}}">Can before Alloc / U</span>
+                            <h4 class="number">{{vm.overview.trip.before_allocation.total_count}}<small> / {{ vm.overview.trip.before_allocation.unique_count }}</small></h4>
+                            <span class="title text-warning">Can before Alloc / U</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
@@ -207,8 +209,8 @@ body {
                 <div class="panel-body">
                     
                     <div>
-                        <ng-map zoom="13" center="[22.717081666666665, 75.87155666666666]"  on-resized="vm.resizeMap()" trigger-resize="true">
-                            <heatmap-layer id="foo" ></heatmap-layer>
+                        <ng-map id="live_map" zoom="13" center="[22.717081666666665, 75.87155666666666]"  on-resized="vm.resizeMap()" trigger-resize="true">
+                            <heatmap-layer id="foo" data="taxiData"></heatmap-layer>
                         </ng-map>
                     </div>
                     
@@ -223,3 +225,12 @@ body {
         </div>
     </div>
 </div>
+
+<script type="text/ng-template" id="myPopoverTemplate.html">
+
+    <div class="form-group">
+        <div>Rider Cancelled/u</div>{{vm.overview.trip.cancelled.rider_cancelled}} / {{vm.overview.trip.cancelled.unique_rider_cancelled}}
+        <div>Driver Cancelled/u</div>{{vm.overview.trip.cancelled.driver_cancelled}} / {{vm.overview.trip.cancelled.unique_rider_cancelled_by_driver}}
+
+    </div>
+</script>

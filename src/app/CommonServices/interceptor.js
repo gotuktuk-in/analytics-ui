@@ -21,11 +21,11 @@ angular.module('httpInterceptor', [])
             return {
                 'request': function(config) {
                     // same as above
-                    loadingScreen.show();
+
                     var hide = (config.url.indexOf('.html')); // is this isn't -1, it means we should hide the request from the loading indicator
                     if(hide == -1)
                     {
-                        $rootScope.isPageLoading = false;
+                        loadingScreen.show();
                     }
                     if(config.params && config.params.startTime && config.params.endTime)
                     {

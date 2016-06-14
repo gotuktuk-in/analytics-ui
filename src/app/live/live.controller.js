@@ -190,7 +190,7 @@
                     })
                     //$scope.heatMapData = transformedData;
 
-                    NgMap.getMap().then(function (map) {
+                    NgMap.getMap({id:'live_map'}).then(function (map) {
                         vm.map = map;
                         //   heatmap = vm.map.heatmapLayers.foo;
                         if (heatmap) {
