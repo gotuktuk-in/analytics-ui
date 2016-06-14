@@ -188,9 +188,9 @@
                     _.forEach(response, function (item) {
                         transformedData.push(new google.maps.LatLng(item.locPickupRequest.lt - 0, item.locPickupRequest.ln - 0));
                     })
-                    //$scope.heatMapData = transformedData;
+                    $scope.heatMapData = transformedData;
 
-                    NgMap.getMap({id:'live_map'}).then(function (map) {
+                    /*NgMap.getMap({id:'live_map'}).then(function (map) {
                         vm.map = map;
                         //   heatmap = vm.map.heatmapLayers.foo;
                         if (heatmap) {
@@ -201,16 +201,9 @@
                             data: pointArray
                         });
                         heatmap.setMap(vm.map);
-                    });
+                    });*/
 
-
-                    //$scope.heatMapData = _.map(response,
-                    //    function (obj) {
-                    //        return new google.maps.LatLng(obj.locPickupRequest.lt - 0, obj.locPickupRequest.ln - 0)
-                    //        //  [obj.locPickupRequest.lt, obj.locPickupRequest.ln]
-                    //    });
-                    //console.log('response ', $scope.heatMapData)
-                }, function (err) {
+               }, function (err) {
                     console.log(err)
                     $scope.error = true;
                 });

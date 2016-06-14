@@ -40,7 +40,17 @@
                     url: '/live/:city/:vehicleType',
                     templateUrl: 'app/live/live.html',
                     controller: 'LiveController',
-                    controllerAs: 'vm'
+                    controllerAs: 'vm',
+                    /*resolve: {
+                        heatmapResolve: function (LiveService) {
+                            LiveService.heatmap({
+                                city: $rootScope.city,
+                                vehicle: $rootScope.vehicleType,
+                                from: from,
+                                to: to,
+                                state: vm.selected.id
+                            })
+                    }}*/
                 })
             .state('home.drivers', {
                     url: '/drivers/:city/:vehicleType',
