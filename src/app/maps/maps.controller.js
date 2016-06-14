@@ -63,5 +63,9 @@
             vm.map.hideInfoWindow('iw-drivers');
         };
 
+        vm.getAddress = function() {
+            vm.map.hideInfoWindow('iw-drivers');
+        };
+
     }
 })();

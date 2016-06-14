@@ -47,13 +47,18 @@
             <div class="info-window">
               <div class="iw-wrapper">
                 <div class="iw-header text-center">
-                	<img src="{{profile_image}}" class="iw-driver" height="50">
+                	<img ng-src="{{vm.driver.profile.profile_image}}" class="iw-driver" height="50">
                   <h3>{{vm.driver.profile.name}}</h3>
                   
                 </div>
                 <div class="iw-content">
                   <table class="table">
                     <tbody>
+                    <tr>
+                      <td class="text-center"><i class="fa fa-mobile-phone"></i></td>
+                      <td>Time</td>
+                      <td>{{vm.driver.profile.time | date:'shortTime'}}</td>
+                    </tr>
                     <tr>
                     	<td class="text-center"><i class="fa fa-mobile-phone"></i></td>
                       <td>Phone#</td>
