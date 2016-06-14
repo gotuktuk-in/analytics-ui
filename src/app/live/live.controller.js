@@ -188,9 +188,9 @@
                     _.forEach(response, function (item) {
                         transformedData.push(new google.maps.LatLng(item.locPickupRequest.lt - 0, item.locPickupRequest.ln - 0));
                     })
-                    $scope.heatMapData = transformedData;
+            //        $scope.heatMapData = transformedData;
 
-                    /*NgMap.getMap({id:'live_map'}).then(function (map) {
+                    NgMap.getMap({id:'live_map'}).then(function (map) {
                         vm.map = map;
                         //   heatmap = vm.map.heatmapLayers.foo;
                         if (heatmap) {
@@ -201,7 +201,7 @@
                             data: pointArray
                         });
                         heatmap.setMap(vm.map);
-                    });*/
+                    });
 
                }, function (err) {
                     console.log(err)
