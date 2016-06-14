@@ -1,18 +1,12 @@
 <div class="container-fluid">
-
+<div class="live" ng-if="vm.live"> LIVE</div>
     <div class="row">
         <form class="form-inline date-selection date-selection-dr ">
-
-            <span ng-click="vm.changeDate('prev')" style=" position: absolute; left: 63px; top: 18px;">&#10094;</span>
-
+            <span ng-click="vm.changeDate('prev')" style="position: absolute; left: -18px; top: 17px;">&#10094;</span>
             <div class="form-group ">
-                <input class="form-control cstm-width text-left today-date-range hide-bdr" type="text" ng-model="date">
+                <input class="form-control cstm-width text-center today-date-range hide-bdr" type="text" ng-model="date">
             </div>
-            <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="position: absolute;right: 50px;top: 18px;">&#10095;</span>
-
-            <div class="live" ng-if="vm.live"> LIVE</div>
-
-
+            <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="position: absolute; top: 17px; right: 37px;">&#10095;</span>
         </form>
     </div>
     <br>

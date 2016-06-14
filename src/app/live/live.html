@@ -10,21 +10,17 @@ body {
 </style>
  -->
 <div class="container-fluid" ng-if="vm.overview">
-
+<div class="live" ng-if="vm.live"> LIVE</div>
     <div class="row">
         <form class="form-inline date-selection date-selection-dr ">
 
-            <span ng-click="vm.changeDate('prev')" style=" position: absolute; left: 63px; top: 18px;">&#10094;</span>
+            <span ng-click="vm.changeDate('prev')" style="position: absolute; left: -18px; top: 17px;">&#10094;</span>
 
             <div class="form-group ">
-                <input class="form-control cstm-width text-left today-date-range hide-bdr" type="text" ng-model="date">
+                <input class="form-control cstm-width text-center today-date-range hide-bdr" type="text" ng-model="date">
             </div>
-            <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="position: absolute;right: 50px;top: 18px;">&#10095;</span>
-
-            <div class="live" ng-if="vm.live"> LIVE</div>
-
-
-        </form>
+            <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="position: absolute; top: 17px; right: 37px;">&#10095;</span>
+            </form>
         <!--<form class="form-inline date-selection">
             <div class="form-group ">
                 <input class="form-control cstm-width text-left today-date-range hide-bdr" type="text" ng-model="today">
@@ -85,7 +81,7 @@ body {
             <div class="panel panel-default">
                 <div class="panel-body">
 
-                    <div class="col-md-2  col-sm-4 col-xs-12 no-mr no-pd">
+                    <div class="col-md-2 col-sm-4 col-xs-12 no-mr no-pd">
                         <div class="box box-heading box-2 text-center">
                             <h4 class="title">BOOKINGS</h4>
                         </div>
@@ -96,7 +92,6 @@ body {
                             <span>Total / U</span>
                         </div>
                     </div>
-
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
                             <h4 class="number">{{vm.overview.trip.successful.total}} <small> / {{ vm.overview.trip.successful.unique_riders}} / {{ vm.overview.trip.fulfillment | number:2}}%</small>
@@ -106,8 +101,16 @@ body {
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{vm.overview.trip.cancelled.total}}<small> / {{ vm.overview.trip.cancelled.unique_rider}}</small></h4>
+                            <h4 class="number"  uib-popover-template="'myPopoverTemplate.html'" popover-trigger="mouseenter">{{vm.overview.trip.cancelled.total}}<small> / {{ vm.overview.trip.cancelled.total_unique_rider}}</small></h4>
                             <span class="title text-warning">Cancelled / U</span>
+
+                            <!--<button uib-popover-template="'myPopoverTemplate.html'" type="button" class="btn btn-default">Popover With Template</button>-->
+                        </div>
+                    </div>
+                    <div class="col-md-1 col-sm-4 col-xs-6">
+                        <div class="box">
+                            <h4 class="number">{{vm.overview.trip.before_allocation.total_count}}<small> / {{ vm.overview.trip.before_allocation.unique_count }}</small></h4>
+                            <span class="title text-warning">Can before Alloc / U</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
@@ -116,13 +119,12 @@ body {
                             <span>Failed / U</span>
                         </div>
                     </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
                             <h4 class="number">{{ vm.overview.trip.in_process}}</h4>
                             <span>in Prog</span>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -207,8 +209,8 @@ body {
                 <div class="panel-body">
                     
                     <div>
-                        <ng-map zoom="13" center="[22.717081666666665, 75.87155666666666]"  on-resized="vm.resizeMap()" trigger-resize="true">
-                            <heatmap-layer id="foo" ></heatmap-layer>
+                        <ng-map id="live_map" zoom="13" center="[22.717081666666665, 75.87155666666666]"  on-resized="vm.resizeMap()" trigger-resize="true">
+                         <!--   <heatmap-layer id="foo" data="'heatMapData'"></heatmap-layer>-->
                         </ng-map>
                     </div>
                     
@@ -223,3 +225,16 @@ body {
         </div>
     </div>
 </div>
+
+<script type="text/ng-template" id="myPopoverTemplate.html">
+
+    <div class="box text-center">
+    	<h4 class="number no-mr">{{vm.overview.trip.cancelled.rider_cancelled}} <small>/ {{vm.overview.trip.cancelled.unique_rider_cancelled}}</small></h4>
+		<span>Rider Cancelled / u</span>
+		
+		<h4 class="number no-mr">{{vm.overview.trip.cancelled.driver_cancelled}} <small>/ {{vm.overview.trip.cancelled.unique_rider_cancelled_by_driver}}</small></h4>
+		<span>Driver Cancelled / u</span>
+
+
+    </div>
+</script>
