@@ -242,7 +242,6 @@ div.box.box-container div.row div.box {padding:20px 0;}
 
 .sidenav {
     width: 250px;
-    overflow: hidden;
     position: fixed;
     left: -350px;
     top: 0px;
@@ -623,15 +622,17 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     margin-left: 10px !important;
 }
 .info-window .iw-header .iw-driver {
+    background-color: #eee !important;
     border-radius: 100%;
-    height: 50px;
+    display: inline-block;
+    height: 50px !important;
     margin-top: 15px;
-    width: 50px;
+    width: 50px !important;
 }
 .info-window .iw-header h3 {
     color: #333;
     font-size: 20px;
-    margin: 10px 0;
+    margin: 15px 0;
 }
 /*
 .ng-map-info-window {
