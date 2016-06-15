@@ -95,7 +95,7 @@
                     <tr>
                     <td class="text-center"><i class="fa fa-map-marker"></i></td>
                       <td>Location</td>
-                      <td><a  ng-click="vm.clicked(vm.driver.marker)"><span ng-if="!vm.driver.address">Show</span></a>
+                      <td style="max-width:100px"><a  ng-click="vm.clicked(vm.driver.marker)"><span ng-if="!vm.driver.address">Show</span></a>
                         <span ng-if="vm.driver.address">{{vm.driver.address}}</span>
                       </td>
                     </tr>
@@ -117,7 +117,8 @@
         <uib-tabset active="active">
           <uib-tab index="0" heading="Drivers">
             <div class="row">
-              <div class="col-md-4">
+              <!-- 
+<div class="col-md-4">
                 <div class="pentagon total">
                   <div class="text-center">
                     <h4>Total</h4>
@@ -125,7 +126,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
+
+              <div class="col-md-6">
                 <div class="pentagon occupied">
                   <div class="text-center">
                     <h4>Occupied</h4>
@@ -133,11 +135,12 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
+               -->
+              <div class="col-md-6">
                 <div class="pentagon available">
                   <div class="text-center">
-                    <h4>Available</h4>
-                    <span>{{vm.allDrivers.available.total}}</span>
+                    <h4>Free</h4>
+                    <span>{{vm.allDrivers.free.total}}</span>
                   </div>
                 </div>
               </div>
