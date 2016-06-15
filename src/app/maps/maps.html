@@ -61,7 +61,7 @@
       </div>
 
       <info-window id="iw-drivers">
-          <div ng-non-bindable>
+          <div ng-non-bindable="">
             <div class="info-window">
               <div class="iw-wrapper">
                 <div class="iw-header text-center">
@@ -95,10 +95,16 @@
                     <tr>
                     <td class="text-center"><i class="fa fa-map-marker"></i></td>
                       <td>Location</td>
-                      <td>Show Address</td>
+                      <td><a  ng-click="vm.clicked(vm.driver.marker)"><span ng-if="!vm.driver.address">Show</span></a>
+                        <span ng-if="vm.driver.address">{{vm.driver.address}}</span>
+                      </td>
                     </tr>
                     </tbody>
                   </table>
+<<<<<<< HEAD
+=======
+                <!--  <div class="text-center"><small>(12:00am)</small></div>-->
+>>>>>>> origin/development
                 </div>
               </div>
             </div>
