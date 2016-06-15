@@ -20,13 +20,13 @@
                 strokeOpacity:.1,
                 fillOpacity:.1
             });
-            /*MapService.loadGeoJson({}, function (response) {
+            MapService.loadGeoJson({}, function (response) {
                     //vm.geoJSON = response
-                  /!*  var temp = {}
+                  /*  var temp = {}
                     temp.features = response.features
                     temp.type = response.type
                     vm.geoJSON=JSON.parse(angular.toJson(temp))
-                    console.log("typeof vm.geoJSON", typeof  vm.geoJSON);*!/
+                    console.log("typeof vm.geoJSON", typeof  vm.geoJSON);*/
                     vm.geoJSON = {}
                     vm.geoJSON = response
                     vm.map.data.addGeoJson(vm.geoJSON );
@@ -34,10 +34,40 @@
                 }, function (error) {
                     console.log("error ", error)
                 }
-            )*/
+            )
         });
 
+        vm.getAddress= function (marker) {
+            alert("get address")
+           /* var lat = parseFloat(marker[0]);
+            var lng = parseFloat(marker[1]);
+            var latlng = new google.maps.LatLng(lat, lng);
+            var geocoder =  new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        vm.driver.address = results[1].formatted_address;
+                        //return results[1].formatted_address;
+                    }
+                }
+            });*/
+        }
 
+        vm.clicked = function(marker) {
+            console.log('Clicked a link inside infoWindow',marker);
+            var lat = parseFloat(marker[0]);
+            var lng = parseFloat(marker[1]);
+            var latlng = new google.maps.LatLng(lat, lng);
+            var geocoder =  new google.maps.Geocoder();
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        vm.driver.address = results[1].formatted_address;
+                        //return results[1].formatted_address;
+                    }
+                }
+            });
+        };
 
         getDrivers()
         function getDrivers(){
@@ -56,6 +86,7 @@
 
         vm.showDetail = function(e, driver, index) {
             vm.driver = driver;
+
             vm.map.showInfoWindow('iw-drivers', index);
         };
 
