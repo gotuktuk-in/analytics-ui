@@ -6,7 +6,7 @@
         .controller('DriversController', DriversController);
 
     /** @ngInject */
-    function DriversController($scope, $log, $rootScope, $window, DriversService, NgTableParams,ngTableEventsChannel, LiveService, $resource) {
+    function DriversController($scope, $log, $rootScope, $window, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this
         var today = moment()
