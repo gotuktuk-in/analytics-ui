@@ -1,19 +1,15 @@
 <div class="container-fluid">
-<div class="live" ng-if="vm.live"> LIVE</div>
-    <div class="row">
-        <form class="form-inline date-selection date-selection-dr ">
-            <span ng-click="vm.changeDate('prev')" style="position: absolute; left: -18px; top: 17px;">&#10094;</span>
-            <div class="form-group ">
-                <input class="form-control cstm-width text-center today-date-range hide-bdr" type="text" ng-model="date">
+    <div class="row" style="z-index:1; position:fixed; width:98%; padding:10px 0; left:53px;">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+            	<span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>
             </div>
-            <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="position: absolute; top: 17px; right: 37px;">&#10095;</span>
-        </form>
-    </div>
+            </div>
+            <span class="live" ng-if="vm.live"> LIVE</span>
+            <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
     <br>
     <br>
     <br>
-    <br>
-
+    <br><br>
     <div class="row overview-box">
         <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>
 </span>
@@ -23,8 +19,7 @@
                 <div class="panel-body">
                     <div class="col-md-2 col-sm-4 col-xs-12 no-mr no-pd">
                         <div class="box box-heading box-1 text-center">
-                            <h4 class="title">DRIVERS<sup ng-if="!vm.live" style="font-size:9px; padding:5px"><span
-                                    style="font-size:6px; margin-right:2px;">&#127934;</span> LIVE</sup></h4>
+                            <h4 class="title">DRIVERS</h4>
 
                         </div>
                     </div>

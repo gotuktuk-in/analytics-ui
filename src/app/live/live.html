@@ -1,41 +1,16 @@
-<!-- 
-<style>
-body {
-    background-color: #333;
-    background-image:url("../../assets/images/blur-bg.jpg");
-    background-size:cover;
-    background-attachment: fixed;
-
-}
-</style>
- -->
 <div class="container-fluid" ng-if="vm.overview">
-<div class="live" ng-if="vm.live"> LIVE</div>
-    <div class="row">
-        <form class="form-inline date-selection date-selection-dr ">
-
-            <span ng-click="vm.changeDate('prev')" style="position: absolute; left: -18px; top: 17px;">&#10094;</span>
-
-            <div class="form-group ">
-                <input class="form-control cstm-width text-center today-date-range hide-bdr" type="text" ng-model="date">
+    <div class="row" style="z-index:1; position:fixed; width:98%; padding:10px 0; left:53px;">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+            	<span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>
             </div>
-            <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="position: absolute; top: 17px; right: 37px;">&#10095;</span>
-            </form>
-        <!--<form class="form-inline date-selection">
-            <div class="form-group ">
-                <input class="form-control cstm-width text-left today-date-range hide-bdr" type="text" ng-model="today">
-                &lt;!&ndash;<input ng-disabled="true" class="form-control cstm-width text-center" type="daterange" ng-model="dates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">&ndash;&gt;
             </div>
-            <div class="live"> LIVE</div>
-        </form>-->
-    </div>
+            <span class="live" ng-if="vm.live"> LIVE</span>
+            <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
     <br>
     <br>
     <br>
-    <br>
+    <br><br>
     <div class="row overview-box">
-    <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>
-</span>
         <div class="col-md-12 col-sm-12 col-xs-12 text-center">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -101,7 +76,7 @@ body {
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number"  uib-popover-template="'myPopoverTemplate.html'" popover-trigger="mouseenter">{{vm.overview.trip.cancelled.total}}<small> / {{ vm.overview.trip.cancelled.total_unique_rider}}</small></h4>
+                            <h4 class="number" uib-popover-template="'myPopoverTemplate.html'" popover-trigger="mouseenter">{{vm.overview.trip.cancelled.total}}<small> / {{ vm.overview.trip.cancelled.total_unique_rider}}</small></h4>
                             <span class="title text-warning">Cancelled / U</span>
 
                             <!--<button uib-popover-template="'myPopoverTemplate.html'" type="button" class="btn btn-default">Popover With Template</button>-->
@@ -163,7 +138,7 @@ body {
                     <div class="col-md-4 col-sm-4 col-xs-6">
                         <div class="box">
                             <h4 class="number">{{vm.overview.tcash.total_amount}}/-</h4>
-							<span>Total Amount</span>
+                            <span>Total Amount</span>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-6">
@@ -192,35 +167,33 @@ body {
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12 col-xs-12"  ngsf-fullscreen>
+        <div class="col-md-6 col-sm-12 col-xs-12" ngsf-fullscreen>
 
             <div class="panel panel-default">
-            <div class="panel-heading">
+                <div class="panel-heading">
                     <div class="pull-right">
-                    
-                       <select name="mySelect" id="mySelect" ng-options="option.label for option in vm.heatMapFilers track by option.id" ng-model="vm.selected" ng-change="vm.loadHeatMap();"></select>
+
+                        <select name="mySelect" id="mySelect" ng-options="option.label for option in vm.heatMapFilers track by option.id" ng-model="vm.selected" ng-change="vm.loadHeatMap();"></select>
                         <span style="padding:0 10px 0 5px">{{vm.heatMapDataLength}}</span>
                         <a ngsf-toggle-fullscreen show-if-fullscreen-enabled style="color:#ccc;">
-                        <i class="fa fa-arrows-alt" show-if-fullscreen=false></i>
-                        <i show-if-fullscreen=true>X</i>
-                    </a>
+                            <i class="fa fa-arrows-alt" show-if-fullscreen=false></i>
+                            <i show-if-fullscreen=true>X</i>
+                        </a>
                     </div>
                     <h4 style="margin-top: 0" class="title">Heat Map</h4></div>
                 <div class="panel-body">
-                    
+
                     <div>
-                        <ng-map id="live_map" zoom="13" center="[22.717081666666665, 75.87155666666666]"  on-resized="vm.resizeMap()" trigger-resize="true">
-                         <!--   <heatmap-layer id="foo" data="'heatMapData'"></heatmap-layer>-->
+                        <ng-map id="live_map" zoom="13" center="[22.717081666666665, 75.87155666666666]" on-resized="vm.resizeMap()" trigger-resize="true">
+                            <!--   <heatmap-layer id="foo" data="'heatMapData'"></heatmap-layer>-->
                         </ng-map>
                     </div>
-                    
 
-<rzslider rz-slider-model="slider.minValue"
-          rz-slider-high="slider.maxValue"
-          rz-slider-options="slider.options">
-          </rzslider>
+                    <rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue" rz-slider-options="slider.options">
+                    </rzslider>
                 </div>
-<br><br>
+                <br>
+                <br>
             </div>
         </div>
     </div>
@@ -229,12 +202,11 @@ body {
 <script type="text/ng-template" id="myPopoverTemplate.html">
 
     <div class="box text-center">
-    	<h4 class="number no-mr">{{vm.overview.trip.cancelled.rider_cancelled}} <small>/ {{vm.overview.trip.cancelled.unique_rider_cancelled}}</small></h4>
-		<span>Rider Cancelled / u</span>
-		
-		<h4 class="number no-mr">{{vm.overview.trip.cancelled.driver_cancelled}} <small>/ {{vm.overview.trip.cancelled.unique_rider_cancelled_by_driver}}</small></h4>
-		<span>Driver Cancelled / u</span>
+        <h4 class="number no-mr">{{vm.overview.trip.cancelled.rider_cancelled}} <small>/ {{vm.overview.trip.cancelled.unique_rider_cancelled}}</small></h4>
+        <span>Rider Cancelled / u</span>
 
+        <h4 class="number no-mr">{{vm.overview.trip.cancelled.driver_cancelled}} <small>/ {{vm.overview.trip.cancelled.unique_rider_cancelled_by_driver}}</small></h4>
+        <span>Driver Cancelled / u</span>
 
     </div>
 </script>
