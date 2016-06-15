@@ -31,6 +31,8 @@ function PerformanceHandler() {
         {"key": "Cancelled trips (by driver)", "values": []},
 
         {"key": "tCash", "values": []},
+        {"key": "Failed", "values": []},
+        {"key": "Failed (U)", "values": []},
     ]
 
     factory.filteredDrivers = [
@@ -45,7 +47,8 @@ function PerformanceHandler() {
     ]
     factory.getTrips = function (data) {
         var requests = [], unique_requests = [], cancelled_requests = [], unique_cancelled_requests = [],
-            successful_requests = [], unique_successful_requests = [], cancelled_trips_rider = [], cancelled_trips_driver = [], tCash = []
+            successful_requests = [], unique_successful_requests = [], cancelled_trips_rider = [], cancelled_trips_driver = [], tCash = [],
+            failed_total= [], failed_unique_riders= []
         _.each(data, function (value) {
 
             var longDate = factory.getLongDate(value.id)
@@ -62,6 +65,9 @@ function PerformanceHandler() {
             cancelled_trips_rider.push([longDate, value.cancelled.cancelled_by_riders])
             cancelled_trips_driver.push([longDate, value.cancelled.cancelled_by_drivers])
 
+            failed_total.push([longDate, value.failed.total])
+            failed_unique_riders.push([longDate, value.failed.unique_riders])
+
             tCash.push([longDate, value.tcash_used])
         });
         factory.filteredTrips[0].values = requests;
@@ -73,6 +79,9 @@ function PerformanceHandler() {
         factory.filteredTrips[6].values = cancelled_trips_rider;
         factory.filteredTrips[7].values = cancelled_trips_driver;
         factory.filteredTrips[8].values = tCash;
+        factory.filteredTrips[9].values = failed_total;
+        factory.filteredTrips[10].values = failed_unique_riders;
+
         return factory.filteredTrips
     }
     factory.getDrivers = function (data) {
