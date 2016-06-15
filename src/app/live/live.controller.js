@@ -28,7 +28,7 @@
                 floor: 0,
                 ceil: 24,
                 //precision:2,
-                showTicksValues: 1,
+                showTicksValues: 0,
                 translate: function (value) {
                     return value + 'h';
                 },

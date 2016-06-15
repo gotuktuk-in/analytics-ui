@@ -8,6 +8,8 @@
 
 var gulp = require('gulp');
 var wrench = require('wrench');
+var htmlmin = require('gulp-htmlmin');
+
 
 /**
  *  This will load all js or coffee files in the gulp directory
@@ -24,6 +26,14 @@ wrench.readdirSyncRecursive('./gulp').filter(function(file) {
  *  Default task clean temporaries directories and launch the
  *  main optimization build task
  */
+ gulp.task('minify', function() {
+  return gulp.src('src/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(htmlmin({collapseBooleanAttributes: false}))
+    .pipe(gulp.dest('dist'))
+});
+
 gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
+
