@@ -14,19 +14,7 @@
         $scope.selectedDates.startDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
         $scope.selectedDates.endDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
 
-        vm.getAcquisition = function () {
-            DriversService.getAcquisition({
-                city: $rootScope.city,
-                vehicle: $rootScope.vehicleType,
-                from: moment(current).startOf('day').format("YYYYMMDD").toString(),
-                to: moment(current).endOf('day').format("YYYYMMDD").toString(),
-            }, function (response) {
-                vm.topDrivers = response;
-            }, function (err) {
-                console.log(err)
-                $scope.error = true;
-            });
-        }
+
         vm.getProfile = function () {
             DriversService.getProfile({id:$stateParams.driverId
             }, function (response) {

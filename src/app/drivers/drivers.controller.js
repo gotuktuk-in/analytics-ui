@@ -6,13 +6,16 @@
         .controller('DriversController', DriversController);
 
     /** @ngInject */
-    function DriversController($scope, $log, $rootScope, $window, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversController($scope, $log, $rootScope, $window, PerformanceService, PerformanceHandler, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this
         var today = moment()
         var currentDate = moment()
         var current = moment()
         vm.live = true
+        vm.acquisitionData = []
+        vm.config = ChartConfigService.lineChartConfig;
+        vm.acquisitionChart = angular.copy(ChartConfigService.lineChartOptions)
         $scope.date = moment().format("dddd, MMMM Do YYYY")
         vm.changeDate = function (to) {
 
@@ -34,6 +37,7 @@
             else { vm.live = false; }
             $scope.tableParams.reload()
             $scope.tableParams.page(1)
+            vm.getAcquisition()
         }
         function getLive() {
             LiveService.getOverview({
@@ -41,6 +45,25 @@
                 vehicle: $rootScope.vehicleType,
             }, function (response) {
                 vm.overview = response;
+            }, function (err) {
+                console.log(err)
+                $scope.error = true;
+            });
+        }
+        vm.getAcquisition = function () {
+            DriversService.getAcquisition({
+                city: $rootScope.city,
+                vehicle: $rootScope.vehicleType,
+                from: moment(current).startOf('day').format("YYYYMMDD").toString(),
+                to: moment(current).endOf('day').format("YYYYMMDD").toString(),
+            }, function (response) {
+
+                var values = []
+                _.each(response, function(value){
+                    values.push([PerformanceHandler.getLongDate(value.id), value.count])
+                })
+                vm.acquisitionData.push({key:'Drivers', values:values})
+                console.log('vm.acquisitionData ', vm.acquisitionData)
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
@@ -63,7 +86,8 @@
             });
         }
         getLive()
-      //  vm.getTopDrivers()
+        vm.getAcquisition()
+        //  vm.getTopDrivers()
 
         // call to get data for the tables
          $scope.tableParams = new NgTableParams({page:1,count: 20, sorting:{earning:'desc'},
