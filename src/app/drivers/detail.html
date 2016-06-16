@@ -17,41 +17,80 @@
         <div class="col-md-12 col-sm-12 col-xs-12 text-center">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="col-md-2 col-sm-4 col-xs-12 no-mr no-pd">
-                        <div class="box box-heading box-1 text-center">
-                            <h4 class="title">DRIVERS</h4>
+                    <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
+                        <div class="box box-heading box-0 text-center">
+                        	<img ng-src="{{profileImage}}" class="iw-driver" height="50">
+                            <h4 class="title">{{name}}</h4>
 
                         </div>
                     </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
+                    <div class="col-md-10 col-sm-12 col-xs-12">
+                        <div class="col-md-1 col-sm-4 col-xs-6">
+                        	<div class="box">
+                            	<h4 class="number">{{id}}</h4>
+                            	<span>id</span>
+                        	</div>
+                    	</div> 
+                        <div class="col-md-1 col-sm-4 col-xs-6">
+                        	<div class="box">
+                            	<h4 class="number">{{phone}}</h4>
+                            	<span>phone</span>
+                        	</div>
+                    	</div>  
+                    	<div class="col-md-1 col-sm-4 col-xs-6">
+                        	<div class="box">
+                            	<h4 class="number">{{vehicle}}</h4>
+                            	<span>vehicle number</span>
+                        	</div>
+                    	</div>                    
+                    	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{ vm.overview.driver.total_drivers}}</h4>
-                            <span>Total</span>
+                            <h4 class="number">{{vehicleType}}</h4>
+                            <span>vehicle Type</span>
                         </div>
                     </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
+                    	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{vm.overview.driver.free_drivers}}</h4>
-                            <span>Free</span>
+                            <h4 class="number">{{joinedOn}}</h4>
+                            <span>joined On</span>
                         </div>
                     </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
+                    	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{vm.overview.driver.occupied_drivers}}</h4>
-                            <span>Occupied</span>
+                            <h4 class="number">{{ridesToday | number:2}}</h4>
+                            <span>Today's ride</span>
                         </div>
                     </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
+                    	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{vm.overview.driver.online_drivers_percentage | number:2}}%</h4>
-                            <span>Online</span>
+                            <h4 class="number">{{ridesTotal | number:2}}</h4>
+                            <span>Total rides</span>
                         </div>
                     </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
+                    	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{vm.overview.driver.utilization_percentage | number:2}}%</h4>
-                            <span>Utilization</span>
+                            <h4 class="number">{{feedbackRating | number:2}}</h4>
+                            <span>feedback</span>
                         </div>
+                    </div>
+                    	<div class="col-md-1 col-sm-4 col-xs-6">
+                        <div class="box">
+                            <h4 class="number">{{earnedTotal | number:2}}</h4>
+                            <span>Total Income</span>
+                        </div>
+                    </div>
+                    	<div class="col-md-1 col-sm-4 col-xs-6">
+                        <div class="box">
+                            <h4 class="number">{{state}}</h4>
+                            <span>Status</span>
+                        </div>
+                    </div>
+                    	<div class="col-md-1 col-sm-4 col-xs-6">
+                        <div class="box">
+                            <h4 class="number">{{city}}</h4>
+                            <span>city</span>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -59,20 +98,18 @@
     </div>
 
     <div class="row">
-        <!--<div class="col-md-12 col-sm-12 col-xs-12" ngsf-fullscreen>
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Driver Acquisition</h4></div>
+                    <h4 style="margin-top: 0" class="title">Rides</h4></div>
                 <div class="panel-body">
                     <div>
                         <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                     </div>
-                    <a ngsf-toggle-fullscreen show-if-fullscreen-enabled>
-                    </a>
                 </div>
             </div>
-        </div>-->
-        <div class="col-md-12 col-sm-12 col-xs-12" ngsf-fullscreen>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
 
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -82,16 +119,6 @@
                     <div>
                         <table ng-table="tableParams"
                                class="table table-responsive table-bordered table-striped global-tbl text-center">
-                            <!--<thead>
-                                <tr>
-                                    <th width="120" style="text-align:left;">#ID</th>
-                                    <th width="200" style="text-align:left;">Name</th>
-                                    <th width="120" style="text-align:right;">Earning(Rs.)</th>
-                                    <th width="120">Rides</th>
-                                    <th style="text-align:left;">Online</th>
-
-                                </tr>
-                            </thead>-->
                             <tbody>
                             <tr ng-repeat="row in $data track by $index">
                                 <td data-title="'#ID'" class="text-left">{{row.driver_id}}</td>
@@ -114,6 +141,30 @@
                 </div>
                 <br>
                 <br>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">Daily Income</h4></div>
+                <div class="panel-body">
+                    <div>
+                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">Heatmap</h4></div>
+                <div class="panel-body">
+                    <div>
+                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

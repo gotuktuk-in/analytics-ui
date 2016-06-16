@@ -12,7 +12,7 @@ body {
 .app-loader{
 	position: absolute;
 	top: 30%;
-	left: 40%;
+	left: 46%;
 	z-index: 200000000;
 	width: 150px;
 	height: 130px;
@@ -64,8 +64,8 @@ h4, .h4 {
     top: -10px;
     width: 21px;
 }
-button, input, optgroup, textarea {
-    color: #333;
+button, input, optgroup, textarea, select {
+    color: initial;
 }
 .panel-heading {
     border-radius: 0;
@@ -631,7 +631,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-color: #ffffff !important;
     margin-left: 10px !important;
 }
-.info-window .iw-header .iw-driver {
+.info-window .iw-header .iw-driver, .iw-driver {
     background-color: #eee !important;
     border-radius: 100%;
     display: inline-block;
@@ -720,6 +720,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .box.box-1, .box.box-2, .box.box-3, .box.box-4{
 	max-width:225px;
 	min-width:200px;
+}
+.box.box-0{
+	background-color: #333;
 }
 .box.box-1{
 	background-color: #ec407a;
