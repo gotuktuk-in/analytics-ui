@@ -69,11 +69,7 @@ angular.module('httpInterceptor', [])
                     switch (errorResponse.status) {
                         case 401:
                           //  console.log("There is an 401 error. signin again." + $rootScope.LOGIN_URL)
-                           // console.log("LOGOUT_URL " + $rootScope.LOGOUT_URL)
-                             $cookies.remove('tuktuk.performance.admin')
-        					//$http.defaults.headers.common.Authorization = '';
-                            $location.path("#/login") //$rootScope.LOGIN_URL;
-                            
+                       $rootScope.$broadcast('unauthorized');
                             break;
                         case 403:
                             //  showMessage('You don\'t have the right to do this', 'alert-danger ', 5000);

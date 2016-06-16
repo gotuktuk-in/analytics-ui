@@ -94,7 +94,7 @@
                             </thead>-->
                             <tbody>
                             <tr ng-repeat="row in $data track by $index">
-                                <td data-title="'#ID'" class="text-left">{{row.driver_id}}</td>
+                                <td data-title="'#ID'" class="text-left"><a ui-sref="home.drivers_detail({driverId:row.driver_id})" >{{row.driver_id}}</a></td>
                                 <td data-title="'Name'" sortable="'name'" class="text-left">{{row.name}}</td>
                                 <td data-title="'Earning(Rs.)'" sortable="'earning'" class="text-right">
                                     {{row.earning}}
