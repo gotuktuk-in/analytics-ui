@@ -6,7 +6,7 @@
         .controller('DriversController', DriversController);
 
     /** @ngInject */
-    function DriversController($scope, $log, $rootScope, $window, PerformanceService, PerformanceHandler, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversController($scope, $log, $rootScope, $window, ChartConfigService, PerformanceService, PerformanceHandler, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this
         var today = moment()
@@ -15,8 +15,12 @@
         vm.live = true
         vm.acquisitionData = []
         vm.config = ChartConfigService.lineChartConfig;
-        vm.acquisitionChart = angular.copy(ChartConfigService.lineChartOptions)
+        vm.acquisitionChart = angular.copy(ChartConfigService.discreteBarChartOptions)
+        vm.acquisitionChart.chart.xAxis.tickFormat = function (d) {
+            return d3.time.format('%d %b %y')(new Date(d));
+        };
         $scope.date = moment().format("dddd, MMMM Do YYYY")
+
         vm.changeDate = function (to) {
 
             if (to == 'next') {
@@ -50,6 +54,7 @@
                 $scope.error = true;
             });
         }
+
         vm.getAcquisition = function () {
             DriversService.getAcquisition({
                 city: $rootScope.city,
@@ -60,7 +65,7 @@
 
                 var values = []
                 _.each(response, function(value){
-                    values.push([PerformanceHandler.getLongDate(value.id), value.count])
+                    values.push({label:PerformanceHandler.getLongDate(value.id), value:value.count})
                 })
                 vm.acquisitionData.push({key:'Drivers', values:values})
                 console.log('vm.acquisitionData ', vm.acquisitionData)
