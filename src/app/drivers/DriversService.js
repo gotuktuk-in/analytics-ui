@@ -31,7 +31,7 @@ function DriversService($q, $resource, API) {
             getProfile: {
                 method: 'GET',
                 url:   url + 'drivers/profile/:id',
-                isArray:true
+                isArray:false
             },
             getTrips: {
                 method: 'GET',
