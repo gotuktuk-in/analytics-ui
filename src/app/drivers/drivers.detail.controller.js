@@ -35,6 +35,17 @@
             });
         }
         vm.getProfile()
+        $scope.getTimeDiff = function (dt1, dt2) {
+            var now = new Date(dt1 * 1000);
+            var then = new Date(dt2 * 1000);
+            var diff = moment.utc(moment(now, "DD/MM/YYYY HH:mm:ss").diff(moment(then, "DD/MM/YYYY HH:mm:ss")));//.format("HH:mm:ss")
+            var timeInStr = ""
+            if (diff.hours() > 0) {
+                timeInStr = diff.hours() + " hr "
+            }
+            timeInStr += diff.minute() + " min "
+            return timeInStr;
+        }
         $scope.tableParams = new NgTableParams({page:1,count: 20, sorting:{earning:'desc'},
         }, {
             counts: [],
