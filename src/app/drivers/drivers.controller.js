@@ -62,7 +62,7 @@
                 from: moment(current).startOf('day').format("YYYYMMDD").toString(),
                 to: moment(current).endOf('day').format("YYYYMMDD").toString(),
             }, function (response) {
-
+                vm.acquisitionData = []
                 var values = []
                 _.each(response, function(value){
                     values.push({label:PerformanceHandler.getLongDate(value.id), value:value.count})

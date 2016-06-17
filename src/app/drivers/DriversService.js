@@ -36,7 +36,7 @@ function DriversService($q, $resource, API) {
             getTrips: {
                 method: 'GET',
                 url:   url + 'drivers/:id/trips',
-                isArray:true
+                isArray:false
             },
 
 

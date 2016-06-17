@@ -19,75 +19,75 @@
                 <div class="panel-body">
                     <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
                         <div class="box box-heading box-0 text-center">
-                        	<img ng-src="{{profileImage}}" class="iw-driver" height="50">
-                            <h4 class="title">{{name}}</h4>
+                        	<img ng-src="{{vm.profile.profileImage}}" class="iw-driver" height="50">
+                            <h4 class="title">{{vm.profile.name}}</h4>
 
                         </div>
                     </div>
                     <div class="col-md-10 col-sm-12 col-xs-12">
                         <div class="col-md-1 col-sm-4 col-xs-6">
                         	<div class="box">
-                            	<h4 class="number">{{id}}</h4>
+                            	<h4 class="number">{{vm.profile.id}}</h4>
                             	<span>id</span>
                         	</div>
                     	</div> 
                         <div class="col-md-1 col-sm-4 col-xs-6">
                         	<div class="box">
-                            	<h4 class="number">{{phone}}</h4>
+                            	<h4 class="number">{{vm.profile.phone}}</h4>
                             	<span>phone</span>
                         	</div>
                     	</div>  
                     	<div class="col-md-1 col-sm-4 col-xs-6">
                         	<div class="box">
-                            	<h4 class="number">{{vehicle}}</h4>
+                            	<h4 class="number">{{vm.profile.vehicle}}</h4>
                             	<span>vehicle number</span>
                         	</div>
                     	</div>                    
                     	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{vehicleType}}</h4>
+                            <h4 class="number">{{vm.profile.vehicleType}}</h4>
                             <span>vehicle Type</span>
                         </div>
                     </div>
                     	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{joinedOn}}</h4>
+                            <h4 class="number">{{vm.profile.joinedOn}}</h4>
                             <span>joined On</span>
                         </div>
                     </div>
                     	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{ridesToday | number:2}}</h4>
+                            <h4 class="number">{{vm.profile.ridesToday | number:2}}</h4>
                             <span>Today's ride</span>
                         </div>
                     </div>
                     	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{ridesTotal | number:2}}</h4>
+                            <h4 class="number">{{vm.profile.ridesTotal | number:2}}</h4>
                             <span>Total rides</span>
                         </div>
                     </div>
                     	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{feedbackRating | number:2}}</h4>
+                            <h4 class="number">{{vm.profile.feedbackRating | number:2}}</h4>
                             <span>feedback</span>
                         </div>
                     </div>
                     	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{earnedTotal | number:2}}</h4>
+                            <h4 class="number">{{vm.profile.earnedTotal | number:2}}</h4>
                             <span>Total Income</span>
                         </div>
                     </div>
                     	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{state}}</h4>
+                            <h4 class="number">{{vm.profile.state}}</h4>
                             <span>Status</span>
                         </div>
                     </div>
                     	<div class="col-md-1 col-sm-4 col-xs-6">
                         <div class="box">
-                            <h4 class="number">{{city}}</h4>
+                            <h4 class="number">{{vm.profile.city}}</h4>
                             <span>city</span>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Top Drivers</h4></div>
+                    <h4 style="margin-top: 0" class="title">Trips</h4></div>
                 <div class="panel-body">
 
                     <div>
@@ -121,10 +121,10 @@
                                class="table table-responsive table-bordered table-striped global-tbl text-center">
                             <tbody>
                             <tr ng-repeat="row in $data track by $index">
-                                <td data-title="'#ID'" class="text-left">{{row.driver_id}}</td>
-                                <td data-title="'Name'" sortable="'name'" class="text-left">{{row.name}}</td>
-                                <td data-title="'Earning(Rs.)'" sortable="'earning'" class="text-right">
-                                    {{row.earning}}
+                                <td data-title="'#ID'" class="text-left">{{row.id}}</td>
+                                <td data-title="'Name'" sortable="'requestOn'" class="text-left">{{row.requestOn}}</td>
+                                <td data-title="'startOn'" sortable="'startOn'" class="text-right">
+                                    {{row.startOn}}
                                 </td>
                                 <td data-title="'Rides'" sortable="'rides'">{{row.rides}}</td>
                                 <td class="text-left" data-title="'Online'">

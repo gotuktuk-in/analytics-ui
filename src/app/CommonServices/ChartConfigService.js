@@ -103,7 +103,7 @@ function ChartConfigService($q, $resource, API) {
                 x: function(d){return d.label;},
             //    y: function(d){return d.value + (1e-10);},
                 y: function(d){
-                    return d.value + (1e-10);
+                    return d.value
                 },
                 showValues: true,
                 valueFormat: function(d){
