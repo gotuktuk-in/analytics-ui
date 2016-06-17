@@ -20,75 +20,81 @@
                     <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
                         <div class="box box-heading box-0 text-center">
                         	<img ng-src="{{vm.profile.profileImage}}" class="iw-driver" height="50">
-                            <h4 class="title">{{vm.profile.name}}</h4>
+                            <h4 class="title" style="margin-top:10px;">{{vm.profile.name}}</h4>
 
                         </div>
                     </div>
                     <div class="col-md-10 col-sm-12 col-xs-12">
-                        <div class="col-md-1 col-sm-4 col-xs-6">
+                        <div class="col-md-2 col-sm-4 col-xs-12">
                         	<div class="box">
                             	<h4 class="number">{{vm.profile.id}}</h4>
                             	<span>id</span>
                         	</div>
                     	</div> 
-                        <div class="col-md-1 col-sm-4 col-xs-6">
+                        <div class="col-md-2 col-sm-4 col-xs-12">
                         	<div class="box">
                             	<h4 class="number">{{vm.profile.phone}}</h4>
                             	<span>phone</span>
                         	</div>
                     	</div>  
-                    	<div class="col-md-1 col-sm-4 col-xs-6">
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
                         	<div class="box">
                             	<h4 class="number">{{vm.profile.vehicle}}</h4>
                             	<span>vehicle number</span>
                         	</div>
-                    	</div>                    
-                    	<div class="col-md-1 col-sm-4 col-xs-6">
+                    	</div>
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="box">
-                            <h4 class="number">{{vm.profile.vehicleType}}</h4>
-                            <span>vehicle Type</span>
-                        </div>
-                    </div>
-                    	<div class="col-md-1 col-sm-4 col-xs-6">
-                        <div class="box">
-                            <h4 class="number">{{vm.profile.joinedOn}}</h4>
+                            <h4 class="number">{{vm.profile.joinedOn*1000 | date:'dd MMM yy'}}</h4>
                             <span>joined On</span>
                         </div>
                     </div>
-                    	<div class="col-md-1 col-sm-4 col-xs-6">
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="box">
-                            <h4 class="number">{{vm.profile.ridesToday | number:2}}</h4>
-                            <span>Today's ride</span>
+                            <h4 class="number">{{vm.profile.rides_today.total}} <small>/ {{vm.profile.rides_today.unique_ride}}</small></h4>
+                            <span>ride / u</span>
                         </div>
                     </div>
-                    	<div class="col-md-1 col-sm-4 col-xs-6">
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="box">
-                            <h4 class="number">{{vm.profile.ridesTotal | number:2}}</h4>
+                            <h4 class="number">{{vm.profile.rides_total.total}} <small>/ {{vm.profile.rides_total.unique_ride}}</small></h4>
                             <span>Total rides</span>
                         </div>
                     </div>
-                    	<div class="col-md-1 col-sm-4 col-xs-6">
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number">{{vm.profile.today_distance.total}} <small>/ {{vm.profile.today_distance.total}} / {{vm.profile.today_distance.total}}</small></h4>
+                            <span>distance / in trip / for trip</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number">{{vm.profile.today_online.total_hours}} <small>/ {{vm.profile.today_online.intrip_time}} / {{vm.profile.today_online.fortrip_time}}</small></h4>
+                            <span>online</span>
+                    </div>
+                    </div>
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="box">
                             <h4 class="number">{{vm.profile.feedbackRating | number:2}}</h4>
                             <span>feedback</span>
                         </div>
                     </div>
-                    	<div class="col-md-1 col-sm-4 col-xs-6">
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="box">
-                            <h4 class="number">{{vm.profile.earnedTotal | number:2}}</h4>
-                            <span>Total Income</span>
+                            <h4 class="number">Rs. {{vm.profile.total_fare | number:2}} <small>/ {{vm.profile.today_fare | number:2}}</small></h4>
+                            <span>total fare / fare</span>
                         </div>
                     </div>
-                    	<div class="col-md-1 col-sm-4 col-xs-6">
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number">Rs. {{vm.profile.total_earning  | number:2}} <small>/ {{vm.profile.today_earning | number:2}}</small></h4>
+                            <span>total earning / earning</span>
+                        </div>
+                    </div>
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="box">
                             <h4 class="number">{{vm.profile.state}}</h4>
                             <span>Status</span>
-                        </div>
-                    </div>
-                    	<div class="col-md-1 col-sm-4 col-xs-6">
-                        <div class="box">
-                            <h4 class="number">{{vm.profile.city}}</h4>
-                            <span>city</span>
                         </div>
                     </div>
                     </div>
@@ -98,10 +104,10 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Rides</h4></div>
+                    <h4 style="margin-top: 0" class="title">Heatmap</h4></div>
                 <div class="panel-body">
                     <div>
                         <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
@@ -141,30 +147,6 @@
                 </div>
                 <br>
                 <br>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Daily Income</h4></div>
-                <div class="panel-body">
-                    <div>
-                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Heatmap</h4></div>
-                <div class="panel-body">
-                    <div>
-                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
