@@ -6,14 +6,23 @@
         .controller('DriversController', DriversController);
 
     /** @ngInject */
-    function DriversController($scope, $log, $rootScope, $window, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversController($scope, $log, $rootScope, $window, ChartConfigService, PerformanceService, PerformanceHandler, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this
         var today = moment()
         var currentDate = moment()
         var current = moment()
         vm.live = true
+        vm.acquisitionData = []
+        vm.config = ChartConfigService.lineChartConfig;
+        vm.acquisitionChart = angular.copy(ChartConfigService.discreteBarChartOptions)
+        vm.acquisitionChart.chart.xAxis.tickFormat = function (d) {
+            return d3.time.format('%d %b %y')(new Date(d));
+        };
         $scope.date = moment().format("dddd, MMMM Do YYYY")
+        $scope.datesForAcq = {}
+        $scope.datesForAcq.startDate = moment().format("YYYY-MM-DD");
+        $scope.datesForAcq.endDate = moment().format("YYYY-MM-DD");
         vm.changeDate = function (to) {
 
             if (to == 'next') {
@@ -34,6 +43,7 @@
             else { vm.live = false; }
             $scope.tableParams.reload()
             $scope.tableParams.page(1)
+            vm.getAcquisition()
         }
         function getLive() {
             LiveService.getOverview({
@@ -41,6 +51,26 @@
                 vehicle: $rootScope.vehicleType,
             }, function (response) {
                 vm.overview = response;
+            }, function (err) {
+                console.log(err)
+                $scope.error = true;
+            });
+        }
+
+        vm.getAcquisition = function () {
+            DriversService.getAcquisition({
+                city: $rootScope.city,
+                vehicle: $rootScope.vehicleType,
+                from: moment( $scope.datesForAcq.startDate).startOf('day').format("YYYYMMDD").toString(),
+                to: moment( $scope.datesForAcq.endDate).endOf('day').format("YYYYMMDD").toString(),
+            }, function (response) {
+                vm.acquisitionData = []
+                var values = []
+                _.each(response, function(value){
+                    values.push({label:PerformanceHandler.getLongDate(value.id), value:value.count})
+                })
+                vm.acquisitionData.push({key:'Drivers', values:values})
+                console.log('vm.acquisitionData ', vm.acquisitionData)
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
@@ -63,7 +93,8 @@
             });
         }
         getLive()
-      //  vm.getTopDrivers()
+        vm.getAcquisition()
+        //  vm.getTopDrivers()
 
         // call to get data for the tables
          $scope.tableParams = new NgTableParams({page:1,count: 20, sorting:{earning:'desc'},

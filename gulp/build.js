@@ -3,6 +3,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var htmlmin = require('gulp-htmlmin');
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
@@ -16,7 +17,7 @@ gulp.task('partials', function () {
     .pipe($.htmlmin({
       removeEmptyAttributes: true,
       removeAttributeQuotes: true,
-      collapseBooleanAttributes: true,
+      collapseBooleanAttributes: false,
       collapseWhitespace: true
     }))
     .pipe($.angularTemplatecache('templateCacheHtml.js', {
@@ -59,7 +60,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.htmlmin({
       removeEmptyAttributes: true,
       removeAttributeQuotes: true,
-      collapseBooleanAttributes: true,
+      collapseBooleanAttributes: false,
       collapseWhitespace: true
     }))
     .pipe(htmlFilter.restore)

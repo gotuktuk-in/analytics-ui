@@ -12,7 +12,7 @@ body {
 .app-loader{
 	position: absolute;
 	top: 30%;
-	left: 40%;
+	left: 46%;
 	z-index: 200000000;
 	width: 150px;
 	height: 130px;
@@ -64,8 +64,8 @@ h4, .h4 {
     top: -10px;
     width: 21px;
 }
-button, input, optgroup, textarea {
-    color: #333;
+button, input, optgroup, textarea, select {
+    color: initial;
 }
 .panel-heading {
     border-radius: 0;
@@ -163,6 +163,16 @@ div.box.box-container div.row div.box {padding:20px 0;}
     border-radius: 0;
     padding: 18px;
 
+}
+input.daterangepicker-aqq-chart {
+    line-height: 16px;
+    padding: 0px;
+    margin: 0px;
+    height: 17px;
+    font-size: 11px;
+    line-height: 16px;
+    max-width: 190px;
+    min-width: 130px;
 }
 .daterangepicker .calendar-date, .daterangepicker td.start-date.end-date {
     border-radius: 0px;
@@ -631,13 +641,13 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-color: #ffffff !important;
     margin-left: 10px !important;
 }
-.info-window .iw-header .iw-driver {
+.info-window .iw-header .iw-driver, .iw-driver {
     background-color: #eee !important;
     border-radius: 100%;
     display: inline-block;
-    height: 50px !important;
+    height: 75px !important;
     margin-top: 15px;
-    width: 50px !important;
+    width: 75px !important;
 }
 .info-window .iw-header h3 {
     color: #333;
@@ -720,6 +730,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .box.box-1, .box.box-2, .box.box-3, .box.box-4{
 	max-width:225px;
 	min-width:200px;
+}
+.box.box-0{
+	background-color: #333	;
 }
 .box.box-1{
 	background-color: #ec407a;

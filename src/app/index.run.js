@@ -29,7 +29,11 @@
             $state.go("login")
             $rootScope.isAuthenticated = false;
         }
-
+        $rootScope.$on('unauthorized', function() {
+            UserService.clearUser()
+            $state.go("login")
+            $rootScope.isAuthenticated = false;
+        });
         $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
             console.log("to - " + toState.name + " $state.current.name - " + $state.current.name)
             if (UserService.getUser() != null && (toState.name == "login")) {

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid"  ng-if="vm.overview.driver.total_drivers">
     <div class="row" style="z-index:1; position:fixed; width:98%; padding:10px 0; left:53px;">
             <div class="col-md-12 col-sm-12 col-xs-12">
             	<span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>
@@ -59,19 +59,23 @@
     </div>
 
     <div class="row">
-        <!--<div class="col-md-12 col-sm-12 col-xs-12" ngsf-fullscreen>
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Driver Acquisition</h4></div>
+                <div class="pull-right">
+					<input ng-change="vm.getAcquisition()" class="form-control cstm-width text-center daterangepicker-aqq-chart" type="daterange" ng-model="datesForAcq" separator=" - " format="DD MMM YY" opens="left" ranges="vm.ranges">
+				</div>
+                    <h4 style="margin-top: 0" class="title">Driver Acquisition</h4>
+                
+                </div>
+
                 <div class="panel-body">
                     <div>
-                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+                        <nvd3 options="vm.acquisitionChart" data="vm.acquisitionData" config="vm.config"></nvd3>
                     </div>
-                    <a ngsf-toggle-fullscreen show-if-fullscreen-enabled>
-                    </a>
                 </div>
             </div>
-        </div>-->
+        </div>
         <div class="col-md-12 col-sm-12 col-xs-12" ngsf-fullscreen>
 
             <div class="panel panel-default">
@@ -94,7 +98,7 @@
                             </thead>-->
                             <tbody>
                             <tr ng-repeat="row in $data track by $index">
-                                <td data-title="'#ID'" class="text-left">{{row.driver_id}}</td>
+                                <td data-title="'#ID'" class="text-left"><a ui-sref="home.drivers_detail({driverId:row.driver_id})" >{{row.driver_id}}</a></td>
                                 <td data-title="'Name'" sortable="'name'" class="text-left">{{row.name}}</td>
                                 <td data-title="'Earning(Rs.)'" sortable="'earning'" class="text-right">
                                     {{row.earning}}

@@ -1,0 +1,195 @@
+<div class="container-fluid" ng-if="vm.profile.name">
+    <div class="row" >
+        <form class="form-inline date-selection date-selection-dr"	>
+            <div class="form-group ">
+                <input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange" ng-model="selectedDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
+            </div>
+        </form>
+            <!--<div class="col-md-12 col-sm-12 col-xs-12">
+            	<span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>
+            </div>-->
+            </div>
+            <span class="live" ng-if="vm.live"> LIVE</span>
+            <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+    <br>
+    <br>
+    <br>
+    <br><br>
+    <div class="row overview-box">
+        <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>
+</span>
+
+        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
+                        <div class="box box-heading box-0 text-center">
+                        	<img ng-src="{{vm.profile.profileImage}}" class="iw-driver" height="50">
+                            <h4 class="title" style="margin-top:10px;">{{vm.profile.name}}</h4>
+
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-sm-12 col-xs-12">
+                        <div class="col-md-2 col-sm-4 col-xs-12">
+                        	<div class="box">
+                            	<h4 class="number">{{vm.profile.id}}</h4>
+                            	<span>id</span>
+                        	</div>
+                    	</div> 
+                        <div class="col-md-2 col-sm-4 col-xs-12">
+                        	<div class="box">
+                            	<h4 class="number">{{vm.profile.phone}}</h4>
+                            	<span>phone</span>
+                        	</div>
+                    	</div>  
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
+                        	<div class="box">
+                            	<h4 class="number">{{vm.profile.vehicle}}</h4>
+                            	<span>vehicle number</span>
+                        	</div>
+                    	</div>
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number">{{vm.profile.joinedOn*1000 | date:'dd MMM yy'}}</h4>
+                            <span>joined On</span>
+                        </div>
+                    </div>
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number">{{vm.profile.rides_today.total}} <small>/ {{vm.profile.rides_today.unique_ride}}</small></h4>
+                            <span>ride / u</span>
+                        </div>
+                    </div>
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number">{{vm.profile.rides_total.total}} <small>/ {{vm.profile.rides_total.unique_ride}}</small></h4>
+                            <span>Total rides</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number">{{vm.profile.today_distance.total}} <small>/ {{vm.profile.today_distance.total}} / {{vm.profile.today_distance.total}}</small></h4>
+                            <span>distance / in trip / for trip</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number">{{vm.profile.today_online.total_hours}} <small>/ {{vm.profile.today_online.intrip_time}} / {{vm.profile.today_online.fortrip_time}}</small></h4>
+                            <span>online</span>
+                    </div>
+                    </div>
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number">{{vm.profile.feedbackRating | number:2}}</h4>
+                            <span>feedback</span>
+                        </div>
+                    </div>
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number">Rs. {{vm.profile.total_fare | number:2}} <small>/ {{vm.profile.today_fare | number:2}}</small></h4>
+                            <span>total fare / fare</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number">Rs. {{vm.profile.total_earning  | number:2}} <small>/ {{vm.profile.today_earning | number:2}}</small></h4>
+                            <span>total earning / earning</span>
+                        </div>
+                    </div>
+                    	<div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="box">
+                            <h4 class="number" ng-if="vm.profile.state== (22|| 11)">Online</h4>
+                            <h4 class="number" ng-if="vm.profile.state== 10">Offline</h4>
+                            <span>Current Status</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+    <!-- 
+<div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">Heatmap</h4></div>
+                <div class="panel-body">
+                    <div>
+                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+                    </div>
+                </div>
+            </div>
+        </div>
+ -->
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">Trips</h4></div>
+                <div class="panel-body">
+
+                    <div>
+                        <table ng-table="tableParams" class="table table-bordered table-condensed">
+                            <tr ng-class="{'unTruncate':row.showMore,'truncate':!row.showMore}" class="truncate"
+                                ng-repeat="row in $data track by $index">
+                                <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
+                                    <div class="trnc">
+                                        <!--  <a href="void:javascript(0);" ng-click="selectTrip(row)">{{row.id}}</a>-->
+                                        <a ui-sref="trips.tripsdetails({ id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id })">{{row.id}}</a>
+                                    </div>
+                                </td>
+                                <td data-title="'Date & Time'" sortable="'requestOn'" style="width:150px;">
+                                    <div>{{(row.requestOn)*1000 | date:"dd/MM/yy 'at' h:mma"}}</div>
+                                </td>
+                                <td data-title="'Rider Info'">
+                                    <div class="trnc">{{row.riderInfo.name}}<br>{{row.riderInfo.phone}}</div>
+                                </td>
+                                <td data-title="'Pickup'" style="width: 200px;">
+                                    <div class="trnc">{{row.pickUp.line1 + ' ' + row.pickUp.line2}} {{row.pickUp.city + " " + row.pickUp.state + ' ' +
+                                        row.pickUp.country}}
+                                    </div>
+                                </td>
+                                <td data-title="'Drop'" style="width: 200px;">
+                                    <div class="trnc">{{row.drop.line1 + ' ' + row.drop.line2}} {{row.pickUp.city + " " + row.drop.state + ' ' +
+                                        row.drop.country}}
+                                    </div>
+                                </td>
+                                <td data-title="'Time'" align="center">
+                                    <div class="trnc">{{getTimeDiff(row.dropOn,row.pickupOn)}}</div>
+                                </td>
+                                <td data-title="'Distance (KM)'" align="center">
+                                    <div class="trnc">{{(row.disPickupDrop)/1000 | number:2}}</div>
+                                </td>
+                                <td data-title="'Amt. (Rs.)'" align="right">
+                                    <div class="trnc">
+                                        {{row.amount.total | number:2}}<br>
+                                        <span class="small">Cash: {{row.amount.cash | number:2}}</span>
+                                        <span class="small">Citrus: {{row.amount.citrus | number:2}}</span>
+                                        <span class="small">Discount: {{row.amount.discount | number:2}}</span>
+                                    </div>
+                                </td>
+                                <td data-title="'Rating'" sortable="'riderFeedbackRating'" align="center">
+                                    <div class="trnc">{{row.riderFeedbackRating | number:1}}</div>
+                                </td>
+                                <!--<td data-title="''">
+                                    <button class="btn btn-xs btn-link" ng-click="showMore(row)">More <i
+                                            class="glyphicon glyphicon-triangle-bottom"></i></button>
+                                </td>-->
+                            </tr>
+                        </table>
+                        <table class="table table-bordered table-condensed" ng-show="tblNoData">
+                            <tr>
+                                <td colspan="9">No data found</td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

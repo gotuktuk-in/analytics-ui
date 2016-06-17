@@ -90,6 +90,37 @@ function ChartConfigService($q, $resource, API) {
                 }
             }
         };
+        factory.discreteBarChartOptions = {
+            chart: {
+                type: 'discreteBarChart',
+                height: 450,
+                margin : {
+                    top: 20,
+                    right: 20,
+                    bottom: 80,
+                    left: 55
+                },
+                x: function(d){return d.label;},
+            //    y: function(d){return d.value + (1e-10);},
+                y: function(d){
+                    return d.value
+                },
+                showValues: true,
+                valueFormat: function(d){
+                    return d3.round(d);
+                  //  return d3.format(',.4f')(d);
+                },
+                duration: 500,
+                xAxis: {
+                    axisLabel: '',
+                    rotateLabels: '-90'
+                },
+                yAxis: {
+                    axisLabel: '',
+                    axisLabelDistance: -10
+                }
+            }
+        }
 
     return factory
 }

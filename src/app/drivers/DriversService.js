@@ -23,6 +23,21 @@ function DriversService($q, $resource, API) {
                 url:   url + 'drivers/topdrivers',
                 isArray:true
             },
+            getAcquisition: {
+                method: 'GET',
+                url:   url + 'drivers/acquisition',
+                isArray:true
+            },
+            getProfile: {
+                method: 'GET',
+                url:   url + 'drivers/profile/:id',
+                isArray:false
+            },
+            getTrips: {
+                method: 'GET',
+                url:   url + 'drivers/:id/trips',
+                isArray:false
+            },
 
 
         }
