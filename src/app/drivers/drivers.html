@@ -62,7 +62,14 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Driver Acquisition</h4></div>
+                    <h4 style="margin-top: 0" class="title">Driver Acquisition</h4>
+                <div>
+
+                            <input ng-change="vm.getAcquisition()" class="form-control cstm-width text-center" type="daterange" ng-model="datesForAcq" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
+
+                </div>
+                </div>
+
                 <div class="panel-body">
                     <div>
                         <nvd3 options="vm.acquisitionChart" data="vm.acquisitionData" config="vm.config"></nvd3>

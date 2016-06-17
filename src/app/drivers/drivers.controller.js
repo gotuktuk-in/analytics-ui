@@ -20,7 +20,9 @@
             return d3.time.format('%d %b %y')(new Date(d));
         };
         $scope.date = moment().format("dddd, MMMM Do YYYY")
-
+        $scope.datesForAcq = {}
+        $scope.datesForAcq.startDate = moment().format("YYYY-MM-DD");
+        $scope.datesForAcq.endDate = moment().format("YYYY-MM-DD");
         vm.changeDate = function (to) {
 
             if (to == 'next') {
@@ -59,8 +61,8 @@
             DriversService.getAcquisition({
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
-                from: moment(current).startOf('day').format("YYYYMMDD").toString(),
-                to: moment(current).endOf('day').format("YYYYMMDD").toString(),
+                from: moment( $scope.datesForAcq.startDate).startOf('day').format("YYYYMMDD").toString(),
+                to: moment( $scope.datesForAcq.endDate).endOf('day').format("YYYYMMDD").toString(),
             }, function (response) {
                 vm.acquisitionData = []
                 var values = []
