@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-if="vm.profile.name">
     <div class="row" >
         <form class="form-inline date-selection date-selection-dr"	>
             <div class="form-group ">
@@ -110,7 +110,8 @@
     </div>
 
     <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <!-- 
+<div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 style="margin-top: 0" class="title">Heatmap</h4></div>
@@ -121,6 +122,7 @@
                 </div>
             </div>
         </div>
+ -->
         <div class="col-md-12 col-sm-12 col-xs-12">
 
             <div class="panel panel-default">
@@ -141,18 +143,6 @@
                                 <td data-title="'Date & Time'" sortable="'requestOn'" style="width:150px;">
                                     <div>{{(row.requestOn)*1000 | date:"dd/MM/yy 'at' h:mma"}}</div>
                                 </td>
-                            <!--    <td data-title="'Reason'">
-                                    <div ng-if="row.reason == 'rCR_MIND_CHANGE'" class="text-warning trnc">Rd cn Mind Chng</div>
-                                    <div ng-if="row.reason == 'rCR_NOT_INTEREST'" class="text-warning trnc">Rd cn Not Intr</div>
-                                    <div ng-if="row.reason == 'rCR_OTHER'" class="text-warning trnc">Rd cn Other</div>
-                                    <div ng-if="row.reason == 'rCR_ROUTE_CHANGE'" class="text-warning trnc">Rd cn Route Chng</div>
-                                    <div ng-if="row.reason == 'dCR_CUSTOMER_LATE'" class="text-warning trnc">Dr cn Cust Late</div>
-                                    <div ng-if="row.reason == 'dCR_VEH_ISSUE'" class="text-warning trnc">Dr cn Veh Issue</div>
-                                    <div ng-if="row.reason == 'dCR_TYRE_FLAT'" class="text-warning trnc">Dr cn Tyre Flat</div>
-                                    <div ng-if="row.reason == 'dCR_STUCK_TRAFFIC'" class="text-warning trnc">Dr cn Stuck Trf</div>
-                                    <div ng-if="row.reason == 'rCR_BEFORE_CONFIRM'" class="text-warning trnc">Rd cn B4 Conf</div>
-                                    <div ng-if="row.tripState == 61" class="text-success trnc">Successful</div>
-                                </td>-->
                                 <td data-title="'Rider Info'">
                                     <div class="trnc">{{row.riderInfo.name}}<br>{{row.riderInfo.phone}}</div>
                                 </td>

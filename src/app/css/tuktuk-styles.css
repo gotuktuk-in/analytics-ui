@@ -645,9 +645,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-color: #eee !important;
     border-radius: 100%;
     display: inline-block;
-    height: 50px !important;
+    height: 75px !important;
     margin-top: 15px;
-    width: 50px !important;
+    width: 75px !important;
 }
 .info-window .iw-header h3 {
     color: #333;
