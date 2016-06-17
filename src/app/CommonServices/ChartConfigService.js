@@ -97,7 +97,7 @@ function ChartConfigService($q, $resource, API) {
                 margin : {
                     top: 20,
                     right: 20,
-                    bottom: 50,
+                    bottom: 80,
                     left: 55
                 },
                 x: function(d){return d.label;},
@@ -112,10 +112,11 @@ function ChartConfigService($q, $resource, API) {
                 },
                 duration: 500,
                 xAxis: {
-                    axisLabel: 'X Axis'
+                    axisLabel: '',
+                    rotateLabels: '-90'
                 },
                 yAxis: {
-                    axisLabel: 'Y Axis',
+                    axisLabel: '',
                     axisLabelDistance: -10
                 }
             }

@@ -62,12 +62,11 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
+                <div class="pull-right">
+					<input ng-change="vm.getAcquisition()" class="form-control cstm-width text-center daterangepicker-aqq-chart" type="daterange" ng-model="datesForAcq" separator=" - " format="DD MMM YY" opens="left" ranges="vm.ranges">
+				</div>
                     <h4 style="margin-top: 0" class="title">Driver Acquisition</h4>
-                <div>
-
-                            <input ng-change="vm.getAcquisition()" class="form-control cstm-width text-center" type="daterange" ng-model="datesForAcq" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
-
-                </div>
+                
                 </div>
 
                 <div class="panel-body">

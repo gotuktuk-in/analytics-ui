@@ -164,6 +164,16 @@ div.box.box-container div.row div.box {padding:20px 0;}
     padding: 18px;
 
 }
+input.daterangepicker-aqq-chart {
+    line-height: 16px;
+    padding: 0px;
+    margin: 0px;
+    height: 17px;
+    font-size: 11px;
+    line-height: 16px;
+    max-width: 190px;
+    min-width: 130px;
+}
 .daterangepicker .calendar-date, .daterangepicker td.start-date.end-date {
     border-radius: 0px;
 }
@@ -722,7 +732,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	min-width:200px;
 }
 .box.box-0{
-	background-color: #333;
+	background-color: #333	;
 }
 .box.box-1{
 	background-color: #ec407a;
