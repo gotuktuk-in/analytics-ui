@@ -6,7 +6,7 @@
         .controller('DriversDetailController', DriversDetailController);
 
     /** @ngInject */
-    function DriversDetailController($scope, $stateParams, $rootScope, $window,StaticDataService, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversDetailController($scope, $stateParams, $rootScope, $interval,StaticDataService, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this
         var current = moment()
@@ -34,7 +34,10 @@
             $scope.tableParams.page(1);
             $scope.tableParams.reload()
         }
-
+        var interval= $interval(function(){
+            vm.getAllData()
+        }, 30000)
+        $scope.$on('$destroy', function () { $interval.cancel(interval); });
         $scope.getTimeDiff = function (dt1, dt2) {
             var now = new Date(dt1 * 1000);
             var then = new Date(dt2 * 1000);

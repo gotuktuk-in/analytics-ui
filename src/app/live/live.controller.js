@@ -215,6 +215,11 @@
         getLive()
         getOverviewLive()
         vm.loadHeatMap()
+       var interval=  $timeout(function(){
+            vm.refreshPage()
+        }, 30000)
+
+        $scope.$on('$destroy', function () { $interval.cancel(interval); });
         vm.refreshPage = function () {
             getLive()
             vm.loadHeatMap()

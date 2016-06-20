@@ -6,7 +6,7 @@
         .controller('PerformanceController', PerformanceController);
 
     /** @ngInject */
-    function PerformanceController($scope, StaticDataService, ChartConfigService, $stateParams, $rootScope, PerformanceService, PerformanceHandler) {
+    function PerformanceController($scope, $interval ,StaticDataService, ChartConfigService, $stateParams, $rootScope, PerformanceService, PerformanceHandler) {
 
         var vm = this;
 
@@ -136,6 +136,9 @@
             vm.getRiders()
         }
         vm.getAllData()
-
+        var interval= $interval(function(){
+            vm.getAllData()
+        }, 30000)
+        $scope.$on('$destroy', function () { $interval.cancel(interval); });
     }
 })();

@@ -6,7 +6,7 @@
         .controller('TripsController', TripsController);
 
     /** @ngInject */
-    function TripsController($scope, StaticDataService, ChartConfigService, PerformanceService, NgTableParams, $stateParams, TripsService, $rootScope, PerformanceHandler) {
+    function TripsController($scope, $interval, StaticDataService, ChartConfigService, PerformanceService, NgTableParams, $stateParams, TripsService, $rootScope, PerformanceHandler) {
 
         var vm = this;
         var trips_heatmap
@@ -113,6 +113,12 @@
             }
         });
         vm.getTrips()
+        var interval= $interval(function(){
+            vm.getTrips()
+            $scope.tableParams.page(1)
+            $scope.tableParams.reload()
+        }, 30000)
+        $scope.$on('$destroy', function () { $interval.cancel(interval); });
         heatmapChart(trips_heatmap);
     }
 })();
