@@ -57,10 +57,10 @@
                 var  start = params.page()//(params.page() - 1) * params.count();
                 console.log("**************************")
                 var orderBy= ''
-                var filed = ''
+                var field = ''
                 if (params.orderBy().length > 0) {
                     orderBy = params.orderBy()[0].substr(0, 1);
-                    filed = params.orderBy()[0].substr(1);
+                    field = params.orderBy()[0].substr(1);
                     if (orderBy === "+") {
                         orderBy = "ASC"
                     }
@@ -75,8 +75,8 @@
                       //  vehicle: $rootScope.vehicleType,
                         startDate: moment(  $scope.selectedDates.startDate).startOf('day').unix(),
                         endDate: moment(  $scope.selectedDates.endDate).endOf('day').unix(),
-                      //  orderby:orderBy,
-                       // field:filed,
+                        orderby:orderBy,
+                        field:field,
                         start:start,
                         count:params.count()
 

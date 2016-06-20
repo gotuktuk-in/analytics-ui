@@ -154,6 +154,20 @@
                                 <td data-title="'Rider Info'">
                                     <div class="trnc">{{row.riderInfo.name}}<br>{{row.riderInfo.phone}}</div>
                                 </td>
+                                <td data-title="'Status'" sortable="'tripState'" style="width: 100px;">
+                                    <div ng-if="row.tripState == 20" class="text-primary">Requested</div>
+                                    <div ng-if="row.tripState == 22">Allocated</div>
+                                    <div ng-if="row.tripState == 30">For Trip</div>
+                                    <div ng-if="row.tripState == 40">At Pickup</div>
+                                    <div ng-if="row.tripState == 60">At Destination</div>
+                                    <div ng-if="row.tripState == 50" class="text-info">In trip</div>
+                                    <div ng-if="row.tripState == 61" class="text-success">Successful</div>
+                                    <div ng-if="row.tripState == 70" class="text-warning">Can by Driver</div>
+                                    <div ng-if="row.tripState == 71" class="text-warning">Can by Rider</div>
+                                    <div ng-if="row.tripState == 80">No Drv Avlble</div>
+                                    <div ng-if="row.tripState == 81" class="text-danger">Failed (No Drivers Accepted)</div>
+                                    <div ng-if="row.tripState == 82">Terminated</div>
+                                </td>
                                 <td data-title="'Pickup'" style="width: 200px;">
                                     <div class="trnc">{{row.pickUp.line1 + ' ' + row.pickUp.line2}} {{row.pickUp.city + " " + row.pickUp.state + ' ' +
                                         row.pickUp.country}}
