@@ -65,6 +65,10 @@
 
         }
         $scope.getTimeDiff = function (dt1, dt2) {
+            if(dt1==0 || dt2==0 )
+            {
+                return '0'
+            }
             if(dt2)
             {
                 var diff = (dt2 - dt1);
