@@ -68,13 +68,13 @@
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="box">
-                            <h4 class="number">{{vm.profile.today_distance.total}} <small>/ {{vm.profile.today_distance.total}} / {{vm.profile.today_distance.total}}</small></h4>
+                            <h4 class="number">{{vm.profile.today_distance.total | number:2}} <small>/ {{vm.profile.today_distance.intrip | number:2}} / {{vm.profile.today_distance.forTrip | number:2}}</small></h4>
                             <span>distance / in trip / for trip</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="box">
-                            <h4 class="number">{{vm.profile.today_online.total_hours}} <small>/ {{vm.profile.today_online.intrip_time}} / {{vm.profile.today_online.fortrip_time}}</small></h4>
+                            <h4 class="number">{{vm.profile.today_online.total_hours | secondsToDateTime}} <small>/ {{vm.profile.today_online.intrip_time | secondsToDateTime}} / {{vm.profile.today_online.fortrip_time | secondsToDateTime}}</small></h4>
                             <span>online hour <small>/ in trip / for trip</small></span>
                     </div>
                     </div>

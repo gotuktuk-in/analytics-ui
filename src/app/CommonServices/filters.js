@@ -18,9 +18,9 @@ angular
 
     var min = mydate.getUTCMinutes()
     var sec = mydate.getUTCSeconds()
-    if(hours ) {string+= hours +" hrs " }
-      if(min ) {string+= min +" min " }
-        if(sec ) {string+=sec +" sec" }
+    if(hours ) {string+= hours +":" }
+      if(min ) {string+= min +":" }
+        if(sec ) {string+=sec +"" }
 
     return string;
   };

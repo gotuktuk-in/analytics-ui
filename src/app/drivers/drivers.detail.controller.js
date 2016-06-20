@@ -12,8 +12,8 @@
         var current = moment()
         vm.ranges = StaticDataService.ranges
         $scope.selectedDates = {};
-        $scope.selectedDates.startDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
-        $scope.selectedDates.endDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.selectedDates.startDate = moment().format("YYYY-MM-DD");
+        $scope.selectedDates.endDate = moment().format("YYYY-MM-DD");
 
 
         vm.getProfile = function () {
