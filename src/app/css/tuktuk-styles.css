@@ -982,10 +982,10 @@ span.img-top{
 
 
 ::-moz-selection {
-    background: white;
+    background: #ccc;
 }
 
-::selection { background: white; }
+::selection { background: #ccc; }
 
 @-webkit-keyframes
 icon-beat {  0% {
