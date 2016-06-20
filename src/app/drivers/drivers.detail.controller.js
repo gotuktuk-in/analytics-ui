@@ -6,17 +6,20 @@
         .controller('DriversDetailController', DriversDetailController);
 
     /** @ngInject */
-    function DriversDetailController($scope, $stateParams, $rootScope, $window, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversDetailController($scope, $stateParams, $rootScope, $interval,StaticDataService, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this
         var current = moment()
+        vm.ranges = StaticDataService.ranges
         $scope.selectedDates = {};
-        $scope.selectedDates.startDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
-        $scope.selectedDates.endDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.selectedDates.startDate = moment().format("YYYY-MM-DD");
+        $scope.selectedDates.endDate = moment().format("YYYY-MM-DD");
 
 
         vm.getProfile = function () {
-            DriversService.getProfile({id:$stateParams.driverId
+            DriversService.getProfile({id:$stateParams.driverId,
+                from: moment( $scope.selectedDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+                to: moment( $scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString(),
             }, function (response) {
                 vm.profile = response;
             }, function (err) {
@@ -25,16 +28,16 @@
             });
         }
 
-        vm.getTrips = function () {
-            DriversService.getTrips({id:$stateParams.driverId
-            }, function (response) {
-                vm.profile = response;
-            }, function (err) {
-                console.log(err)
-                $scope.error = true;
-            });
-        }
         vm.getProfile()
+        vm.getAllData = function () {
+            vm.getProfile();
+            $scope.tableParams.page(1);
+            $scope.tableParams.reload()
+        }
+        var interval= $interval(function(){
+            vm.getAllData()
+        }, 30000)
+        $scope.$on('$destroy', function () { $interval.cancel(interval); });
         $scope.getTimeDiff = function (dt1, dt2) {
             var now = new Date(dt1 * 1000);
             var then = new Date(dt2 * 1000);
@@ -54,10 +57,10 @@
                 var  start = params.page()//(params.page() - 1) * params.count();
                 console.log("**************************")
                 var orderBy= ''
-                var filed = ''
+                var field = ''
                 if (params.orderBy().length > 0) {
                     orderBy = params.orderBy()[0].substr(0, 1);
-                    filed = params.orderBy()[0].substr(1);
+                    field = params.orderBy()[0].substr(1);
                     if (orderBy === "+") {
                         orderBy = "ASC"
                     }
@@ -70,10 +73,10 @@
                     {
                        // city: $rootScope.city,
                       //  vehicle: $rootScope.vehicleType,
-                        startDate: moment( current).startOf('day').unix(),
-                        endDate: moment( current).endOf('day').unix(),
-                      //  orderby:orderBy,
-                       // field:filed,
+                        startDate: moment(  $scope.selectedDates.startDate).startOf('day').unix(),
+                        endDate: moment(  $scope.selectedDates.endDate).endOf('day').unix(),
+                        orderby:orderBy,
+                        field:field,
                         start:start,
                         count:params.count()
 
