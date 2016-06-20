@@ -6,17 +6,20 @@
         .controller('DriversDetailController', DriversDetailController);
 
     /** @ngInject */
-    function DriversDetailController($scope, $stateParams, $rootScope, $window, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversDetailController($scope, $stateParams, $rootScope, $window,StaticDataService, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this
         var current = moment()
+        vm.ranges = StaticDataService.ranges
         $scope.selectedDates = {};
         $scope.selectedDates.startDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
         $scope.selectedDates.endDate = moment().subtract(1, 'days').format("YYYY-MM-DD");
 
 
         vm.getProfile = function () {
-            DriversService.getProfile({id:$stateParams.driverId
+            DriversService.getProfile({id:$stateParams.driverId,
+                from: moment( $scope.selectedDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+                to: moment( $scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString(),
             }, function (response) {
                 vm.profile = response;
             }, function (err) {
@@ -25,16 +28,13 @@
             });
         }
 
-        vm.getTrips = function () {
-            DriversService.getTrips({id:$stateParams.driverId
-            }, function (response) {
-                vm.profile = response;
-            }, function (err) {
-                console.log(err)
-                $scope.error = true;
-            });
-        }
         vm.getProfile()
+        vm.getAllData = function () {
+            vm.getProfile();
+            $scope.tableParams.page(1);
+            $scope.tableParams.reload()
+        }
+
         $scope.getTimeDiff = function (dt1, dt2) {
             var now = new Date(dt1 * 1000);
             var then = new Date(dt2 * 1000);
@@ -70,8 +70,8 @@
                     {
                        // city: $rootScope.city,
                       //  vehicle: $rootScope.vehicleType,
-                        startDate: moment( current).startOf('day').unix(),
-                        endDate: moment( current).endOf('day').unix(),
+                        startDate: moment(  $scope.selectedDates.startDate).startOf('day').unix(),
+                        endDate: moment(  $scope.selectedDates.endDate).endOf('day').unix(),
                       //  orderby:orderBy,
                        // field:filed,
                         start:start,

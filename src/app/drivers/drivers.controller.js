@@ -6,7 +6,7 @@
         .controller('DriversController', DriversController);
 
     /** @ngInject */
-    function DriversController($scope, $log, $rootScope, $window, ChartConfigService, PerformanceService, PerformanceHandler, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversController($scope, $log, $rootScope, $window,StaticDataService, ChartConfigService, PerformanceService, PerformanceHandler, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this
         var today = moment()
@@ -14,6 +14,7 @@
         var current = moment()
         vm.live = true
         vm.acquisitionData = []
+        vm.ranges = StaticDataService.ranges
         vm.config = ChartConfigService.lineChartConfig;
         vm.acquisitionChart = angular.copy(ChartConfigService.discreteBarChartOptions)
         vm.acquisitionChart.chart.xAxis.tickFormat = function (d) {
@@ -21,7 +22,7 @@
         };
         $scope.date = moment().format("dddd, MMMM Do YYYY")
         $scope.datesForAcq = {}
-        $scope.datesForAcq.startDate = moment().format("YYYY-MM-DD");
+        $scope.datesForAcq.startDate = moment().subtract(7,'days').format("YYYY-MM-DD");
         $scope.datesForAcq.endDate = moment().format("YYYY-MM-DD");
         vm.changeDate = function (to) {
 
@@ -58,6 +59,7 @@
         }
 
         vm.getAcquisition = function () {
+            console.log($scope.datesForAcq)
             DriversService.getAcquisition({
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,

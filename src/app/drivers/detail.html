@@ -1,4 +1,4 @@
-<div class="container-fluid" ng-if="vm.profile.name">
+<div class="container-fluid">
     <div class="row" >
         <form class="form-inline date-selection date-selection-dr"	>
             <div class="form-group ">
@@ -98,7 +98,7 @@
                     </div>
                     	<div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="box">
-                            <h4 class="number" ng-if="vm.profile.state== (22|| 11)">Online</h4>
+                            <h4 class="number" ng-if="vm.profile.state== 22 || vm.profile.state== 11">Online</h4>
                             <h4 class="number" ng-if="vm.profile.state== 10">Offline</h4>
                             <span>Current Status</span>
                         </div>
@@ -137,7 +137,7 @@
                                 <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
                                     <div class="trnc">
                                         <!--  <a href="void:javascript(0);" ng-click="selectTrip(row)">{{row.id}}</a>-->
-                                        <a ui-sref="trips.tripsdetails({ id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id })">{{row.id}}</a>
+                                        <a >{{row.id}}</a>
                                     </div>
                                 </td>
                                 <td data-title="'Date & Time'" sortable="'requestOn'" style="width:150px;">
