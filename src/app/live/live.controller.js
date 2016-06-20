@@ -6,7 +6,7 @@
         .controller('LiveController', LiveController);
 
     /** @ngInject */
-    function LiveController($scope, $log, $rootScope, $state, $timeout, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
+    function LiveController($scope, $log, $rootScope, $state, $interval, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
         var vm = this;
         //range slider , Failed(2), Cancel(2), Success.
 
@@ -215,7 +215,7 @@
         getLive()
         getOverviewLive()
         vm.loadHeatMap()
-       var interval=  $timeout(function(){
+       var interval=  $interval(function(){
             vm.refreshPage()
         }, 30000)
 
