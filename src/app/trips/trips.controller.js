@@ -56,7 +56,7 @@
                 console.log(err)
                 $scope.error = true;
             });
-            $scope.tableParams.page(1)
+          //  $scope.tableParams.page(1)
             $scope.tableParams.reload();
         }
         var sorting;
@@ -79,7 +79,7 @@
                 return '0'
             }
         }
-        $scope.tableParams = new NgTableParams({page: 1, count: 10}, {
+        $scope.tableParams = new NgTableParams({page: 1, count: 20}, {
             counts: [],
             getData: function (params) {
                 // ajax request to api
