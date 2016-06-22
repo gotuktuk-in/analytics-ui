@@ -139,7 +139,7 @@
                 <div class="panel-body">
 
                     <div>
-                        <table ng-table="tableParams" class="table table-bordered table-condensed">
+                        <table ng-table="tableParams" class="table table-responsive table-bordered table-striped text-center">
                             <tr ng-class="{'unTruncate':row.showMore,'truncate':!row.showMore}" class="truncate"
                                 ng-repeat="row in $data track by $index">
                                 <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
