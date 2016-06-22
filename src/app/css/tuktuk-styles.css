@@ -1,13 +1,22 @@
+*{
+	font-family: Lato, "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+}
+
 body {
     background-color: #f9f9f9;
-    /* font-family: 'aller_lightregular', sans-serif; */
-    font-family: open sans, sans-serif;
     letter-spacing:-0.3px;
     font-size: 13px;
     color: #333;
     min-width:320px;
+    font-weight:400;
     -webkit-font-smoothing: auto;
     -moz-osx-font-smoothing: auto;
+}
+table, tr, td, th, thead, tbody, tfoot, ul, li, input, textara, button,label{
+	font-size: 13px !important;
+	color: #333 !important;
+}
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
 .app-loader{
 	position: absolute;
@@ -25,14 +34,14 @@ a:focus {
     outline-offset: 0;
 }
 h4 small, .h4 small, h5 small, .h5 small, h6 small, .h6 small, h4 .small, .h4 .small, h5 .small, .h5 .small, h6 .small, .h6 .small {
+    color: #666;
     font-size: 65%;
-    color:#666;
+    font-weight: 200;
 }
 i {
     font-style: normal;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: open sans, sans-serif !important;
     font-weight: 100;
 }
 .form-inline .form-control {
@@ -725,6 +734,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .no-pd{padding:0 !important;}
 .no-mr-lt{margin-left:0 !important;}
 .no-pd-lt{padding-left:0 !important;}
+.pd10-tp{padding-top:10px !important;}
+.pd10-bt{padding-bottom:10px !important;}
 .overview-box .section{background:#fff;}
 .box{
 	padding:12px 0;
@@ -751,7 +762,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	background-color: #47639e;
 }
 .box.box-online{
-	background-color: #4B610B	!important;
+	background-color: #5cb85c	!important;
 }
 .box.box-offline{
 	background-color: #B40404	!important;
@@ -763,6 +774,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	font-size:22px;
 	margin-top:0px;
 	margin-bottom:0px;
+	font-weight: 200;
 }
 .box h4.number {
 	/* line-height:30px */

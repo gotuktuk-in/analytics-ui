@@ -37,8 +37,22 @@
         }, 30000)
         $scope.$on('$destroy', function () { $interval.cancel(interval); });
         $scope.getTimeDiff = function (dt1, dt2) {
+        var then;
+          if(dt1==0 )
+            {
+                return '0'
+            }
+            
+            if(dt2==0)
+            {
+             then = new Date();
+            }
+            else
+            {
+            then = new Date(dt2 * 1000);
+            }
             var now = new Date(dt1 * 1000);
-            var then = new Date(dt2 * 1000);
+        
             var diff = moment.utc(moment(now, "DD/MM/YYYY HH:mm:ss").diff(moment(then, "DD/MM/YYYY HH:mm:ss")));//.format("HH:mm:ss")
             var timeInStr = ""
             if (diff.hours() > 0) {
