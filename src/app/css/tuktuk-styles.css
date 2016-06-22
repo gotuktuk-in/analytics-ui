@@ -1,5 +1,5 @@
-*{
-	font-family: Lato, "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+* {
+	font-family: 'Lato', Helvetica Neue ,Helvetica, Arial, sans-serif !important;
 }
 
 body {
@@ -15,8 +15,7 @@ body {
 table, tr, td, th, thead, tbody, tfoot, ul, li, input, textara, button,label{
 	font-size: 13px !important;
 	color: #333 !important;
-}
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+	font-family: 'Lato', Helvetica Neue ,Helvetica, Arial, sans-serif !important;
 }
 .app-loader{
 	position: absolute;
