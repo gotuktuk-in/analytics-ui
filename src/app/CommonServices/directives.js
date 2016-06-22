@@ -21,13 +21,13 @@ function PunchCardFunc()
             title: '@',
             data:'='
         },
-        template: '<div></div>',
-        templateUrl: 'mytemplate.html',
-        controller: controllerFunction, //Embed a custom controller in the directive
+      //  template: '<div></div>',
+       //   controller: controllerFunction, //Embed a custom controller in the directive
         link: function ($scope, element, attrs) {
-            element.append("svg").
-                attr("width", fullWidth).
-                attr("height", fullHeight);
+            var options = {};
+            options.element = element;
+            options.data = [[{key:'Type A', value:'a'},{key:'Type b', value:'b'}],[{key:'RA', value:'ra'},{key:'RB', value:'ra'}]]
+           var punchCard = new D3punchcard(options).draw({ width: element.offsetWidth });
         } //DOM manipulation
 
     }

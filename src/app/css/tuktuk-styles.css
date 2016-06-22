@@ -1,13 +1,18 @@
 body {
     background-color: #f9f9f9;
-    /* font-family: 'aller_lightregular', sans-serif; */
-    font-family: open sans, sans-serif;
+    font-family: 'Lato', Helvetica Neue ,Helvetica, Arial, sans-serif !important;
     letter-spacing:-0.3px;
     font-size: 13px;
     color: #333;
     min-width:320px;
+    font-weight:400;
     -webkit-font-smoothing: auto;
     -moz-osx-font-smoothing: auto;
+}
+table, tr, td, th, thead, tbody, tfoot, ul, li, input, textara, button,label{
+	font-size: 13px;
+	color: #333;
+	font-family: 'Lato', Helvetica Neue ,Helvetica, Arial, sans-serif !important;
 }
 .app-loader{
 	position: absolute;
@@ -19,20 +24,26 @@ body {
 	display: block; 
 	background-color: rgba(0, 0, 0,0.4);
 }
+.input-search-term {
+    height: 34px;
+    vertical-align: middle;
+    margin-left:10px;
+    padding:0 5px;
+}
 /* ng-map {width:100%; height:100%;position: absolute;} */
 a:focus {
     outline: none;
     outline-offset: 0;
 }
 h4 small, .h4 small, h5 small, .h5 small, h6 small, .h6 small, h4 .small, .h4 .small, h5 .small, .h5 .small, h6 .small, .h6 .small {
+    color: #666;
     font-size: 65%;
-    color:#666;
+    font-weight: 200;
 }
 i {
     font-style: normal;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: open sans, sans-serif !important;
     font-weight: 100;
 }
 .form-inline .form-control {
@@ -725,6 +736,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .no-pd{padding:0 !important;}
 .no-mr-lt{margin-left:0 !important;}
 .no-pd-lt{padding-left:0 !important;}
+.pd10-tp{padding-top:10px !important;}
+.pd10-bt{padding-bottom:10px !important;}
 .overview-box .section{background:#fff;}
 .box{
 	padding:12px 0;
@@ -751,7 +764,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	background-color: #47639e;
 }
 .box.box-online{
-	background-color: #4B610B	!important;
+	background-color: #5cb85c	!important;
 }
 .box.box-offline{
 	background-color: #B40404	!important;
@@ -763,6 +776,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 	font-size:22px;
 	margin-top:0px;
 	margin-bottom:0px;
+	font-weight: 200;
 }
 .box h4.number {
 	/* line-height:30px */
@@ -1137,4 +1151,24 @@ icon-beat {  0% {
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate)
 {
     display: none !important;
+}
+.axis path, .axis line
+{
+    fill: none;
+    stroke: #777;
+    shape-rendering: crispEdges;
+}
+
+.axis text
+{
+    font-family: 'Arial';
+    font-size: 13px;
+}
+.tick
+{
+    stroke-dasharray: 1, 2;
+}
+.bar
+{
+    fill: FireBrick;
 }

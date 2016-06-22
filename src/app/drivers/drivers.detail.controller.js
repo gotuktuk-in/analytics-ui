@@ -14,8 +14,6 @@
         $scope.selectedDates = {};
         $scope.selectedDates.startDate = moment().format("YYYY-MM-DD");
         $scope.selectedDates.endDate = moment().format("YYYY-MM-DD");
-
-
         vm.getProfile = function () {
             DriversService.getProfile({id:$stateParams.driverId,
                 from: moment( $scope.selectedDates.startDate).startOf('day').format("YYYYMMDD").toString(),
@@ -31,7 +29,7 @@
         vm.getProfile()
         vm.getAllData = function () {
             vm.getProfile();
-            $scope.tableParams.page(1);
+          //  $scope.tableParams.page(1);
             $scope.tableParams.reload()
         }
         var interval= $interval(function(){
@@ -68,7 +66,7 @@
             counts: [],
             getData: function (params) {
                 // ajax request to api
-                var  start = params.page()//(params.page() - 1) * params.count();
+                var  start = ((params.page() - 1) * 10) + 1;
                 console.log("**************************")
                 var orderBy= ''
                 var field = ''
@@ -113,4 +111,94 @@
             }
         });
     }
+
+    // Heatmap graph
+
 })();
+InitChart();
+
+function InitChart() {
+
+    var lineData = [{
+        'x': 1,
+        'y': 5
+    }, {
+        'x': 20,
+        'y': 20
+    }, {
+        'x': 40,
+        'y': 10
+    }, {
+        'x': 60,
+        'y': 40
+    }, {
+        'x': 80,
+        'y': 5
+    }, {
+        'x': 100,
+        'y': 60
+    }];
+
+    var vis = d3.select("#visualisation"),
+        WIDTH = 1000,
+        HEIGHT = 500,
+        MARGINS = {
+            top: 20,
+            right: 20,
+            bottom: 20,
+            left: 50
+        },
+        xRange = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([d3.min(lineData, function (d) {
+            return d.x;
+        }),
+            d3.max(lineData, function (d) {
+                return d.x;
+            })
+        ]),
+
+        yRange = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([d3.min(lineData, function (d) {
+            return d.y;
+        }),
+            d3.max(lineData, function (d) {
+                return d.y;
+            })
+        ]),
+
+        xAxis = d3.svg.axis()
+            .scale(xRange)
+            .tickSize(5)
+            .tickSubdivide(true),
+
+        yAxis = d3.svg.axis()
+            .scale(yRange)
+            .tickSize(5)
+            .orient("left")
+            .tickSubdivide(true);
+
+
+    vis.append("svg:g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
+        .call(xAxis);
+
+    vis.append("svg:g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + (MARGINS.left) + ",0)")
+        .call(yAxis);
+
+    var lineFunc = d3.svg.line()
+        .x(function (d) {
+            return xRange(d.x);
+        })
+        .y(function (d) {
+            return yRange(d.y);
+        })
+        .interpolate('linear');
+
+    vis.append("svg:path")
+        .attr("d", lineFunc(lineData))
+        .attr("stroke", "blue")
+        .attr("stroke-width", 2)
+        .attr("fill", "none");
+
+}

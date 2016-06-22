@@ -67,15 +67,15 @@
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box">
-                            <h4 class="number">{{vm.profile.today_distance.total | number:2}} <small>/ {{vm.profile.today_distance.intrip | number:2}} / {{vm.profile.today_distance.forTrip | number:2}}</small></h4>
-                            <span>distance / in trip / for trip</span>
+                        <div class="box" uib-popover-template="'myPopoverTemplate1.html'" popover-trigger="mouseenter" popover-placement="bottom">
+                            <h4 class="number">{{vm.profile.today_distance.total | number:2}}</h4>
+                            <span>distance</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box">
-                            <h4 class="number">{{vm.profile.today_online.total_hours | secondsToDateTime}} <small>/ {{vm.profile.today_online.intrip_time | secondsToDateTime}} / {{vm.profile.today_online.fortrip_time | secondsToDateTime}}</small></h4>
-                            <span>online hour <small>/ in trip / for trip</small></span>
+                        <div class="box" uib-popover-template="'myPopoverTemplate2.html'" popover-trigger="mouseenter" popover-placement="bottom">
+                            <h4 class="number">{{vm.profile.today_online.total_hours | secondsToDateTime}}</h4>
+                            <span>online hour</span>
                     </div>
                     </div>
                     	<div class="col-md-2 col-sm-4 col-xs-12">
@@ -86,13 +86,13 @@
                     </div>
                     	<div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="box">
-                            <h4 class="number">Rs. {{vm.profile.total_fare | number:2}} <small>/ {{vm.profile.today_fare | number:2}}</small></h4>
+                            <h4 class="number">Rs. {{vm.profile.total_fare | number:0}} <small>/ {{vm.profile.today_fare | number:0}}</small></h4>
                             <span>total fare / fare</span>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-12">
                         <div class="box">
-                            <h4 class="number">Rs. {{vm.profile.total_earning  | number:2}} <small>/ {{vm.profile.today_earning | number:2}}</small></h4>
+                            <h4 class="number">Rs. {{vm.profile.total_earning  | number:0}} <small>/ {{vm.profile.today_earning | number:0}}</small></h4>
                             <span>total earning / earning</span>
                         </div>
                     </div>
@@ -106,9 +106,9 @@
                     </div>
  -->
                     <div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box">
-                             <h4 class="number">{{vm.profile.today_bid.total}} <small>/ {{vm.profile.today_bid.accepted}} / {{vm.profile.today_bid.rejected}} / {{vm.profile.today_bid.ignored}}</small></h4>
-                            <span>bid <small>/ accepted / rejected / ignored</small></span>
+                        <div class="box" uib-popover-template="'myPopoverTemplate3.html'" popover-trigger="mouseenter" popover-placement="bottom">
+                             <h4 class="number">{{vm.profile.today_bid.total}}</h4>
+                            <span>bid </span>
                         </div>
                     </div>
                     </div>
@@ -118,19 +118,17 @@
     </div>
 
     <div class="row">
-    <!-- 
-<div class="col-md-12 col-sm-12 col-xs-12">
+<!--<div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 style="margin-top: 0" class="title">Heatmap</h4></div>
                 <div class="panel-body">
-                    <div>
-                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+                    <div id="example">
+                        <svg id="visualisation" width="1000" height="500"></svg>
                     </div>
                 </div>
             </div>
-        </div>
- -->
+        </div>-->
         <div class="col-md-12 col-sm-12 col-xs-12">
 
             <div class="panel panel-default">
@@ -139,7 +137,7 @@
                 <div class="panel-body">
 
                     <div>
-                        <table ng-table="tableParams" class="table table-bordered table-condensed">
+                        <table ng-table="tableParams" class="table table-responsive table-bordered table-striped text-center">
                             <tr ng-class="{'unTruncate':row.showMore,'truncate':!row.showMore}" class="truncate"
                                 ng-repeat="row in $data track by $index">
                                 <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
@@ -215,3 +213,39 @@
         </div>
     </div>
 </div>
+<script type="text/ng-template" id="myPopoverTemplate1.html">
+
+    <div class="box text-center">
+        <h4 class="number no-mr">{{vm.profile.today_distance.intrip | number:2}}</h4>
+        <span>in trip</span>
+			<br>
+        <h4 class="number no-mr pd10-tp">{{vm.profile.today_distance.forTrip | number:2}}</h4>
+        <span>for trip</span>
+
+    </div>
+</script>
+<script type="text/ng-template" id="myPopoverTemplate2.html">
+
+    <div class="box text-center">
+        <h4 class="number no-mr">{{vm.profile.today_online.intrip_time | secondsToDateTime}}</h4>
+        <span>in trip</span>
+			<br>
+        <h4 class="number no-mr pd10-tp">{{vm.profile.today_online.fortrip_time | secondsToDateTime}}</h4>
+        <span>for trip</span>
+
+    </div>
+</script>
+<script type="text/ng-template" id="myPopoverTemplate3.html">
+
+    <div class="box text-center">
+        <h4 class="number no-mr">{{vm.profile.today_bid.accepted}}</h4>
+        <span>accepted</span>
+			<br>
+        <h4 class="number no-mr pd10-tp">{{vm.profile.today_bid.rejected}}</h4>
+        <span>rejected</span>
+        <br>
+        <h4 class="number no-mr pd10-tp">{{vm.profile.today_bid.ignored}}</h4>
+        <span>ignored</span>
+
+    </div>
+</script>
