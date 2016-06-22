@@ -54,25 +54,27 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <form>
-            <div class="input-group">
+            <form class="form-inline">
+            <div class="input-group col-md-3">
                 <select ng-model="vm.filterTerm" class="form-control"
                        ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
                 <option value="" disabled>-- Select Filter --</option>
                 </select>
             </div>
-                <div class="input-group" >
-                           <input ng-model="vm.searchTerm" placeholder="term" ng-disabled="!vm.filterTerm"/>
+                <div class="input-group col-md-3" >
+                           <input ng-model="vm.searchTerm" class="input-search-term" placeholder="term" ng-disabled="!vm.filterTerm"/>
                     <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-small">Search</button>
                 </div>
-                <div class="input-group">
+                <div class="input-group col-md-3">
                     <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
                             ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters track by statusFilter.value">
                         <option value="" disabled>-- Select Status --</option>
                     </select>
                 </div>
             </form>
+             <br>
         </div>
+       
         <div class="col-md-12">
             <div class="panel panel-default">
             <div class="panel-heading">

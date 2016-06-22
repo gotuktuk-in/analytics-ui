@@ -24,6 +24,10 @@ table, tr, td, th, thead, tbody, tfoot, ul, li, input, textara, button,label{
 	display: block; 
 	background-color: rgba(0, 0, 0,0.4);
 }
+.input-search-term {
+    height: 30px;
+    vertical-align: middle;
+}
 /* ng-map {width:100%; height:100%;position: absolute;} */
 a:focus {
     outline: none;
