@@ -22,7 +22,30 @@
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
 
         vm.trips = [];
-
+        vm.filterTerm ='';
+        vm.filterFields = [{value:"id",name:"ID"},
+            //{filed:"requestOn",title:"Date"},
+            {value:"dname",name:"Driver Name"},
+            {value:"dphone",name:"Driver Phone"},
+            {value:"dvehicle",name:"Vehicle Number"},
+      //      {value:"vehicleType",name:"Vehicle Type"},
+            {value:"rname",name:"Rider Name"},
+            {value:"rphone",name:"Rider Phone"},
+            {value:"pickUp",name:"Pick Up"},
+            {value:"drop",name:"Drop"},
+            {value:"amount",name:"Amount"},
+            {value:"riderFeedbackRating",name:"Rider Feedback Rating "}
+        ]
+        vm.statusCodes = ''
+        vm.tripStatusFilters = [{name: 'All', value: "all"},
+            {name: 'Successful', value: "61"},
+            {name: 'Cancelled ', value: '70,71'},
+            {name: 'In Progress', value: '20,22,30,40,50,60'},
+            {name: 'Failed', value: '80,81,82'},
+        ]
+        vm.searchTable = function () {
+            $scope.tableParams.reload()
+        }
         this.changeFrequency = function (section, freqModel) {
             console.log("Frequency changed ", freqModel.value)
 
@@ -56,7 +79,7 @@
                 console.log(err)
                 $scope.error = true;
             });
-          //  $scope.tableParams.page(1)
+            //  $scope.tableParams.page(1)
             $scope.tableParams.reload();
         }
         var sorting;
@@ -64,18 +87,16 @@
         function setDate() {
 
         }
+
         $scope.getTimeDiff = function (dt1, dt2) {
-            if(dt1==0 || dt2==0 )
-            {
+            if (dt1 == 0 || dt2 == 0) {
                 return '0'
             }
-            if(dt2)
-            {
+            if (dt2) {
                 var diff = (dt2 - dt1);
                 return diff
             }
-            else
-            {
+            else {
                 return '0'
             }
         }
@@ -101,6 +122,13 @@
                         dataObj.orderby = "DESC"
                     }
                 }
+
+                if ( vm.searchTerm && vm.searchTerm != '') {
+                    dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm
+                }
+                if (vm.statusCodes.value != '') {
+                    dataObj.filterByStatus = vm.statusCodes.value
+                }
                 return TripsService.getAllTrips(dataObj).$promise.then(function (data) {
 
                     params.total(data.total); // recal. page nav controls
@@ -117,12 +145,13 @@
             }
         });
         vm.getTrips()
-        var interval= $interval(function(){
+        var interval = $interval(function () {
             vm.getTrips()
-            $scope.tableParams.page(1)
             $scope.tableParams.reload()
         }, 30000)
-        $scope.$on('$destroy', function () { $interval.cancel(interval); });
+        $scope.$on('$destroy', function () {
+            $interval.cancel(interval);
+        });
         heatmapChart(trips_heatmap);
     }
 })();
