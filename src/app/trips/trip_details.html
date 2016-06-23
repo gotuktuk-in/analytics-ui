@@ -92,35 +92,11 @@
                         + ' ' + selectedTrip.drop.country}}</p>
 
                     <div class="tripMap">
-                        <img ng-show="selectedTrip.tripState==TRIP.STATE_INVOICE" ng-src="{{MapURL}}"
+                        <img ng-show="selectedTrip.tripState==61" ng-src="https://api.gotuktuk.in/rest/o/v1/trips/t4gM1U6Nrbp/snap?size=400x150"
                              title="" style="width:100%; height:auto;">
 
                     </div>
                 </div>
-
-                <div class="panel-body"
-                     ng-if="selectedTrip.tripState==70 || selectedTrip.tripState==71 || selectedTrip.tripState==81 || selectedTrip.tripState==80 ">
-                    <h4>
-                        <div style="background-color:#30b03a;min-height:12px;width:12px;border-radius:100%;display:inline-block; margin-right: 5px;"></div>
-                        Pickup
-                    </h4>
-                    <p>{{selectedTrip.locPickupReq.line1 + ' ' + selectedTrip.locPickupReq.line2}}<br>{{selectedTrip.locPickupReq.state
-                        + ' ' + selectedTrip.locPickupReq.country}}</p>
-
-                    <h4>
-                        <div style="background-color:#f32f00;display:inline-block;min-height:12px;width:12px;border-radius:100%;margin-right: 5px;"></div>
-                        Drop
-                    </h4>
-                    <p> {{selectedTrip.locDropReq.line1 + ' ' + selectedTrip.locDropReq.line2}}<br>{{selectedTrip.locDropReq.state
-                        + ' ' + selectedTrip.locDropReq.country}}</p>
-
-                    <div class="tripMap">
-                        <img ng-show="selectedTrip.tripState==TRIP.STATE_INVOICE" ng-src="{{MapURL}}"
-                             title="" style="width:100%; height:auto;">
-
-                    </div>
-                </div>
-
             </div>
 
         </div>
