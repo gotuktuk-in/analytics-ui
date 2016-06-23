@@ -16,7 +16,7 @@ function TripsService($q, $resource, API) {
   var url = API;
     return $resource(
         "",
-        {frequency:"@frequency", vehicle:"@vehicle"},
+        {frequency:"@frequency", vehicle:"@vehicle",id:'@id'},
         {
             getAllTrips: {
                 method: 'GET',
@@ -25,8 +25,8 @@ function TripsService($q, $resource, API) {
             },
             getTripDetail: {
                 method: 'GET',
-                url:   url + 'trips/info',
-                isArray:true
+                url:   url + 'trips/info/:id',
+                isArray:false
             },
             getRiders: {
                 method: 'GET',

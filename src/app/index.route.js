@@ -69,7 +69,13 @@
                 templateUrl: 'app/trips/trips.html',
                 controller: 'TripsController',
                 controllerAs: 'vm'
-            });
+            })
+            .state('home.trip_detail', {
+                    url: '/tripdetail/:id/:driverId/:riderId',
+                    templateUrl: 'app/trips/trip_details.html',
+                    controller: 'TripDetailController',
+                    controllerAs: 'vm'
+                })
 
     }
 
