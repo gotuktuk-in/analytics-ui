@@ -11,7 +11,7 @@
         //range slider , Failed(2), Cancel(2), Success.
 
         var today = moment()
-        var  heatmap;
+        var heatmap;
         vm.heatMapFilers = [{label: "In-Process", id: '20,22,30,40,50'}, {label: "Failed", id: '72,80,81,82'}, {
             label: "Cancel",
             id: '70,71'
@@ -48,9 +48,13 @@
         $scope.date = moment().format("dddd, MMMM Do YYYY")
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+        vm.newRidersChartOptions = angular.copy(ChartConfigService.lineChartOptions);
 
         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
             return d3.time.format('%I %p')(new Date(d).addHours(1));
+        };
+        vm.newRidersChartOptions.chart.xAxis.tickFormat = function (d) {
+            return d3.time.format('%d %b %y')(new Date(d));
         };
         vm.trips = [];
         var current = moment()
@@ -80,8 +84,7 @@
             vm.loadHeatMap()
         }
 
-        function getOverviewLive()
-        {
+        function getOverviewLive() {
             LiveService.getOverview({
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
@@ -93,8 +96,43 @@
                 $scope.error = true;
             });
         }
-        function getOverviewBack()
-        {
+
+        function getNewRiders() {
+            LiveService.getNewRiders({
+                from: moment(current).subtract(7, 'days').startOf('day').unix(),
+                to: moment(current).endOf('day').unix(),
+            }, function (response) {
+                //  PerformanceHandler.trips = response[0].trip
+                vm.newRiders = transformNewRiders(response);
+                console.log('response ', vm.overview)
+            }, function (err) {
+                console.log(err)
+                $scope.error = true;
+            });
+        }
+
+        function transformNewRiders(response) {
+            var data = [{"key": "Total New", "values": []},
+                {"key": "Next Day Rides", "values": []},
+
+                {"key": "Next Day Rides (U)", "values": []},]
+
+
+            var total_new_registration = [], next_day_total_rides = [], next_day_unique_rides = []
+            _.each(response, function (value) {
+                var longDate = PerformanceHandler.getLongDate(value.date)
+                total_new_registration.push([longDate, value.total_new_registration]);
+                next_day_total_rides.push([longDate, value.next_day_total_rides]);
+                next_day_unique_rides.push([longDate, value.next_day_unique_rides]);
+            })
+            data[0].values = total_new_registration;
+            data[1].values = next_day_total_rides;
+            data[2].values = next_day_unique_rides;
+            return data
+        }
+
+        getNewRiders()
+        function getOverviewBack() {
             LiveService.getOverview({
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
@@ -109,8 +147,9 @@
                 $scope.error = true;
             });
         }
+
         function getLive() {
-           PerformanceService.getTrips({
+            PerformanceService.getTrips({
                 city: $rootScope.city,
                 startTime: moment(current).startOf('day'),
                 endTime: moment(current).endOf('day'),
@@ -188,9 +227,9 @@
                     _.forEach(response, function (item) {
                         transformedData.push(new google.maps.LatLng(item.locPickupRequest.lt - 0, item.locPickupRequest.ln - 0));
                     })
-            //        $scope.heatMapData = transformedData;
+                    //        $scope.heatMapData = transformedData;
 
-                    NgMap.getMap({id:'live_map'}).then(function (map) {
+                    NgMap.getMap({id: 'live_map'}).then(function (map) {
                         vm.map = map;
                         //   heatmap = vm.map.heatmapLayers.foo;
                         if (heatmap) {
@@ -203,7 +242,7 @@
                         heatmap.setMap(vm.map);
                     });
 
-               }, function (err) {
+                }, function (err) {
                     console.log(err)
                     $scope.error = true;
                 });
@@ -215,17 +254,18 @@
         getLive()
         getOverviewLive()
         vm.loadHeatMap()
-       var interval=  $interval(function(){
+        var interval = $interval(function () {
             vm.refreshPage()
         }, 30000)
 
-        $scope.$on('$destroy', function () { $interval.cancel(interval); });
+        $scope.$on('$destroy', function () {
+            $interval.cancel(interval);
+        });
         vm.refreshPage = function () {
             getLive()
             vm.loadHeatMap()
-          //  vm.loadHeatMap()
-            if(vm.live)
-            {
+            //  vm.loadHeatMap()
+            if (vm.live) {
                 getOverviewLive()
             }
             else {
