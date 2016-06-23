@@ -34,6 +34,11 @@ function LiveService($q, $resource, API) {
                 method: 'GET',
                 url:   url + 'rider/live/',
             },
+            getNewRiders: {
+                method: 'GET',
+                url:   url + 'trips/newRiders',
+                isArray:true
+            },
             heatmap: {
             method: 'GET',
             url:   url + 'trips/heatmap',

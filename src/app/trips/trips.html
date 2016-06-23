@@ -87,7 +87,7 @@
                                 ng-repeat="row in $data track by $index">
                                 <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
                                     <a target="_blank"
-                                       ui-sref="trips.tripsdetails({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">{{row.id}}
+                                       ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">{{row.id}}
                                     </a>
                                 </td>
                                 <td data-title="'Date & Time'" sortable="'requestOn'" style="width: 150px;">
