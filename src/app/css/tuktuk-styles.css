@@ -1,8 +1,7 @@
 body {
     background-color: #f9f9f9;
-    font-family: 'Lato', Helvetica Neue ,Helvetica, Arial, sans-serif !important;
-    letter-spacing:-0.3px;
-    font-size: 13px;
+    font-family: Helvetica Neue ,Helvetica, Arial, sans-serif;
+    font-size: 14px;
     color: #333;
     min-width:320px;
     font-weight:400;
@@ -10,9 +9,9 @@ body {
     -moz-osx-font-smoothing: auto;
 }
 table, tr, td, th, thead, tbody, tfoot, ul, li, input, textara, button,label{
-	font-size: 13px;
+	font-size: 14px;
 	color: #333;
-	font-family: 'Lato', Helvetica Neue ,Helvetica, Arial, sans-serif !important;
+	font-family: Helvetica Neue ,Helvetica, Arial, sans-serif;
 }
 .app-loader{
 	position: absolute;
@@ -44,7 +43,7 @@ i {
     font-style: normal;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-weight: 100;
+    font-weight: 300;
 }
 .form-inline .form-control {
     background: rgba(0, 0, 0, 0) none repeat; 
@@ -193,7 +192,6 @@ input.daterangepicker-aqq-chart {
 .daterangepicker .btn-sm, .daterangepicker .btn-group-sm > .btn,
 .daterangepicker .input-mini {border-radius: 0 !important;}
 .daterangepicker, .daterangepicker .calendar th, .daterangepicker .calendar td {
-     /* font-family: 'aller_lightregular', sans-serif; */
      font-size:12px;
 }
 .date-selection-dr {

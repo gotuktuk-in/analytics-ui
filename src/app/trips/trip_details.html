@@ -81,18 +81,18 @@
                         <div style="background-color:#30b03a;min-height:12px;width:12px;border-radius:100%;display:inline-block;margin-right: 5px;"></div>
                         Pickup
                     </h4>
-                    <p>{{selectedTrip.pickUp.line1 + ' ' + selectedTrip.pickUp.line2}}<br>{{selectedTrip.pickUp.state
+                    <p style="margin-left:20px;">{{selectedTrip.pickUp.line1 + ' ' + selectedTrip.pickUp.line2}}<br>{{selectedTrip.pickUp.state
                         + ' ' + selectedTrip.pickUp.country}}</p>
 
                     <h4>
                         <div style="background-color:#f32f00;display:inline-block;min-height:12px;width:12px;border-radius:100%;margin-right: 5px;"></div>
                         Drop
                     </h4>
-                    <p> {{selectedTrip.drop.line1 + ' ' + selectedTrip.drop.line2}}<br>{{selectedTrip.drop.state
+                    <p style="margin-left:20px;"> {{selectedTrip.drop.line1 + ' ' + selectedTrip.drop.line2}}<br>{{selectedTrip.drop.state
                         + ' ' + selectedTrip.drop.country}}</p>
-
+                    <br>
                     <div class="tripMap">
-                        <img ng-show="selectedTrip.tripState==61" ng-src="https://api.gotuktuk.in/rest/o/v1/trips/t4gM1U6Nrbp/snap?size=400x150"
+                        <img ng-show="selectedTrip.tripState==61" ng-src="https://api.gotuktuk.in/rest/o/v1/trips/t4gM1U6Nrbp/snap?size=600x250"
                              title="" style="width:100%; height:auto;">
 
                     </div>
