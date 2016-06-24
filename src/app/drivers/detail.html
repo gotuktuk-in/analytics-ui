@@ -143,7 +143,7 @@
                                 <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
                                     <div class="trnc">
                                         <!--  <a href="void:javascript(0);" ng-click="selectTrip(row)">{{row.id}}</a>-->
-                                        <a >{{row.id}}</a>
+                                        <a ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">{{row.id}}</a>
                                     </div>
                                 </td>
                                 <td data-title="'Date & Time'" sortable="'requestOn'" style="width:150px;">
