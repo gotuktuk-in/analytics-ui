@@ -124,35 +124,34 @@ function ChartConfigService($q, $resource, API) {
         }
     }
     factory.multiBarChartOptions = {
-        chart: {
-            type: 'multiBarChart',
-            height: 450,
-            margin: {
-                top: 20,
-                right: 20,
-                bottom: 45,
-                left: 45
+        chart : {
+            type : 'multiBarChart',
+            height : 400,
+            text : 'Credit Recovery',
+            x : function(d) {
+                return d.x;
             },
-            clipEdge: true,
-            duration: 500,
-            stacked: true,
-            xAxis: {
-                axisLabel: 'Date',
-                showMaxMin: false,
-                tickFormat: function (d) {
-                    return d3.time.format('%d %b')(new Date(d*1000))
-                   // return d3.time.format('%d %b %I %p')(new Date(d))
-                  //  return d3.format(',f')(d);
-                }
+            y : function(d) {
+                return d.y;
             },
-            yAxis: {
-                axisLabel: 'Y Axis',
-                axisLabelDistance: -20,
-                tickFormat: function (d) {
-                    return d3.format(',.1f')(d);
+            clipEdge : true,
+            transitionDuration : 1000,
+            useInteractiveGuideline : true,
+            /*    xScale : d3.time.scale(), // <-- explicitly set time scale
+         xAxis : {
+                ticks : d3.time.months, // <-- add formatter for the ticks
+                tickFormat : function(d) {
+                    return d3.time.format('%m-%y')(new Date(d))
+                },
+                showMaxMin : false
+            },
+            yAxis : {
+                tickFormat : function(d) {
+                    return '$' + d3.format('.02f')(d )
                 }
-            }
+            }*/
         }
+
     };
 
     return factory

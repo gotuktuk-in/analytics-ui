@@ -326,8 +326,44 @@ var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"2016061
                 to: moment(current).endOf('day').unix(),
             }, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
-                vm.newRiders =transformNewRiders(response);
-                //vm.newRiders = transformNewRiders(a)
+                vm.newRiders =[ {
+                    "values":[
+                        {x:1359072000000, y:10,label:'C1.1'},
+                        {x:1365116400000, y:30,label:'C1.2'},
+                        {x:1357516800000, y:40,label:'C1.3'},
+                    ],
+                    "bar":true,
+                    "key":"Carrier1"
+
+                },
+                    {
+                        "values":[
+                            {x:1359072000000, y:30,label:'C2.1'},
+                            {x:1365116400000, y:10,label:'C2.2'},
+                            {x:1357516800000, y:79,label:'C2.3'},
+                        ],
+                        "bar":true,
+                        "key":"Carrier2"
+
+                    }
+                ]
+
+
+                /*vm.newRiders =[{
+                    "key": "Stream0",
+                    "values": [{"x": 20160624, "y": 0.7853112626333064}, {"x": 20160623, "y": 0.9373718528670135}]
+                },
+                    {
+                        "key": "Stream0",
+                        "values": [{"x": 20160623, "y": 0.7853112626333064}, {"x": 20160622, "y": 0.9373718528670135}]
+                    },
+                    {
+                        "key": "Stream0",
+                        "values": [{"x": 20160622, "y": 0.7853112626333064}, {"x": 20160621, "y": 0.9373718528670135}]
+                    }
+                ]*/
+                //transformNewRiders(response);
+               // vm.newRiders = transformNewRiders(a)
                 console.log('response ', vm.newRiders)
             }, function (err) {
                 console.log(err)
@@ -341,15 +377,15 @@ var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"2016061
 
             _.each(riders, function (weekday) {
                 var obj = {}
-                obj.key = PerformanceHandler.getLongDate( weekday.key.toString())//moment(weekday.key*1000).format('DD/MM/YYYY')// PerformanceHandler.getLongDate(Object.keys(weekday)[0])
+                obj.key = PerformanceHandler.getLongDate( weekday.date.toString())//moment(weekday.key*1000).format('DD/MM/YYYY')// PerformanceHandler.getLongDate(Object.keys(weekday)[0])
                 obj.values = []
                 console.log(weekday)
 
                     _.each(weekday.value, function (value) {
-                        var fullDate = PerformanceHandler.getLongDate( weekday.key.toString())
+                        var fullDate = PerformanceHandler.getLongDate( weekday.date.toString())
                         var unixDate = moment(fullDate).startOf('day').unix()
                         console.log(unixDate)
-                            obj.values.push({x: unixDate, y: value.trips, y0: value.uniqtrips, y1: value.rider})
+                            obj.values.push({x: unixDate, y: value.rider, y0: value.uniqtrips})
                      })
 
                 // var longDate = PerformanceHandler.getLongDate(weekday.date)
