@@ -134,18 +134,19 @@ function ChartConfigService($q, $resource, API) {
             y : function(d) {
                 return d.y;
             },
+            "stacked": true,
             clipEdge : true,
             transitionDuration : 1000,
             useInteractiveGuideline : true,
-            /*    xScale : d3.time.scale(), // <-- explicitly set time scale
-         xAxis : {
+         //   xScale : d3.time.scale(), // <-- explicitly set time scale
+            xAxis : {
                 ticks : d3.time.months, // <-- add formatter for the ticks
                 tickFormat : function(d) {
-                    return d3.time.format('%m-%y')(new Date(d))
+                    return d3.time.format('%d-%m-%Y')(new Date(d))
                 },
                 showMaxMin : false
             },
-            yAxis : {
+           /* yAxis : {
                 tickFormat : function(d) {
                     return '$' + d3.format('.02f')(d )
                 }
