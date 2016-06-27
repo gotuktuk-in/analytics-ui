@@ -58,6 +58,12 @@
                     controller: 'DriversController',
                     controllerAs: 'vm'
                 })
+            .state('home.drivers_offers', {
+                url: '/drivers/offers',
+                templateUrl: 'app/drivers/offers.html',
+               // controller: 'DriversController',
+              //  controllerAs: 'vm'
+            })
             .state('home.drivers_detail', {
                 url: '/detail/:driverId',
                 templateUrl: 'app/drivers/detail.html',
