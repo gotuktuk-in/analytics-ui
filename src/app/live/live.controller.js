@@ -120,7 +120,7 @@ var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"2016061
                 to: moment(current).endOf('day').unix(),
             }, function (response) {
                 vm.newRiders =transformNewRiders(response);
-               // console.log('response ', vm.newRiders)
+               console.log('response ', vm.newRiders)
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
@@ -139,7 +139,9 @@ var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"2016061
                 console.log(weekday)
 
                     _.each(weekday.value, function (value) {
-                        var unixDate =moment(date).unix()*1000
+                        var long  =  PerformanceHandler.getLongDate(value.id.toString())
+                        var unixDate =moment(Number(long)).unix()*1000
+                        console.log(unixDate)
                       //  obj.values.push({x:unixDate , y: value.uniqRides})
                        obj.values.push({x: unixDate, y: value.uniqRides, y0: value.totalRides, y1: value.newRiderRegCount})
                      })
@@ -147,7 +149,6 @@ var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"2016061
                 // var longDate = PerformanceHandler.getLongDate(weekday.date)
                 data.push(obj)
             })
-            console.log(data)
             return data
         }
 
