@@ -12,7 +12,7 @@ angular
     .module('tuktukV2Dahboard')
     .factory('ChartConfigService', ChartConfigService)
 
-function ChartConfigService($q, $resource, API) {
+function ChartConfigService($q, $resource, API, PerformanceHandler) {
     var factory = {}
     Date.prototype.addHours = function (h) {
         this.setHours(this.getHours() + h);
@@ -124,33 +124,47 @@ function ChartConfigService($q, $resource, API) {
         }
     }
     factory.multiBarChartOptions = {
-        chart : {
-            type : 'multiBarChart',
-            height : 400,
-            text : 'Credit Recovery',
-            x : function(d) {
+        chart: {
+            type: 'multiBarChart',
+            height: 400,
+            text: 'Credit Recovery',
+            x: function (d) {
                 return d.x;
             },
-            y : function(d) {
+            y: function (d) {
                 return d.y;
             },
-            "stacked": true,
-            clipEdge : true,
-            transitionDuration : 1000,
-            useInteractiveGuideline : true,
-         //   xScale : d3.time.scale(), // <-- explicitly set time scale
-            xAxis : {
-                ticks : d3.time.months, // <-- add formatter for the ticks
-                tickFormat : function(d) {
+            stacked: true,
+            clipEdge: true,
+            transitionDuration: 1000,
+            useInteractiveGuideline: false,
+            //   xScale : d3.time.scale(), // <-- explicitly set time scale
+            xAxis: {
+                ticks: d3.time.months, // <-- add formatter for the ticks
+                tickFormat: function (d) {
                     return d3.time.format('%d-%m-%Y')(new Date(d))
                 },
-                showMaxMin : false
+                showMaxMin: false
             },
-           /* yAxis : {
-                tickFormat : function(d) {
-                    return '$' + d3.format('.02f')(d )
+
+            yAxis: {
+                tickFormat: function (d) {
+                    return d;
                 }
-            }*/
+            },
+            tooltip: {
+                contentGenerator: function (key, x, y, e, graph) { //return html content
+                    var data = key.data
+                    var str ='<div>'
+                        str += '<h5>Date</h5>' + moment(PerformanceHandler.getLongDate(data.date.toString())).format('MMMM Do YYYY') + ''
+                    str += '<h6>Rides (U)</h6>' + data.uniqRides + ''
+                    str += '<h6>New Rider Registered</h6>' + data.newRiderRegCount + ''
+                    str += '<h6>Total Rides</h6>' + data.y + ''
+                   // str += '<h1>Date</h1>' + data.date + '/n'
+                    str +='</div>'
+                    return str;
+                }
+            }
         }
 
     };

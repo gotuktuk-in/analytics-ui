@@ -119,7 +119,7 @@ var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"2016061
                 from: moment(current).subtract(6, 'days').startOf('day').unix(),
                 to: moment(current).endOf('day').unix(),
             }, function (response) {
-                vm.newRiders =transformNewRiders(response);
+                vm.newRiders = transformNewRiders(response);
                console.log('response ', vm.newRiders)
             }, function (err) {
                 console.log(err)
@@ -127,29 +127,31 @@ var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"2016061
             });
         }
 
-        function transformNewRiders(data) {
-            var riders =JSON.parse(angular.toJson(data));
+        function transformNewRiders(ridresData) {
             var data = []
-
-            _.each(riders, function (weekday) {
+            var riders =JSON.parse(angular.toJson(ridresData));
+            var count = 0
+            _.each(riders, function(rides){
                 var obj = {}
-                var date = PerformanceHandler.getLongDate(weekday.date.toString())
-                obj.key =  moment(date).format('MMMM Do YYYY')
+                obj.key = moment(PerformanceHandler.getLongDate(rides.date)).format('MMMM Do YYYY')
+                obj.bar = true;
                 obj.values = []
-                console.log(weekday)
-
-                    _.each(weekday.value, function (value) {
-                        var long  =  PerformanceHandler.getLongDate(value.id.toString())
-                        var unixDate =moment(Number(long)).unix()*1000
-                        console.log(unixDate)
-                      //  obj.values.push({x:unixDate , y: value.uniqRides})
-                       obj.values.push({x: unixDate, y: value.uniqRides, y0: value.totalRides, y1: value.newRiderRegCount})
-                     })
-
-                // var longDate = PerformanceHandler.getLongDate(weekday.date)
                 data.push(obj)
             })
-            return data
+            _.each(riders, function(rides){
+                var ridesByDay = rides;
+               for (var a=0;a<=6;a++)
+                {
+                    data[a].values[count] = {}
+                    data[a].values[count].x = PerformanceHandler.getLongDate(ridesByDay.date)
+                    data[a].values[count].y = Number(rides.value[a].totalRides)
+                    data[a].values[count].uniqRides = Number(rides.value[a].uniqRides)
+                    data[a].values[count].newRiderRegCount = Number(rides.value[a].newRiderRegCount)
+                    data[a].values[count].date = Number(rides.value[a].id)
+                }
+                count++
+            })
+            return data;
         }
 
         getNewRiders()
