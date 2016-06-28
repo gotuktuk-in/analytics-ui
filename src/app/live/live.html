@@ -170,7 +170,7 @@
         <div class="col-md-6 col-sm-12 col-xs-12" ngsf-fullscreen>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">New Riders</h4></div>
+                    <h4 style="margin-top: 0" class="title">Rides</h4></div>
                 <div class="panel-body">
                     <div>
                         <nvd3 options="vm.newRidersChartOptions" data="vm.newRiders" config="vm.config"></nvd3>
@@ -181,7 +181,7 @@
             </div>
         </div>
 
-        <div class="col-md-6 col-sm-12 col-xs-12" ngsf-fullscreen>
+        <div class="col-md-12 col-sm-12 col-xs-12" ngsf-fullscreen>
 
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -197,17 +197,17 @@
                     <h4 style="margin-top: 0" class="title">Heat Map</h4></div>
                 <div class="panel-body">
 
-                    <div>
+                    <div class="pd-10">
                         <ng-map id="live_map" zoom="13" center="[22.717081666666665, 75.87155666666666]" on-resized="vm.resizeMap()" trigger-resize="true">
                             <!--   <heatmap-layer id="foo" data="'heatMapData'"></heatmap-layer>-->
                         </ng-map>
-                    </div>
+
 
                     <rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue" rz-slider-options="slider.options">
                     </rzslider>
+                    </div>
                 </div>
-                <br>
-                <br>
+
             </div>
         </div>
     </div>

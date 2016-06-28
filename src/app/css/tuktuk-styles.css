@@ -732,6 +732,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .mr-bt{margin-bottom:20px !important;}
 .no-mr{margin:0 !important;}
 .no-pd{padding:0 !important;}
+.pd-10{padding:10px !important;}
 .no-mr-lt{margin-left:0 !important;}
 .no-pd-lt{padding-left:0 !important;}
 .pd10-tp{padding-top:10px !important;}

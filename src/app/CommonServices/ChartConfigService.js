@@ -155,13 +155,13 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             tooltip: {
                 contentGenerator: function (key, x, y, e, graph) { //return html content
                     var data = key.data
-                    var str ='<div>'
-                        str += '<h5>Date</h5>' + moment(PerformanceHandler.getLongDate(data.date.toString())).format('MMMM Do YYYY') + ''
-                    str += '<h6>Rides (U)</h6>' + data.uniqRides + ''
-                    str += '<h6>New Rider Registered</h6>' + data.newRiderRegCount + ''
-                    str += '<h6>Total Rides</h6>' + data.y + ''
-                   // str += '<h1>Date</h1>' + data.date + '/n'
-                    str +='</div>'
+                    var str ='<div class="panel panel-default" style="margin-bottom: 0;"><div class="panel-heading box-4">'
+                        str += '<h4 style="margin-top: 0; color: #fff; text-transform: inherit;" class="title">Date: ' + moment(PerformanceHandler.getLongDate(data.date.toString())).format('MMMM Do YYYY') + ' </h4></div><div class="panel-body pd-10">'  + ''
+                    //str += '<h6>New Rider Registered</h6>' + data.newRiderRegCount + ''
+                    str += '<h5>Total Rides: ' + data.y + '</h5>'
+                    str += '<h5>Rides(U): ' + data.uniqRides + '</h5>'
+                    // str += '<h1>Date</h1>' + data.date + '/n'
+                    str +='</div></div>'
                     return str;
                 }
             }
