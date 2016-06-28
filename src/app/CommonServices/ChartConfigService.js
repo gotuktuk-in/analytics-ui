@@ -5,122 +5,174 @@
 'use strict';
 
 /*
-This Service will hold the chart configuration for D3 charts
+ This Service will hold the chart configuration for D3 charts
  */
 
 angular
     .module('tuktukV2Dahboard')
     .factory('ChartConfigService', ChartConfigService)
 
-function ChartConfigService($q, $resource, API) {
-      var factory = {}
-    Date.prototype.addHours= function(h){
-        this.setHours(this.getHours()+h);
+function ChartConfigService($q, $resource, API, PerformanceHandler) {
+    var factory = {}
+    Date.prototype.addHours = function (h) {
+        this.setHours(this.getHours() + h);
         return this;
     }
-        factory.lineChartConfig ={refreshDataOnly: false}
-        factory.lineChartOptions = {
-            chart: {
-                 type: 'lineChart',
-                height: '400',
-                interpolate: 'basis',
-                legend: {
-       				vers: 'classic',
-       				maxKeyLength:400,
-       				margin : {
+    factory.lineChartConfig = {refreshDataOnly: false}
+    factory.lineChartOptions = {
+        chart: {
+            type: 'lineChart',
+            height: '400',
+            interpolate: 'basis',
+            legend: {
+                vers: 'classic',
+                maxKeyLength: 400,
+                margin: {
                     top: 5,
                     right: 15,
                     bottom: 20,
                     left: 50
                 }
-     			 },
-      			legendPosition: 'top',
-                margin : {
-                    top: 0,
-                    right: 20,
-                    bottom: 100,
-                    left: 50
-                },
-                x: function(d){
-                    return d[0];
-                },
-              //  y: function(d){ return d[1]/100; },
-                y: function(d){
-                    return d[1];
-                },
-             //   average: function(d) { return d.mean/100; },
+            },
+            legendPosition: 'top',
+            margin: {
+                top: 0,
+                right: 20,
+                bottom: 100,
+                left: 50
+            },
+            x: function (d) {
+                return d[0];
+            },
+            //  y: function(d){ return d[1]/100; },
+            y: function (d) {
+                return d[1];
+            },
+            //   average: function(d) { return d.mean/100; },
 
-                color: d3.scale.category10().range(),
-                duration: 300,
-                useInteractiveGuideline: true,
-                clipVoronoi: false,
-                showYAxis:true,
-                xAxis: {
-                    tickSize:'10',
-                   // axisLabel: 'Per Hour',
-                     rotateLabels: '-90',
-                    tickFormat: function(d) {
-                     //   return d3.time.format('%d %B %y')(new Date(d))
-                      return d3.time.format('%d %b %I %p')(new Date(d))
-                    },
-
-                    showMaxMin: true,
-                    staggerLabels: false,
-                    axisLabelDistance: 200,
-                },
-                x2Axis: {
-                    axisLabel: 'Date',
-                    tickFormat: function(d) {
-                        //   return d3.time.format('%d %B %y')(new Date(d))
-                        return d3.time.format('%I %p')(new Date(d))
-                    },
-
-                    showMaxMin: true,
-                    staggerLabels: false
+            color: d3.scale.category10().range(),
+            duration: 300,
+            useInteractiveGuideline: true,
+            clipVoronoi: false,
+            showYAxis: true,
+            xAxis: {
+                tickSize: '10',
+                // axisLabel: 'Per Hour',
+                rotateLabels: '-90',
+                tickFormat: function (d) {
+                    //   return d3.time.format('%d %B %y')(new Date(d))
+                    return d3.time.format('%d %b %I %p')(new Date(d))
                 },
 
-                yAxis: {
-                    axisLabel: 'Trips',
-                    tickFormat: function(d){
-                        return d3.round(d);
-                       // return d3.format(',.1%')(d);
-                    },
-                    showMaxMin: true,
-                    axisLabelDistance: 200
-                }
-            }
-        };
-        factory.discreteBarChartOptions = {
-            chart: {
-                type: 'discreteBarChart',
-                height: 450,
-                margin : {
-                    top: 20,
-                    right: 20,
-                    bottom: 80,
-                    left: 55
+                showMaxMin: true,
+                staggerLabels: false,
+                axisLabelDistance: 200,
+            },
+            x2Axis: {
+                axisLabel: 'Date',
+                tickFormat: function (d) {
+                    //   return d3.time.format('%d %B %y')(new Date(d))
+                    return d3.time.format('%I %p')(new Date(d))
                 },
-                x: function(d){return d.label;},
-            //    y: function(d){return d.value + (1e-10);},
-                y: function(d){
-                    return d.value
-                },
-                showValues: true,
-                valueFormat: function(d){
+
+                showMaxMin: true,
+                staggerLabels: false
+            },
+
+            yAxis: {
+                axisLabel: 'Trips',
+                tickFormat: function (d) {
                     return d3.round(d);
-                  //  return d3.format(',.4f')(d);
+                    // return d3.format(',.1%')(d);
                 },
-                duration: 500,
-                xAxis: {
-                    axisLabel: '',
-                    rotateLabels: '-90'
+                showMaxMin: true,
+                axisLabelDistance: 200
+            }
+        }
+    };
+    factory.discreteBarChartOptions = {
+        chart: {
+            type: 'discreteBarChart',
+            height: 450,
+            margin: {
+                top: 20,
+                right: 20,
+                bottom: 80,
+                left: 55
+            },
+            x: function (d) {
+                return d.label;
+            },
+            //    y: function(d){return d.value + (1e-10);},
+            y: function (d) {
+                return d.value
+            },
+            showValues: true,
+            valueFormat: function (d) {
+                return d3.round(d);
+                //  return d3.format(',.4f')(d);
+            },
+            duration: 500,
+            xAxis: {
+                axisLabel: '',
+                rotateLabels: '-90'
+            },
+            yAxis: {
+                axisLabel: '',
+                axisLabelDistance: -10
+            }
+        }
+    }
+    factory.multiBarChartOptions = {
+        chart: {
+            type: 'multiBarChart',
+            height: 400,
+            text: 'Credit Recovery',
+            x: function (d) {
+                return d.x;
+            },
+            y: function (d) {
+                return d.y;
+            },
+            stacked: true,
+            clipEdge: true,
+            transitionDuration: 1000,
+            useInteractiveGuideline: false,
+            //   xScale : d3.time.scale(), // <-- explicitly set time scale
+            xAxis: {
+                ticks: d3.time.months, // <-- add formatter for the ticks
+                tickFormat: function (d) {
+                    return d3.time.format('%d-%m-%Y')(new Date(d))
                 },
-                yAxis: {
-                    axisLabel: '',
-                    axisLabelDistance: -10
+                showMaxMin: false
+            },
+
+            yAxis: {
+                tickFormat: function (d) {
+                    return d;
+                }
+            },
+            tooltip: {
+                contentGenerator: function (key, x, y, e, graph) { //return html content
+                    var data = key.data
+                    var formateDate;
+                    if(data.date === 'Others')
+                        formateDate= data.date.toString();
+                    else
+                        formateDate = moment(PerformanceHandler.getLongDate(data.date.toString())).format('MMMM Do YYYY');
+                    var str ='<div class="panel panel-default" style="margin-bottom: 0;"><div class="panel-heading box-4">'
+                        str += '<h4 style="margin-top: 0; color: #fff; text-transform: inherit;" class="title">Date: ' +formateDate + ' </h4></div><div class="panel-body pd-10">'  + ''
+                    //str += '<h6>New Rider Registered</h6>' + data.newRiderRegCount + ''
+                    str += '<h5>Total Rides: ' + data.y + '</h5>'
+                    str += '<h5>Rides(U): ' + data.uniqRides + '</h5>'
+                    // str += '<h1>Date</h1>' + data.date + '/n'
+                    str +='</div></div>'
+                    return str;
                 }
             }
         }
+
+    };
 
     return factory
 }

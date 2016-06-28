@@ -48,13 +48,10 @@
         $scope.date = moment().format("dddd, MMMM Do YYYY")
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
-        vm.newRidersChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+        vm.newRidersChartOptions = angular.copy(ChartConfigService.multiBarChartOptions);
 
         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
             return d3.time.format('%I %p')(new Date(d).addHours(1));
-        };
-        vm.newRidersChartOptions.chart.xAxis.tickFormat = function (d) {
-            return d3.time.format('%d %b %y')(new Date(d));
         };
         vm.trips = [];
         var current = moment()
@@ -90,45 +87,86 @@
                 vehicle: $rootScope.vehicleType,
             }, function (response) {
                 vm.overview = response;
-                console.log('response ', vm.overview)
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
             });
         }
+        vm.newRiders =[ {
+         "values":[
+         {x:1359072000000, y:10,label:'C1.1'},
+         {x:1365116400000, y:30,label:'C1.2'},
+         {x:1357516800000, y:40,label:'C1.3'},
+         ],
+         "bar":true,
+         "key":"Carrier1"
 
+         },
+         {
+         "values":[
+         {x:1359072000000, y:30,label:'C2.1'},
+         {x:1365116400000, y:10,label:'C2.2'},
+         {x:1357516800000, y:79,label:'C2.3'},
+         ],
+         "bar":true,
+         "key":"Carrier2"
+
+         }
+         ]
+var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"20160620":{"rider":20,"trips":50,"uniqtrips":30},"20160621":{"rider":40,"trips":70,"uniqtrips":67},"20160622":{"rider":10,"trips":20,"uniqtrips":17},"20160623":{"rider":30,"trips":40,"uniqtrips":38},"20160624":{"rider":20,"trips":50,"uniqtrips":30},"totalrides":400}},{"20160623":{"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"20160620":{"rider":20,"trips":50,"uniqtrips":30},"20160621":{"rider":40,"trips":70,"uniqtrips":67},"20160622":{"rider":10,"trips":20,"uniqtrips":17},"20160623":{"rider":30,"trips":40,"uniqtrips":38},"totalrides":500}},{"20160622":{"20160616":{"rider":80,"trips":110,"uniqtrips":98},"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"20160620":{"rider":20,"trips":50,"uniqtrips":30},"20160621":{"rider":40,"trips":70,"uniqtrips":67},"20160622":{"rider":10,"trips":20,"uniqtrips":17},"totalrides":600}},{"20160621":{"20160615":{"rider":60,"trips":90,"uniqtrips":88},"20160616":{"rider":80,"trips":110,"uniqtrips":98},"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"20160620":{"rider":20,"trips":50,"uniqtrips":30},"20160621":{"rider":40,"trips":70,"uniqtrips":67},"totalrides":400}},{"20160620":{"20160614":{"rider":90,"trips":190,"uniqtrips":188},"20160615":{"rider":60,"trips":90,"uniqtrips":88},"20160616":{"rider":80,"trips":110,"uniqtrips":98},"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"20160620":{"rider":20,"trips":50,"uniqtrips":30},"totalrides":300}},{"20160619":{"20160613":{"rider":10,"trips":20,"uniqtrips":18},"20160614":{"rider":90,"trips":190,"uniqtrips":188},"20160615":{"rider":60,"trips":90,"uniqtrips":88},"20160616":{"rider":80,"trips":110,"uniqtrips":98},"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"totalrides":200}},{"20160618":{"20160612":{"rider":100,"trips":120,"uniqtrips":118},"20160613":{"rider":10,"trips":20,"uniqtrips":18},"20160614":{"rider":90,"trips":190,"uniqtrips":188},"20160615":{"rider":60,"trips":90,"uniqtrips":88},"20160616":{"rider":80,"trips":110,"uniqtrips":98},"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"totalrides":700}}]
         function getNewRiders() {
             LiveService.getNewRiders({
-                from: moment(current).subtract(7, 'days').startOf('day').unix(),
+                from: moment(current).subtract(6, 'days').startOf('day').unix(),
                 to: moment(current).endOf('day').unix(),
             }, function (response) {
-                //  PerformanceHandler.trips = response[0].trip
                 vm.newRiders = transformNewRiders(response);
-                console.log('response ', vm.overview)
+               console.log('response ', vm.newRiders)
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
             });
         }
 
-        function transformNewRiders(response) {
-            var data = [{"key": "Total New", "values": []},
-                {"key": "Next Day Rides", "values": []},
+        function transformNewRiders(ridresData) {
+            var data = []
+            var riders =JSON.parse(angular.toJson(ridresData));
+            var count = 0
+            var i=0
+            var labelsArr = ['today','1 day ago','2 day ago','3 day ago','4 day ago','5 day ago','6 day ago','Others']
 
-                {"key": "Next Day Rides (U)", "values": []},]
-
-
-            var total_new_registration = [], next_day_total_rides = [], next_day_unique_rides = []
-            _.each(response, function (value) {
-                var longDate = PerformanceHandler.getLongDate(value.date)
-                total_new_registration.push([longDate, value.total_new_registration]);
-                next_day_total_rides.push([longDate, value.next_day_total_rides]);
-                next_day_unique_rides.push([longDate, value.next_day_unique_rides]);
+            _.each(riders, function(rides){
+                var obj = {}
+                //obj.key = moment(PerformanceHandler.getLongDate(rides.date)).format('MMMM Do YYYY')
+                obj.key = labelsArr[i]
+                obj.bar = true;
+                obj.values = []
+                data.push(obj)
+                i++
             })
-            data[0].values = total_new_registration;
-            data[1].values = next_day_total_rides;
-            data[2].values = next_day_unique_rides;
-            return data
+            var obj = {}
+            //obj.key = moment(PerformanceHandler.getLongDate(rides.date)).format('MMMM Do YYYY')
+            obj.key = labelsArr[i]
+            obj.bar = true;
+            obj.values = []
+            data.push(obj);
+            _.each(riders, function(rides){
+                var ridesByDay = rides;
+               for (var a=0;a<=7;a++)
+                {
+                    data[a].values[count] = {}
+                    data[a].values[count].x = PerformanceHandler.getLongDate(ridesByDay.date)
+                    data[a].values[count].y = Number(rides.value[a].totalRides)
+                    data[a].values[count].uniqRides = Number(rides.value[a].uniqRides)
+                  //  data[a].values[count].newRiderRegCount = Number(rides.value[a].newRiderRegCount)
+                    if(rides.value[a].id === 'Others')
+                        data[a].values[count].date = rides.value[a].id
+                    else
+                        data[a].values[count].date = Number(rides.value[a].id)
+
+                }
+                count++
+            })
+            return data;
         }
 
         getNewRiders()
@@ -141,8 +179,7 @@
             }, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
                 vm.overview = response;
-                console.log('response ', vm.overview)
-            }, function (err) {
+             }, function (err) {
                 console.log(err)
                 $scope.error = true;
             });
