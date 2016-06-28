@@ -131,12 +131,16 @@ var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"2016061
             var data = []
             var riders =JSON.parse(angular.toJson(ridresData));
             var count = 0
+            var i=0
+            var labelsArr = ['today','1 day ago','2 day ago','3 day ago','4 day ago','5 day ago','6 day ago','Others']
             _.each(riders, function(rides){
                 var obj = {}
-                obj.key = moment(PerformanceHandler.getLongDate(rides.date)).format('MMMM Do YYYY')
+                //obj.key = moment(PerformanceHandler.getLongDate(rides.date)).format('MMMM Do YYYY')
+                obj.key = labelsArr[i]
                 obj.bar = true;
                 obj.values = []
                 data.push(obj)
+                i++
             })
             _.each(riders, function(rides){
                 var ridesByDay = rides;
@@ -146,7 +150,7 @@ var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"2016061
                     data[a].values[count].x = PerformanceHandler.getLongDate(ridesByDay.date)
                     data[a].values[count].y = Number(rides.value[a].totalRides)
                     data[a].values[count].uniqRides = Number(rides.value[a].uniqRides)
-                    data[a].values[count].newRiderRegCount = Number(rides.value[a].newRiderRegCount)
+                  //  data[a].values[count].newRiderRegCount = Number(rides.value[a].newRiderRegCount)
                     data[a].values[count].date = Number(rides.value[a].id)
                 }
                 count++
