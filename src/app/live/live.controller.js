@@ -78,6 +78,7 @@
                 getOverviewBack()
             }
             getLive()
+            getNewRiders()
             vm.loadHeatMap()
         }
 
@@ -300,7 +301,7 @@
         vm.refreshPage = function () {
             getLive()
             vm.loadHeatMap()
-            //  vm.loadHeatMap()
+            getNewRiders()
             if (vm.live) {
                 getOverviewLive()
             }
