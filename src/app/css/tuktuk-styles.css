@@ -9,9 +9,7 @@ body {
     -moz-osx-font-smoothing: auto;
 }
 table, tr, td, th, thead, tbody, tfoot, ul, li, input, textara, button,label{
-	font-size: 14px;
-	color: #333;
-	font-family: Helvetica Neue ,Helvetica, Arial, sans-serif;
+
 }
 .app-loader{
 	position: absolute;
@@ -46,8 +44,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 300;
 }
 .form-inline .form-control {
-    background: rgba(0, 0, 0, 0) none repeat; 
-    }
+    /*background: rgba(0, 0, 0, 0) none repeat; */
+}
 h4, .h4 {
     font-size: 16px;
 }
@@ -706,9 +704,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .navbar-fixed-top, .navbar-fixed-bottom {
     z-index: 1;
 }
-.panel-default {
-    border-color: #eee;
+.panel {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.07);
 }
+
 .panel-body {
     padding: 10px;
 }
@@ -839,8 +838,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 h4.title{
-	font-size:15px;
+	font-size:14px;
 	text-transform:uppercase;
+    font-weight: 500;
 }
 .box span {
     color: #999;

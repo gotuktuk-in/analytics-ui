@@ -127,6 +127,12 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
         chart: {
             type: 'multiBarChart',
             height: 400,
+            margin: {
+                top: 20,
+                right: 20,
+                bottom: 80,
+                left: 55
+            },
             text: 'Credit Recovery',
             x: function (d) {
                 return d.x;
@@ -140,9 +146,12 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             useInteractiveGuideline: false,
             //   xScale : d3.time.scale(), // <-- explicitly set time scale
             xAxis: {
+                rotateLabels: '-90',
                 ticks: d3.time.months, // <-- add formatter for the ticks
                 tickFormat: function (d) {
-                    return d3.time.format('%d-%m-%Y')(new Date(d))
+                    //return d3.time.format('%d-%m-%Y')(new Date(d))
+                    //return d3.time.format('%I %p')(new Date(d))
+                    return d3.time.format('%d %b %y')(new Date(d));
                 },
                 showMaxMin: false
             },
