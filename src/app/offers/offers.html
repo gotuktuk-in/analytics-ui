@@ -14,120 +14,128 @@
     <br>
     <br>
     <br>
-    <br><br>
-    <div class="row overview-box">
-        <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>
-</span>
+    <br>
+    <!--<div class="row overview-box">-->
+        <!--<span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>-->
+<!--</span>-->
 
-        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
-                        <div class="box box-heading box-0 text-center" ng-class="{'box-online': vm.profile.state== 22 || vm.profile.state== 11, 'box-offline': vm.profile.state== 10 } ">
-                        	<h4 class="title" style="margin-top:10px;">{{vm.profile.name}}</h4>
+        <!--<div class="col-md-12 col-sm-12 col-xs-12 text-center">-->
+            <!--<div class="panel panel-default">-->
+                <!--<div class="panel-body">-->
+                    <!--<div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">-->
+                        <!--<div class="box box-heading box-2 text-center" ng-class="{'box-online': vm.profile.state== 22 || vm.profile.state== 11, 'box-offline': vm.profile.state== 10 } ">-->
+                            <!--<h4 class="title">Offers</h4>-->
 
-                        </div>
-                    </div>
-                    <div class="col-md-10 col-sm-12 col-xs-12">
-                        <div class="col-md-2 col-sm-4 col-xs-12">
-                        	<div class="box">
-                            	<h4 class="number">{{vm.profile.id}}</h4>
-                            	<span>id</span>
-                        	</div>
-                    	</div>
-                        <div class="col-md-2 col-sm-4 col-xs-12">
-                        	<div class="box">
-                            	<h4 class="number">{{vm.profile.phone}}</h4>
-                            	<span>phone</span>
-                        	</div>
-                    	</div>  
-                    	<div class="col-md-2 col-sm-4 col-xs-12">
-                        	<div class="box">
-                            	<h4 class="number">{{vm.profile.vehicle}}</h4>
-                            	<span>vehicle number</span>
-                        	</div>
-                    	</div>
-                    	<div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box">
-                            <h4 class="number">{{vm.profile.joinedOn*1000 | date:'dd MMM yy'}}</h4>
-                            <span>joined On</span>
-                        </div>
-                    </div>
-                    	<div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box">
-                            <h4 class="number">{{vm.profile.rides_today.total}} <small>/ {{vm.profile.rides_today.unique_ride}}</small></h4>
-                            <span>ride / u</span>
-                        </div>
-                    </div>
-                    	<div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box">
-                            <h4 class="number">{{vm.profile.rides_total.total}} <small>/ {{vm.profile.rides_total.unique_ride}}</small></h4>
-                            <span>Total rides</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box" uib-popover-template="'myPopoverTemplate1.html'" popover-trigger="mouseenter" popover-placement="bottom">
-                            <h4 class="number">{{vm.profile.today_distance.total | number:2}}</h4>
-                            <span>distance</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box" uib-popover-template="'myPopoverTemplate2.html'" popover-trigger="mouseenter" popover-placement="bottom">
-                            <h4 class="number">{{vm.profile.today_online.total_hours | secondsToDateTime}}</h4>
-                            <span>online hour</span>
-                    </div>
-                    </div>
-                    	<div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box">
-                            <h4 class="number">{{vm.profile.feedbackRating | number:2}}</h4>
-                            <span>feedback</span>
-                        </div>
-                    </div>
-                    	<div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box">
-                            <h4 class="number">Rs. {{vm.profile.total_fare | number:0}} <small>/ {{vm.profile.today_fare | number:0}}</small></h4>
-                            <span>total fare / fare</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box">
-                            <h4 class="number">Rs. {{vm.profile.total_earning  | number:0}} <small>/ {{vm.profile.today_earning | number:0}}</small></h4>
-                            <span>total earning / earning</span>
-                        </div>
-                    </div>
-                    	<!-- 
-<div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box">
-                            <h4 class="number" ng-if="vm.profile.state== 22 || vm.profile.state== 11">Online</h4>
-                            <h4 class="number" ng-if="vm.profile.state== 10">Offline</h4>
-                            <span>Current Status</span>
-                        </div>
-                    </div>
- -->
-                    <div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box" uib-popover-template="'myPopoverTemplate3.html'" popover-trigger="mouseenter" popover-placement="bottom">
-                             <h4 class="number">{{vm.profile.today_bid.total}}</h4>
-                            <span>bid </span>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-10 col-sm-12 col-xs-12">-->
+                        <!--<div class="col-md-6 col-sm-4 col-xs-12">-->
+                        	<!--<div class="box">-->
+                            	<!--<h4 class="number">{{vm.profile.id}}</h4>-->
+                            	<!--<span>id</span>-->
+                        	<!--</div>-->
+                    	<!--</div>-->
+                        <!--<div class="col-md-6 col-sm-4 col-xs-12">-->
+                        	<!--<div class="box">-->
+                            	<!--<h4 class="number">{{vm.profile.phone}}</h4>-->
+                            	<!--<span>phone</span>-->
+                        	<!--</div>-->
+                    	<!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
     <div class="row">
-<!--<div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Heatmap</h4></div>
-                <div class="panel-body">
-                    <div id="example">
-                        <svg id="visualisation" width="1000" height="500"></svg>
+            <div class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading box-2">
+                            <h4 style="margin-top: 0" class="title">Offers</h4></div>
+                        <div class="panel-body">
+                            <table class="table table-responsive no-mr">
+                                <tr>
+                                    <td class="text-left">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="">Option 1</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="">Option 2</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="">Option 3</label>
+                                        </div>
+
+                                    </td></tr>
+                                    <tr>
+                                    <td><button>Select All</button></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading box-4">
+                            <h4 style="margin-top: 0" class="title">Drivers</h4></div>
+                        <div class="panel-body">
+                            <table class="table table-responsive no-mr">
+                                <tr>
+                                    <td class="text-left">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="">Option 1</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="">Option 2</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="">Option 3</label>
+                                        </div>
+
+                                    </td></tr>
+                                <tr>
+                                    <td><button>Select All</button></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-responsive text-center table-borderless">
+                            <tr>
+                                <td><br><button>&#10095;</button></td>
+                            </tr>
+                            <tr>
+                                <td><button>&#10094</button></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
+        </div>
+            <div class="col-md-5 col-sm-6 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading box-4">
+                            <h4 style="margin-top: 0" class="title">Assigned Offer to Drivers</h4></div>
+                        <div class="panel-body">
+                            <table class="table table-responsive no-mr">
+                                <tr>
+                                    <td class="text-left">
+                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
+                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
+                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
+                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
+                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
+                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
+                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
+                                    </td></tr>
+                            </table>
+                        </div>
+                    </div>
             </div>
-        </div>-->
         <div class="col-md-12 col-sm-12 col-xs-12">
 
             <div class="panel panel-default">

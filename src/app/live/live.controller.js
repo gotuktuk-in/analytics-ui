@@ -132,6 +132,7 @@
             var count = 0
             var i=0
             var labelsArr = ['today','1 day ago','2 day ago','3 day ago','4 day ago','5 day ago','6 day ago','Others']
+
             _.each(riders, function(rides){
                 var obj = {}
                 //obj.key = moment(PerformanceHandler.getLongDate(rides.date)).format('MMMM Do YYYY')
@@ -141,16 +142,26 @@
                 data.push(obj)
                 i++
             })
+            var obj = {}
+            //obj.key = moment(PerformanceHandler.getLongDate(rides.date)).format('MMMM Do YYYY')
+            obj.key = labelsArr[i]
+            obj.bar = true;
+            obj.values = []
+            data.push(obj);
             _.each(riders, function(rides){
                 var ridesByDay = rides;
-               for (var a=0;a<=6;a++)
+               for (var a=0;a<=7;a++)
                 {
                     data[a].values[count] = {}
                     data[a].values[count].x = PerformanceHandler.getLongDate(ridesByDay.date)
                     data[a].values[count].y = Number(rides.value[a].totalRides)
                     data[a].values[count].uniqRides = Number(rides.value[a].uniqRides)
                   //  data[a].values[count].newRiderRegCount = Number(rides.value[a].newRiderRegCount)
-                    data[a].values[count].date = Number(rides.value[a].id)
+                    if(rides.value[a].id === 'Others')
+                        data[a].values[count].date = rides.value[a].id
+                    else
+                        data[a].values[count].date = Number(rides.value[a].id)
+
                 }
                 count++
             })
