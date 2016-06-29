@@ -23,6 +23,9 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
         chart: {
             type: 'lineChart',
             height: '400',
+            zoom: {
+                enabled: true
+            },
             interpolate: 'basis',
             legend: {
                 vers: 'classic',
@@ -66,7 +69,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
 
                 showMaxMin: true,
                 staggerLabels: false,
-                axisLabelDistance: 200,
+                axisLabelDistance: 0
             },
             x2Axis: {
                 axisLabel: 'Date',
