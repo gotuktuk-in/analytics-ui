@@ -48,7 +48,7 @@
     <!--</div>-->
 
     <div class="row">
-            <div class="col-md-2 col-sm-6 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading box-2">
                             <h4 style="margin-top: 0" class="title">Offers</h4></div>
@@ -75,7 +75,7 @@
                         </div>
                     </div>
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading box-4">
                             <h4 style="margin-top: 0" class="title">Drivers</h4></div>
@@ -102,21 +102,7 @@
                         </div>
                     </div>
             </div>
-            <div class="col-md-2 col-sm-6 col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <table class="table table-responsive text-center table-borderless">
-                            <tr>
-                                <td><br><button>&#10095;</button></td>
-                            </tr>
-                            <tr>
-                                <td><button>&#10094</button></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-        </div>
-            <div class="col-md-5 col-sm-6 col-xs-12">
+            <div class="col-md-12 col-sm-6 col-xs-12">
                     <div class="panel panel-default">
                         <div class="panel-heading box-4">
                             <h4 style="margin-top: 0" class="title">Assigned Offer to Drivers</h4></div>
@@ -136,123 +122,5 @@
                         </div>
                     </div>
             </div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Trips</h4></div>
-                <div class="panel-body">
-
-                    <div>
-                        <table ng-table="tableParams" class="table table-responsive table-bordered table-striped text-center">
-                            <tr ng-class="{'unTruncate':row.showMore,'truncate':!row.showMore}" class="truncate"
-                                ng-repeat="row in $data track by $index">
-                                <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
-                                    <div class="trnc">
-                                        <!--  <a href="void:javascript(0);" ng-click="selectTrip(row)">{{row.id}}</a>-->
-                                        <a ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">{{row.id}}</a>
-                                    </div>
-                                </td>
-                                <td data-title="'Date & Time'" sortable="'requestOn'" style="width:150px;">
-                                    <div>{{(row.requestOn)*1000 | date:"dd/MM/yy 'at' h:mma"}}</div>
-                                </td>
-                                <td data-title="'Rider Info'">
-                                    <div class="trnc">{{row.riderInfo.name}}<br>{{row.riderInfo.phone}}</div>
-                                </td>
-                                <td data-title="'Status'" sortable="'tripState'" style="width: 100px;">
-                                    <div ng-if="row.tripState == 20" class="text-primary">Requested</div>
-                                    <div ng-if="row.tripState == 22">Allocated</div>
-                                    <div ng-if="row.tripState == 30">For Trip</div>
-                                    <div ng-if="row.tripState == 40">At Pickup</div>
-                                    <div ng-if="row.tripState == 60">At Destination</div>
-                                    <div ng-if="row.tripState == 50" class="text-info">In trip</div>
-                                    <div ng-if="row.tripState == 61" class="text-success">Successful</div>
-                                    <div ng-if="row.tripState == 70" class="text-warning">Can by Driver</div>
-                                    <div ng-if="row.tripState == 71" class="text-warning">Can by Rider</div>
-                                    <div ng-if="row.tripState == 80">No Drv Avlble</div>
-                                    <div ng-if="row.tripState == 81" class="text-danger">Failed (No Drivers Accepted)</div>
-                                    <div ng-if="row.tripState == 82">Terminated</div>
-                                </td>
-                                <td data-title="'Pickup'" style="width: 200px;">
-                                    <div class="trnc">{{row.pickUp.line1 + ' ' + row.pickUp.line2}} {{row.pickUp.city + " " + row.pickUp.state + ' ' +
-                                        row.pickUp.country}}
-                                    </div>
-                                </td>
-                                <td data-title="'Drop'" style="width: 200px;">
-                                    <div class="trnc">{{row.drop.line1 + ' ' + row.drop.line2}} {{row.pickUp.city + " " + row.drop.state + ' ' +
-                                        row.drop.country}}
-                                    </div>
-                                </td>
-                                <td data-title="'Time'" align="center">
-                                    <div class="trnc">{{getTimeDiff(row.dropOn,row.pickupOn)}}</div>
-                                </td>
-                                <td data-title="'Distance (KM)'" align="center">
-                                    <div class="trnc">{{(row.disPickupDrop)/1000 | number:2}}</div>
-                                </td>
-                                <td data-title="'Amt. (Rs.)'" align="right">
-                                    <div class="trnc">
-                                        {{row.amount.total | number:2}}<br>
-                                        <span class="small">Cash: {{row.amount.cash | number:2}}</span>
-                                        <span class="small">Citrus: {{row.amount.citrus | number:2}}</span>
-                                        <span class="small">Discount: {{row.amount.discount | number:2}}</span>
-                                    </div>
-                                </td>
-                                <td data-title="'Rating'" sortable="'riderFeedbackRating'" align="center">
-                                    <div class="trnc">{{row.riderFeedbackRating | number:1}}</div>
-                                </td>
-                                <!--<td data-title="''">
-                                    <button class="btn btn-xs btn-link" ng-click="showMore(row)">More <i
-                                            class="glyphicon glyphicon-triangle-bottom"></i></button>
-                                </td>-->
-                            </tr>
-                        </table>
-                        <table class="table table-bordered table-condensed" ng-show="tblNoData">
-                            <tr>
-                                <td colspan="9">No data found</td>
-                            </tr>
-                        </table>
-
-                    </div>
-                </div>
-                <br>
-                <br>
-            </div>
-        </div>
     </div>
 </div>
-<script type="text/ng-template" id="myPopoverTemplate1.html">
-
-    <div class="box text-center">
-        <h4 class="number no-mr">{{vm.profile.today_distance.intrip | number:2}}</h4>
-        <span>in trip</span>
-			<br>
-        <h4 class="number no-mr pd10-tp">{{vm.profile.today_distance.forTrip | number:2}}</h4>
-        <span>for trip</span>
-
-    </div>
-</script>
-<script type="text/ng-template" id="myPopoverTemplate2.html">
-
-    <div class="box text-center">
-        <h4 class="number no-mr">{{vm.profile.today_online.intrip_time | secondsToDateTime}}</h4>
-        <span>in trip</span>
-			<br>
-        <h4 class="number no-mr pd10-tp">{{vm.profile.today_online.fortrip_time | secondsToDateTime}}</h4>
-        <span>for trip</span>
-
-    </div>
-</script>
-<script type="text/ng-template" id="myPopoverTemplate3.html">
-
-    <div class="box text-center">
-        <h4 class="number no-mr">{{vm.profile.today_bid.accepted}}</h4>
-        <span>accepted</span>
-			<br>
-        <h4 class="number no-mr pd10-tp">{{vm.profile.today_bid.rejected}}</h4>
-        <span>rejected</span>
-        <br>
-        <h4 class="number no-mr pd10-tp">{{vm.profile.today_bid.ignored}}</h4>
-        <span>ignored</span>
-
-    </div>
-</script>

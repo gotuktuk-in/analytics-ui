@@ -78,6 +78,7 @@
                 getOverviewBack()
             }
             getLive()
+            getNewRiders()
             vm.loadHeatMap()
         }
 
@@ -113,7 +114,6 @@
 
          }
          ]
-var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"20160620":{"rider":20,"trips":50,"uniqtrips":30},"20160621":{"rider":40,"trips":70,"uniqtrips":67},"20160622":{"rider":10,"trips":20,"uniqtrips":17},"20160623":{"rider":30,"trips":40,"uniqtrips":38},"20160624":{"rider":20,"trips":50,"uniqtrips":30},"totalrides":400}},{"20160623":{"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"20160620":{"rider":20,"trips":50,"uniqtrips":30},"20160621":{"rider":40,"trips":70,"uniqtrips":67},"20160622":{"rider":10,"trips":20,"uniqtrips":17},"20160623":{"rider":30,"trips":40,"uniqtrips":38},"totalrides":500}},{"20160622":{"20160616":{"rider":80,"trips":110,"uniqtrips":98},"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"20160620":{"rider":20,"trips":50,"uniqtrips":30},"20160621":{"rider":40,"trips":70,"uniqtrips":67},"20160622":{"rider":10,"trips":20,"uniqtrips":17},"totalrides":600}},{"20160621":{"20160615":{"rider":60,"trips":90,"uniqtrips":88},"20160616":{"rider":80,"trips":110,"uniqtrips":98},"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"20160620":{"rider":20,"trips":50,"uniqtrips":30},"20160621":{"rider":40,"trips":70,"uniqtrips":67},"totalrides":400}},{"20160620":{"20160614":{"rider":90,"trips":190,"uniqtrips":188},"20160615":{"rider":60,"trips":90,"uniqtrips":88},"20160616":{"rider":80,"trips":110,"uniqtrips":98},"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"20160620":{"rider":20,"trips":50,"uniqtrips":30},"totalrides":300}},{"20160619":{"20160613":{"rider":10,"trips":20,"uniqtrips":18},"20160614":{"rider":90,"trips":190,"uniqtrips":188},"20160615":{"rider":60,"trips":90,"uniqtrips":88},"20160616":{"rider":80,"trips":110,"uniqtrips":98},"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"20160619":{"rider":50,"trips":90,"uniqtrips":50},"totalrides":200}},{"20160618":{"20160612":{"rider":100,"trips":120,"uniqtrips":118},"20160613":{"rider":10,"trips":20,"uniqtrips":18},"20160614":{"rider":90,"trips":190,"uniqtrips":188},"20160615":{"rider":60,"trips":90,"uniqtrips":88},"20160616":{"rider":80,"trips":110,"uniqtrips":98},"20160617":{"rider":70,"trips":100,"uniqtrips":98},"20160618":{"rider":20,"trips":60,"uniqtrips":40},"totalrides":700}}]
         function getNewRiders() {
             LiveService.getNewRiders({
                 from: moment(current).subtract(6, 'days').startOf('day').unix(),
@@ -301,7 +301,7 @@ var a = [{"20160624":{"20160618":{"rider":20,"trips":60,"uniqtrips":40},"2016061
         vm.refreshPage = function () {
             getLive()
             vm.loadHeatMap()
-            //  vm.loadHeatMap()
+            getNewRiders()
             if (vm.live) {
                 getOverviewLive()
             }

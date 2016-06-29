@@ -6,7 +6,7 @@
         .controller('DriversController', DriversController);
 
     /** @ngInject */
-    function DriversController($scope, $log, $rootScope, $interval,StaticDataService, ChartConfigService, PerformanceService, PerformanceHandler, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversController($scope, $log, $rootScope, $interval, StaticDataService, ChartConfigService, PerformanceService, PerformanceHandler, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this
         var today = moment()
@@ -22,29 +22,49 @@
         };
         $scope.date = moment().format("dddd, MMMM Do YYYY")
         $scope.datesForAcq = {}
-        $scope.datesForAcq.startDate = moment().subtract(7,'days').format("YYYY-MM-DD");
+        $scope.datesForAcq.startDate = moment().subtract(7, 'days').format("YYYY-MM-DD");
         $scope.datesForAcq.endDate = moment().format("YYYY-MM-DD");
         vm.changeDate = function (to) {
 
             if (to == 'next') {
-                current =  moment(current).add(1, 'day')
+                current = moment(current).add(1, 'day')
                 $scope.date = moment(current).format("dddd, MMMM Do YYYY")
 
             }
             else {
-                current =  moment(current).subtract(1, 'day')
+                current = moment(current).subtract(1, 'day')
                 $scope.date = moment(current).format("dddd, MMMM Do YYYY")
 
                 console.log('$scope.date ', $scope.date)
             }
-        if( moment(current).unix() == moment(today).unix())
-            {
+            if (moment(current).unix() == moment(today).unix()) {
                 vm.live = true;
             }
-            else { vm.live = false; }
+            else {
+                vm.live = false;
+            }
             $scope.tableParams.reload()
             $scope.tableParams.page(1)
             vm.getAcquisition()
+        }
+
+        vm.filterTerm = '';
+        vm.filterFields = [{value: "id", name: "Driver ID"},
+            //{filed:"requestOn",title:"Date"},
+            {value: "dname", name: "Driver Name"},
+            {value: "dphone", name: "Driver Phone"},
+            {value: "dvehicle", name: "Vehicle Number"},
+            {value: "vehicleType", name: "Vehicle Type"},
+            {value: "riderFeedbackRating", name: "Feedback Rating "}
+        ]
+        vm.statusCodes = ''
+        vm.tripStatusFilters = [{name: 'All', value: "all"},
+            {name: 'Occupied', value: "61"},
+            {name: 'Unoccupied ', value: '70,71'},
+            {name: 'Offline', value: '20,22,30,40,50,60'},
+        ]
+        vm.searchTable = function () {
+            $scope.tableParams.reload()
         }
         function getLive() {
             LiveService.getOverview({
@@ -63,15 +83,15 @@
             DriversService.getAcquisition({
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
-                from: moment( $scope.datesForAcq.startDate).startOf('day').format("YYYYMMDD").toString(),
-                to: moment( $scope.datesForAcq.endDate).endOf('day').format("YYYYMMDD").toString(),
+                from: moment($scope.datesForAcq.startDate).startOf('day').format("YYYYMMDD").toString(),
+                to: moment($scope.datesForAcq.endDate).endOf('day').format("YYYYMMDD").toString(),
             }, function (response) {
                 vm.acquisitionData = []
                 var values = []
-                _.each(response, function(value){
-                    values.push({label:PerformanceHandler.getLongDate(value.id), value:value.count})
+                _.each(response, function (value) {
+                    values.push({label: PerformanceHandler.getLongDate(value.id), value: value.count})
                 })
-                vm.acquisitionData.push({key:'Drivers', values:values})
+                vm.acquisitionData.push({key: 'Drivers', values: values})
                 console.log('vm.acquisitionData ', vm.acquisitionData)
             }, function (err) {
                 console.log(err)
@@ -81,22 +101,25 @@
 
         getLive()
         vm.getAcquisition()
-        var interval =  $interval(function(){
+        var interval = $interval(function () {
             getLive()
             vm.getAcquisition()
             $scope.tableParams.reload()
             $scope.tableParams.page(1)
         }, 30000)
-        $scope.$on('$destroy', function () { $interval.cancel(interval); });
+        $scope.$on('$destroy', function () {
+            $interval.cancel(interval);
+        });
         // call to get data for the tables
-         $scope.tableParams = new NgTableParams({page:1,count: 20, sorting:{earning:'desc'},
+        $scope.tableParams = new NgTableParams({
+            page: 1, count: 20, sorting: {earning: 'desc'},
         }, {
             counts: [],
             getData: function (params) {
                 // ajax request to api
-               var  start =  params.page()
+                var start = params.page()
                 console.log("**************************")
-                var orderBy= ''
+                var orderBy = ''
                 var field = ''
                 if (params.orderBy().length > 0) {
                     orderBy = params.orderBy()[0].substr(0, 1);
@@ -108,31 +131,35 @@
                         orderBy = "DESC"
                     }
                 }
+                var dataObj = {
+                    city: $rootScope.city,
+                    vehicle: $rootScope.vehicleType,
+                    from: moment(current).startOf('day').format("YYYYMMDD").toString(),
+                    to: moment(current).endOf('day').format("YYYYMMDD").toString(),
+                    orderby: orderBy,
+                    field: field,
+                    start: start,
+                    count: params.count()
+                }
+                if (vm.searchTerm && vm.searchTerm != '') {
+                    dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm
+                }
+                if (vm.statusCodes.value != '') {
+                    dataObj.filterByStatus = vm.statusCodes.value
+                }
+                return DriversService.getTopDrivers(dataObj).$promise.then(function (data) {
 
-                return DriversService.getTopDrivers(
-                    {
-                        city: $rootScope.city,
-                        vehicle: $rootScope.vehicleType,
-                        from: moment( current).startOf('day').format("YYYYMMDD").toString(),
-                        to: moment( current).endOf('day').format("YYYYMMDD").toString(),
-                        orderby:orderBy,
-                        field:field,
-                        start:start,
-                        count:params.count()
-                    }
-                ).$promise.then(function (data) {
+                        params.total(data.total); // recal. page nav controls
 
-                    params.total(data.total); // recal. page nav controls
-
-                    console.log('trop ',data)
-                    if(data.length > 0){
-                        $scope.tblNoData = false
-                    }
-                    else{
-                        $scope.tblNoData = true
-                    }
-                    return data;
-                });
+                        console.log('trop ', data)
+                        if (data.length > 0) {
+                            $scope.tblNoData = false
+                        }
+                        else {
+                            $scope.tblNoData = true
+                        }
+                        return data;
+                    });
             }
         });
     }
