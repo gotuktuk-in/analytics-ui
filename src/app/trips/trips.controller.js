@@ -128,6 +128,9 @@
             }, {vehicle: $rootScope.vehicleType, frequency: vm.tripFrequency.value}, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
                 vm.trips = PerformanceHandler.getTrips(response[0].trip)
+                vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by rider)'}));
+                vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by driver)'}));
+                vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'tCash'}));
                 trips_heatmap = response[0].trip;
             }, function (err) {
                 console.log(err)
