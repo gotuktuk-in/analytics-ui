@@ -14,12 +14,12 @@
   <li style="padding:2px 10px"><span class="pull-right" style="color: rgb(204, 204, 204); padding: 15px 0px;">Admin
           <span style="padding: 0;color:#ccc;" ng-click="logout()"  id="admin" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">[ Logout ] </span> </span><img height="30" style="margin:10px 12px" title="Tuktuk" src="assets/images/gotuktuk-play-logo.png"></li>
     <li style="background:#444; padding:15px; color:#eee"><span style="padding:5px 10px;" >{{selectedVehicle.name}}</span> | <span style="padding:5px 10px;">{{selectedCity.name}}</span></li>
-    <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.live({city: city,vehicleType: vehicleType})"> <span class="fa fa-heart"></span> Live</a></li>
+    <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.live({city: city,vehicleType: vehicleType})"> <span class="fa fa-paper-plane"></span> Live</a></li>
     <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.drivers({city: city,vehicleType: vehicleType})"> <span class="fa fa-paper-plane"></span> Drivers</a></li>
     <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.maps({city: city,vehicleType: vehicleType})"> <span class="fa fa-map"></span>Maps</a></li>
     <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.performance({city: city,vehicleType: vehicleType})"><span class="fa fa-area-chart "></span> <strike>Performance</strike> <sup class="text-lowercase">Beta</sup></a></li>
-    <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.trips({city: city,vehicleType: vehicleType})"> <span class="fa fa-map-pin"></span> Trips</a></li>
-    <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.offers"> <span class="fa fa-barcode"></span> <strike>Offers</strike></a></li>
+    <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.trips({city: city,vehicleType: vehicleType})"> <span class="fa fa-map-pin"></span> <strike>Trips</strike></a></li>
+    <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.offers"> <span class="fa fa-map-pin"></span> <strike>Offers</strike></a></li>
   </ul>
 </div>
 <ui-view></ui-view>

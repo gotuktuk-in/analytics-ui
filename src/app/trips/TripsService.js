@@ -33,11 +33,6 @@ function TripsService($q, $resource, API) {
                 url:   url + 'rider/:frequency/:vehicle',
                 isArray:true
             },
-            getTCash: {
-                method: 'GET',
-                url:   url + 'trips/tcash',
-                isArray:true
-            },
 
         }
     );

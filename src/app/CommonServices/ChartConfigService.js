@@ -97,9 +97,6 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
         chart: {
             type: 'discreteBarChart',
             height: 450,
-            zoom: {
-                enabled: true
-            },
             margin: {
                 top: 20,
                 right: 20,
@@ -167,7 +164,24 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                     return d;
                 }
             },
-
+            tooltip: {
+                contentGenerator: function (key, x, y, e, graph) { //return html content
+                    var data = key.data
+                    var formateDate;
+                    if(data.date === 'Others')
+                        formateDate= data.date.toString();
+                    else
+                        formateDate = moment(PerformanceHandler.getLongDate(data.date.toString())).format('MMMM Do YYYY');
+                    var str ='<div class="panel panel-default" style="margin-bottom: 0;"><div class="panel-heading box-4">'
+                        str += '<h4 style="margin-top: 0; color: #fff; text-transform: inherit;" class="title">Date: ' +formateDate + ' </h4></div><div class="panel-body pd-10">'  + ''
+                    //str += '<h6>New Rider Registered</h6>' + data.newRiderRegCount + ''
+                    str += '<h5>Total Rides: ' + data.y + '</h5>'
+                    str += '<h5>Rides(U): ' + data.uniqRides + '</h5>'
+                    // str += '<h1>Date</h1>' + data.date + '/n'
+                    str +='</div></div>'
+                    return str;
+                }
+            }
         }
 
     };
