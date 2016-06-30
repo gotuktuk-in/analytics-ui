@@ -50,9 +50,8 @@ button, input, optgroup, textarea, select {
 }
 
 .input-search-term {
-    height: 34px;
+    height: 32px;
     vertical-align: middle;
-    margin-left: 10px;
     padding: 0 8px;
 }
 
@@ -1401,7 +1400,7 @@ span.img-top {
     font-family: 'FontAwesome';
     font-size: 16px;
     height: 25px;
-    width: 25px;
+    width: 15px;
     display: inline-block;
 }
 

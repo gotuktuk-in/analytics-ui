@@ -97,6 +97,9 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
         chart: {
             type: 'discreteBarChart',
             height: 450,
+            zoom: {
+                enabled: true
+            },
             margin: {
                 top: 20,
                 right: 20,
