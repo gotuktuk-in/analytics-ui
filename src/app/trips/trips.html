@@ -2,7 +2,7 @@
     <div class="row">
         <form class="form-inline date-selection date-selection-dr">
             <div class="form-group ">
-                <input ng-change="vm.getTrips()" class="form-control cstm-width text-center" type="daterange"
+                <input ng-change=" vm.onDateChange()" class="form-control cstm-width text-center" type="daterange"
                        ng-model="tripDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
             </div>
         </form>
@@ -12,17 +12,7 @@
     <div class="row">
         <div class="col-md-6"></div>
         <div class="col-md-6 text-right">
-            <form class="form-inline">
-                <div class="form-group " style="margin-top:15px">
-                    <div class="radio inpt-style">
-                        <label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"
-                                      name="optradio" ng-model="vm.tripFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
-                        <label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"
-                                      name="optradio" ng-model="vm.tripFrequency.value" value="day"> <i></i> <span>Per Day</span></label>
 
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
     <br>
@@ -42,40 +32,63 @@
         </div>
     </div>-->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
-            <div class="panel-heading">
+                <form class="form-inline pull-right">
+                    <div class="form-group ">
+                        <div class="radio inpt-style">
+                            <label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"
+                                          name="optradio" ng-model="vm.tripFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
+                            <label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"
+                                          name="optradio" ng-model="vm.tripFrequency.value" value="day"> <i></i> <span>Per Day</span></label>
+
+                        </div>
+                    </div>
+                </form>
+                <div class="panel-heading">
+
                     <h4 style="margin-top: 0" class="title">Trips</h4></div>
                 <div class="panel-body">
-                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+                    <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">tCash Burned</h4></div>
+                <div class="panel-body">
+                    <nvd3 options="vm.tcashChartOptions" data="vm.tcashData" config="vm.config"></nvd3>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <form class="form-inline">
-            <div class="input-group col-md-3">
-                <select ng-model="vm.filterTerm" class="form-control"
-                       ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
-                <option value="" disabled>-- Select Filter --</option>
-                </select>
-            </div>
-                <div class="input-group col-md-3" >
-                           <input ng-model="vm.searchTerm" class="input-search-term" placeholder="term" ng-disabled="!vm.filterTerm"/>
-                    <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-small">Search</button>
-                </div>
-                <div class="input-group col-md-3">
+
+                    <div class="input-group">
+                        <select ng-model="vm.filterTerm" class="form-control"
+                                ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
+                            <option value="" disabled>Select Filter</option>
+                        </select>
+                    </div>
+                    <div class="input-group" >
+                        <input ng-model="vm.searchTerm" class="input-search-term" placeholder="term" ng-disabled="!vm.filterTerm"/>
+                        <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-small">Search</button>
+                    </div>
+                <div class="input-group">
                     <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
                             ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters track by statusFilter.value">
-                        <option value="" disabled>-- Select Status --</option>
+                        <option value="" disabled>Select Status</option>
                     </select>
                 </div>
-            </form>
-             <br>
-        </div>
-       
-        <div class="col-md-12">
+
+            </form><br>
+    </div>
+    </div>
+        <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
             <div class="panel-heading">
                     <h4 style="margin-top: 0" class="title">Trips Table</h4></div>
@@ -85,13 +98,16 @@
 
                             <tr class="truncate"
                                 ng-repeat="row in $data track by $index">
-                                <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
+                               <!-- <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
                                     <a target="_blank"
                                        ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">{{row.id}}
                                     </a>
-                                </td>
+                                </td>-->
                                 <td data-title="'Date & Time'" sortable="'requestOn'" style="width: 150px;">
-                                    <div>{{(row.requestOn)*1000 | date:"dd/MMM/yyyy 'at' h:mma"}}</div>
+                                    <a target="_blank"
+                                       ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})"><div>{{(row.requestOn)*1000 | date:"dd/MMM/yyyy 'at' h:mma"}}</div>
+                                    </a>
+
                                 </td>
                                 <td data-title="'Status'" sortable="'tripState'" style="width: 100px;">
                                     <div ng-if="row.tripState == 20" class="text-primary">Requested</div>
@@ -108,19 +124,18 @@
                                     <div ng-if="row.tripState == 82">Terminated</div>
                                 </td>
                                 <td data-title="'Driver Info'">
-                                    <div><b><a
-                                            ui-sref="drivers.driverRiderHistory({id:row.driverInfo.id})">{{row.driverInfo.name}}</a></b><br>
-                                        <span class="small">{{row.driverInfo.phone}}</span>
-                                        <span class="small">{{row.driverInfo.vehicle}}</span>
+                                    <div>{{row.driverInfo.name}}<br>
+                                      <!--  <span class="small">{{row.driverInfo.phone}}</span>
+                                        <span class="small">{{row.driverInfo.vehicle}}</span>-->
                                     </div>
                                 </td>
                                 <td data-title="'VType'" sortable="'vehicleType'" align="center">
                                     <div>{{row.vehicleType}}</div>
                                 </td>
                                 <td data-title="'Rider  Info'">
-                                    <div>{{row.riderInfo.name}}<br>{{row.riderInfo.phone}}</div>
+                                    <div>{{row.riderInfo.name}}</div>
                                 </td>
-                                <td data-title="'Pickup'" style="width:150px;">
+                                <!--<td data-title="'Pickup'" style="width:150px;">
                                     <div class="truncate truncate-pick-drop">{{row.pickUp.line1 + ' ' + row.pickUp.line2}} {{row.drop.city + '
                                         ' +row.pickUp.state + ' ' +
                                         row.pickUp.country}}
@@ -131,7 +146,7 @@
                                         +row.drop.state + ' ' +
                                         row.drop.country}}
                                     </div>
-                                </td>
+                                </td>-->
 
                                 <td data-title="'Time'" sortable="'time'" style="width:110px;">
                                     <div>{{getTimeDiff(row.pickupOn,row.dropOn)| secondsToDateTime}}</div>
@@ -141,7 +156,7 @@
                                 <td data-title="'Dist(KM)'" sortable="'disPickupDrop'" align="center">
                                     <div>{{(row.disPickupDrop)/1000 | number:2}}</div>
                                 </td>
-                                <td data-title="'Amt(Rs.)'" sortable="'amount'" align="right">
+                               <!-- <td data-title="'Amt(Rs.)'" sortable="'amount'" align="right">
                                     <div class="truncate truncate-amt"><b>{{row.amount.total}}</b>
                                         <span class="small">Cash: {{row.amount.cash | number:2}}</span>
                                         <span class="small">Citrus: {{row.amount.citrus | number:2}}</span>
@@ -150,7 +165,7 @@
                                 </td>
                                 <td data-title="'Rating'" sortable="'riderFeedbackRating'" align="center">
                                     <div>{{row.riderFeedbackRating | number:1}}</div>
-                                </td>
+                                </td>-->
                                <!-- <td data-title="'Show'" align="center">
                                     <button class="btn btn-xs btn-link" ng-click="showMore(row)"><i
                                             ng-class="{'glyphicon-chevron-up':row.showMore,'glyphicon-chevron-down':!row.showMore}"

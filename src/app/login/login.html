@@ -20,7 +20,7 @@ body {
     	<div class="col-md-12">
     	<form name="login" novalidate>
         <div class="group">
-          <input class="inputMaterial" type="text" ng-model="user.username" required placeholder="Username">
+          <input class="inputMaterial" type="text" ng-model="user.username" required placeholder="Username" style="border:none !important;">
 
         </div>
         <div class="help-block animated slideInUp" ng-messages="login.username.$error"
@@ -28,7 +28,7 @@ body {
           <p ng-message="required"> Please enter username.</p>
         </div>
         <div class="group">
-          <input class="inputMaterial" type="password" ng-model="user.password" required placeholder="Password">
+          <input class="inputMaterial" type="password" ng-model="user.password" required placeholder="Password" style="border:none !important;">
 
         </div>
         <div class="help-block animated slideInUp" ng-messages="login.password.$error"

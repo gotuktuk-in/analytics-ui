@@ -13,32 +13,33 @@
         var startDate, endDate;
         vm.ranges = StaticDataService.ranges
         $scope.tripDates = {};
-        $scope.tripDates.startDate = StaticDataService.ranges.Yesterday[0]//moment().subtract(1, 'days').format("YYYY-MM-DD");
-        $scope.tripDates.endDate = StaticDataService.ranges.Yesterday[1]//moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.tripDates.startDate = StaticDataService.ranges['Last 7 Days'][0]//moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.tripDates.endDate = StaticDataService.ranges['Last 7 Days'][1]//moment().subtract(1, 'days').format("YYYY-MM-DD");
 
         vm.timeFrequency = [{label: "Per Hour", value: "hour"}, {label: "Per Day", value: "day"}];
-        vm.tripFrequency = {value: "hour"};
+        vm.tripFrequency = {value: "day"};
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+        vm.tcashChartOptions = angular.copy(ChartConfigService.multiBarChartOptions);
 
         vm.trips = [];
-        vm.filterTerm ='';
-        vm.filterFields = [{value:"id",name:"ID"},
+        vm.filterTerm = '';
+        vm.filterFields = [{value: "id", name: "ID"},
             //{filed:"requestOn",title:"Date"},
-            {value:"dname",name:"Driver Name"},
-            {value:"dphone",name:"Driver Phone"},
-            {value:"dvehicle",name:"Vehicle Number"},
-      //      {value:"vehicleType",name:"Vehicle Type"},
-            {value:"rname",name:"Rider Name"},
-            {value:"rphone",name:"Rider Phone"},
-            {value:"pickUp",name:"Pick Up"},
-            {value:"drop",name:"Drop"},
-            {value:"amount",name:"Amount"},
-            {value:"riderFeedbackRating",name:"Rider Feedback Rating "}
+            {value: "dname", name: "Driver Name"},
+            {value: "dphone", name: "Driver Phone"},
+            {value: "dvehicle", name: "Vehicle Number"},
+            //      {value:"vehicleType",name:"Vehicle Type"},
+            {value: "rname", name: "Rider Name"},
+            {value: "rphone", name: "Rider Phone"},
+            /* {value:"pickUp",name:"Pick Up"},
+             {value:"drop",name:"Drop"},
+             {value:"amount",name:"Amount"},
+             {value:"riderFeedbackRating",name:"Rider Feedback Rating "}*/
         ]
         vm.statusCodes = ''
         vm.tripStatusFilters = [{name: 'All', value: "all"},
-            {name: 'Successful', value: "61"},
+            {name: 'Fullfiled', value: "61"},
             {name: 'Cancelled ', value: '70,71'},
             {name: 'In Progress', value: '20,22,30,40,50,60'},
             {name: 'Failed', value: '80,81,82'},
@@ -63,6 +64,59 @@
             vm.getTrips()
 
         }
+        vm.onDateChange = function () {
+            vm.getTCash()
+            vm.getTrips()
+        }
+        vm.getTCash = function () {
+            TripsService.getTCash({
+                city: $rootScope.city,
+                startTime: $scope.tripDates.startDate,
+                endTime: $scope.tripDates.endDate,
+                vehicle: $rootScope.vehicleType
+            }, {}, function (response) {
+                //  PerformanceHandler.trips = response[0].trip
+                vm.tcashData = transformTCash(response) ;
+                console.log('response ', vm.tcashData)
+            }, function (err) {
+                console.log(err)
+                $scope.error = true;
+            });
+            //  $scope.tableParams.page(1)
+            $scope.tableParams.reload();
+        }
+        function transformTCash(data) {
+            var transformed = []
+            data = angular.fromJson(data);
+            var arr = ['tCash', 'Trip']
+            for (var i=0;i<arr.length;i++)
+            {
+                var newObj = {}
+                newObj.key =arr[i]
+                newObj.values =[]
+                for (var a=0;a<data.length;a++)
+                {
+                    var x = PerformanceHandler.getLongDate(data[a].date)
+                    newObj.values.push({x:x, y:data[a].trip,y0:data[a].tcash })
+                }
+
+                transformed.push(newObj)
+            }
+            /*_.each(data,function(value){
+
+                var newObj = {}
+                newObj.key = value.date
+                newObj.values =[]
+                for (var a=0;a<data.length;a++)
+                {
+                    newObj.values.push({x:data[a].date, y:data[a].trip,y0:data[a].tcash })
+                }
+
+                transformed.push(newObj)
+            })*/
+            return transformed
+        }
+
         vm.getTrips = function () {
             PerformanceService.getTrips({
                 city: $rootScope.city,
@@ -74,6 +128,9 @@
             }, {vehicle: $rootScope.vehicleType, frequency: vm.tripFrequency.value}, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
                 vm.trips = PerformanceHandler.getTrips(response[0].trip)
+                vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by rider)'}));
+                vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by driver)'}));
+                vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'tCash'}));
                 trips_heatmap = response[0].trip;
             }, function (err) {
                 console.log(err)
@@ -123,7 +180,7 @@
                     }
                 }
 
-                if ( vm.searchTerm && vm.searchTerm != '') {
+                if (vm.searchTerm && vm.searchTerm != '') {
                     dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm
                 }
                 if (vm.statusCodes.value != '') {
@@ -133,7 +190,6 @@
 
                     params.total(data.total); // recal. page nav controls
 
-                    console.log('trop ', data)
                     if (data.data.length > 0) {
                         $scope.tblNoData = false
                     }
@@ -144,7 +200,7 @@
                 });
             }
         });
-        vm.getTrips()
+        vm.onDateChange()
         var interval = $interval(function () {
             vm.getTrips()
             $scope.tableParams.reload()
