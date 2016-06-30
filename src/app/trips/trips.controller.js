@@ -21,7 +21,7 @@
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
         vm.tcashChartOptions = angular.copy(ChartConfigService.multiBarChartOptions);
-
+        vm.tcashChartOptions.chart.stacked=false
         vm.trips = [];
         vm.filterTerm = '';
         vm.filterFields = [{value: "id", name: "ID"},
@@ -76,7 +76,7 @@
                 vehicle: $rootScope.vehicleType
             }, {}, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
-                vm.tcashData = transformTCash(response) ;
+                vm.tcashData = transformTCash(response);
                 console.log('response ', vm.tcashData)
             }, function (err) {
                 console.log(err)
@@ -89,31 +89,25 @@
             var transformed = []
             data = angular.fromJson(data);
             var arr = ['tCash', 'Trip']
-            for (var i=0;i<arr.length;i++)
-            {
-                var newObj = {}
-                newObj.key =arr[i]
-                newObj.values =[]
-                for (var a=0;a<data.length;a++)
-                {
-                    var x = PerformanceHandler.getLongDate(data[a].date)
-                    newObj.values.push({x:x, y:data[a].trip,y0:data[a].tcash })
-                }
 
-                transformed.push(newObj)
+            var newObj = {}
+            newObj.key = arr[0]
+            newObj.values = []
+            for (var a = 0; a < data.length; a++) {
+                var x = PerformanceHandler.getLongDate(data[a].date)
+                newObj.values.push({x: x, y: data[a].tcash})
             }
-            /*_.each(data,function(value){
+            transformed.push(newObj);
 
-                var newObj = {}
-                newObj.key = value.date
-                newObj.values =[]
-                for (var a=0;a<data.length;a++)
-                {
-                    newObj.values.push({x:data[a].date, y:data[a].trip,y0:data[a].tcash })
-                }
+            var newObj = {}
+            newObj.key = arr[1]
+            newObj.values = []
+            for (var a = 0; a < data.length; a++) {
+                var x = PerformanceHandler.getLongDate(data[a].date)
+                newObj.values.push({x: x, y: data[a].trip})
+            }
+            transformed.push(newObj);
 
-                transformed.push(newObj)
-            })*/
             return transformed
         }
 
