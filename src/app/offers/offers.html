@@ -1,126 +1,236 @@
 <div class="container-fluid">
-    <div class="row" >
-        <form class="form-inline date-selection date-selection-dr"	>
+    <div class="row">
+        <form class="form-inline date-selection date-selection-dr">
             <div class="form-group ">
-                <input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange" ng-model="selectedDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
+                <input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange"
+                       ng-model="selectedDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
             </div>
         </form>
-            <!--<div class="col-md-12 col-sm-12 col-xs-12">
-            	<span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>
-            </div>-->
-            </div>
-            <span class="live" ng-if="vm.live"> LIVE</span>
-            <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+        <!--<div class="col-md-12 col-sm-12 col-xs-12">
+            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>
+        </div>-->
+    </div>
+    <span class="live" ng-if="vm.live"> LIVE</span>
+    <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
     <br>
     <br>
     <br>
     <br>
     <!--<div class="row overview-box">-->
-        <!--<span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>-->
-<!--</span>-->
+    <!--<span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>-->
+    <!--</span>-->
 
-        <!--<div class="col-md-12 col-sm-12 col-xs-12 text-center">-->
-            <!--<div class="panel panel-default">-->
-                <!--<div class="panel-body">-->
-                    <!--<div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">-->
-                        <!--<div class="box box-heading box-2 text-center" ng-class="{'box-online': vm.profile.state== 22 || vm.profile.state== 11, 'box-offline': vm.profile.state== 10 } ">-->
-                            <!--<h4 class="title">Offers</h4>-->
+    <!--<div class="col-md-12 col-sm-12 col-xs-12 text-center">-->
+    <!--<div class="panel panel-default">-->
+    <!--<div class="panel-body">-->
+    <!--<div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">-->
+    <!--<div class="box box-heading box-2 text-center" ng-class="{'box-online': vm.profile.state== 22 || vm.profile.state== 11, 'box-offline': vm.profile.state== 10 } ">-->
+    <!--<h4 class="title">Offers</h4>-->
 
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="col-md-10 col-sm-12 col-xs-12">-->
-                        <!--<div class="col-md-6 col-sm-4 col-xs-12">-->
-                        	<!--<div class="box">-->
-                            	<!--<h4 class="number">{{vm.profile.id}}</h4>-->
-                            	<!--<span>id</span>-->
-                        	<!--</div>-->
-                    	<!--</div>-->
-                        <!--<div class="col-md-6 col-sm-4 col-xs-12">-->
-                        	<!--<div class="box">-->
-                            	<!--<h4 class="number">{{vm.profile.phone}}</h4>-->
-                            	<!--<span>phone</span>-->
-                        	<!--</div>-->
-                    	<!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-10 col-sm-12 col-xs-12">-->
+    <!--<div class="col-md-6 col-sm-4 col-xs-12">-->
+    <!--<div class="box">-->
+    <!--<h4 class="number">{{vm.profile.id}}</h4>-->
+    <!--<span>id</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-md-6 col-sm-4 col-xs-12">-->
+    <!--<div class="box">-->
+    <!--<h4 class="number">{{vm.profile.phone}}</h4>-->
+    <!--<span>phone</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</div>-->
 
     <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading box-2">
-                            <h4 style="margin-top: 0" class="title">Offers</h4></div>
-                        <div class="panel-body">
-                            <table class="table table-responsive no-mr">
-                                <tr>
-                                    <td class="text-left">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="">Option 1</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="">Option 2</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="">Option 3</label>
-                                        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
 
-                                    </td></tr>
-                                    <tr>
-                                    <td><button>Select All</button></td>
-                                </tr>
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control col-md-6 col-sm-6 col-xs-6" id="searchOffer" placeholder="Enter Offer Code">
+                </div>
+                <button type="submit" class="btn btn-search">
+                    <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
+            </form>
+            <br>
 
-                            </table>
-                        </div>
-                    </div>
+            <div class="panel panel-default">
+                <div class="panel-heading box-6">
+                    <h4 style="margin-top: 0" class="title">Offers</h4></div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                        <tr>
+                            <th width="30"><input type="checkbox" value=""></th>
+                            <th>Code</th>
+                            <th>Offer Detail</th>
+                            <th width="50" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row"><input type="checkbox" value=""></th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td class="text-center"><button type="submit" class="btn btn-add">
+                                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+                            </button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><input type="checkbox" value=""></th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td class="text-center"><button type="submit" class="btn btn-add">
+                                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+                            </button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><input type="checkbox" value=""></th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td class="text-center"><button type="submit" class="btn btn-add">
+                                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+                            </button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-default pull-right">
+                        <span aria-hidden="true" class="glyphicon glyphicon glyphicon-chevron-down"></span> Add Offer(s)
+                    </button>
+                </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading box-4">
-                            <h4 style="margin-top: 0" class="title">Drivers</h4></div>
-                        <div class="panel-body">
-                            <table class="table table-responsive no-mr">
-                                <tr>
-                                    <td class="text-left">
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="">Option 1</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="">Option 2</label>
-                                        </div>
-                                        <div class="checkbox">
-                                            <label><input type="checkbox" value="">Option 3</label>
-                                        </div>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control col-md-6 col-sm-6 col-xs-6" id="searchDriver" placeholder="Enter keyword">
+                </div>
+                <button type="submit" class="btn btn-search">
+                    <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
+            </form>
+            <br>
 
-                                    </td></tr>
-                                <tr>
-                                    <td><button>Select All</button></td>
-                                </tr>
-
-                            </table>
-                        </div>
-                    </div>
+            <div class="panel panel-default">
+                <div class="panel-heading box-5">
+                    <h4 style="margin-top: 0" class="title">Drivers</h4></div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                        <tr>
+                            <th width="30"><input type="checkbox" value=""></th>
+                            <th>Name</th>
+                            <th class="hidden-xs">Driver Info</th>
+                            <th>Assigned Offer(s)</th>
+                            <th width="50" class="text-center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row"><input type="checkbox" value=""></th>
+                            <td>Mark</td>
+                            <td class="hidden-xs">+919516599119, MP09R5840</td>
+                            <td>Otto</td>
+                            <td class="text-center">
+                                <button type="submit" class="btn btn-add">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><input type="checkbox" value=""></th>
+                            <td>Mark</td>
+                            <td class="hidden-xs">+919516599119, MP09R5840</td>
+                            <td>Otto</td>
+                            <td class="text-center"><button type="submit" class="btn btn-add">
+                                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+                            </button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><input type="checkbox" value=""></th>
+                            <td>Jacob</td>
+                            <td class="hidden-xs">+919516599119, MP09R5840</td>
+                            <td>Otto</td>
+                            <td class="text-center"><button type="submit" class="btn btn-add">
+                                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+                            </button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn btn-default pull-right">
+                        <span aria-hidden="true" class="glyphicon glyphicon glyphicon-chevron-down"></span> Add Driver(s)
+                    </button>
+                </div>
             </div>
-            <div class="col-md-12 col-sm-6 col-xs-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading box-4">
-                            <h4 style="margin-top: 0" class="title">Assigned Offer to Drivers</h4></div>
-                        <div class="panel-body">
-                            <table class="table table-responsive no-mr">
-                                <tr>
-                                    <td class="text-left">
-                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
-                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
-                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
-                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
-                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
-                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
-                                        <span class="label label-success">Offer: Driver <button class="no-pd">x</button></span>
-                                    </td></tr>
-                            </table>
-                        </div>
-                    </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">Confirmation</h4></div>
+                <div class="panel-body">
+                    <table class="table table-responsive no-mr">
+                        <tr>
+                            <td class="text-left">Offers</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <span class="label label-warning">Offer <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-warning">Offer <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-warning">Offer <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-warning">Offer <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-warning">Offer <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-warning">Offer <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-warning">Offer <button class="label-btn">x
+                                </button></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"> <hr class="hidden-xs"></td>
+                        </tr>
+                    </table>
+                    <table class="table table-responsive no-mr">
+                        <tr>
+                            <td class="text-left">Drivers</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">
+                                <span class="label label-info">Driver <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-info">Driver <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-info">Driver <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-info">Driver <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-info">Driver <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-info">Driver <button class="label-btn">x
+                                </button></span>
+                                <span class="label label-info">Driver <button class="label-btn">x
+                                </button></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-right"> <hr> <button type="submit" class="btn btn-default">
+                                <span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Clear
+                            </button> <button type="submit" class="btn btn-success">
+                                <span aria-hidden="true" class="glyphicon glyphicon-ok"></span> Save
+                            </button></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
+        </div>
     </div>
 </div>
