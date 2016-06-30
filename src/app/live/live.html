@@ -197,7 +197,7 @@
                     <h4 style="margin-top: 0" class="title">Heat Map</h4></div>
                 <div class="panel-body">
 
-                    <div class="pd-10">
+                    <div>
                         <ng-map id="live_map" zoom="13" center="[22.717081666666665, 75.87155666666666]" on-resized="vm.resizeMap()" trigger-resize="true">
                             <!--   <heatmap-layer id="foo" data="'heatMapData'"></heatmap-layer>-->
                         </ng-map>
@@ -218,7 +218,6 @@
     <div class="box text-center">
         <h4 class="number no-mr">{{vm.overview.trip.cancelled.rider_cancelled}} <small>/ {{vm.overview.trip.cancelled.unique_rider_cancelled}}</small></h4>
         <span>Rider Cancelled / u</span>
-
         <h4 class="number no-mr">{{vm.overview.trip.cancelled.driver_cancelled}} <small>/ {{vm.overview.trip.cancelled.unique_rider_cancelled_by_driver}}</small></h4>
         <span>Driver Cancelled / u</span>
 
