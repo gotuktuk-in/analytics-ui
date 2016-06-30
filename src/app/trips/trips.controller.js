@@ -88,22 +88,32 @@
         function transformTCash(data) {
             var transformed = []
             data = angular.fromJson(data);
-            _.each(data, function (obj) {
-                var tempObj = {}
-                tempObj.key = moment(PerformanceHandler.getLongDate(obj.date.toString()))//.format('MMMM Do YYYY')
-                tempObj.bar = true;
-                tempObj.values = []
-                transformed.push(tempObj)
-            })
-            var count = 0;
-            _.each(data, function (obj) {
-                for (var a = 0; a < data.length; a++) {
-                    transformed[a].values[count] = {};
-                    transformed[a].values[count].x = obj.tcash;
-                    transformed[a].values[count].y = obj.trip;
+            var arr = ['tCash', 'Trip']
+            for (var i=0;i<arr.length;i++)
+            {
+                var newObj = {}
+                newObj.key =arr[i]
+                newObj.values =[]
+                for (var a=0;a<data.length;a++)
+                {
+                    var x = PerformanceHandler.getLongDate(data[a].date)
+                    newObj.values.push({x:x, y:data[a].trip,y0:data[a].tcash })
                 }
-                count++
-            })
+
+                transformed.push(newObj)
+            }
+            /*_.each(data,function(value){
+
+                var newObj = {}
+                newObj.key = value.date
+                newObj.values =[]
+                for (var a=0;a<data.length;a++)
+                {
+                    newObj.values.push({x:data[a].date, y:data[a].trip,y0:data[a].tcash })
+                }
+
+                transformed.push(newObj)
+            })*/
             return transformed
         }
 
