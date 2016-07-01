@@ -1,3 +1,6 @@
+<script type="text/ng-template" id="headerCheckbox.html">
+    <input type="checkbox" ng-model="vm.offerCheckboxes.checked" class="select-all" value="" />
+</script>
 <div class="container-fluid">
     <div class="row">
         <form class="form-inline date-selection date-selection-dr">
@@ -53,7 +56,8 @@
 
             <form class="form-inline">
                 <div class="form-group">
-                    <input type="text" class="form-control col-md-6 col-sm-6 col-xs-6" id="searchOffer" placeholder="Enter Offer Code">
+                    <input type="text" class="form-control col-md-6 col-sm-6 col-xs-6" id="searchOffer"
+                           placeholder="Enter Offer Code">
                 </div>
                 <button type="submit" class="btn btn-search">
                     <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
@@ -64,40 +68,20 @@
                 <div class="panel-heading box-6">
                     <h4 style="margin-top: 0" class="title">Offers</h4></div>
                 <div class="panel-body">
-                    <table class="table table-bordered table-responsive">
-                        <thead>
-                        <tr>
-                            <th width="30"><input type="checkbox" value=""></th>
-                            <th>Code</th>
-                            <th>Offer Detail</th>
-                            <th width="50" class="text-center">Action</th>
-                        </tr>
-                        </thead>
+                    <table ng-table="offerTableParams" class="table table-bordered table-responsive">
+
                         <tbody>
-                        <tr>
-                            <th scope="row"><input type="checkbox" value=""></th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td class="text-center"><button type="submit" class="btn btn-add">
-                                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
-                            </button></td>
+                        <tr ng-repeat="row in $data track by $index">
+                            <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.offerCheckboxes.items[row.id]"></td>
+                            <td data-title="'Code'">{{row.code}}</td>
+                            <td data-title="'Offer Detail'">{{row.description}}</td>
+                            <td data-title="'Action'" class="text-center">
+                                <button type="submit" class="btn btn-add" ng-click=" vm.addOffer(row)">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </td>
                         </tr>
-                        <tr>
-                            <th scope="row"><input type="checkbox" value=""></th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td class="text-center"><button type="submit" class="btn btn-add">
-                                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
-                            </button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input type="checkbox" value=""></th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td class="text-center"><button type="submit" class="btn btn-add">
-                                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
-                            </button></td>
-                        </tr>
+
                         </tbody>
                     </table>
                     <button type="submit" class="btn btn-default pull-right">
@@ -109,7 +93,8 @@
         <div class="col-md-8 col-sm-8 col-xs-12">
             <form class="form-inline">
                 <div class="form-group">
-                    <input type="text" class="form-control col-md-6 col-sm-6 col-xs-6" id="searchDriver" placeholder="Enter keyword">
+                    <input type="text" class="form-control col-md-6 col-sm-6 col-xs-6" id="searchDriver"
+                           placeholder="Enter keyword">
                 </div>
                 <button type="submit" class="btn btn-search">
                     <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
@@ -120,50 +105,25 @@
                 <div class="panel-heading box-5">
                     <h4 style="margin-top: 0" class="title">Drivers</h4></div>
                 <div class="panel-body">
-                    <table class="table table-bordered table-responsive">
-                        <thead>
-                        <tr>
-                            <th width="30"><input type="checkbox" value=""></th>
-                            <th>Name</th>
-                            <th class="hidden-xs">Driver Info</th>
-                            <th>Assigned Offer(s)</th>
-                            <th width="50" class="text-center">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row"><input type="checkbox" value=""></th>
-                            <td>Mark</td>
-                            <td class="hidden-xs">+919516599119, MP09R5840</td>
-                            <td>Otto</td>
-                            <td class="text-center">
+                    <table ng-table="driverTableParams" class="table table-bordered table-responsive">
+                           <tbody>
+                        <tr ng-repeat="row in $data track by $index">
+                            <td data-title="''"><input type="checkbox" value=""></td>
+                            <td data-title="'Name'">{{row.name}}</td>
+                            <td data-title="'Driver Info'" class="hidden-xs">{{row.phone}}{{row.vehicle}}</td>
+                            <td data-title="'Assigned Offer(s)'">{{row.id}}</td>
+                            <td ata-title="'Action'" class="text-center">
                                 <button type="submit" class="btn btn-add">
                                     <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </td>
                         </tr>
-                        <tr>
-                            <th scope="row"><input type="checkbox" value=""></th>
-                            <td>Mark</td>
-                            <td class="hidden-xs">+919516599119, MP09R5840</td>
-                            <td>Otto</td>
-                            <td class="text-center"><button type="submit" class="btn btn-add">
-                                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
-                            </button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><input type="checkbox" value=""></th>
-                            <td>Jacob</td>
-                            <td class="hidden-xs">+919516599119, MP09R5840</td>
-                            <td>Otto</td>
-                            <td class="text-center"><button type="submit" class="btn btn-add">
-                                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
-                            </button></td>
-                        </tr>
+
                         </tbody>
                     </table>
                     <button type="submit" class="btn btn-default pull-right">
-                        <span aria-hidden="true" class="glyphicon glyphicon glyphicon-chevron-down"></span> Add Driver(s)
+                        <span aria-hidden="true" class="glyphicon glyphicon glyphicon-chevron-down"></span> Add
+                        Driver(s)
                     </button>
                 </div>
             </div>
@@ -179,7 +139,10 @@
                         </tr>
                         <tr>
                             <td class="text-left">
-                                <span class="label label-warning">Offer <button class="label-btn">x
+                                <span class="label label-warning" ng-repeat="offer in vm.selectedOffers">Offer
+                                    <button class="label-btn">x
+                                    </button></span>
+                                <!--<span class="label label-warning">Offer <button class="label-btn">x
                                 </button></span>
                                 <span class="label label-warning">Offer <button class="label-btn">x
                                 </button></span>
@@ -190,13 +153,13 @@
                                 <span class="label label-warning">Offer <button class="label-btn">x
                                 </button></span>
                                 <span class="label label-warning">Offer <button class="label-btn">x
-                                </button></span>
-                                <span class="label label-warning">Offer <button class="label-btn">x
-                                </button></span>
+                                </button></span>-->
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-left"> <hr class="hidden-xs"></td>
+                            <td class="text-left">
+                                <hr class="hidden-xs">
+                            </td>
                         </tr>
                     </table>
                     <table class="table table-responsive no-mr">
@@ -222,11 +185,15 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-right"> <hr> <button type="submit" class="btn btn-default">
-                                <span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Clear
-                            </button> <button type="submit" class="btn btn-success">
-                                <span aria-hidden="true" class="glyphicon glyphicon-ok"></span> Save
-                            </button></td>
+                            <td class="text-right">
+                                <hr>
+                                <button type="submit" class="btn btn-default">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-remove"></span> Clear
+                                </button>
+                                <button type="submit" class="btn btn-success">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-ok"></span> Save
+                                </button>
+                            </td>
                         </tr>
                     </table>
                 </div>

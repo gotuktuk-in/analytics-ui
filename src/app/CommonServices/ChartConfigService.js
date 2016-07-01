@@ -101,8 +101,8 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 enabled: true
             },
             margin: {
-                top: 20,
-                right: 20,
+                top: 30,
+                right: 50,
                 bottom: 80,
                 left: 55
             },
@@ -134,8 +134,8 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             type: 'multiBarChart',
             height: 400,
             margin: {
-                top: 20,
-                right: 20,
+                top: 30,
+                right: 50,
                 bottom: 80,
                 left: 55
             },
@@ -147,6 +147,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 return d.y;
             },
             stacked: true,
+            showControls:false,
             clipEdge: true,
             transitionDuration: 1000,
             useInteractiveGuideline: false,
@@ -170,6 +171,38 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
 
         }
 
+    };
+    factory.linePlusBarChartOptions = {
+        chart: {
+            type: 'linePlusBarChart',
+            height: 400,
+            focusEnable:false,
+            margin: {
+                top: 30,
+                right: 75,
+                bottom: 50,
+                left: 75
+            },
+            bars: {
+                forceY: [0]
+            },
+            /* bars2: {
+             forceY: [0]
+             },*/
+            color: ['#2ca02c', 'darkred'],
+            x: function(d,i) { return i },
+            xAxis: {
+                axisLabel: 'X Axis',
+                tickFormat: function(d) {
+                    var dx = $scope.data[0].values[d] && $scope.data[0].values[d].x || 0;
+                    if (dx > 0) {
+                        return d3.time.format('%x')(new Date(dx))
+                    }
+                    return null;
+                }
+            },
+
+        }
     };
 
     return factory
