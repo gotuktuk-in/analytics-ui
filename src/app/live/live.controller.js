@@ -19,7 +19,7 @@
         vm.selected = vm.heatMapFilers[0]
         $scope.rangSlider = {
             max: 24,
-            min: 0,
+            min: 0
         };
         $scope.slider = {
             minValue: 0,
@@ -102,7 +102,7 @@
         function getOverviewLive() {
             LiveService.getOverview({
                 city: $rootScope.city,
-                vehicle: $rootScope.vehicleType,
+                vehicle: $rootScope.vehicleType
             }, function (response) {
                 vm.overview = response;
             }, function (err) {
@@ -134,7 +134,7 @@
         function getNewRiders() {
             LiveService.getNewRiders({
                 from: moment(current).subtract(6, 'days').startOf('day').unix(),
-                to: moment(current).endOf('day').unix(),
+                to: moment(current).endOf('day').unix()
             }, function (response) {
                 vm.newRiders = transformNewRiders(response);
                console.log('response ', vm.newRiders)
@@ -175,7 +175,7 @@
                     data[a].values[count].y = Number(rides.value[a].totalRides)
                     data[a].values[count].uniqRides = Number(rides.value[a].uniqRides)
                   //  data[a].values[count].newRiderRegCount = Number(rides.value[a].newRiderRegCount)
-                    if(rides.value[a].id === 'Others')
+                    if(rides.value[a].id === 'Above 7 days')
                         data[a].values[count].date = rides.value[a].id
                     else
                         data[a].values[count].date = Number(rides.value[a].id)
@@ -192,7 +192,7 @@
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
                 startTime: moment(current).startOf('day'),
-                endTime: moment(current).endOf('day'),
+                endTime: moment(current).endOf('day')
             }, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
                 vm.overview = response;
