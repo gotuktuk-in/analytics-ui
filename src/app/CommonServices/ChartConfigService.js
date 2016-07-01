@@ -103,7 +103,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             margin: {
                 top: 30,
                 right: 50,
-                bottom: 80,
+                bottom: 100,
                 left: 55
             },
             x: function (d) {
@@ -136,7 +136,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             margin: {
                 top: 30,
                 right: 50,
-                bottom: 80,
+                bottom: 100,
                 left: 55
             },
             text: 'Credit Recovery',
@@ -180,19 +180,17 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             margin: {
                 top: 30,
                 right: 75,
-                bottom: 50,
+                bottom: 100,
                 left: 75
             },
             bars: {
                 forceY: [0]
             },
-            /* bars2: {
-             forceY: [0]
-             },*/
-            color: ['#2ca02c', 'darkred'],
+            color: ['#ff7f0e', '#e377c2'],
             x: function(d,i) { return i },
             xAxis: {
-                axisLabel: 'X Axis',
+                rotateLabels: '-90',
+                axisLabel: '',
                 tickFormat: function(d) {
                     var dx = $scope.data[0].values[d] && $scope.data[0].values[d].x || 0;
                     if (dx > 0) {
@@ -200,7 +198,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                     }
                     return null;
                 }
-            },
+            }
 
         }
     };
