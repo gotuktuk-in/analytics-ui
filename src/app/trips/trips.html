@@ -6,7 +6,7 @@
                        ng-model="tripDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
             </div>
         </form>
-        <br><br><br>
+        <br><br><br><br>
     </div>
 
     <div class="row">
@@ -74,10 +74,12 @@
                         </select>
                     </div>
                     <div class="input-group" >
-                        <input ng-model="vm.searchTerm" class="input-search-term" placeholder="term" ng-disabled="!vm.filterTerm"/>
-                        <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-small">Search</button>
+                        <input ng-model="vm.searchTerm" class="form-control" placeholder="term" ng-disabled="!vm.filterTerm"/>
                     </div>
-                <div class="input-group">
+                <div class="input-group" >
+                    <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-search"><span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
+                </div>
+                     <div class="input-group">
                     <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
                             ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters track by statusFilter.value">
                         <option value="" disabled>Select Status</option>
@@ -103,25 +105,25 @@
                                        ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">{{row.id}}
                                     </a>
                                 </td>-->
-                                <td data-title="'Date & Time'" sortable="'requestOn'" style="width: 150px;">
+                                <td data-title="'Date & Time'" sortable="'requestOn'" style="width: 170px;">
                                     <a target="_blank"
                                        ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})"><div>{{(row.requestOn)*1000 | date:"dd/MMM/yyyy 'at' h:mma"}}</div>
                                     </a>
 
                                 </td>
                                 <td data-title="'Status'" sortable="'tripState'" style="width: 100px;">
-                                    <div ng-if="row.tripState == 20" class="text-primary">Requested</div>
-                                    <div ng-if="row.tripState == 22">Allocated</div>
-                                    <div ng-if="row.tripState == 30">For Trip</div>
-                                    <div ng-if="row.tripState == 40">At Pickup</div>
-                                    <div ng-if="row.tripState == 60">At Destination</div>
-                                    <div ng-if="row.tripState == 50" class="text-info">In trip</div>
-                                    <div ng-if="row.tripState == 61" class="text-success">Successful</div>
-                                    <div ng-if="row.tripState == 70" class="text-warning">Can by Driver</div>
-                                    <div ng-if="row.tripState == 71" class="text-warning">Can by Rider</div>
-                                    <div ng-if="row.tripState == 80">No Drv Avlble</div>
-                                    <div ng-if="row.tripState == 81" class="text-danger">Failed (No Drivers Accepted)</div>
-                                    <div ng-if="row.tripState == 82">Terminated</div>
+                                    <div ng-if="row.tripState == 20" class="text-primary" style="white-space: nowrap">Requested</div>
+                                    <div ng-if="row.tripState == 22" style="white-space: nowrap">Allocated</div>
+                                    <div ng-if="row.tripState == 30" style="white-space: nowrap">For Trip</div>
+                                    <div ng-if="row.tripState == 40" style="white-space: nowrap">At Pickup</div>
+                                    <div ng-if="row.tripState == 60" style="white-space: nowrap">At Destination</div>
+                                    <div ng-if="row.tripState == 50" class="text-info" style="white-space: nowrap">In trip</div>
+                                    <div ng-if="row.tripState == 61" class="text-success" style="white-space: nowrap">Successful</div>
+                                    <div ng-if="row.tripState == 70" class="text-warning" style="white-space: nowrap">Can by Driver</div>
+                                    <div ng-if="row.tripState == 71" class="text-warning" style="white-space: nowrap">Can by Rider</div>
+                                    <div ng-if="row.tripState == 80" style="white-space: nowrap">No Drv Avlble</div>
+                                    <div ng-if="row.tripState == 81" class="text-danger" style="white-space: nowrap">Failed (No Drivers Accepted)</div>
+                                    <div ng-if="row.tripState == 82" style="white-space: nowrap">Terminated</div>
                                 </td>
                                 <td data-title="'Driver Info'">
                                     <div>{{row.driverInfo.name}}<br>
