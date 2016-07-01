@@ -101,8 +101,8 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 enabled: true
             },
             margin: {
-                top: 20,
-                right: 20,
+                top: 30,
+                right: 50,
                 bottom: 80,
                 left: 55
             },
@@ -134,8 +134,8 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             type: 'multiBarChart',
             height: 400,
             margin: {
-                top: 20,
-                right: 20,
+                top: 30,
+                right: 50,
                 bottom: 80,
                 left: 55
             },
@@ -147,6 +147,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 return d.y;
             },
             stacked: true,
+            showControls:false,
             clipEdge: true,
             transitionDuration: 1000,
             useInteractiveGuideline: false,

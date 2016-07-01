@@ -57,13 +57,12 @@
                     formateDate= data.date.toString();
                 else
                     formateDate = moment(PerformanceHandler.getLongDate(data.date.toString())).format('MMMM Do YYYY');
-                var str ='<div class="panel panel-default" style="margin-bottom: 0;"><div class="panel-heading box-4">'
-                str += '<h4 style="margin-top: 0; color: #fff; text-transform: inherit;" class="title">Date: ' +formateDate + ' </h4></div><div class="panel-body pd-10">'  + ''
+                var str ='<div class="pd-10 text-left"><span><b>'
+                str += formateDate + ' </b></span>'  + ''
                 //str += '<h6>New Rider Registered</h6>' + data.newRiderRegCount + ''
-                str += '<h5>Total Rides: ' + data.y + '</h5>'
-                str += '<h5>Rides(U): ' + data.uniqRides + '</h5>'
+                str += '<h3 class="no-mr">' + data.y + '<small style="color:#333;"> /' + data.uniqRides + '</small><br><small style="font-size:10px;color:#666;text-transform: uppercase;">Total Rides / Rides(U)</small></h3>'
                 // str += '<h1>Date</h1>' + data.date + '/n'
-                str +='</div></div>'
+                str +='</div>'
                 return str;
             }
         }
@@ -150,7 +149,7 @@
             var riders =JSON.parse(angular.toJson(ridresData));
             var count = 0
             var i=0
-            var labelsArr = ['today','1 day ago','2 day ago','3 day ago','4 day ago','5 day ago','6 day ago','Others']
+            var labelsArr = ['today','1 day ago','2 day ago','3 day ago','4 day ago','5 day ago','6 day ago','Above 7 days']
 
             _.each(riders, function(rides){
                 var obj = {}
