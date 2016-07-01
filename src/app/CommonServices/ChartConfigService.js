@@ -172,6 +172,37 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
         }
 
     };
+    factory.linePlusBarChartOptions = {
+        chart: {
+            type: 'linePlusBarChart',
+            height: 500,
+            margin: {
+                top: 30,
+                right: 75,
+                bottom: 50,
+                left: 75
+            },
+            bars: {
+                forceY: [0]
+            },
+            /* bars2: {
+             forceY: [0]
+             },*/
+            color: ['#2ca02c', 'darkred'],
+            x: function(d,i) { return i },
+            xAxis: {
+                axisLabel: 'X Axis',
+                tickFormat: function(d) {
+                    var dx = $scope.data[0].values[d] && $scope.data[0].values[d].x || 0;
+                    if (dx > 0) {
+                        return d3.time.format('%x')(new Date(dx))
+                    }
+                    return null;
+                }
+            },
+
+        }
+    };
 
     return factory
 }

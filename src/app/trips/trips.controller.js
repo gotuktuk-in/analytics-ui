@@ -20,8 +20,17 @@
         vm.tripFrequency = {value: "day"};
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
-        vm.tcashChartOptions = angular.copy(ChartConfigService.multiBarChartOptions);
-        vm.tcashChartOptions.chart.stacked=false
+        vm.tcashChartOptions = angular.copy(ChartConfigService.linePlusBarChartOptions);
+        vm.tcashChartOptions.chart.xAxis= {
+            axisLabel: 'X Axis',
+                tickFormat: function(d) {
+                var dx =  vm.tcashData[0].values[d] &&  vm.tcashData[0].values[d].x || 0;
+                if (dx > 0) {
+                    return d3.time.format('%x')(new Date(dx))
+                }
+                return null;
+            }
+        },
         vm.trips = [];
         vm.filterTerm = '';
         vm.filterFields = [{value: "id", name: "ID"},
@@ -76,7 +85,10 @@
                 vehicle: $rootScope.vehicleType
             }, {}, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
-                vm.tcashData = transformTCash(response);
+                vm.tcashData = transformTCash(response).map(function(series) {
+                    series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });
+                    return series;
+                });;
                 console.log('response ', vm.tcashData)
             }, function (err) {
                 console.log(err)
@@ -86,6 +98,32 @@
             $scope.tableParams.reload();
         }
         function transformTCash(data) {
+            var transformed = []
+            data = angular.fromJson(data);
+            var arr = ['tCash', 'Trip']
+
+            var newObj = {}
+            newObj.key = arr[0]
+            newObj.values = []
+            newObj.bar = true;
+            for (var a = 0; a < data.length; a++) {
+                var x = moment(PerformanceHandler.getLongDate(data[a].date)).unix()*1000
+                newObj.values.push([x,data[a].tcash])
+            }
+            transformed.push(newObj);
+
+            var newObj = {}
+            newObj.key = arr[1]
+            newObj.values = []
+            for (var a = 0; a < data.length; a++) {
+                var x = moment(PerformanceHandler.getLongDate(data[a].date)).unix()*1000
+                newObj.values.push([x, data[a].trip])
+            }
+            transformed.push(newObj);
+
+            return transformed
+        }
+       /* function transformTCash(data) {
             var transformed = []
             data = angular.fromJson(data);
             var arr = ['tCash', 'Trip']
@@ -109,7 +147,7 @@
             transformed.push(newObj);
 
             return transformed
-        }
+        }*/
 
         vm.getTrips = function () {
             PerformanceService.getTrips({
