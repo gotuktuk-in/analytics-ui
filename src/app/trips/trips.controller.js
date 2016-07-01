@@ -38,7 +38,7 @@
              {value:"riderFeedbackRating",name:"Rider Feedback Rating "}*/
         ]
         vm.statusCodes = ''
-        vm.tripStatusFilters = [{name: 'All', value: "all"},
+        vm.tripStatusFilters = [{name: 'All', value: "20,22,30,40,50,60,61,70,71,80,81,82"},
             {name: 'Fullfiled', value: "61"},
             {name: 'Cancelled ', value: '70,71'},
             {name: 'In Progress', value: '20,22,30,40,50,60'},
