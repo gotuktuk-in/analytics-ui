@@ -175,7 +175,8 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
     factory.linePlusBarChartOptions = {
         chart: {
             type: 'linePlusBarChart',
-            height: 500,
+            height: 400,
+            focusEnable:false,
             margin: {
                 top: 30,
                 right: 75,
