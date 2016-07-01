@@ -54,7 +54,7 @@
                 var data = key.data
                 var formateDate;
                 if(data.date === 'Others')
-                    formateDate= data.date.toString();
+                    formateDate = 'Above 7 days';
                 else
                     formateDate = moment(PerformanceHandler.getLongDate(data.date.toString())).format('MMMM Do YYYY');
                 var str ='<div class="pd-10 text-left"><span><b>'
@@ -175,7 +175,7 @@
                     data[a].values[count].y = Number(rides.value[a].totalRides)
                     data[a].values[count].uniqRides = Number(rides.value[a].uniqRides)
                   //  data[a].values[count].newRiderRegCount = Number(rides.value[a].newRiderRegCount)
-                    if(rides.value[a].id === 'Above 7 days')
+                    if(rides.value[a].id === 'Others')
                         data[a].values[count].date = rides.value[a].id
                     else
                         data[a].values[count].date = Number(rides.value[a].id)

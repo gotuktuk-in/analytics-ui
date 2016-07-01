@@ -22,11 +22,12 @@
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
         vm.tcashChartOptions = angular.copy(ChartConfigService.linePlusBarChartOptions);
         vm.tcashChartOptions.chart.xAxis= {
-            axisLabel: 'X Axis',
+            rotateLabels: '-90',
+            axisLabel: '',
                 tickFormat: function(d) {
                 var dx =  vm.tcashData[0].values[d] &&  vm.tcashData[0].values[d].x || 0;
                 if (dx > 0) {
-                    return d3.time.format('%x')(new Date(dx))
+                    return d3.time.format('%d %b %y')(new Date(dx))
                 }
                 return null;
             }
