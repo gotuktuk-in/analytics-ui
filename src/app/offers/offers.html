@@ -1,6 +1,9 @@
 <script type="text/ng-template" id="headerCheckbox.html">
     <input type="checkbox" ng-model="vm.offerCheckboxes.checked" class="select-all" value="" />
 </script>
+<script type="text/ng-template" id="driverCheckbox.html">
+<input type="checkbox" ng-model="vm.driverCheckboxes.checked" class="select-all-drivers" value="" />
+</script>
 <div class="container-fluid">
     <div class="row">
         <form class="form-inline date-selection date-selection-dr">
@@ -57,9 +60,9 @@
             <form class="form-inline">
                 <div class="form-group">
                     <input type="text" class="form-control col-md-6 col-sm-6 col-xs-6" id="searchOffer"
-                           placeholder="Enter Offer Code">
+                           placeholder="Enter Offer Code" ng-model="vm.offerTxt">
                 </div>
-                <button type="submit" class="btn btn-search">
+                <button type="submit" class="btn btn-search" ng-click="vm.searchOffers()">
                     <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
             </form>
             <br>
@@ -94,9 +97,9 @@
             <form class="form-inline">
                 <div class="form-group">
                     <input type="text" class="form-control col-md-6 col-sm-6 col-xs-6" id="searchDriver"
-                           placeholder="Enter keyword">
+                           placeholder="Enter keyword" ng-model="vm.driverTxt">
                 </div>
-                <button type="submit" class="btn btn-search">
+                <button type="submit" class="btn btn-search" ng-click="vm.searchDrivers()">
                     <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
             </form>
             <br>
@@ -108,12 +111,12 @@
                     <table ng-table="driverTableParams" class="table table-bordered table-responsive">
                            <tbody>
                         <tr ng-repeat="row in $data track by $index">
-                            <td data-title="''"><input type="checkbox" value=""></td>
+                            <td header="'driverCheckbox.html'"><input type="checkbox" ng-model="vm.driverCheckboxes.items[row.id]"></td>
                             <td data-title="'Name'">{{row.name}}</td>
-                            <td data-title="'Driver Info'" class="hidden-xs">{{row.phone}}{{row.vehicle}}</td>
+                            <td data-title="'Driver Info'" class="hidden-xs">{{row.phone}}, {{row.vehicle}}</td>
                             <td data-title="'Assigned Offer(s)'">{{row.id}}</td>
                             <td ata-title="'Action'" class="text-center">
-                                <button type="submit" class="btn btn-add">
+                                <button type="submit" class="btn btn-add" ng-click=" vm.addDriver(row)">
                                     <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </td>
@@ -121,7 +124,7 @@
 
                         </tbody>
                     </table>
-                    <button type="submit" class="btn btn-default pull-right">
+                    <button type="submit" class="btn btn-default pull-right" ng-click=" vm.addDrivers()">
                         <span aria-hidden="true" class="glyphicon glyphicon glyphicon-chevron-down"></span> Add
                         Driver(s)
                     </button>
@@ -139,21 +142,10 @@
                         </tr>
                         <tr>
                             <td class="text-left">
-                                <span class="label label-warning" ng-repeat="offer in vm.selectedOffers">Offer
-                                    <button class="label-btn">x
+                                <span ng-if="vm.selectedOffers.length==0">No Offers Selected</span>
+                                <span ng-if="vm.selectedOffers.length>0" class="label label-warning" ng-repeat="offer in vm.selectedOffers track by $index">{{offer.code}}
+                                    <button class="label-btn" ng-click="vm.removeOffer($index)">x
                                     </button></span>
-                                <!--<span class="label label-warning">Offer <button class="label-btn">x
-                                </button></span>
-                                <span class="label label-warning">Offer <button class="label-btn">x
-                                </button></span>
-                                <span class="label label-warning">Offer <button class="label-btn">x
-                                </button></span>
-                                <span class="label label-warning">Offer <button class="label-btn">x
-                                </button></span>
-                                <span class="label label-warning">Offer <button class="label-btn">x
-                                </button></span>
-                                <span class="label label-warning">Offer <button class="label-btn">x
-                                </button></span>-->
                             </td>
                         </tr>
                         <tr>
@@ -168,20 +160,11 @@
                         </tr>
                         <tr>
                             <td class="text-left">
-                                <span class="label label-info">Driver <button class="label-btn">x
+                                <span ng-if="vm.selectedDrivers.length==0">No Drivers Selected</span>
+                                <span ng-if="vm.selectedDrivers.length>0" ng-repeat="driver in vm.selectedDrivers track by $index"
+                                      class="label label-info">{{driver.name}} <button class="label-btn" ng-click="vm.removeDriver($index)">x
                                 </button></span>
-                                <span class="label label-info">Driver <button class="label-btn">x
-                                </button></span>
-                                <span class="label label-info">Driver <button class="label-btn">x
-                                </button></span>
-                                <span class="label label-info">Driver <button class="label-btn">x
-                                </button></span>
-                                <span class="label label-info">Driver <button class="label-btn">x
-                                </button></span>
-                                <span class="label label-info">Driver <button class="label-btn">x
-                                </button></span>
-                                <span class="label label-info">Driver <button class="label-btn">x
-                                </button></span>
+
                             </td>
                         </tr>
                         <tr>
