@@ -64,6 +64,8 @@
                 </div>
                 <button type="submit" class="btn btn-search" ng-click="vm.searchOffers()">
                     <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
+                <button type="submit" class="btn btn-search" ng-click="vm.searchOffers()">
+                    <span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
             </form>
             <br>
 
@@ -75,7 +77,7 @@
 
                         <tbody>
                         <tr ng-repeat="row in $data track by $index">
-                            <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.offerCheckboxes.items[row.id]"></td>
+                            <td header="'headerCheckbox.html'" width="30"><input type="checkbox" ng-model="vm.offerCheckboxes.items[row.id]"></td>
                             <td data-title="'Code'">{{row.code}}</td>
                             <td data-title="'Offer Detail'">{{row.description}}</td>
                             <td data-title="'Action'" class="text-center">
@@ -101,6 +103,8 @@
                 </div>
                 <button type="submit" class="btn btn-search" ng-click="vm.searchDrivers()">
                     <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
+                <button type="submit" class="btn btn-search" ng-click="vm.searchOffers()">
+                    <span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
             </form>
             <br>
 
@@ -111,7 +115,7 @@
                     <table ng-table="driverTableParams" class="table table-bordered table-responsive">
                            <tbody>
                         <tr ng-repeat="row in $data track by $index">
-                            <td header="'driverCheckbox.html'"><input type="checkbox" ng-model="vm.driverCheckboxes.items[row.id]"></td>
+                            <td header="'driverCheckbox.html'" width="30"><input type="checkbox" ng-model="vm.driverCheckboxes.items[row.id]"></td>
                             <td data-title="'Name'">{{row.name}}</td>
                             <td data-title="'Driver Info'" class="hidden-xs">{{row.phone}}, {{row.vehicle}}</td>
                             <td data-title="'Assigned Offer(s)'">
