@@ -92,6 +92,7 @@
             obj.status = true;
             OfferService.assignOffers({}, obj, function (response) {
                 toastr.success("Offers assigned to selected drivers.");
+                vm.clearAll();
 
             }, function (error) {
                 toastr.error("Error : " + error);
@@ -115,7 +116,7 @@
                 template: 'alert.html',
                 className: 'ngdialog-theme-plain',
                 scope: $scope,
-            overlay:false
+            overlay:true
         });
         }
         vm.removeAllAssignedOffers = function () {
@@ -127,6 +128,7 @@
                 obj.status = false;
                 OfferService.assignOffers({}, obj, function (response) {
                     toastr.success("All offers removed for this driver.");
+                    vm.refreshPage();
 
                 }, function (error) {
                     toastr.error("Error : " + error);
