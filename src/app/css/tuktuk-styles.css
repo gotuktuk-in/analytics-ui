@@ -36,6 +36,11 @@ body {
     color:#178c6e;
     font-size:10px;
 }
+.btn-del{
+    border: 1px solid transparent;
+    color: #cb2930;
+    font-size:10px;
+}
 .btn-tag-delete {
     background: #fff;
     border: 1px solid transparent;

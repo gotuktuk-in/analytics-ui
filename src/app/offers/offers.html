@@ -127,11 +127,17 @@
                             <td data-title="'Driver Info'" class="hidden-xs">{{row.phone}}, {{row.vehicle}}</td>
                             <td data-title="'Assigned Offer(s)'">
                                 <a ng-if="!row.offers" ng-click="vm.getDriverOffers(row)">Show</a>
-                                <span ng-if="row.offers" ng-repeat="offer in row.offers">{{offer}}<br></span>
+                                <!--<span ng-if="row.offers" ng-repeat="offer in row.offers">{{offer}}<br></span>-->
+                                 <span ng-if="row.offers" ng-repeat="offer in row.offers" class="label label-warning">{{offer}}
+                                    <button class="label-btn" ng-click="vm.removeOffer($index)">x
+                                    </button></span>
                             </td>
                             <td ata-title="'Action'" class="text-center">
                                 <button type="submit" class="btn btn-add" ng-click=" vm.addDriver(row)">
                                     <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+                                </button>
+                                <button type="submit" class="btn btn-del" ng-click=" vm.addDriver(row)">
+                                    <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
                                 </button>
                             </td>
                         </tr>
