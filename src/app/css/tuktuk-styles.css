@@ -13,6 +13,10 @@ body {
     background-color: #fff;
     border-color: #e7e7e7;
 }
+.nav.nav-stacked li.active {
+    background: #f9f9f9 none repeat scroll 0 0;
+    border-left: 4px solid gold;
+}
 .btn {
     border: 1px solid #ccc;
     border-radius: 0;
@@ -191,6 +195,8 @@ div.panel.panel-default div.panel-heading h4.title {
     font-size: 14px;
     padding: 0 4px;
     line-height: 0;
+    height: 18px;
+    width: 20px;
 }
 
 .reload {
