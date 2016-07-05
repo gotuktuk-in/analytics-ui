@@ -64,7 +64,7 @@
                 </div>
                 <button type="submit" class="btn btn-search" ng-click="vm.searchOffers()">
                     <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
-                <button type="submit" class="btn btn-search" ng-click="vm.searchOffers()">
+                <button type="submit" class="btn btn-search" ng-click="vm.clearOfferSearch()">
                     <span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
             </form>
             <br>
@@ -97,14 +97,21 @@
         </div>
         <div class="col-md-8 col-sm-8 col-xs-12">
             <form class="form-inline">
+                <div class="input-group col-md-3">
+                    <select ng-model="vm.filterTerm" class="form-control"
+                            ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
+                        <option value="" disabled>Select Filter</option>
+                    </select>
+                </div>
                 <div class="form-group">
                     <input type="text" class="form-control col-md-6 col-sm-6 col-xs-6" id="searchDriver"
                            placeholder="Enter keyword" ng-model="vm.driverTxt">
                 </div>
                 <button type="submit" class="btn btn-search" ng-click="vm.searchDrivers()">
                     <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
-                <button type="submit" class="btn btn-search" ng-click="vm.searchOffers()">
+                <button type="submit" class="btn btn-search" ng-click="vm.clearDriverSearch()">
                     <span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+
             </form>
             <br>
 
@@ -119,7 +126,7 @@
                             <td data-title="'Name'">{{row.name}}</td>
                             <td data-title="'Driver Info'" class="hidden-xs">{{row.phone}}, {{row.vehicle}}</td>
                             <td data-title="'Assigned Offer(s)'">
-                                <a ng-if="!row.offers" ng-click="vm.getDriverOffers(row)">Show Offers</a>
+                                <a ng-if="!row.offers" ng-click="vm.getDriverOffers(row)">Show</a>
                                 <span ng-if="row.offers" ng-repeat="offer in row.offers">{{offer}}<br></span>
                             </td>
                             <td ata-title="'Action'" class="text-center">

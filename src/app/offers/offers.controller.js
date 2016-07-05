@@ -17,6 +17,11 @@
         vm.driverCheckboxes = {};
         vm.noDriversSelected = false;
         vm.noOffersSelected = false;
+        vm.filterTerm = '';
+        vm.filterFields = [{value: "id", name: "Driver ID"},
+            {value: "name", name: "Driver Name"},
+            {value: "phone", name: "Driver Phone"},
+           ]
         vm.addOffer = function (offer) {
             vm.selectedOffers.push(offer)
         }
@@ -71,6 +76,19 @@
             $scope.offerTableParams.reload()
         }
         vm.searchDrivers = function () {
+            $scope.driverTableParams.reload()
+        }
+        vm.clearOfferSearch = function () {
+            vm.offerTxt =""
+            $scope.offerTableParams.reload()
+        }
+        vm.refreshPage = function () {
+            $scope.driverTableParams.reload()
+            $scope.offerTableParams.reload()
+
+        }
+        vm.clearDriverSearch = function () {
+            vm.driverTxt =""
             $scope.driverTableParams.reload()
         }
         vm.assignOffers = function () {
@@ -162,9 +180,9 @@
                 }
 
                 if (vm.driverTxt && vm.driverTxt != '') {
-                    dataObj.term = "name|" + vm.driverTxt
-                }
+                    dataObj.term =  vm.filterTerm.value + "|" + vm.driverTxt
 
+                }
                 return OfferService.getDrivers(dataObj).$promise.then(function (data) {
 
                     params.total(data.total); // recal. page nav controls
