@@ -28,6 +28,11 @@ function OfferService($q, $resource, API, AUTH_API) {
                 url:   url + 'drivers/list',
                 isArray:false
             },
+            getDriverOffers: {
+                method: 'GET',
+                url:   url + 'offers/driver/:id',
+                isArray:false
+            },
             assignOffers: {
                 method: 'POST',
                 url:   url + 'drivers/offers',

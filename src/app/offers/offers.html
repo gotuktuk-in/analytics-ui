@@ -114,7 +114,10 @@
                             <td header="'driverCheckbox.html'"><input type="checkbox" ng-model="vm.driverCheckboxes.items[row.id]"></td>
                             <td data-title="'Name'">{{row.name}}</td>
                             <td data-title="'Driver Info'" class="hidden-xs">{{row.phone}}, {{row.vehicle}}</td>
-                            <td data-title="'Assigned Offer(s)'">{{row.id}}</td>
+                            <td data-title="'Assigned Offer(s)'">
+                                <a ng-if="!row.offers" ng-click="vm.getDriverOffers(row)">Show Offers</a>
+                                <span ng-if="row.offers" ng-repeat="offer in row.offers">{{offer}}<br></span>
+                            </td>
                             <td ata-title="'Action'" class="text-center">
                                 <button type="submit" class="btn btn-add" ng-click=" vm.addDriver(row)">
                                     <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>

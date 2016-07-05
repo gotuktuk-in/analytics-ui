@@ -85,6 +85,15 @@
                 toastr.error("Error : "+error);
             })
         }
+        vm.getDriverOffers = function (row) {
+
+            OfferService.getDriverOffers({id:row.id}, function (response) {
+                row.offers = response.offers;
+
+            }, function (error) {
+                toastr.error("Error : "+error);
+            })
+        }
         vm.clearAll = function () {
             vm.selectedOffers = []
             vm.selectedDrivers = []
