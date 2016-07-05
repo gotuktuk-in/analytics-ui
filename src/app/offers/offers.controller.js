@@ -6,16 +6,17 @@
         .controller('OffersController', OffersController);
 
     /** @ngInject */
-    function OffersController($scope, OfferService, NgTableParams,  $element) {
+    function OffersController($scope, OfferService, NgTableParams,  $element, toastr) {
         var vm = this
 
         vm.offers = []
-        vm.selectedOffers = []
-
         vm.drivers = []
+        vm.selectedOffers = []
         vm.selectedDrivers = []
         vm.offerCheckboxes = {};
         vm.driverCheckboxes = {};
+        vm.noDriversSelected = false;
+        vm.noOffersSelected = false;
         vm.addOffer = function (offer) {
             vm.selectedOffers.push(offer)
         }
@@ -27,8 +28,40 @@
         }
         vm.addDrivers = function()
         {
-            _.each(vm.driverCheckboxes.items,function(item){
-                console.log(item)
+
+            vm.noDriversSelected = false;
+           var selectedItems =  _.pairs(vm.driverCheckboxes.items)
+            if(selectedItems.length==0)
+            {
+                vm.noDriversSelected = true
+                return;
+            }
+            _.each(selectedItems, function(item){
+               if(item[1]==true && !_.find(vm.selectedDrivers, {id:item[0]}))
+               {
+                   var toPush = _.find($scope.driverTableParams.data, {id:item[0]})
+                   vm.addDriver(toPush)
+               }
+
+            })
+        }
+
+        vm.addOffers = function()
+        {
+            var selectedItems =  _.pairs(vm.offerCheckboxes.items)
+
+            _.each(selectedItems, function(item){
+                if(vm.selectedOffers.length==0 && item[1]==true)
+                {
+                    var toPush = _.find($scope.offerTableParams.data, {id:Number(item[0])})
+                    vm.addOffer(toPush)
+                }
+                if (item[1]==true && !_.find(vm.selectedOffers, {id:Number(item[0])}))
+                {
+                    var toPush = _.find($scope.offerTableParams.data, {id:Number(item[0])})
+                    vm.addOffer(toPush)
+                }
+
             })
         }
         vm.removeDriver = function (index) {
@@ -39,6 +72,22 @@
         }
         vm.searchDrivers = function () {
             $scope.driverTableParams.reload()
+        }
+        vm.assignOffers = function () {
+            var obj ={}
+            obj.drivers = _.pluck(vm.selectedDrivers,'id')
+            obj.offers = _.pluck(vm.selectedOffers,'code')
+            obj.status = true;
+            OfferService.assignOffers({},obj, function (response) {
+                toastr.success("Offers assigned to selected drivers.");
+                
+            }, function (error) {
+                toastr.error("Error : "+error);
+            })
+        }
+        vm.clearAll = function () {
+            vm.selectedOffers = []
+            vm.selectedDrivers = []
         }
         $scope.offerTableParams = new NgTableParams({page: 1, count: 10}, {
             counts: [],
@@ -125,6 +174,24 @@
                 });
             }
         });
+        //************** New Code *****************//
+       /* $scope.$watch(
+            // This function returns the value being watched. It is called for each turn of the $digest loop
+            function() { return vm.driverCheckboxes.checked; },
+            // This is the change listener, called when the value returned from the above function changes
+            function(newValue, oldValue) {
+                console.log('newValue ',newValue)
+                console.log('oldValue ',oldValue)
+                if ( newValue !== oldValue ) {
+                    angular.forEach($scope.driverTableParams.data , function(item) {
+                        item.checked = newValue;
+                        console.log('newValue ', newValue)
+                    });
+                }
+            }
+        );*/
+
+        //************************
 
         // for offers table
         // watch for check all checkbox
