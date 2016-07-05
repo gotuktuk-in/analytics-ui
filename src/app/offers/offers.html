@@ -4,6 +4,13 @@
 <script type="text/ng-template" id="driverCheckbox.html">
 <input type="checkbox" ng-model="vm.driverCheckboxes.checked" class="select-all-drivers" value="" />
 </script>
+<script type="text/ng-template" id="alert.html">
+    <p>Are you sure you want to delete all offers assigned to this driver?</p>
+    <div class="ngdialog-buttons">
+        <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">No</button>
+        <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="vm.removeAllAssignedOffers();closeThisDialog(0)">Yes</button>
+    </div>
+</script>
 <div class="container-fluid">
     <div class="row">
         <form class="form-inline date-selection date-selection-dr">
@@ -129,14 +136,14 @@
                                 <a ng-if="!row.offers" ng-click="vm.getDriverOffers(row)">Show</a>
                                 <!--<span ng-if="row.offers" ng-repeat="offer in row.offers">{{offer}}<br></span>-->
                                  <span ng-if="row.offers" ng-repeat="offer in row.offers" class="label label-warning">{{offer}}
-                                    <button class="label-btn" ng-click="vm.removeOffer($index)">x
+                                    <button class="label-btn" ng-click="vm.removeSingleOffer($index,row)">x
                                     </button></span>
                             </td>
                             <td ata-title="'Action'" class="text-center">
                                 <button type="submit" class="btn btn-add" ng-click=" vm.addDriver(row)">
                                     <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
                                 </button>
-                                <button type="submit" class="btn btn-del" ng-click=" vm.addDriver(row)">
+                                <button type="submit" class="btn btn-del" ng-click="vm.alertDeleteAllOffers(row)">
                                     <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
                                 </button>
                             </td>
