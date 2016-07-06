@@ -11,6 +11,13 @@
         <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="vm.removeAllAssignedOffers();closeThisDialog(0)">Yes</button>
     </div>
 </script>
+<script type="text/ng-template" id="alertSingleDelete.html">
+    <p>Are you sure you want to delete this offer?</p>
+    <div class="ngdialog-buttons">
+        <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">No</button>
+        <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="removeSingleOffer(index,row);closeThisDialog(0)">Yes</button>
+    </div>
+</script>
 <div class="container-fluid">
     <div class="row">
         <form class="form-inline date-selection date-selection-dr">
@@ -136,7 +143,7 @@
                                 <a ng-if="!row.offers" ng-click="vm.getDriverOffers(row)">Show</a>
                                 <!--<span ng-if="row.offers" ng-repeat="offer in row.offers">{{offer}}<br></span>-->
                                  <span ng-if="row.offers" ng-repeat="offer in row.offers" class="label label-warning">{{offer}}
-                                    <button class="label-btn" ng-click="vm.removeSingleOffer($index,row)">x
+                                    <button class="label-btn" ng-click="vm.openSingleAlert($index,row)">x
                                     </button></span>
                             </td>
                             <td ata-title="'Action'" class="text-center">
