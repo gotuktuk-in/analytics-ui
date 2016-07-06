@@ -19,17 +19,17 @@
     </div>
 </script>
 <div class="container-fluid">
-    <div class="row">
-        <form class="form-inline date-selection date-selection-dr">
-            <div class="form-group ">
-                <input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange"
-                       ng-model="selectedDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
-            </div>
-        </form>
-        <!--<div class="col-md-12 col-sm-12 col-xs-12">
-            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>
-        </div>-->
-    </div>
+    <!--<div class="row">-->
+        <!--<form class="form-inline date-selection date-selection-dr">-->
+            <!--<div class="form-group ">-->
+                <!--<input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange"-->
+                       <!--ng-model="selectedDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">-->
+            <!--</div>-->
+        <!--</form>-->
+        <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+            <!--<span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>-->
+        <!--</div>-->
+    <!--</div>-->
     <span class="live" ng-if="vm.live"> LIVE</span>
     <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
     <br>

@@ -32,9 +32,9 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 maxKeyLength: 400,
                 margin: {
                     top: 5,
-                    right: 15,
-                    bottom: 20,
-                    left: 50
+                    right: 0,
+                    bottom: 30,
+                    left: 0
                 }
             },
             legendPosition: 'top',
@@ -100,6 +100,17 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             zoom: {
                 enabled: true
             },
+            legend: {
+                vers: 'classic',
+                maxKeyLength: 400,
+                margin: {
+                    top: 5,
+                    right: 0,
+                    bottom: 30,
+                    left: 0
+                }
+            },
+            legendPosition: 'top',
             margin: {
                 top: 30,
                 right: 50,
@@ -139,6 +150,17 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 bottom: 100,
                 left: 55
             },
+            legend: {
+                vers: 'classic',
+                maxKeyLength: 400,
+                margin: {
+                    top: 5,
+                    right: 0,
+                    bottom: 30,
+                    left: 0
+                }
+            },
+            legendPosition: 'top',
             text: 'Credit Recovery',
             x: function (d) {
                 return d.x;
@@ -177,6 +199,17 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             type: 'linePlusBarChart',
             height: 400,
             focusEnable:false,
+            legend: {
+                vers: 'classic',
+                maxKeyLength: 400,
+                margin: {
+                    top: 5,
+                    right: 100,
+                    bottom: 30,
+                    left: 0
+                }
+            },
+            legendPosition: 'left',
             margin: {
                 top: 30,
                 right: 75,
@@ -203,5 +236,5 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
         }
     };
 
-    return factory
+    return factory;
 }

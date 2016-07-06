@@ -1141,7 +1141,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
     .date-selection {
         border-bottom: 1px solid #ccc;
-        width: 100%;
+        width: 70%;
     }
 }
 
@@ -1161,7 +1161,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
     .date-selection {
         border-bottom: 1px solid #eee;
-        width: 100%;
+        width: 70%;
     }
 }
 
