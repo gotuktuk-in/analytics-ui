@@ -1,15 +1,19 @@
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="row" style="z-index:1; position:fixed; width:98%; padding:10px 0; left:53px;">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-            	<span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>
-            </div>
-            </div>
-            <span class="live" ng-if="vm.live"> LIVE</span>
-            <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span
+                class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
+                ng-click="vm.changeDate('next')" ng-if="!vm.live"
+                style="display: inline-block; padding: 7px;">&#10095;</span>
+        </div>
+    </div>
+    <span class="live" ng-if="vm.live"> LIVE</span>
+    <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
     <br>
     <br>
     <br>
     <br><br>
+
     <div class="row overview-box">
         <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>
 </span>
@@ -62,11 +66,14 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                <div class="pull-right">
-					<input ng-change="vm.getAcquisition()" class="form-control cstm-width text-center daterangepicker-aqq-chart" type="daterange" ng-model="datesForAcq" separator=" - " format="DD MMM YY" opens="left" ranges="vm.ranges">
-				</div>
+                    <div class="pull-right">
+                        <input ng-change="vm.getAcquisition()"
+                               class="form-control cstm-width text-center daterangepicker-aqq-chart" type="daterange"
+                               ng-model="datesForAcq" separator=" - " format="DD MMM YY" opens="left"
+                               ranges="vm.ranges">
+                    </div>
                     <h4 style="margin-top: 0" class="title">Driver Acquisition</h4>
-                
+
                 </div>
 
                 <div class="panel-body">
@@ -84,11 +91,13 @@
                         <option value="" disabled>Select Filter</option>
                     </select>
                 </div>
-                <div class="input-group col-md-3 col-sm-12 col-xs-12" >
-                    <input ng-model="vm.searchTerm" class="form-control input-search-term" placeholder="term" ng-disabled="!vm.filterTerm"/>
+                <div class="input-group col-md-3 col-sm-12 col-xs-12">
+                    <input ng-model="vm.searchTerm" class="form-control input-search-term" placeholder="term"
+                           ng-disabled="!vm.filterTerm"/>
                 </div>
-                <div class="input-group col-md-3 col-sm-12 col-xs-12" >
-                    <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-small">Search</button>
+                <div class="input-group col-md-3 col-sm-12 col-xs-12">
+                    <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-small">Search
+                    </button>
                 </div>
                 <div class="input-group col-md-3 col-sm-12 col-xs-12">
                     <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
@@ -116,7 +125,9 @@
                             </thead>-->
                             <tbody>
                             <tr ng-repeat="row in $data track by $index">
-                                <td data-title="'#ID'" class="text-left"><a ui-sref="home.drivers_detail({driverId:row.driver_id})" >{{row.driver_id}}</a></td>
+                                <td data-title="'#ID'" class="text-left"><a
+                                        ui-sref="home.drivers_detail({driverId:row.driver_id})">{{row.driver_id}}</a>
+                                </td>
                                 <td data-title="'Name'" sortable="'name'" class="text-left">{{row.name}}</td>
                                 <td data-title="'Earning(Rs.)'" sortable="'earning'" class="text-right">
                                     {{row.earning}}
@@ -124,7 +135,7 @@
                                 <td data-title="'Rides'" sortable="'rides'">{{row.rides}}</td>
                                 <td class="text-left" data-title="'Online'">
 
-                                        <span  ng-repeat="time in row.online"
+                                        <span ng-repeat="time in row.online"
                                               class="label label-primary">{{time.start*1000 | date:'h:mma'}} - {{time.end*1000 | date:'h:mma'}}</span>
 
                                 </td>

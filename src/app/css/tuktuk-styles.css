@@ -1,4 +1,7 @@
-* {outline: none !important;}
+* {
+    outline: none !important;
+}
+
 body {
     background: #efefef;
     font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -9,20 +12,23 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
 }
-.ngdialog-open .container-fluid{
+
+.ngdialog-open .container-fluid {
     pointer-events: none;
 }
+
 /*.ngdialog {*/
-    /*z-index: 10000;*/
-    /*width:100%;*/
-    /*height:100%;*/
-    /*background-color: rgba(0,0,0,0.5);*/
+/*z-index: 10000;*/
+/*width:100%;*/
+/*height:100%;*/
+/*background-color: rgba(0,0,0,0.5);*/
 /*}*/
 .ngdialog-close {
     position: absolute;
     right: 12px;
     top: 4px;
 }
+
 .ngdialog-content {
     animation: 0.5s ease 0s normal none 1 running ngdialog-fadein;
     background: #fff none repeat scroll 0 0;
@@ -39,49 +45,60 @@ body {
     height: 30%;
     max-height: 130px;
 }
+
 .navbar-default {
     background-color: #fff;
     border-color: #e7e7e7;
 }
+
 .nav.nav-stacked li.active {
     background: #f9f9f9 none repeat scroll 0 0;
     border-left: 4px solid gold;
 }
+
 .btn {
     border: 1px solid #ccc;
     border-radius: 0;
     background-color: #fff;
 }
+
 .btn-success {
     background-color: #5cb85c;
     border-color: #4cae4c;
     color: #fff;
 }
+
 .btn-search {
     border: 1px solid transparent;
     color: #e67a5a;
 }
+
 .btn-add {
     border: 1px solid transparent;
-    color:#178c6e;
-    font-size:10px;
+    color: #178c6e;
+    font-size: 10px;
 }
-.btn-del{
+
+.btn-del {
     border: 1px solid transparent;
     color: #cb2930;
-    font-size:10px;
+    font-size: 10px;
 }
+
 .btn-tag-delete {
     background: #fff;
     border: 1px solid transparent;
-    color:#fff;
+    color: #fff;
 }
+
 button, input, optgroup, textarea, select {
     border: 1px solid #ddd !important;
 }
+
 .table > thead > tr > th {
     background: #f9f9f9;
 }
+
 .app-loader {
     position: absolute;
     top: 30%;
@@ -196,6 +213,7 @@ div.panel.panel-default div.panel-heading h4.title {
     padding: 8px 10px;
     white-space: normal;
 }
+
 .label.label-success {
     border-radius: 0;
     display: inline-block;
@@ -205,6 +223,7 @@ div.panel.panel-default div.panel-heading h4.title {
     padding: 8px 10px;
     white-space: normal;
 }
+
 .label.label-warning {
     border-radius: 0;
     display: inline-block;
@@ -214,6 +233,7 @@ div.panel.panel-default div.panel-heading h4.title {
     padding: 8px 10px;
     white-space: normal;
 }
+
 .label.label-info {
     border-radius: 0;
     display: inline-block;
@@ -223,6 +243,7 @@ div.panel.panel-default div.panel-heading h4.title {
     padding: 8px 10px;
     white-space: normal;
 }
+
 .label-btn {
     background: transparent;
     border: 0 !important;
@@ -503,12 +524,14 @@ input.daterangepicker-aqq-chart {
     font-size: 16px;
     width: 40px;
 }
+
 .nav-stacked .header {
     background: #eee;
     padding: 13px;
     color: #333;
     border-bottom: 1px solid #ddd;
 }
+
 .nav > li > a:hover, .nav > li > a:focus {
     background-color: #f9f9f9;
     text-decoration: none;
@@ -868,12 +891,14 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     z-index: 10;
     border: none !important;
 }
+
 .map-btn {
     width: 34px !important;
     position: fixed !important;
     top: 180px !important;
     margin: 0 !important;
 }
+
 .tabs-toggle-btn i {
     transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;
@@ -1074,10 +1099,12 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     background-color: #47639e !important;
     color: #fff !important
 }
+
 .box.box-5, .box-5 {
     background-color: #5bc0de !important;
     color: #fff !important
 }
+
 .box.box-6, .box-6 {
     background-color: #f0ad4e !important;
     color: #fff !important

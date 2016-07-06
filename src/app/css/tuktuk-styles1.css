@@ -3,27 +3,31 @@
         margin-bottom: 20px;
     }
 }
+
 @media only screen and (max-width: 767px) {
     .nav-tabs > li > a {
         padding: 10px;
     }
+
     .table-responsive > .table > thead > tr > th, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tfoot > tr > td {
         white-space: normal;
     }
-.app-loader{
-	position: absolute;
-	top: 54px;
-	left: 0;
-	z-index: 200000000;
-	width: 100%;
-	height: 100%;
-	display: block; 
-	background-color: rgba(0, 0, 0,0.4);
-}
-   
+
+    .app-loader {
+        position: fixed;
+        top: 54px;
+        left: 0;
+        z-index: 200000000;
+        width: 100%;
+        height: 100%;
+        display: block;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
     .tab-container {
         padding: 20px 10px;
     }
+
     .global-tbl table,
     .global-tbl thead,
     .global-tbl tbody,
@@ -32,194 +36,87 @@
     .global-tbl tr {
         display: block;
     }
+
     .global-tbl thead tr {
         position: absolute;
         top: -9999px;
         left: -9999px;
     }
-.reload {
-    position: fixed;
-    right: 20px;
-    top: 18px;
-    z-index: 10;
-}
-.live {
-    background-color: rgb(48, 176, 58);
-    border-radius: 100%;
-    height: 12px;
-    line-height: 12px;
-    position: fixed;
-    right: 72px !important;
-    text-indent: 17px;
-    top: 22px;
-    width: 12px;
-    z-index: 10;
-    left: inherit;
-}
-    .global-tbl td {
-        border: none;
-        border-bottom: 1px solid #eee;
-        position: relative;
-        padding-left: 50%;
-        white-space: normal;
-        text-align:left;
-    }
-    .global-tbl td:before {
-        top: 6px;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
 
-        text-align:left;
-        font-weight: bold;
-    }
-    .global-tbl td:before { content: attr(data-title); }
-    .well {width: 90%;}
-    .content .tabs-view {min-width: 300px;}
-    .tabs-view .col-md-4 {margin-bottom: 30px;}
-
-    .flx-performance {
-        height: auto!important;
-    }
-    .flx-performance .flx-cnt-right div {
-        text-align: left;
-        padding: 15px 20px!important;
-    }
-    .ng-map-info-window {width: 310px!important;}
-    .cstm-width {
-        min-width: inherit!important;
-        max-width: inherit!important;
-    }
-    .ngdialog-content {
-        left: 5%;
-        max-width: 327px;
-        top: 17%;
-        height: 20%;
-        max-height: 130px;
-    }
-    .radio, .checkbox {
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-    form {
-        margin-bottom: 20px;
-    }
-    .form-control {
-        width: 100%;
-    }
-    .btn {
-        border-radius: 4px !important;
-        width: 100%;
-        cursor: pointer;
-    }
-    table td .btn {
-        border-radius: 4px !important;
-        width: auto;
-        cursor: pointer;
-    }
-    .input-group {
-        margin: 5px 0 0px;
-    }
-    .pagination {
-        display: inline-block;
-        padding-left: 0;
-        margin: 10px;
-        border-radius: 4px;
-    }
-    .pagination > li > a, .pagination > li > span {
-        padding: 6px;
-    }
-}
-@media only screen and (max-width: 375px) {
-    form {
-        margin-bottom: 20px;
-    }
-    .form-control {
-        width: 100%;
-    }
-    .btn {
-        border-radius: 4px !important;
-        width: 100%;
-        cursor: pointer;
-    }
-    table td .btn {
-        border-radius: 4px !important;
-        width: auto;
-        cursor: pointer;
-    }
-    .input-group {
-        margin: 5px 0 0px;
-    }
-.reload {
-    position: fixed;
-    right: 20px;
-    top: 18px;
-    z-index: 10;
-}
-.live {
-    background-color: rgb(48, 176, 58);
-    border-radius: 100%;
-    height: 12px;
-    line-height: 12px;
-    position: fixed;
-    right: 72px !important;
-    text-indent: 17px;
-    top: 22px;
-    width: 12px;
-    z-index: 10;
-    left: inherit;
-}
-    .ngdialog-content {
-        left: 5%;
-        max-width: 327px;
-        top: 17%;
-        height: 20%;
-        max-height: 130px;
-    }
-    .radio, .checkbox {
-        margin-top: 0px;
-        margin-bottom: 0px;
-    }
-}
-@media only screen and (max-width: 320px) {
-    form {
-        margin-bottom: 20px;
-    }
-    .form-control {
-        width: 100%;
-    }
-    .btn {
-        border-radius: 4px !important;
-        width: 100%;
-        cursor: pointer;
-    }
-    table td .btn {
-        border-radius: 4px !important;
-        width: auto;
-        cursor: pointer;
-    }
-    .input-group {
-        margin: 5px 0 0px;
-    }
     .reload {
         position: fixed;
         right: 20px;
         top: 18px;
         z-index: 10;
     }
-.live {
-    background-color: rgb(48, 176, 58);
-    border-radius: 100%;
-    height: 12px;
-    line-height: 12px;
-    position: fixed;
-    right: 72px !important;
-    text-indent: 17px;
-    top: 67px;
-    width: 12px;
-    z-index: 10;
-    left: inherit;
-}
+
+    .live {
+        background-color: rgb(48, 176, 58);
+        border-radius: 100%;
+        height: 12px;
+        line-height: 12px;
+        position: fixed;
+        right: 72px !important;
+        text-indent: 17px;
+        top: 22px;
+        width: 12px;
+        z-index: 10;
+        left: inherit;
+    }
+
+    .global-tbl td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+        text-align: left;
+    }
+
+    .global-tbl td:before {
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .global-tbl td:before {
+        content: attr(data-title);
+    }
+
+    .well {
+        width: 90%;
+    }
+
+    .content .tabs-view {
+        min-width: 300px;
+    }
+
+    .tabs-view .col-md-4 {
+        margin-bottom: 30px;
+    }
+
+    .flx-performance {
+        height: auto !important;
+    }
+
+    .flx-performance .flx-cnt-right div {
+        text-align: left;
+        padding: 15px 20px !important;
+    }
+
+    .ng-map-info-window {
+        width: 310px !important;
+    }
+
+    .cstm-width {
+        min-width: inherit !important;
+        max-width: inherit !important;
+    }
+
     .ngdialog-content {
         left: 5%;
         max-width: 327px;
@@ -227,6 +124,162 @@
         height: 20%;
         max-height: 130px;
     }
+
+    .radio, .checkbox {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+
+    .btn {
+        border-radius: 4px !important;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    table td .btn {
+        border-radius: 4px !important;
+        width: auto;
+        cursor: pointer;
+    }
+
+    .input-group {
+        margin: 5px 0 0px;
+    }
+
+    .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 10px;
+        border-radius: 4px;
+    }
+
+    .pagination > li > a, .pagination > li > span {
+        padding: 6px;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    form {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+
+    .btn {
+        border-radius: 4px !important;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    table td .btn {
+        border-radius: 4px !important;
+        width: auto;
+        cursor: pointer;
+    }
+
+    .input-group {
+        margin: 5px 0 0px;
+    }
+
+    .reload {
+        position: fixed;
+        right: 20px;
+        top: 18px;
+        z-index: 10;
+    }
+
+    .live {
+        background-color: rgb(48, 176, 58);
+        border-radius: 100%;
+        height: 12px;
+        line-height: 12px;
+        position: fixed;
+        right: 72px !important;
+        text-indent: 17px;
+        top: 22px;
+        width: 12px;
+        z-index: 10;
+        left: inherit;
+    }
+
+    .ngdialog-content {
+        left: 5%;
+        max-width: 327px;
+        top: 17%;
+        height: 20%;
+        max-height: 130px;
+    }
+
+    .radio, .checkbox {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    form {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+
+    .btn {
+        border-radius: 4px !important;
+        width: 100%;
+        cursor: pointer;
+    }
+
+    table td .btn {
+        border-radius: 4px !important;
+        width: auto;
+        cursor: pointer;
+    }
+
+    .input-group {
+        margin: 5px 0 0px;
+    }
+
+    .reload {
+        position: fixed;
+        right: 20px;
+        top: 18px;
+        z-index: 10;
+    }
+
+    .live {
+        background-color: rgb(48, 176, 58);
+        border-radius: 100%;
+        height: 12px;
+        line-height: 12px;
+        position: fixed;
+        right: 72px !important;
+        text-indent: 17px;
+        top: 67px;
+        width: 12px;
+        z-index: 10;
+        left: inherit;
+    }
+
+    .ngdialog-content {
+        left: 5%;
+        max-width: 327px;
+        top: 17%;
+        height: 20%;
+        max-height: 130px;
+    }
+
     .radio, .checkbox {
         margin-top: 0px;
         margin-bottom: 0px;
