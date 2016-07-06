@@ -101,9 +101,8 @@
                     <h4 style="margin-top: 0" class="title">Top Drivers</h4></div>
                 <div class="panel-body">
 
-                    <div>
-                        <table ng-table="tableParams"
-                               class="table table-responsive table-bordered table-striped text-center">
+                    <div class="table-responsive">
+                        <table ng-table="tableParams" class="table table-bordered table-striped text-center">
                             <!--<thead>
                                 <tr>
                                     <th width="120" style="text-align:left;">#ID</th>
@@ -123,10 +122,10 @@
                                 </td>
                                 <td data-title="'Rides'" sortable="'rides'">{{row.rides}}</td>
                                 <td class="text-left" data-title="'Online'">
-                                    <div style="max-height: 80px; overflow: auto; display: block;">
+
                                         <span  ng-repeat="time in row.online"
                                               class="label label-primary">{{time.start*1000 | date:'h:mma'}} - {{time.end*1000 | date:'h:mma'}}</span>
-                                    </div>
+
                                 </td>
                             </tr>
                             </tbody>

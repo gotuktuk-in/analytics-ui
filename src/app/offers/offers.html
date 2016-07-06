@@ -69,29 +69,31 @@
     <!--</div>-->
 
     <div class="row">
-        <div class="col-md-4 col-sm-4 col-xs-12">
-
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <form class="form-inline">
-                <div class="form-group">
-                    <input type="text" class="form-control col-md-6 col-sm-6 col-xs-6" id="searchOffer"
+                <div class="input-group col-md-4 col-sm-6 col-xs-12 no-pd">
+                    <input type="text" class="form-control" id="searchOffer"
                            placeholder="Enter Offer Code" ng-model="vm.offerTxt">
                 </div>
-                <button type="submit" class="btn btn-search" ng-click="vm.searchOffers()">
-                    <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
-                <button type="submit" class="btn btn-search" ng-click="vm.clearOfferSearch()">
-                    <span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+                <div class="input-group col-md-1 col-sm-1 col-xs-12 text-center">
+                    <button type="submit" class="btn btn-search" ng-click="vm.searchOffers()">
+                        <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
+                     </div>
+                <div class="input-group col-md-1 col-sm-1 col-xs-12 text-left">
+                  <button type="submit" class="btn btn-search" ng-click="vm.clearOfferSearch()">
+                        <span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+                </div>
             </form>
-            <br>
-
             <div class="panel panel-default">
                 <div class="panel-heading box-6">
                     <h4 style="margin-top: 0" class="title">Offers</h4></div>
                 <div class="panel-body">
-                    <table ng-table="offerTableParams" class="table table-bordered table-responsive">
+                    <div class=" table-responsive">
+                    <table ng-table="offerTableParams" class="table table-bordered">
 
                         <tbody>
                         <tr ng-repeat="row in $data track by $index">
-                            <td header="'headerCheckbox.html'" width="30"><input type="checkbox" ng-model="vm.offerCheckboxes.items[row.id]"></td>
+                            <td header="'headerCheckbox.html'"><input type="checkbox" ng-model="vm.offerCheckboxes.items[row.id]"></td>
                             <td data-title="'Code'">{{row.code}}</td>
                             <td data-title="'Offer Detail'">{{row.description}}</td>
                             <td data-title="'Action'" class="text-center">
@@ -103,42 +105,46 @@
 
                         </tbody>
                     </table>
+                    </div>
                     <button type="submit" class="btn btn-default pull-right" ng-click="vm.addOffers()">
                         <span aria-hidden="true" class="glyphicon glyphicon glyphicon-chevron-down"></span> Add Offer(s)
                     </button>
                 </div>
             </div>
         </div>
-        <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <form class="form-inline">
-                <div class="input-group col-md-3">
+                <div class="input-group col-md-4 col-sm-6 col-xs-12 no-pd">
+                    <input type="text" class="form-control" id="searchDriver"
+                           placeholder="Enter keyword" ng-model="vm.driverTxt">
+                    </div>
+                <div class="input-group col-md-1 col-sm-1 col-xs-12 no-pd text-center">
+                   <button type="submit" class="btn btn-search" ng-click="vm.searchDrivers()">
+                        <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
+                   </div>
+                <div class="input-group col-md-1 col-sm-1 col-xs-12 no-pd text-left">
+                    <button type="submit" class="btn btn-search" ng-click="vm.clearDriverSearch()">
+                        <span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
+                </div>
+                <div class="input-group col-md-4 col-sm-3 col-xs-12">
                     <select ng-model="vm.filterTerm" class="form-control"
                             ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
                         <option value="" disabled>Select Filter</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <input type="text" class="form-control col-md-6 col-sm-6 col-xs-6" id="searchDriver"
-                           placeholder="Enter keyword" ng-model="vm.driverTxt">
-                </div>
-                <button type="submit" class="btn btn-search" ng-click="vm.searchDrivers()">
-                    <span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
-                <button type="submit" class="btn btn-search" ng-click="vm.clearDriverSearch()">
-                    <span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>
 
             </form>
-            <br>
-
             <div class="panel panel-default">
                 <div class="panel-heading box-5">
                     <h4 style="margin-top: 0" class="title">Drivers</h4></div>
                 <div class="panel-body">
-                    <table ng-table="driverTableParams" class="table table-bordered table-responsive">
-                           <tbody>
+                    <div class=" table-responsive">
+                    <table ng-table="driverTableParams" class="table table-bordered">
+                        <tbody>
                         <tr ng-repeat="row in $data track by $index">
                             <td header="'driverCheckbox.html'" width="30"><input type="checkbox" ng-model="vm.driverCheckboxes.items[row.id]"></td>
                             <td data-title="'Name'">{{row.name}}</td>
-                            <td data-title="'Driver Info'" class="hidden-xs">{{row.phone}}, {{row.vehicle}}</td>
+                            <td data-title="'Driver Info'">{{row.phone}}, {{row.vehicle}}</td>
                             <td data-title="'Assigned Offer(s)'">
                                 <a ng-if="!row.offers" ng-click="vm.getDriverOffers(row)">Show</a>
                                 <!--<span ng-if="row.offers" ng-repeat="offer in row.offers">{{offer}}<br></span>-->
@@ -158,6 +164,7 @@
 
                         </tbody>
                     </table>
+                        </div>
                     <button type="submit" class="btn btn-default pull-right" ng-click=" vm.addDrivers()">
                         <span aria-hidden="true" class="glyphicon glyphicon glyphicon-chevron-down"></span> Add
                         Driver(s)
@@ -165,12 +172,15 @@
                     <div ng-if="vm.driverExistError">Driver(s) Already selected</div>
                 </div>
             </div>
+            </div>
         </div>
+    <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 style="margin-top: 0" class="title">Confirmation</h4></div>
                 <div class="panel-body">
+                    <div class=" table-responsive">
                     <table class="table table-responsive no-mr">
                         <tr>
                             <td class="text-left">Offers</td>
@@ -214,6 +224,7 @@
                             </td>
                         </tr>
                     </table>
+                        </div>
                 </div>
             </div>
         </div>
