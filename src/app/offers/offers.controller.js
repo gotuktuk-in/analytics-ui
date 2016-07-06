@@ -98,18 +98,41 @@
                 toastr.error("Error : " + error);
             })
         }
-        vm.removeSingleOffer = function (index, row) {
-            var obj = {}
-            obj.drivers = [row.id]
-            obj.offers = [row.offers[index]]
-            obj.status = false;
-            OfferService.assignOffers({}, obj, function (response) {
-                toastr.success("Offers removed.");
-                row.offers.splice(index, 1)
-            }, function (error) {
-                toastr.error("Error : " + error);
-            })
+        vm.openSingleAlert = function(index, row)
+        {
+            ngDialog.open({
+                template: 'alertSingleDelete.html',
+                className: 'ngdialog-theme-plain',
+            //    scope: $scope,
+                overlay:true,
+                resolve: {
+                    index: function depFactory() {
+                        return index;
+                    },
+                    row: function depFactory() {
+                        return row;
+                    }
+                },
+                controller: function Ctrl($scope, index, row, OfferService) {
+                    $scope.index = index
+                    $scope.row = row
+                    console.log(index, row)
+                    $scope.removeSingleOffer = function (index, row) {
+                        var obj = {}
+                        obj.drivers = [row.id]
+                        obj.offers = [row.offers[index]]
+                        obj.status = false;
+                        OfferService.assignOffers({}, obj, function (response) {
+                            toastr.success("Offer removed.");
+                            row.offers.splice(index, 1)
+                        }, function (error) {
+                            toastr.error("Error : " + error);
+                        })
+                    }
+                },
+            });
         }
+
         vm.alertDeleteAllOffers = function (row) {
             vm.currentRow = row
             ngDialog.open({
@@ -136,16 +159,6 @@
             }, function (error) {
                 toastr.error("Error : " + error);
             })
-           /* var obj = {}
-            obj.drivers = [vm.currentRow.id]
-            obj.offers = row.offers
-            obj.status = false;
-            OfferService.assignOffers({}, obj, function (response) {
-                toastr.success("Offers assigned to selected drivers.");
-
-            }, function (error) {
-                toastr.error("Error : " + error);
-            })*/
         }
         vm.getDriverOffers = function (row) {
 

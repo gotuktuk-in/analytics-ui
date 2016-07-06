@@ -16,21 +16,21 @@
         </div>
     </div>
     <br>
-   <!-- <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h4 style="margin-top: 0">Heatmap</h4>
-                    <br>
+    <!-- <div class="row">
+         <div class="col-md-12">
+             <div class="panel panel-default">
+                 <div class="panel-body">
+                     <h4 style="margin-top: 0">Heatmap</h4>
+                     <br>
 
-                    <div class="table-responsive">
-                        <div id="chart"></div>
-                      &lt;!&ndash;  <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>&ndash;&gt;
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
+                     <div class="table-responsive">
+                         <div id="chart"></div>
+                       &lt;!&ndash;  <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>&ndash;&gt;
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>-->
     <div class="row">
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
@@ -67,68 +67,83 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <form class="form-inline">
 
-                    <div class="input-group">
-                        <select ng-model="vm.filterTerm" class="form-control"
-                                ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
-                            <option value="" disabled>Select Filter</option>
-                        </select>
-                    </div>
-                    <div class="input-group" >
-                        <input ng-model="vm.searchTerm" class="form-control" placeholder="term" ng-disabled="!vm.filterTerm"/>
-                    </div>
-                <div class="input-group" >
-                    <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-search"><span aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
+                <div class="input-group col-md-3 col-sm-4 col-xs-12">
+                    <select ng-model="vm.filterTerm" class="form-control"
+                            ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
+                        <option value="" disabled>Select Filter</option>
+                    </select>
                 </div>
-                     <div class="input-group">
+                <div class="input-group col-md-3 col-sm-4 col-xs-12">
+                    <input ng-model="vm.searchTerm" class="form-control" placeholder="term"
+                           ng-disabled="!vm.filterTerm"/>
+                </div>
+                <div class="input-group col-md-1 col-sm-4 col-xs-12">
+                    <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-search"><span
+                            aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
+                </div>
+                <div class="input-group col-md-3 col-sm-4 col-xs-12">
                     <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
                             ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters track by statusFilter.value">
                         <option value="" disabled>Select Status</option>
                     </select>
                 </div>
 
-            </form><br>
+            </form>
+        </div>
     </div>
-    </div>
-        <div class="row">
+    <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
-            <div class="panel-heading">
+                <div class="panel-heading">
                     <h4 style="margin-top: 0" class="title">Trips Table</h4></div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table ng-table="tableParams" class="table table-bordered  table-condensed">
+                        <table ng-table="tableParams" class="table table-bordered">
 
                             <tr class="truncate"
                                 ng-repeat="row in $data track by $index">
-                               <!-- <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
-                                    <a target="_blank"
-                                       ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">{{row.id}}
-                                    </a>
-                                </td>-->
-                                <td data-title="'Date & Time'" sortable="'requestOn'" style="width: 170px;">
-                                    <a target="_blank"
-                                       ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})"><div>{{(row.requestOn)*1000 | date:"dd/MMM/yyyy 'at' h:mma"}}</div>
+                                <!-- <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
+                                     <a target="_blank"
+                                        ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">{{row.id}}
+                                     </a>
+                                 </td>-->
+                                <td data-title="'Date & Time'" sortable="'requestOn'" style="width: 145px;">
+                                    <a target="_self"
+                                       ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">
+                                        <div>{{(row.requestOn)*1000 | date:"dd MMM yy h:mma"}}</div>
                                     </a>
 
                                 </td>
-                                <td data-title="'Status'" sortable="'tripState'" style="width: 100px;">
-                                    <div ng-if="row.tripState == 20" class="text-primary" style="white-space: nowrap">Requested</div>
+                                <td data-title="'Status'" sortable="'tripState'">
+                                    <div ng-if="row.tripState == 20" class="text-primary" style="white-space: nowrap">
+                                        Requested
+                                    </div>
                                     <div ng-if="row.tripState == 22" style="white-space: nowrap">Allocated</div>
                                     <div ng-if="row.tripState == 30" style="white-space: nowrap">For Trip</div>
                                     <div ng-if="row.tripState == 40" style="white-space: nowrap">At Pickup</div>
                                     <div ng-if="row.tripState == 60" style="white-space: nowrap">At Destination</div>
-                                    <div ng-if="row.tripState == 50" class="text-info" style="white-space: nowrap">In trip</div>
-                                    <div ng-if="row.tripState == 61" class="text-success" style="white-space: nowrap">Successful</div>
-                                    <div ng-if="row.tripState == 70" class="text-warning" style="white-space: nowrap">Can by Driver</div>
-                                    <div ng-if="row.tripState == 71" class="text-warning" style="white-space: nowrap">Can by Rider</div>
+                                    <div ng-if="row.tripState == 50" class="text-info" style="white-space: nowrap">In
+                                        trip
+                                    </div>
+                                    <div ng-if="row.tripState == 61" class="text-success" style="white-space: nowrap">
+                                        Successful
+                                    </div>
+                                    <div ng-if="row.tripState == 70" class="text-warning" style="white-space: nowrap">
+                                        Can by Driver
+                                    </div>
+                                    <div ng-if="row.tripState == 71" class="text-warning" style="white-space: nowrap">
+                                        Can by Rider
+                                    </div>
                                     <div ng-if="row.tripState == 80" style="white-space: nowrap">No Drv Avlble</div>
-                                    <div ng-if="row.tripState == 81" class="text-danger" style="white-space: nowrap">Failed (No Drivers Accepted)</div>
+                                    <div ng-if="row.tripState == 81" class="text-danger" style="white-space: nowrap">
+                                        Failed (No Drivers Accepted)
+                                    </div>
                                     <div ng-if="row.tripState == 82" style="white-space: nowrap">Terminated</div>
                                 </td>
                                 <td data-title="'Driver Info'">
                                     <div>{{row.driverInfo.name}}<br>
-                                      <!--  <span class="small">{{row.driverInfo.phone}}</span>
-                                        <span class="small">{{row.driverInfo.vehicle}}</span>-->
+                                        <!--  <span class="small">{{row.driverInfo.phone}}</span>
+                                          <span class="small">{{row.driverInfo.vehicle}}</span>-->
                                     </div>
                                 </td>
                                 <td data-title="'VType'" sortable="'vehicleType'" align="center">
@@ -150,7 +165,7 @@
                                     </div>
                                 </td>-->
 
-                                <td data-title="'Time'" sortable="'time'" style="width:110px;">
+                                <td data-title="'Time'" sortable="'time'">
                                     <div>{{getTimeDiff(row.pickupOn,row.dropOn)| secondsToDateTime}}</div>
                                     <!--<div>{{getTimeDiff(row.pickupOn,row.dropOn)| secondsToDateTime}}</div>-->
                                 </td>
@@ -158,21 +173,21 @@
                                 <td data-title="'Dist(KM)'" sortable="'disPickupDrop'" align="center">
                                     <div>{{(row.disPickupDrop)/1000 | number:2}}</div>
                                 </td>
-                               <!-- <td data-title="'Amt(Rs.)'" sortable="'amount'" align="right">
-                                    <div class="truncate truncate-amt"><b>{{row.amount.total}}</b>
-                                        <span class="small">Cash: {{row.amount.cash | number:2}}</span>
-                                        <span class="small">Citrus: {{row.amount.citrus | number:2}}</span>
-                                        <span class="small">Discount: {{row.amount.discount | number:2}} </span>
-                                    </div>
-                                </td>
-                                <td data-title="'Rating'" sortable="'riderFeedbackRating'" align="center">
-                                    <div>{{row.riderFeedbackRating | number:1}}</div>
-                                </td>-->
-                               <!-- <td data-title="'Show'" align="center">
-                                    <button class="btn btn-xs btn-link" ng-click="showMore(row)"><i
-                                            ng-class="{'glyphicon-chevron-up':row.showMore,'glyphicon-chevron-down':!row.showMore}"
-                                            class="glyphicon glyphicon-chevron-down"></i></button>
-                                </td>-->
+                                <!-- <td data-title="'Amt(Rs.)'" sortable="'amount'" align="right">
+                                     <div class="truncate truncate-amt"><b>{{row.amount.total}}</b>
+                                         <span class="small">Cash: {{row.amount.cash | number:2}}</span>
+                                         <span class="small">Citrus: {{row.amount.citrus | number:2}}</span>
+                                         <span class="small">Discount: {{row.amount.discount | number:2}} </span>
+                                     </div>
+                                 </td>
+                                 <td data-title="'Rating'" sortable="'riderFeedbackRating'" align="center">
+                                     <div>{{row.riderFeedbackRating | number:1}}</div>
+                                 </td>-->
+                                <!-- <td data-title="'Show'" align="center">
+                                     <button class="btn btn-xs btn-link" ng-click="showMore(row)"><i
+                                             ng-class="{'glyphicon-chevron-up':row.showMore,'glyphicon-chevron-down':!row.showMore}"
+                                             class="glyphicon glyphicon-chevron-down"></i></button>
+                                 </td>-->
                             </tr>
                         </table>
                         <table class="table table-bordered table-striped table-condensed" ng-show="tblNoData">
