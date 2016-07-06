@@ -72,7 +72,7 @@
         </ng-map>
         <div class="tabs-view">
             <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}"
-                    class="btn btn-default tabs-toggle-btn" title="Show More...">
+                    class="btn btn-default tabs-toggle-btn map-btn" title="Show More...">
                 <i class="fa fa-angle-double-right"></i>
             </button>
             <div class="tabs-toggle" ng-class="{'tabs-show' : tabView}">
@@ -146,103 +146,103 @@
                         </div>
                     </uib-tab>
                     <uib-tab index="1" heading="Driver Info">
+                    <div class="table-responsive"> <table width="100%" class="table  table-bordered table-striped ">
+                        <tr>
+                            <td colspan="2">
+                                <img ng-src="{{selectedTrip.driverInfo.profileImage ? selectedTrip.driverInfo.profileImage:'assets/images/default.png' }}"
+                                     style="height:100px;">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Name</td>
+                            <td><label>{{selectedTrip.driverInfo.name}}</label></td>
+                        </tr>
 
-                                <table width="100%" class="table table-responsive table-bordered table-striped ">
-                                    <tr>
-                                        <td colspan="2">
-                                            <img ng-src="{{selectedTrip.driverInfo.profileImage ? selectedTrip.driverInfo.profileImage:'assets/images/default.png' }}"
-                                                 style="height:100px;">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td><label>{{selectedTrip.driverInfo.name}}</label></td>
-                                    </tr>
+                        <tr>
+                            <td>Vehicle Number</td>
+                            <td><label>{{selectedTrip.driverInfo.vehicle}}</label></td>
+                        </tr>
+                        <tr>
+                            <td>Phone Number</td>
+                            <td><label>{{selectedTrip.driverInfo.phone}} </label></td>
+                        </tr>
+                        <tr>
+                            <td>Current Status</td>
+                            <td>
+                                <div ng-if="selectedTrip.driverInfo.state == 10"><span
+                                        class="text-danger">Offline</span></div>
+                                <div ng-if="selectedTrip.driverInfo.state == 11"><span
+                                        class="text-success">Online</span></div>
+                                <div ng-if="selectedTrip.driverInfo.state == 22"><span
+                                        class="text-danger">Unoccupied</span></div>
+                                <div ng-if="selectedTrip.driverInfo.state == 30"><span
+                                        class="text-info">Occupied</span></div>
+                                <div ng-if="selectedTrip.driverInfo.state == 40"><span
+                                        class="text-info">Occupied</span></div>
+                                <div ng-if="selectedTrip.driverInfo.state == 50"><span
+                                        class="text-info">Occupied</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Total Rides</td>
+                            <td> {{selectedTrip.driverInfo.ridesTotal}}</td>
+                        </tr>
+                        <tr>
+                            <td>Today's Rides</td>
+                            <td> {{selectedTrip.driverInfo.ridesToday}}</td>
+                        </tr>
+                        <tr>
+                            <td>Today's Earnings</td>
+                            <td>{{selectedTrip.driverInfo.fare}}</td>
+                        </tr>
+                        <tr>
+                            <td>Overall Feedback</td>
+                            <td>{{selectedTrip.driverInfo.avg | number:2}}</td>
+                        </tr>
+                    </table></div>
 
-                                    <tr>
-                                        <td>Vehicle Number</td>
-                                        <td><label>{{selectedTrip.driverInfo.vehicle}}</label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Phone Number</td>
-                                        <td><label>{{selectedTrip.driverInfo.phone}} </label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Current Status</td>
-                                        <td>
-                                            <div ng-if="selectedTrip.driverInfo.state == 10"><span
-                                                    class="text-danger">Offline</span></div>
-                                            <div ng-if="selectedTrip.driverInfo.state == 11"><span
-                                                    class="text-success">Online</span></div>
-                                            <div ng-if="selectedTrip.driverInfo.state == 22"><span
-                                                    class="text-danger">Unoccupied</span></div>
-                                            <div ng-if="selectedTrip.driverInfo.state == 30"><span
-                                                    class="text-info">Occupied</span></div>
-                                            <div ng-if="selectedTrip.driverInfo.state == 40"><span
-                                                    class="text-info">Occupied</span></div>
-                                            <div ng-if="selectedTrip.driverInfo.state == 50"><span
-                                                    class="text-info">Occupied</span></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total Rides</td>
-                                        <td> {{selectedTrip.driverInfo.ridesTotal}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Today's Rides</td>
-                                        <td> {{selectedTrip.driverInfo.ridesToday}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Today's Earnings</td>
-                                        <td>{{selectedTrip.driverInfo.fare}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Overall Feedback</td>
-                                        <td>{{selectedTrip.driverInfo.avg | number:2}}</td>
-                                    </tr>
-                                </table>
 
 
                     </uib-tab>
                     <uib-tab index="1" heading="Rider Info">
+                        <div class="table-responsive"><table width="100%" class="table table-bordered table-striped ">
+                            <tr>
+                                <td colspan="2">
+                                    <img ng-src="{{selectedTrip.riderInfo.profileImage ? selectedTrip.riderInfo.profileImage:'assets/images/default.png' }}"
+                                         style="height:100px;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Name</td>
+                                <td><label>{{selectedTrip.riderInfo.name}}</label></td>
+                            </tr>
 
-                                <table width="100%" class="table table-responsive table-bordered table-striped ">
-                                    <tr>
-                                        <td colspan="2">
-                                            <img ng-src="{{selectedTrip.riderInfo.profileImage ? selectedTrip.riderInfo.profileImage:'assets/images/default.png' }}"
-                                                 style="height:100px;">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td><label>{{selectedTrip.riderInfo.name}}</label></td>
-                                    </tr>
+                            <tr>
+                                <td>Phone Number</td>
+                                <td><label>{{selectedTrip.riderInfo.phone}} </label></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td>{{selectedTrip.riderInfo.email}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Gender</td>
+                                <td> {{selectedTrip.riderInfo.gender}}</td>
+                            </tr>
+                            <tr>
+                                <td>Age</td>
+                                <td>{{selectedTrip.riderInfo.age}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Rides</td>
+                                <td>{{selectedTrip.riderInfo.ridesTotal}}</td>
+                            </tr>
+                            <tr>
+                                <td>Today's Rides</td>
+                                <td>{{selectedTrip.riderInfo.ridesToday}}</td>
+                            </tr>
+                        </table></div>
 
-                                    <tr>
-                                        <td>Phone Number</td>
-                                        <td><label>{{selectedTrip.riderInfo.phone}} </label></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email</td>
-                                        <td>{{selectedTrip.riderInfo.email}}</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gender</td>
-                                        <td> {{selectedTrip.riderInfo.gender}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Age</td>
-                                        <td>{{selectedTrip.riderInfo.age}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Total Rides</td>
-                                        <td>{{selectedTrip.riderInfo.ridesTotal}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Today's Rides</td>
-                                        <td>{{selectedTrip.riderInfo.ridesToday}}</td>
-                                    </tr>
-                                </table>
 
                     </uib-tab>
                 </uib-tabset>

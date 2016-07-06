@@ -4,6 +4,12 @@
     }
 }
 @media only screen and (max-width: 767px) {
+    .nav-tabs > li > a {
+        padding: 10px;
+    }
+    .table-responsive > .table > thead > tr > th, .table-responsive > .table > tbody > tr > th, .table-responsive > .table > tfoot > tr > th, .table-responsive > .table > thead > tr > td, .table-responsive > .table > tbody > tr > td, .table-responsive > .table > tfoot > tr > td {
+        white-space: normal;
+    }
 .app-loader{
 	position: absolute;
 	top: 54px;

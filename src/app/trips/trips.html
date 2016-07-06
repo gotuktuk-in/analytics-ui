@@ -86,7 +86,7 @@
                     </select>
                 </div>
 
-            </form><br>
+            </form>
     </div>
     </div>
         <div class="row">
@@ -106,7 +106,7 @@
                                     </a>
                                 </td>-->
                                 <td data-title="'Date & Time'" sortable="'requestOn'" style="width: 145px;">
-                                    <a target="_blank"
+                                    <a target="_self"
                                        ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})"><div>{{(row.requestOn)*1000 | date:"dd MMM yy h:mma"}}</div>
                                     </a>
 

@@ -850,9 +850,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 .tabs-show {
-    left: 27px;
+    left: 28px;
     visibility: visible;
-    z-index: 9;
+    z-index: 11;
 }
 
 .tabs-toggle-btn {
@@ -865,12 +865,15 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     height: 40px;
     line-height: 28px;
     text-align: center;
-    width: 34px;
-    margin-top: 54px;
     z-index: 10;
     border: none !important;
 }
-
+.map-btn {
+    width: 34px !important;
+    position: fixed !important;
+    top: 180px !important;
+    margin: 0 !important;
+}
 .tabs-toggle-btn i {
     transition: all 0.4s ease-in-out;
     -webkit-transition: all 0.4s ease-in-out;

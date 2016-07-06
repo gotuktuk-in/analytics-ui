@@ -136,12 +136,12 @@
                     <h4 style="margin-top: 0" class="title">Trips</h4></div>
                 <div class="panel-body">
 
-                    <div>
-                        <table ng-table="tableParams" class="table table-responsive table-bordered table-striped text-center">
+                    <div class="table-responsive">
+                        <table ng-table="tableParams" class="table table-bordered table-striped">
                             <tr ng-class="{'unTruncate':row.showMore,'truncate':!row.showMore}" class="truncate"
                                 ng-repeat="row in $data track by $index">
                                 <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
-                                    <div class="trnc">
+                                    <div style="white-space: normal;">
                                         <!--  <a href="void:javascript(0);" ng-click="selectTrip(row)">{{row.id}}</a>-->
                                         <a ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">{{row.id}}</a>
                                     </div>
@@ -150,7 +150,7 @@
                                     <div>{{(row.requestOn)*1000 | date:"dd/MM/yy 'at' h:mma"}}</div>
                                 </td>
                                 <td data-title="'Rider Info'">
-                                    <div class="trnc">{{row.riderInfo.name}}<br>{{row.riderInfo.phone}}</div>
+                                    <div style="white-space: normal;">{{row.riderInfo.name}}<br>{{row.riderInfo.phone}}</div>
                                 </td>
                                 <td data-title="'Status'" sortable="'tripState'" style="width: 100px;">
                                     <div ng-if="row.tripState == 20" class="text-primary">Requested</div>
@@ -166,24 +166,24 @@
                                     <div ng-if="row.tripState == 81" class="text-danger">Failed (No Drivers Accepted)</div>
                                     <div ng-if="row.tripState == 82">Terminated</div>
                                 </td>
-                                <td data-title="'Pickup'" style="width: 200px;">
-                                    <div class="trnc">{{row.pickUp.line1 + ' ' + row.pickUp.line2}} {{row.pickUp.city + " " + row.pickUp.state + ' ' +
+                                <td data-title="'Pickup'" style="max-width: 200px;">
+                                    <div style="white-space: normal;">{{row.pickUp.line1 + ' ' + row.pickUp.line2}} {{row.pickUp.city + " " + row.pickUp.state + ' ' +
                                         row.pickUp.country}}
                                     </div>
                                 </td>
-                                <td data-title="'Drop'" style="width: 200px;">
-                                    <div class="trnc">{{row.drop.line1 + ' ' + row.drop.line2}} {{row.pickUp.city + " " + row.drop.state + ' ' +
+                                <td data-title="'Drop'" style="max-width: 200px;">
+                                    <div style="white-space: normal;">{{row.drop.line1 + ' ' + row.drop.line2}} {{row.pickUp.city + " " + row.drop.state + ' ' +
                                         row.drop.country}}
                                     </div>
                                 </td>
                                 <td data-title="'Time'" align="center">
-                                    <div class="trnc">{{getTimeDiff(row.dropOn,row.pickupOn)}}</div>
+                                    <div style="white-space: normal;">{{getTimeDiff(row.dropOn,row.pickupOn)}}</div>
                                 </td>
                                 <td data-title="'Distance (KM)'" align="center">
-                                    <div class="trnc">{{(row.disPickupDrop)/1000 | number:2}}</div>
+                                    <div style="white-space: normal;">{{(row.disPickupDrop)/1000 | number:2}}</div>
                                 </td>
                                 <td data-title="'Amt. (Rs.)'" align="right">
-                                    <div class="trnc">
+                                    <div style="white-space: normal;">
                                         {{row.amount.total | number:2}}<br>
                                         <span class="small">Cash: {{row.amount.cash | number:2}}</span>
                                         <span class="small">Citrus: {{row.amount.citrus | number:2}}</span>
@@ -191,7 +191,7 @@
                                     </div>
                                 </td>
                                 <td data-title="'Rating'" sortable="'riderFeedbackRating'" align="center">
-                                    <div class="trnc">{{row.riderFeedbackRating | number:1}}</div>
+                                    <div style="white-space: normal;">{{row.riderFeedbackRating | number:1}}</div>
                                 </td>
                                 <!--<td data-title="''">
                                     <button class="btn btn-xs btn-link" ng-click="showMore(row)">More <i
