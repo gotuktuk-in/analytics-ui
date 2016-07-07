@@ -8,7 +8,8 @@
     /** @ngInject */
     function RidersController($scope, $log, $rootScope, $interval, StaticDataService, ChartConfigService, PerformanceService, PerformanceHandler, RidersService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
-        var vm = this
+        var vm = this;
+
 
         function getRidersChart() {
             RidersService.getRiders({}, function (response) {
@@ -21,12 +22,15 @@
             });
         }
 
-        getRidersChart()
+        getRidersChart();
+
         function drawDimpleMatrix() {
-            var svg = dimple.newSvg("#matrixChart", 590, 400);
+            var chartWidth = document.getElementById("matrixChartDiv").offsetWidth;
+            var setBoundsWidth = document.getElementById("matrixChartDiv").offsetWidth - 180;
+            var svg = dimple.newSvg("#matrixChart", chartWidth, 450);
          //   d3.tsv("example_data.tsv", function (data) {
                 var myChart = new dimple.chart(svg, vm.ridersData);
-                myChart.setBounds(90, 50, 480, 310)
+                myChart.setBounds(90, 50, setBoundsWidth, 350)
                 myChart.addCategoryAxis("x","rider_reg" );
                 myChart.addCategoryAxis("y", "week");
                 myChart.addSeries("week", dimple.plot.bar);
@@ -109,6 +113,17 @@
              return d.week + "," + d.rider_reg;
              })*/
         }
+
+        var resizeTimer;
+        $(window).resize(function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                var chartWidth = document.getElementById("matrixChartDiv").offsetWidth;
+                var setBoundsWidth = document.getElementById("matrixChartDiv").offsetWidth - 180;
+                $( "#matrixChart" ).empty();
+                getRidersChart();
+            }, 500);
+        });
 
 
     }

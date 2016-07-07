@@ -10,55 +10,8 @@
     <br>
     <br>
     <br><br>
-   <!-- <div class="row overview-box">
-        <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>
-</span>
 
-        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="col-md-2 col-sm-4 col-xs-12 no-mr no-pd">
-                        <div class="box box-heading box-1 text-center">
-                            <h4 class="title">RIDERS</h4>
-
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
-                        <div class="box">
-                            <h4 class="number">{{ vm.overview.driver.total_drivers}}</h4>
-                            <span>Total</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
-                        <div class="box">
-                            <h4 class="number">{{vm.overview.driver.free_drivers}}</h4>
-                            <span>Free</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
-                        <div class="box">
-                            <h4 class="number">{{vm.overview.driver.occupied_drivers}}</h4>
-                            <span>Occupied</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
-                        <div class="box">
-                            <h4 class="number">{{vm.overview.driver.online_drivers_percentage | number:2}}%</h4>
-                            <span>Online</span>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-sm-4 col-xs-6">
-                        <div class="box">
-                            <h4 class="number">{{vm.overview.driver.utilization_percentage | number:2}}%</h4>
-                            <span>Utilization</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
-
-    <div class="row">
+    <div class="row" id="matrixChartDiv">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -75,67 +28,6 @@
                         <!--<nvd3 options="vm.acquisitionChart" data="vm.acquisitionData" config="vm.config"></nvd3>-->
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-12 col-sm-12 col-xs-12" ngsf-fullscreen>
-            <form class="form-inline">
-                <div class="input-group col-md-3">
-                    <select ng-model="vm.filterTerm" class="form-control"
-                            ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
-                        <option value="" disabled>Select Filter</option>
-                    </select>
-                </div>
-                <div class="input-group col-md-3" >
-                    <input ng-model="vm.searchTerm" class="input-search-term" placeholder="term" ng-disabled="!vm.filterTerm"/>
-                    <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-small">Search</button>
-                </div>
-                <div class="input-group col-md-3">
-                    <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
-                            ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters track by statusFilter.value">
-                        <option value="" disabled>Select Status</option>
-                    </select>
-                </div>
-            </form>
-            <br>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Top Drivers</h4></div>
-                <div class="panel-body">
-
-                    <div class="table-responsive">
-                        <table ng-table="tableParams" class="table table-bordered table-striped text-center">
-                            <!--<thead>
-                                <tr>
-                                    <th width="120" style="text-align:left;">#ID</th>
-                                    <th width="200" style="text-align:left;">Name</th>
-                                    <th width="120" style="text-align:right;">Earning(Rs.)</th>
-                                    <th width="120">Rides</th>
-                                    <th style="text-align:left;">Online</th>
-
-                                </tr>
-                            </thead>-->
-                            <tbody>
-                            <tr ng-repeat="row in $data track by $index">
-                                <td data-title="'#ID'" class="text-left"><a ui-sref="home.drivers_detail({driverId:row.driver_id})" >{{row.driver_id}}</a></td>
-                                <td data-title="'Name'" sortable="'name'" class="text-left">{{row.name}}</td>
-                                <td data-title="'Earning(Rs.)'" sortable="'earning'" class="text-right">
-                                    {{row.earning}}
-                                </td>
-                                <td data-title="'Rides'" sortable="'rides'">{{row.rides}}</td>
-                                <td class="text-left" data-title="'Online'">
-
-                                        <span  ng-repeat="time in row.online"
-                                              class="label label-primary">{{time.start*1000 | date:'h:mma'}} - {{time.end*1000 | date:'h:mma'}}</span>
-
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-                <br>
-                <br>
             </div>
         </div>
     </div>
