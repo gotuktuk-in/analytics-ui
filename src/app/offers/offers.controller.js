@@ -23,13 +23,21 @@
             {value: "phone", name: "Driver Phone"},
         ]
         vm.addOffer = function (offer) {
-            vm.selectedOffers.push(offer)
+            if(!_.find(vm.selectedOffers, {id: offer.id}))
+            {
+                vm.selectedOffers.push(offer)
+            }
+
         }
         vm.removeOffer = function (index) {
             vm.selectedOffers.splice(index, 1)
         }
         vm.addDriver = function (driver) {
-            vm.selectedDrivers.push(driver)
+            if(!_.find(vm.selectedDrivers, {id: driver.id}))
+            {
+                vm.selectedDrivers.push(driver)
+            }
+
         }
         vm.addDrivers = function () {
 
@@ -86,18 +94,20 @@
             $scope.driverTableParams.reload()
         }
         vm.assignOffers = function () {
-            var obj = {}
-            obj.drivers = _.pluck(vm.selectedDrivers, 'id')
-            obj.offers = _.pluck(vm.selectedOffers, 'code')
-            obj.status = true;
-            OfferService.assignOffers({}, obj, function (response) {
-                toastr.success("Offers assigned to selected drivers.");
-                vm.clearAll();
+            if (confirm('Are you sure you want to save?')) {
+                var obj = {};
+                obj.drivers = _.pluck(vm.selectedDrivers, 'id');
+                obj.offers = _.pluck(vm.selectedOffers, 'code');
+                obj.status = true;
+                OfferService.assignOffers({}, obj, function (response) {
+                    toastr.success("Offers assigned to selected drivers.");
+                    vm.clearAll();
 
-            }, function (error) {
-                toastr.error("Error : " + error);
-            })
-        }
+                }, function (error) {
+                 toastr.error("Error : " + error);
+                })
+            }
+        };
         vm.openSingleAlert = function(index, row)
         {
             ngDialog.open({

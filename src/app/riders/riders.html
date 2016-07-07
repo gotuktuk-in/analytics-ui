@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row" style="z-index:1; position:fixed; width:98%; padding:10px 0; left:53px;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span
+                class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
+                ng-click="vm.changeDate('next')" ng-if="!vm.live"
+                style="display: inline-block; padding: 7px;">&#10095;</span>
+        </div>
+    </div>
+    <span class="live" ng-if="vm.live"> LIVE</span>
+    <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+    <br>
+    <br>
+    <br>
+    <br><br>
+
+    <div class="row" id="matrixChartDiv">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">Driver Acquisition</h4>
+
+                </div>
+
+                <div class="panel-body">
+                    <div>
+                        <div id="matrixChart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
