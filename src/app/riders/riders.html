@@ -1,11 +1,14 @@
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="row" style="z-index:1; position:fixed; width:98%; padding:10px 0; left:53px;">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-            	<span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>
-            </div>
-            </div>
-            <span class="live" ng-if="vm.live"> LIVE</span>
-            <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span
+                class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
+                ng-click="vm.changeDate('next')" ng-if="!vm.live"
+                style="display: inline-block; padding: 7px;">&#10095;</span>
+        </div>
+    </div>
+    <span class="live" ng-if="vm.live"> LIVE</span>
+    <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
     <br>
     <br>
     <br>
@@ -15,17 +18,13 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                <div class="pull-right">
-					<input ng-change="vm.getAcquisition()" class="form-control cstm-width text-center daterangepicker-aqq-chart" type="daterange" ng-model="datesForAcq" separator=" - " format="DD MMM YY" opens="left" ranges="vm.ranges">
-				</div>
                     <h4 style="margin-top: 0" class="title">Driver Acquisition</h4>
-                
+
                 </div>
 
                 <div class="panel-body">
                     <div>
                         <div id="matrixChart"></div>
-                        <!--<nvd3 options="vm.acquisitionChart" data="vm.acquisitionData" config="vm.config"></nvd3>-->
                     </div>
                 </div>
             </div>
