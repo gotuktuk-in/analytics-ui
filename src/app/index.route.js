@@ -82,6 +82,12 @@
                     controller: 'TripDetailController',
                     controllerAs: 'vm'
                 })
+            .state('home.riders', {
+                url: '/riders',
+                templateUrl: 'app/riders/riders.html',
+                controller: 'RidersController',
+                controllerAs: 'vm'
+            })
 
     }
 
