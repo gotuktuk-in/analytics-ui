@@ -1,11 +1,10 @@
-
 <nav id="load" class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container-fluid">
-  <div class="row">
-	<div>
-      <a  class="tg-menu" ng-click="toggle = !toggle"><img src="assets/images/menu.svg" title="Tuktuk"></a>
-    </div>
-  </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div>
+                <a class="tg-menu" ng-click="toggle = !toggle"><img src="assets/images/menu.svg" title="Tuktuk"></a>
+            </div>
+        </div>
 </nav>
 
 <div class="sidenav" ng-class="{'open' : toggle}">
@@ -19,9 +18,10 @@
     <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.maps({city: city,vehicleType: vehicleType})"> <span class="fa fa-map"></span>Maps</a></li>
     <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.performance({city: city,vehicleType: vehicleType})"><span class="fa fa-area-chart "></span> <strike>Performance</strike> <sup class="text-lowercase">Beta</sup></a></li>
     <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.trips({city: city,vehicleType: vehicleType})"> <span class="fa fa-map-pin"></span> Trips</a></li>
-    <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.offers"> <span class="fa fa-barcode"></span> <strike>Offers</strike></a></li>
+    <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.offers"> <span class="fa fa-barcode"></span> Offers</a></li>
     <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.riders"> <span class="fa fa-barcode"></span> <strike>Riders</strike></a></li>
   </ul>
+
 </div>
 <ui-view></ui-view>
 
