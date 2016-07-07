@@ -33,7 +33,7 @@
             vm.selectedOffers.splice(index, 1)
         }
         vm.addDriver = function (driver) {
-            if(!_.find(vm.selectedOffers, {id: driver.id}))
+            if(!_.find(vm.selectedDrivers, {id: driver.id}))
             {
                 vm.selectedDrivers.push(driver)
             }
