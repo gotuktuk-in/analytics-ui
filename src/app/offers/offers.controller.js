@@ -23,13 +23,21 @@
             {value: "phone", name: "Driver Phone"},
         ]
         vm.addOffer = function (offer) {
-            vm.selectedOffers.push(offer)
+            if(!_.find(vm.selectedOffers, {id: offer.id}))
+            {
+                vm.selectedOffers.push(offer)
+            }
+
         }
         vm.removeOffer = function (index) {
             vm.selectedOffers.splice(index, 1)
         }
         vm.addDriver = function (driver) {
-            vm.selectedDrivers.push(driver)
+            if(!_.find(vm.selectedOffers, {id: driver.id}))
+            {
+                vm.selectedDrivers.push(driver)
+            }
+
         }
         vm.addDrivers = function () {
 
