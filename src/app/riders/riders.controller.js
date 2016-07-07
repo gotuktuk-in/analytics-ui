@@ -12,7 +12,7 @@
 
         function getRidersChart() {
             RidersService.getRiders({}, function (response) {
-                vm.ridersData = JSON.parse(angular.toJson(response));
+                vm.ridersData = transformData(JSON.parse(angular.toJson(response)))
                 //drawChart()
                 drawDimpleMatrix()
             }, function (err) {
@@ -23,7 +23,17 @@
 
         getRidersChart()
         function drawDimpleMatrix() {
-            var chart = {width: 500, height: 500}
+            var svg = dimple.newSvg("#matrixChart", 590, 400);
+         //   d3.tsv("example_data.tsv", function (data) {
+                var myChart = new dimple.chart(svg, vm.ridersData);
+                myChart.setBounds(90, 50, 480, 310)
+                myChart.addCategoryAxis("x","rider_reg" );
+                myChart.addCategoryAxis("y", "week");
+                myChart.addSeries("week", dimple.plot.bar);
+                myChart.addLegend(240, 10, 330, 20, "right");
+                myChart.draw();
+        //    });
+           /* var chart = {width: 500, height: 500}
          //   var dataset = [5, 10, 15, 20, 25];
             //   d3.select("#matrixChart").append("p").text("New paragraph!");
             var svg = dimple.newSvg("#matrixChart", 690, 500),
@@ -39,9 +49,26 @@
             myChart.addCategoryAxis("y", "rider_reg");
             myChart.addSeries("week", dimple.plot.bar);
             myChart.addLegend(240, 10, 330, 20, "right");
-            myChart.draw();
+            myChart.draw();*/
         }
+        function transformData(data)
+        {
+            var newData = []
+            _.each(data, function(obj){
 
+                _.each(obj.values, function(obj1){
+                    var newObj = {};
+                    newObj.rider_reg = obj.rider_reg
+                    newObj.week = obj1.week;
+                    newObj.total_request = obj1.total_request
+                    newObj.unique_request = obj1.unique_request
+                    newObj.fulfill_request= obj1.fulfill_request
+                    newObj.unique_fulfill_request= obj1.unique_fulfill_request;
+                    newData.push(newObj)
+                })
+            })
+            return newData
+        }
         function drawChart() {
             var svg = d3.select("#matrixChart")
                 .append("svg")
