@@ -142,7 +142,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12" ng-if="vm.selectedDrivers.length>0 && vm.selectedOffers.length>0">
+        <div class="col-md-12 col-sm-12 col-xs-12" >
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 style="margin-top: 0" class="title">Confirmation</h4></div>
@@ -183,7 +183,7 @@
 
                                 </td>
                             </tr>
-                            <tr>
+                            <tr ng-if="vm.selectedDrivers.length>0 || vm.selectedOffers.length>0">
                                 <td class="text-right">
                                     <hr>
                                     <button type="submit" class="btn btn-default" ng-click="vm.clearAll()">
