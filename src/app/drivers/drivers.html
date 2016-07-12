@@ -101,7 +101,7 @@
                 </div>
                 <div class="input-group col-md-3 col-sm-12 col-xs-12">
                     <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
-                            ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters track by statusFilter.value">
+                            ng-options="statusFilter.name for statusFilter in vm.driverStatusFilters track by statusFilter.value">
                         <option value="" disabled>Select Status</option>
                     </select>
                 </div>
