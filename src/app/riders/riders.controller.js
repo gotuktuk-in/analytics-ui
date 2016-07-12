@@ -31,12 +31,12 @@
 
             var myChart = new dimple.chart(svg, vm.ridersData); //"total_request","unique_request","fulfill_request", "unique_fulfill_request"
             myChart.setBounds(90, 50, setBoundsWidth, 350)
-            var xAxis = myChart.addCategoryAxis("x", ["rider_reg"]);
-            var yAxis = myChart.addCategoryAxis("y", ["week", "total_request","unique_request","fulfill_request", "unique_fulfill_request"]);
-            var weekSeries = myChart.addSeries("week", dimple.plot.bubble);
+            var xAxis = myChart.addCategoryAxis("x", ["RiderReg"]);
+            var yAxis = myChart.addCategoryAxis("y", ["Week", "TotalRequest","UniqueRequest","FulfillRequest", "UniqueFulfillRequest"]);
+            var weekSeries = myChart.addSeries("Week", dimple.plot.bubble);
             xAxis.title=""
             yAxis.title=""
-            xAxis.addOrderRule("week");
+            xAxis.addOrderRule("Week");
         //    myChart.addLegend(40, 10, 700, 20, "left");
             myChart.draw();
         }
@@ -47,12 +47,12 @@
 
                 _.each(obj.values, function (obj1) {
                     var newObj = {};
-                    newObj.rider_reg = obj.rider_reg
-                    newObj.week = obj1.week;
-                    newObj.total_request = obj1.total_request
-                    newObj.unique_request = obj1.unique_request
-                    newObj.fulfill_request = obj1.fulfill_request
-                    newObj.unique_fulfill_request = obj1.unique_fulfill_request;
+                    newObj.RiderReg = obj.rider_reg
+                    newObj.Week = obj1.week;
+                    newObj.TotalRequest = obj1.total_request
+                    newObj.UniqueRequest = obj1.unique_request
+                    newObj.FulfillRequest = obj1.fulfill_request
+                    newObj.UniqueFulfillRequest = obj1.unique_fulfill_request;
                     newData.push(newObj)
                 })
             })
