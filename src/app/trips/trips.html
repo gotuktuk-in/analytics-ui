@@ -108,7 +108,7 @@
                                      </a>
                                  </td>-->
                                 <td data-title="'Date & Time'" sortable="'requestOn'" style="width: 145px;">
-                                    <a target="_self"
+                                    <a target="_blank"
                                        ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">
                                         <div>{{(row.requestOn)*1000 | date:"dd MMM yy h:mma"}}</div>
                                     </a>
@@ -146,9 +146,9 @@
                                           <span class="small">{{row.driverInfo.vehicle}}</span>-->
                                     </div>
                                 </td>
-                                <td data-title="'VType'" sortable="'vehicleType'" align="center">
-                                    <div>{{row.vehicleType}}</div>
-                                </td>
+                                <!--<td data-title="'VType'" sortable="'vehicleType'" align="center">-->
+                                    <!--<div>{{row.vehicleType}}</div>-->
+                                <!--</td>-->
                                 <td data-title="'Rider  Info'">
                                     <div>{{row.riderInfo.name}}</div>
                                 </td>

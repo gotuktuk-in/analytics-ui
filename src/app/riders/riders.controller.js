@@ -28,51 +28,37 @@
             var chartWidth = document.getElementById("matrixChartDiv").offsetWidth;
             var setBoundsWidth = document.getElementById("matrixChartDiv").offsetWidth - 180;
             var svg = dimple.newSvg("#matrixChart", chartWidth, 450);
-         //   d3.tsv("example_data.tsv", function (data) {
-                var myChart = new dimple.chart(svg, vm.ridersData);
-                myChart.setBounds(90, 50, setBoundsWidth, 350)
-                myChart.addCategoryAxis("x","rider_reg" );
-                myChart.addCategoryAxis("y", "week");
-                myChart.addSeries("week", dimple.plot.bar);
-                myChart.addLegend(240, 10, 330, 20, "right");
-                myChart.draw();
-        //    });
-           /* var chart = {width: 500, height: 500}
-         //   var dataset = [5, 10, 15, 20, 25];
-            //   d3.select("#matrixChart").append("p").text("New paragraph!");
-            var svg = dimple.newSvg("#matrixChart", 690, 500),
-                data = [
-                    {x: 10, y: 33, z: 32, s: "a"},
-                    {x: 30, y: 6, z: 37, s: "b"},
-                    {x: 40, y: 25, z: 52, s: "c"},
-                    {x: 50, y: 42, z: 42, s: "d"}
-                ]
-            var myChart = new dimple.chart(svg, vm.ridersData);
-            myChart.setBounds(90, 50, 580, 410)
-            myChart.addCategoryAxis("x","week" );
-            myChart.addCategoryAxis("y", "rider_reg");
-            myChart.addSeries("week", dimple.plot.bar);
-            myChart.addLegend(240, 10, 330, 20, "right");
-            myChart.draw();*/
-        }
-        function transformData(data)
-        {
-            var newData = []
-            _.each(data, function(obj){
 
-                _.each(obj.values, function(obj1){
+            var myChart = new dimple.chart(svg, vm.ridersData); //"total_request","unique_request","fulfill_request", "unique_fulfill_request"
+            myChart.setBounds(90, 50, setBoundsWidth, 350)
+            var xAxis = myChart.addCategoryAxis("x", ["RiderReg"]);
+            var yAxis = myChart.addCategoryAxis("y", ["Week", "TotalRequest","UniqueRequest","FulfillRequest", "UniqueFulfillRequest"]);
+            var weekSeries = myChart.addSeries("Week", dimple.plot.bubble);
+            xAxis.title=""
+            yAxis.title=""
+            xAxis.addOrderRule("Week");
+        //    myChart.addLegend(40, 10, 700, 20, "left");
+            myChart.draw();
+        }
+
+        function transformData(data) {
+            var newData = []
+            _.each(data, function (obj) {
+
+                _.each(obj.values, function (obj1) {
                     var newObj = {};
-                    newObj.rider_reg = obj.rider_reg
-                    newObj.week = obj1.week;
-                    newObj.total_request = obj1.total_request
-                    newObj.unique_request = obj1.unique_request
-                    newObj.fulfill_request= obj1.fulfill_request
-                    newObj.unique_fulfill_request= obj1.unique_fulfill_request;
+                    newObj.RiderReg = obj.rider_reg
+                    newObj.Week = obj1.week;
+                    newObj.TotalRequest = obj1.total_request
+                    newObj.UniqueRequest = obj1.unique_request
+                    newObj.FulfillRequest = obj1.fulfill_request
+                    newObj.UniqueFulfillRequest = obj1.unique_fulfill_request;
                     newData.push(newObj)
                 })
             })
             return newData
         }
+
         function drawChart() {
             var svg = d3.select("#matrixChart")
                 .append("svg")
@@ -115,12 +101,12 @@
         }
 
         var resizeTimer;
-        $(window).resize(function() {
+        $(window).resize(function () {
             clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(function() {
+            resizeTimer = setTimeout(function () {
                 var chartWidth = document.getElementById("matrixChartDiv").offsetWidth;
                 var setBoundsWidth = document.getElementById("matrixChartDiv").offsetWidth - 180;
-                $( "#matrixChart" ).empty();
+                $("#matrixChart").empty();
                 getRidersChart();
             }, 500);
         });

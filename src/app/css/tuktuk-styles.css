@@ -13,6 +13,7 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
 }
+
 #matrixChart svg {
     display: inline-block;
     position: relative;
@@ -21,6 +22,7 @@ body {
     vertical-align: top;
     overflow: hidden;
 }
+
 .ngdialog-open .container-fluid {
     pointer-events: none;
 }
@@ -487,7 +489,6 @@ input.daterangepicker-aqq-chart {
     box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
     -webkit-box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
     background: #fff;
-    z-index: 2147483647;
 }
 
 .sidenav.open {
