@@ -88,7 +88,12 @@
                 controller: 'RidersController',
                 controllerAs: 'vm'
             })
-
+            .state('home.geomap', {
+                url: '/geomap',
+                templateUrl: 'app/geomap/geomap.html',
+                controller: 'GeoMapController',
+                controllerAs: 'vm'
+            })
     }
 
 })();
