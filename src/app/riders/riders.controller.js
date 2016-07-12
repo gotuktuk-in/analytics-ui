@@ -29,10 +29,10 @@
             var setBoundsWidth = document.getElementById("matrixChartDiv").offsetWidth - 180;
             var svg = dimple.newSvg("#matrixChart", chartWidth, 450);
 
-            var myChart = new dimple.chart(svg, vm.ridersData);
+            var myChart = new dimple.chart(svg, vm.ridersData); //"total_request","unique_request","fulfill_request", "unique_fulfill_request"
             myChart.setBounds(90, 50, setBoundsWidth, 350)
-            var xAxis = myChart.addCategoryAxis("x", "rider_reg");
-            var yAxis = myChart.addCategoryAxis("y", "week");
+            var xAxis = myChart.addCategoryAxis("x", ["rider_reg"]);
+            var yAxis = myChart.addCategoryAxis("y", ["week"]);
             var weekSeries = myChart.addSeries("week", dimple.plot.bar);
             xAxis.addOrderRule("week");
             myChart.addLegend(40, 10, 700, 20, "left");
