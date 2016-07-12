@@ -3,7 +3,7 @@
 
     angular
         .module('tuktukV2Dahboard')
-        .controller('GeoMapController', GeoMapController);
+        .controller('surgeController', GeoMapController);
 
     /** @ngInject */
     function GeoMapController($scope, $log, $rootScope, $interval, StaticDataService, ChartConfigService, PerformanceService, PerformanceHandler, RidersService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
