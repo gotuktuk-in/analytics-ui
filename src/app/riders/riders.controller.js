@@ -32,10 +32,12 @@
             var myChart = new dimple.chart(svg, vm.ridersData); //"total_request","unique_request","fulfill_request", "unique_fulfill_request"
             myChart.setBounds(90, 50, setBoundsWidth, 350)
             var xAxis = myChart.addCategoryAxis("x", ["rider_reg"]);
-            var yAxis = myChart.addCategoryAxis("y", ["week"]);
-            var weekSeries = myChart.addSeries("week", dimple.plot.bar);
+            var yAxis = myChart.addCategoryAxis("y", ["week", "total_request","unique_request","fulfill_request", "unique_fulfill_request"]);
+            var weekSeries = myChart.addSeries("week", dimple.plot.bubble);
+            xAxis.title=""
+            yAxis.title=""
             xAxis.addOrderRule("week");
-            myChart.addLegend(40, 10, 700, 20, "left");
+        //    myChart.addLegend(40, 10, 700, 20, "left");
             myChart.draw();
         }
 
