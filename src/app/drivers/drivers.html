@@ -125,10 +125,32 @@
                             </thead>-->
                             <tbody>
                             <tr ng-repeat="row in $data track by $index">
-                                <td data-title="'#ID'" class="text-left"><a
-                                        ui-sref="home.drivers_detail({driverId:row.driver_id})">{{row.driver_id}}</a>
+                                <!--<td data-title="'#ID'" class="text-left"><a-->
+                                        <!--ui-sref="home.drivers_detail({driverId:row.driver_id})">{{row.driver_id}}</a>-->
+                                <!--</td>-->
+                                <td data-title="'Name'" sortable="'name'" class="text-left">
+                                    <a target="_blank"
+                                       ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                    {{row.name}}
+                                        </a>
                                 </td>
-                                <td data-title="'Name'" sortable="'name'" class="text-left">{{row.name}}</td>
+                                <td data-title="'Phone'" class="text-right">
+                                    {{row.phone}}
+                                </td>
+                                <td data-title="'State'" sortable="'state'" class="text-center">
+                                <span ng-if="row.state== 22" class="text-warning">
+                                    Occupied
+                                </span>
+                                <span ng-if="row.state== 11" class="text-success">
+                                    Online
+                                </span>
+                                <span ng-if="row.state== 10" class="text-danger">
+                                    Offline
+                                </span>
+                                </td>
+                                <td data-title="'App Version'" class="text-right">
+                                    {{row.app_version}}
+                                </td>
                                 <td data-title="'Earning(Rs.)'" sortable="'earning'" class="text-right">
                                     {{row.earning}}
                                 </td>
