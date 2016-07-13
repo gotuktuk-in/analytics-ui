@@ -88,10 +88,10 @@
                 controller: 'RidersController',
                 controllerAs: 'vm'
             })
-            .state('home.geomap', {
-                url: '/geomap',
-                templateUrl: 'app/geomap/geomap.html',
-                controller: 'GeoMapController',
+            .state('home.surge', {
+                url: '/surge',
+                templateUrl: 'app/surge/surge.html',
+                controller: 'surgeController',
                 controllerAs: 'vm'
             })
     }
