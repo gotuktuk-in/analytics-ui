@@ -1,30 +1,60 @@
-<div class="container-fluid">
-    <div class="row" style="z-index:1; position:fixed; width:98%; padding:10px 0; left:53px;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span
-                class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
-                ng-click="vm.changeDate('next')" ng-if="!vm.live"
-                style="display: inline-block; padding: 7px;">&#10095;</span>
-        </div>
-    </div>
-    <span class="live" ng-if="vm.live"> LIVE</span>
-    <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
-    <br>
-    <br>
-    <br>
-    <br><br>
-    <div id="tuktukGeoMap"></div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">City Fence</h4>
+<div class="content">
+    <div class="content-div">
+        <ng-map id="drivers_map" center="[22.717081666666665, 75.87155666666666]" style="height:100%" zoom="12">
+            <map-data load-geo-json={{vm.API_URL}}geofence></map-data>
+            <div>
+                <marker ng-repeat="driver in vm.allDrivers.free.drivers track by $index" icon="{
+        url:'assets/images/icons/marker-green.svg',
+        scaledSize:[30,30],
+        origin: [0,0],
+        anchor: [15,15]
+      }"
+                        id="free-driver-{{$index}}"
+                        on-click="vm.showDetail(driver,'free-driver-'+$index)"
+                        position="{{driver.marker}}">
+                </marker>
+            </div>
+        </ng-map>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default geo-fence-tbl">
+                    <div class="panel-heading">
+                        <h4 style="margin-top: 0" class="title">City Fence</h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-inverse table-bordered">
+                            <thead>
+                            <tr>
+                                <th width="30" class="text-center">#</th>
+                                <th>Area</th>
+                                <th width="30" class="text-center"><span class="fa fa-eye pointer" ng-click="toggle = !toggle" ng-class="{'red' : toggle}"></span></th>
 
-                </div>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>Mark</td>
+                                <td class="text-center"><span class="fa fa-eye pointer"></span>
+                                </td>
 
-                <div class="panel-body">
-                    <div>
+                            </tr>
+                            <tr>
+                                <td class="text-center">2</td>
+                                <td>Jacob</td>
+                                <td class="text-center"><span class="fa fa-eye pointer"></span>
+                                </td>
 
+                            </tr>
+                            <tr>
+                                <td class="text-center">3</td>
+                                <td>Larry</td>
+                                <td class="text-center"><span class="fa fa-eye-slash pointer"></span>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
