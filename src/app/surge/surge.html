@@ -1,37 +1,139 @@
-<div class="container-fluid">
-    <div class="row" style="z-index:1; position:fixed; width:98%; padding:10px 0; left:53px;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span
-                class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
-                ng-click="vm.changeDate('next')" ng-if="!vm.live"
-                style="display: inline-block; padding: 7px;">&#10095;</span>
-        </div>
+<div class="content">
+    <div class="geo-hash-select">
+        <select style="padding:5px 10px; border-radius: 4px;" ng-model="vm.selectedPrecision" ng-options="precision.name for precision  in  vm.precisionArr track by $index">
+
+        </select>
     </div>
-    <span class="live" ng-if="vm.live"> LIVE</span>
-    <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
-    <br>
-    <br>
-    <br>
-    <br><br>
 
-    <div class="row" id="matrixChartDiv">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Rider Acquisition</h4>
+    <div class="row">
+        <div class="content-div">
+            <ng-map id="surgeMap" center="indore" zoom="15" style="height:100%">
+                <shape ng-repeat="arr in vm.rectArray" name="rectangle"
+                       editable="false"
+                       draggable="false"
+                       bounds={{arr}}
+                       on-bounds_changed="vm.boundsChanged()">
+                </shape>
+            </ng-map>
+            <div class="row geo-fence-tbl">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-default ">
+                        <div class="panel-heading">
+                            <h4 style="margin-top: 0" class="title">City Fence</h4>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-inverse table-bordered">
+                                <thead>
+                                <tr>
+                                    <th width="30" class="text-center">#</th>
+                                    <th>Area</th>
+                                    <th width="30" class="text-center"><span class="fa fa-eye pointer"
+                                                                             ng-click="toggle = !toggle"
+                                                                             ng-class="{'red' : toggle}"></span></th>
 
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td>Mark</td>
+                                    <td class="text-center"><span class="fa fa-eye pointer"></span>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">2</td>
+                                    <td>Jacob</td>
+                                    <td class="text-center"><span class="fa fa-eye pointer"></span>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="text-center">3</td>
+                                    <td>Larry</td>
+                                    <td class="text-center"><span class="fa fa-eye-slash pointer"></span>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Surge Settings</div>
+                        <div class="panel-body">
+                            <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="selectType">Type</label>
 
-                <div class="panel-body">
-                    <div>
-                        <ng-map id="surgeMap" center="indore" zoom="15">
-                            <shape ng-repeat="arr in vm.rectArray" name="rectangle"
-                                   editable="true"
-                                   draggable="true"
-                                   bounds={{arr}}
-                                   on-bounds_changed="vm.boundsChanged()">
-                            </shape>
-                        </ng-map>
+                                    <div class="col-sm-9" id="selectType">
+                                        <select style="padding:5px 10px; border-radius: 4px;">
+                                            <option value="0"> Multiple</option>
+                                            <option value="1"> Plus</option>
+                                        </select>
+
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputCharge">Charge</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" placeholder="Charge" id="inputCharge" class="form-control">
+
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputDate">Date</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" placeholder="Date" id="inputDate" class="form-control">
+
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputStartTime">Start Time</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" placeholder="Start Time" id="inputStartTime"
+                                               class="form-control">
+
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputEndTime">End Time</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" placeholder="End Time" id="inputEndTime"
+                                               class="form-control">
+
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> Active
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-default pull-right" type="submit">Save</button>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>

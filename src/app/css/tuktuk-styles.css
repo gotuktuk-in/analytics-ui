@@ -201,6 +201,12 @@ div.panel.panel-default div.panel-heading h4.title {
     width: 12px;
     z-index: 9999999;
 }
+.geo-hash-select{
+    position: fixed;
+    right:30px;
+    top: 12px;
+    z-index: 9999999;
+}
 
 .rzslider .rz-pointer.rz-active::after {
     background-color: #eee;
@@ -1235,122 +1241,6 @@ span.img-top {
     box-shadow: 0 0 0 #fff
 }
 
-/**********************Drivers***/
-.flx-container {
-    /*     height: 250px; */
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.flx-container .flx-cnt-left {
-    flex: 1 20%;
-    background-color: #373a3c;
-    color: #FFF;
-}
-
-.flx-container .flx-cnt-left .info-window {
-    background-color: #373a3c;
-    height: 250px;
-    position: static;
-    width: 100%;
-    text-align: center;
-}
-
-.flx-container .info-window .iw-header .iw-driver {
-    height: 120px;
-    width: 120px;
-}
-
-.flx-container .flx-cnt-left .info-window .iw-content {
-    color: #f2f2f2;
-}
-
-.flx-container .flx-cnt-right {
-    flex: 1 80%;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-flow: row wrap;
-}
-
-.flx-performance .flx-cnt-right div {
-    flex: 1 16%;
-    border-right: solid 1px #eee;
-    margin-left: 7%;
-}
-
-.flx-performance .flx-cnt-right div:first-child {
-    border-right: solid 1px #eee;
-    margin: 0 7%;
-}
-
-.flx-performance .flx-cnt-right div:last-child {
-    border-right: solid 0px #eee;
-    margin-left: 7%;
-}
-
-.flx-performance .flx-cnt-right div h4 {
-    color: #333;
-    /*  font-family: "allerregular"; */
-    font-size: 24px;
-    line-height: 32px;
-    margin: 0;
-}
-
-.flx-performance .flx-cnt-right div span {
-    font-size: 11px;
-    text-transform: none;
-    color: #999;
-    display: inline-block;
-}
-
-.flx-live.flx-container .flx-cnt-right span b {
-    font-weight: normal;
-}
-
-.flx-live.flx-container .flx-cnt-right span b.title {
-    display: inline-block;
-    min-width: 80px;
-}
-
-.flx-live .flx-cnt-right .first-box {
-    flex: 1 20%;
-    border-right: solid 1px #eee;
-    margin: 0 6%;
-}
-
-.flx-live .flx-cnt-right .middle-box {
-    flex: 1 20%;
-    border-right: solid 1px #eee;
-    margin: 0 4%;
-}
-
-.flx-live .flx-cnt-right .last-box {
-    flex: 1 5%;
-    border-right: solid 0px #eee;
-    margin: 0 2%;
-}
-
-.flx-live .flx-cnt-right div h4 {
-    color: #333;
-    /* font-family: "allerregular"; */
-    font-size: 24px;
-    line-height: 32px;
-    margin: 0;
-}
-
-.flx-live .flx-cnt-right div span {
-    font-size: 14px;
-    text-transform: none;
-    color: #999;
-    display: inline-block;
-}
 
 .date-selection .form-control[disabled], .date-selection .form-control[readonly], .date-selection fieldset[disabled] .form-control {
     background-color: #f9f9f9;
@@ -1636,7 +1526,18 @@ span.img-top {
     -moz-animation: inputHighlighter 0.3s ease;
     animation: inputHighlighter 0.3s ease;
 }
-
+/*surge*/
+.pointer{
+    cursor: pointer;}
+.geo-fence-tbl{
+    position: fixed;
+    right: 30px;
+    top:80px;
+    width: 50%;
+    min-width: 320px;
+    max-width: 480px;
+}
+/*end*/
 /* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {
     from {
