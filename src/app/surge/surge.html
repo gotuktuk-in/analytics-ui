@@ -13,7 +13,7 @@
     <br>
     <br>
     <br><br>
-    <div id="tuktukGeoMap"></div>
+
     <div class="row" id="matrixChartDiv">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
@@ -24,7 +24,14 @@
 
                 <div class="panel-body">
                     <div>
-
+                        <ng-map id="surgeMap" center="indore" zoom="15">
+                            <shape ng-repeat="arr in vm.rectArray" name="rectangle"
+                                   editable="true"
+                                   draggable="true"
+                                   bounds={{arr}}
+                                   on-bounds_changed="vm.boundsChanged()">
+                            </shape>
+                        </ng-map>
                     </div>
                 </div>
             </div>

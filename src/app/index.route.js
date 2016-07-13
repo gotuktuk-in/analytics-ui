@@ -91,7 +91,7 @@
             .state('home.surge', {
                 url: '/surge',
                 templateUrl: 'app/surge/surge.html',
-                controller: 'surgeController',
+                controller: 'SurgeController',
                 controllerAs: 'vm'
             })
     }
