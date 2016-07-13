@@ -1,13 +1,13 @@
 <div class="content">
     <div class="geo-hash-select">
-        <select style="padding:5px 10px; border-radius: 4px;" ng-model="vm.selectedPrecision" ng-options="precision.name for precision  in  vm.precisionArr track by $index">
+        <select style="padding:5px 10px; border-radius: 4px;" ng-model="vm.selectedPrecision" ng-options="precision.name for precision  in  vm.precisionArr track by precision.value">
 
         </select>
     </div>
 
     <div class="row">
         <div class="content-div">
-            <ng-map id="surgeMap" center="indore" zoom="15" style="height:100%">
+            <ng-map id="surgeMap" center="indore" style="height:100%" zoom="{{vm.selectedPrecision.value+8}}">
                 <shape ng-repeat="arr in vm.rectArray" name="rectangle"
                        editable="false"
                        draggable="false"
