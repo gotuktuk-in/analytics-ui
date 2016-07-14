@@ -122,7 +122,7 @@
                                                class="form-control" required>
 
                                         <p class="help-block"></p>
-                                        <button ng-disabled="!vm.geohashArray.length>0 || groupForm.$invalid"
+                                        <button ng-click="vm.addGroup()" ng-disabled="!vm.geohashArray.length>0 || groupForm.$invalid"
                                                 class="btn btn-default pull-right" type="submit">Save Group
                                         </button>
                                     </div>

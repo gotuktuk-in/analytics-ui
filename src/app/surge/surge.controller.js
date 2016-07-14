@@ -6,7 +6,7 @@
         .controller('SurgeController', SurgeController);
 
     /** @ngInject */
-    function SurgeController($scope, NgMap, geohash) {
+    function SurgeController($scope, NgMap, geohash, SurgeService) {
 
         var vm = this;
         vm.map;
@@ -32,8 +32,12 @@
         vm.addGroup = function () {
 
             var obj = {}
-            obj.name = vm.groupName
-            obj.geohash =  vm.geohashArray
+            obj.title = vm.groupName
+            obj.geohash = _.pluck(vm.geohashArray,"geoHash")
+            console.log(obj)
+            SurgeService.createGroup(obj, function () {
+                
+            })
 
         }
         vm.addSetting = function () {
