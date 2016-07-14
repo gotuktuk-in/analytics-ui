@@ -3,44 +3,59 @@
 
     angular
         .module('tuktukV2Dahboard')
-        .controller('surgeController', surgeController);
+        .controller('SurgeController', SurgeController);
 
     /** @ngInject */
-    function surgeController($scope, $log, $rootScope, MapService, NgMap, AUTH_API) {
+    function SurgeController($scope, NgMap, geohash, SurgeService) {
 
-        $scope.toggle = false;
         var vm = this;
-        var map;
-        NgMap.getMap({id:'drivers_map'}).then(function (map) {
-            vm.map = map;
-            if(vm.map && vm.map.data)
-            {
-                vm.map.data.forEach(function(feature) {
-                    //filter...
-                    vm.map.data.remove(feature);
-                });
-            }
-            map.data.setStyle({
-                fillColor: 'gray',
-                strokeWeight: 1,
-                strokeOpacity:.1,
-                fillOpacity:.1
-            });
-            MapService.loadGeoJson({}, function (response) {
-                    //vm.geoJSON = response
-                    /*  var temp = {}
-                     temp.features = response.features
-                     temp.type = response.type
-                     vm.geoJSON=JSON.parse(angular.toJson(temp))
-                     console.log("typeof vm.geoJSON", typeof  vm.geoJSON);*/
-                    vm.geoJSON = {}
-                    vm.geoJSON = response
-                    vm.map.data.addGeoJson(vm.geoJSON );
+        vm.map;
+        vm.geohashArray = [];
+        vm.test='pavan';
 
-                }, function (error) {
-                    console.log("error ", error)
-                }
-            )
+        vm.precisionArr = [{name:"4", value:4},{name:"5", value:5},{name:"6", value:6},{name:"7", value:7},{name:"8", value:8}]
+        vm.selectedPrecision = vm.precisionArr[2];
+        vm.geohashGroups = [{name:'group1', hash:'sdfdfdf'},{name:'group2', hash:'sdfrdf'},{name:'group3', hash:'sdyfdf'}]
+        $scope.toggle = false;
+        NgMap.getMap({id:'surgeMap'}).then(function (map) {
+            vm.map = map;
+            google.maps.event.addDomListener( vm.map, 'click', onMapClick);
+            vm.map.setClickableIcons(false);
+         //   vm.map.setZoom(vm.selectedPrecision.value + 8);
         });
+        vm.onPrecisionChange = function () {
+            vm.geohashArray = [];
+        }
+        vm.removeGeoHash = function (index) {
+            vm.geohashArray.splice(index, 1)
+        }
+        vm.addGroup = function () {
+
+            var obj = {}
+            obj.title = vm.groupName
+            obj.geohash = _.pluck(vm.geohashArray,"geoHash")
+            console.log(obj)
+            SurgeService.createGroup(obj, function () {
+                
+            })
+
+        }
+        vm.addSetting = function () {
+
+        }
+        function onMapClick(e)
+        {
+             var obj = {}
+            obj.geoHash = geohash.encode (e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
+            var bBox = geohash.decode_bbox (obj.geoHash);
+            obj.boxBounds = [[bBox[0], bBox[1]], [bBox[2], bBox[3]]]
+            //[22.720584869384766, 75.85772037506104, 22.720627784729004, 75.85776329040527]
+            $scope.$apply(function () {
+                vm.geohashArray.push(obj)
+            });
+
+          //  console.log('Geo-hash', angular.toJson(vm.geohashArray))
+        }
+
     }
 })();

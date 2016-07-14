@@ -13,7 +13,13 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
 }
-
+.geohashBox {
+    position: relative;
+}
+.geohashLabel {
+    position: absolute;
+    z-index: 1;
+}
 #matrixChart svg {
     display: inline-block;
     position: relative;
@@ -199,6 +205,12 @@ div.panel.panel-default div.panel-heading h4.title {
     text-indent: 17px;
     top: 21px;
     width: 12px;
+    z-index: 9999999;
+}
+.geo-hash-select{
+    position: fixed;
+    right:30px;
+    top: 12px;
     z-index: 9999999;
 }
 

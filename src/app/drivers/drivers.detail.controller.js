@@ -17,7 +17,7 @@
         vm.getProfile = function () {
             DriversService.getProfile({id:$stateParams.driverId,
                 from: moment( $scope.selectedDates.startDate).startOf('day').format("YYYYMMDD").toString(),
-                to: moment( $scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString(),
+                to: moment( $scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString()
             }, function (response) {
                 vm.profile = response;
             }, function (err) {
@@ -61,7 +61,7 @@
             timeInStr += diff.minute() + " min "
             return timeInStr;
         }
-        $scope.tableParams = new NgTableParams({page:1,count: 20, sorting:{earning:'desc'},
+        $scope.tableParams = new NgTableParams({page:1,count: 20, sorting:{earning:'desc'}
         }, {
             counts: [],
             getData: function (params) {

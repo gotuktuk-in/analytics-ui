@@ -123,7 +123,7 @@
                         return row;
                     }
                 },
-                controller: function Ctrl($scope, index, row, OfferService) {
+                controller: ['index', 'row', 'OfferService','$scope', function Ctrl(index, row, OfferService,$scope) {
                     $scope.index = index
                     $scope.row = row
                     console.log(index, row)
@@ -139,7 +139,7 @@
                             toastr.error("Error : " + error);
                         })
                     }
-                },
+                }]
             });
         }
 

@@ -1,60 +1,193 @@
 <div class="content">
-    <div class="content-div">
-        <ng-map id="drivers_map" center="[22.717081666666665, 75.87155666666666]" style="height:100%" zoom="12">
-            <map-data load-geo-json={{vm.API_URL}}geofence></map-data>
-            <div>
-                <marker ng-repeat="driver in vm.allDrivers.free.drivers track by $index" icon="{
-        url:'assets/images/icons/marker-green.svg',
-        scaledSize:[30,30],
-        origin: [0,0],
-        anchor: [15,15]
-      }"
-                        id="free-driver-{{$index}}"
-                        on-click="vm.showDetail(driver,'free-driver-'+$index)"
-                        position="{{driver.marker}}">
-                </marker>
-            </div>
-        </ng-map>
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="panel panel-default geo-fence-tbl">
-                    <div class="panel-heading">
-                        <h4 style="margin-top: 0" class="title">City Fence</h4>
+    <div class="geo-hash-select">
+        <select ng-change="vm.onPrecisionChange()" style="padding:5px 10px; border-radius: 4px;"
+                ng-model="vm.selectedPrecision"
+                ng-options="precision.name for precision  in  vm.precisionArr track by precision.value">
+
+        </select>
+    </div>
+
+    <div class="row">
+        <div class="content-div">
+            <ng-map id="surgeMap" center="indore" style="height:100%" zoom="{{vm.selectedPrecision.value+8}}">
+                <div ng-repeat="arr in vm.geohashArray" class="geohashBox">
+                    <shape name="rectangle"
+                           editable="false"
+                           draggable="false"
+                           fill-color="#000"
+                           fill-opacity="0.1"
+                           stroke-color="#000"
+                           stroke-weight="1"
+                           stroke-opacity="0.2"
+                           bounds={{arr.boxBounds}}
+                           on-bounds_changed="vm.boundsChanged()">
+
+                    </shape>
+                    <div class="geohashLabel"><label>{{arr.geoHash}}</label></div>
+
+                </div>
+
+            </ng-map>
+            <div class="row geo-fence-tbl">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-default ">
+                        <div class="panel-heading">
+                            <h4 style="margin-top: 0" class="title">Groups</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div style="max-height: 200px; height: 80%; overflow:auto;">
+                                <table class="table table-inverse table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th width="30" class="text-center">#</th>
+                                        <th>Name</th>
+                                        <th width="30" class="text-center"><span class="fa fa-remove pointer"
+                                                                                 ng-click="toggle = !toggle"
+                                                                                 ng-class="{'red' : toggle}"></span>
+                                        </th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="group in vm.geohashGroups">
+                                        <td class="text-center">{{$index}}</td>
+                                        <td>{{group.name}}</td>
+                                        <td class="text-center"><span class="fa fa-remove pointer"
+                                                                      ng-click="vm.removeGeoHash($index)"></span>
+                                        </td>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputCharge">Group Name</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" placeholder="Group Name" id="groupname"
+                                               ng-model="vm.groupName"
+                                               class="form-control">
+
+                                        <p class="help-block"></p>
+                                        <button class="btn btn-default pull-right" type="submit" ng-disabled="">Save
+                                            Group
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        <table class="table table-inverse table-bordered">
-                            <thead>
-                            <tr>
-                                <th width="30" class="text-center">#</th>
-                                <th>Area</th>
-                                <th width="30" class="text-center"><span class="fa fa-eye pointer" ng-click="toggle = !toggle" ng-class="{'red' : toggle}"></span></th>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-default ">
+                        <div class="panel-heading">
+                            <h4 style="margin-top: 0" class="title">Geo Hash</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div style="max-height: 200px; height: 80%; overflow:auto;">
+                                <table class="table table-inverse table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th width="30" class="text-center">#</th>
+                                        <th>Code</th>
+                                        <th width="30" class="text-center"><span class="fa fa-remove pointer"
+                                                                                 ng-click="toggle = !toggle"
+                                                                                 ng-class="{'red' : toggle}"></span>
+                                        </th>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td>Mark</td>
-                                <td class="text-center"><span class="fa fa-eye pointer"></span>
-                                </td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="box in vm.geohashArray">
+                                        <td class="text-center">{{$index}}</td>
+                                        <td>{{box.geoHash}}</td>
+                                        <td class="text-center"><span class="fa fa-remove pointer"
+                                                                      ng-click="vm.removeGeoHash($index)"></span>
+                                        </td>
 
-                            </tr>
-                            <tr>
-                                <td class="text-center">2</td>
-                                <td>Jacob</td>
-                                <td class="text-center"><span class="fa fa-eye pointer"></span>
-                                </td>
+                                    </tr>
 
-                            </tr>
-                            <tr>
-                                <td class="text-center">3</td>
-                                <td>Larry</td>
-                                <td class="text-center"><span class="fa fa-eye-slash pointer"></span>
-                                </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <form role="form" class="form-horizontal" name="groupForm" novalidate>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputCharge">Group Name</label>
 
-                            </tr>
-                            </tbody>
-                        </table>
+                                    <div class="col-sm-9">
+                                        <input type="text" placeholder="Group Name" id="groupname"
+                                               ng-model="vm.groupName"
+                                               class="form-control" required>
+
+                                        <p class="help-block"></p>
+                                        <button ng-click="vm.addGroup()" ng-disabled="!vm.geohashArray.length>0 || groupForm.$invalid"
+                                                class="btn btn-default pull-right" type="submit">Save Group
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Surge Settings</div>
+                        <div class="panel-body">
+                            <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="IsSmallBusiness" class="col-md-3 control-label">Type</label>
+                                    <div class="col-md-9">
+                                        <label class="radio-inline">
+                                            <input type="radio" value="False" name="IsSmallBusiness" id="IsSmallBusiness" data-val-required="The IsSmallBusiness field is required." data-val="true" checked="checked">
+                                            x
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" value="True" name="IsSmallBusiness" id="IsSmallBusiness">
+                                            +
+                                        </label>
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputCharge">Charge</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" placeholder="Charge" id="inputCharge" class="form-control">
+
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputStartTime">Duration</label>
+
+                                    <div class="col-sm-9">
+                                        <input enabletimepicker="true" ng-change="vm.getAllData()"
+                                               class="form-control cstm-width text-center" type="daterange"
+                                               ng-model="selectedDates" separator=" - " format="MM/DD/YYYY h:mm A"
+                                               opens="left">
+
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-9">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> Active
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-default pull-right" type="submit">Save Settings</button>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
