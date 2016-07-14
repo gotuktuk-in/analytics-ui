@@ -25,6 +25,9 @@
         vm.onPrecisionChange = function () {
             vm.rectArray = [];
         }
+        vm.removeGeoHash = function (index) {
+            vm.rectArray.splice(index, 1)
+        }
         function onMapClick(e)
         {
              var obj = {}

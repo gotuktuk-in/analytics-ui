@@ -43,7 +43,7 @@
                                 <tr ng-repeat="box in vm.rectArray">
                                     <td class="text-center">{{$index}}</td>
                                     <td>{{box.geoHash}}</td>
-                                    <td class="text-center"><span class="fa fa-remove pointer"></span>
+                                    <td class="text-center"><span class="fa fa-remove pointer" ng-click="vm.removeGeoHash($index)"></span>
                                     </td>
 
                                 </tr>
