@@ -13,7 +13,13 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
 }
-
+.geohashBox {
+    position: relative;
+}
+.geohashLabel {
+    position: absolute;
+    z-index: 1;
+}
 #matrixChart svg {
     display: inline-block;
     position: relative;

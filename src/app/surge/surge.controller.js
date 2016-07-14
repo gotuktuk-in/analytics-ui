@@ -22,16 +22,18 @@
             google.maps.event.addDomListener( vm.map, 'click', onMapClick);
          //   vm.map.setZoom(vm.selectedPrecision.value + 8);
         });
+        vm.onPrecisionChange = function () {
+            vm.rectArray = [];
+        }
         function onMapClick(e)
         {
-           console.log('clicked', e.latLng.lat());
-           var geoHashString = geohash.encode (e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
-           var bBox = geohash.decode_bbox (geoHashString);
-
-            console.log('bBox ', geoHashString);
+             var obj = {}
+            obj.geoHash = geohash.encode (e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
+            var bBox = geohash.decode_bbox (obj.geoHash);
+            obj.boxBounds = [[bBox[0], bBox[1]], [bBox[2], bBox[3]]]
             //[22.720584869384766, 75.85772037506104, 22.720627784729004, 75.85776329040527]
             $scope.$apply(function () {
-                vm.rectArray.push([[bBox[0], bBox[1]], [bBox[2], bBox[3]]])
+                vm.rectArray.push(obj)
             });
 
           //  console.log('Geo-hash', angular.toJson(vm.rectArray))

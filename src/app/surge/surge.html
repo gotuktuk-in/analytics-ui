@@ -1,6 +1,6 @@
 <div class="content">
     <div class="geo-hash-select">
-        <select style="padding:5px 10px; border-radius: 4px;" ng-model="vm.selectedPrecision" ng-options="precision.name for precision  in  vm.precisionArr track by precision.value">
+        <select ng-change="vm.onPrecisionChange()" style="padding:5px 10px; border-radius: 4px;" ng-model="vm.selectedPrecision" ng-options="precision.name for precision  in  vm.precisionArr track by precision.value">
 
         </select>
     </div>
@@ -8,12 +8,18 @@
     <div class="row">
         <div class="content-div">
             <ng-map id="surgeMap" center="indore" style="height:100%" zoom="{{vm.selectedPrecision.value+8}}">
-                <shape ng-repeat="arr in vm.rectArray" name="rectangle"
-                       editable="false"
-                       draggable="false"
-                       bounds={{arr}}
-                       on-bounds_changed="vm.boundsChanged()">
-                </shape>
+                <div ng-repeat="arr in vm.rectArray" class="geohashBox">
+                    <shape  name="rectangle"
+                           editable="false"
+                           draggable="false"
+                           bounds={{arr.boxBounds}}
+                           on-bounds_changed="vm.boundsChanged()">
+
+                    </shape>
+                    <div class="geohashLabel"> <label>{{arr.geoHash}}</label></div>
+
+                </div>
+
             </ng-map>
             <div class="row geo-fence-tbl">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -26,7 +32,7 @@
                                 <thead>
                                 <tr>
                                     <th width="30" class="text-center">#</th>
-                                    <th>Area</th>
+                                    <th>Geo Hash</th>
                                     <th width="30" class="text-center"><span class="fa fa-eye pointer"
                                                                              ng-click="toggle = !toggle"
                                                                              ng-class="{'red' : toggle}"></span></th>
@@ -34,29 +40,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Mark</td>
-                                    <td class="text-center"><span class="fa fa-eye pointer"></span>
+                                <tr ng-repeat="box in vm.rectArray">
+                                    <td class="text-center">{{$index}}</td>
+                                    <td>{{box.geoHash}}</td>
+                                    <td class="text-center"><span class="fa fa-remove pointer"></span>
                                     </td>
 
                                 </tr>
-                                <tr>
-                                    <td class="text-center">2</td>
-                                    <td>Jacob</td>
-                                    <td class="text-center"><span class="fa fa-eye pointer"></span>
-                                    </td>
 
-                                </tr>
-                                <tr>
-                                    <td class="text-center">3</td>
-                                    <td>Larry</td>
-                                    <td class="text-center"><span class="fa fa-eye-slash pointer"></span>
-                                    </td>
-
-                                </tr>
                                 </tbody>
                             </table>
+                            <div>
+                                <label>Group Name</label><input type="text"  class="form-control"></input>
+                                <button class="btn">Save</button>
+                            </div>
                         </div>
                     </div>
                 </div>
