@@ -1,6 +1,8 @@
 <div class="content">
     <div class="geo-hash-select">
-        <select ng-change="vm.onPrecisionChange()" style="padding:5px 10px; border-radius: 4px;" ng-model="vm.selectedPrecision" ng-options="precision.name for precision  in  vm.precisionArr track by precision.value">
+        <select ng-change="vm.onPrecisionChange()" style="padding:5px 10px; border-radius: 4px;"
+                ng-model="vm.selectedPrecision"
+                ng-options="precision.name for precision  in  vm.precisionArr track by precision.value">
 
         </select>
     </div>
@@ -9,14 +11,14 @@
         <div class="content-div">
             <ng-map id="surgeMap" center="indore" style="height:100%" zoom="{{vm.selectedPrecision.value+8}}">
                 <div ng-repeat="arr in vm.rectArray" class="geohashBox">
-                    <shape  name="rectangle"
+                    <shape name="rectangle"
                            editable="false"
                            draggable="false"
                            bounds={{arr.boxBounds}}
                            on-bounds_changed="vm.boundsChanged()">
 
                     </shape>
-                    <div class="geohashLabel"> <label>{{arr.geoHash}}</label></div>
+                    <div class="geohashLabel"><label>{{arr.geoHash}}</label></div>
 
                 </div>
 
@@ -28,32 +30,45 @@
                             <h4 style="margin-top: 0" class="title">City Fence</h4>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-inverse table-bordered">
-                                <thead>
-                                <tr>
-                                    <th width="30" class="text-center">#</th>
-                                    <th>Geo Hash</th>
-                                    <th width="30" class="text-center"><span class="fa fa-eye pointer"
-                                                                             ng-click="toggle = !toggle"
-                                                                             ng-class="{'red' : toggle}"></span></th>
+                            <div style="max-height: 400px; height: 80%; overflow:auto;">
+                                <table class="table table-inverse table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th width="30" class="text-center">#</th>
+                                        <th>Geo Hash</th>
+                                        <th width="30" class="text-center"><span class="fa fa-remove pointer"
+                                                                                 ng-click="toggle = !toggle"
+                                                                                 ng-class="{'red' : toggle}"></span>
+                                        </th>
 
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="box in vm.rectArray">
-                                    <td class="text-center">{{$index}}</td>
-                                    <td>{{box.geoHash}}</td>
-                                    <td class="text-center"><span class="fa fa-remove pointer" ng-click="vm.removeGeoHash($index)"></span>
-                                    </td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="box in vm.rectArray">
+                                        <td class="text-center">{{$index}}</td>
+                                        <td>{{box.geoHash}}</td>
+                                        <td class="text-center"><span class="fa fa-remove pointer"
+                                                                      ng-click="vm.removeGeoHash($index)"></span>
+                                        </td>
 
-                                </tr>
+                                    </tr>
 
-                                </tbody>
-                            </table>
-                            <div>
-                                <label>Group Name</label><input type="text"  class="form-control"></input>
-                                <button class="btn">Save</button>
+                                    </tbody>
+                                </table>
                             </div>
+                            <form role="form" class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputCharge">Group Name</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" placeholder="Group Name" id="inputCharge"
+                                               class="form-control">
+
+                                        <p class="help-block"></p>
+                                        <button class="btn btn-default pull-right" type="submit">Save Group</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -99,10 +114,12 @@
                                     <label class="col-sm-3 control-label" for="inputStartTime">Duration</label>
 
                                     <div class="col-sm-9">
-                                        <input enabletimepicker="true" ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange"
-                                               ng-model="selectedDates" separator=" - " format="MM/DD/YYYY h:mm A" opens="left">
-                                       <!-- <input type="text" placeholder="Start Time" id="inputStartTime"
-                                               class="form-control">-->
+                                        <input enabletimepicker="true" ng-change="vm.getAllData()"
+                                               class="form-control cstm-width text-center" type="daterange"
+                                               ng-model="selectedDates" separator=" - " format="MM/DD/YYYY h:mm A"
+                                               opens="left">
+                                        <!-- <input type="text" placeholder="Start Time" id="inputStartTime"
+                                                class="form-control">-->
 
                                         <p class="help-block"></p>
                                     </div>
@@ -129,7 +146,7 @@
                                     </div>
                                 </div>
 
-                                <button class="btn btn-default pull-right" type="submit">Save</button>
+                                <button class="btn btn-default pull-right" type="submit">Save Settings</button>
                             </form>
 
                         </div>
