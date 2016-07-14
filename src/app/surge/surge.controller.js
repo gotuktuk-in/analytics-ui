@@ -20,6 +20,7 @@
         NgMap.getMap({id:'surgeMap'}).then(function (map) {
             vm.map = map;
             google.maps.event.addDomListener( vm.map, 'click', onMapClick);
+            vm.map.setClickableIcons(false);
          //   vm.map.setZoom(vm.selectedPrecision.value + 8);
         });
         vm.onPrecisionChange = function () {
