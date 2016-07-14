@@ -85,7 +85,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label class="col-sm-3 control-label" for="inputDate">Date</label>
 
                                     <div class="col-sm-9">
@@ -93,20 +93,22 @@
 
                                         <p class="help-block"></p>
                                     </div>
-                                </div>
+                                </div>-->
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="inputStartTime">Start Time</label>
+                                    <label class="col-sm-3 control-label" for="inputStartTime">Duration</label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Start Time" id="inputStartTime"
-                                               class="form-control">
+                                        <input enabletimepicker="true" ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange"
+                                               ng-model="selectedDates" separator=" - " format="MM/DD/YYYY h:mm A" opens="left">
+                                       <!-- <input type="text" placeholder="Start Time" id="inputStartTime"
+                                               class="form-control">-->
 
                                         <p class="help-block"></p>
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label class="col-sm-3 control-label" for="inputEndTime">End Time</label>
 
                                     <div class="col-sm-9">
@@ -115,7 +117,7 @@
 
                                         <p class="help-block"></p>
                                     </div>
-                                </div>
+                                </div>-->
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-3 col-sm-9">
