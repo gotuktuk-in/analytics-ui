@@ -61,6 +61,12 @@ body {
     height: 30%;
     max-height: 130px;
 }
+.surge-dialog .ngdialog-content {
+    max-width: 650px;
+    max-height: 310px;
+    width: 650px;
+    height: 310px;
+}
 
 .navbar-default {
     background-color: #fff;

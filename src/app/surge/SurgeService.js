@@ -20,13 +20,16 @@ function SurgeService($q, $resource, API) {
         {
             getGroups: {
                 method: 'GET',
-                url:   url + 'serge/group',
+                url:   url + 'surge/group/',
                 isArray:true
             },
             createGroup: {
                 method: 'POST',
-                url:   url + 'serge/create/group',
-                isArray:true
+                url:   url + 'surge/create/group/',
+               },
+            updateSurgeForGroup: {
+                method: 'POST',
+                url:   url + 'surge/apply',
             },
 /*            getAcquisition: {
                 method: 'GET',

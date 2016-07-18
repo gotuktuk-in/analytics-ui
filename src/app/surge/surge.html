@@ -45,38 +45,22 @@
                                                                                  ng-click="toggle = !toggle"
                                                                                  ng-class="{'red' : toggle}"></span>
                                         </th>
-
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="group in vm.geohashGroups">
                                         <td class="text-center">{{$index}}</td>
-                                        <td>{{group.name}}</td>
+                                        <td>{{group.groupTitle}}</td>
                                         <td class="text-center"><span class="fa fa-remove pointer"
-                                                                      ng-click="vm.removeGeoHash($index)"></span>
+                                                                      ng-click="vm.removeGroup($index)"></span>
                                         </td>
-
+                                        <td><span ng-click="vm.editGroup($index)">Edit</span></td>
                                     </tr>
 
                                     </tbody>
                                 </table>
                             </div>
-                            <form role="form" class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="inputCharge">Group Name</label>
-
-                                    <div class="col-sm-9">
-                                        <input type="text" placeholder="Group Name" id="groupname"
-                                               ng-model="vm.groupName"
-                                               class="form-control">
-
-                                        <p class="help-block"></p>
-                                        <button class="btn btn-default pull-right" type="submit" ng-disabled="">Save
-                                            Group
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -135,16 +119,16 @@
                     <div class="panel panel-info">
                         <div class="panel-heading">Surge Settings</div>
                         <div class="panel-body">
-                            <form role="form" class="form-horizontal">
+                            <form role="form" class="form-horizontal" name="settingForm" novalidate>
                                 <div class="form-group">
                                     <label for="IsSmallBusiness" class="col-md-3 control-label">Type</label>
                                     <div class="col-md-9">
                                         <label class="radio-inline">
-                                            <input type="radio" value="False" name="IsSmallBusiness" id="IsSmallBusiness" data-val-required="The IsSmallBusiness field is required." data-val="true" checked="checked">
+                                            <input ng-model="vm.setting.type" type="radio" value="multiply" name="IsSmallBusiness" checked="checked">
                                             x
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" value="True" name="IsSmallBusiness" id="IsSmallBusiness">
+                                            <input ng-model="vm.setting.type" type="radio" value="plus" name="IsSmallBusiness" >
                                             +
                                         </label>
                                         <p class="help-block"></p>
@@ -154,22 +138,26 @@
                                     <label class="col-sm-3 control-label" for="inputCharge">Charge</label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Charge" id="inputCharge" class="form-control">
+                                        <input type="text" ng-model="vm.setting.charge" placeholder="Charge" name="inputCharge" class="form-control" required>
 
-                                        <p class="help-block"></p>
+                                        <div ng-messages="settingForm.inputCharge.$error" ng-if="settingForm.inputCharge.$touched">
+                                            <div ng-message="required">This field is required</div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="inputStartTime">Duration</label>
+                                    <label class="col-sm-3 control-label" >Duration{{vm.setting.selectedDates}}</label>
 
                                     <div class="col-sm-9">
-                                        <input enabletimepicker="true" ng-change="vm.getAllData()"
-                                               class="form-control cstm-width text-center" type="daterange"
-                                               ng-model="selectedDates" separator=" - " format="MM/DD/YYYY h:mm A"
-                                               opens="left">
+                                        <input name="inputDates" enabletimepicker="true" ng-change="vm.getAllData()"
+                                               class="form-control text-center" type="daterange"
+                                               ng-model="vm.setting.selectedDates" separator=" - " format="DD/MM/YYYY h:mm"
+                                               opens="left" required>
 
-                                        <p class="help-block"></p>
+                                        <div ng-messages="settingForm.inputDates.$error" ng-if="settingForm.inputDates.$touched">
+                                            <div ng-message="required">Please select date range</div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -178,19 +166,141 @@
                                     <div class="col-sm-offset-3 col-sm-9">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox"> Active
+                                                <input type="checkbox" ng-model="vm.setting.forceConfirm"> Active
                                             </label>
                                         </div>
                                     </div>
                                 </div>
 
-                                <button class="btn btn-default pull-right" type="submit">Save Settings</button>
+                                <button ng-click="vm.saveSurgeSettings()" class="btn btn-default pull-right" type="submit">Save Settings</button>
                             </form>
 
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
+<script type="text/ng-template"  id="editgroupTemplate.html">
+
+    <div class="panel panel-info">
+        <div class="panel-heading">Surge Settings</div>
+        <div class="panel-body">
+            <form role="form" class="form-horizontal">
+                <div class="form-group">
+                    <label for="IsSmallBusiness" class="col-md-3 control-label">Type</label>
+                    <div class="col-md-9">
+                        <label class="radio-inline">
+                            <input type="radio" value="False" name="IsSmallBusiness" id="IsSmallBusiness" data-val-required="The IsSmallBusiness field is required." data-val="true" checked="checked">
+                            x
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="True" name="IsSmallBusiness" id="IsSmallBusiness">
+                            +
+                        </label>
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="inputCharge">Charge</label>
+
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="Charge" id="inputCharge" class="form-control">
+
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="inputStartTime">Duration</label>
+
+                    <div class="col-sm-9">
+                        <input enabletimepicker="true" ng-change="vm.getAllData()"
+                               class="form-control cstm-width text-center" type="daterange"
+                               ng-model="selectedDates" separator=" - " format="MM/DD/YYYY h:mm A"
+                               opens="left">
+
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Active
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-default pull-right" type="submit">Save Settings</button>
+            </form>
+
+        </div>
+    </div>
+
+
+    <!--<div class="dialog-contents" >
+        <div class="panel panel-info">
+            <div class="panel-heading">Surge Settings</div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="IsSmallBusiness" class="col-md-3 control-label">Type</label>
+                        <div class="col-md-9">
+                            <label class="radio-inline">
+                                <input type="radio" value="False" name="IsSmallBusiness" id="IsSmallBusiness" data-val-required="The IsSmallBusiness field is required." data-val="true" checked="checked">
+                                x
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" value="True" name="IsSmallBusiness" id="IsSmallBusiness">
+                                +
+                            </label>
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="inputCharge">Charge</label>
+
+                        <div class="col-sm-9">
+                            <input type="text" placeholder="Charge" id="inputCharge" class="form-control">
+
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label" for="inputStartTime">Duration</label>
+
+                        <div class="col-sm-9">
+                            <input enabletimepicker="true" ng-change="vm.getAllData()"
+                                   class="form-control cstm-width text-center" type="daterange"
+                                   ng-model="selectedDates" separator=" - " format="MM/DD/YYYY h:mm A"
+                                   opens="left">
+
+                            <p class="help-block"></p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox"> Active
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-default pull-right" type="submit">Save Settings</button>
+                </form>
+
+            </div>
+        </div>
+    </div>-->
+</script>
