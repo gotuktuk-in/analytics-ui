@@ -1542,7 +1542,7 @@ span.img-top {
 .pointer{
     cursor: pointer;}
 .geo-fence-tbl{
-    position: fixed;
+    position: absolute;
     right: 30px;
     top:80px;
     width: 50%;
