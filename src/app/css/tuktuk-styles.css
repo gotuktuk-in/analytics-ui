@@ -13,10 +13,10 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
 }
-.geohashBox {
+.geo-hash-box {
     position: relative;
 }
-.geohashLabel {
+.geo-hash-label {
     position: absolute;
     z-index: 1;
 }
