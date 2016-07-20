@@ -13,6 +13,9 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
 }
+input[type="radio"]{
+    margin: 2px 0 0;
+}
 .geo-hash-box {
     position: relative;
 }
@@ -781,7 +784,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     width: 50%;
 }
 
-.tabs-view {
+.tabs-view-2 {
     position: absolute;
     min-width: 800px;
     top: 125px;

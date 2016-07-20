@@ -6,9 +6,8 @@
         .controller('AlertController', AlertController);
 
     /** @ngInject */
-    function SurgeController($scope, $rootScope, AlertService, toastr, ngDialog) {
-
-        var vm = this;
+    function AlertController($scope, $rootScope, AlertService, toastr, ngDialog) {
 
     }
+
 })();

@@ -10,9 +10,9 @@
 
 angular
     .module('tuktukV2Dahboard')
-    .factory('SurgeService', SurgeService)
+    .factory('AlertService', AlertService)
 
-function SurgeService($q, $resource, API) {
+function AlertService($q, $resource, API) {
   var url = API;
     return $resource(
         "",
