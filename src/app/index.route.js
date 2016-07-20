@@ -96,7 +96,7 @@
             })
             .state('home.alert', {
                 url: '/alert',
-                templateUrl: 'app/surge/alert.html',
+                templateUrl: 'app/alert/alert.html',
                 controller: 'AlertController',
                 controllerAs: 'vm'
             })
