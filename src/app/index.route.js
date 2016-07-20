@@ -94,6 +94,12 @@
                 controller: 'SurgeController',
                 controllerAs: 'vm'
             })
+            .state('home.alert', {
+                url: '/alert',
+                templateUrl: 'app/surge/alert.html',
+                controller: 'AlertController',
+                controllerAs: 'vm'
+            })
     }
 
 })();
