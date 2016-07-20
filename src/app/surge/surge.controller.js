@@ -12,13 +12,16 @@
         vm.map;
         vm.geohashArray = [];
         vm.setting = {};
+        vm.setting.groupTitle = ''
         vm.setting.type = 'multiply'
         vm.precisionArr = [{name:"4", value:4},{name:"5", value:5},{name:"6", value:6},{name:"7", value:7},{name:"8", value:8}]
         vm.selectedPrecision = vm.precisionArr[2];
-        vm.selectedGroup;
-        vm.setting.selectedDates = {}
-        vm.setting.selectedDates.startDate = moment().format('DD/MM/YYYY h:mm')
-        vm.setting.selectedDates.endDate = moment().add(7,'days').format('DD/MM/YYYY h:mm')
+        vm.setting.startTime = moment().startOf('day')
+        vm.setting.endTime =  moment().startOf('day')
+        vm.hstep = 1;
+        vm.mstep = 15;
+        vm.setting.forceConfirm = true
+        $scope.ismeridian = true;
         $scope.toggle = false;
         NgMap.getMap({id:'surgeMap'}).then(function (map) {
             vm.map = map;
@@ -32,9 +35,14 @@
         vm.removeGeoHash = function (index) {
             vm.geohashArray.splice(index, 1);
         }
-        vm.editGroup = function (index) {
-            vm.selectedGroup = vm.geohashGroups[index];
-            vm.groupName = vm.selectedGroup.groupTitle;
+        vm.editGroup = function (id, index) {
+
+            getGroupSetting(id)
+            vm.geohashArray = []
+            _.each(vm.geohashGroups[index].geohash, function(hash){
+                vm.geohashArray.push(getGeoHashObj(hash))
+            })
+         //   vm.groupName = vm.selectedGroup.groupTitle;
             /*   vm.geohashArray = []
                 _.each(vm.geohashGroups[index].geohash, function(hash){
                     vm.geohashArray.push(getGeoHashObj(hash))
@@ -46,6 +54,14 @@
                 overlay:true
             });*/
         }
+        function getGroupSetting(id)
+        {
+            SurgeService.getGroupSetting({id:id}, function (response) {
+                vm.setting = response;
+            }, function (error) {
+                toastr.success(error);
+            })
+        }
         function getAllGroups()
         {
             SurgeService.getGroups({}, function (response) {
@@ -55,36 +71,27 @@
             })
         }
         getAllGroups()
-        vm.addGroup = function () {
+
+        vm.createSurge = function () {
             var obj = {}
-            obj.title = vm.groupName;
+            obj.groupTitle = vm.groupName;
             obj.geohash = _.pluck(vm.geohashArray,"geoHash");
             obj.precision = vm.selectedPrecision.value;
-            console.log(obj)
-
-            SurgeService.createGroup(angular.toJson(obj), function (response) {
-                toastr.success("Group Created.");
-            }, function (error) {
-                toastr.success(error);
-            })
-
-        }
-        vm.saveSurgeSettings = function () {
-            var obj = {}
-            obj.title = vm.groupName;
-            obj.groupId =  vm.selectedGroup.groupId
+           // obj.groupId =  vm.selectedGroup.groupId
             obj.geohash = _.pluck(vm.geohashArray,"geoHash");
             obj.precision = vm.selectedPrecision.value;
             obj.city = $rootScope.city;
-            obj.vehicle = $rootScope.vehicleType;
-            obj.value = vm.setting.charge;
-            obj.fromTime = moment.unix(vm.setting.selectedDates.startDate);
-            obj.toTime = moment.unix(vm.setting.selectedDates.endDate);
+            obj.vehicleType = $rootScope.vehicleType;
+            obj.driverValue = vm.setting.driverValue;
+            obj.groupTitle = vm.setting.groupTitle;
+            obj.value = vm.setting.value;
+            obj.fromTime = moment(vm.setting.startTime).format('hmm')//moment.unix(vm.setting.selectedDates.startDate);
+            obj.toTime = moment(vm.setting.endTime).format('hmm')//moment.unix(vm.setting.selectedDates.endDate);
             obj.type = vm.setting.type;
-            obj.forceConfirm = vm.setting.forceConfirm;
+            obj.forceConfirm = vm.setting.forceConfirm ?  1 : 0
             console.log(obj)
 
-            SurgeService.updateSurgeForGroup(obj, function (response) {
+            SurgeService.createSurge(obj, function (response) {
                 toastr.success("Settings saved.");
             }, function (error) {
                 toastr.success(error);

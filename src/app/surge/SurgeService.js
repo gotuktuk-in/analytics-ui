@@ -31,6 +31,15 @@ function SurgeService($q, $resource, API) {
                 method: 'POST',
                 url:   url + 'surge/apply',
             },
+            createSurge: {
+                method: 'POST',
+                url:   url + 'surge/create',
+            },
+
+            getGroupSetting: {
+                method: 'GET',
+                url:   url + 'surge/apply/group/:id',
+            }
 /*            getAcquisition: {
                 method: 'GET',
                 url:   url + 'drivers/acquisition',

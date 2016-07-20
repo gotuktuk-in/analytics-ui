@@ -33,7 +33,7 @@
                             <h4 style="margin-top: 0" class="title">Groups</h4>
                         </div>
                         <div class="panel-body">
-                            <div style="max-height: 200px; height: 80%; overflow:auto;">
+                            <div style="max-height: 200px; height: 80%; overflow:auto;" ng-if="vm.geohashGroups.length>0">
                                 <table class="table table-inverse table-bordered">
                                     <thead>
                                     <tr>
@@ -53,12 +53,13 @@
                                         <td class="text-center"><span class="fa fa-remove pointer"
                                                                       ng-click="vm.removeGroup($index)"></span>
                                         </td>
-                                        <td><span ng-click="vm.editGroup($index)">Edit</span></td>
+                                        <td><span ng-click="vm.editGroup(group.groupId, $index)">Edit</span></td>
                                     </tr>
 
                                     </tbody>
                                 </table>
                             </div>
+                            <div ng-if="vm.geohashGroups.length<=0">No groups available</div>
                         </div>
                     </div>
                 </div>
@@ -71,26 +72,24 @@
                             <form role="form" class="form-horizontal" name="settingForm" novalidate>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" >Duration</label>
-                                    <div class="col-sm-9">
-                                        <input name="inputDates" enabletimepicker="true" ng-change="vm.getAllData()"
-                                               class="form-control text-center" type="daterange"
-                                               ng-model="vm.setting.selectedDates" separator=" - " format="DD/MM/YYYY h:mm"
-                                               opens="left" required>
-
-                                        <div ng-messages="settingForm.inputDates.$error" ng-if="settingForm.inputDates.$touched">
-                                            <div ng-message="required">Please select date range</div>
-                                        </div>
-                                        <p class="help-block"></p>
+                                    <div class="col-sm-4">
+                                        <uib-timepicker ng-model="vm.setting.startTime" ng-change="changed()" hour-step="vm.hstep" minute-step="vm.mstep" show-meridian="ismeridian"></uib-timepicker>
+                                     </div>
+                                    <div class="col-sm-4">
+                                        <uib-timepicker ng-model="vm.setting.endTime" ng-change="changed()" hour-step="vm.hstep" minute-step="vm.mstep" show-meridian="ismeridian"></uib-timepicker>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label" >Geo Hash</label>
                                     <div class="col-sm-9">
-                                        <span ng-repeat="box in vm.geohashArray"  class="label label-info">{{box.geoHash}}<button class="label-btn"
-                                                                                                                                  ng-click="vm.removeGeoHash($index)">
-                                            x
-                                        </button></span>
+                                        <div ng-if="vm.geohashArray.length>0">
+                                            <span ng-repeat="box in vm.geohashArray"  class="label label-info">{{box.geoHash}}<button class="label-btn" ng-click="vm.removeGeoHash($index)">
+                                                x
+                                            </button></span>
+                                        </div>
+                                        <div ng-if="vm.geohashArray.length<=0">No geohash created</div>
+
                                         <p class="help-block"></p>
                                     </div>
 
@@ -113,9 +112,21 @@
                                     <label class="col-sm-3 control-label" for="inputCharge">Charge</label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" ng-model="vm.setting.charge" placeholder="Charge" name="inputCharge" class="form-control" required>
+                                        <input type="text" ng-model="vm.setting.value" placeholder="Charge" name="inputCharge" class="form-control" required>
 
                                         <div ng-messages="settingForm.inputCharge.$error" ng-if="settingForm.inputCharge.$touched">
+                                            <div ng-message="required">This field is required</div>
+                                        </div>
+                                        <p class="help-block"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label" for="inputCharge">Driver Value</label>
+
+                                    <div class="col-sm-9">
+                                        <input type="text" ng-model="vm.setting.driverValue" placeholder="Driver Value" name="inputDriverValue" class="form-control" required>
+
+                                        <div ng-messages="settingForm.inputDriverValue.$error" ng-if="settingForm.inputDriverValue.$touched">
                                             <div ng-message="required">This field is required</div>
                                         </div>
                                         <p class="help-block"></p>
@@ -128,10 +139,12 @@
                                     <label class="col-sm-3 control-label" for="inputCharge">Group Name</label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" placeholder="Group Name" id="groupname"
-                                               ng-model="vm.groupName"
+                                        <input type="text" placeholder="Group Title" name="inputGroupTitle"
+                                               ng-model="vm.setting.groupTitle"
                                                class="form-control" required>
-
+                                        <div ng-messages="settingForm.inputGroupTitle.$error" ng-if="settingForm.inputGroupTitle.$touched">
+                                            <div ng-message="required">This field is required</div>
+                                        </div>
                                         <p class="help-block"></p>
                                     </div>
                                 </div>
@@ -143,7 +156,7 @@
                                             </label>
                                         </div>
                                         <p class="help-block"></p>
-                                        <button ng-click="vm.addGroup()" ng-disabled="!vm.geohashArray.length>0 || groupForm.$invalid"
+                                        <button ng-click="vm.createSurge()" ng-disabled="!vm.geohashArray.length>0 || groupForm.$invalid"
                                                 class="btn btn-default pull-left" type="submit">Save
                                         </button>
                                     </div>
