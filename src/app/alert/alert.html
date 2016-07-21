@@ -6,7 +6,6 @@
     <br>
     <br>
     <br><br>
-
     <div class="tabs-view">
         <div>
             <uib-tabset active="active">
@@ -18,7 +17,6 @@
                                     <label class="control-label">TYPE</label><br>
                                     <label class="radio-inline"><input type="radio" name="optradio">Push</label>
                                     <label class="radio-inline"><input type="radio" name="optradio">SMS</label>
-
                                     <p class="help-block"></p>
                                     <br>
                                 </div>
@@ -66,12 +64,9 @@
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <button class="btn btn-success" type="submit">Send <i class="fa fa-paper-plane"
-                                                                                          aria-hidden="true"></i>
+                                    <button class="btn btn-success" type="submit">Send <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                     </button>
                                 </div>
-
-
                             </form>
                         </div>
                     </div>
@@ -93,6 +88,11 @@
                                             <a target="_blank"
                                                ui-sref="home.drivers_detail({driverId:row.driver_id})">
                                                 {{row.name}}
+                                            </a>
+                                        </td><td data-title="'Vehicle Number'" sortable="'vNumber'" class="text-center">
+                                            <a target="_blank"
+                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                                {{row.vNumber}}
                                             </a>
                                         </td>
                                     </tr>
@@ -158,8 +158,6 @@
                                                                                           aria-hidden="true"></i>
                                     </button>
                                 </div>
-
-
                             </form>
                         </div>
                     </div>
