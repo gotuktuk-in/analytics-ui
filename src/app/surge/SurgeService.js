@@ -34,6 +34,16 @@ function SurgeService($q, $resource, API) {
             createSurge: {
                 method: 'POST',
                 url:   url + 'surge/create',
+                isArray:true
+            },
+            removeGroup: {
+                method: 'DELETE',
+                url:   url + 'surge/delete/group/:id',
+            },
+            updateGroup: {
+                method: 'PUT',
+                url:   url + 'surge/edit/group',
+                isArray:true
             },
 
             getGroupSetting: {
