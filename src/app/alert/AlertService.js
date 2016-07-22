@@ -18,35 +18,11 @@ function AlertService($q, $resource, API) {
         "",
         {id:"@id"},
         {
-            getGroups: {
-                method: 'GET',
-                url:   url + 'surge/group/',
-                isArray:true
-            },
-            createGroup: {
-                method: 'POST',
-                url:   url + 'surge/create/group/',
-               },
-            updateSurgeForGroup: {
-                method: 'POST',
-                url:   url + 'surge/apply',
-            },
-/*            getAcquisition: {
-                method: 'GET',
-                url:   url + 'drivers/acquisition',
-                isArray:true
-            },
-            getProfile: {
-                method: 'GET',
-                url:   url + 'drivers/profile/:id',
-                isArray:false
-            },
-            getTrips: {
-                method: 'GET',
-                url:   url + 'drivers/:id/trips',
-                isArray:false
-            },*/
 
+            sendNotification: {
+                method: 'POST',
+                url:   url + 'notification',
+               },
 
         }
     );

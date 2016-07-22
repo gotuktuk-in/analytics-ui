@@ -9,44 +9,51 @@
     <div class="tabs-view">
         <div>
             <uib-tabset active="active">
-                <uib-tab index="0" heading="All Drivers">
+                <uib-tab index="0" heading="All Drivers" select="vm.tabChanged('topic')">
                     <div class="row">
                         <div class="col-md-8 col-sm-12 col-xs-12">
-                            <form role="form">
+                            <form role="form" name="msgForm" novalidate>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">TYPE</label><br>
-                                    <label class="radio-inline"><input type="radio" name="optradio">Push</label>
-                                    <label class="radio-inline"><input type="radio" name="optradio" disabled>SMS</label>
+                                    <label class="radio-inline"><input ng-model="vm.formObj.notificationType" type="radio" value="push" name="inputNotificationType">Push</label>
+                                    <label class="radio-inline"><input ng-model="vm.formObj.notificationType" type="radio" value="sms" name="inputNotificationType" disabled>SMS</label>
                                     <p class="help-block"></p>
                                     <br>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">LANGUAGE</label><br>
-                                    <label class="radio-inline"><input type="radio" name="optradio">English</label>
-                                    <label class="radio-inline"><input type="radio" name="optradio">Hindi</label>
+                                    <label class="radio-inline"><input type="radio" ng-model="vm.formObj.message.lang" value="en" name="inputLang">English</label>
+                                    <label class="radio-inline"><input type="radio" ng-model="vm.formObj.message.lang" value="hin" name="inputLang">Hindi</label>
 
                                     <p class="help-block"></p>
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="title" class="control-label">Title</label>
-                                    <input type="text" placeholder="Enter Title" id="title" class="form-control">
-
+                                    <input ng-model="vm.formObj.message.title" type="text" placeholder="Enter Title" name="inputTitle" class="form-control" required>
+                                    <div ng-messages="msgForm.inputTitle.$error" ng-if="msgForm.inputTitle.$touched">
+                                        <div ng-message="required">This field is required</div>
+                                    </div>
                                     <p class="help-block"></p>
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="comment">MESSAGE</label>
-                                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                                    <textarea ng-model="vm.formObj.message.message" class="form-control" rows="5" name="inputMessage" required></textarea>
 
-                                    <p class="help-block">Character Count: {{"149"}}  <a href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab" target="_blank">(Download Chrome Extensions)</a></p>
+                                    <p class="help-block">Character Count: {{"149"}}</p>
+                                    <div ng-messages="msgForm.inputMessage.$error" ng-if="msgForm.inputMessage.$touched">
+                                        <div ng-message="required">This field is required</div>
+                                    </div>
                                     <br>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="URL" class="control-label">URL</label>
-                                    <input type="text" placeholder="Enter URL" id="URL" class="form-control">
+                                    <input ng-model="vm.formObj.message.url" type="text" placeholder="Enter URL" name="inputURL" class="form-control" required>
 
-                                    <p class="help-block"></p>
+                                    <div ng-messages="msgForm.inputURL.$error" ng-if="msgForm.inputURL.$touched">
+                                        <div ng-message="required">This field is required</div>
+                                    </div>
                                     <br>
                                 </div>
                                 <div class="form-group col-md-2">
@@ -62,25 +69,32 @@
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <button class="btn btn-success" type="submit">Send <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                    <button class="btn btn-success" type="submit" ng-click="vm.sendPushMsg()">Send <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </uib-tab>
-                <uib-tab index="1" heading="Selected Driver">
+                <uib-tab index="1" heading="Selected Driver"  select="vm.tabChanged('user')">
                     <div class="row">
                         <div class="col-md-4 col-sm-12 col-xs-12">
                             <label for="URL" class="control-label">SELECT DRIVERS</label>
-
+                            <div class="input-group col-md-3 col-sm-12 col-xs-12">
+                                <input ng-model="vm.searchTerm" class="form-control input-search-term" placeholder="Driver Name"/>
+                            </div>
+                            <div class="input-group col-md-1 col-sm-12 col-xs-12">
+                                <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-small">Search
+                                </button>
+                            </div>
                             <div class="table-responsive">
+
                                 <table ng-table="tableParams" class="table table-bordered table-striped text-center">
                                     <tbody>
 
                                     <tr ng-repeat="row in $data track by $index">
                                         <td data-title="'#'" class="text-center">
-                                            <input type="checkbox">
+                                            <input type="checkbox" ng-model="row.selected" ng-change="vm.selectDriver(row)">
                                         </td>
                                         <td data-title="'Name'" sortable="'name'" class="text-left">
                                             <a target="_blank"
@@ -99,40 +113,43 @@
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-12 col-xs-12">
-                            <form role="form">
+                            <form role="form" name="msgForm">
                                 <div class="form-group col-md-6">
                                     <label class="control-label">TYPE</label><br>
-                                    <label class="radio-inline"><input type="radio" name="optradio">Push</label>
-                                    <label class="radio-inline"><input type="radio" name="optradio" disabled>SMS</label>
-
+                                    <label class="radio-inline"><input ng-model="vm.formObj.notificationType" type="radio" value="push" name="inputNotificationType">Push</label>
+                                    <label class="radio-inline"><input ng-model="vm.formObj.notificationType" type="radio" value="sms" name="inputNotificationType" disabled>SMS</label>
                                     <p class="help-block"></p>
                                     <br>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">LANGUAGE</label><br>
-                                    <label class="radio-inline"><input type="radio" name="optradio">English</label>
-                                    <label class="radio-inline"><input type="radio" name="optradio">Hindi</label>
+                                    <label class="radio-inline"><input type="radio" ng-model="vm.formObj.message.lang" value="en" name="inputLang">English</label>
+                                    <label class="radio-inline"><input type="radio" ng-model="vm.formObj.message.lang" value="hin" name="inputLang">Hindi</label>
 
                                     <p class="help-block"></p>
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="title" class="control-label">Title</label>
-                                    <input type="text" placeholder="Enter Title" id="title" class="form-control">
+                                    <input ng-model="vm.formObj.message.title" type="text" placeholder="Enter Title" name="inputTitle" class="form-control">
 
                                     <p class="help-block"></p>
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
+                                    <label for="comment">DRIVERS</label>
+                                    <div ng-repeat="driver in vm.selectedDrivers" class="badge">{{driver.name}}</div>
+                                                               </div>
+                                <div class="form-group col-md-12">
                                     <label for="comment">MESSAGE</label>
-                                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                                    <textarea ng-model="vm.formObj.message.message" class="form-control" rows="5" name="inputMessage"></textarea>
 
-                                    <p class="help-block">Character Count: {{"149"}} <a href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab" target="_blank">(Download Chrome Extensions)</a></p>
+                                    <p class="help-block">Character Count: {{"149"}}  <a href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab" target="_blank">(Download Chrome Extensions)</a></p>
                                     <br>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="URL" class="control-label">URL</label>
-                                    <input type="text" placeholder="Enter URL" id="URL" class="form-control">
+                                    <input ng-model="vm.formObj.message.url" type="text" placeholder="Enter URL" name="inputURL" class="form-control">
 
                                     <p class="help-block"></p>
                                     <br>
@@ -150,7 +167,7 @@
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <button class="btn btn-success" type="submit">Send <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                    <button class="btn btn-success" type="submit" ng-click="vm.sendPushMsg()">Send <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </form>

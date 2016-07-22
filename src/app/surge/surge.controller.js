@@ -80,7 +80,7 @@
             //   vm.map.setZoom(vm.selectedPrecision.value + 8);
         });
         vm.onPrecisionChange = function () {
-            vm.geohashArray = [];
+            vm.geohashGroups = []
             getAllGroups()
         }
         vm.removeGeoHash = function (index) {
@@ -125,7 +125,7 @@
         }
 
         function getAllGroups() {
-            SurgeService.getGroups({}, function (response) {
+            SurgeService.getGroups({precision: vm.selectedPrecision.value}, function (response) {
                 var allGroups = response
                 //    vm.geohashGroups = response;
                 _.each(allGroups, function (group) {
