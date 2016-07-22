@@ -13,12 +13,26 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
 }
-.geohashBox {
+input[type="radio"]{
+    margin: 2px 0 0;
+}
+.geo-hash-box {
     position: relative;
 }
-.geohashLabel {
+.geo-hash-label {
     position: absolute;
     z-index: 1;
+}
+.time-picker .btn-link {
+    font-weight: 100;
+    color: #333;
+    border-radius: 0 !important;
+    border: none !important;
+    margin: 0;
+    padding: 0;
+}
+.time-picker .btn-link .glyphicon{
+    font-size: 10px;
 }
 #matrixChart svg {
     display: inline-block;
@@ -60,6 +74,12 @@ body {
     pointer-events: all;
     height: 30%;
     max-height: 130px;
+}
+.surge-dialog .ngdialog-content {
+    max-width: 650px;
+    max-height: 310px;
+    width: 650px;
+    height: 310px;
 }
 
 .navbar-default {
@@ -646,12 +666,23 @@ input.daterangepicker-aqq-chart {
     opacity: 1;
     top: 100%;
 }
-
+.btn-danger {
+    color: #fff;
+    background-color: #d9534f !important;
+    border-color: #d43f3a !important;
+}
+/*.badge {*/
+    /*font-size: 11px;*/
+    /*font-weight: normal;*/
+    /*margin-top: -14px;*/
+    /*padding: 3px 6px;*/
+/*}*/
 .badge {
     font-size: 11px;
     font-weight: normal;
-    margin-top: -14px;
-    padding: 3px 6px;
+    margin-top: -4px;
+    padding: 5px 10px;
+    margin-right: 3px;
 }
 
 /***Login*******************************************/
@@ -775,12 +806,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     width: 50%;
 }
 
-.tabs-view {
-    position: absolute;
-    min-width: 800px;
-    top: 125px;
-    left: 10px;
-}
 
 .nav-tabs > li > a {
     background-color: #e9e9e9;
@@ -794,6 +819,19 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     border-radius: 4px 4px 0 0;
 }
 
+.tabs-view-2 {
+    position: absolute;
+    min-width: 800px;
+    top: 125px;
+    left: 10px;
+}
+.tabs-view-2 .tab-content {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-left: 1px;
+    border-radius: 0;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);
+}
 .tabs-view .tab-content {
     background-color: #ffffff;
     padding: 20px;
@@ -1536,7 +1574,7 @@ span.img-top {
 .pointer{
     cursor: pointer;}
 .geo-fence-tbl{
-    position: fixed;
+    position: absolute;
     right: 30px;
     top:80px;
     width: 50%;

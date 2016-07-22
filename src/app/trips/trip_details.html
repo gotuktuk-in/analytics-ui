@@ -1,76 +1,10 @@
 <div class="content">
     <div class="content-div">
-
-        <ng-map id="drivers_map" center="[22.717081666666665, 75.87155666666666]" style="height:100%" zoom="12">
-            <map-data load-geo-json={{vm.API_URL}}geofence>
-            </map-data>
-            <!--<map-data  add-geo-json={{vm.geoJSON}}>
-            </map-data>-->
-            <div>
-                <marker ng-repeat="driver in vm.allDrivers.free.drivers track by $index" icon="{
-        url:'assets/images/icons/marker-green.svg',
-        scaledSize:[30,30],
-        origin: [0,0],
-        anchor: [15,15]
-      }"
-                        id="free-driver-{{$index}}"
-                        on-click="vm.showDetail(driver,'free-driver-'+$index)"
-                        position="{{driver.marker}}">
-                </marker>
-            </div>
-
-            <info-window id="iw-drivers">
-                <div ng-non-bindable="">
-                    <div class="info-window">
-                        <div class="iw-wrapper">
-                            <div class="iw-header text-center">
-                                <img ng-src="{{vm.driver.profile.profile_image}}" class="iw-driver" height="50">
-
-                                <h3>{{vm.driver.profile.name}}</h3>
-
-                            </div>
-                            <div class="iw-content">
-                                <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-center"><i class="fa fa-clock-o"></i></td>
-                                        <td>Time</td>
-                                        <td>{{vm.driver.profile.time | date:'shortTime'}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center"><i class="fa fa-mobile-phone"></i></td>
-                                        <td>Phone#</td>
-                                        <td>{{vm.driver.profile.phone}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center"><i class="fa fa-taxi"></i></td>
-                                        <td>Vehicle#</td>
-                                        <td>{{vm.driver.profile.vehicle}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center"><i class="fa fa-user"></i></td>
-                                        <td>ID#</td>
-                                        <td>{{vm.driver.profile.driverId}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center"><i class="fa fa-map-marker"></i></td>
-                                        <td>Location</td>
-                                        <td style="max-width:100px"><a ng-click="vm.clicked(vm.driver.marker)"><span
-                                                ng-if="!vm.driver.address">Show</span></a>
-                                            <span ng-if="vm.driver.address">{{vm.driver.address}}</span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </info-window>
+        <ng-map id="drivers_map" style="height:100%">
 
 
         </ng-map>
-        <div class="tabs-view">
+        <div class="tabs-view-2">
             <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}"
                     class="btn btn-default tabs-toggle-btn map-btn" title="Show More...">
                 <i class="fa fa-angle-double-right"></i>
@@ -80,7 +14,6 @@
                     <uib-tab index="0" heading="Trips">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
-
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.id}}</h4>
@@ -89,8 +22,7 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yy
-                                            'at' h:mma"}}</h4>
+                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yy 'at' h:mma"}}</h4>
                                         <span>date</span>
                                     </div>
                                 </div>
