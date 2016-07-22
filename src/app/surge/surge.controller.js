@@ -246,8 +246,6 @@
                     vm.setting.geoHashArr.push(getGeoHashObj(obj.geoHash))
 
                 });
-
-
             }
 
         }
