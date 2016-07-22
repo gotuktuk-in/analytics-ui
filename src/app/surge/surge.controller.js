@@ -13,7 +13,7 @@
         vm.geohashArray = [];
         vm.geohashGroups = []
         vm.setting = {};
-
+        vm.colors = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
         vm.hstep = 1;
         vm.mstep = 15;
         $scope.ismeridian = false;
@@ -37,6 +37,7 @@
         }
         vm.ShapeClicked = function (e) {
               vm.groupEdit = true;
+            vm.groupCreation = false;
             var geoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
 
             vm.setting = findGeohashInArray(geoHash)
@@ -134,17 +135,20 @@
         }
 
         function getAllGroups() {
+            vm.geohashGroups = []
             SurgeService.getGroups({precision: vm.selectedPrecision.value}, function (response) {
                 var allGroups = response
                 //    vm.geohashGroups = response;
+                var i=0
                 _.each(allGroups, function (group) {
                     var newObj = group
-                    newObj.color = StaticDataService.getRandomColor()
+                    newObj.color = vm.colors[i]//StaticDataService.getRandomColor()
                     newObj.geoHashArr = []
                     _.each(group.geohash, function (hash) {
                         newObj.geoHashArr.push(getGeoHashObj(hash))
                     })
                     vm.geohashGroups.push(newObj)
+                    i++;
                 })
                 console.log(' vm.geohashGroups ', vm.geohashGroups)
             }, function (error) {
@@ -174,6 +178,8 @@
             {
                 SurgeService.createSurge(obj, function (response) {
                     vm.groupCreation = false;
+                    initSetting()
+                    getAllGroups()
                     toastr.success("Surge Group Created.");
                 }, function (error) {
                     toastr.success(error);
@@ -184,6 +190,8 @@
                 obj.groupId = vm.setting.groupId
                 SurgeService.updateGroup(obj, function (response) {
                     vm.groupEdit = false;
+                    initSetting()
+                    getAllGroups()
                     toastr.success("Surge Group Updated.");
                 }, function (error) {
                     toastr.success(error);
@@ -211,7 +219,7 @@
                 var newGroup = {}
                 newGroup.geoHashArr = []
                 newGroup.groupTitle = 'untitled group'
-                newGroup.color = StaticDataService.getRandomColor()
+                newGroup.color = '#cc99ff'//StaticDataService.getRandomColor()
                 newGroup.startTime = moment().add(15, 'm');
                 newGroup.endTime = moment().add(30, 'm');
                 $scope.$apply(function () {
