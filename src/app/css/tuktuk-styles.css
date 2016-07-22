@@ -795,12 +795,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     width: 50%;
 }
 
-.tabs-view-2 {
-    position: absolute;
-    min-width: 800px;
-    top: 125px;
-    left: 10px;
-}
 
 .nav-tabs > li > a {
     background-color: #e9e9e9;
@@ -814,6 +808,19 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     border-radius: 4px 4px 0 0;
 }
 
+.tabs-view-2 {
+    position: absolute;
+    min-width: 800px;
+    top: 125px;
+    left: 10px;
+}
+.tabs-view-2 .tab-content {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-left: 1px;
+    border-radius: 0;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);
+}
 .tabs-view .tab-content {
     background-color: #ffffff;
     padding: 20px;
