@@ -13,22 +13,28 @@
         vm.geohashArray = [];
         vm.geohashGroups = []
         vm.setting = {};
-        vm.setting.groupTitle = ''
-        vm.setting.type = 'multiply'
-        vm.precisionArr = [{name: "4", value: 4}, {name: "5", value: 5}, {name: "6", value: 6}, {
-            name: "7",
-            value: 7
-        }, {name: "8", value: 8}]
-        vm.selectedPrecision = vm.precisionArr[2];
-        vm.setting.startTime = moment().add(15, 'm');
-        vm.setting.endTime = moment().add(30, 'm');
+
         vm.hstep = 1;
         vm.mstep = 15;
-        vm.setting.forceConfirm = true
         $scope.ismeridian = false;
         $scope.toggle = false;
         vm.groupCreation = false;
         vm.groupEdit = false;
+        vm.precisionArr = [{name: "4", value: 4}, {name: "5", value: 5}, {name: "6", value: 6}, {
+            name: "7",
+            value: 7
+        }, {name: "8", value: 8}]
+        initSetting()
+        vm.selectedPrecision = vm.precisionArr[2];
+        function initSetting()
+        {
+            vm.setting.groupTitle = ''
+            vm.setting.type = 'multiply'
+            vm.setting.geoHashArr = []
+            vm.setting.startTime = moment().add(15, 'm');
+            vm.setting.endTime = moment().add(30, 'm');
+            vm.setting.forceConfirm = true
+        }
         vm.ShapeClicked = function (e) {
               vm.groupEdit = true;
             var geoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
@@ -80,7 +86,10 @@
             //   vm.map.setZoom(vm.selectedPrecision.value + 8);
         });
         vm.onPrecisionChange = function () {
+            vm.groupCreation = false;
+            vm.groupEdit = false;
             vm.geohashGroups = []
+            initSetting()
             getAllGroups()
         }
         vm.removeGeoHash = function (index) {

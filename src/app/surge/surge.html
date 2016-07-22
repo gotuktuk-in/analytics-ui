@@ -41,18 +41,18 @@
                                                                                  ng-click="toggle = !toggle"
                                                                                  ng-class="{'red' : toggle}"></span>
                                         </th>
-                                        <th></th>
+                                      <!--  <th></th>-->
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr ng-repeat="group in vm.geohashGroups">
-                                        <td class="text-center">{{$index}}</td>
+                                        <td class="text-center" style="color: {{group.color}}">{{$index}}</td>
                                         <td>{{group.groupTitle}}</td>
                                         <td class="text-center">
                                             <span class="fa fa-remove pointer"
                                                                       ng-click="vm.removeGroup(group.groupId)"></span>
                                         </td>
-                                        <td><span ng-click="vm.editGroup(group.groupId, $index)">Edit</span></td>
+                                       <!-- <td><span ng-click="vm.editGroup(group.groupId, $index)">Edit</span></td>-->
                                     </tr>
 
                                     </tbody>
@@ -114,7 +114,7 @@
                                     <label class="col-sm-3 control-label" for="inputCharge">Charge</label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" ng-model="vm.setting.value" placeholder="Charge" name="inputCharge" class="form-control" required>
+                                        <input type="number" ng-model="vm.setting.value" placeholder="Charge" name="inputCharge" class="form-control" required>
 
                                         <div ng-messages="settingForm.inputCharge.$error" ng-if="settingForm.inputCharge.$touched">
                                             <div ng-message="required">This field is required</div>
@@ -126,7 +126,7 @@
                                     <label class="col-sm-3 control-label" for="inputCharge">Driver Value</label>
 
                                     <div class="col-sm-9">
-                                        <input type="text" ng-model="vm.setting.driverValue" placeholder="Driver Value" name="inputDriverValue" class="form-control" required>
+                                        <input type="number" ng-model="vm.setting.driverValue" placeholder="Driver Value" name="inputDriverValue" class="form-control" required>
 
                                         <div ng-messages="settingForm.inputDriverValue.$error" ng-if="settingForm.inputDriverValue.$touched">
                                             <div ng-message="required">This field is required</div>
