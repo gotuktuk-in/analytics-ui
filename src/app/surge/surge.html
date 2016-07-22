@@ -69,7 +69,7 @@
                         </div>
                         <div class="panel-body">
                             <form role="form" class="form-horizontal" name="settingForm" novalidate>
-                                <div class="form-group">
+                                <div class="form-group time-picker">
                                     <label class="col-sm-3 control-label" >Duration</label>
                                     <div class="col-sm-4">
                                         <uib-timepicker ng-model="vm.setting.startTime" ng-change="changed()" hour-step="vm.hstep" minute-step="vm.mstep" show-meridian="ismeridian"></uib-timepicker>
@@ -97,14 +97,15 @@
                                     <label for="IsSmallBusiness" class="col-md-3 control-label">Type</label>
                                     <div class="col-md-9">
                                         <label class="radio-inline">
-                                            <input ng-model="vm.setting.type" type="radio" value="multiply" name="IsSmallBusiness" checked="checked" required>
+                                            <input ng-model="vm.setting.type" type="radio" value="multiply" name="chargeType" checked="checked" required>
                                             x
                                         </label>
                                         <label class="radio-inline">
-                                            <input ng-model="vm.setting.type" type="radio" value="plus" name="IsSmallBusiness"  required>
+                                            <input ng-model="vm.setting.type" type="radio" value="plus" name="chargeType"  required>
                                             +
                                         </label>
-                                        <div ng-messages="settingForm.IsSmallBusiness.$error" ng-if="settingForm.IsSmallBusiness.$touched">
+                                        <p class="help-block"></p>
+                                        <div ng-messages="settingForm.chargeType.$error" ng-if="settingForm.chargeType.$touched">
                                             <div ng-message="required">This field is required</div>
                                         </div>
                                     </div>

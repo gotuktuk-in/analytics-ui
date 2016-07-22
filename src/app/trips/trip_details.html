@@ -253,3 +253,258 @@
         </div>
     </div>
 </div>
+<div class="content">
+    <div class="content-div">
+
+        <ng-map id="drivers_map" center="[22.717081666666665, 75.87155666666666]" style="height:100%" zoom="12">
+            <map-data load-geo-json={{vm.API_URL}}geofence>
+            </map-data>
+            <!--<map-data  add-geo-json={{vm.geoJSON}}>
+            </map-data>-->
+            <div>
+                <marker ng-repeat="driver in vm.allDrivers.free.drivers track by $index" icon="{
+        url:'assets/images/icons/marker-green.svg',
+        scaledSize:[30,30],
+        origin: [0,0],
+        anchor: [15,15]
+      }"
+                        id="free-driver-{{$index}}"
+                        on-click="vm.showDetail(driver,'free-driver-'+$index)"
+                        position="{{driver.marker}}">
+                </marker>
+            </div>
+
+            <info-window id="iw-drivers">
+                <div ng-non-bindable="">
+                    <div class="info-window">
+                        <div class="iw-wrapper">
+                            <div class="iw-header text-center">
+                                <img ng-src="{{vm.driver.profile.profile_image}}" class="iw-driver" height="50">
+
+                                <h3>{{vm.driver.profile.name}}</h3>
+
+                            </div>
+                            <div class="iw-content">
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-center"><i class="fa fa-clock-o"></i></td>
+                                        <td>Time</td>
+                                        <td>{{vm.driver.profile.time | date:'shortTime'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center"><i class="fa fa-mobile-phone"></i></td>
+                                        <td>Phone#</td>
+                                        <td>{{vm.driver.profile.phone}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center"><i class="fa fa-taxi"></i></td>
+                                        <td>Vehicle#</td>
+                                        <td>{{vm.driver.profile.vehicle}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center"><i class="fa fa-user"></i></td>
+                                        <td>ID#</td>
+                                        <td>{{vm.driver.profile.driverId}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center"><i class="fa fa-map-marker"></i></td>
+                                        <td>Location</td>
+                                        <td style="max-width:100px"><a ng-click="vm.clicked(vm.driver.marker)"><span
+                                                ng-if="!vm.driver.address">Show</span></a>
+                                            <span ng-if="vm.driver.address">{{vm.driver.address}}</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </info-window>
+
+
+        </ng-map>
+        <div class="tabs-view tabs-view-2">
+            <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}"
+                    class="btn btn-default tabs-toggle-btn map-btn" title="Show More...">
+                <i class="fa fa-angle-double-right"></i>
+            </button>
+            <div class="tabs-toggle" ng-class="{'tabs-show' : tabView}">
+                <uib-tabset active="active">
+                    <uib-tab index="0" heading="Trips">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.id}}</h4>
+                                        <span>id</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yy
+                                            'at' h:mma"}}</h4>
+                                        <span>date</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{getTimeDiff(selectedTrip.requestOn,
+                                            selectedTrip.pickupOn ) |
+                                            secondsToDateTime}} / {{getTimeDiff(selectedTrip.pickupOn
+                                            ,selectedTrip.dropOn)|
+                                            secondsToDateTime}}</h4>
+                                        <span>Time for Trip / in Trip</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{(selectedTrip.disStartPickup/1000) | number:2}}km /
+                                            {{(selectedTrip.disPickupDrop/1000) | number:2}}km</h4>
+                                        <span>Distance for Trip / in Trip</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">Rs.{{selectedTrip.fareStartPickup}}</small></h4>
+                                        <span>Amount</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.pickupOn ? (selectedTrip.pickupOn
+                                            *1000 | date:"h:mma ") : 'N/A'}} / {{selectedTrip.dropOn ?
+                                            (selectedTrip.dropOn *1000| date:"h:mma ") : 'N/A'}}</h4>
+                                        <span>Start Time / End Time</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">Rs.{{selectedTrip.amount.total}}
+                                            <small> / {{selectedTrip.amount.cash}} /
+                                                {{selectedTrip.amount.tcash}}
+                                            </small>
+                                        </h4>
+                                        <span>Amount Total<small> / Cash / tCash</small></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.riderFeedbackRating | number:2}}</h4>
+                                        <span>Rider's Feedback</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="1" heading="Driver Info">
+                        <div class="table-responsive">
+                            <table width="100%" class="table  table-bordered table-striped ">
+                                <tr>
+                                    <td colspan="2">
+                                        <img ng-src="{{selectedTrip.driverInfo.profileImage ? selectedTrip.driverInfo.profileImage:'assets/images/default.png' }}"
+                                             style="height:100px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Name</td>
+                                    <td><label>{{selectedTrip.driverInfo.name}}</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Vehicle Number</td>
+                                    <td><label>{{selectedTrip.driverInfo.vehicle}}</label></td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td><label>{{selectedTrip.driverInfo.phone}} </label></td>
+                                </tr>
+                                <tr>
+                                    <td>Current Status</td>
+                                    <td>
+                                        <div ng-if="selectedTrip.driverInfo.state == 10"><span
+                                                class="text-danger">Offline</span></div>
+                                        <div ng-if="selectedTrip.driverInfo.state == 11"><span
+                                                class="text-success">Online</span></div>
+                                        <div ng-if="selectedTrip.driverInfo.state == 22"><span
+                                                class="text-danger">Unoccupied</span></div>
+                                        <div ng-if="selectedTrip.driverInfo.state == 30"><span
+                                                class="text-info">Occupied</span></div>
+                                        <div ng-if="selectedTrip.driverInfo.state == 40"><span
+                                                class="text-info">Occupied</span></div>
+                                        <div ng-if="selectedTrip.driverInfo.state == 50"><span
+                                                class="text-info">Occupied</span></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Total Rides</td>
+                                    <td> {{selectedTrip.driverInfo.ridesTotal}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Today's Rides</td>
+                                    <td> {{selectedTrip.driverInfo.ridesToday}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Today's Earnings</td>
+                                    <td>{{selectedTrip.driverInfo.fare}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Overall Feedback</td>
+                                    <td>{{selectedTrip.driverInfo.avg | number:2}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                    </uib-tab>
+                    <uib-tab index="1" heading="Rider Info">
+                        <div class="table-responsive">
+                            <table width="100%" class="table table-bordered table-striped ">
+                                <tr>
+                                    <td colspan="2">
+                                        <img ng-src="{{selectedTrip.riderInfo.profileImage ? selectedTrip.riderInfo.profileImage:'assets/images/default.png' }}"
+                                             style="height:100px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Name</td>
+                                    <td><label>{{selectedTrip.riderInfo.name}}</label></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td><label>{{selectedTrip.riderInfo.phone}} </label></td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>{{selectedTrip.riderInfo.email}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Gender</td>
+                                    <td> {{selectedTrip.riderInfo.gender}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Age</td>
+                                    <td>{{selectedTrip.riderInfo.age}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Total Rides</td>
+                                    <td>{{selectedTrip.riderInfo.ridesTotal}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Today's Rides</td>
+                                    <td>{{selectedTrip.riderInfo.ridesToday}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>

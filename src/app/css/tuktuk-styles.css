@@ -23,6 +23,17 @@ input[type="radio"]{
     position: absolute;
     z-index: 1;
 }
+.time-picker .btn-link {
+    font-weight: 100;
+    color: #333;
+    border-radius: 0 !important;
+    border: none !important;
+    margin: 0;
+    padding: 0;
+}
+.time-picker .btn-link .glyphicon{
+    font-size: 10px;
+}
 #matrixChart svg {
     display: inline-block;
     position: relative;
