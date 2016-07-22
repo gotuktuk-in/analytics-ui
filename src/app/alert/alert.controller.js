@@ -22,14 +22,54 @@
         vm.searchTable = function () {
             $scope.tableParams.reload()
         }
-        vm.selectDriver= function (row) {
-            if(vm.selectedDrivers.length<=10)
+        vm.selectDriver= function (row , id) {
+
+            if(row.selected && vm.selectedDrivers.length<10)
             {
                 vm.selectedDrivers.push(row)
             }
-            else {
+            else
+            {
+                if(row.selected)
+                {
+                    row.selected = false;
+                    alert("You have selected maximum allowed drivers.")
+                }
+                else {
+                    var index = _.indexOf(_.pluck(vm.selectedDrivers, 'driver_id'), id);//_.findWhere(vm.selectedDrivers, {driver_id:id})
+                    vm.selectedDrivers.splice(index, 1)
+                }
+            }
+           /* if(vm.selectedDrivers.length<10)
+            {
+                if(row.selected)
+                {
+                    vm.selectedDrivers.push(row)
+
+                }
 
             }
+            else
+            {
+                if(row.selected  && vm.selectedDrivers.length>0 )
+                {
+
+                }
+              //  row.selected = false
+                if( row.selected && vm.selectedDrivers.length>0)
+                {
+                    if(!row.selected){
+                        var index = _.indexOf(_.pluck(vm.selectedDrivers, 'driver_id'), id);//_.findWhere(vm.selectedDrivers, {driver_id:id})
+                        vm.selectedDrivers.splice(index, 1)
+                    }
+                }
+                return;
+                //confirm("You have selected maximum allowed drivers.")
+            }
+
+*/
+
+
 
         }
         vm.sendPushMsg = function () {
