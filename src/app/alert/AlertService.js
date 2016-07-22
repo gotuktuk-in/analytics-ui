@@ -16,7 +16,7 @@ function AlertService($q, $resource, API) {
   var url = API;
     return $resource(
         "",
-        {id:"@id"},
+        {},
         {
 
             sendNotification: {

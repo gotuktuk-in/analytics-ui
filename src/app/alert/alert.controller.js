@@ -34,6 +34,7 @@
         }
         vm.sendPushMsg = function () {
 
+            vm.formObj.id = moment().unix()
             if( vm.formObj.type=='user')
             {
                 vm.formObj.drivers = []
