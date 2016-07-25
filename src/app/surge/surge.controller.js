@@ -221,7 +221,7 @@
                 newGroup.groupTitle = 'untitled group'
                 newGroup.color = '#cc99ff'//StaticDataService.getRandomColor()
                 newGroup.startTime = moment().add(0, 'm');
-                newGroup.endTime = moment().add(0, 'm');
+                newGroup.endTime = moment().add(15, 'm');
                 $scope.$apply(function () {
                     vm.geohashGroups.push(newGroup)
                 });
