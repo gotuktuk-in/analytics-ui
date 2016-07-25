@@ -49,20 +49,20 @@
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
         vm.newRidersChartOptions = angular.copy(ChartConfigService.multiBarChartOptions);
-        vm.newRidersChartOptions.chart.tooltip= {
+        vm.newRidersChartOptions.chart.tooltip = {
             contentGenerator: function (key, x, y, e, graph) { //return html content
                 var data = key.data
                 var formateDate;
-                if(data.date === 'Others')
+                if (data.date === 'Others')
                     formateDate = 'Above 7 days';
                 else
                     formateDate = moment(PerformanceHandler.getLongDate(data.date.toString())).format('MMMM Do YYYY');
-                var str ='<div class="pd-10 text-left"><span><b>'
-                str += formateDate + ' </b></span>'  + ''
+                var str = '<div class="pd-10 text-left"><span><b>'
+                str += formateDate + ' </b></span>' + ''
                 //str += '<h6>New Rider Registered</h6>' + data.newRiderRegCount + ''
                 str += '<h3 class="no-mr">' + data.y + '<small style="color:#333;"> /' + data.uniqRides + '</small><br><small style="font-size:10px;color:#666;text-transform: uppercase;">Total Rides / Rides(U)</small></h3>'
                 // str += '<h1>Date</h1>' + data.date + '/n'
-                str +='</div>'
+                str += '</div>'
                 return str;
             }
         }
@@ -110,34 +110,13 @@
                 $scope.error = true;
             });
         }
-        vm.newRiders =[ {
-         "values":[
-         {x:1359072000000, y:10,label:'C1.1'},
-         {x:1365116400000, y:30,label:'C1.2'},
-         {x:1357516800000, y:40,label:'C1.3'},
-         ],
-         "bar":true,
-         "key":"Carrier1"
-
-         },
-         {
-         "values":[
-         {x:1359072000000, y:30,label:'C2.1'},
-         {x:1365116400000, y:10,label:'C2.2'},
-         {x:1357516800000, y:79,label:'C2.3'},
-         ],
-         "bar":true,
-         "key":"Carrier2"
-
-         }
-         ]
         function getNewRiders() {
             LiveService.getNewRiders({
                 from: moment(current).subtract(6, 'days').startOf('day').unix(),
                 to: moment(current).endOf('day').unix()
             }, function (response) {
                 vm.newRiders = transformNewRiders(response);
-               console.log('response ', vm.newRiders)
+                console.log('response ', vm.newRiders)
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
@@ -146,12 +125,12 @@
 
         function transformNewRiders(ridresData) {
             var data = []
-            var riders =JSON.parse(angular.toJson(ridresData));
+            var riders = JSON.parse(angular.toJson(ridresData));
             var count = 0
-            var i=0
-            var labelsArr = ['today','1 day ago','2 day ago','3 day ago','4 day ago','5 day ago','6 day ago','Above 7 days']
+            var i = 0
+            var labelsArr = ['today', '1 day ago', '2 day ago', '3 day ago', '4 day ago', '5 day ago', '6 day ago', 'Above 7 days']
 
-            _.each(riders, function(rides){
+            _.each(riders, function (rides) {
                 var obj = {}
                 //obj.key = moment(PerformanceHandler.getLongDate(rides.date)).format('MMMM Do YYYY')
                 obj.key = labelsArr[i]
@@ -166,16 +145,15 @@
             obj.bar = true;
             obj.values = []
             data.push(obj);
-            _.each(riders, function(rides){
+            _.each(riders, function (rides) {
                 var ridesByDay = rides;
-               for (var a=0;a<=7;a++)
-                {
+                for (var a = 0; a <= 7; a++) {
                     data[a].values[count] = {}
                     data[a].values[count].x = PerformanceHandler.getLongDate(ridesByDay.date)
                     data[a].values[count].y = Number(rides.value[a].totalRides)
                     data[a].values[count].uniqRides = Number(rides.value[a].uniqRides)
-                  //  data[a].values[count].newRiderRegCount = Number(rides.value[a].newRiderRegCount)
-                    if(rides.value[a].id === 'Others')
+                    //  data[a].values[count].newRiderRegCount = Number(rides.value[a].newRiderRegCount)
+                    if (rides.value[a].id === 'Others')
                         data[a].values[count].date = rides.value[a].id
                     else
                         data[a].values[count].date = Number(rides.value[a].id)
@@ -196,7 +174,7 @@
             }, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
                 vm.overview = response;
-             }, function (err) {
+            }, function (err) {
                 console.log(err)
                 $scope.error = true;
             });
