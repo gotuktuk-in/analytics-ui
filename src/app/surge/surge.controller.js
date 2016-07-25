@@ -92,11 +92,18 @@
             initSetting()
             getAllGroups()
         }
+        vm.refresh = function () {
+            vm.groupCreation = false;
+            vm.groupEdit = false;
+            initSetting()
+            getAllGroups()
+        }
         vm.removeGeoHash = function (index) {
             vm.geohashArray.splice(index, 1);
         }
         vm.removeGroup = function (id) {
             SurgeService.removeGroup({id: id}, function (response) {
+                vm.refresh()
                 initSetting()
                 getAllGroups()
                 toastr.success(response);
