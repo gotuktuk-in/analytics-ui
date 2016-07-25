@@ -17,6 +17,10 @@
                 rId: $stateParams.riderId
             }, {id: $stateParams.id}, function (response) {
                 $scope.selectedTrip = response;
+                //vm.startPointLn = $scope.selectedTrip.pickUp.ln;
+                //vm.startPointLt = $scope.selectedTrip.pickUp.lt;
+                //vm.endPointLn = $scope.selectedTrip.pickUp.ln;
+                //vm.endPointLt = $scope.selectedTrip.pickUp.lt;
                 vm.snapCodes = $scope.selectedTrip.snapCode;
                 initialize();
             }, function (err) {

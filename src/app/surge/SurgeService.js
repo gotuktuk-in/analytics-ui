@@ -25,11 +25,11 @@ function SurgeService($q, $resource, API) {
             },
             createGroup: {
                 method: 'POST',
-                url:   url + 'surge/create/group/',
+                url:   url + 'surge/create/group/'
                },
             updateSurgeForGroup: {
                 method: 'POST',
-                url:   url + 'surge/apply',
+                url:   url + 'surge/apply'
             },
             createSurge: {
                 method: 'POST',
@@ -38,7 +38,7 @@ function SurgeService($q, $resource, API) {
             },
             removeGroup: {
                 method: 'DELETE',
-                url:   url + 'surge/delete/group/:id',
+                url:   url + 'surge/delete/group/:id/indore/auto'
             },
             updateGroup: {
                 method: 'PUT',
@@ -48,7 +48,7 @@ function SurgeService($q, $resource, API) {
 
             getGroupSetting: {
                 method: 'GET',
-                url:   url + 'surge/apply/group/:id',
+                url:   url + 'surge/apply/group/:id'
             }
 /*            getAcquisition: {
                 method: 'GET',
