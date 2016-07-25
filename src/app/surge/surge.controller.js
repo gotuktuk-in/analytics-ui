@@ -4,29 +4,28 @@
     angular
         .module('tuktukV2Dahboard')
         .controller('SurgeController', SurgeController);
-
     /** @ngInject */
     function SurgeController($scope, $rootScope, NgMap, geohash, SurgeService, toastr, ngDialog, StaticDataService) {
-
         var vm = this;
         vm.map;
         vm.geohashArray = [];
         vm.geohashGroups = []
         vm.setting = {};
-        vm.colors = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
+        //vm.colors = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
         //vm.colors = ["#20b2aa", "#fa8072", "#87ceeb", "#daa520", "#00bfff", "#dc143c", "#87cefa", "#90ee90", "#add8e6", "#d3d3d3"];
+        vm.colors = ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'];
         vm.hstep = 1;
-        vm.mstep = 15;
+        vm.mstep = 5;
         $scope.ismeridian = false;
         $scope.toggle = false;
         vm.groupCreation = false;
         vm.groupEdit = false;
-        vm.precisionArr = [{name: "4", value: 4}, {name: "5", value: 5}, {name: "6", value: 6}, {
+        vm.precisionArr = [{name: "5", value: 5}, {name: "6", value: 6}, {
             name: "7",
             value: 7
         }, {name: "8", value: 8}]
         initSetting()
-        vm.selectedPrecision = vm.precisionArr[3];
+        vm.selectedPrecision = vm.precisionArr[2];
         function initSetting()
         {
             vm.setting.value=''
@@ -34,8 +33,8 @@
             vm.setting.groupTitle = ''
             vm.setting.type = 'multiply'
             vm.setting.geoHashArr = []
-            vm.setting.startTime = moment().add(15, 'm');
-            vm.setting.endTime = moment().add(30, 'm');
+            vm.setting.startTime = moment().add(0, 'm');
+            vm.setting.endTime = moment().add(0, 'm');
             vm.setting.forceConfirm = true
         }
         vm.ShapeClicked = function (e) {
@@ -46,13 +45,10 @@
             vm.setting = findGeohashInArray(geoHash)
             console.log(vm.setting.fromTime)
             console.log(vm.setting.toTime)
-
             var startHour =  vm.setting.fromTime.slice(0,2)
             var startMin =  vm.setting.fromTime.slice(2,4)
-
             var endHour =  vm.setting.toTime.slice(0,2)
             var endMin =  vm.setting.toTime.slice(2,4)
-
             vm.setting.startTime = moment().hour(startHour).minute(startMin);
             vm.setting.endTime = moment().hour(endHour).minute(endMin);
             console.log(vm.setting.startTime)
@@ -96,11 +92,18 @@
             initSetting()
             getAllGroups()
         }
+        vm.refresh = function () {
+            vm.groupCreation = false;
+            vm.groupEdit = false;
+            initSetting()
+            getAllGroups()
+        }
         vm.removeGeoHash = function (index) {
             vm.geohashArray.splice(index, 1);
         }
         vm.removeGroup = function (id) {
             SurgeService.removeGroup({id: id}, function (response) {
+                vm.refresh()
                 initSetting()
                 getAllGroups()
                 toastr.success(response);
@@ -225,8 +228,8 @@
                 newGroup.geoHashArr = []
                 newGroup.groupTitle = 'untitled group'
                 newGroup.color = '#cc99ff'//StaticDataService.getRandomColor()
-                newGroup.startTime = moment().add(15, 'm');
-                newGroup.endTime = moment().add(30, 'm');
+                newGroup.startTime = moment().add(0, 'm');
+                newGroup.endTime = moment().add(15, 'm');
                 $scope.$apply(function () {
                     vm.geohashGroups.push(newGroup)
                 });
@@ -237,23 +240,17 @@
                 $scope.$apply(function () {
                     _.last(vm.geohashGroups).geoHashArr.push(getGeoHashObj(obj.geoHash))
                     vm.setting = _.last(vm.geohashGroups)
-
                 });
                 console.log(vm.setting)
-
             }
             if (vm.groupEdit) {
                 var obj = {};
                 obj.geoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
                 console.log('setting ',vm.setting)
                 $scope.$apply(function () {
-
                     vm.setting.geoHashArr.push(getGeoHashObj(obj.geoHash))
-
                 });
             }
-
         }
-
     }
 })();

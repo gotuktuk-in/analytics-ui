@@ -13,7 +13,7 @@
         vm.formObj.message = {}
         vm.formObj.notificationType = 'push'
         vm.formObj.message.lang = 'en'
-        vm.formObj.type='topic'
+        vm.formObj.type = 'topic'
         vm.selectedDrivers = []
         vm.tabChanged = function (type) {
             console.log('changed', type)
@@ -22,16 +22,13 @@
         vm.searchTable = function () {
             $scope.tableParams.reload()
         }
-        vm.selectDriver= function (row , id) {
+        vm.selectDriver = function (row, id) {
 
-            if(row.selected && vm.selectedDrivers.length<10)
-            {
+            if (row.selected && vm.selectedDrivers.length < 10) {
                 vm.selectedDrivers.push(row)
             }
-            else
-            {
-                if(row.selected)
-                {
+            else {
+                if (row.selected) {
                     row.selected = false;
                     alert("You have selected maximum allowed drivers.")
                 }
@@ -40,43 +37,41 @@
                     vm.selectedDrivers.splice(index, 1)
                 }
             }
-           /* if(vm.selectedDrivers.length<10)
-            {
-                if(row.selected)
-                {
-                    vm.selectedDrivers.push(row)
+            /* if(vm.selectedDrivers.length<10)
+             {
+             if(row.selected)
+             {
+             vm.selectedDrivers.push(row)
 
-                }
+             }
 
-            }
-            else
-            {
-                if(row.selected  && vm.selectedDrivers.length>0 )
-                {
+             }
+             else
+             {
+             if(row.selected  && vm.selectedDrivers.length>0 )
+             {
 
-                }
-              //  row.selected = false
-                if( row.selected && vm.selectedDrivers.length>0)
-                {
-                    if(!row.selected){
-                        var index = _.indexOf(_.pluck(vm.selectedDrivers, 'driver_id'), id);//_.findWhere(vm.selectedDrivers, {driver_id:id})
-                        vm.selectedDrivers.splice(index, 1)
-                    }
-                }
-                return;
-                //confirm("You have selected maximum allowed drivers.")
-            }
+             }
+             //  row.selected = false
+             if( row.selected && vm.selectedDrivers.length>0)
+             {
+             if(!row.selected){
+             var index = _.indexOf(_.pluck(vm.selectedDrivers, 'driver_id'), id);//_.findWhere(vm.selectedDrivers, {driver_id:id})
+             vm.selectedDrivers.splice(index, 1)
+             }
+             }
+             return;
+             //confirm("You have selected maximum allowed drivers.")
+             }
 
-*/
-
+             */
 
 
         }
         vm.sendPushMsg = function () {
 
             vm.formObj.id = moment().unix()
-            if( vm.formObj.type=='user')
-            {
+            if (vm.formObj.type == 'user') {
                 vm.formObj.drivers = []
                 vm.formObj.drivers = _.pluck(vm.selectedDrivers, 'driver_id')
             }
@@ -86,7 +81,7 @@
             AlertService.sendNotification(vm.formObj, function (response) {
                 toastr.success('Notification sent.')
             }, function (error) {
-                toastr.success('Error in sending notification.'+error)
+                toastr.success('Error in sending notification.' + error)
             })
         }
         $scope.tableParams = new NgTableParams({
@@ -122,9 +117,9 @@
                 if (vm.searchTerm && vm.searchTerm != '') {
                     dataObj.term = "name|" + vm.searchTerm
                 }
-               /*  if (vm.statusCodes.value != '') {
-                    dataObj.filterByStatus = vm.statusCodes.value
-                }*/
+                /*  if (vm.statusCodes.value != '') {
+                 dataObj.filterByStatus = vm.statusCodes.value
+                 }*/
                 return DriversService.getTopDrivers(dataObj).$promise.then(function (data) {
 
                     params.total(data.total); // recal. page nav controls
