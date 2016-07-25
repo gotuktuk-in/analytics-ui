@@ -7,12 +7,12 @@
 
     /** @ngInject */
     function OffersController($scope, OfferService, NgTableParams, $element, toastr, ngDialog) {
-        var vm = this
+        var vm = this;
 
-        vm.offers = []
-        vm.drivers = []
-        vm.selectedOffers = []
-        vm.selectedDrivers = []
+        vm.offers = [];
+        vm.drivers = [];
+        vm.selectedOffers = [];
+        vm.selectedDrivers = [];
         vm.offerCheckboxes = {};
         vm.driverCheckboxes = {};
         vm.noDriversSelected = false;
@@ -21,24 +21,24 @@
         vm.filterFields = [{value: "id", name: "Driver ID"},
             {value: "name", name: "Driver Name"},
             {value: "phone", name: "Driver Phone"},
-        ]
+        ];
         vm.addOffer = function (offer) {
             if(!_.find(vm.selectedOffers, {id: offer.id}))
             {
                 vm.selectedOffers.push(offer)
             }
 
-        }
+        };
         vm.removeOffer = function (index) {
             vm.selectedOffers.splice(index, 1)
-        }
+        };
         vm.addDriver = function (driver) {
             if(!_.find(vm.selectedDrivers, {id: driver.id}))
             {
                 vm.selectedDrivers.push(driver)
             }
 
-        }
+        };
         vm.addDrivers = function () {
 
             vm.noDriversSelected = false;
