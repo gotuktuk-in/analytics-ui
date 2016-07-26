@@ -40,11 +40,11 @@
             console.log(encodedString);
             var myLatlng = new google.maps.LatLng(22.717081666666665, 75.87155666666666);
             var myOptions = {
-                zoom: 14,
+                zoom: 13,
                 center: myLatlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                //mapTypeId: google.maps.MapTypeId.ROADMAP
             }
-            var map = new google.maps.Map(document.getElementById("drivers_map"), myOptions);
+            var map = new google.maps.Map(document.getElementById("driversMap"), myOptions);
             var decodedPath = google.maps.geometry.encoding.decodePath(encodedString);
             //var decodedPath = google.maps.geometry.encoding.decodePath("}~kvHmzrr@ba\hnc@jiu@r{Zqx~@hjp@pwEhnc@zhu@zflAbxn@fhjBvqHroaAgcnAp}gAeahAtqGkngAinc@_h|@r{Zad\y|_D}_y@swg@ysg@}llBpoZqa{@xrw@~eBaaX}{uAero@uqGadY}nr@`dYs_NquNgbjAf{l@|yh@bfc@}nr@z}q@i|i@zgz@r{ZhjFr}gApob@ff}@laIsen@dgYhdPvbIren@");
             var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");

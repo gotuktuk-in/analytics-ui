@@ -45,10 +45,10 @@
             vm.setting = findGeohashInArray(geoHash)
             console.log(vm.setting.fromTime)
             console.log(vm.setting.toTime)
-            var startHour =  vm.setting.fromTime.slice(0,2)
-            var startMin =  vm.setting.fromTime.slice(2,4)
-            var endHour =  vm.setting.toTime.slice(0,2)
-            var endMin =  vm.setting.toTime.slice(2,4)
+            var startHour =  vm.setting.fromTime
+            var startMin =  vm.setting.fromTime
+            var endHour =  vm.setting.toTime
+            var endMin =  vm.setting.toTime
             vm.setting.startTime = moment().hour(startHour).minute(startMin);
             vm.setting.endTime = moment().hour(endHour).minute(endMin);
             console.log(vm.setting.startTime)
@@ -175,10 +175,21 @@
             obj.city = $rootScope.city;
             obj.vehicleType = $rootScope.vehicleType;
             obj.driverValue = vm.setting.driverValue;
-
             obj.value = vm.setting.value;
-            obj.fromTime = moment(vm.setting.startTime).format('Hmm')//moment.unix(vm.setting.selectedDates.startDate);
-            obj.toTime = moment(vm.setting.endTime).format('Hmm')//moment.unix(vm.setting.selectedDates.endDate);
+
+            var fromTimeUtc = moment.utc(vm.setting.startTime).format('Hmm');
+            var toTimeUtc = moment.utc(vm.setting.endTime).format('Hmm');
+            if(fromTimeUtc.length<4){
+                obj.fromTime = '0' + fromTimeUtc
+            }else{
+                obj.fromTime = fromTimeUtc
+            }
+            if(toTimeUtc.length<4){
+                obj.toTime = '0' + toTimeUtc
+            }else{
+                obj.toTime = toTimeUtc
+            }
+
             obj.type = vm.setting.type;
             obj.forceConfirm = vm.setting.forceConfirm ? 1 : 0
             console.log(obj)

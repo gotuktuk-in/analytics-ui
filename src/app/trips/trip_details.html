@@ -1,8 +1,11 @@
 <div class="content">
     <div class="content-div">
-        <ng-map id="drivers_map" style="height:100%">
-            <!--<marker icon="http://www.cliparthut.com/clip-arts/823/arrowhead-clip-art-823528.png"  position="{{selectedTrip.pickUp.ln}}, {{selectedTrip.pickUp.lt}}" ></marker>-->
+        <ng-map id="driversMap" style="width:100%; height:100%;" zoom="16">
+
+            <marker icon="http://www.cliparthut.com/clip-arts/823/arrowhead-clip-art-823528.png"
+                    icon.scale="0.1" position="{{selectedTrip.pickUp.ln}}, {{selectedTrip.pickUp.lt}}"></marker>
         </ng-map>
+
         <div class="tabs-view-2">
             <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}"
                     class="btn btn-default tabs-toggle-btn map-btn" title="Show More...">
