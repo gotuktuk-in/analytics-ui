@@ -83,9 +83,11 @@
                                     <label class="col-sm-3 control-label" >Geo Hash</label>
                                     <div class="col-sm-9">
                                         <div ng-if="vm.setting.geoHashArr.length>0">
-                                            <span ng-repeat="box in vm.setting.geoHashArr"  class="label label-info">{{box.geoHash}}<button class="label-btn" ng-click="vm.removeGeoHash($index)">
-                                                x
-                                            </button></span>
+                                            <span ng-repeat="box in vm.setting.geoHashArr"  class="label label-info">{{box.geoHash}}
+                                                <!--<button class="label-btn" ng-click="vm.removeGeoHash($index)">-->
+                                                <!--x-->
+                                            <!--</button>-->
+                                            </span>
                                         </div>
                                         <div ng-if="vm.setting.geoHashArr.length<=0">No geohash created</div>
 
