@@ -26,10 +26,9 @@
         }, {name: "8", value: 8}]
         initSetting()
         vm.selectedPrecision = vm.precisionArr[2];
-        function initSetting()
-        {
-            vm.setting.value=''
-            vm.setting.driverValue=''
+        function initSetting() {
+            vm.setting.value = ''
+            vm.setting.driverValue = ''
             vm.setting.groupTitle = ''
             vm.setting.type = 'multiply'
             vm.setting.geoHashArr = []
@@ -37,23 +36,32 @@
             vm.setting.endTime = moment().add(0, 'm');
             vm.setting.forceConfirm = true
         }
+
         vm.ShapeClicked = function (e) {
-              vm.groupEdit = true;
+            vm.groupEdit = true;
             vm.groupCreation = false;
             var geoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
 
-            vm.setting = findGeohashInArray(geoHash)
-            console.log(vm.setting.fromTime)
-            console.log(vm.setting.toTime)
-            var startHour =  vm.setting.fromTime
-            var startMin =  vm.setting.fromTime
-            var endHour =  vm.setting.toTime
-            var endMin =  vm.setting.toTime
-            vm.setting.startTime = moment().hour(startHour).minute(startMin);
-            vm.setting.endTime = moment().hour(endHour).minute(endMin);
-            console.log(vm.setting.startTime)
-            console.log(vm.setting.endTime)
-            console.log('setting ',vm.setting)
+            vm.setting = findGeohashInArray(geoHash);
+            console.log(vm.setting.fromTime);
+            console.log(vm.setting.toTime);
+            var startHour = vm.setting.fromTime.slice(0, 2);
+            var startMin = vm.setting.fromTime.slice(2, 4);
+            var endHour = vm.setting.toTime.slice(0, 2);
+            var endMin = vm.setting.toTime.slice(2, 4);
+
+            var startDate = new Date();
+            startDate.setUTCHours(startHour,startMin,0,0);
+            var newStartHrs = startDate.getHours();
+            var newStartMin = startDate.getMinutes();
+
+            var endDate = new Date();
+            endDate.setUTCHours(endHour,endMin,0,0);
+            var newEndHrs = endDate.getHours();
+            var newEndMin = endDate.getMinutes();
+
+            vm.setting.startTime = moment().hour(newStartHrs).minute(newStartMin);
+            vm.setting.endTime = moment().hour(newEndHrs).minute(newEndMin);
             getGroupSetting(vm.setting.groupId)
         }
         vm.ShapeDblClicked = function (e) {
@@ -104,7 +112,7 @@
         vm.removeGroup = function (id) {
             SurgeService.removeGroup({id: id}, function (response) {
                 vm.refresh()
-                initSetting()
+                //initSetting()
                 getAllGroups()
                 toastr.success(response);
             }, function (error) {
@@ -135,7 +143,7 @@
                 vm.setting.driverValue = response.driverValue;
                 vm.setting.value = response.value;
                 vm.setting.type = response.type;
-                vm.setting.forceConfirm = response.forceConfirm ? true :false
+                vm.setting.forceConfirm = response.forceConfirm ? true : false
                 ;
             }, function (error) {
                 toastr.success(error);
@@ -147,7 +155,7 @@
             SurgeService.getGroups({precision: vm.selectedPrecision.value}, function (response) {
                 var allGroups = response
                 //    vm.geohashGroups = response;
-                var i=0
+                var i = 0
                 _.each(allGroups, function (group) {
                     var newObj = group
                     newObj.color = vm.colors[i]//StaticDataService.getRandomColor()
@@ -179,22 +187,21 @@
 
             var fromTimeUtc = moment.utc(vm.setting.startTime).format('Hmm');
             var toTimeUtc = moment.utc(vm.setting.endTime).format('Hmm');
-            if(fromTimeUtc.length<4){
+            if (fromTimeUtc.length < 4) {
                 obj.fromTime = '0' + fromTimeUtc
-            }else{
+            } else {
                 obj.fromTime = fromTimeUtc
             }
-            if(toTimeUtc.length<4){
+            if (toTimeUtc.length < 4) {
                 obj.toTime = '0' + toTimeUtc
-            }else{
+            } else {
                 obj.toTime = toTimeUtc
             }
 
             obj.type = vm.setting.type;
             obj.forceConfirm = vm.setting.forceConfirm ? 1 : 0
             console.log(obj)
-            if(vm.groupCreation)
-            {
+            if (vm.groupCreation) {
                 SurgeService.createSurge(obj, function (response) {
                     vm.groupCreation = false;
                     initSetting()
@@ -204,8 +211,7 @@
                     toastr.success(error);
                 })
             }
-            else
-            {
+            else {
                 obj.groupId = vm.setting.groupId
                 SurgeService.updateGroup(obj, function (response) {
                     vm.groupEdit = false;
@@ -257,7 +263,6 @@
             if (vm.groupEdit) {
                 var obj = {};
                 obj.geoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
-                console.log('setting ',vm.setting)
                 $scope.$apply(function () {
                     vm.setting.geoHashArr.push(getGeoHashObj(obj.geoHash))
                 });

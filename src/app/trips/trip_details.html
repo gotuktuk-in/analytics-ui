@@ -1,9 +1,24 @@
 <div class="content">
     <div class="content-div">
-        <ng-map id="driversMap" style="width:100%; height:100%;" zoom="16">
+        <ng-map id="driversMap" center="indore" style="width:100%; height:100%;" zoom="14">
 
-            <marker icon="http://www.cliparthut.com/clip-arts/823/arrowhead-clip-art-823528.png"
-                    icon.scale="0.1" position="{{selectedTrip.pickUp.ln}}, {{selectedTrip.pickUp.lt}}"></marker>
+
+            <div>
+                <marker icon="{
+        url:'assets/images/icons/marker-green.svg',
+        scaledSize:[30,30],
+        origin: [0,0],
+        anchor: [15,15]
+      }" position="{{selectedTrip.pickUp.lt}}, {{selectedTrip.pickUp.ln}}">
+                </marker>
+                <marker icon="{
+        url:'assets/images/icons/marker-red.svg',
+        scaledSize:[30,30],
+        origin: [0,0],
+        anchor: [15,15]
+      }" position="{{selectedTrip.drop.lt}}, {{selectedTrip.drop.ln}}">
+                </marker>
+            </div>
         </ng-map>
 
         <div class="tabs-view-2">
@@ -24,7 +39,8 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yy 'at' h:mma"}}</h4>
+                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yy 'at'
+                                            h:mma"}}</h4>
                                         <span>date</span>
                                     </div>
                                 </div>
