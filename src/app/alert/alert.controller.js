@@ -115,7 +115,7 @@
                     count: params.count()
                 }
                 if (vm.searchTerm && vm.searchTerm != '') {
-                    dataObj.term = "name|" + vm.searchTerm
+                    dataObj.filterByName= "name" + vm.searchTerm
                 }
                 /*  if (vm.statusCodes.value != '') {
                  dataObj.filterByStatus = vm.statusCodes.value

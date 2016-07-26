@@ -31,7 +31,7 @@
                                     <label class="radio-inline"><input type="radio" ng-model="vm.formObj.message.lang"
                                                                        value="en" name="inputLang">English</label>
                                     <label class="radio-inline"><input type="radio" ng-model="vm.formObj.message.lang"
-                                                                       value="hin" name="inputLang">Hindi</label>
+                                                                       value="hi" name="inputLang">Hindi</label>
 
                                     <p class="help-block"></p>
                                     <br>
@@ -109,7 +109,7 @@
                                     <label class="radio-inline"><input type="radio" ng-model="vm.formObj.message.lang"
                                                                        value="en" name="inputLang">English</label>
                                     <label class="radio-inline"><input type="radio" ng-model="vm.formObj.message.lang"
-                                                                       value="hin" name="inputLang">Hindi</label>
+                                                                       value="hi" name="inputLang">Hindi</label>
 
                                     <p class="help-block"></p>
                                     <br>
@@ -181,7 +181,7 @@
                                     </div>
                             <div class="inline-group col-md-6 col-sm-12 col-xs-12">
                                 <input ng-model="vm.searchTerm" class="form-control input-search-term"
-                                       placeholder="Driver Name"/>
+                                       placeholder="Driver Name" />
                             </div>
                             <div class="inline-group col-md-4 col-sm-12 col-xs-12 no-mr no-pd">
                                 <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-small">
@@ -211,10 +211,7 @@
                                                 </a>
                                             </td>
                                             <td data-title="'Vehicle Number'" sortable="'vNumber'" class="text-center">
-                                                <a target="_blank"
-                                                   ui-sref="home.drivers_detail({driverId:row.driver_id})">
                                                     {{row.vNumber}}
-                                                </a>
                                             </td>
                                         </tr>
                                         </tbody>
