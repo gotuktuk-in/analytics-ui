@@ -38,31 +38,41 @@
         }
 
         vm.ShapeClicked = function (e) {
-            vm.groupEdit = true;
-            vm.groupCreation = false;
-            var geoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
+            //if(vm.setting.groupId) {
 
-            vm.setting = findGeohashInArray(geoHash);
-            console.log(vm.setting.fromTime);
-            console.log(vm.setting.toTime);
-            var startHour = vm.setting.fromTime.slice(0, 2);
-            var startMin = vm.setting.fromTime.slice(2, 4);
-            var endHour = vm.setting.toTime.slice(0, 2);
-            var endMin = vm.setting.toTime.slice(2, 4);
 
-            var startDate = new Date();
-            startDate.setUTCHours(startHour,startMin,0,0);
-            var newStartHrs = startDate.getHours();
-            var newStartMin = startDate.getMinutes();
+                var geoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
 
-            var endDate = new Date();
-            endDate.setUTCHours(endHour,endMin,0,0);
-            var newEndHrs = endDate.getHours();
-            var newEndMin = endDate.getMinutes();
+                vm.setting = findGeohashInArray(geoHash);
+            if(vm.setting.groupId) {
+                vm.groupEdit = true;
+                vm.groupCreation = false;
+                console.log(vm.setting.fromTime);
+                console.log(vm.setting.toTime);
+                var startHour = vm.setting.fromTime.slice(0, 2);
+                var startMin = vm.setting.fromTime.slice(2, 4);
+                var endHour = vm.setting.toTime.slice(0, 2);
+                var endMin = vm.setting.toTime.slice(2, 4);
 
-            vm.setting.startTime = moment().hour(newStartHrs).minute(newStartMin);
-            vm.setting.endTime = moment().hour(newEndHrs).minute(newEndMin);
-            getGroupSetting(vm.setting.groupId)
+                var startDate = new Date();
+                startDate.setUTCHours(startHour, startMin, 0, 0);
+                var newStartHrs = startDate.getHours();
+                var newStartMin = startDate.getMinutes();
+
+                var endDate = new Date();
+                endDate.setUTCHours(endHour, endMin, 0, 0);
+                var newEndHrs = endDate.getHours();
+                var newEndMin = endDate.getMinutes();
+
+                vm.setting.startTime = moment().hour(newStartHrs).minute(newStartMin);
+                vm.setting.endTime = moment().hour(newEndHrs).minute(newEndMin);
+                getGroupSetting(vm.setting.groupId)
+            }
+            else
+            {
+                vm.groupEdit = false;
+                vm.groupCreation = true;
+            }
         }
         vm.ShapeDblClicked = function (e) {
             e.stop();
@@ -106,7 +116,7 @@
             initSetting()
             getAllGroups()
         }
-        vm.removeGeoHash = function (index) {
+        vm.removeGeoHash = function () {
             vm.geohashArray.splice(index, 1);
         }
         vm.removeGroup = function (id) {
@@ -119,25 +129,25 @@
                 toastr.success(error);
             })
         }
-        vm.editGroup = function (id, index) {
-
-            getGroupSetting(id)
-            vm.geohashArray = []
-            _.each(vm.geohashGroups[index].geohash, function (hash) {
-                vm.geohashArray.push(getGeoHashObj(hash))
-            })
-            //   vm.groupName = vm.selectedGroup.groupTitle;
-            /*   vm.geohashArray = []
-             _.each(vm.geohashGroups[index].geohash, function(hash){
-             vm.geohashArray.push(getGeoHashObj(hash))
-             })*/
-            /*   ngDialog.open({
-             template: 'editgroupTemplate.html',
-             className: 'ngdialog-theme-plain surge-dialog',
-             scope: $scope,
-             overlay:true
-             });*/
-        }
+        //vm.editGroup = function (id, index) {
+        //
+        //    getGroupSetting(id)
+        //    vm.geohashArray = []
+        //    _.each(vm.geohashGroups[index].geohash, function (hash) {
+        //        vm.geohashArray.push(getGeoHashObj(hash))
+        //    })
+        //    //   vm.groupName = vm.selectedGroup.groupTitle;
+        //    /*   vm.geohashArray = []
+        //     _.each(vm.geohashGroups[index].geohash, function(hash){
+        //     vm.geohashArray.push(getGeoHashObj(hash))
+        //     })*/
+        //    /*   ngDialog.open({
+        //     template: 'editgroupTemplate.html',
+        //     className: 'ngdialog-theme-plain surge-dialog',
+        //     scope: $scope,
+        //     overlay:true
+        //     });*/
+        //}
         function getGroupSetting(id) {
             SurgeService.getGroupSetting({id: id}, function (response) {
                 vm.setting.driverValue = response.driverValue;
