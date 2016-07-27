@@ -22,38 +22,38 @@
                 //vm.endPointLn = $scope.selectedTrip.pickUp.ln;
                 //vm.endPointLt = $scope.selectedTrip.pickUp.lt;
                 vm.snapCodes = $scope.selectedTrip.snapCode;
-                //initialize();
+                initialize();
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
             });
 
 
-            //function initialize() {
-            //    var encodedString = vm.snapCodes;
-            //
-            //    function replaceAll(search, replacement) {
-            //        var target = this;
-            //        return target.split(search).join(replacement);
-            //    };
-            //    var myLatlng = new google.maps.LatLng(22.717081666666665, 75.87155666666666);
-            //    var myOptions = {
-            //        zoom: 14,
-            //        center: myLatlng,
-            //        mapTypeId: google.maps.MapTypeId.ROADMAP
-            //    }
-            //    var map = new google.maps.Map(document.getElementById("driversMap"), myOptions);
-            //    var decodedPath = google.maps.geometry.encoding.decodePath(encodedString);
-            //    var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-            //    var setRegion = new google.maps.Polyline({
-            //        path: decodedPath,
-            //        levels: decodedLevels,
-            //        strokeColor: "#333",
-            //        strokeOpacity: 1.0,
-            //        strokeWeight: 2,
-            //        map: map
-            //    });
-            //}
+            function initialize() {
+                var encodedString = vm.snapCodes;
+
+                function replaceAll(search, replacement) {
+                    var target = this;
+                    return target.split(search).join(replacement);
+                };
+                var myLatlng = new google.maps.LatLng(22.717081666666665, 75.87155666666666);
+                var myOptions = {
+                    zoom: 14,
+                    center: myLatlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+                var map = new google.maps.Map(document.getElementById("driversMap"), myOptions);
+                var decodedPath = google.maps.geometry.encoding.decodePath(encodedString);
+                //var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+                var setRegion = new google.maps.Polyline({
+                    path: decodedPath,
+                    //levels: decodedLevels,
+                    strokeColor: "#333",
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2,
+                    map: map
+                });
+            }
             //function decodeLevels(encodedLevelsString) {
             //    var decodedLevels = [];
             //
@@ -63,6 +63,7 @@
             //    }
             //    return decodedLevels;
             //}
+
 
         }
 

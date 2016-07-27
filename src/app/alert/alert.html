@@ -12,7 +12,7 @@
             <uib-tabset active="active">
                 <uib-tab index="0" heading="All Drivers" select="vm.tabChanged('topic')">
                     <div class="row">
-                        <div class="col-md-8 col-sm-12 col-xs-12">
+                        <div class="col-md-7 col-sm-12 col-xs-12">
                             <form role="form" name="msgForm" novalidate>
                                 <div class="form-group col-md-6">
                                     <label class="control-label">TYPE</label><br>
@@ -37,7 +37,7 @@
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="title" class="control-label">Title</label>
+                                    <label class="control-label">Title</label>
                                     <input ng-model="vm.formObj.message.title" type="text" placeholder="Enter Title"
                                            name="inputTitle" class="form-control" required>
 
@@ -48,7 +48,7 @@
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="comment">MESSAGE</label>
+                                    <label>MESSAGE</label>
                                     <textarea ng-model="vm.formObj.message.message" class="form-control" rows="5"
                                               name="inputMessage" required></textarea>
 
@@ -61,13 +61,13 @@
                                     <br>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="URL" class="control-label">URL</label>
+                                    <label class="control-label">URL</label>
                                     <input ng-model="vm.formObj.message.url" type="text" placeholder="Enter URL"
                                            name="inputURL" class="form-control">
                                     <br>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="URL" class="control-label">Expiration</label>
+                                    <label class="control-label">Expiration</label>
                                     <select class="form-control" style="padding:5px 10px; border-radius: 4px;">
                                         <option>01 hr</option>
                                         <option>12 hr</option>
@@ -90,7 +90,7 @@
                 </uib-tab>
                 <uib-tab index="1" heading="Selected Driver" select="vm.tabChanged('user')">
                     <div class="row">
-                        <div class="col-md-8 col-sm-12 col-xs-12">
+                        <div class="col-md-7 col-sm-12 col-xs-12">
                             <form role="form" name="msgForm1">
                                 <div class="form-group col-md-6">
                                     <label class="control-label">TYPE</label><br>
@@ -115,7 +115,7 @@
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="title" class="control-label">Title</label>
+                                    <label class="control-label">Title</label>
                                     <input ng-model="vm.formObj.message.title" type="text" placeholder="Enter Title"
                                            name="inputTitle" class="form-control" required>
 
@@ -126,14 +126,14 @@
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="comment">DRIVERS</label><br>
+                                    <label>DRIVERS</label><br>
 
                                     <div ng-repeat="driver in vm.selectedDrivers" class="badge">{{driver.name}}</div>
                                     <p class="help-block"></p>
                                     <br>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="comment">MESSAGE</label>
+                                    <label>MESSAGE</label>
                                     <textarea ng-model="vm.formObj.message.message" class="form-control" rows="5"
                                               name="inputMessage" required></textarea>
 
@@ -147,7 +147,7 @@
                                     <br>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="URL" class="control-label">URL</label>
+                                    <label class="control-label">URL</label>
                                     <input ng-model="vm.formObj.message.url" type="text" placeholder="Enter URL"
                                            name="inputURL" class="form-control">
 
@@ -155,7 +155,7 @@
                                     <br>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <label for="URL" class="control-label">Expiration</label>
+                                    <label class="control-label">Expiration</label>
                                     <select class="form-control" style="padding:5px 10px; border-radius: 4px;">
                                         <option>01 hr</option>
                                         <option>12 hr</option>
@@ -174,10 +174,10 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="col-md-5 col-sm-12 col-xs-12">
                             <form role="form" name="msgForm1">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                <label for="URL" class="control-label">SELECT DRIVERS</label>
+                                <label class="control-label">SELECT DRIVERS</label>
                                     </div>
                             <div class="inline-group col-md-6 col-sm-12 col-xs-12">
                                 <input ng-model="vm.searchTerm" class="form-control input-search-term"
