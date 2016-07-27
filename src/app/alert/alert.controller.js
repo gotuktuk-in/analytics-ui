@@ -80,6 +80,11 @@
             }
             AlertService.sendNotification(vm.formObj, function (response) {
                 toastr.success('Notification sent.')
+                vm.formObj = {}
+                vm.formObj.notificationType = 'push'
+                vm.formObj.message.lang = 'en'
+                vm.selectedDrivers = ''
+
             }, function (error) {
                 toastr.success('Error in sending notification.' + error)
             })
@@ -115,7 +120,7 @@
                     count: params.count()
                 }
                 if (vm.searchTerm && vm.searchTerm != '') {
-                    dataObj.filterByName= "name" + vm.searchTerm
+                    dataObj.term = "name|" + vm.searchTerm
                 }
                 /*  if (vm.statusCodes.value != '') {
                  dataObj.filterByStatus = vm.statusCodes.value
