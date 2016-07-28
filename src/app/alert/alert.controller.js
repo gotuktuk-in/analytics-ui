@@ -15,10 +15,11 @@
         vm.formObj.message.lang = 'en'
         vm.formObj.type = 'topic'
         vm.selectedDrivers = []
-        vm.filterFields = [{value: "id", name: "Driver ID"},
+        vm.filterFields = [
             {value: "name", name: "Driver Name"},
             {value: "phone", name: "Driver Phone"},
         ];
+        vm.filterTerm = vm.filterFields[0];
         vm.tabChanged = function (type) {
             console.log('changed', type)
             vm.formObj.type = type;

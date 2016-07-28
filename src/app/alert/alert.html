@@ -182,19 +182,18 @@
                                 <input type="text" ng-model="vm.searchTerm" placeholder="Driver Name"
                                        class="form-control">
                             </div>
+                            <div class="input-group col-md-4 col-sm-3 col-xs-12">
+                                <select ng-model="vm.filterTerm" class="form-control"
+                                        ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
+                                </select>
+                            </div>
                             <div class="input-group col-md-1 col-sm-1 col-xs-12 text-center">
                                 <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-search"
                                         type="submit">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </div>
-                            <div class="input-group col-md-4 col-sm-3 col-xs-12">
-                                <select ng-model="vm.filterTerm" class="form-control"
-                                        ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
-                                    <option value="" disabled>Select Filter</option>
-                                </select>
-                            </div>
                             <div class="input-group col-md-1 col-sm-1 col-xs-12 text-left">
-                                <button ng-click="vm.clearSearch()" class="btn btn-search" type="submit">
+                                <button ng-disabled="!vm.searchTerm" ng-click="vm.clearSearch()" class="btn btn-search" type="submit">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                             </div>
                         </form>
@@ -223,19 +222,24 @@
                                        class="table table-bordered table-striped text-center">
                                     <tbody>
 
-                                    <tr ng-repeat="row in $data track by $index">
+                                    <tr ng-repeat="row in $data track by $index" ng-if="!tblNoData">
                                         <td data-title="'#'" class="text-center">
                                             <input type="checkbox" ng-model="row.selected"
-                                                   ng-change="vm.selectDriver(row, row.driver_id)">
+                                                   ng-change="vm.selectDriver(row, row.id)">
                                         </td>
                                         <td data-title="'Name'" sortable="'name'" class="text-left">
                                             <a target="_blank"
-                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                               ui-sref="home.drivers_detail({driverId:row.id})">
                                                 {{row.name}}
                                             </a>
                                         </td>
                                         <td data-title="'Phone'" sortable="'phone'" class="text-center">
                                             {{row.phone}}
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="tblNoData">
+                                        <td colspan="3">
+                                            no result found
                                         </td>
                                     </tr>
                                     </tbody>
