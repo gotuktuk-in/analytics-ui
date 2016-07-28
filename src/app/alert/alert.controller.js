@@ -15,6 +15,10 @@
         vm.formObj.message.lang = 'en'
         vm.formObj.type = 'topic'
         vm.selectedDrivers = []
+        vm.filterFields = [{value: "id", name: "Driver ID"},
+            {value: "name", name: "Driver Name"},
+            {value: "phone", name: "Driver Phone"},
+        ];
         vm.tabChanged = function (type) {
             console.log('changed', type)
             vm.formObj.type = type;
@@ -125,8 +129,12 @@
                     count: params.count()
                 }
                 if (vm.searchTerm && vm.searchTerm != '') {
-                    dataObj.term = "phone|" + vm.searchTerm
+                    dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm
+
                 }
+               /* if (vm.searchTerm && vm.searchTerm != '') {
+                    dataObj.term = "phone|" + vm.searchTerm
+                }*/
                 /*  if (vm.statusCodes.value != '') {
                  dataObj.filterByStatus = vm.statusCodes.value
                  }*/
@@ -138,6 +146,7 @@
                     }
                     else {
                         $scope.tblNoData = true
+                        return []
                     }
                     return data.data;
                 });

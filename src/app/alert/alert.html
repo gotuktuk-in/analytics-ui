@@ -187,6 +187,12 @@
                                         type="submit">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                             </div>
+                            <div class="input-group col-md-4 col-sm-3 col-xs-12">
+                                <select ng-model="vm.filterTerm" class="form-control"
+                                        ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
+                                    <option value="" disabled>Select Filter</option>
+                                </select>
+                            </div>
                             <div class="input-group col-md-1 col-sm-1 col-xs-12 text-left">
                                 <button ng-click="vm.clearSearch()" class="btn btn-search" type="submit">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
