@@ -81,6 +81,7 @@
             AlertService.sendNotification(vm.formObj, function (response) {
                 toastr.success('Notification sent.')
                 vm.formObj = {}
+                vm.formObj.message = {}
                 vm.formObj.notificationType = 'push'
                 vm.formObj.message.lang = 'en'
                 vm.selectedDrivers = ''
