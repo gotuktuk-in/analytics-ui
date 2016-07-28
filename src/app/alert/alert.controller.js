@@ -31,6 +31,15 @@
             vm.searchTerm = ""
             $scope.tableParams.reload()
         }
+        vm.deselectAll = function () {
+            vm.selectedDrivers = [];
+            angular.forEach($scope.tableParams.data, function (item) {
+               if(item && item.selected)
+               {
+                   item.selected = false
+               }
+            });
+        }
         vm.selectDriver = function (row, id) {
 
             if (row.selected && vm.selectedDrivers.length < 10) {
@@ -93,7 +102,7 @@
                 vm.formObj.message = {}
                 vm.formObj.notificationType = 'push'
                 vm.formObj.message.lang = 'en'
-                vm.selectedDrivers = ''
+                vm.deselectAll()
 
             }, function (error) {
                 toastr.success('Error in sending notification.' + error)
