@@ -57,6 +57,9 @@
                                      ng-if="msgForm.inputMessage.$touched">
                                     <div ng-message="required">This field is required</div>
                                 </div>
+                                <p class="help-block"><a
+                                        href="https://chrome.google.com/webstore/detail/google-input-tools/mclkkofklkfljcocdinagocijmpgbhab"
+                                        target="_blank">(Download Chrome Extensions)</a></p>
                                 <br>
                             </div>
                             <div class="form-group col-md-6">
@@ -124,7 +127,7 @@
                                 <p class="help-block"></p>
                                 <br>
                             </div>
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-12" ng-if="vm.selectedDrivers.length>0">
                                 <label>DRIVERS</label><br>
 
                                 <div ng-repeat="driver in vm.selectedDrivers" class="badge">{{driver.name}}</div>
@@ -227,13 +230,13 @@
                                             <input type="checkbox" ng-model="row.selected"
                                                    ng-change="vm.selectDriver(row, row.id)">
                                         </td>
-                                        <td data-title="'Name'" sortable="'name'" class="text-left">
+                                        <td data-title="'Name'" class="text-left">
                                             <a target="_blank"
                                                ui-sref="home.drivers_detail({driverId:row.id})">
                                                 {{row.name}}
                                             </a>
                                         </td>
-                                        <td data-title="'Phone'" sortable="'phone'" class="text-center">
+                                        <td data-title="'Phone'" class="text-center">
                                             {{row.phone}}
                                         </td>
                                     </tr>
@@ -255,3 +258,5 @@
 
 
 </div>
+<br>
+<br>
