@@ -59,25 +59,23 @@
                     url: "assets/images/icons/marker-green.svg", // url
                     scaledSize: new google.maps.Size(30, 30), // scaled size
                     origin: new google.maps.Point(0, 0), // origin
-                    anchor: new google.maps.Point(30, 30) // anchor
+                    anchor: new google.maps.Point(0, 0) // anchor
                 };
                 var icon2 = {
                     url: "assets/images/icons/marker-red.svg", // url
                     scaledSize: new google.maps.Size(30, 30), // scaled size
                     origin: new google.maps.Point(0, 0), // origin
-                    anchor: new google.maps.Point(30, 30) // anchor
+                    anchor: new google.maps.Point(0, 0) // anchor
                 };
 
 
                 var marker1 = new google.maps.Marker({
                     position: new google.maps.LatLng(vm.startPointLt, vm.startPointLn),
-                    //icon: 'assets/images/icons/marker-green.svg',
                     icon: icon1,
                     map: map
                 });
                 var marker2 = new google.maps.Marker({
                     position: new google.maps.LatLng(vm.endPointLt, vm.endPointLn),
-                    //icon: 'assets/images/icons/marker-red.svg',
                     icon: icon2,
                     map: map
                 });
