@@ -6,7 +6,7 @@
         .controller('AlertController', AlertController);
 
     /** @ngInject */
-    function AlertController($scope, $rootScope, AlertService, toastr, NgTableParams, DriversService) {
+    function AlertController($scope, $rootScope, AlertService, toastr, NgTableParams, OfferService) {
         var vm = this;
         var current = moment()
         vm.formObj = {}
@@ -125,16 +125,16 @@
                 /*  if (vm.statusCodes.value != '') {
                  dataObj.filterByStatus = vm.statusCodes.value
                  }*/
-                return DriversService.getTopDrivers(dataObj).$promise.then(function (data) {
+                return OfferService.getDrivers(dataObj).$promise.then(function (data) {
 
                     params.total(data.total); // recal. page nav controls
-                    if (data.length > 0) {
+                    if (data.data.length > 0) {
                         $scope.tblNoData = false
                     }
                     else {
                         $scope.tblNoData = true
                     }
-                    return data;
+                    return data.data;
                 });
             }
         });
