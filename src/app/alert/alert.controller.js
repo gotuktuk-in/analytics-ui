@@ -125,7 +125,7 @@
                     count: params.count()
                 }
                 if (vm.searchTerm && vm.searchTerm != '') {
-                    dataObj.term = "phone|" + vm.searchTerm
+                    dataObj.term = "name|" + vm.searchTerm
                 }
                 /*  if (vm.statusCodes.value != '') {
                  dataObj.filterByStatus = vm.statusCodes.value
