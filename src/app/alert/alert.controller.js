@@ -22,6 +22,10 @@
         vm.searchTable = function () {
             $scope.tableParams.reload()
         }
+        vm.clearSearch = function () {
+            vm.searchTerm = ""
+            $scope.tableParams.reload()
+        }
         vm.selectDriver = function (row, id) {
 
             if (row.selected && vm.selectedDrivers.length < 10) {
@@ -33,7 +37,7 @@
                     alert("You have selected maximum allowed drivers.")
                 }
                 else {
-                    var index = _.indexOf(_.pluck(vm.selectedDrivers, 'driver_id'), id);//_.findWhere(vm.selectedDrivers, {driver_id:id})
+                    var index = _.indexOf(_.pluck(vm.selectedDrivers, 'id'), id);//_.findWhere(vm.selectedDrivers, {driver_id:id})
                     vm.selectedDrivers.splice(index, 1)
                 }
             }
@@ -73,7 +77,7 @@
             vm.formObj.message.id = moment().unix()
             if (vm.formObj.type == 'user') {
                 vm.formObj.drivers = []
-                vm.formObj.drivers = _.pluck(vm.selectedDrivers, 'driver_id')
+                vm.formObj.drivers = _.pluck(vm.selectedDrivers, 'id')
             }
             else {
                 vm.formObj.drivers = []
@@ -121,7 +125,7 @@
                     count: params.count()
                 }
                 if (vm.searchTerm && vm.searchTerm != '') {
-                    dataObj.term = "name|" + vm.searchTerm
+                    dataObj.term = "phone|" + vm.searchTerm
                 }
                 /*  if (vm.statusCodes.value != '') {
                  dataObj.filterByStatus = vm.statusCodes.value
