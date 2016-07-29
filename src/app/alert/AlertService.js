@@ -21,8 +21,13 @@ function AlertService($q, $resource, API) {
 
             sendNotification: {
                 method: 'POST',
-                url:   url + 'notification',
+                url:   url + 'notification'
                },
+            getNotification: {
+                method: 'GET',
+                url:   url + 'notification',
+                isArray:true
+            }
 
         }
     );
