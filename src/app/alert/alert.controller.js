@@ -180,6 +180,20 @@
                 });
             }
         });
+
+        //--------------- msg archive section
+        function getNotificationData() {
+            AlertService.getNotification({
+                //city: $rootScope.city,
+                //vehicle: $rootScope.vehicleType
+            }, function (response) {
+                vm.notification = response;
+            }, function (err) {
+                console.log(err)
+                $scope.error = true;
+            });
+        }
+        getNotificationData();
     }
 
 })();

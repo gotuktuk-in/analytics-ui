@@ -248,12 +248,52 @@
             </uib-tab>
             <uib-tab index="2" heading="Archive">
                 <div class="row">
-                    <div class="col-md-7 col-sm-12 col-xs-12">
-                        <div class="table-responsive" style="max-height: 800px; overflow: auto;">
-                           data
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <table ng-table="msgTableParams"
+                                   class="table table-bordered table-striped text-center">
+                                <tbody>
+
+                                <tr ng-repeat="row in vm.notification">
+                                    <td data-title="'ID'" class="text-center">
+                                        {{row.id}}
+                                    </td>
+                                    <td data-title="'Title'" class="text-left">
+
+                                        {{row.title}}
+                                    </td>
+                                    <td data-title="'Message'" class="text-center">
+                                        {{row.message.message}}
+                                    </td>
+                                    <td data-title="'Send On'" class="text-center">
+                                        {{(row.sendOn)*1000 | date:"dd MMM yy h:mma"}}
+                                    </td>
+                                    <td data-title="'Updated On'" class="text-center">
+                                        {{(row.updatedOn)*1000 | date:"dd MMM yy h:mma"}}
+                                    </td>
+                                    <td data-title="'Expire At'" class="text-center">
+                                        {{(row.message.expireAt)*1000 | date:"dd MMM yy h:mma"}}
+                                    </td>
+                                    <td data-title="'Type'" class="text-center">
+                                        {{row.type}}
+                                    </td>
+                                    <td data-title="'Notification Type'" class="text-center">
+                                        {{row.notificationType}}
+                                    </td>
+
+                                    <td data-title="'Send To'" class="text-center">
+                                        {{row.sendTo[0]}}
+                                    </td>
+                                </tr>
+                                </tr>
+                                <!--<tr >-->
+                                    <!--<td colspan="3">-->
+                                        <!--no result found-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                                </tbody>
                             </table>
                         </div>
-                    </div>
                 </div>
             </uib-tab>
         </uib-tabset>
