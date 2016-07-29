@@ -19,6 +19,13 @@
             {value: "name", name: "Driver Name"},
             {value: "phone", name: "Driver Phone"},
         ];
+        vm.expirationValues = [
+            {value: 1 , name: "1 Hour"},
+            {value: 12 , name: "12 Hour"},
+            {value: 24 , name: "24 Hour"},
+            {value: 25 , name: "1 Week"} ,
+        ];
+        vm.expireAt = vm.expirationValues[0]
         vm.filterTerm = vm.filterFields[0];
         vm.tabChanged = function (type) {
             console.log('changed', type)
@@ -95,6 +102,13 @@
             }
             else {
                 vm.formObj.drivers = []
+            }
+            if(vm.expireAt.value>24)
+            {
+                vm.formObj.message.expireAt = moment().add(1,'week').unix()
+            }
+            else{
+                vm.formObj.message.expireAt = moment().add(vm.expireAt.value,'hour').unix()
             }
             AlertService.sendNotification(vm.formObj, function (response) {
                 toastr.success('Notification sent.')

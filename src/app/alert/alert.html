@@ -67,11 +67,8 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <label class="control-label">Expiration</label>
-                                <select class="form-control" style="padding:5px 10px; border-radius: 4px;">
-                                    <option>01 hr</option>
-                                    <option>12 hr</option>
-                                    <option>24 hr</option>
-                                    <option>01 week</option>
+                                <select class="form-control" style="padding:5px 10px; border-radius: 4px;" ng-model="vm.expireAt" ng-options="exp.name for exp in vm.expirationValues track by exp.value">
+
                                 </select>
 
                                 <p class="help-block"></p>
@@ -155,11 +152,8 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <label class="control-label">Expiration</label>
-                                <select class="form-control" style="padding:5px 10px; border-radius: 4px;">
-                                    <option>01 hr</option>
-                                    <option>12 hr</option>
-                                    <option>24 hr</option>
-                                    <option>01 week</option>
+                                <select class="form-control" style="padding:5px 10px; border-radius: 4px;" ng-model="vm.expireAt" ng-options="exp.name for exp in vm.expirationValues track by exp.value">
+
                                 </select>
 
                                 <p class="help-block"></p>
