@@ -114,6 +114,7 @@
                 toastr.success('Notification sent.')
                 vm.formObj = {}
                 vm.formObj.message = {}
+                vm.formObj.drivers = []
                 vm.formObj.notificationType = 'push'
                 vm.formObj.message.lang = 'en'
                 vm.deselectAll()
