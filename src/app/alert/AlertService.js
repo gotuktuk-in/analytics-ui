@@ -23,6 +23,11 @@ function AlertService($q, $resource, API) {
                 method: 'POST',
                 url:   url + 'notification',
                },
+            getNotification: {
+                method: 'GET',
+                url:   url + '/rest/v1/notification',
+                isArray:false
+            }
 
         }
     );
