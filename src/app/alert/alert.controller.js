@@ -15,6 +15,7 @@
         vm.formObj.message.lang = 'en'
         vm.formObj.type = 'topic'
         vm.selectedDrivers = []
+        vm.selectedType;
         vm.filterFields = [
             {value: "name", name: "Driver Name"},
             {value: "phone", name: "Driver Phone"},
@@ -29,6 +30,7 @@
         vm.filterTerm = vm.filterFields[0];
         vm.tabChanged = function (type) {
             console.log('changed', type)
+            vm.selectedType = type;
             vm.formObj.type = type;
         }
         vm.searchTable = function () {
@@ -117,6 +119,7 @@
                 vm.formObj.drivers = []
                 vm.formObj.notificationType = 'push'
                 vm.formObj.message.lang = 'en'
+                vm.formObj.type = vm.selectedType
                 vm.deselectAll()
 
             }, function (error) {
