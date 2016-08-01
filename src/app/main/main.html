@@ -27,7 +27,11 @@
                 ui-sref="home.drivers({city: city,vehicleType: vehicleType})"> <span class="fa fa-paper-plane"></span>
             Drivers</a></li>
         <li ng-click="toggle = !toggle" ui-sref-active="active"><a
-                ui-sref="home.maps({city: city,vehicleType: vehicleType})"> <span class="fa fa-map"></span>Maps</a></li>
+                ui-sref="home.maps({city: city,vehicleType: vehicleType})"> <span class="fa fa-map"></span>Maps</a>
+            <ul class="nav sub-nav">
+                <li><a ui-sref="home.demandsupply({city: city,vehicleType: vehicleType})"><span class="fa fa-line-chart"></span><strike>Demand / Supply</strike></a></li>
+            </ul>
+        </li>
         <li ng-click="toggle = !toggle" ui-sref-active="active"><a
                 ui-sref="home.performance({city: city,vehicleType: vehicleType})"><span
                 class="fa fa-area-chart "></span> <strike>Performance</strike> <sup

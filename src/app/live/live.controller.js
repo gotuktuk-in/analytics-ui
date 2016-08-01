@@ -270,6 +270,7 @@
                         pointArray = new google.maps.MVCArray(transformedData);
                         heatmap = new google.maps.visualization.HeatmapLayer({
                             data: pointArray
+
                         });
                         heatmap.setMap(vm.map);
                     });

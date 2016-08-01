@@ -36,6 +36,13 @@
                 controllerAs: 'vm',
                 cache: false
             })
+            .state('home.demandsupply', {
+                url: '/maps/demand-supply/:city/:vehicleType',
+                templateUrl: 'app/maps/demand-supply.html',
+                controller: 'MapsController',
+                controllerAs: 'vm',
+                cache: false
+            })
             .state('home.live', {
                     url: '/live/:city/:vehicleType',
                     templateUrl: 'app/live/live.html',
