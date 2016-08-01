@@ -195,7 +195,7 @@
         }
 
         getNotificationData();
-        
+
         vm.refreshPage = function () {
             getNotificationData();
         }
