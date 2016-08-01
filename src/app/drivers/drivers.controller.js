@@ -22,7 +22,7 @@
         };
         $scope.date = moment().format("dddd, MMMM Do YYYY")
         $scope.datesForAcq = {}
-        $scope.datesForAcq.startDate = moment().subtract(7, 'days').format("YYYY-MM-DD");
+        $scope.datesForAcq.startDate = moment().subtract(10, 'days').format("YYYY-MM-DD");
         $scope.datesForAcq.endDate = moment().format("YYYY-MM-DD");
         vm.changeDate = function (to) {
 
@@ -84,7 +84,7 @@
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
                 from: moment($scope.datesForAcq.startDate).startOf('day').format("YYYYMMDD").toString(),
-                to: moment($scope.datesForAcq.endDate).endOf('day').format("YYYYMMDD").toString(),
+                to: moment($scope.datesForAcq.endDate).endOf('day').format("YYYYMMDD").toString()
             }, function (response) {
                 vm.acquisitionData = []
                 var values = []
