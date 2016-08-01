@@ -313,7 +313,7 @@ div.panel.panel-default div.panel-heading h4.title {
     position: fixed;
     right: 15px;
     top: 17px;
-    z-index: 999999999;
+    z-index: 999999999 !important;
 }
 
 div.box.box-container div.row div.box table tbody tr td span h4 {
@@ -532,8 +532,8 @@ input.daterangepicker-aqq-chart {
     box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
     -webkit-box-shadow: 0 8px 17px rgba(0, 0, 0, .2);
     background: #fff;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /*overflow-y: auto;*/
+    /*overflow-x: hidden;*/
 }
 
 .sidenav.open {
