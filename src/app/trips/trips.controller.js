@@ -234,10 +234,14 @@
             }
         });
         vm.onDateChange()
-        var interval = $interval(function () {
+        //var interval = $interval(function () {
+        //    vm.getTrips()
+        //    $scope.tableParams.reload()
+        //}, 30000)
+        vm.refreshPage = function () {
             vm.getTrips()
             $scope.tableParams.reload()
-        }, 30000)
+        }
         $scope.$on('$destroy', function () {
             $interval.cancel(interval);
         });

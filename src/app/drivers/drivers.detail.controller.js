@@ -32,9 +32,12 @@
           //  $scope.tableParams.page(1);
             $scope.tableParams.reload()
         }
-        var interval= $interval(function(){
+        //var interval= $interval(function(){
+        //    vm.getAllData()
+        //}, 30000)
+        vm.refreshPage = function () {
             vm.getAllData()
-        }, 30000)
+        }
         $scope.$on('$destroy', function () { $interval.cancel(interval); });
         $scope.getTimeDiff = function (dt1, dt2) {
         var then;

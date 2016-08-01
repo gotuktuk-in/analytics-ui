@@ -101,12 +101,20 @@
 
         getLive()
         vm.getAcquisition()
-        var interval = $interval(function () {
+        //var interval = $interval(function () {
+        //    getLive()
+        //    vm.getAcquisition()
+        //    $scope.tableParams.reload()
+        //    $scope.tableParams.page(1)
+        //}, 30000)
+
+        vm.refreshPage = function () {
             getLive()
             vm.getAcquisition()
             $scope.tableParams.reload()
             $scope.tableParams.page(1)
-        }, 30000)
+        }
+
         $scope.$on('$destroy', function () {
             $interval.cancel(interval);
         });
