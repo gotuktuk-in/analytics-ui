@@ -47,7 +47,7 @@
         position: fixed;
         right: 20px;
         top: 18px;
-        z-index: 15;
+        z-index: 999999999 !important;
     }
 
     .live {
@@ -195,7 +195,7 @@
         position: fixed;
         right: 20px;
         top: 18px;
-        z-index: 15;
+        z-index: 999999999 !important;
     }
 
     .live {
@@ -255,7 +255,7 @@
         position: fixed;
         right: 20px;
         top: 18px;
-        z-index: 15;
+        z-index: 999999999 !important;
     }
 
     .live {
