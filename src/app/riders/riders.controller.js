@@ -24,6 +24,11 @@
 
         getRidersChart();
 
+        vm.refreshPage = function () {
+            getRidersChart();
+
+        }
+
         function drawDimpleMatrix() {
             var chartWidth = document.getElementById("matrixChartDiv").offsetWidth;
             var setBoundsWidth = document.getElementById("matrixChartDiv").offsetWidth - 180;

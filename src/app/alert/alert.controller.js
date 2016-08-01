@@ -193,7 +193,12 @@
                 $scope.error = true;
             });
         }
+
         getNotificationData();
+
+        vm.refreshPage = function () {
+            getNotificationData();
+        }
     }
 
 })();
