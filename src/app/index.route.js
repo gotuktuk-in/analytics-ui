@@ -39,7 +39,7 @@
             .state('home.demandsupply', {
                 url: '/maps/demand-supply/:city/:vehicleType',
                 templateUrl: 'app/maps/demand-supply.html',
-                controller: 'MapsController',
+                controller: 'DemandSupplyController',
                 controllerAs: 'vm',
                 cache: false
             })
@@ -65,6 +65,12 @@
                     controller: 'DriversController',
                     controllerAs: 'vm'
                 })
+            .state('home.onboarding', {
+                url: '/drivers/onboarding/:city/:vehicleType',
+                templateUrl: 'app/drivers/onboarding.html',
+                controller: 'OnboardingController',
+                controllerAs: 'vm'
+            })
             .state('home.offers', {
                 url: '/offers/',
                 templateUrl: 'app/offers/offers.html',

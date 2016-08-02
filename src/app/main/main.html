@@ -25,7 +25,11 @@
         </li>
         <li ng-click="toggle = !toggle" ui-sref-active="active"><a
                 ui-sref="home.drivers({city: city,vehicleType: vehicleType})"> <span class="fa fa-paper-plane"></span>
-            Drivers</a></li>
+            Drivers</a>
+            <ul class="nav sub-nav">
+                <li><a ui-sref="home.onboarding({city: city,vehicleType: vehicleType})"><span class="fa fa-pencil-square-o"></span><strike>Onboarding</strike></a></li>
+            </ul>
+        </li>
         <li ng-click="toggle = !toggle" ui-sref-active="active"><a
                 ui-sref="home.maps({city: city,vehicleType: vehicleType})"> <span class="fa fa-map"></span>Maps</a>
             <ul class="nav sub-nav">
