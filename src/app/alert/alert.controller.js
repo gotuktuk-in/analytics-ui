@@ -6,13 +6,13 @@
         .controller('AlertController', AlertController);
 
     /** @ngInject */
-    function AlertController($scope, $rootScope, AlertService, toastr, NgTableParams, OfferService) {
+    function AlertController($scope, $rootScope, $confirm, AlertService, toastr, NgTableParams, OfferService) {
         var vm = this;
         var current = moment()
         vm.formObj = {}
         vm.formObj.message = {}
         vm.formObj.notificationType = 'push'
-        vm.formObj.message.lang = 'en'
+        vm.formObj.message.lang = 'hi'
         vm.formObj.type = 'topic'
         vm.selectedDrivers = []
         vm.selectedType;
@@ -95,6 +95,17 @@
 
 
         }
+        $scope.confirmSendPushMsg = function() {
+            $confirm({
+                text: 'Are you sure want send Push Message?',
+                title: 'Are you Sure?',
+                ok: 'Yes',
+                cancel: 'No'
+            })
+                .then(function() {
+                    vm.sendPushMsg();
+                });
+        }
         vm.sendPushMsg = function () {
 
             vm.formObj.message.id = moment().unix()
@@ -118,7 +129,7 @@
                 vm.formObj.message = {}
                 vm.formObj.drivers = []
                 vm.formObj.notificationType = 'push'
-                vm.formObj.message.lang = 'en'
+                vm.formObj.message.lang = 'hi'
                 vm.formObj.type = vm.selectedType
                 vm.deselectAll()
 
