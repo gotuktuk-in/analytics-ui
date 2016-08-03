@@ -46,6 +46,25 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
+                                        <h4 class="number">{{selectedTrip.startCode}}</h4>
+                                        <span>Start Code</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{(selectedTrip.disForTrip/1000) | number:2}} /
+                                            {{(selectedTrip.disInTrip/1000) | number:2}}</h4>
+                                        <span>Distance for Trip / in Trip</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.durForTrip}} / {{selectedTrip.durInTrip}}</h4>
+                                        <span>Duration for Trip / in Trip</span>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
                                         <h4 class="number">{{getTimeDiff(selectedTrip.requestOn,
                                             selectedTrip.pickupOn ) |
                                             secondsToDateTime}} / {{getTimeDiff(selectedTrip.pickupOn
@@ -53,21 +72,27 @@
                                             secondsToDateTime}}</h4>
                                         <span>Time for Trip / in Trip</span>
                                     </div>
+                                </div> -->
+                                
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.waitingTime}}</small></h4>
+                                        <span>Waiting Time</span>
+                                    </div>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.disStartPickup/1000) | number:2}}km /
-                                            {{(selectedTrip.disPickupDrop/1000) | number:2}}km</h4>
-                                        <span>Distance for Trip / in Trip</span>
+                                        <h4 class="number">&nbsp;</small></h4>
+                                        <span>Time allocated</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">Rs.{{selectedTrip.fareStartPickup}}</small></h4>
-                                        <span>Amount</span>
+                                        <h4 class="number">{{selectedTrip.atPickupOn*1000 | date: "h:mma"}}</small></h4>
+                                        <span>At Pickup</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.pickupOn ? (selectedTrip.pickupOn
                                             *1000 | date:"h:mma ") : 'N/A'}} / {{selectedTrip.dropOn ?
@@ -75,22 +100,60 @@
                                         <span>Start Time / End Time</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.riderFeedback | number:2}}</h4>
+                                        <span>Rider's Feedback</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.driverFeedback | number:2}}</h4>
+                                        <span>driver's Feedback</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.driverFare}}</h4>
+                                        <span>driver's Fare</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.riderFare}}</h4>
+                                        <span>Rider's Feedback</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">Rs.{{selectedTrip.driverFare}}</small></h4>
+                                        <span>Amount</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.inTripSpeed}} / {{selectedTrip.forTripspeed}}</h4>
+                                        <span>In Trip Speed / For Trip Speed</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">Rs.{{selectedTrip.amount.total}}
                                             <small> / {{selectedTrip.amount.cash}} /
-                                                {{selectedTrip.amount.tcash}}
+                                                {{selectedTrip.tcashUsed}}
                                             </small>
                                         </h4>
                                         <span>Amount Total<small> / Cash / tCash</small></span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{selectedTrip.riderFeedbackRating | number:2}}</h4>
-                                        <span>Rider's Feedback</span>
+                                        <h4 class="number">&nbsp;</h4>
+                                        <span>Priority Pricing (rider/driver)</span>
                                     </div>
                                 </div>
+                                
 
                             </div>
                         </div>
@@ -115,6 +178,12 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
+                                        <h4 class="number">{{selectedTrip.driverInfo.name}}</h4>
+                                        <span>Name</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
                                         <h4 class="number">{{selectedTrip.driverInfo.phone}}</h4>
                                         <span>phone</span>
                                     </div>
@@ -126,33 +195,34 @@
                                         <span>Email</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.driverInfo.joinedOn*1000 | date:'dd MMM
                                             yy'}}</h4>
                                         <span>joined On</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.driverInfo.rating | number:2}}</h4>
+                                        <span>feedback</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.driverInfo.ridesTotal}}
                                         </h4>
                                         <span>Total Rides</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.driverInfo.ridesToday}}
                                         </h4>
                                         <span>Today's Ride</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.driverInfo.avg | number:2}}</h4>
-                                        <span>feedback</span>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </uib-tab>
@@ -176,44 +246,50 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
+                                        <h4 class="number">{{selectedTrip.riderInfo.name}}</h4>
+                                        <span>Name</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
                                         <h4 class="number">{{selectedTrip.riderInfo.phone}}</h4>
                                         <span>phone</span>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="col-md-12 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.riderInfo.email ?
                                             selectedTrip.riderInfo.email:'-'}}</h4>
                                         <span>Email</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.riderInfo.joinedOn*1000 | date:'dd MMM
                                             yy'}}</h4>
                                         <span>joined On</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.riderInfo.ridesTotal}}
                                         </h4>
                                         <span>Total Rides</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.riderInfo.ridesToday}}
                                         </h4>
                                         <span>Today's Ride</span>
                                     </div>
                                 </div>
-                                <div class="col-md-3 col-sm-4 col-xs-12">
+                                <!-- <div class="col-md-3 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.driverInfo.avg | number:2}}</h4>
                                         <span>feedback</span>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </uib-tab>
