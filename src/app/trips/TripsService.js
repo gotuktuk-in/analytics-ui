@@ -38,7 +38,7 @@ function TripsService($q, $resource, API) {
                 url:   url + 'trips/tcash',
                 isArray:true
             },
-            getBid: {
+            getBidDetail: {
                 method: 'GET',
                 url:   url + 'trip/bid/drivers/:id',
                 isArray:true

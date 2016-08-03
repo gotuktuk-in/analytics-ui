@@ -98,6 +98,17 @@
 
         getDetails();
 
+        function getBid() {
+            TripsService.getBidDetail(
+                {id: $stateParams.id}, function (data) {
+                    $scope.data = data;
+                }, function (err) {
+                    console.log(err)
+                    $scope.error = true;
+                });
+        }
+        getBid();
+
     }
 })();
 
