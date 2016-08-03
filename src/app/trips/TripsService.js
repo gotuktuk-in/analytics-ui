@@ -20,12 +20,12 @@ function TripsService($q, $resource, API) {
         {
             getAllTrips: {
                 method: 'GET',
-                url:   url + 'trips',
+                url:   url + 'trips'
              //   isArray:true
             },
             getTripDetail: {
                 method: 'GET',
-                url:   url + 'trips/info/:id',
+                url:   url + 'tripinfo/:id',
                 isArray:false
             },
             getRiders: {
@@ -38,6 +38,11 @@ function TripsService($q, $resource, API) {
                 url:   url + 'trips/tcash',
                 isArray:true
             },
+            getBid: {
+                method: 'GET',
+                url:   url + 'trip/bid/drivers/:id',
+                isArray:true
+            }
 
         }
     );

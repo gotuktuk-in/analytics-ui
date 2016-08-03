@@ -10,12 +10,15 @@
 
         var vm = this;
 
-        $scope.selectedTrip
+        $scope.selectedTrip;
+
         function getDetails() {
-            TripsService.getTripDetail({
-                dId: $stateParams.driverId,
-                rId: $stateParams.riderId
-            }, {id: $stateParams.id}, function (response) {
+            TripsService.getTripDetail(
+                //{
+                //dId: $stateParams.driverId,
+                //rId: $stateParams.riderId
+                // },
+                {id: $stateParams.id}, function (response) {
                 $scope.selectedTrip = response;
                 vm.startPointLn = $scope.selectedTrip.pickUp.ln;
                 vm.startPointLt = $scope.selectedTrip.pickUp.lt;
