@@ -41,6 +41,12 @@ function LiveHandler() {
         {"key": "Total Riders", "values": []},
         {"key": "New Riders", "values": []},
     ]
+    /********
+    factory.cancelledTripsDriver1 = [
+        {"key": "Requests", "values": []}
+    ]*/
+    /*********/
+
     factory.getTrips = function () {
         var booking = [], successful_total = [], successful_unique_riders = [], in_process = [],
             cancelled_total = [], cancelled_unique_rider = [], failed_total = [], failed_unique_rider = [];

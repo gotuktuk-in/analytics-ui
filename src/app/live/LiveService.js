@@ -29,7 +29,12 @@ function LiveService($q, $resource, API) {
             getDrivers: {
                 method: 'GET',
                 url:   url + 'driver/live/',
-              },
+            },
+            getCancelTripsDriver: {
+                method: 'GET',
+                url:   url + 'drivers/cancelled'
+                //isArray:true
+            },
             getRiders: {
                 method: 'GET',
                 url:   url + 'rider/live/',
@@ -38,7 +43,8 @@ function LiveService($q, $resource, API) {
                 method: 'GET',
                 url:   url + 'trips/newRiders',
                 isArray:true
-            },
+            }
+            ,
             heatmap: {
             method: 'GET',
             url:   url + 'trips/heatmap',
