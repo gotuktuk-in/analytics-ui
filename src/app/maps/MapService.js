@@ -13,40 +13,50 @@ angular
     .factory('MapService', MapService)
 
 function MapService($q, $resource, API, AUTH_API) {
-  var url = API;
+    var url = API;
     return $resource(
         "",
-        {id:"@id"},
+        {id: "@id", precision: "@precision"},
         {
             getDrivers: {
                 method: 'GET',
-                url:   url + 'map/driver'
+                url: url + 'map/driver'
                 //http://111.118.241.68:8088/rest/v1/geofence
             },
             loadGeoJson: {
                 method: 'GET',
-                url:   AUTH_API + 'geofence'
+                url: AUTH_API + 'geofence'
                 //http://111.118.241.68:8088/rest/v1/geofence
             },
 
             registerList: {
                 method: 'GET',
-                url:   url + 'drivers/registered',
-                isArray:true
+                url: url + 'drivers/registered',
+                isArray: true
             },
 
             inprocessList: {
                 method: 'GET',
-                url:   url + 'drivers/inprocess',
+                url: url + 'drivers/inprocess'
                 //isArray:true
 
             },
-          deleteInProcessDriver: {
-            method: 'DELETE',
-            url:   url + 'drivers/:id',
-            //isArray:true
+            deleteInProcessDriver: {
+                method: 'DELETE',
+                url: url + 'drivers/:id'
+                //isArray:true
 
-          },
+            },
+            getDemandSupply: {
+                method: 'GET',
+                url: url + 'supply/demand/indore/auto/:precision',
+                isArray: true
+            },
+            getGroups: {
+                method: 'GET',
+                url: url + 'surge/group/',
+                isArray: true
+            }
         }
     );
 }
