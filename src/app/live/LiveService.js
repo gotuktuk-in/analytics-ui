@@ -33,7 +33,10 @@ function LiveService($q, $resource, API) {
             getCancelTripsDriver: {
                 method: 'GET',
                 url:   url + 'drivers/cancelled'
-                //isArray:true
+            },
+            getCancelTripsRider: {
+                method: 'GET',
+                url:   url + 'riders/cancelled'
             },
             getRiders: {
                 method: 'GET',

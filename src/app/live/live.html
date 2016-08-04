@@ -1,8 +1,8 @@
 <div class="container-fluid" ng-if="vm.overview">
     <div class="row" style="z-index:99; position:fixed; width:auto; padding:10px 0; left:53px;">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span
-                class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
+            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span>
+            <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
                 ng-click="vm.changeDate('next')" ng-if="!vm.live"
                 style="display: inline-block; padding: 7px;">&#10095;</span>
         </div>
@@ -201,7 +201,7 @@
                     <h4 style="margin-top: 0" class="title">Trips cancelled by driver</h4></div>
                 <div class="panel-body">
                     <div>
-                        <nvd3 options="vm.cancelTripByDriverChartOptions" data="data"></nvd3>
+                        <nvd3 options="vm.cancelTripByDriverChartOptions" data="vm.canceledTripByDriver" config="vm.config"></nvd3>
                     </div>
                     </a>
                 </div>
@@ -213,7 +213,7 @@
                     <h4 style="margin-top: 0" class="title">Trips cancelled by Rider</h4></div>
                 <div class="panel-body">
                     <div>
-                        <nvd3 options="vm.cancelTripByRiderChartOptions" data="data" config="vm.config"></nvd3>
+                        <nvd3 options="vm.cancelTripByRiderChartOptions" data="vm.canceledTripByRider" config="vm.config"></nvd3>
                     </div>
                     </a>
                 </div>

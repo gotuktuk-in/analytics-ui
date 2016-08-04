@@ -6,7 +6,7 @@
         .controller('LiveController', LiveController);
 
     /** @ngInject */
-    function LiveController($scope, $log, $rootScope, $state, $interval, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler) {
+    function LiveController($scope, $log, $rootScope, $state, $interval, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler, LiveHandler) {
         var vm = this;
         //range slider , Failed(2), Cancel(2), Success.
 
@@ -66,6 +66,8 @@
                 return str;
             }
         }
+
+        /*** code starts for Chart of canceld trip by Driver ***/
         vm.cancelTripByDriverChartOptions ={
             chart: {
                 type: 'discreteBarChart',
@@ -92,6 +94,27 @@
                 }
             }
         };
+        
+        vm.cancelTripByDriverChartOptions = angular.copy(ChartConfigService.discreteBarChartOptions);
+        vm.cancelTripByDriverChartOptions.chart.tooltip = {
+            contentGenerator: function (key, x, y, e, graph){
+                //return html stuff
+                var data = key.data
+                var formatDate;
+                if (data.date === 'other')
+                    formateDate = 'Above 7 days';
+                else
+                    formateDate = moment(PerformanceHandler.getLongDate(data.date.toString())).fomate('MMMM Do YYYY');
+                var str = '<div class="pd-10 text-left"><span><b>'
+                str += formateDate + ' </b></span>' + ''
+                str += '<h3 class="no-mr">' + data.y + '<small style="color:#333;"> /' + data.uniqRides + '</small><br><small style="font-size:10px;color:#666;text-transform: uppercase;">Total Rides / Rides(U)</small></h3>'
+                str += '</div>'
+                return str;
+
+            }
+        }
+        /*** code ends for Chart of canceld trip by Driver ***/
+        /*** code starts for Chart of canceld trip by Rider ***/
         vm.cancelTripByRiderChartOptions ={
             chart: {
                 type: 'discreteBarChart',
@@ -118,47 +141,9 @@
                 }
             }
         };
-        $scope.data = [
-            {
-                key: "Cumulative Return",
-                values: [
-                    {
-                        "label" : "A" ,
-                        "value" : -29.765957771107
-                    } ,
-                    {
-                        "label" : "B" ,
-                        "value" : 0
-                    } ,
-                    {
-                        "label" : "C" ,
-                        "value" : 32.807804682612
-                    } ,
-                    {
-                        "label" : "D" ,
-                        "value" : 196.45946739256
-                    } ,
-                    {
-                        "label" : "E" ,
-                        "value" : 0.19434030906893
-                    } ,
-                    {
-                        "label" : "F" ,
-                        "value" : -98.079782601442
-                    } ,
-                    {
-                        "label" : "G" ,
-                        "value" : -13.925743130903
-                    } ,
-                    {
-                        "label" : "H" ,
-                        "value" : -5.1387322875705
-                    }
-                ]
-            }
-        ]
-        /*vm.cancelTripByDriverChartOptions = angular.copy(ChartConfigService.discreteBarChartOptions);
-        vm.cancelTripByDriverChartOptions.chart.tooltip = {
+        
+        vm.cancelTripByRiderChartOptions = angular.copy(ChartConfigService.discreteBarChartOptions);
+        vm.cancelTripByRiderChartOptions.chart.tooltip = {
             contentGenerator: function (key, x, y, e, graph){
                 //return html stuff
                 var data = key.data
@@ -174,7 +159,8 @@
                 return str;
 
             }
-        }*/
+        }
+        /*** code ends for Chart of canceld trip by Rider ***/
 
         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
             return d3.time.format('%I %p')(new Date(d).addHours(1));
@@ -208,63 +194,40 @@
             vm.loadHeatMap()
         }
         /*** rest call for barchart for canceld trip by driver code starts ***/
-        function exampleData() {
-            return  [ 
-                {                                                                       
-                  key: "Cumulative Return",
-                  values: [
-                    { 
-                      "label" : "A Label" ,
-                      "value" : -29.765957771107
-                    } , 
-                    { 
-                      "label" : "B Label" , 
-                      "value" : 0
-                    } , 
-                    { 
-                      "label" : "C Label" , 
-                      "value" : 32.807804682612
-                    } , 
-                    { 
-                      "label" : "D Label" , 
-                      "value" : 196.45946739256
-                    } , 
-                    { 
-                      "label" : "E Label" ,
-                      "value" : 0.19434030906893
-                    } , 
-                    { 
-                      "label" : "F Label" , 
-                      "value" : -98.079782601442
-                    } , 
-                    { 
-                      "label" : "G Label" , 
-                      "value" : -13.925743130903
-                    } , 
-                    { 
-                      "label" : "H Label" , 
-                      "value" : -5.1387322875705
-                    }
-                  ]
-                }
-            ]
-        }
         function getCanceledTripByDriver(){
-            /*LiveService.getCancelTripsDriver({
-                 from: moment(current).subtract(6, 'days').startOf('day').unix(),
-                to: moment(current).endOf('day').unix(),
+            LiveService.getCancelTripsDriver({
+               startTime: moment(current).startOf('day'),
+                endTime: moment(current).endOf('day'),
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType
             }, function (response){
                 console.log(response);
-                vm.canceledTripByDriver = response;
+                vm.canceledTripByDriver = LiveHandler.canTripDriver(response);
+                console.log('hey ', vm.canceledTripByDriver);
             }, function (err){
                 console.log(err)
                 $scope.error = true;
-            })*/
-            
+            })
         }
         /*** rest call for barchart for canceld trip by driver code ends ***/
+
+        /*** rest call for barchart for canceld trip by Rider code starts ***/
+        function getCanceledTripByRider(){
+            LiveService.getCancelTripsRider({
+               startTime: moment(current).startOf('day'),
+                endTime: moment(current).endOf('day'),
+                city: $rootScope.city,
+                vehicle: $rootScope.vehicleType
+            }, function (response){
+                console.log(response);
+                vm.canceledTripByRider = LiveHandler.canTripRider(response);
+                console.log('hey ', vm.canceledTripByRider);
+            }, function (err){
+                console.log(err)
+                $scope.error = true;
+            })
+        }
+        /*** rest call for barchart for canceld trip by Rider code ends ***/
 
         function getOverviewLive() {
             LiveService.getOverview({
@@ -454,6 +417,7 @@
         getLive()
         getOverviewLive()
         getCanceledTripByDriver()
+        getCanceledTripByRider()
         vm.loadHeatMap()
         var interval = $interval(function () {
             vm.refreshPage()
