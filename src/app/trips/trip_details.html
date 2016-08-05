@@ -108,22 +108,15 @@
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.riderFare}}</h4>
-                                        <span>Rider's Feedback</span>
+                                        <span>Rider's Fare</span>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                <!-- <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">Rs.{{selectedTrip.driverFare}}</small></h4>
                                         <span>Amount</span>
                                     </div>
-                                </div>
-                                
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.inTripSpeed}} / {{selectedTrip.forTripspeed}}</h4>
-                                        <span>In Trip Speed / For Trip Speed</span>
-                                    </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">Rs.{{selectedTrip.amount.total}}
@@ -132,6 +125,12 @@
                                             </small>
                                         </h4>
                                         <span>Amount Total<small> / Cash / tCash</small></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.inTripSpeed}} / {{selectedTrip.forTripspeed}}</h4>
+                                        <span>In Trip Speed / For Trip Speed</span>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
