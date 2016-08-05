@@ -11,25 +11,33 @@
         var vm = this;
 
         $scope.selectedTrip;
+        $scope.selectedTripBid;
 
 
-        function getBid() {
+        //function getBid() {
+        //    TripsService.getBidDetail(
+        //        {id: $stateParams.id}, function (data) {
+        //            $scope.data = data;
+        //        }, function (err) {
+        //            console.log(err)
+        //            $scope.error = true;
+        //        });
+        //}
+        //
+        //getBid();
+
+        function getDetails() {
+
             TripsService.getBidDetail(
                 {id: $stateParams.id}, function (response) {
-                    $scope.data = response;
+                    $scope.selectedTripBid = response;
+                    $scope.totalBid = response.length;
                 }, function (err) {
                     console.log(err)
                     $scope.error = true;
                 });
-        }
-
-        function getDetails() {
 
             TripsService.getTripDetail(
-                //{
-                //dId: $stateParams.driverId,
-                //rId: $stateParams.riderId
-                // },
                 {id: $stateParams.id}, function (response) {
                 $scope.selectedTrip = response;
                 vm.snapCodesFor = $scope.selectedTrip.forTripSnapCode;
@@ -61,6 +69,7 @@
                 var decodedPathFor = google.maps.geometry.encoding.decodePath(encodedStringFor);
                 var decodedPathIn = google.maps.geometry.encoding.decodePath(encodedStringIn);
                 //var decodedLevels = decodeLevels("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
+
                 var setRegion1 = new google.maps.Polyline({
                     path: decodedPathFor,
                     //levels: decodedLevels,
@@ -69,7 +78,6 @@
                     strokeWeight: 3,
                     map: map
                 });
-
                 var setRegion2 = new google.maps.Polyline({
                     path: decodedPathIn,
                     //levels: decodedLevels,
@@ -78,6 +86,59 @@
                     strokeWeight: 3,
                     map: map
                 });
+
+                var icon1 = {
+                    url: "assets/images/icons/marker-green.svg", // url
+                    scaledSize: new google.maps.Size(30, 30) // scaled size
+
+                };
+                var icon2 = {
+                    url: "assets/images/icons/marker-red.svg", // url
+                    scaledSize: new google.maps.Size(30, 30) // scaled size
+                };
+                var icon3 = {
+                    url: "assets/images/icons/marker-orange.svg", // url
+                    scaledSize: new google.maps.Size(30, 30) // scaled size
+                };
+
+
+                //bid Marker start
+
+                var markers=[];
+                var contents = [];
+                var infowindows = [];
+                var i = 0;
+
+
+                for (i = 0; i < $scope.totalBid; i++) {
+
+                    markers[i] = new google.maps.Marker({
+                        position: new google.maps.LatLng($scope.selectedTripBid[i].lt, $scope.selectedTripBid[i].ln),
+                        map: map,
+                        title: 'Bid',
+                        icon: icon3
+                    });
+                    markers[i].index = i;
+                    contents[i] = '<div class="popup_container">'
+                    + $scope.selectedTripBid[i].lt
+                    + ','
+                    + $scope.selectedTripBid[i].ln
+                    '</div>';
+
+
+                    infowindows[i] = new google.maps.InfoWindow({
+                        content: contents[i],
+                        maxWidth: 300
+                    });
+
+                    google.maps.event.addListener(markers[i], 'click', function() {
+                        console.log(this.index); // this will give correct index
+                        console.log(i); //this will always give 10 for you
+                        infowindows[this.index].open(map,markers[this.index]);
+                        map.panTo(markers[this.index].getPosition());
+                    });
+                }
+                //bid Marker end
 
                 //check the precision
                 var decompressed1 = decompress(encodedStringFor, 5);
@@ -119,38 +180,24 @@
                     $scope.starttLnIn = _.first(arrayLn);
                     $scope.endtLnIn = _.last(arrayLn);
 
-                    var icon1 = {
-                        url: "assets/images/icons/marker-green.svg", // url
-                        scaledSize: new google.maps.Size(30, 30), // scaled size
-                        origin: new google.maps.Point(0, 0), // origin
-                        anchor: new google.maps.Point(0, 0) // anchor
-                    };
-                    var icon2 = {
-                        url: "assets/images/icons/marker-red.svg", // url
-                        scaledSize: new google.maps.Size(30, 30), // scaled size
-                        origin: new google.maps.Point(0, 0), // origin
-                        anchor: new google.maps.Point(0, 0) // anchor
-                    };
-
-
                     var marker1 = new google.maps.Marker({
                         position: new google.maps.LatLng($scope.startLtFor,$scope.starttLnFor),
-                        //icon: icon1,
+                        icon: icon1,
                         map: map
                     });
                     var marker2 = new google.maps.Marker({
                         position: new google.maps.LatLng($scope.endtLtFor,$scope.endtLnFor),
-                        //icon: icon2,
+                        icon: icon2,
                         map: map
                     });
                     var marker3 = new google.maps.Marker({
                         position: new google.maps.LatLng($scope.startLtIn,$scope.starttLnIn),
-                        //icon: icon1,
+                        icon: icon1,
                         map: map
                     });
                     var marker4 = new google.maps.Marker({
                         position: new google.maps.LatLng($scope.endtLtIn,$scope.endtLnIn),
-                        //icon: icon2,
+                        icon: icon2,
                         map: map
                     });
 
@@ -172,7 +219,6 @@
         }
 
         getDetails();
-        getBid();
 
     }
 })();
