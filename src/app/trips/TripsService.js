@@ -42,6 +42,11 @@ function TripsService($q, $resource, API) {
                 method: 'GET',
                 url:   url + 'trip/bid/drivers/:id',
                 isArray:true
+            },
+            getProfile: {
+                method: 'GET',
+                url:   url + 'drivers/profile/:id',
+                isArray:false
             }
 
         }

@@ -10,9 +10,12 @@
 
         var vm = this;
 
+        $scope.selectedDates = {};
+        $scope.selectedDates.startDate = moment().format("YYYY-MM-DD");
+        $scope.selectedDates.endDate = moment().format("YYYY-MM-DD");
+
         $scope.selectedTrip;
         $scope.selectedTripBid;
-
 
         //function getBid() {
         //    TripsService.getBidDetail(
@@ -29,7 +32,9 @@
         function getDetails() {
 
             TripsService.getBidDetail(
-                {id: $stateParams.id}, function (response) {
+                {
+                    id: $stateParams.id
+                }, function (response) {
                     $scope.selectedTripBid = response;
                     $scope.totalBid = response.length;
                 }, function (err) {
@@ -37,16 +42,31 @@
                     $scope.error = true;
                 });
 
+            TripsService.getProfile(
+                {
+                    id: $stateParams.driverId,
+                    from: moment($scope.selectedDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+                    to: moment($scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString()
+                }, function (response) {
+                    vm.profile = response;
+                }, function (err) {
+                    console.log(err)
+                    $scope.error = true;
+                });
+
+
             TripsService.getTripDetail(
-                {id: $stateParams.id}, function (response) {
-                $scope.selectedTrip = response;
-                vm.snapCodesFor = $scope.selectedTrip.forTripSnapCode;
-                vm.snapCodesIn = $scope.selectedTrip.inTripSnapCode;
-                initialize();
-            }, function (err) {
-                console.log(err)
-                $scope.error = true;
-            });
+                {
+                    id: $stateParams.id
+                }, function (response) {
+                    $scope.selectedTrip = response;
+                    vm.snapCodesFor = $scope.selectedTrip.forTripSnapCode;
+                    vm.snapCodesIn = $scope.selectedTrip.inTripSnapCode;
+                    initialize();
+                }, function (err) {
+                    console.log(err)
+                    $scope.error = true;
+                });
 
 
             function initialize() {
@@ -104,7 +124,7 @@
 
                 //bid Marker start
 
-                var markers=[];
+                var markers = [];
                 var contents = [];
                 var infowindows = [];
                 var i = 0;
@@ -131,10 +151,10 @@
                         maxWidth: 300
                     });
 
-                    google.maps.event.addListener(markers[i], 'click', function() {
+                    google.maps.event.addListener(markers[i], 'click', function () {
                         console.log(this.index); // this will give correct index
                         console.log(i); //this will always give 10 for you
-                        infowindows[this.index].open(map,markers[this.index]);
+                        infowindows[this.index].open(map, markers[this.index]);
                         map.panTo(markers[this.index].getPosition());
                     });
                 }
@@ -144,9 +164,9 @@
                 var decompressed1 = decompress(encodedStringFor, 5);
                 var decompressed2 = decompress(encodedStringIn, 5);
 
-                function decompress (encoded, precision) {
+                function decompress(encoded, precision) {
                     precision = Math.pow(10, -precision);
-                    var len = encoded.length, index=0, lat=0, lng = 0, arrayLt = [], arrayLn = [];
+                    var len = encoded.length, index = 0, lat = 0, lng = 0, arrayLt = [], arrayLn = [];
                     while (index < len) {
                         var b, shift = 0, result = 0;
                         do {
@@ -181,22 +201,22 @@
                     $scope.endtLnIn = _.last(arrayLn);
 
                     var marker1 = new google.maps.Marker({
-                        position: new google.maps.LatLng($scope.startLtFor,$scope.starttLnFor),
+                        position: new google.maps.LatLng($scope.startLtFor, $scope.starttLnFor),
                         icon: icon1,
                         map: map
                     });
                     var marker2 = new google.maps.Marker({
-                        position: new google.maps.LatLng($scope.endtLtFor,$scope.endtLnFor),
+                        position: new google.maps.LatLng($scope.endtLtFor, $scope.endtLnFor),
                         icon: icon2,
                         map: map
                     });
                     var marker3 = new google.maps.Marker({
-                        position: new google.maps.LatLng($scope.startLtIn,$scope.starttLnIn),
+                        position: new google.maps.LatLng($scope.startLtIn, $scope.starttLnIn),
                         icon: icon1,
                         map: map
                     });
                     var marker4 = new google.maps.Marker({
-                        position: new google.maps.LatLng($scope.endtLtIn,$scope.endtLnIn),
+                        position: new google.maps.LatLng($scope.endtLtIn, $scope.endtLnIn),
                         icon: icon2,
                         map: map
                     });

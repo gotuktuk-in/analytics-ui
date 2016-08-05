@@ -8,6 +8,7 @@
     function DemandSupplyController($scope, $rootScope, NgMap, geohash, MapService, toastr, ngDialog, StaticDataService) {
         var vm = this;
         vm.map;
+        var Geohash = {};
         vm.colors = ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'];
         vm.precisionArr = [
             {name: "5", value: 5},
@@ -21,44 +22,45 @@
         NgMap.getMap({id: 'bidMap'}).then(function (map) {
             vm.map = map;
             google.maps.event.addDomListener(vm.map);
+
+
         });
-
-        vm.onPrecisionChange = function () {
-            getDetail();
-        };
-
-        vm.showInfoWindow = function (e, index) {
-            //var geoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
-        };
 
         function getDetail() {
             MapService.getDemandSupply({precision: vm.selectedPrecision.value}, function (response) {
                 $scope.allHash = response;
                 $scope.totalHash = response.length;
-                _.each($scope.allHash , function (group) {
+                _.each($scope.allHash, function (group) {
                     group.hash = getGeoHashObj(group.geo_hash);
                 });
-                console.log($scope.allHash)
-                }, function (err) {
-                    console.log(err);
-                    $scope.error = true;
-                });
+                getDemandSupply();
+                //console.log($scope.allHash);
+            }, function (err) {
+                console.log(err);
+                $scope.error = true;
+            });
+        }
 
+        getDetail();
 
+        function getDemandSupply() {
 
             //bid Marker start
 
-            var markers=[];
+            var markers = [];
             var contents = [];
-            var infowindows = [];
+            var infoWindows = [];
             var i = 0;
-
-
             for (i = 0; i < $scope.totalHash; i++) {
 
+                var newData = $scope.allHash[i].geo_hash;
+                var myLatlng = geohash.decode (newData);
+                console.log(newData)
+                console.log(myLatlng.latitude +','+ myLatlng.longitude)
+
                 markers[i] = new google.maps.Marker({
-                    position: new google.maps.LatLng((group.hash.boxBounds[i][i] + group.hash.boxBounds[i+1][i])/2,(group.hash.boxBounds[i][i+1] + group.hash.boxBounds[i+1][i+1])/2),
-                    map: map,
+                    position: new google.maps.LatLng(myLatlng.latitude+','+myLatlng.longitude),
+                    map: vm.map,
                     title: 'Bid'
                 });
 
@@ -68,25 +70,28 @@
                 '</div>';
 
 
-                infowindows[i] = new google.maps.InfoWindow({
+                infoWindows[i] = new google.maps.InfoWindow({
                     content: contents[i],
                     maxWidth: 300
                 });
 
-                google.maps.event.addListener(markers[i], 'click', function() {
+                google.maps.event.addListener(markers[i], 'click', function () {
                     console.log(this.index); // this will give correct index
                     console.log(i); //this will always give 10 for you
-                    infowindows[this.index].open(map,markers[this.index]);
+                    infowindows[this.index].open(map, markers[this.index]);
                     map.panTo(markers[this.index].getPosition());
                 });
 
             }
             //bid Marker end
 
-
-
         }
-        getDetail();
+
+        vm.showDetail = function(e, driver, index) {
+            vm.driver = driver;
+
+            vm.map.showInfoWindow('iw-drivers', index);
+        };
 
         function getGeoHashObj(hash) {
             var obj = {};

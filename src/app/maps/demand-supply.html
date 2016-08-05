@@ -20,53 +20,28 @@
                    stroke-weight="0.1"
                    stroke-opacity="0.5"
                    bounds={{data.hash.boxBounds}}
-                   clickable="true" on-click="vm.ShapeClicked()">
+                   clickable="true" on-click="">
             </shape>
-            <!--<marker title="ashish" id="driver-{{$index}}"-->
-                    <!--on-click="vm.showInfoWindow()"-->
-                    <!--position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}">-->
-            <!--</marker>-->
+            <marker title="ashish" id="driver-{{$index}}"
+                    on-click="vm.map.showInfoWindow($index)"
+                    position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}">
+            </marker>
         </div>
+        <info-window id="iw-drivers">
+            <div ng-non-bindable="">
+                <div class="info-window">
+                    <div class="iw-wrapper">
+                        <div class="iw-content">
+                            Demand: {{}}<br>
+                            Supply: {{}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </info-window>
     </ng-map>
 
     <div class="row geo-fence-tbl" ng-if=" vm.groupCreation || vm.groupEdit">
-        <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
-        <!--<div class="panel panel-default ">-->
-        <!--<div class="panel-heading">-->
-        <!--<h4 style="margin-top: 0" class="title">Groups</h4>-->
-        <!--</div>-->
-        <!--<div class="panel-body">-->
-        <!--<div style="max-height: 200px; height: 80%; overflow:auto;" ng-if="vm.geohashGroups.length>0">-->
-        <!--<table class="table table-inverse table-bordered">-->
-        <!--<thead>-->
-        <!--<tr>-->
-        <!--<th width="30" class="text-center">#</th>-->
-        <!--<th>Name</th>-->
-        <!--<th width="30" class="text-center"><span class="fa fa-remove pointer"-->
-        <!--ng-click="toggle = !toggle"-->
-        <!--ng-class="{'red' : toggle}"></span>-->
-        <!--</th>-->
-        <!--&lt;!&ndash;  <th></th>&ndash;&gt;-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr ng-repeat="group in vm.geohashGroups">-->
-        <!--<td class="text-center" style="color: {{group.color}}">{{$index}}</td>-->
-        <!--<td>{{group.groupTitle}}</td>-->
-        <!--<td class="text-center">-->
-        <!--<span class="fa fa-remove pointer"-->
-        <!--ng-click="vm.removeGroup(group.groupId)"></span>-->
-        <!--</td>-->
-        <!--&lt;!&ndash; <td><span ng-click="vm.editGroup(group.groupId, $index)">Edit</span></td>&ndash;&gt;-->
-        <!--</tr>-->
-
-        <!--</tbody>-->
-        <!--</table>-->
-        <!--</div>-->
-        <!--<div ng-if="vm.geohashGroups.length<=0">No groups available</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default ">
                 <div class="panel-heading">
