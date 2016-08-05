@@ -22,22 +22,11 @@
                    bounds={{data.hash.boxBounds}}
                    clickable="true" on-click="vm.ShapeClicked()">
             </shape>
-            <marker title="ashish" id="driver-{{$index}}"
-                    on-click="vm.showInfoWindow()"
-                    position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}">
-            </marker>
+            <!--<marker title="ashish" id="driver-{{$index}}"-->
+                    <!--on-click="vm.showInfoWindow()"-->
+                    <!--position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}">-->
+            <!--</marker>-->
         </div>
-        <info-window id="iw-drivers">
-            <div ng-non-bindable="">
-                <div class="info-window">
-                    <div class="iw-wrapper">
-                        <div class="iw-content">
-                            test
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </info-window>
     </ng-map>
 
     <div class="row geo-fence-tbl" ng-if=" vm.groupCreation || vm.groupEdit">
