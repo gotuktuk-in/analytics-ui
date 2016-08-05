@@ -66,100 +66,30 @@
                 return str;
             }
         }
-
-        /*** code starts for Chart of canceld trip by Driver ***/
-        vm.cancelTripByDriverChartOptions ={
-            chart: {
-                type: 'discreteBarChart',
-                height: 450,
-                margin : {
-                    top: 20,
-                    right: 20,
-                    bottom: 50,
-                    left: 55
-                },
-                x: function(d){return d.label;},
-                y: function(d){return d.value + (1e-10);},
-                showValues: true,
-                valueFormat: function(d){
-                    return d3.format(',.4f')(d);
-                },
-                duration: 500,
-                xAxis: {
-                    axisLabel: 'X Axis'
-                },
-                yAxis: {
-                    axisLabel: 'Y Axis',
-                    axisLabelDistance: -10
-                }
-            }
-        };
         
+        /*** code starts for Chart of canceld trip by Driver ***/
+        vm.drRideCancelReasonCode = {'dCR_TYRE_FLAT':'Flat tyre', 'dCR_VEH_ISSUE':'Vehicle issues', 'dCR_STUCK_TRAFFIC':'Stuck in traffic', 'dCR_CUSTOMER_LATE':'Customer is late'};
         vm.cancelTripByDriverChartOptions = angular.copy(ChartConfigService.discreteBarChartOptions);
-        vm.cancelTripByDriverChartOptions.chart.tooltip = {
-            contentGenerator: function (key, x, y, e, graph){
-                //return html stuff
-                var data = key.data
-                var formatDate;
-                if (data.date === 'other')
-                    formateDate = 'Above 7 days';
-                else
-                    formateDate = moment(PerformanceHandler.getLongDate(data.date.toString())).fomate('MMMM Do YYYY');
-                var str = '<div class="pd-10 text-left"><span><b>'
-                str += formateDate + ' </b></span>' + ''
-                str += '<h3 class="no-mr">' + data.y + '<small style="color:#333;"> /' + data.uniqRides + '</small><br><small style="font-size:10px;color:#666;text-transform: uppercase;">Total Rides / Rides(U)</small></h3>'
-                str += '</div>'
-                return str;
-
-            }
+        vm.cancelTripByDriverChartOptions.chart.x = function (d) {
+            //console.log(vm.drRideCancelReasonCode[d.label]);
+            return vm.drRideCancelReasonCode[d.label];
         }
         /*** code ends for Chart of canceld trip by Driver ***/
         /*** code starts for Chart of canceld trip by Rider ***/
-        vm.cancelTripByRiderChartOptions ={
-            chart: {
-                type: 'discreteBarChart',
-                height: 450,
-                margin : {
-                    top: 20,
-                    right: 20,
-                    bottom: 50,
-                    left: 55
-                },
-                x: function(d){return d.label;},
-                y: function(d){return d.value + (1e-10);},
-                showValues: true,
-                valueFormat: function(d){
-                    return d3.format(',.4f')(d);
-                },
-                duration: 500,
-                xAxis: {
-                    axisLabel: 'X Axis'
-                },
-                yAxis: {
-                    axisLabel: 'Y Axis',
-                    axisLabelDistance: -10
-                }
-            }
-        };
-        
-        vm.cancelTripByRiderChartOptions = angular.copy(ChartConfigService.discreteBarChartOptions);
-        vm.cancelTripByRiderChartOptions.chart.tooltip = {
-            contentGenerator: function (key, x, y, e, graph){
-                //return html stuff
-                var data = key.data
-                var formatDate;
-                if (data.date === 'other')
-                    formateDate = 'Above 7 days';
-                else
-                    formateDate = moment(PerformanceHandler.getLongDate(data.date.toString())).fomate('MMMM Do YYYY');
-                var str = '<div class="pd-10 text-left"><span><b>'
-                str += formateDate + ' </b></span>' + ''
-                str += '<h3 class="no-mr">' + data.y + '<small style="color:#333;"> /' + data.uniqRides + '</small><br><small style="font-size:10px;color:#666;text-transform: uppercase;">Total Rides / Rides(U)</small></h3>'
-                str += '</div>'
-                return str;
+        vm.rdRideCancelReasonCode = {
+            "rCR_MIND_CHANGE":"Changed my mind", 
+            "rCR_ROUTE_CHANGE":"Changed the route", 
+            "rCR_NOT_INTEREST":"not need the ride anymore", 
+            "rCR_DRIVER_ASKED_TO":"Driver asked to cancel", 
+            "rCR_OTHER":"Other",
+            "rCR_BEFORE_CONFIRM":"Ride canceled before confirmation"};
 
-            }
-        }
+        vm.cancelTripByRiderChartOptions = angular.copy(ChartConfigService.discreteBarChartOptions);
+        vm.cancelTripByRiderChartOptions.chart.x = function (d) {
+            console.log(d.label);
+            //return d.label
+            return vm.rdRideCancelReasonCode[d.label];
+        } /**/
         /*** code ends for Chart of canceld trip by Rider ***/
 
         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
@@ -188,6 +118,8 @@
             else {
                 vm.live = false;
                 getOverviewBack()
+                getCanceledTripByRider()
+                getCanceledTripByRider()
             }
             getLive()
             getNewRiders()
@@ -221,7 +153,7 @@
             }, function (response){
                 console.log(response);
                 vm.canceledTripByRider = LiveHandler.canTripRider(response);
-                console.log('hey ', vm.canceledTripByRider);
+                console.log('heyfsfsf ', vm.canceledTripByRider);
             }, function (err){
                 console.log(err)
                 $scope.error = true;

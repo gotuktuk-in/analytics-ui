@@ -118,7 +118,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 left: 55
             },
             x: function (d) {
-                return d.label;
+                return d.label
             },
             //    y: function(d){return d.value + (1e-10);},
             y: function (d) {
