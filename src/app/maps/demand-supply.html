@@ -18,27 +18,31 @@
                    fill-opacity="0.5"
                    stroke-color="#000"
                    stroke-weight="0.1"
-                   stroke-opacity="0.5"
+                   stroke-opacity="0.1"
                    bounds={{data.hash.boxBounds}}
-                   clickable="true" on-click="">
+                   clickable="true">
             </shape>
-            <marker title="ashish" id="driver-{{$index}}"
-                    on-click="vm.map.showInfoWindow($index)"
+            <marker icon="{
+        url:'assets/images/icons/marker-red.svg',
+        scaledSize:[30,30]
+      }" title="Demand: {{data.demand}}, Supply: {{data.supply}}" id="driver-{{$index}}"
+                    on-click="vm.map.showInfoWindow('iw-window', 'driver-'+$index)"
                     position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}">
             </marker>
+            <!--<info-window visible-on-marker="driver-{{$index}}" id="iw-window">-->
+                <!--<div ng-non-bindable>-->
+                    <!--<div class="info-window">-->
+                        <!--<div class="iw-wrapper">-->
+                            <!--<div class="iw-content">-->
+                                <!--Demand: {{data.demand}}<br>-->
+                                <!--Supply: {{data.supply}}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</info-window>-->
         </div>
-        <info-window id="iw-drivers">
-            <div ng-non-bindable="">
-                <div class="info-window">
-                    <div class="iw-wrapper">
-                        <div class="iw-content">
-                            Demand: {{}}<br>
-                            Supply: {{}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </info-window>
+
     </ng-map>
 
     <div class="row geo-fence-tbl" ng-if=" vm.groupCreation || vm.groupEdit">
@@ -83,7 +87,7 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="IsSmallBusiness" class="col-md-3 control-label">Type</label>
+                            <label class="col-md-3 control-label">Type</label>
 
                             <div class="col-md-9">
                                 <label class="radio-inline">
@@ -105,7 +109,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="inputCharge">Charge</label>
+                            <label class="col-sm-3 control-label" >Charge</label>
 
                             <div class="col-sm-9">
                                 <input type="number" ng-model="vm.setting.value" placeholder="Charge" name="inputCharge"
@@ -119,7 +123,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="inputCharge">Driver Value</label>
+                            <label class="col-sm-3 control-label" >Driver Value</label>
 
                             <div class="col-sm-9">
                                 <input type="number" ng-model="vm.setting.driverValue" placeholder="Driver Value"
@@ -135,7 +139,7 @@
 
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="inputCharge">Group Name</label>
+                            <label class="col-sm-3 control-label" >Group Name</label>
 
                             <div class="col-sm-9">
                                 <input type="text" placeholder="Group Title" name="inputGroupTitle"

@@ -23,8 +23,11 @@
             vm.map = map;
             google.maps.event.addDomListener(vm.map);
 
-
         });
+
+        vm.onPrecisionChange = function () {
+            getDetail();
+        };
 
         function getDetail() {
             MapService.getDemandSupply({precision: vm.selectedPrecision.value}, function (response) {
@@ -33,8 +36,6 @@
                 _.each($scope.allHash, function (group) {
                     group.hash = getGeoHashObj(group.geo_hash);
                 });
-                getDemandSupply();
-                //console.log($scope.allHash);
             }, function (err) {
                 console.log(err);
                 $scope.error = true;
@@ -43,55 +44,51 @@
 
         getDetail();
 
-        function getDemandSupply() {
-
-            //bid Marker start
-
-            var markers = [];
-            var contents = [];
-            var infoWindows = [];
-            var i = 0;
-            for (i = 0; i < $scope.totalHash; i++) {
-
-                var newData = $scope.allHash[i].geo_hash;
-                var myLatlng = geohash.decode (newData);
-                console.log(newData)
-                console.log(myLatlng.latitude +','+ myLatlng.longitude)
-
-                markers[i] = new google.maps.Marker({
-                    position: new google.maps.LatLng(myLatlng.latitude+','+myLatlng.longitude),
-                    map: vm.map,
-                    title: 'Bid'
-                });
-
-                markers[i].index = i;
-                contents[i] = '<div class="popup_container">'
-                + 'test'
-                '</div>';
-
-
-                infoWindows[i] = new google.maps.InfoWindow({
-                    content: contents[i],
-                    maxWidth: 300
-                });
-
-                google.maps.event.addListener(markers[i], 'click', function () {
-                    console.log(this.index); // this will give correct index
-                    console.log(i); //this will always give 10 for you
-                    infowindows[this.index].open(map, markers[this.index]);
-                    map.panTo(markers[this.index].getPosition());
-                });
-
-            }
-            //bid Marker end
-
-        }
-
-        vm.showDetail = function(e, driver, index) {
-            vm.driver = driver;
-
-            vm.map.showInfoWindow('iw-drivers', index);
-        };
+        //function getDemandSupply() {
+        //
+        //    //bid Marker start
+        //
+        //    var markers = [];
+        //    var contents = [];
+        //    var infoWindows = [];
+        //    var i = 0;
+        //    for (i = 0; i < $scope.totalHash; i++) {
+        //
+        //        var newData = $scope.allHash[i].geo_hash;
+        //        var myLatlng = geohash.decode (newData);
+        //        //console.log(newData)
+        //        //console.log(myLatlng.latitude +','+ myLatlng.longitude)
+        //
+        //        markers[i] = new google.maps.Marker({
+        //            position: new google.maps.LatLng(myLatlng.latitude+','+myLatlng.longitude),
+        //            map: vm.map,
+        //            title: 'Bid'
+        //        });
+        //
+        //        markers[i].index = i;
+        //        contents[i] = '<div class="popup_container">'
+        //        + 'test'
+        //        '</div>';
+        //
+        //
+        //        infoWindows[i] = new google.maps.InfoWindow({
+        //            content: contents[i],
+        //            maxWidth: 300
+        //        });
+        //
+        //        google.maps.event.addListener(markers[i], 'click', function () {
+        //            console.log(this.index); // this will give correct index
+        //            console.log(i); //this will always give 10 for you
+        //            infowindows[this.index].open(map, markers[this.index]);
+        //            map.panTo(markers[this.index].getPosition());
+        //        });
+        //
+        //
+        //
+        //    }
+        //    //bid Marker end
+        //
+        //}
 
         function getGeoHashObj(hash) {
             var obj = {};
