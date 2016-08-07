@@ -34,31 +34,9 @@
         anchor: [15,15]
       }"
                         id="free-driver-{{$index}}"
-                        on-click="vm.showDetail(driver,'free-driver-'+$index)"
+                        on-click="vm.map.showInfoWindow(driver,'free-driver-'+$index)"
                         position="{{driver.marker}}">
                 </marker>
-                <!--<marker ng-repeat="driver in vm.allDrivers.available.drivers track by $index"icon="{
-                url:'assets/images/icons/marker-green.svg',
-                scaledSize:[30,30],
-                origin: [0,0],
-                anchor: [15,15]
-              }"
-                        id="custom-marker-{{$index}}"
-                        on-click="vm.map.showInfoWindow('iw-drivers', 'custom-marker-'+$index)"
-                        position="{{driver.marker}}">
-                </marker>
-              </div>
-              <div>
-                <marker ng-repeat="driver in vm.allDrivers.occupied.drivers track by $index" icon="{
-                url:'assets/images/icons/marker-red.svg',
-                scaledSize:[30,30],
-                origin: [0,0],
-                anchor: [15,15]
-              }"
-                        id="custom-marker-{{$index}}"
-                        on-click="vm.showDetail(driver)"
-                        position="{{driver.marker}}">
-                </marker>-->
             </div>
 
             <info-window id="iw-drivers">

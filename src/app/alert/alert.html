@@ -265,34 +265,37 @@
                                 <tbody>
 
                                 <tr ng-repeat="row in vm.notification">
-                                    <td data-title="'ID'" class="text-center">
+                                    <td data-title="'ID'" class="text-left">
                                         {{row.id}}
                                     </td>
                                     <td data-title="'Title'" class="text-left">
 
                                         {{row.title}}
                                     </td>
-                                    <td data-title="'Message'" class="text-center">
+                                    <td data-title="'Message'" class="text-left">
                                         {{row.message.message}}
                                     </td>
-                                    <td data-title="'Send On'" class="text-center">
+                                    <td data-title="'Send On'" class="text-left">
                                         {{(row.sendOn)*1000 | date:"dd MMM yy h:mma"}}
                                     </td>
-                                    <td data-title="'Updated On'" class="text-center">
+                                    <td data-title="'Updated On'" class="text-left">
                                         {{(row.updatedOn)*1000 | date:"dd MMM yy h:mma"}}
                                     </td>
-                                    <td data-title="'Expire At'" class="text-center">
+                                    <td data-title="'Expire At'" class="text-left">
                                         {{(row.message.expireAt)*1000 | date:"dd MMM yy h:mma"}}
                                     </td>
-                                    <td data-title="'Type'" class="text-center">
+                                    <td data-title="'Type'" class="text-left">
                                         {{row.type}}
                                     </td>
-                                    <td data-title="'Notification Type'" class="text-center">
+                                    <td data-title="'Notification Type'" class="text-left">
                                         {{row.notificationType}}
                                     </td>
 
-                                    <td data-title="'Send To'" class="text-center">
-                                        {{row.sendTo[0]}}
+                                    <td data-title="'Send To'" class="text-left">
+                                        <div style="width:200px; word-break: break-all;">{{row.sendTo.toString()}}</div>
+                                    </td>
+                                    <td data-title="'Author'" class="text-left">
+                                        {{row.author}}
                                     </td>
                                 </tr>
                                 </tr>

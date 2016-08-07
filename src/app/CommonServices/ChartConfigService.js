@@ -114,11 +114,11 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             margin: {
                 top: 30,
                 right: 50,
-                bottom: 100,
+                bottom: 180,
                 left: 55
             },
             x: function (d) {
-                return d.label;
+                return d.label
             },
             //    y: function(d){return d.value + (1e-10);},
             y: function (d) {

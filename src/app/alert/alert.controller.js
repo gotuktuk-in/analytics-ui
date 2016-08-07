@@ -40,6 +40,12 @@
             vm.searchTerm = ""
             $scope.tableParams.reload()
         }
+
+        function replaceAll(search, replacement) {
+            var target = this;
+            return target.split(search).join(replacement);
+        };
+
         vm.deselectAll = function () {
             vm.selectedDrivers = [];
             angular.forEach($scope.tableParams.data, function (item) {

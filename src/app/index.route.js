@@ -90,7 +90,7 @@
                 controllerAs: 'vm'
             })
             .state('home.trip_detail', {
-                    url: '/tripdetail/:id/:driverId/:riderId',
+                    url: '/tripdetail/:id',
                     templateUrl: 'app/trips/trip_details.html',
                     controller: 'TripDetailController',
                     controllerAs: 'vm'
