@@ -1687,3 +1687,5 @@ span.img-top {
     fill: FireBrick;
 }
 .get-bid-marker-btn{margin-top:25px}
+.bid-driver-detail h4{font-weight:400}
+.bid-driver-detail h4 + span{text-transform: uppercase;}
