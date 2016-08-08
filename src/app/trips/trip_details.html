@@ -1,54 +1,147 @@
 <div class="content">
     <div class="content-div">
         <ng-map id="driversMap" center="indore" style="width:100%; height:100%; position: static;">
-            <div>
-                <marker position="{{selectedTripBid.lt}},{{selectedTripBid.ln}}" ng-repeat="data in data"></marker>
+        <div>
+            <marker position="{{selectedTripBid.lt}},{{selectedTripBid.ln}}" ng-repeat="data in data"></marker>
+        </div>
+    </ng-map>
+
+    <div class="tabs-view-2">
+        <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}"
+        class="btn btn-default tabs-toggle-btn map-btn" title="Show More...">
+        <i class="fa fa-angle-double-right"></i>
+    </button>
+
+    <div class="tabs-toggle" ng-class="{'tabs-show' : !tabView}">
+        <uib-tabset active="active">
+        <uib-tab index="0" heading="Trip">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="box">
+                        <h4 class="number">{{selectedTrip.id}}</h4>
+                        <span>id</span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="box">
+                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yyyy 'at' hh:mm"}}</h4>
+                        <span>date</span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="box">
+                        <h4 class="number">{{selectedTrip.startCode}}</h4>
+                        <span>Start Code</span>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
+                            <h3>For Trip</h3>
+                            <hr>
+                        </div>
+                       
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="box">
+                                    <h4 class="number">{{(selectedTrip.disForTrip/1000)}}</h4>
+                                    <span>Distance</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="box">
+                                    <h4 class="number">{{selectedTrip.durForTrip}}</h4>
+                                    <span>Duration</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="box">
+                                    <h4 class="number">{{selectedTrip.forTripspeed}}</h4>
+                                    <span>Speed</span>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    &nbsp;
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
+                            <h3>In Trip</h3>
+                            <hr>
+                        </div>
+                      
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="box">
+                                    <h4 class="number">{{(selectedTrip.disInTrip/1000) | number:2}}</h4>
+                                    <span>Distance</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="box">
+                                    <h4 class="number">{{selectedTrip.durInTrip}}</h4>
+                                    <span>Duration</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="box">
+                                    <h4 class="number">{{selectedTrip.inTripSpeed}}</h4>
+                                    <span>Speed </span>
+                                </div>
+                            </div>
+                        
+                        
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    &nbsp;
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
+                            <h3>Amount</h3>
+                            <hr>
+                        </div>
+                        
+                           <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="box">
+                                    <h4 class="number">{{selectedTrip.driverFare}}</h4>
+                                    <span>driver's Fare</span>
+                                </div>
+                            </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{selectedTrip.riderFare}}</h4>
+                                <span>Rider's Fare</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">Rs.
+                                    {{selectedTrip.tcashUsed}}
+                                </h4>
+                                <span>Amount <small>tCash</small></span>
+                                <!-- <span>Amount Total<small> / Cash / tCash</small></span> -->
+                            </div>
+                        </div>
+                   
+
+                </div>
             </div>
-        </ng-map>
-
-        <div class="tabs-view-2">
-            <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}"
-                    class="btn btn-default tabs-toggle-btn map-btn" title="Show More...">
-                <i class="fa fa-angle-double-right"></i>
-            </button>
-
-            <div class="tabs-toggle" ng-class="{'tabs-show' : !tabView}">
-                <uib-tabset active="active">
-                    <uib-tab index="0" heading="Trip">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.id}}</h4>
-                                        <span>id</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yy 'at'
-                                            h:mma"}}</h4>
-                                        <span>date</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.startCode}}</h4>
-                                        <span>Start Code</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{(selectedTrip.disForTrip/1000) | number:2}} /
-                                            {{(selectedTrip.disInTrip/1000) | number:2}}</h4>
-                                        <span>Distance for Trip / in Trip</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.durForTrip}} / {{selectedTrip.durInTrip}}</h4>
-                                        <span>Duration for Trip / in Trip</span>
-                                    </div>
-                                </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                &nbsp;<br> &nbsp;
+                <hr style="margin:0">
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="box">
+                    <h4 class="number">{{selectedTrip.waitingTime}}</small></h4>
+                    <span>Waiting Time</span>
+                </div>
+            </div>
                                 <!-- <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{getTimeDiff(selectedTrip.requestOn,
@@ -59,14 +152,7 @@
                                         <span>Time for Trip / in Trip</span>
                                     </div>
                                 </div> -->
-                                
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.waitingTime}}</small></h4>
-                                        <span>Waiting Time</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                <!-- <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">&nbsp;</small></h4>
                                         <span>Time allocated</span>
@@ -77,61 +163,36 @@
                                         <h4 class="number">{{selectedTrip.atPickupOn*1000 | date: "h:mma"}}</small></h4>
                                         <span>At Pickup</span>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.pickupOn ? (selectedTrip.pickupOn
                                             *1000 | date:"h:mma ") : 'N/A'}} / {{selectedTrip.dropOn ?
                                             (selectedTrip.dropOn *1000| date:"h:mma ") : 'N/A'}}</h4>
-                                        <span>Start Time / End Time</span>
+                                            <span>Start Time / End Time</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.riderFeedback | number:2}}</h4>
-                                        <span>Rider's Feedback</span>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <div class="box">
+                                            <h4 class="number">{{selectedTrip.riderFeedback | number:2}} / {{selectedTrip.driverFeedback | number:2}}</h4>
+                                            <span>Rider's / driver's Feedback</span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                <!--<div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.driverFeedback | number:2}}</h4>
                                         <span>driver's Feedback</span>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.driverFare}}</h4>
-                                        <span>driver's Fare</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.riderFare}}</h4>
-                                        <span>Rider's Fare</span>
-                                    </div>
-                                </div>
-                                <!-- <div class="col-md-4 col-sm-4 col-xs-12">
+                                
+                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">Rs.{{selectedTrip.driverFare}}</small></h4>
                                         <span>Amount</span>
                                     </div>
                                 </div> -->
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">Rs.{{selectedTrip.amount.total}}
-                                            <small> / {{selectedTrip.amount.cash}} /
-                                                {{selectedTrip.tcashUsed}}
-                                            </small>
-                                        </h4>
-                                        <span>Amount Total<small> / Cash / tCash</small></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.inTripSpeed}} / {{selectedTrip.forTripspeed}}</h4>
-                                        <span>In Trip Speed / For Trip Speed</span>
-                                    </div>
-                                </div>
+                                
+                                
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">&nbsp;</h4>
@@ -142,7 +203,7 @@
                                 <div class="col-md-4 col-sm-4 col-xs-12 pull-right" align="right">
                                     <div class="box">
                                         <!-- <h4 class="number">&nbsp;</h4> -->
-                                        <button type="button" class="btn btn-default get-bid-marker-btn" ng-click="vm.getBid()">Get Bidders</button>
+                                        <button type="button" class="btn btn-default get-bid-marker-btn" ng-click="vm.getBid()">Candidates</button>
                                     </div>
                                 </div>
                                 
@@ -151,46 +212,46 @@
                         </div>
                     </uib-tab>
                     <uib-tab index="0" heading="Driver">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
-                                <div class="box box-heading box-0 text-center"
-                                     ng-class="{'box-online': selectedTrip.driverInfo.state== 22 || selectedTrip.driverInfo.state== 11, 'box-offline': selectedTrip.driverInfo.state== 10 } ">
-                                    <img ng-src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{selectedTrip.driverInfo.profileImage}}&container=focus&resize_w=75&resize_h=75&refresh=2592000"
-                                         class="iw-driver" height="50">
-                                    <h4 class="title" style="margin-top:10px;">{{selectedTrip.driverInfo.name}}</h4>
+                    <div class="row">
+                        <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
+                            <div class="box box-heading box-0 text-center"
+                            ng-class="{'box-online': selectedTrip.driverInfo.state== 22 || selectedTrip.driverInfo.state== 11, 'box-offline': selectedTrip.driverInfo.state== 10 } ">
+                            <img ng-src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{selectedTrip.driverInfo.profileImage}}&container=focus&resize_w=75&resize_h=75&refresh=2592000"
+                            class="iw-driver" height="50">
+                            <h4 class="title" style="margin-top:10px;">{{selectedTrip.driverInfo.name}}</h4>
 
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-sm-12 col-xs-12">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{selectedTrip.driverInfo.id}}</h4>
+                                <span>id</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{selectedTrip.driverInfo.name}}</h4>
+                                <span>Name</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{selectedTrip.driverInfo.phone}}</h4>
+                                <span>phone</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{selectedTrip.driverInfo.email ?
+                                    selectedTrip.driverInfo.email:'-'}}</h4>
+                                    <span>Email</span>
                                 </div>
                             </div>
-                            <div class="col-md-10 col-sm-12 col-xs-12">
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.driverInfo.id}}</h4>
-                                        <span>id</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.driverInfo.name}}</h4>
-                                        <span>Name</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.driverInfo.phone}}</h4>
-                                        <span>phone</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.driverInfo.email ?
-                                            selectedTrip.driverInfo.email:'-'}}</h4>
-                                        <span>Email</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.driverInfo.joinedOn*1000 | date:'dd MMM
-                                            yy'}}</h4>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="box">
+                                    <h4 class="number">{{selectedTrip.driverInfo.joinedOn*1000 | date:'dd MMM
+                                        yy'}}</h4>
                                         <span>joined On</span>
                                     </div>
                                 </div>
@@ -219,46 +280,46 @@
                         </div>
                     </uib-tab>
                     <uib-tab index="0" heading="Rider">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
-                                <div class="box box-heading box-0 text-center"
-                                     ng-class="{'box-online': selectedTrip.riderInfo.state== 22 || selectedTrip.riderInfo.state== 11, 'box-offline': selectedTrip.riderInfo.state== 10 } ">
-                                    <img ng-src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{selectedTrip.riderInfo.profileImage}}&container=focus&resize_w=75&resize_h=75&refresh=2592000"
-                                         class="iw-driver" height="50">
-                                    <h4 class="title" style="margin-top:10px;">{{selectedTrip.riderInfo.name}}</h4>
+                    <div class="row">
+                        <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
+                            <div class="box box-heading box-0 text-center"
+                            ng-class="{'box-online': selectedTrip.riderInfo.state== 22 || selectedTrip.riderInfo.state== 11, 'box-offline': selectedTrip.riderInfo.state== 10 } ">
+                            <img ng-src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{selectedTrip.riderInfo.profileImage}}&container=focus&resize_w=75&resize_h=75&refresh=2592000"
+                            class="iw-driver" height="50">
+                            <h4 class="title" style="margin-top:10px;">{{selectedTrip.riderInfo.name}}</h4>
 
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-sm-12 col-xs-12">
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{selectedTrip.riderInfo.id}}</h4>
+                                <span>id</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{selectedTrip.riderInfo.name}}</h4>
+                                <span>Name</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{selectedTrip.riderInfo.phone}}</h4>
+                                <span>phone</span>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{selectedTrip.riderInfo.email ?
+                                    selectedTrip.riderInfo.email:'-'}}</h4>
+                                    <span>Email</span>
                                 </div>
                             </div>
-                            <div class="col-md-10 col-sm-12 col-xs-12">
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.riderInfo.id}}</h4>
-                                        <span>id</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.riderInfo.name}}</h4>
-                                        <span>Name</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.riderInfo.phone}}</h4>
-                                        <span>phone</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-12 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.riderInfo.email ?
-                                            selectedTrip.riderInfo.email:'-'}}</h4>
-                                        <span>Email</span>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <div class="box">
-                                        <h4 class="number">{{selectedTrip.riderInfo.joinedOn*1000 | date:'dd MMM
-                                            yy'}}</h4>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="box">
+                                    <h4 class="number">{{selectedTrip.riderInfo.joinedOn*1000 | date:'dd MMM
+                                        yy'}}</h4>
                                         <span>joined On</span>
                                     </div>
                                 </div>

@@ -20,9 +20,9 @@
         vm.drID;
         vm.drID2;
         
-        vm.infowindows = new google.maps.InfoWindow({
+        /*vm.infowindows = new google.maps.InfoWindow({
                             maxWidth: 320
-                        });
+                        });*/
 
         vm.getBid = function() {
            TripsService.getBidDetail(
@@ -50,7 +50,7 @@
                     to: moment($scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString()
                 }, function (response) {
                     var detail = response;
-                    var content = '<div class="popup_container bid-driver-detail">' +
+                    /*var content = '<div class="popup_container bid-driver-detail">' +
                                     '<div class="col-md-6 col-sm-4 col-xs-12">' + 
                                         '<h4 class="number ng-binding">' + detail.id + '</h4>' +
                                         '<span>Id</span>' +
@@ -103,7 +103,7 @@
                                         '<h4 class="number ng-binding">' + detail.today_bid.total + '</h4>' +
                                         '<span>Bid' + 
                                     '</div>' +
-                                '</div>';
+                                '</div>';*/
                     vm.infowindows.setContent(content)
                     console.log('$scope.detail', detail);
                     
@@ -152,6 +152,7 @@
                     $scope.selectedTrip = response;
                     vm.snapCodesFor = $scope.selectedTrip.forTripSnapCode;
                     vm.snapCodesIn = $scope.selectedTrip.inTripSnapCode;
+                    //angular.element(document.querySelector('html')).toggleClass('left-arrow');
                     vm.initialize();
                 }, function (err) {
                     console.log(err)
@@ -214,11 +215,11 @@
                 //bid Marker start
 
                 var markers = [];
-                var contents;
+                var contents = [];
                 var infowindows = [];
                 var i = 0;
 
-
+                $scope.bidConstants = {"0":"Reject", "1":"Accept","-2":"Low_ Battery","-1":"Offline", "2":"Delivered","-3":"Unknown","-4":"Retry Failed"};
                 for (i = 0; i < $scope.totalBid; i++) {
                     
                     markers[i] = new google.maps.Marker({
@@ -228,28 +229,28 @@
                         icon: icon3
                     });
                     markers[i].index = i;
-                   ;
-                   /* contents[i] = '<div class="popup_container">'  
-                  
-                    + '<div class="col-md-6 col-sm-4 col-xs-12"><h4 class="number ng-binding">' + detail + '</h4><span>Id</span></div>'
-                    + '<div class="col-md-6 col-sm-4 col-xs-12"><h4 class="number ng-binding">' +  + '</h4><span>Id</span></div>'
+                    
+                    contents[i] = '<div class="popup_container">' + 
+                    '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].dr +  '</h4><span>Id</span></div>'
+                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].name + '</h4><span>Name</span></div>'
+                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.bidConstants[$scope.selectedTripBid[i].bid] + '</h4><span>Bid</span></div>'
                     + 
-                    '</div>';*/
+                    '</div>';
 
 
-                    /*infowindows[i] = new google.maps.InfoWindow({
+                    infowindows[i] = new google.maps.InfoWindow({
                         content: contents[i],
                         maxWidth: 300
-                    });*/
+                    });/**/
 
                     google.maps.event.addListener(markers[i], 'click', function () {
                         //console.log(this.index); // this will give correct index
                         //console.log(i); //this will always give 10 for you
-                        vm.drID = this.index;
-                        console.log(vm.drID);
-                        vm.getDriverDetail(vm.drID)     
+                        //vm.drID = this.index;
+                        //console.log(vm.drID);
+                        //vm.getDriverDetail(vm.drID)     
 
-                        vm.infowindows.open(map, markers[this.index]);
+                        infowindows[this.index].open(map, markers[this.index]);
                         map.panTo(markers[this.index].getPosition());
                     });
 
