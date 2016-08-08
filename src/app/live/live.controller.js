@@ -69,7 +69,7 @@
         
         /*** code starts for Chart of canceld trip by Driver ***/
         vm.drRideCancelReasonCode = {'dCR_TYRE_FLAT':'Flat tyre', 'dCR_VEH_ISSUE':'Vehicle issues', 'dCR_STUCK_TRAFFIC':'Stuck in traffic', 'dCR_CUSTOMER_LATE':'Customer is late'};
-        vm.cancelTripByDriverChartOptions = angular.copy(ChartConfigService.discreteBarChartOptions);
+        vm.cancelTripByDriverChartOptions = angular.copy(ChartConfigService.pieChartOptions);
         vm.cancelTripByDriverChartOptions.chart.x = function (d) {
             //console.log(vm.drRideCancelReasonCode[d.label]);
             return vm.drRideCancelReasonCode[d.label];
@@ -84,7 +84,7 @@
             "rCR_OTHER":"Other",
             "rCR_BEFORE_CONFIRM":"Ride canceled before confirmation"};
 
-        vm.cancelTripByRiderChartOptions = angular.copy(ChartConfigService.discreteBarChartOptions);
+        vm.cancelTripByRiderChartOptions = angular.copy(ChartConfigService.pieChartOptions);
         vm.cancelTripByRiderChartOptions.chart.x = function (d) {
             console.log(d.label);
             //return d.label
@@ -96,6 +96,7 @@
             return d3.time.format('%I %p')(new Date(d).addHours(1));
         };
         vm.trips = [];
+
         var current = moment()
         vm.live = true
         vm.changeDate = function (to) {
@@ -129,6 +130,8 @@
         }
         /*** rest call for barchart for canceld trip by driver code starts ***/
         function getCanceledTripByDriver(){
+            vm.canceledTripByDriver = [];
+        
             LiveService.getCancelTripsDriver({
                startTime: moment(current).startOf('day'),
                 endTime: moment(current).endOf('day'),
@@ -147,6 +150,7 @@
 
         /*** rest call for barchart for canceld trip by Rider code starts ***/
         function getCanceledTripByRider(){
+           vm.canceledTripByRider = [];
             LiveService.getCancelTripsRider({
                startTime: moment(current).startOf('day'),
                 endTime: moment(current).endOf('day'),

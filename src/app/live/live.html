@@ -198,31 +198,20 @@
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Trips cancelled by driver</h4></div>
+                    <h4 style="margin-top: 0" class="title">Cancelled Trips</h4></div>
                 <div class="panel-body">
-                    <div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                        <h5>By driver</h5>
                         <nvd3 options="vm.cancelTripByDriverChartOptions" data="vm.canceledTripByDriver" config="vm.config"></nvd3>
                     </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Trips cancelled by Rider</h4></div>
-                <div class="panel-body">
-                    <div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                        <h5>By Rider</h5>
                         <nvd3 options="vm.cancelTripByRiderChartOptions" data="vm.canceledTripByRider" config="vm.config"></nvd3>
                     </div>
-                    </a>
                 </div>
             </div>
         </div>
-        <div class="clearfix"></div>
-
-
-        <div class="col-md-12 col-sm-12 col-xs-12" ngsf-fullscreen>
+        <div class="col-md-6 col-sm-6 col-xs-12" ngsf-fullscreen>
 
             <div class="panel panel-default">
                 <div class="panel-heading">

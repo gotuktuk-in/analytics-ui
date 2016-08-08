@@ -1687,5 +1687,12 @@ span.img-top {
     fill: FireBrick;
 }
 .get-bid-marker-btn{margin-top:25px}
-.bid-driver-detail h4{font-weight:400}
+.heading-box1{color:#333; text-transform:uppercase; text-align:left}
+.heading-box1 h3{ font-size:14px; margin:20px 0 5px 0; font-weight:400}
+.heading-box1 hr{margin:0}
+
+.heading-box1{}
+/*.bid-driver-detail h4{px t-weight:400}
 .bid-driver-detail h4 + span{text-transform: uppercase;}
+.trip-in-detail-quad1, .trip-amount-detail-quad1{border-left:solid 1px rgba(153,153,153,0.5)}
+.trip-for-detail-quad1 h3, .trip-in-detail-quad1 h3, .trip-amount-detail-quad1 h3{margin-top:5px}*/

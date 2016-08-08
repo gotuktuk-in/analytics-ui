@@ -42,12 +42,14 @@ function LiveHandler() {
         {"key": "New Riders", "values": []},
     ]
     /****returnable object for cancel trip by driver/ rider code starts*****/
-    factory.cancelledTripsDriver1 = [
+    /*factory.cancelledTripsDriver1 = [
         {"key": "", "values": []}
-    ]
-    factory.cancelledTripsRider1 = [
+    ]*/
+    factory.cancelledTripsDriver1 = []
+  /*  factory.cancelledTripsRider1 = [
         {"key": "", "values": []}
-    ]
+    ]*/
+      factory.cancelledTripsRider1 = []
     /****returnable object for cancel trip by driver/ rider code ends*****/
 
     factory.getTrips = function () {
@@ -97,14 +99,16 @@ function LiveHandler() {
     /*** handler function for canceld trip by Driver code starts ***/
     factory.canTripDriver = function (data) {
         var drCancelRide = [];
-        var longDate = factory.getLongDate(data.drcan.date)
-        factory.cancelledTripsDriver1[0].key = longDate
-        var e = 1;
+        //var longDate = factory.getLongDate(data.drcan.date)
+        //factory.cancelledTripsDriver1[0].key = longDate
+        //var e = 1;
         _.each(data.drcan.data, function (value) {
-            drCancelRide.push({label: value.reason_code , value : value.count});
+            //drCancelRide.push({label: value.reason_code , value : value.count});
             //drCancelRide.push({label:'R'+ e++ , value : value.count});
+            factory.cancelledTripsDriver1.push({label: value.reason_code , value : value.count});
+
          })
-        factory.cancelledTripsDriver1[0].values = drCancelRide
+        //factory.cancelledTripsDriver1[0].values = drCancelRide
         return factory.cancelledTripsDriver1
     }
     /*** handler function for canceld trip by Driver code ends ***/
@@ -112,14 +116,15 @@ function LiveHandler() {
     /*** handler function for canceld trip by Rider code starts ***/
     factory.canTripRider = function (data) {
         var riderCancelRide = [];
-        var longDate = factory.getLongDate(data.rican.date)
-        factory.cancelledTripsDriver1[0].key = longDate
-        var e = 1;
+        //var longDate = factory.getLongDate(data.rican.date)
+        //factory.cancelledTripsDriver1[0].key = longDate
+        //var e = 1;
         _.each(data.rican.data, function (value) {
-            riderCancelRide.push({label: value.reason_code , value : value.count});
+            //riderCancelRide.push({label: value.reason_code , value : value.count});
             //riderCancelRide.push({label:'R'+ e++ , value : value.count});
+            factory.cancelledTripsRider1.push({label: value.reason_code , value : value.count});
          })
-        factory.cancelledTripsRider1[0].values = riderCancelRide
+        //factory.cancelledTripsRider1[0].values = riderCancelRide
         return factory.cancelledTripsRider1
     }
     /*** handler function for canceld trip by Rider code ends ***/

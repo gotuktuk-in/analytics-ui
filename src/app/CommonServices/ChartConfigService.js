@@ -238,6 +238,25 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
 
         }
     };
-
+    factory.pieChartOptions = {
+        chart: {
+          type: 'pieChart',
+          height: 420,
+          x: function(d){return d.label;},
+          y: function(d){return d.value;},
+          showLabels: false,
+          duration: 500,
+          labelThreshold: 0.01,
+          labelSunbeamLayout: true,
+          legend: {
+            margin: {
+              top: 5,
+              right: 35,
+              bottom: 5,
+              left: 0
+            }
+          }
+        }
+    };
     return factory;
 }
