@@ -118,12 +118,14 @@
             else {
                 vm.live = false;
                 getOverviewBack()
-                getCanceledTripByRider()
+                getCanceledTripByDriver()
                 getCanceledTripByRider()
             }
             getLive()
             getNewRiders()
             vm.loadHeatMap()
+            getCanceledTripByDriver()
+            getCanceledTripByRider()
         }
         /*** rest call for barchart for canceld trip by driver code starts ***/
         function getCanceledTripByDriver(){
@@ -364,6 +366,8 @@
             getNewRiders()
             if (vm.live) {
                 getOverviewLive()
+                getCanceledTripByDriver()
+                getCanceledTripByRider()
             }
             else {
                 getOverviewBack()

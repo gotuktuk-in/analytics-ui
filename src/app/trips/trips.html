@@ -86,7 +86,7 @@
                             aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
                 </div>
                 <div class="input-group col-md-3 col-sm-4 col-xs-12">
-                    <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
+                    <select ng-model="vm.statusCodes" ng-change="vm.getTrips()" class="form-control"
                             ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters track by statusFilter.value">
                         <option value="" disabled>Select Status</option>
                     </select>

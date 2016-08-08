@@ -169,7 +169,7 @@
                 console.log(err)
                 $scope.error = true;
             });
-            //  $scope.tableParams.page(1)
+            $scope.tableParams.page(1)
             $scope.tableParams.reload();
         }
         var sorting;

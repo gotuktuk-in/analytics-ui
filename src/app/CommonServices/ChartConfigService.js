@@ -136,7 +136,10 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             },
             yAxis: {
                 axisLabel: '',
-                axisLabelDistance: -10
+                axisLabelDistance: -10,
+                tickFormat: function (d) {
+                    return d3.round(d);
+                }
             }
         }
     }
@@ -187,9 +190,9 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
 
             yAxis: {
                 tickFormat: function (d) {
-                    return d;
+                    return d3.round(d);
                 }
-            },
+            }
 
         }
 
