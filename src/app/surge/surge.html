@@ -1,4 +1,10 @@
 <div class="content">
+    <div class="row" style="z-index:99; position:fixed; width:auto; padding:10px 0; left:53px;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <span class="text-center" ng-model="date"
+                  style="display: inline-block; padding: 7px 0;">{{date}}</span>
+        </div>
+    </div>
     <div class="geo-hash-select">
         <select ng-change="vm.onPrecisionChange()" style="padding:5px 10px; border-radius: 4px;"
                 ng-model="vm.selectedPrecision"
@@ -6,9 +12,10 @@
 
         </select>
     </div>
-    <ng-map click id="surgeMap" center="indore" style="width:100%; height:100%; position:fixed" zoom="{{vm.selectedPrecision.value+8}}">
+    <ng-map click id="surgeMap" center="indore" style="width:100%; height:100%; position:fixed"
+            zoom="{{vm.selectedPrecision.value+8}}">
         <div ng-repeat="group in vm.geohashGroups" class="geo-hash-box">
-            <shape  ng-repeat="geohashItem in group.geoHashArr" name="rectangle"
+            <shape ng-repeat="geohashItem in group.geoHashArr" name="rectangle"
                    editable="false"
                    draggable="false"
                    fill-color={{group.color}}
@@ -24,155 +31,206 @@
 
     </ng-map>
 
-            <div class="row geo-fence-tbl"  ng-if=" vm.groupCreation || vm.groupEdit">
-                <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
-                    <!--<div class="panel panel-default ">-->
-                        <!--<div class="panel-heading">-->
-                            <!--<h4 style="margin-top: 0" class="title">Groups</h4>-->
-                        <!--</div>-->
-                        <!--<div class="panel-body">-->
-                            <!--<div style="max-height: 200px; height: 80%; overflow:auto;" ng-if="vm.geohashGroups.length>0">-->
-                                <!--<table class="table table-inverse table-bordered">-->
-                                    <!--<thead>-->
-                                    <!--<tr>-->
-                                        <!--<th width="30" class="text-center">#</th>-->
-                                        <!--<th>Name</th>-->
-                                        <!--<th width="30" class="text-center"><span class="fa fa-remove pointer"-->
-                                                                                 <!--ng-click="toggle = !toggle"-->
-                                                                                 <!--ng-class="{'red' : toggle}"></span>-->
-                                        <!--</th>-->
-                                      <!--&lt;!&ndash;  <th></th>&ndash;&gt;-->
-                                    <!--</tr>-->
-                                    <!--</thead>-->
-                                    <!--<tbody>-->
-                                    <!--<tr ng-repeat="group in vm.geohashGroups">-->
-                                        <!--<td class="text-center" style="color: {{group.color}}">{{$index}}</td>-->
-                                        <!--<td>{{group.groupTitle}}</td>-->
-                                        <!--<td class="text-center">-->
-                                            <!--<span class="fa fa-remove pointer"-->
-                                                                      <!--ng-click="vm.removeGroup(group.groupId)"></span>-->
-                                        <!--</td>-->
-                                       <!--&lt;!&ndash; <td><span ng-click="vm.editGroup(group.groupId, $index)">Edit</span></td>&ndash;&gt;-->
-                                    <!--</tr>-->
+    <div class="row geo-fence-tbl" ng-if="vm.groupCreation || vm.groupEdit">
+        <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+        <!--<div class="panel panel-default ">-->
+        <!--<div class="panel-heading">-->
+        <!--<h4 style="margin-top: 0" class="title">Groups</h4>-->
+        <!--</div>-->
+        <!--<div class="panel-body">-->
+        <!--<div style="max-height: 200px; height: 80%; overflow:auto;" ng-if="vm.geohashGroups.length>0">-->
+        <!--<table class="table table-inverse table-bordered">-->
+        <!--<thead>-->
+        <!--<tr>-->
+        <!--<th width="30" class="text-center">#</th>-->
+        <!--<th>Name</th>-->
+        <!--<th width="30" class="text-center"><span class="fa fa-remove pointer"-->
+        <!--ng-click="toggle = !toggle"-->
+        <!--ng-class="{'red' : toggle}"></span>-->
+        <!--</th>-->
+        <!--&lt;!&ndash;  <th></th>&ndash;&gt;-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr ng-repeat="group in vm.geohashGroups">-->
+        <!--<td class="text-center" style="color: {{group.color}}">{{$index}}</td>-->
+        <!--<td>{{group.groupTitle}}</td>-->
+        <!--<td class="text-center">-->
+        <!--<span class="fa fa-remove pointer"-->
+        <!--ng-click="vm.removeGroup(group.groupId)"></span>-->
+        <!--</td>-->
+        <!--&lt;!&ndash; <td><span ng-click="vm.editGroup(group.groupId, $index)">Edit</span></td>&ndash;&gt;-->
+        <!--</tr>-->
 
-                                    <!--</tbody>-->
-                                <!--</table>-->
-                            <!--</div>-->
-                            <!--<div ng-if="vm.geohashGroups.length<=0">No groups available</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="panel panel-default ">
-                        <div class="panel-heading">
-                            <h4 style="margin-top: 0" class="title"><span class="pull-right"  ng-click="vm.onPrecisionChange()"><i aria-hidden="true" class="fa fa-plus"></i></span>Geo Hash</h4>
+        <!--</tbody>-->
+        <!--</table>-->
+        <!--</div>-->
+        <!--<div ng-if="vm.geohashGroups.length<=0">No groups available</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default ">
+                <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title"><span class="pull-right"
+                                                                  ng-click="vm.onPrecisionChange()"><i
+                            aria-hidden="true" class="fa fa-close"></i></span>Surge</h4>
+                </div>
+                <div class="panel-body" style="padding: 30px;">
+                    <form role="form" class="form-horizontal" name="settingForm" novalidate>
+                        <div class="form-group">
+                            <label class="col-md-12 col-sm-12 col-xs-12 text-center"><h5><b>Title</b></h5></label>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" placeholder="Group Title" name="inputGroupTitle"
+                                       ng-model="vm.setting.groupTitle"
+                                       class="form-control" required>
+
+                                <div ng-messages="settingForm.inputGroupTitle.$error"
+                                     ng-if="settingForm.inputGroupTitle.$touched">
+                                    <div ng-message="required">This field is required</div>
+                                </div>
+                                <p class="help-block"></p>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <form role="form" class="form-horizontal" name="settingForm" novalidate>
-                                <div class="form-group time-picker">
-                                    <label class="col-sm-3 control-label" >Duration</label>
-                                    <div class="col-sm-4">
-                                        <uib-timepicker ng-model="vm.setting.startTime" ng-change="changed()" hour-step="vm.hstep" minute-step="vm.mstep" show-meridian="ismeridian"></uib-timepicker>
-                                     </div>
-                                    <div class="col-sm-4">
-                                        <uib-timepicker ng-model="vm.setting.endTime" ng-change="changed()" hour-step="vm.hstep" minute-step="vm.mstep" show-meridian="ismeridian"></uib-timepicker>
-                                    </div>
+
+
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label" >Geo Hash</label>-->
+                        <!--<div class="col-sm-9">-->
+                        <!--<div ng-if="vm.setting.geoHashArr.length>0">-->
+                        <!--<span ng-repeat="box in vm.setting.geoHashArr"  class="label label-info">{{box.geoHash}}-->
+                        <!--&lt;!&ndash;<button class="label-btn" ng-click="vm.removeGeoHash($index)">&ndash;&gt;-->
+                        <!--&lt;!&ndash;x&ndash;&gt;-->
+                        <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                        <!--</span>-->
+                        <!--</div>-->
+                        <!--<div ng-if="vm.setting.geoHashArr.length<=0">No geohash created</div>-->
+
+                        <!--<p class="help-block"></p>-->
+                        <!--</div>-->
+
+                        <!--</div>-->
+                        <div class="form-group">
+                            <!--<label class="col-md-3 control-label">Type</label>-->
+                            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                <label class="radio-inline">
+                                    <input ng-model="vm.setting.type" type="radio" value="x" name="chargeType" required ng-change="vm.setValueArr()">
+                                    x
+                                </label>
+                                <label class="radio-inline">
+                                    <input ng-model="vm.setting.type" type="radio" value="a" name="chargeType" required ng-change="vm.setValueArr()">
+                                    +
+                                </label>
+
+                                <p class="help-block"></p>
+
+                                <div ng-messages="settingForm.chargeType.$error"
+                                     ng-if="settingForm.chargeType.$touched">
+                                    <div ng-message="required">This field is required</div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" >Geo Hash</label>
-                                    <div class="col-sm-9">
-                                        <div ng-if="vm.setting.geoHashArr.length>0">
-                                            <span ng-repeat="box in vm.setting.geoHashArr"  class="label label-info">{{box.geoHash}}
-                                                <!--<button class="label-btn" ng-click="vm.removeGeoHash($index)">-->
-                                                <!--x-->
-                                            <!--</button>-->
-                                            </span>
-                                        </div>
-                                        <div ng-if="vm.setting.geoHashArr.length<=0">No geohash created</div>
-
-                                        <p class="help-block"></p>
-                                    </div>
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="IsSmallBusiness" class="col-md-3 control-label">Type</label>
-                                    <div class="col-md-9">
-                                        <label class="radio-inline">
-                                            <input ng-model="vm.setting.type" type="radio" value="x" name="chargeType" checked="checked" required>
-                                            x
-                                        </label>
-                                        <label class="radio-inline">
-                                            <input ng-model="vm.setting.type" type="radio" value="a" name="chargeType"  required>
-                                            +
-                                        </label>
-                                        <p class="help-block"></p>
-                                        <div ng-messages="settingForm.chargeType.$error" ng-if="settingForm.chargeType.$touched">
-                                            <div ng-message="required">This field is required</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="inputCharge">Charge</label>
-
-                                    <div class="col-sm-9">
-                                        <input type="number" ng-model="vm.setting.value" placeholder="Charge" name="inputCharge" class="form-control" required>
-
-                                        <div ng-messages="settingForm.inputCharge.$error" ng-if="settingForm.inputCharge.$touched">
-                                            <div ng-message="required">This field is required</div>
-                                        </div>
-                                        <p class="help-block"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="inputCharge">Driver Value</label>
-
-                                    <div class="col-sm-9">
-                                        <input type="number" ng-model="vm.setting.driverValue" placeholder="Driver Value" name="inputDriverValue" class="form-control" required>
-
-                                        <div ng-messages="settingForm.inputDriverValue.$error" ng-if="settingForm.inputDriverValue.$touched">
-                                            <div ng-message="required">This field is required</div>
-                                        </div>
-                                        <p class="help-block"></p>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label" for="inputCharge">Group Name</label>
-
-                                    <div class="col-sm-9">
-                                        <input type="text" placeholder="Group Title" name="inputGroupTitle"
-                                               ng-model="vm.setting.groupTitle"
-                                               class="form-control" required>
-                                        <div ng-messages="settingForm.inputGroupTitle.$error" ng-if="settingForm.inputGroupTitle.$touched">
-                                            <div ng-message="required">This field is required</div>
-                                        </div>
-                                        <p class="help-block"></p>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-3 col-sm-9">
-                                        <div class="checkbox">
-                                            <label>
-                                                <input type="checkbox" ng-model="vm.setting.forceConfirm" style="margin-top: 2px"> Force Confirm
-                                            </label>
-                                        </div>
-                                        <p class="help-block"></p>
-                                        <button ng-click="vm.createSurge()" ng-disabled="!vm.setting.geoHashArr.length>0 || settingForm.$invalid"
-                                                class="btn btn-success pull-left" type="submit">Save
-                                        </button> <button ng-click="vm.removeGroup(vm.setting.groupId)"
-                                                          ng-if="vm.setting.groupId"
-                                                          class="btn btn-danger pull-right" type="button">Delete
-                                        </button>
-
-                                    </div>
-                                </div>
-
-                            </form>
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label class="col-md-6 col-sm-6 col-xs-6 text-left">Rider</label>
+                            <label class="col-md-6 col-sm-6 col-xs-6 text-left">Driver</label>
+
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <!--<input type="number" ng-model="vm.setting.value" placeholder="Rider" name="inputCharge"-->
+                                <!--class="form-control" required>-->
+
+                                <select class="col-md-6 col-sm-6 col-xs-6" style="border-radius: 4px;"
+                                        ng-model="vm.setting.value"
+                                        ng-options="multiple.name for multiple  in  vm.multipleArrRider track by multiple.value">
+                                </select>
+
+                                <div ng-messages="settingForm.inputCharge.$error"
+                                     ng-if="settingForm.inputCharge.$touched">
+                                    <div ng-message="required">This field is required</div>
+                                </div>
+                                <p class="help-block"></p>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <!--<input type="number" ng-model="vm.setting.driverValue" placeholder="Driver"-->
+                                <!--name="inputDriverValue" class="form-control" required>-->
+                                <select class="col-md-6 col-sm-6 col-xs-6" style="border-radius: 4px;"
+                                        ng-model="vm.setting.driverValue"
+                                        ng-options="multiple.name for multiple  in  vm.multipleArrDriver track by multiple.value">
+                                </select>
+
+                                <div ng-messages="settingForm.inputDriverValue.$error"
+                                     ng-if="settingForm.inputDriverValue.$touched">
+                                    <div ng-message="required">This field is required</div>
+                                </div>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <!--<div class="form-group">-->
+                        <!--<label class="col-md-12 col-sm-12 col-xs-12" >Driver Value</label>-->
+
+                        <!--<div class="col-sm-9">-->
+                        <!--<input type="number" ng-model="vm.setting.driverValue" placeholder="Driver" name="inputDriverValue" class="form-control" required>-->
+
+                        <!--<div ng-messages="settingForm.inputDriverValue.$error" ng-if="settingForm.inputDriverValue.$touched">-->
+                        <!--<div ng-message="required">This field is required</div>-->
+                        <!--</div>-->
+                        <!--<p class="help-block"></p>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <div class="form-group time-picker">
+                            <label class="col-md-6 col-sm-6 col-xs-6">Start Time</label>
+                            <label class="col-md-6 col-sm-6 col-xs-6">End Time</label>
+
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <uib-timepicker ng-model="vm.setting.startTime" ng-change="changed()"
+                                                hour-step="vm.hstep" minute-step="vm.mstep"
+                                                show-meridian="ismeridian"></uib-timepicker>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <uib-timepicker ng-model="vm.setting.endTime" ng-change="changed()" hour-step="vm.hstep"
+                                                minute-step="vm.mstep" hour-max="23"
+                                                show-meridian="ismeridian"></uib-timepicker>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <br><br>
+
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" ng-model="vm.setting.forceConfirm"
+                                               style="margin-top: 2px"> Force Confirm
+                                    </label>
+                                </div>
+                                <p class="help-block"></p>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 text-center" ng-if="!vm.groupEdit">
+                                <button  ng-click="vm.createSurge()"
+                                        ng-disabled="!vm.setting.geoHashArr.length>0 || settingForm.$invalid"
+                                        class="btn btn-success col-sm-12" type="submit">Save
+                                </button>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4 text-center" ng-if="vm.groupEdit">
+                                <button  ng-click="vm.createSurge()"
+                                        ng-disabled="!vm.setting.geoHashArr.length>0 || settingForm.$invalid"
+                                        class="btn btn-success col-sm-12" type="submit">Update
+                                </button>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4" ng-if="vm.setting.groupId">
+                                <a href="" ng-click="vm.removeGroup(vm.setting.groupId)"
+                                    class="pull-right" style="line-height: 30px;">Delete
+                                    Surge</a>
+                                <!--<button -->
+                                <!--class="btn btn-danger pull-right" type="button">Delete-->
+                                <!--</button>-->
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
             </div>
+        </div>
+    </div>
 </div>

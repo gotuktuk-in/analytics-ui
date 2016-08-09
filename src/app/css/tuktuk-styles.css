@@ -13,19 +13,24 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
 }
+
 .alert-container {
     background: #fff;
 }
-input[type="radio"]{
+
+input[type="radio"] {
     margin: 2px 0 0;
 }
+
 .geo-hash-box {
     position: relative;
 }
+
 .geo-hash-label {
     position: absolute;
     z-index: 1;
 }
+
 .time-picker .btn-link {
     font-weight: 100;
     color: #333;
@@ -34,9 +39,11 @@ input[type="radio"]{
     margin: 0;
     padding: 0;
 }
-.time-picker .btn-link .glyphicon{
+
+.time-picker .btn-link .glyphicon {
     font-size: 10px;
 }
+
 #matrixChart svg {
     display: inline-block;
     position: relative;
@@ -78,6 +85,7 @@ input[type="radio"]{
     height: 30%;
     max-height: 130px;
 }
+
 .surge-dialog .ngdialog-content {
     max-width: 650px;
     max-height: 310px;
@@ -94,11 +102,13 @@ input[type="radio"]{
     background: #f9f9f9 none repeat scroll 0 0;
     border-left: 4px solid gold;
 }
+
 .nav.sub-nav {
     background: #fff;
     border-left: 0px solid gold;
     padding-left: 30px;
 }
+
 .nav.sub-nav li a {
     font-size: 12px;
 }
@@ -238,9 +248,10 @@ div.panel.panel-default div.panel-heading h4.title {
     width: 12px;
     z-index: 9999999;
 }
-.geo-hash-select{
+
+.geo-hash-select {
     position: fixed;
-    right:30px;
+    right: 30px;
     top: 12px;
     z-index: 9999999;
 }
@@ -679,16 +690,18 @@ input.daterangepicker-aqq-chart {
     opacity: 1;
     top: 100%;
 }
+
 .btn-danger {
     color: #fff;
     background-color: #d9534f !important;
     border-color: #d43f3a !important;
 }
+
 /*.badge {*/
-    /*font-size: 11px;*/
-    /*font-weight: normal;*/
-    /*margin-top: -14px;*/
-    /*padding: 3px 6px;*/
+/*font-size: 11px;*/
+/*font-weight: normal;*/
+/*margin-top: -14px;*/
+/*padding: 3px 6px;*/
 /*}*/
 .badge {
     font-size: 11px;
@@ -702,6 +715,7 @@ input.daterangepicker-aqq-chart {
     -webkit-transition: all 0.4s;
     transition: all 0.4s;
 }
+
 .btn-primary {
     background-color: #337ab7;
     border-color: #2e6da4;
@@ -823,7 +837,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     width: 50%;
 }
 
-
 .nav-tabs > li > a {
     background-color: #e9e9e9;
     border: 1px solid rgba(0, 0, 0, 0);
@@ -839,9 +852,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .tabs-view-2 {
     position: absolute;
     min-width: 800px;
-    top: 125px;
+    top: 65px;
     left: 10px;
 }
+
 .tabs-view-2 .tab-content {
     background-color: #ffffff;
     padding: 20px;
@@ -849,6 +863,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     border-radius: 0;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);
 }
+
 .tabs-view .tab-content {
     background-color: #ffffff;
     padding: 20px;
@@ -856,20 +871,24 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     border-radius: 0;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);
 }
+
 .alert-tabs-view .nav-tabs {
     border-bottom: 0 solid #ddd;
     margin: 0;
 }
+
 .alert-tabs-view .nav-tabs > li {
     margin: 0 15px;
 }
+
 .alert-tabs-view .nav-tabs > li.active > a, .alert-tabs-view .nav-tabs > li.active > a:hover, .alert-tabs-view .nav-tabs > li.active > a:focus {
     background-color: #fff;
-    border:none;
+    border: none;
     border-bottom: 2px solid #00BFFF;
     color: #333;
     cursor: default;
 }
+
 .alert-tabs-view .nav-tabs > li > a {
     background-color: #fff;
     border: none;
@@ -879,10 +898,12 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     font-size: 14px;
     padding: 15px 5px;
 }
+
 .alert-tabs-view .tab-content {
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0);
     padding: 40px 0 20px 0;
 }
+
 .pentagon {
     background: red;
     display: inline-block;
@@ -970,8 +991,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     z-index: 9;
     visibility: hidden;
     left: -800px;
-    transition: all 0.4s ease-in-out;
-    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    -webkit-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
 .tabs-show {
@@ -997,7 +1018,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .map-btn {
     width: 34px !important;
     position: fixed !important;
-    top: 180px !important;
+    top: 118px !important;
     margin: 0 !important;
 }
 
@@ -1223,7 +1244,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 .box.box-heading {
-    min-height: 85px;
+    min-height: 85px
 }
 
 .box h4 {
@@ -1235,6 +1256,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .box h4.number {
     margin-top: 10px;
 }
+
 .box h4.number {
     word-wrap: break-word;
 }
@@ -1329,7 +1351,6 @@ span.img-top {
     border: none;
     box-shadow: 0 0 0 #fff
 }
-
 
 .date-selection .form-control[disabled], .date-selection .form-control[readonly], .date-selection fieldset[disabled] .form-control {
     background-color: #f9f9f9;
@@ -1615,17 +1636,21 @@ span.img-top {
     -moz-animation: inputHighlighter 0.3s ease;
     animation: inputHighlighter 0.3s ease;
 }
+
 /*surge*/
-.pointer{
-    cursor: pointer;}
-.geo-fence-tbl{
+.pointer {
+    cursor: pointer;
+}
+
+.geo-fence-tbl {
     position: absolute;
     right: 30px;
-    top:80px;
+    top: 80px;
     width: 50%;
     min-width: 320px;
     max-width: 480px;
 }
+
 /*end*/
 /* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {
@@ -1686,4 +1711,42 @@ span.img-top {
 .bar {
     fill: FireBrick;
 }
-.get-bid-marker-btn{margin-top:25px}
+
+.get-bid-marker-btn {
+    margin-top: 25px
+}
+
+.heading-box1 {
+    color: #333;
+    text-transform: uppercase;
+    text-align: left
+}
+
+.heading-box1 h3 {
+    font-size: 14px;
+    margin: 5px 0 5px 0;
+    font-weight: 400
+}
+
+.heading-box1 hr {
+    margin: 0
+}
+
+.heading-box1 {
+}
+
+.cancelled-trip-quad1 h5 {
+    /*border-bottom: solid 1px rgba(51, 51, 51, 0.3);*/
+    font-weight: 400;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.tripInfo-driver-tab .box.box-heading {
+    min-height: 225px;
+}
+
+/*.bid-driver-detail h4{px t-weight:400}
+.bid-driver-detail h4 + span{text-transform: uppercase;}
+.trip-in-detail-quad1, .trip-amount-detail-quad1{border-left:solid 1px rgba(153,153,153,0.5)}
+.trip-for-detail-quad1 h3, .trip-in-detail-quad1 h3, .trip-amount-detail-quad1 h3{margin-top:5px}*/

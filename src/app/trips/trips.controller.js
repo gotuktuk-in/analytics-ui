@@ -169,7 +169,7 @@
                 console.log(err)
                 $scope.error = true;
             });
-            //  $scope.tableParams.page(1)
+            $scope.tableParams.page(1)
             $scope.tableParams.reload();
         }
         var sorting;
@@ -242,9 +242,9 @@
             vm.getTrips()
             $scope.tableParams.reload()
         }
-        $scope.$on('$destroy', function () {
-            $interval.cancel(interval);
-        });
+        //$scope.$on('$destroy', function () {
+        //    $interval.cancel(interval);
+        //});
         heatmapChart(trips_heatmap);
     }
 })();
