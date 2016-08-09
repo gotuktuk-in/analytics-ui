@@ -117,7 +117,7 @@ function LiveHandler() {
     factory.canTripRider = function (data) {
         var riderCancelRide = [];
         //var longDate = factory.getLongDate(data.rican.date)
-        //factory.cancelledTripsDriver1[0].key = longDate
+        //factory.cancelledTripsRriver1[0].key = longDate
         //var e = 1;
         _.each(data.rican.data, function (value) {
             //riderCancelRide.push({label: value.reason_code , value : value.count});
