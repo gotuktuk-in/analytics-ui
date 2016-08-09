@@ -70,7 +70,7 @@
                                                                   ng-click="vm.onPrecisionChange()"><i
                             aria-hidden="true" class="fa fa-close"></i></span>Surge</h4>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body" style="padding: 30px;">
                     <form role="form" class="form-horizontal" name="settingForm" novalidate>
                         <div class="form-group">
                             <label class="col-md-12 col-sm-12 col-xs-12 text-center"><h5><b>Title</b></h5></label>
@@ -191,7 +191,7 @@
                         <div class="form-group">
                             <br><br>
 
-                            <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" ng-model="vm.setting.forceConfirm"
@@ -200,15 +200,18 @@
                                 </div>
                                 <p class="help-block"></p>
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-md-4 col-sm-4 col-xs-4 text-center">
                                 <button ng-click="vm.createSurge()"
                                         ng-disabled="!vm.setting.geoHashArr.length>0 || settingForm.$invalid"
-                                        class="btn btn-success pull-left" type="submit">Save
+                                        class="btn btn-success col-sm-12" type="submit">Save
                                 </button>
-                                <button ng-click="vm.removeGroup(vm.setting.groupId)"
-                                        ng-if="vm.setting.groupId"
-                                        class="btn btn-danger pull-right" type="button">Delete
-                                </button>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <a href="" ng-click="vm.removeGroup(vm.setting.groupId)"
+                                   ng-if="vm.setting.groupId" class="pull-right" style="line-height: 30px;">Delete Surge</a>
+                                <!--<button -->
+                                <!--class="btn btn-danger pull-right" type="button">Delete-->
+                                <!--</button>-->
                             </div>
                         </div>
 
