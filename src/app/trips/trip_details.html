@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="box">
-                                    <h4 class="number">{{selectedTrip.durForTrip}}</h4>
+                                    <h4 class="number">{{(selectedTrip.durForTrip) | toMinSec}}</h4>
                                     <span>Duration</span>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="box">
-                                    <h4 class="number">{{selectedTrip.durInTrip}}</h4>
+                                    <h4 class="number">{{(selectedTrip.durInTrip) | toMinSec}}</h4>
                                     <span>Duration</span>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
             </div>
             <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="box">
-                    <h4 class="number">{{(selectedTrip.waitingTime)/60 | number:2}}</small></h4>
+                    <h4 class="number">{{(selectedTrip.waitingTime) | toMinSec}}</small></h4>
                     <span>Waiting Time</span>
                 </div>
             </div>
@@ -250,8 +250,7 @@
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="box">
-                                    <h4 class="number">{{selectedTrip.driverInfo.joinedOn*1000 | date:'dd MMM
-                                        yy'}}</h4>
+                                    <h4 class="number">{{(selectedTrip.driverInfo.joinedOn)*1000 | date:"MMM dd, yyyy"}}</h4>
                                         <span>joined On</span>
                                     </div>
                                 </div>
@@ -318,8 +317,7 @@
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="box">
-                                    <h4 class="number">{{selectedTrip.riderInfo.joinedOn*1000 | date:'dd MMM
-                                        yy'}}</h4>
+                                    <h4 class="number">{{(selectedTrip.riderInfo.joinedOn)*1000 | date:"MMM dd, yyyy"}}</h4>
                                         <span>joined On</span>
                                     </div>
                                 </div>
