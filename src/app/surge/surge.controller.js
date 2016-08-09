@@ -25,8 +25,7 @@
             {name: "7", value: 7},
             {name: "8", value: 8}
         ];
-        vm.selectedPrecision = vm.precisionArr[2];
-
+        vm.selectedPrecision = vm.precisionArr[0];
         vm.multipleArrRider = [
             {name: "1.1", value: 1.1},
             {name: "1.2", value: 1.2},
@@ -52,51 +51,81 @@
         ];
         vm.setting.driverValue = vm.multipleArrDriver[0];
 
-        vm.plusArrDriver = [
-            {name: "5", value: 5},
-            {name: "10", value: 10},
-            {name: "15", value: 15},
-            {name: "20", value: 20},
-            {name: "25", value: 25},
-            {name: "30", value: 30},
-            {name: "35", value: 35},
-            {name: "40", value: 40},
-            {name: "45", value: 45},
-            {name: "50", value: 50}
-        ];
-        vm.selectedPlus = vm.plusArrDriver[0];
-        vm.plusArrRider = [
-            {name: "5", value: 5},
-            {name: "10", value: 10},
-            {name: "15", value: 15},
-            {name: "20", value: 20},
-            {name: "25", value: 25},
-            {name: "30", value: 30},
-            {name: "35", value: 35},
-            {name: "40", value: 40},
-            {name: "45", value: 45},
-            {name: "50", value: 50}
-        ];
-        vm.selectedPlus = vm.plusArrRider[0];
-
-
         initSetting();
 
         function initSetting() {
             vm.setting.value = '';
             vm.setting.driverValue = '';
             vm.setting.groupTitle = '';
-            vm.setting.type = 'multiply';
+            vm.setting.type = 'x';
             vm.setting.geoHashArr = [];
             vm.setting.startTime = moment().add(0, 'm');
             vm.setting.endTime = moment().add(0, 'm');
             vm.setting.forceConfirm = true;
-            console.log(vm.setting.value);
         }
+
+        vm.setValueArr = function () {
+            if (vm.setting.type == 'x') {
+                vm.multipleArrRider = [
+                    {name: "1.1", value: 1.1},
+                    {name: "1.2", value: 1.2},
+                    {name: "1.3", value: 1.3},
+                    {name: "1.4", value: 1.4},
+                    {name: "1.5", value: 1.5},
+                    {name: "1.6", value: 1.6},
+                    {name: "1.7", value: 1.7},
+                    {name: "1.8", value: 1.8},
+                    {name: "1.9", value: 1.9}
+                ];
+                vm.setting.value = vm.multipleArrRider[0];
+                vm.multipleArrDriver = [
+                    {name: "1.1", value: 1.1},
+                    {name: "1.2", value: 1.2},
+                    {name: "1.3", value: 1.3},
+                    {name: "1.4", value: 1.4},
+                    {name: "1.5", value: 1.5},
+                    {name: "1.6", value: 1.6},
+                    {name: "1.7", value: 1.7},
+                    {name: "1.8", value: 1.8},
+                    {name: "1.9", value: 1.9}
+                ];
+                vm.setting.driverValue = vm.multipleArrDriver[0];
+            }
+            if (vm.setting.type == 'a') {
+                vm.multipleArrRider = [
+                    {name: "5", value: 5},
+                    {name: "10", value: 10},
+                    {name: "15", value: 15},
+                    {name: "20", value: 20},
+                    {name: "25", value: 25},
+                    {name: "30", value: 30},
+                    {name: "35", value: 35},
+                    {name: "40", value: 40},
+                    {name: "45", value: 45},
+                    {name: "50", value: 50}
+                ];
+                vm.setting.value = vm.multipleArrRider[0];
+                vm.multipleArrDriver = [
+                    {name: "5", value: 5},
+                    {name: "10", value: 10},
+                    {name: "15", value: 15},
+                    {name: "20", value: 20},
+                    {name: "25", value: 25},
+                    {name: "30", value: 30},
+                    {name: "35", value: 35},
+                    {name: "40", value: 40},
+                    {name: "45", value: 45},
+                    {name: "50", value: 50}
+                ];
+                vm.setting.driverValue = vm.multipleArrDriver[0];
+            }
+
+        };
 
         vm.ShapeClicked = function (e) {
             var geoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
             vm.setting = findGeohashInArray(geoHash);
+
             if (vm.setting.groupId) {
                 vm.groupEdit = true;
                 vm.groupCreation = false;
@@ -200,11 +229,11 @@
             SurgeService.getGroupSetting({id: id}, function (response) {
                 //vm.setting.driverValue = response.driverValue;
                 //vm.setting.value = response.value;
+                vm.setting.type = response.type;
+                vm.setValueArr();
                 vm.setting.driverValue = {name: response.driverValue, value: response.driverValue},
                 vm.setting.value = {name: response.value, value: response.value},
-                vm.setting.type = response.type;
-                vm.setting.forceConfirm = response.forceConfirm ? true : false
-                ;
+                vm.setting.forceConfirm = response.forceConfirm ? true : false;
             }, function (error) {
                 toastr.success(error);
             })

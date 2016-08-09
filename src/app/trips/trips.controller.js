@@ -242,9 +242,9 @@
             vm.getTrips()
             $scope.tableParams.reload()
         }
-        $scope.$on('$destroy', function () {
-            $interval.cancel(interval);
-        });
+        //$scope.$on('$destroy', function () {
+        //    $interval.cancel(interval);
+        //});
         heatmapChart(trips_heatmap);
     }
 })();
