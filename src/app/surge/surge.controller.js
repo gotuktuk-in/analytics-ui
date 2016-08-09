@@ -8,6 +8,7 @@
     function SurgeController($scope, $rootScope, NgMap, geohash, SurgeService, toastr, ngDialog, StaticDataService) {
         var vm = this;
         vm.map
+        $scope.date = moment().format("dddd, MMMM Do YYYY");
         vm.geohashArray = [];
         vm.geohashGroups = [];
         vm.setting = {};

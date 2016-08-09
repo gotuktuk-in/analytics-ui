@@ -1,4 +1,10 @@
 <div class="content">
+    <div class="row" style="z-index:99; position:fixed; width:auto; padding:10px 0; left:53px;">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <span class="text-center" ng-model="date"
+                  style="display: inline-block; padding: 7px 0;">{{date}}</span>
+        </div>
+    </div>
     <div class="geo-hash-select">
         <select ng-change="vm.onPrecisionChange()" style="padding:5px 10px; border-radius: 4px;"
                 ng-model="vm.selectedPrecision"
