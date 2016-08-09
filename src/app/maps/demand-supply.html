@@ -85,24 +85,14 @@
 
         </select>
     </div>
-    <!--<ng-map click id="bidMap" center="indore" style="width:100%; height:100%; position:fixed"-->
-    <!--zoom="{{vm.selectedPrecision.value+8}}">-->
     <ng-map click id="bidMap" center="indore" style="width:100%; height:100%; position:fixed"
-            zoom="13">
-
-        <custom-marker class="custom-marker my1" ng-repeat="data in allHash" position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}"
-                       on-mouseover="mouseover()" on-mouseout="mouseout()"
-                       on-click="click()">
-            <div class="my1">
-                <div>D: {{data.demand}}, S: {{data.supply}}</div>
-            </div>
-        </custom-marker>
+    zoom="{{vm.selectedPrecision.value+8}}">
 
         <div ng-repeat="data in allHash" class="geo-hash-box">
             <shape name="rectangle"
                    editable="false"
                    draggable="false"
-                   fill-color="red"
+                   fill-color={{data.color}}
                    fill-opacity="0.5"
                    stroke-color="#000"
                    stroke-weight="0.1"
@@ -110,27 +100,37 @@
                    bounds={{data.hash.boxBounds}}
                    clickable="true">
             </shape>
-            <!--<marker icon="{-->
+        </div>
+        <!--<ng-map click id="bidMap" center="indore" style="width:100%; height:100%; position:fixed"-->
+        <!--zoom="13">-->
+
+        <!--<custom-marker class="custom-marker my1" ng-repeat="data in allHash" position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}"-->
+        <!--on-mouseover="mouseover()" on-mouseout="mouseout()"-->
+        <!--on-click="click()">-->
+        <!--<div class="my1">-->
+        <!--<div>D: {{data.demand}}, S: {{data.supply}}</div>-->
+        <!--</div>-->
+        <!--</custom-marker>-->
+
+        <!--<marker icon="{-->
         <!--url:'assets/images/icons/marker-red.svg',-->
         <!--scaledSize:[30,30]-->
-      <!--}" title="Demand: {{data.demand}}, Supply: {{data.supply}}" id="driver-{{$index}}"-->
-                    <!--on-click="vm.map.showInfoWindow('iw-window', 'driver-'+$index)"-->
-                    <!--position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}">-->
-            <!--</marker>-->
-            <!--<info-window visible-on-marker="driver-{{$index}}" id="iw-window">-->
-                <!--<div ng-non-bindable>-->
-                    <!--<div class="info-window">-->
-                        <!--<div class="iw-wrapper">-->
-                            <!--<div class="iw-content">-->
-                                <!--Demand: {{data.demand}}<br>-->
-                                <!--Supply: {{data.supply}}-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</info-window>-->
-        </div>
-
+        <!--}" title="Demand: {{data.demand}}, Supply: {{data.supply}}" id="driver-{{$index}}"-->
+        <!--on-click="vm.map.showInfoWindow('iw-window', 'driver-'+$index)"-->
+        <!--position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}">-->
+        <!--</marker>-->
+        <!--<info-window visible-on-marker="driver-{{$index}}" id="iw-window">-->
+        <!--<div ng-non-bindable>-->
+        <!--<div class="info-window">-->
+        <!--<div class="iw-wrapper">-->
+        <!--<div class="iw-content">-->
+        <!--Demand: {{data.demand}}<br>-->
+        <!--Supply: {{data.supply}}-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</info-window>-->
     </ng-map>
 
     <div class="row geo-fence-tbl" ng-if=" vm.groupCreation || vm.groupEdit">
