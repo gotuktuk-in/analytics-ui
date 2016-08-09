@@ -48,6 +48,7 @@
 
   }
 })();
+<<<<<<< HEAD
 angular
     .module('tuktukV2Dahboard').filter('toMinSec', function(){
   return function(input){
@@ -57,3 +58,6 @@ angular
     return minutes+' Min.'+(seconds ? ' & '+seconds+' Sec.' : '');
   }
 })
+=======
+
+>>>>>>> development
