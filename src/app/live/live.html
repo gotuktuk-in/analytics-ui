@@ -2,7 +2,8 @@
     <div class="row" style="z-index:99; position:fixed; width:auto; padding:10px 0; left:53px;">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span>
-            <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
+            <span class="text-center" ng-model="date"
+                  style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
                 ng-click="vm.changeDate('next')" ng-if="!vm.live"
                 style="display: inline-block; padding: 7px;">&#10095;</span>
         </div>
@@ -202,11 +203,13 @@
                 <div class="panel-body">
                     <div class="col-md-6 col-sm-6 col-xs-12 ">
                         <h5>By driver</h5>
-                        <nvd3 options="vm.cancelTripByDriverChartOptions" data="vm.canceledTripByDriver" config="vm.config"></nvd3>
+                        <nvd3 options="vm.cancelTripByDriverChartOptions" data="vm.canceledTripByDriver"
+                              config="vm.config"></nvd3>
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 ">
                         <h5>By Rider</h5>
-                        <nvd3 options="vm.cancelTripByRiderChartOptions" data="vm.canceledTripByRider" config="vm.config"></nvd3>
+                        <nvd3 options="vm.cancelTripByRiderChartOptions" data="vm.canceledTripByRider"
+                              config="vm.config"></nvd3>
                     </div>
                 </div>
             </div>

@@ -11,12 +11,10 @@
         var Geohash = {};
         vm.colors = ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'];
         vm.precisionArr = [
-            {name: "5", value: 5},
             {name: "6", value: 6},
-            {name: "7", value: 7},
-            {name: "8", value: 8}
+            {name: "7", value: 7}
         ];
-        vm.selectedPrecision = vm.precisionArr[2];
+        vm.selectedPrecision = vm.precisionArr[0];
         var defaultPrecesion = vm.selectedPrecision.value;
 
         NgMap.getMap({id: 'bidMap'}).then(function (map) {
@@ -33,9 +31,15 @@
             MapService.getDemandSupply({precision: vm.selectedPrecision.value}, function (response) {
                 $scope.allHash = response;
                 $scope.totalHash = response.length;
+                //var i = 0
                 _.each($scope.allHash, function (group) {
+                    var newObj = group;
                     group.hash = getGeoHashObj(group.geo_hash);
+                    group.color = genNewColor(group.rank);
+                    //newObj.color = vm.colors[i];
+                    //i++;
                 });
+                console.log($scope.allHash);
             }, function (err) {
                 console.log(err);
                 $scope.error = true;
@@ -44,52 +48,6 @@
 
         getDetail();
 
-        //function getDemandSupply() {
-        //
-        //    //bid Marker start
-        //
-        //    var markers = [];
-        //    var contents = [];
-        //    var infoWindows = [];
-        //    var i = 0;
-        //    for (i = 0; i < $scope.totalHash; i++) {
-        //
-        //        var newData = $scope.allHash[i].geo_hash;
-        //        var myLatlng = geohash.decode (newData);
-        //        //console.log(newData)
-        //        //console.log(myLatlng.latitude +','+ myLatlng.longitude)
-        //
-        //        markers[i] = new google.maps.Marker({
-        //            position: new google.maps.LatLng(myLatlng.latitude+','+myLatlng.longitude),
-        //            map: vm.map,
-        //            title: 'Bid'
-        //        });
-        //
-        //        markers[i].index = i;
-        //        contents[i] = '<div class="popup_container">'
-        //        + 'test'
-        //        '</div>';
-        //
-        //
-        //        infoWindows[i] = new google.maps.InfoWindow({
-        //            content: contents[i],
-        //            maxWidth: 300
-        //        });
-        //
-        //        google.maps.event.addListener(markers[i], 'click', function () {
-        //            console.log(this.index); // this will give correct index
-        //            console.log(i); //this will always give 10 for you
-        //            infowindows[this.index].open(map, markers[this.index]);
-        //            map.panTo(markers[this.index].getPosition());
-        //        });
-        //
-        //
-        //
-        //    }
-        //    //bid Marker end
-        //
-        //}
-
         function getGeoHashObj(hash) {
             var obj = {};
             obj.geoHash = hash;
@@ -97,5 +55,20 @@
             obj.boxBounds = [[bBox[0], bBox[1]], [bBox[2], bBox[3]]];
             return obj;
         }
+
+        function genNewColor(rank){
+
+            //Lets assume 3 start and 3 end free section of rank
+            var baseColor = "0000ff";
+            var startBase = 3;
+            var endBase = 3;
+            var totalRankAlphaParts = 11 /*0 to 10*/ + startBase + endBase;
+            var singleAlphaPartValue = 255 / totalRankAlphaParts; //[0 to 255]
+            var alphaValueForRank = singleAlphaPartValue * (startBase + rank + 1); //rank starts from 0
+
+            var colorValue = Color.argb(alphaValueForRank, Color.red(baseColor), Color.green(baseColor), Color.blue(baseColor));
+            return colorValue;
+        }
+
     }
 })();

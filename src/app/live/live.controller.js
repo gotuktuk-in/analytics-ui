@@ -66,7 +66,7 @@
                 return str;
             }
         }
-        
+
         /*** code starts for Chart of canceld trip by Driver ***/
         vm.drRideCancelReasonCode = {'dCR_TYRE_FLAT':'Flat tyre', 'dCR_VEH_ISSUE':'Vehicle issues', 'dCR_STUCK_TRAFFIC':'Stuck in traffic', 'dCR_CUSTOMER_LATE':'Customer is late'};
         vm.cancelTripByDriverChartOptions = angular.copy(ChartConfigService.pieChartOptions);
@@ -77,10 +77,10 @@
         /*** code ends for Chart of canceld trip by Driver ***/
         /*** code starts for Chart of canceld trip by Rider ***/
         vm.rdRideCancelReasonCode = {
-            "rCR_MIND_CHANGE":"Changed my mind", 
-            "rCR_ROUTE_CHANGE":"Changed the route", 
-            "rCR_NOT_INTEREST":"not need the ride anymore", 
-            "rCR_DRIVER_ASKED_TO":"Driver asked to cancel", 
+            "rCR_MIND_CHANGE":"Changed my mind",
+            "rCR_ROUTE_CHANGE":"Changed the route",
+            "rCR_NOT_INTEREST":"not need the ride anymore",
+            "rCR_DRIVER_ASKED_TO":"Driver asked to cancel",
             "rCR_OTHER":"Other",
             "rCR_BEFORE_CONFIRM":"Ride canceled before confirmation"};
 
@@ -131,7 +131,7 @@
         /*** rest call for barchart for canceld trip by driver code starts ***/
         function getCanceledTripByDriver(){
             vm.canceledTripByDriver = [];
-        
+
             LiveService.getCancelTripsDriver({
                startTime: moment(current).startOf('day'),
                 endTime: moment(current).endOf('day'),
