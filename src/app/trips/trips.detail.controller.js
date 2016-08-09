@@ -19,13 +19,13 @@
         vm.bidDr;
         vm.drID;
         vm.drID2;
-        
-        /*vm.infowindows = new google.maps.InfoWindow({
-                            maxWidth: 320
-                        });*/
 
-        vm.getBid = function() {
-           TripsService.getBidDetail(
+        /*vm.infowindows = new google.maps.InfoWindow({
+         maxWidth: 320
+         });*/
+
+        vm.getBid = function () {
+            TripsService.getBidDetail(
                 {
                     id: $stateParams.id
                 }, function (response) {
@@ -39,74 +39,74 @@
                     $scope.error = true;
                 });
         }
-        
-        vm.getDriverDetail = function(){
+
+        vm.getDriverDetail = function () {
             var z = vm.drID;
             vm.drID2 = vm.bidDr[z].dr;
             TripsService.getProfile(
                 {
-                    id:  vm.drID2,
+                    id: vm.drID2,
                     from: moment($scope.selectedDates.startDate).startOf('day').format("YYYYMMDD").toString(),
                     to: moment($scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString()
                 }, function (response) {
                     var detail = response;
                     /*var content = '<div class="popup_container bid-driver-detail">' +
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.id + '</h4>' +
-                                        '<span>Id</span>' +
-                                    '</div>' + 
-                                   '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.phone + '</h4>' + 
-                                        '<span>Phone</span>' + 
-                                    '</div>' + 
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.vehicle + '</h4>' + 
-                                        '<span>Vehicle Number</span>' + 
-                                    '</div>' + 
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.joinedOn + '</h4>' + 
-                                        '<span>Joined date</span>' + 
-                                    '</div>' + 
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.rides_today.total + ' / ' + detail.rides_today.unique_ride + '</h4>' +
-                                        '<span>Ride / u</span>' + 
-                                    '</div>' + 
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.rides_total.total + ' / ' + detail.rides_total.unique_ride + '</h4>' +
-                                        '<span>Total rides</span>' + 
-                                    '</div>' + 
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.today_distance.total + '</h4>' +
-                                        '<span>distance</span>' + 
-                                    '</div>' + 
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.today_online.total_hours + '</h4>' +
-                                        '<span>online hour</span>' + 
-                                    '</div>' + 
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.feedbackRating + '</h4>' +
-                                        '<span>FEEDBACK</span>' + 
-                                    '</div>' + 
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.total_fare  + ' / '+ detail.today_fare + '</h4>' +
-                                        '<span>total fare / fare</span>' + 
-                                    '</div>' + 
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.total_fare  + ' / '+ detail.today_fare + '</h4>' +
-                                        '<span>total fare / fare</span>' + 
-                                    '</div>' + 
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.total_earning  + ' / '+ detail.today_earning + '</h4>' +
-                                        '<span>total earning / earning</span>' + 
-                                    '</div>' + 
-                                    '<div class="col-md-6 col-sm-4 col-xs-12">' + 
-                                        '<h4 class="number ng-binding">' + detail.today_bid.total + '</h4>' +
-                                        '<span>Bid' + 
-                                    '</div>' +
-                                '</div>';*/
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.id + '</h4>' +
+                     '<span>Id</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.phone + '</h4>' +
+                     '<span>Phone</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.vehicle + '</h4>' +
+                     '<span>Vehicle Number</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.joinedOn + '</h4>' +
+                     '<span>Joined date</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.rides_today.total + ' / ' + detail.rides_today.unique_ride + '</h4>' +
+                     '<span>Ride / u</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.rides_total.total + ' / ' + detail.rides_total.unique_ride + '</h4>' +
+                     '<span>Total rides</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.today_distance.total + '</h4>' +
+                     '<span>distance</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.today_online.total_hours + '</h4>' +
+                     '<span>online hour</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.feedbackRating + '</h4>' +
+                     '<span>FEEDBACK</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.total_fare  + ' / '+ detail.today_fare + '</h4>' +
+                     '<span>total fare / fare</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.total_fare  + ' / '+ detail.today_fare + '</h4>' +
+                     '<span>total fare / fare</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.total_earning  + ' / '+ detail.today_earning + '</h4>' +
+                     '<span>total earning / earning</span>' +
+                     '</div>' +
+                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
+                     '<h4 class="number ng-binding">' + detail.today_bid.total + '</h4>' +
+                     '<span>Bid' +
+                     '</div>' +
+                     '</div>';*/
                     vm.infowindows.setContent(content)
                     console.log('$scope.detail', detail);
-                    
+
 
                 }, function (err) {
                     console.log(err)
@@ -115,35 +115,8 @@
             );
         }
 
-        
 
         function getDetails() {
-
-            /*TripsService.getBidDetail(
-                {
-                    id: $stateParams.id
-                }, function (response) {
-                    $scope.selectedTripBid = response;
-                    $scope.totalBid = response.length;
-                }, function (err) {
-                    console.log(err)
-                    $scope.error = true;
-                });*/
-
-            /*TripsService.getProfile(
-                console.log('uu', $stateParams.driverId);
-                {
-                    id: $stateParams.driverId,
-                    from: moment($scope.selectedDates.startDate).startOf('day').format("YYYYMMDD").toString(),
-                    to: moment($scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString()
-                }, function (response) {
-                    vm.profile = response;
-                    vm.initialize()
-                }, function (err) {
-                    console.log(err)
-                    $scope.error = true;
-                });*/
-
 
             TripsService.getTripDetail(
                 {
@@ -160,7 +133,7 @@
                 });
 
 
-            vm.initialize = function() {
+            vm.initialize = function () {
                 var encodedStringFor = vm.snapCodesFor;
                 var encodedStringIn = vm.snapCodesIn;
 
@@ -192,23 +165,32 @@
                 var setRegion2 = new google.maps.Polyline({
                     path: decodedPathIn,
                     //levels: decodedLevels,
-                    strokeColor: "green",
+                    strokeColor: "#8A87FC",
                     strokeOpacity: 1.0,
-                    strokeWeight: 3,
+                    strokeWeight: 6,
                     map: map
                 });
 
-                var icon1 = {
+
+                var iconForStart = {
                     url: "assets/images/icons/marker-green.svg", // url
-                    scaledSize: new google.maps.Size(30, 30) // scaled size
+                    scaledSize: new google.maps.Size(20, 20) // scaled size
                 };
-                var icon2 = {
-                    url: "assets/images/icons/marker-red.svg", // url
-                    scaledSize: new google.maps.Size(30, 30) // scaled size
+                var iconForEnd = {
+                    url: "assets/images/space.gif", // url
+                    scaledSize: new google.maps.Size(1, 1) // scaled size
                 };
-                var icon3 = {
+                var iconInStart = {
+                    url: "assets/images/pickup.png", // url
+                    scaledSize: new google.maps.Size(20, 20) // scaled size
+                };
+                var iconInEnd = {
+                    url: "assets/images/drop.png", // url
+                    scaledSize: new google.maps.Size(20, 20) // scaled size
+                };
+                var iconBidder = {
                     url: "assets/images/icons/marker-orange.svg", // url
-                    scaledSize: new google.maps.Size(30, 30) // scaled size
+                    scaledSize: new google.maps.Size(20, 20) // scaled size
                 };
 
 
@@ -219,29 +201,36 @@
                 var infowindows = [];
                 var i = 0;
 
-                $scope.bidConstants = {"0":"Reject", "1":"Accept","-2":"Low_ Battery","-1":"Offline", "2":"Delivered","-3":"Unknown","-4":"Retry Failed"};
+                $scope.bidConstants = {
+                    "0": "Reject",
+                    "1": "Accept",
+                    "-2": "Low_ Battery",
+                    "-1": "Offline",
+                    "2": "Delivered",
+                    "-3": "Unknown",
+                    "-4": "Retry Failed"
+                };
                 for (i = 0; i < $scope.totalBid; i++) {
-                    
+
                     markers[i] = new google.maps.Marker({
                         position: new google.maps.LatLng($scope.selectedTripBid[i].lt, $scope.selectedTripBid[i].ln),
                         map: map,
                         title: 'Bid' + [i],
-                        icon: icon3
+                        icon: iconBidder
                     });
                     markers[i].index = i;
-                    
-                    contents[i] = '<div class="popup_container">' + 
-                    '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].dr +  '</h4><span>Id</span></div>'
+
+                    contents[i] = '<div class="popup_container">'
+                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].dr + '</h4><span>Id</span></div>'
                     + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].name + '</h4><span>Name</span></div>'
                     + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.bidConstants[$scope.selectedTripBid[i].bid] + '</h4><span>Bid</span></div>'
-                    + 
-                    '</div>';
-
+                    + '</div>';
 
                     infowindows[i] = new google.maps.InfoWindow({
                         content: contents[i],
                         maxWidth: 300
-                    });/**/
+                    });
+
 
                     google.maps.event.addListener(markers[i], 'click', function () {
                         //console.log(this.index); // this will give correct index
@@ -258,10 +247,46 @@
                 //bid Marker end
 
                 //check the precision
-                var decompressed1 = decompress(encodedStringFor, 5);
-                var decompressed2 = decompress(encodedStringIn, 5);
+                decompress(encodedStringFor, 5, function (start, end) {
+                    $scope.startLtFor = start.lat;
+                    $scope.endtLtFor = end.lat;
+                    $scope.starttLnFor = start.lon;
+                    $scope.endtLnFor = end.lon;
 
-                function decompress(encoded, precision) {
+                    new google.maps.Marker({
+                        position: new google.maps.LatLng($scope.startLtFor, $scope.starttLnFor),
+                        icon: iconForStart,
+                        map: map
+                    });
+
+                    new google.maps.Marker({
+                        position: new google.maps.LatLng($scope.endtLtFor, $scope.endtLnFor),
+                        icon: iconForEnd,
+                        map: map
+                    });
+                });
+                decompress(encodedStringIn, 5, function (start, end) {
+
+                    $scope.startLtIn = start.lat;
+                    $scope.starttLnIn = start.lon;
+
+                    $scope.endtLtIn = end.lat;
+                    $scope.endtLnIn = end.lon;
+
+                    new google.maps.Marker({
+                        position: new google.maps.LatLng($scope.startLtIn, $scope.starttLnIn),
+                        icon: iconInStart,
+                        map: map
+                    });
+
+                    new google.maps.Marker({
+                        position: new google.maps.LatLng($scope.endtLtIn, $scope.endtLnIn),
+                        icon: iconInEnd,
+                        map: map
+                    });
+                });
+
+                function decompress(encoded, precision, cb) {
                     precision = Math.pow(10, -precision);
                     var len = encoded.length, index = 0, lat = 0, lng = 0, arrayLt = [], arrayLn = [];
                     while (index < len) {
@@ -287,36 +312,9 @@
                         arrayLn.push(lng * precision);
                     }
                     //return array;
-                    $scope.startLtFor = _.first(arrayLt);
-                    $scope.endtLtFor = _.last(arrayLt);
-                    $scope.starttLnFor = _.first(arrayLn);
-                    $scope.endtLnFor = _.last(arrayLn);
+                    cb({lat: _.first(arrayLt), lon: _.first(arrayLn)}, {lat: _.last(arrayLt), lon: _.last(arrayLn)});
 
-                    $scope.startLtIn = _.first(arrayLt);
-                    $scope.endtLtIn = _.last(arrayLt);
-                    $scope.starttLnIn = _.first(arrayLn);
-                    $scope.endtLnIn = _.last(arrayLn);
 
-                    var marker1 = new google.maps.Marker({
-                        position: new google.maps.LatLng($scope.startLtFor, $scope.starttLnFor),
-                        icon: icon1,
-                        map: map
-                    });
-                    var marker2 = new google.maps.Marker({
-                        position: new google.maps.LatLng($scope.endtLtFor, $scope.endtLnFor),
-                        icon: icon2,
-                        map: map
-                    });
-                    var marker3 = new google.maps.Marker({
-                        position: new google.maps.LatLng($scope.startLtIn, $scope.starttLnIn),
-                        icon: icon1,
-                        map: map
-                    });
-                    var marker4 = new google.maps.Marker({
-                        position: new google.maps.LatLng($scope.endtLtIn, $scope.endtLnIn),
-                        icon: icon2,
-                        map: map
-                    });
                 }
             }
 
