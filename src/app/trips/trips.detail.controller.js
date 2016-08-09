@@ -9,6 +9,7 @@
     function TripDetailController($scope, $interval, $stateParams, TripsService, $rootScope, NgMap) {
 
         var vm = this;
+        $scope.showHide = true;
 
         $scope.selectedDates = {};
         $scope.selectedDates.startDate = moment().format("YYYY-MM-DD");
@@ -32,12 +33,18 @@
                     $scope.selectedTripBid = response;
                     vm.bidDr = $scope.selectedTripBid;
                     console.log('selectedTripBid-dr', $scope.selectedTripBid);
-                    $scope.totalBid = response.length;
+                    $scope.totalBid = response;
+                    $scope.showHide = false;
                     vm.initialize()
                 }, function (err) {
                     console.log(err)
                     $scope.error = true;
                 });
+        }
+        vm.clearBid = function () {
+            $scope.showHide = true;
+            $scope.totalBid = [];
+            vm.initialize();
         }
 
         vm.getDriverDetail = function () {
@@ -172,25 +179,29 @@
                 });
 
 
+                var iconForBidGot = {
+                    url: "assets/images/icons/marker-green.svg", // url
+                    scaledSize: new google.maps.Size(30, 30) // scaled size
+                };
                 var iconForStart = {
                     url: "assets/images/icons/marker-green.svg", // url
-                    scaledSize: new google.maps.Size(20, 20) // scaled size
+                    scaledSize: new google.maps.Size(40, 40) // scaled size
                 };
                 var iconForEnd = {
-                    url: "assets/images/space.gif", // url
+                    url: "assets/images/icons/spacer.gif", // url
                     scaledSize: new google.maps.Size(1, 1) // scaled size
                 };
                 var iconInStart = {
-                    url: "assets/images/pickup.png", // url
+                    url: "assets/images/icons/pickup.png", // url
                     scaledSize: new google.maps.Size(20, 20) // scaled size
                 };
                 var iconInEnd = {
-                    url: "assets/images/drop.png", // url
+                    url: "assets/images/icons/drop.png", // url
                     scaledSize: new google.maps.Size(20, 20) // scaled size
                 };
                 var iconBidder = {
                     url: "assets/images/icons/marker-orange.svg", // url
-                    scaledSize: new google.maps.Size(20, 20) // scaled size
+                    scaledSize: new google.maps.Size(30, 30) // scaled size
                 };
 
 
@@ -210,20 +221,30 @@
                     "-3": "Unknown",
                     "-4": "Retry Failed"
                 };
-                for (i = 0; i < $scope.totalBid; i++) {
+                for (i = 0; i < ($scope.totalBid || []).length; i++) {
 
-                    markers[i] = new google.maps.Marker({
-                        position: new google.maps.LatLng($scope.selectedTripBid[i].lt, $scope.selectedTripBid[i].ln),
-                        map: map,
-                        title: 'Bid' + [i],
-                        icon: iconBidder
-                    });
+                    if (($scope.selectedTrip.driverInfo || {}).id === $scope.totalBid[i].dr) {
+                        markers[i] = new google.maps.Marker({
+                            position: new google.maps.LatLng($scope.totalBid[i].lt, $scope.totalBid[i].ln),
+                            map: map,
+                            title: 'Bid' + [i],
+                            icon: iconForBidGot
+                        });
+                    } else {
+                        markers[i] = new google.maps.Marker({
+                            position: new google.maps.LatLng($scope.totalBid[i].lt, $scope.totalBid[i].ln),
+                            map: map,
+                            title: 'Bid' + [i],
+                            icon: iconBidder
+                        });
+                    }
+
                     markers[i].index = i;
 
                     contents[i] = '<div class="popup_container">'
-                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].dr + '</h4><span>Id</span></div>'
-                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].name + '</h4><span>Name</span></div>'
-                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.bidConstants[$scope.selectedTripBid[i].bid] + '</h4><span>Bid</span></div>'
+                        //+ '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].dr + '</h4><span>Id</span></div>'
+                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;">' + $scope.selectedTripBid[i].name + '</h4><span>Name</span></div>'
+                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;">' + $scope.bidConstants[$scope.selectedTripBid[i].bid] + '</h4><span>Bid</span><br></div>'
                     + '</div>';
 
                     infowindows[i] = new google.maps.InfoWindow({

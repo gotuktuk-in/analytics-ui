@@ -206,15 +206,21 @@
                                 </div>
                                 <p class="help-block"></p>
                             </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4 text-center">
-                                <button ng-click="vm.createSurge()"
+                            <div class="col-md-4 col-sm-4 col-xs-4 text-center" ng-if="!vm.groupEdit">
+                                <button  ng-click="vm.createSurge()"
                                         ng-disabled="!vm.setting.geoHashArr.length>0 || settingForm.$invalid"
                                         class="btn btn-success col-sm-12" type="submit">Save
                                 </button>
                             </div>
-                            <div class="col-md-4 col-sm-4 col-xs-4">
+                            <div class="col-md-4 col-sm-4 col-xs-4 text-center" ng-if="vm.groupEdit">
+                                <button  ng-click="vm.createSurge()"
+                                        ng-disabled="!vm.setting.geoHashArr.length>0 || settingForm.$invalid"
+                                        class="btn btn-success col-sm-12" type="submit">Update
+                                </button>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4" ng-if="vm.setting.groupId">
                                 <a href="" ng-click="vm.removeGroup(vm.setting.groupId)"
-                                   ng-if="vm.setting.groupId" class="pull-right" style="line-height: 30px;">Delete
+                                    class="pull-right" style="line-height: 30px;">Delete
                                     Surge</a>
                                 <!--<button -->
                                 <!--class="btn btn-danger pull-right" type="button">Delete-->

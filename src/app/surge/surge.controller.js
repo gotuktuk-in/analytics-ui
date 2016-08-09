@@ -123,6 +123,7 @@
         };
 
         vm.ShapeClicked = function (e) {
+            vm.groupEdit = true;
             var geoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
             vm.setting = findGeohashInArray(geoHash);
 
