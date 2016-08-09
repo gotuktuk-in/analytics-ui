@@ -45,11 +45,11 @@ function LiveHandler() {
     /*factory.cancelledTripsDriver1 = [
         {"key": "", "values": []}
     ]*/
-    factory.cancelledTripsDriver1 = []
+  /*  factory.cancelledTripsDriver1 = []*/
   /*  factory.cancelledTripsRider1 = [
         {"key": "", "values": []}
     ]*/
-      factory.cancelledTripsRider1 = []
+      /*factory.cancelledTripsRider1 = []*/
     /****returnable object for cancel trip by driver/ rider code ends*****/
 
     factory.getTrips = function () {
@@ -98,6 +98,7 @@ function LiveHandler() {
 
     /*** handler function for canceld trip by Driver code starts ***/
     factory.canTripDriver = function (data) {
+          factory.cancelledTripsDriver1 = []
         var drCancelRide = [];
         //var longDate = factory.getLongDate(data.drcan.date)
         //factory.cancelledTripsDriver1[0].key = longDate
@@ -115,6 +116,7 @@ function LiveHandler() {
 
     /*** handler function for canceld trip by Rider code starts ***/
     factory.canTripRider = function (data) {
+        factory.cancelledTripsRider1 = []
         var riderCancelRide = [];
         //var longDate = factory.getLongDate(data.rican.date)
         //factory.cancelledTripsRriver1[0].key = longDate

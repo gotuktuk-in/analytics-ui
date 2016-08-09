@@ -251,10 +251,11 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
           legend: {
             margin: {
               top: 5,
-              right: 35,
+              right: 5,
               bottom: 5,
               left: 0
-            }
+            },
+            height: 200
           }
         }
     };
