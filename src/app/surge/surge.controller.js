@@ -5,9 +5,10 @@
         .module('tuktukV2Dahboard')
         .controller('SurgeController', SurgeController);
     /** @ngInject */
-    function SurgeController($scope, $rootScope, NgMap, geohash, SurgeService, toastr, ngDialog, StaticDataService) {
+    function SurgeController($scope, $rootScope, $interval, NgMap, geohash, SurgeService, toastr, ngDialog, StaticDataService) {
         var vm = this;
-        vm.map
+        vm.map;
+        vm.show500 = false;
         $scope.date = moment().format("dddd, MMMM Do YYYY");
         vm.geohashArray = [];
         vm.geohashGroups = [];
@@ -19,6 +20,7 @@
         $scope.toggle = false;
         vm.groupCreation = false;
         vm.groupEdit = false;
+
         vm.precisionArr = [
             {name: "5", value: 5},
             {name: "6", value: 6},
@@ -236,6 +238,7 @@
                 vm.setting.value = {name: response.value, value: response.value},
                 vm.setting.forceConfirm = response.forceConfirm ? true : false;
             }, function (error) {
+                //error500();
                 toastr.success(error);
             })
         }
@@ -257,7 +260,7 @@
                 });
                 console.log(' vm.geohashGroups ', vm.geohashGroups)
             }, function (error) {
-                toastr.success(error);
+                toastr.error(error);
             })
         }
 
@@ -297,7 +300,12 @@
                     getAllGroups();
                     toastr.success("Surge Group Created.");
                 }, function (error) {
-                    toastr.success(error);
+                    if (error.status == 500){
+                        toastr.error("Permission Denied");
+                    }else {
+                        toastr.error(error);
+                    }
+
                 })
             }
             else {
@@ -308,7 +316,11 @@
                     getAllGroups();
                     toastr.success("Surge Group Updated.");
                 }, function (error) {
-                    toastr.success(error);
+                    if (error.status == 500){
+                        toastr.error("Permission Denied");
+                    }else {
+                        toastr.error(error);
+                    }
                 })
             }
 

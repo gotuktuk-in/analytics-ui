@@ -3,6 +3,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <span class="text-center" ng-model="date"
                   style="display: inline-block; padding: 7px 0;">{{date}}</span>
+
         </div>
     </div>
     <div class="geo-hash-select">
@@ -115,11 +116,13 @@
                             <!--<label class="col-md-3 control-label">Type</label>-->
                             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                                 <label class="radio-inline">
-                                    <input ng-model="vm.setting.type" type="radio" value="x" name="chargeType" required ng-change="vm.setValueArr()">
+                                    <input ng-model="vm.setting.type" type="radio" value="x" name="chargeType" required
+                                           ng-change="vm.setValueArr()">
                                     x
                                 </label>
                                 <label class="radio-inline">
-                                    <input ng-model="vm.setting.type" type="radio" value="a" name="chargeType" required ng-change="vm.setValueArr()">
+                                    <input ng-model="vm.setting.type" type="radio" value="a" name="chargeType" required
+                                           ng-change="vm.setValueArr()">
                                     +
                                 </label>
 
@@ -207,20 +210,20 @@
                                 <p class="help-block"></p>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4 text-center" ng-if="!vm.groupEdit">
-                                <button  ng-click="vm.createSurge()"
+                                <button ng-click="vm.createSurge()"
                                         ng-disabled="!vm.setting.geoHashArr.length>0 || settingForm.$invalid"
                                         class="btn btn-success col-sm-12" type="submit">Save
                                 </button>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4 text-center" ng-if="vm.groupEdit">
-                                <button  ng-click="vm.createSurge()"
+                                <button ng-click="vm.createSurge()"
                                         ng-disabled="!vm.setting.geoHashArr.length>0 || settingForm.$invalid"
                                         class="btn btn-success col-sm-12" type="submit">Update
                                 </button>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4" ng-if="vm.setting.groupId">
                                 <a href="" ng-click="vm.removeGroup(vm.setting.groupId)"
-                                    class="pull-right" style="line-height: 30px;">Delete
+                                   class="pull-right" style="line-height: 30px;">Delete
                                     Surge</a>
                                 <!--<button -->
                                 <!--class="btn btn-danger pull-right" type="button">Delete-->
