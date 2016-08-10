@@ -183,7 +183,33 @@
             vm.map = map;
             google.maps.event.addDomListener(vm.map, 'click', onMapClick);
             vm.map.setClickableIcons(false);
+
+            //if (vm.map && vm.map.data) {
+            //    vm.map.data.forEach(function (feature) {
+            //        vm.map.data.remove(feature);
+            //    });
+            //}
+            //map.data.setStyle({
+            //    fillColor: '#333',
+            //    strokeColor: '#333',
+            //    strokeWeight: 1,
+            //    strokeOpacity: 1,
+            //    fillOpacity: 0.1
+            //});
+            //
+            //MapService.loadGeoJson({}, function (response) {
+            //        vm.geoJSON = {}
+            //        vm.geoJSON = response
+            //        //vm.map.data.addGeoJson(vm.geoJSON);
+            //    }, function (error) {
+            //        console.log("error ", error)
+            //    }
+            //);
+
+
         });
+
+
         vm.onPrecisionChange = function () {
             vm.groupCreation = false;
             vm.groupEdit = false;
@@ -235,8 +261,8 @@
                 vm.setting.type = response.type;
                 vm.setValueArr();
                 vm.setting.driverValue = {name: response.driverValue, value: response.driverValue},
-                vm.setting.value = {name: response.value, value: response.value},
-                vm.setting.forceConfirm = response.forceConfirm ? true : false;
+                    vm.setting.value = {name: response.value, value: response.value},
+                    vm.setting.forceConfirm = response.forceConfirm ? true : false;
             }, function (error) {
                 //error500();
                 toastr.success(error);
@@ -300,9 +326,9 @@
                     getAllGroups();
                     toastr.success("Surge Group Created.");
                 }, function (error) {
-                    if (error.status == 500){
+                    if (error.status == 500) {
                         toastr.error("Permission Denied");
-                    }else {
+                    } else {
                         toastr.error(error);
                     }
 
@@ -316,9 +342,9 @@
                     getAllGroups();
                     toastr.success("Surge Group Updated.");
                 }, function (error) {
-                    if (error.status == 500){
+                    if (error.status == 500) {
                         toastr.error("Permission Denied");
-                    }else {
+                    } else {
                         toastr.error(error);
                     }
                 })
@@ -338,6 +364,7 @@
         }
 
         function onMapClick(e) {
+
 
             // For creating new groups
             if (!vm.groupCreation && !vm.groupEdit) {
