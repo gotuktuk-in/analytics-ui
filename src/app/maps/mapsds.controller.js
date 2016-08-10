@@ -31,13 +31,13 @@
             MapService.getDemandSupply({precision: vm.selectedPrecision.value}, function (response) {
                 $scope.allHash = response;
                 $scope.totalHash = response.length;
-                //var i = 0
+                var i = 0
                 _.each($scope.allHash, function (group) {
                     var newObj = group;
                     group.hash = getGeoHashObj(group.geo_hash);
-                    group.color = genNewColor(group.rank);
-                    //newObj.color = vm.colors[i];
-                    //i++;
+                    //group.color = genNewColor(group.rank);
+                    newObj.color = vm.colors[i];
+                    i++;
                 });
                 console.log($scope.allHash);
             }, function (err) {
@@ -55,20 +55,5 @@
             obj.boxBounds = [[bBox[0], bBox[1]], [bBox[2], bBox[3]]];
             return obj;
         }
-
-        function genNewColor(rank){
-
-            //Lets assume 3 start and 3 end free section of rank
-            var baseColor = "0000ff";
-            var startBase = 3;
-            var endBase = 3;
-            var totalRankAlphaParts = 11 /*0 to 10*/ + startBase + endBase;
-            var singleAlphaPartValue = 255 / totalRankAlphaParts; //[0 to 255]
-            var alphaValueForRank = singleAlphaPartValue * (startBase + rank + 1); //rank starts from 0
-
-            var colorValue = Color.argb(alphaValueForRank, Color.red(baseColor), Color.green(baseColor), Color.blue(baseColor));
-            return colorValue;
-        }
-
     }
 })();
