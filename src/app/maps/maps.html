@@ -24,23 +24,17 @@
         <ng-map id="drivers_map" center="indore" style="height:100%" zoom="12">
             <map-data load-geo-json={{vm.API_URL}}geofence>
             </map-data>
-            <!--<map-data  add-geo-json={{vm.geoJSON}}>
-            </map-data>-->
             <div>
-                <marker ng-repeat="driver in vm.allDrivers.free.drivers track by $index" icon="{
-        url:'assets/images/icons/marker-green.svg',
-        scaledSize:[30,30],
-        origin: [0,0],
-        anchor: [15,15]
-      }"
+                <marker ng-repeat="data in vm.data track by $index" title="{{data.id}}"
+                        icon="{ url:'assets/images/icons/marker-green.svg', scaledSize:[30,30]}"
                         id="free-driver-{{$index}}"
-                        on-click="vm.map.showInfoWindow(driver,'free-driver-'+$index)"
-                        position="{{driver.marker}}">
+                        on-click="vm.showDetail(data,'free-driver-'+$index)"
+                        position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}">
                 </marker>
             </div>
 
             <info-window id="iw-drivers">
-                <div ng-non-bindable="">
+                <div ng-non-bindable="" ng-if="vm.driver.profile">
                     <div class="info-window">
                         <div class="iw-wrapper">
                             <div class="iw-header text-center">
@@ -55,7 +49,7 @@
                                     <tr>
                                         <td class="text-center"><i class="fa fa-clock-o"></i></td>
                                         <td>Time</td>
-                                        <td>{{vm.driver.profile.time | date:'shortTime'}}</td>
+                                        <td>{{vm.driver.time | date:'shortTime'}}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-center"><i class="fa fa-mobile-phone"></i></td>
@@ -122,7 +116,7 @@
                                 <div class="pentagon available">
                                     <div class="text-center">
                                         <h4>Free</h4>
-                                        <span>{{vm.allDrivers.free.total}}</span>
+                                        <span>{{vm.data.length}}</span>
                                     </div>
                                 </div>
                             </div>

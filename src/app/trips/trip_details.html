@@ -1,4 +1,20 @@
 <div class="content">
+    <div class="row" style="
+         z-index: 99;
+         position: fixed;
+         width: auto;
+         padding: 20px 0;
+         right: 20px;
+         ">
+        <div class="col-md-12 col-sm-12 col-xs-12" ng-if="showHide">
+            <span><a href="" ng-click="vm.getBid();">Show Candidates</a></span>
+
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12" ng-if="!showHide">
+            <span><a href="" ng-click="vm.clearBid();">Clear Candidates</a></span>
+        </div>
+    </div>
+
     <div class="content-div">
         <ng-map id="driversMap" center="indore" style="height:100%;">
             <!--<div>-->
@@ -25,8 +41,7 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yyyy 'at'
-                                            hh:mm"}}</h4>
+                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yyyy 'at' hh:mm"}}</h4>
                                         <span>date</span>
                                     </div>
                                 </div>
@@ -200,15 +215,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 col-sm-4 col-xs-12" ng-if="showHide">
-                                    <h4 class="number">&nbsp;</h4>
-                                    <span><a href="" ng-click="vm.getBid();">Show Candidates</a></span>
 
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12" ng-if="!showHide">
-                                    <h4 class="number">&nbsp;</h4>
-                                    <span><a href="" ng-click="vm.clearBid();">Clear Candidates</a></span>
-                                </div>
 
 
                             </div>
