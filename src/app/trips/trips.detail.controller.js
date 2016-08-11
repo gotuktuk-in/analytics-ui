@@ -121,9 +121,6 @@
                 }
             );
         }
-vm.swithcDriverProfile = function (dr){
-     $state.go("home.drivers_detail", { driverId: dr});
-}
 
         function getDetails() {
 
@@ -245,7 +242,7 @@ vm.swithcDriverProfile = function (dr){
 
                     contents[i] = '<div class="popup_container">'
                         //+ '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].dr + '</h4><span>Id</span></div>'
-                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;"><a href="#/home/detail/'+$scope.selectedTripBid[i].dr+'" ng-click="vm.swithcDriverProfile('+$scope.selectedTripBid[i].dr +')">' + $scope.selectedTripBid[i].name + '</a></h4><span>Name</span></div>'
+                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;"><a href="#/home/detail/'+$scope.selectedTripBid[i].dr+'">' + $scope.selectedTripBid[i].name + '</a></h4><span>Name</span></div>'
                     + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;">' + $scope.bidConstants[$scope.selectedTripBid[i].bid] + '</h4><span>Bid</span><br></div>'
                     + '</div>';
 
