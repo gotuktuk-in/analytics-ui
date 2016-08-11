@@ -251,7 +251,6 @@
                         maxWidth: 300
                     });
 
-
                     google.maps.event.addListener(markers[i], 'click', function () {
                         //console.log(this.index); // this will give correct index
                         //console.log(i); //this will always give 10 for you
