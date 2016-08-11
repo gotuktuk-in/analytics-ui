@@ -243,7 +243,7 @@
 
                     contents[i] = '<div class="popup_container">'
                         //+ '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].dr + '</h4><span>Id</span></div>'
-                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;">' + $scope.selectedTripBid[i].name + '</h4><span>Name</span></div>'
+                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;"><a target="_blank" ui-sref="home.drivers_detail({driverId:'+$scope.selectedTripBid[i].dr+'})">' + $scope.selectedTripBid[i].name + '</a></h4><span>Name</span></div>'
                     + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;">' + $scope.bidConstants[$scope.selectedTripBid[i].bid] + '</h4><span>Bid</span><br></div>'
                     + '</div>';
 
