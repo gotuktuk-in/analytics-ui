@@ -61,7 +61,7 @@
 
                                         <div class="col-md-4 col-sm-4 col-xs-12">
                                             <div class="box">
-                                                <h4 class="number">{{(selectedTrip.disForTrip/1000)}} KM</h4>
+                                                <h4 class="number">{{(selectedTrip.disForTrip/1000) | number:2}} KM</h4>
                                                 <span>Distance</span>
                                             </div>
                                         </div>
@@ -144,6 +144,15 @@
                                                 <!-- <span>Amount Total<small> / Cash / tCash</small></span> -->
                                             </div>
                                         </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="box">
+                                                <h4 class="number">Rs.
+                                                    {{selectedTrip.cashback}}
+                                                </h4>
+                                                <span>Cashback</span>
+                                                <!-- <span>Amount Total<small> / Cash / tCash</small></span> -->
+                                            </div>
+                                        </div>
 
 
                                     </div>
@@ -221,7 +230,7 @@
                             </div>
                         </div>
                     </uib-tab>
-                    <uib-tab index="0" heading="Driver">
+                    <uib-tab index="0" heading="Driver" ng-if="selectedTrip.driverInfo.id">
                         <div class="row tripInfo-driver-tab">
                             <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
                                 <div class="box box-heading box-0 text-center"
@@ -251,10 +260,16 @@
                                         <span>phone</span>
                                     </div>
                                 </div>
-                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-8 col-sm-12 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.driverInfo.email ?
                                             selectedTrip.driverInfo.email:'-'}}</h4>
+                                        <span>Email</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.driverInfo.model.model}}</h4>
                                         <span>Email</span>
                                     </div>
                                 </div>

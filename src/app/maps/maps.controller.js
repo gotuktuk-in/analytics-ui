@@ -45,7 +45,6 @@
                     vehicle: $rootScope.vehicleType
                 }, function (response) {
                     $scope.allDrivers = response;
-                    var i = 0;
                     vm.data = [];
                     _.each($scope.allDrivers, function (group) {
                         var newObj = group.split('/');
@@ -54,7 +53,6 @@
                         $scope.time = newObj[3];
                         vm.data.push({id: newObj[0], hash: $scope.hash, time: newObj[3]})
                     });
-                    i++;
                 }, function (error) {
                     console.log("error ", error)
                 }
@@ -79,15 +77,6 @@
                 if (status === 'OK') {
                     if (results[1]) {
                         vm.driver.address = results[1].formatted_address;
-                        //vm.map.setZoom(11);
-                        //var marker = new google.maps.Marker({
-                        //    position: latlng,
-                        //    map:vm.map
-                        //});
-                        //infowindow.setContent(results[1].formatted_address);
-                        //infowindow.open(map, marker);
-                        //infowindows[this.index].open(map, markers[this.index]);
-                        //map.panTo(markers[this.index].getPosition());
                     } else {
                         window.alert('No results found');
                     }
@@ -105,7 +94,7 @@
             //});
 
             getProfile();
-            vm.map.showInfoWindow('iw-drivers', index);
+            //vm.map.showInfoWindow('iw-drivers', index);
         };
 
         function getProfile() {
@@ -121,26 +110,6 @@
                 $scope.error = true;
             });
         }
-
-        vm.getAddress = function (marker) {
-            alert("get address")
-        };
-
-        //vm.clicked = function (marker) {
-        //    console.log('Clicked a link inside infoWindow', marker);
-        //    var lat = parseFloat(marker[0]);
-        //    var lng = parseFloat(marker[1]);
-        //    var latlng = new google.maps.LatLng(lat, lng);
-        //    var geocoder = new google.maps.Geocoder();
-        //    geocoder.geocode({'latLng': latlng}, function (results, status) {
-        //        if (status == google.maps.GeocoderStatus.OK) {
-        //            if (results[1]) {
-        //                vm.driver.address = results[1].formatted_address;
-        //            }
-        //        }
-        //    });
-        //};
-
         vm.hideDetail = function () {
             vm.map.hideInfoWindow('iw-drivers');
         };

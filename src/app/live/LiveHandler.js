@@ -43,13 +43,13 @@ function LiveHandler() {
     ]
     /****returnable object for cancel trip by driver/ rider code starts*****/
     /*factory.cancelledTripsDriver1 = [
-        {"key": "", "values": []}
-    ]*/
-  /*  factory.cancelledTripsDriver1 = []*/
-  /*  factory.cancelledTripsRider1 = [
-        {"key": "", "values": []}
-    ]*/
-      /*factory.cancelledTripsRider1 = []*/
+     {"key": "", "values": []}
+     ]*/
+    /*  factory.cancelledTripsDriver1 = []*/
+    /*  factory.cancelledTripsRider1 = [
+     {"key": "", "values": []}
+     ]*/
+    /*factory.cancelledTripsRider1 = []*/
     /****returnable object for cancel trip by driver/ rider code ends*****/
 
     factory.getTrips = function () {
@@ -82,7 +82,7 @@ function LiveHandler() {
         return factory.filteredTrips
     }
     factory.getDrivers = function () {
-        var total_count = [],free_driver = [],occupied_driver = [];
+        var total_count = [], free_driver = [], occupied_driver = [];
         _.each(factory.drivers, function (value) {
             var longDate = factory.getLongDate(value.id)
             total_count.push([longDate, value.total_count]);
@@ -98,7 +98,7 @@ function LiveHandler() {
 
     /*** handler function for canceld trip by Driver code starts ***/
     factory.canTripDriver = function (data) {
-          factory.cancelledTripsDriver1 = []
+        factory.cancelledTripsDriver1 = []
         var drCancelRide = [];
         //var longDate = factory.getLongDate(data.drcan.date)
         //factory.cancelledTripsDriver1[0].key = longDate
@@ -106,9 +106,9 @@ function LiveHandler() {
         _.each(data.drcan.data, function (value) {
             //drCancelRide.push({label: value.reason_code , value : value.count});
             //drCancelRide.push({label:'R'+ e++ , value : value.count});
-            factory.cancelledTripsDriver1.push({label: value.reason_code , value : value.count});
+            factory.cancelledTripsDriver1.push({label: value.reason_code, value: value.count});
 
-         })
+        })
         //factory.cancelledTripsDriver1[0].values = drCancelRide
         return factory.cancelledTripsDriver1
     }
@@ -124,13 +124,13 @@ function LiveHandler() {
         _.each(data.rican.data, function (value) {
             //riderCancelRide.push({label: value.reason_code , value : value.count});
             //riderCancelRide.push({label:'R'+ e++ , value : value.count});
-            factory.cancelledTripsRider1.push({label: value.reason_code , value : value.count});
-         })
+            factory.cancelledTripsRider1.push({label: value.reason_code, value: value.count});
+        })
         //factory.cancelledTripsRider1[0].values = riderCancelRide
         return factory.cancelledTripsRider1
     }
     /*** handler function for canceld trip by Rider code ends ***/
-    
+
     factory.getRiders = function () {
         var total_riders = [], new_rider_reg = [];
         _.each(factory.riders, function (value) {

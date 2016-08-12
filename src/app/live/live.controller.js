@@ -41,7 +41,13 @@
                 }
             }
         };
-
+        Array.prototype.sum = function (prop) {
+            var total = 0
+            for ( var i = 0, _len = this.length; i < _len; i++ ) {
+                total += this[i][prop]
+            }
+            return total
+        }
         $scope.ddSettings = {enableSearch: false};
         //range slider end
 
@@ -136,6 +142,8 @@
             getCanceledTripByRider()
         }
         /*** rest call for barchart for canceld trip by driver code starts ***/
+
+
         function getCanceledTripByDriver() {
             vm.canceledTripByDriver = [];
 
@@ -147,9 +155,10 @@
             }, function (response) {
                 console.log(response);
                 vm.canceledTripByDriver = LiveHandler.canTripDriver(response);
-                console.log('hey ', vm.canceledTripByDriver);
+                $scope.totalCanDriver = vm.canceledTripByDriver.sum("value");
+                console.log($scope.valueNew);
             }, function (err) {
-                console.log(err)
+                console.log(err);
                 $scope.error = true;
             })
         }
@@ -167,7 +176,7 @@
             }, function (response) {
                 console.log(response);
                 vm.canceledTripByRider = LiveHandler.canTripRider(response);
-                console.log('heyfsfsf ', vm.canceledTripByRider);
+                $scope.totalCanRider = vm.canceledTripByRider.sum("value");
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
