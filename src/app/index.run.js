@@ -6,7 +6,7 @@
         .run(runBlock);
 
     /** @ngInject */
-    function runBlock($log, UserService, StaticDataService, $http, toastr, $state, $rootScope, LoginService, $templateCache, setNavByRoleService) {
+    function runBlock($log, UserService, StaticDataService, $http, toastr, $state, $rootScope, LoginService, $templateCache) {
         if (UserService.getUser() != null) {
             $http.defaults.headers.common.Authorization = 'Basic ' + UserService.getUser().token;
         }
