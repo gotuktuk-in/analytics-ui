@@ -92,7 +92,7 @@
 
         vm.cancelTripByRiderChartOptions = angular.copy(ChartConfigService.pieChartOptions);
         vm.cancelTripByRiderChartOptions.chart.x = function (d) {
-            console.log(d.label);
+            //console.log(d.label);
             //return d.label
             return vm.rdRideCancelReasonCode[d.label];
         }
@@ -145,9 +145,9 @@
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType
             }, function (response) {
-                console.log(response);
+                //console.log(response);
                 vm.canceledTripByDriver = LiveHandler.canTripDriver(response);
-                console.log('hey ', vm.canceledTripByDriver);
+                //console.log('hey ', vm.canceledTripByDriver);
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
@@ -165,9 +165,9 @@
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType
             }, function (response) {
-                console.log(response);
+                //console.log(response);
                 vm.canceledTripByRider = LiveHandler.canTripRider(response);
-                console.log('heyfsfsf ', vm.canceledTripByRider);
+                //console.log('heyfsfsf ', vm.canceledTripByRider);
             }, function (err) {
                 console.log(err)
                 $scope.error = true;
