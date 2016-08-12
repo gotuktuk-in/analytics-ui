@@ -1,4 +1,30 @@
+<style>
+    #driversMap {
+        height: 100% !important;
+        display: block !important;
+        width: 100% !important;
+        position: fixed !important;
+        overflow: hidden !important;
+        background-color: rgb(229, 227, 223);
+    }
+</style>
 <div class="content">
+    <div class="row" style="
+         z-index: 99;
+         position: fixed;
+         width: auto;
+         padding: 20px 0;
+         right: 20px;
+         ">
+        <div class="col-md-12 col-sm-12 col-xs-12" ng-if="showHide">
+            <span><a href="" ng-click="vm.getBid();">Show Candidates</a></span>
+
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12" ng-if="!showHide">
+            <span><a href="" ng-click="vm.clearBid();">Clear Candidates</a></span>
+        </div>
+    </div>
+
     <div class="content-div">
         <ng-map id="driversMap" center="indore" style="height:100%;">
             <!--<div>-->
@@ -25,8 +51,7 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yyyy 'at'
-                                            hh:mm"}}</h4>
+                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yyyy 'at' hh:mm"}}</h4>
                                         <span>date</span>
                                     </div>
                                 </div>
@@ -46,7 +71,7 @@
 
                                         <div class="col-md-4 col-sm-4 col-xs-12">
                                             <div class="box">
-                                                <h4 class="number">{{(selectedTrip.disForTrip/1000)}} KM</h4>
+                                                <h4 class="number">{{(selectedTrip.disForTrip/1000) | number:2}} KM</h4>
                                                 <span>Distance</span>
                                             </div>
                                         </div>
@@ -129,6 +154,15 @@
                                                 <!-- <span>Amount Total<small> / Cash / tCash</small></span> -->
                                             </div>
                                         </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="box">
+                                                <h4 class="number">Rs.
+                                                    {{selectedTrip.cashback}}
+                                                </h4>
+                                                <span>Cashback</span>
+                                                <!-- <span>Amount Total<small> / Cash / tCash</small></span> -->
+                                            </div>
+                                        </div>
 
 
                                     </div>
@@ -200,21 +234,13 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 col-sm-4 col-xs-12" ng-if="showHide">
-                                    <h4 class="number">&nbsp;</h4>
-                                    <span><a href="" ng-click="vm.getBid();">Show Candidates</a></span>
 
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12" ng-if="!showHide">
-                                    <h4 class="number">&nbsp;</h4>
-                                    <span><a href="" ng-click="vm.clearBid();">Clear Candidates</a></span>
-                                </div>
 
 
                             </div>
                         </div>
                     </uib-tab>
-                    <uib-tab index="0" heading="Driver">
+                    <uib-tab index="0" heading="Driver" ng-if="selectedTrip.driverInfo.id">
                         <div class="row tripInfo-driver-tab">
                             <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
                                 <div class="box box-heading box-0 text-center"
@@ -244,10 +270,16 @@
                                         <span>phone</span>
                                     </div>
                                 </div>
-                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-8 col-sm-12 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.driverInfo.email ?
                                             selectedTrip.driverInfo.email:'-'}}</h4>
+                                        <span>Email</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="box">
+                                        <h4 class="number">{{selectedTrip.driverInfo.model.model}}</h4>
                                         <span>Email</span>
                                     </div>
                                 </div>

@@ -23,6 +23,16 @@ function MapService($q, $resource, API, AUTH_API) {
                 url: url + 'map/driver'
                 //http://111.118.241.68:8088/rest/v1/geofence
             },
+            getAllDrivers: {
+                method: 'GET',
+                url: url + 'online/driver',
+                isArray:true
+            },
+            getProfile: {
+                method: 'GET',
+                url:   url + 'drivers/profile/:id',
+                isArray:false
+            },
             loadGeoJson: {
                 method: 'GET',
                 url: AUTH_API + 'geofence'

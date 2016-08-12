@@ -41,7 +41,13 @@
                 }
             }
         };
-
+        Array.prototype.sum = function (prop) {
+            var total = 0
+            for ( var i = 0, _len = this.length; i < _len; i++ ) {
+                total += this[i][prop]
+            }
+            return total
+        }
         $scope.ddSettings = {enableSearch: false};
         //range slider end
 
@@ -92,7 +98,7 @@
 
         vm.cancelTripByRiderChartOptions = angular.copy(ChartConfigService.pieChartOptions);
         vm.cancelTripByRiderChartOptions.chart.x = function (d) {
-            console.log(d.label);
+            //console.log(d.label);
             //return d.label
             return vm.rdRideCancelReasonCode[d.label];
         }
@@ -136,6 +142,8 @@
             getCanceledTripByRider()
         }
         /*** rest call for barchart for canceld trip by driver code starts ***/
+
+
         function getCanceledTripByDriver() {
             vm.canceledTripByDriver = [];
 
@@ -145,11 +153,14 @@
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType
             }, function (response) {
-                console.log(response);
+                //console.log(response);
                 vm.canceledTripByDriver = LiveHandler.canTripDriver(response);
-                console.log('hey ', vm.canceledTripByDriver);
+
+                $scope.totalCanDriver = vm.canceledTripByDriver.sum("value");
+                console.log($scope.valueNew);
+
             }, function (err) {
-                console.log(err)
+                console.log(err);
                 $scope.error = true;
             })
         }
@@ -165,9 +176,10 @@
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType
             }, function (response) {
-                console.log(response);
+                //console.log(response);
                 vm.canceledTripByRider = LiveHandler.canTripRider(response);
-                console.log('heyfsfsf ', vm.canceledTripByRider);
+                $scope.totalCanRider = vm.canceledTripByRider.sum("value");
+
             }, function (err) {
                 console.log(err)
                 $scope.error = true;

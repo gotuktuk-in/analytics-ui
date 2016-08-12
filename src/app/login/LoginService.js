@@ -26,9 +26,7 @@ function LoginService($q, $resource, API, AUTH_API) {
             logout: {
                 method: 'GET',
                 url:   url + 'logout'
-            },
-
-
+            }
         }
     );
 }

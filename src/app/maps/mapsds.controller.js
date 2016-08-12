@@ -8,6 +8,8 @@
     function DemandSupplyController($scope, $rootScope, NgMap, geohash, MapService, toastr, ngDialog, StaticDataService) {
         var vm = this;
         vm.map;
+        vm.dsShow = false;
+        vm.allHash;
         var Geohash = {};
         $scope.date = moment().format("dddd, MMMM Do YYYY");
         vm.colors = ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'];
@@ -26,10 +28,32 @@
         vm.onPrecisionChange = function () {
             getDetail();
         };
+        vm.shosGeoHashDetail = function (e){
+            
+            var currentGeoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
+            
+            console.log('currentGeoHash' , currentGeoHash);
+            vm.hashDetail = getGeoHashDetail(currentGeoHash);
+            vm.dsShow = true;
+            console.log('vm.hashDetail' , vm.hashDetail);
+        }
+
+        function getGeoHashDetail(curHash){
+            var obj;
+            _.each(vm.allHash, function(a){
+                if(a.geo_hash == curHash){
+                    obj = a
+                }
+
+            })
+            return obj;
+        }
 
         function getDetail() {
             MapService.getDemandSupply({precision: vm.selectedPrecision.value}, function (response) {
                 $scope.allHash = response;
+                vm.allHash = $scope.allHash;
+                console.log('$scope.allHash ' , $scope.allHash);
                 $scope.totalHash = response.length;
 
                 var dateString = $scope.allHash[0].id;
@@ -50,7 +74,7 @@
                     newObj.color = vm.colors[i];
                     i++;
                 });
-                console.log($scope.allHash);
+                console.log('allHash', $scope.allHash);
             }, function (err) {
                 console.log(err);
                 $scope.error = true;

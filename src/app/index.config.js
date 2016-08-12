@@ -16,5 +16,6 @@
     toastrConfig.positionClass = 'toast-top-right';
     toastrConfig.preventDuplicates = false;
     toastrConfig.progressBar = false;
+    
   }
 })();

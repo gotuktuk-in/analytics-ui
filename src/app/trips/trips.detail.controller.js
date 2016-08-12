@@ -122,7 +122,6 @@
             );
         }
 
-
         function getDetails() {
 
             TripsService.getTripDetail(
@@ -243,7 +242,7 @@
 
                     contents[i] = '<div class="popup_container">'
                         //+ '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].dr + '</h4><span>Id</span></div>'
-                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;">' + $scope.selectedTripBid[i].name + '</h4><span>Name</span></div>'
+                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;"><a href="#/home/detail/'+$scope.selectedTripBid[i].dr+'">' + $scope.selectedTripBid[i].name + '</a></h4><span>Name</span></div>'
                     + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;">' + $scope.bidConstants[$scope.selectedTripBid[i].bid] + '</h4><span>Bid</span><br></div>'
                     + '</div>';
 
@@ -251,7 +250,6 @@
                         content: contents[i],
                         maxWidth: 300
                     });
-
 
                     google.maps.event.addListener(markers[i], 'click', function () {
                         //console.log(this.index); // this will give correct index
@@ -263,6 +261,7 @@
                         infowindows[this.index].open(map, markers[this.index]);
                         map.panTo(markers[this.index].getPosition());
                     });
+
 
                 }
                 //bid Marker end

@@ -20,6 +20,7 @@
          });*/
         $rootScope.logout = function () {
             LoginService.logout({}, function (response) {
+                setNavByRoleService.clearNav();
                     toastr.error("You have logged out successfully.");
                 },
                 function (error) {
@@ -45,5 +46,28 @@
             }
         });
     }
+
+    /*angular
+        .module('tuktukV2Dahboard')
+    .factory('RoleBasedNavs', RoleBasedNavs);
+    RoleBasedNavs.$inject = ["$rootScope"];
+
+    function RoleBasedNavs($rootScope){
+       var service = {
+            getNavs : getNavs,
+            throwNavs : throwNavs
+       }
+       return service;
+
+       function getNavs(obj){
+        $rootScope.$broadcast("Navsharing", obj);
+       }
+       function throwNavs(obj){
+
+        $rootScope.$on("Navsharing", function(event, response){
+            return obj;
+        });
+       }
+    }*/
 
 })();

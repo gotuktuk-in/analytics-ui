@@ -10,15 +10,15 @@
 
 angular
     .module('tuktukV2Dahboard')
-    .factory('ChartConfigService', ChartConfigService)
+    .factory('ChartConfigService', ChartConfigService);
 
 function ChartConfigService($q, $resource, API, PerformanceHandler) {
-    var factory = {}
+    var factory = {};
     Date.prototype.addHours = function (h) {
         this.setHours(this.getHours() + h);
         return this;
-    }
-    factory.lineChartConfig = {refreshDataOnly: false}
+    };
+    factory.lineChartConfig = {refreshDataOnly: false};
     factory.lineChartOptions = {
         chart: {
             type: 'lineChart',
@@ -142,7 +142,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 }
             }
         }
-    }
+    };
     factory.multiBarChartOptions = {
         chart: {
             type: 'multiBarChart',
@@ -172,7 +172,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 return d.y;
             },
             stacked: true,
-            showControls:false,
+            showControls: false,
             clipEdge: true,
             transitionDuration: 1000,
             useInteractiveGuideline: false,
@@ -201,7 +201,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
         chart: {
             type: 'linePlusBarChart',
             height: 400,
-            focusEnable:false,
+            focusEnable: false,
             legend: {
                 vers: 'classic',
                 maxKeyLength: 400,
@@ -223,11 +223,13 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 forceY: [0]
             },
             color: ['#ff7f0e', '#e377c2'],
-            x: function(d,i) { return i },
+            x: function (d, i) {
+                return i
+            },
             xAxis: {
                 rotateLabels: '-90',
                 axisLabel: '',
-                tickFormat: function(d) {
+                tickFormat: function (d) {
                     var dx = $scope.data[0].values[d] && $scope.data[0].values[d].x || 0;
                     if (dx > 0) {
                         return d3.time.format('%x')(new Date(dx))
@@ -240,23 +242,37 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
     };
     factory.pieChartOptions = {
         chart: {
-          type: 'pieChart',
-          height: 420,
-          x: function(d){return d.label;},
-          y: function(d){return d.value;},
-          showLabels: false,
-          duration: 500,
-          labelThreshold: 0.01,
-          labelSunbeamLayout: true,
-          legend: {
-            margin: {
-              top: 5,
-              right: 5,
-              bottom: 5,
-              left: 0
+            type: 'pieChart',
+            height: 410,
+            x: function (d) {
+                return d.label;
             },
-            height: 200
-          }
+            y: function (d) {
+                return (d.value);
+            },
+            valueFormat: function(d){
+                return d3.format(',.0f')(d);
+            },
+            showValues: true,
+            showLabels: false,
+            duration: 500,
+            labelThreshold: 0,
+            labelSunbeamLayout: true,
+            margin: {
+                top: 0,
+                right: 0,
+                bottom: 0,
+                left: 0
+            },
+            legend: {
+                maxKeyLength: 400,
+                margin: {
+                    top: 5,
+                    right: 5,
+                    bottom: 5,
+                    left: 0
+                }
+            }
         }
     };
     return factory;
