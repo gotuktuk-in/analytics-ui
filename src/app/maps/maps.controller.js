@@ -38,6 +38,12 @@
             )
         });
 
+        $(document).ready(function(){
+            $("#hide").click(function(){
+                $(".card").hide();
+            });
+        });
+
         getAllDrivers();
         function getAllDrivers() {
             MapService.getAllDrivers({
@@ -103,6 +109,7 @@
                 from: moment($scope.startDate).startOf('day').format("YYYYMMDD").toString(),
                 to: moment($scope.endDate).endOf('day').format("YYYYMMDD").toString()
             }, function (response) {
+                $(".card").show();
                 vm.driver.profile = response;
                 console.log(vm.driver.time);
             }, function (err) {
