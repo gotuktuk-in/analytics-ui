@@ -16,33 +16,19 @@
         z-index: 999999999;
         left: inherit;
     }
-    .card {
-        position: fixed;
-        top: 80px;
-        right: 20px;
-        z-index: 999999;
-        background: #fff;
-        padding: 5px;
-        width: 400px;
-        box-shadow: 0px 0px 40px rgba(0,0,0,0.1);
-    }
-    .img-fluid {
-        max-height: 100%;
-        width: 100%;
-        display: block;
-    }
+
     .card-bg-img {
-        width: 100%;
-        height: 250px;
-        overflow: hidden;
         background: url("https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{vm.driver.profile.profileImage}}&container=focus&resize_w=200&resize_h=250&refresh=2592000"), url("assets/images/ajax-loader.gif");
         background-color: #fff;
         background-size: cover, 20px;
         background-repeat: no-repeat;
         background-position: center 20%;
     }
-    .card-block{padding: 0px}
-    .card-title{padding: 20px; background: #f9f9f9; margin: 0;}
+    .close-card {
+        position: absolute;
+        right: 18px;
+        top: 15px;
+    }
 </style>
 <div class="content">
     <div class="live"> LIVE</div>
@@ -109,6 +95,7 @@
         </ng-map>
         <!--Card-->
         <div class="card" ng-show="vm.driver.profile">
+            <span class="fa fa-remove close-card" id="hide"></span>
 
             <!--Card image-->
             <div class="view overlay hm-white-slight card-bg-img">
@@ -122,37 +109,39 @@
                 <h3 class="card-title">{{vm.driver.profile.name}}</h3>
                 <!--Text-->
                 <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td class="text-center"><i class="fa fa-user"></i></td>
-                        <td>ID#</td>
-                        <td>{{vm.driver.profile.id}}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><i class="fa fa-mobile-phone"></i></td>
-                        <td>Phone#</td>
-                        <td>{{vm.driver.profile.phone}}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><i class="fa fa-taxi"></i></td>
-                        <td>Vehicle#</td>
-                        <td>{{vm.driver.profile.vehicle}}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center" width="10"><i class="fa fa-clock-o"></i></td>
-                        <td width="80">Time</td>
-                        <td>{{vm.driver.time | date:'shortTime'}}</td>
-                    </tr>
-                    <tr>
-                        <td class="text-center"><i class="fa fa-map-marker"></i></td>
-                        <td>Location</td>
-                        <td style="max-width:100px">
-                            <span ng-if="vm.driver.address">{{vm.driver.address}}</span>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td class="text-center"><i class="fa fa-user"></i></td>
+                            <td>ID#</td>
+                            <td>{{vm.driver.profile.id}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><i class="fa fa-mobile-phone"></i></td>
+                            <td>Phone#</td>
+                            <td>{{vm.driver.profile.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><i class="fa fa-taxi"></i></td>
+                            <td>Vehicle#</td>
+                            <td>{{vm.driver.profile.vehicle}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" width="10"><i class="fa fa-clock-o"></i></td>
+                            <td width="80">Time</td>
+                            <td>{{vm.driver.time | date:'shortTime'}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center"><i class="fa fa-map-marker"></i></td>
+                            <td>Location</td>
+                            <td style="max-width:100px">
+                                <span ng-if="vm.driver.address">{{vm.driver.address}}</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <!--/.Card content-->
 
