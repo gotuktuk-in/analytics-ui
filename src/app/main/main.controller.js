@@ -7,7 +7,7 @@
 
   /** @ngInject */
   
-  function MainController($scope, $log, $rootScope,$state, $stateParams, StaticDataService) {
+  function MainController($scope, $log, $rootScope,$state, $stateParams, StaticDataService, setNavByRoleService) {
     var vm = this;
     vm.navsLister = [];
     $scope.cities = StaticDataService.cities
@@ -35,10 +35,11 @@
     $scope.toggled = function(open) {
       $log.log('Dropdown is now: ', open);
     };
-    //if(setNavByRoleService.getNav())
-    //{
-    //  vm.navsLister = setNavByRoleService.getNav();
-    //}
+    if(setNavByRoleService.getNav())
+    {
+      vm.navsLister = setNavByRoleService.getNav();
+      console.log('vm.navsLister' , vm.navsLister);
+    }
     
 
 
