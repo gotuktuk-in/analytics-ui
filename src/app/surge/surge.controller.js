@@ -53,6 +53,20 @@
         ];
         vm.setting.driverValue = vm.multipleArrDriver[0];
 
+        (function()
+        {
+            if( window.localStorage )
+            {
+                if( !localStorage.getItem('firstLoad') )
+                {
+                    localStorage['firstLoad'] = true;
+                    window.location.reload();
+                }
+                else
+                    localStorage.removeItem('firstLoad');
+            }
+        })();
+
         initSetting();
 
         function initSetting() {

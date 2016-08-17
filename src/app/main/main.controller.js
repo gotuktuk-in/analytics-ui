@@ -9,7 +9,7 @@
   
   function MainController($scope, $log, $rootScope,$state, $stateParams, StaticDataService, setNavByRoleService) {
     var vm = this;
-    vm.navsLister = [];
+    $scope.navsLister = [];
     $scope.cities = StaticDataService.cities
     $scope.vehicleTypes = StaticDataService.vehicleTypes
     $rootScope.selectedCity =StaticDataService.cities[0]
@@ -37,11 +37,12 @@
     };
     if(setNavByRoleService.getNav())
     {
-      vm.navsLister = setNavByRoleService.getNav();
-      console.log('vm.navsLister' , vm.navsLister);
+        $scope.navsLister = setNavByRoleService.getNav();
     }
-    
-
+      if ($scope.navsLister.navList.MAPS)
+      {
+          alert("hi");
+      }
 
     //console.log('vm.navsLister' , vm.navsLister);
   /*  var links = angular.element('.t-module-link');

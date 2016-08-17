@@ -28,12 +28,12 @@
             <span style="padding:5px 10px;">{{selectedVehicle.name}}</span> | <span
             style="padding:5px 10px;">{{selectedCity.name}}</span>
         </li>
-        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="vm.navsLister.LIVE = true">
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.LIVE">
             <a ui-sref="home.live({city: city,vehicleType: vehicleType})">
                 <span class="fa fa-heart"></span> Live
             </a>
         </li>
-        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="vm.navsLister.DRIVERS = true">
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.DRIVERS">
             <a ui-sref="home.drivers({city: city,vehicleType: vehicleType})">
                 <span class="fa fa-paper-plane"></span> Drivers
             </a>
@@ -41,7 +41,7 @@
             <!--<li><a ui-sref="home.onboarding({city: city,vehicleType: vehicleType})"><span class="fa fa-pencil-square-o"></span><strike>Onboarding</strike></a></li>-->
             <!--</ul>-->
         </li>
-        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="vm.navsLister.MAPS = true">
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.MAPS">
             <a ui-sref="home.maps({city: city,vehicleType: vehicleType})">
                 <span class="fa fa-map"></span>Maps
             </a>
@@ -61,13 +61,13 @@
                 <sup class="text-lowercase">Beta</sup>
             </a>
         </li>-->
-        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="vm.navsLister.TRIP = true">
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.TRIP">
             <a ui-sref="home.trips({city: city,vehicleType: vehicleType})">
                 <span class="fa fa-map-pin"></span>
                 Trips
             </a>
         </li>
-        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="vm.navsLister.OFFERS = true">
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.OFFERS">
             <a ui-sref="home.offers">
                 <span class="fa fa-barcode"></span> Offers
             </a>
@@ -78,12 +78,12 @@
                 <strike>Riders</strike>
             </a>
         </li>-->
-        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="vm.navsLister.SURGE = true">
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.SURGE">
             <a ui-sref="home.surge">
                 <span class="fa fa-rupee"></span> Surge
             </a>
         </li>
-        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="vm.navsLister.ALERT = true">
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.ALERT">
             <a ui-sref="home.alert">
                 <span class="fa fa-bell"></span>Alert
             </a>

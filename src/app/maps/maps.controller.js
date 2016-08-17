@@ -14,6 +14,20 @@
         $scope.startDate = moment().format("YYYY-MM-DD");
         $scope.endDate = moment().format("YYYY-MM-DD");
 
+        (function()
+        {
+            if( window.localStorage )
+            {
+                if( !localStorage.getItem('firstLoad') )
+                {
+                    localStorage['firstLoad'] = true;
+                    window.location.reload();
+                }
+                else
+                    localStorage.removeItem('firstLoad');
+            }
+        })();
+
         NgMap.getMap({id: 'drivers_map'}).then(function (map) {
             vm.map = map;
             if (vm.map && vm.map.data) {
