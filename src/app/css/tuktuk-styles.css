@@ -1782,3 +1782,23 @@ span.img-top {
 }
 .card-block{padding: 0px}
 .card-title{padding: 20px; background: #f9f9f9; margin: 0;}
+
+.role-base-navs{width:100%; overflow-y:auto}
+@media only screen and (min-height:768px) {
+    .role-base-navs{max-height:87.1vh}
+}
+@media only screen and (min-height:800px) {
+    .role-base-navs{max-height:87.5vh}
+}
+@media only screen and (min-height:1024px) {
+    .role-base-navs{max-height:90.3vh}
+}
+@media only screen and (min-height:1200px) {
+    .role-base-navs {max-height: 91.7vh}
+}
+@media only screen and (min-height:1200px) {
+    .role-base-navs {max-height: 91.7vh}
+}
+@media only screen and (min-height: 1280px)
+    .role-base-navs {max-height: 94vh}
+}

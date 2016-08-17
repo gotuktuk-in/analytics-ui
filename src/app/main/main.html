@@ -28,6 +28,8 @@
             <span style="padding:5px 10px;">{{selectedVehicle.name}}</span> | <span
             style="padding:5px 10px;">{{selectedCity.name}}</span>
         </li>
+    </ul>
+    <ul class="nav nav-stacked role-base-navs">
         <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.LIVE">
             <a ui-sref="home.live({city: city,vehicleType: vehicleType})">
                 <span class="fa fa-heart"></span> Live
