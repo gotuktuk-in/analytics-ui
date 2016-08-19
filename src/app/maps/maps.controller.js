@@ -39,17 +39,19 @@
                 fillColor: 'gray',
                 strokeWeight: 1,
                 strokeOpacity: .1,
-                fillOpacity: .1
+                fillOpacity: .1,
+                draggable: false,
+                editable: true
             });
             MapService.loadGeoJson({}, function (response) {
-                    vm.geoJSON = {}
-                    vm.geoJSON = response
+                    vm.geoJSON = {};
+                    vm.geoJSON = response;
                     vm.map.data.addGeoJson(vm.geoJSON);
 
                 }, function (error) {
                     console.log("error ", error)
                 }
-            )
+            );
         });
 
         $(document).ready(function(){

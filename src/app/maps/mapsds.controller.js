@@ -20,6 +20,20 @@
         vm.selectedPrecision = vm.precisionArr[0];
         var defaultPrecesion = vm.selectedPrecision.value;
 
+        (function()
+        {
+            if( window.localStorage )
+            {
+                if( !localStorage.getItem('firstLoad') )
+                {
+                    localStorage['firstLoad'] = true;
+                    window.location.reload();
+                }
+                else
+                    localStorage.removeItem('firstLoad');
+            }
+        })();
+
         NgMap.getMap({id: 'bidMap'}).then(function (map) {
             vm.map = map;
             google.maps.event.addDomListener(vm.map);
