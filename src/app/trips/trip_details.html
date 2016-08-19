@@ -16,13 +16,13 @@
     </div>
 
     <div class="content-div">
-        <ng-map id="driversMap" center="indore" style="height:100%;">
+        <ng-map id="driversMap" center="indore" style="width:100%; height:100%; position:fixed !important;">
             <!--<div>-->
                 <!--<marker ng-repeat="data in data"></marker>-->
             <!--</div>-->
         </ng-map>
 
-        <div class="tabs-view-2">
+        <div class="tabs-view tabs-view-2">
             <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}"
                     class="btn btn-default tabs-toggle-btn map-btn " title="Show More...">
                 <i class="fa fa-angle-double-right"></i>
@@ -210,7 +210,7 @@
                                         <span>driver's Feedback</span>
                                     </div>
                                 </div>
-                                
+
                                  <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">Rs.{{selectedTrip.driverFare}}</small></h4>
@@ -343,8 +343,7 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.riderInfo.joinedOn)*1000 | date:"MMM dd,
-                                            yyyy"}}</h4>
+                                        <h4 class="number">{{(selectedTrip.riderInfo.joinedOn)*1000 | date:"MMM dd, yyyy"}}</h4>
                                         <span>joined On</span>
                                     </div>
                                 </div>

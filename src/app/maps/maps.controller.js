@@ -41,7 +41,7 @@
                 strokeOpacity: .1,
                 fillOpacity: .1,
                 draggable: false,
-                editable: true
+                editable: false
             });
             MapService.loadGeoJson({}, function (response) {
                     vm.geoJSON = {};
