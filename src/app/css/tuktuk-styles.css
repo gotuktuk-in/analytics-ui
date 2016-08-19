@@ -1799,6 +1799,6 @@ span.img-top {
 @media only screen and (min-height:1200px) {
     .role-base-navs {max-height: 91.7vh}
 }
-@media only screen and (min-height: 1280px)
+@media only screen and (min-height: 1280px){
     .role-base-navs {max-height: 94vh}
 }
