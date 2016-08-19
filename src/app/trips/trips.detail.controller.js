@@ -6,7 +6,7 @@
         .controller('TripDetailController', TripDetailController);
 
     /** @ngInject */
-    function TripDetailController($scope, $interval, $stateParams, TripsService, $rootScope, NgMap) {
+    function TripDetailController($scope, $interval, $stateParams, TripsService, $rootScope, NgMap, $uibModal) {
 
         var vm = this;
         $scope.showHide = true;
@@ -352,6 +352,40 @@
 
         getDetails();
 
+        $scope.openEditFareModal = function(){
+            var modalInstance = $uibModal.open({
+                animation : $scope.animationEnabled,
+                templateUrl : 'editFareModal.html',
+                controller : 'EditFareController',
+                windowClass : 'edit-fare-modal',
+                keyboard : false,
+                backdrop : 'static',
+                resolve : {
+                   DriverFare : function(){
+                    return $scope.selectedTrip.driverFare;
+                   },
+                   RiderFare : function(){
+                    return $scope.selectedTrip.riderFare;
+                   }
+                }
+                
+            })
+        }
     }
+    angular
+        .module('tuktukV2Dahboard')
+        .controller('EditFareController', EditFareController);
+     function EditFareController($scope, $uibModalInstance, DriverFare, RiderFare) {
+        $scope.drFare = DriverFare;
+        $scope.rdFare = RiderFare;
+        $scope.ok = function () {
+            $uibModalInstance.close($scope.selected.item);
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        }
+     }
+
 })();
 

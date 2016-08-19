@@ -1802,3 +1802,15 @@ span.img-top {
 @media only screen and (min-height: 1280px){
     .role-base-navs {max-height: 94vh}
 }
+.edit-fare-modal .modal-header, .edit-fare-modal .modal-body, .edit-fare-modal .modal-footer{padding: 10px 13px;}
+.edit-fare-modal .modal-header h3{font-size:18px; font-weight:400;}
+.edit-fare-modal .modal-header .cls-btn{color:rgba(0,0,0,0.5); text-decoration:none; margin-top:5px;font-weight:600;}
+.edit-fare-modal .heading-box1 span{font-size: 20px; font-weight: 300; margin-bottom: 0px; color: #aaa;}
+.edit-fare-modal .input-group{margin-bottom:10px; width:100%}
+.edit-fare-modal .modal-body hr{margin:10px 0}
+.edit-fare-modal .modal-body h3{margin-bottom:10px}
+.save-farechanges-btn{padding:0 12px; line-height:26px;}
+.cancel-farechanges-btn{line-height:27px; margin-left:15px}
+
+
+
