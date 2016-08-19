@@ -14,6 +14,20 @@
         $scope.startDate = moment().format("YYYY-MM-DD");
         $scope.endDate = moment().format("YYYY-MM-DD");
 
+        (function()
+        {
+            if( window.localStorage )
+            {
+                if( !localStorage.getItem('firstLoad') )
+                {
+                    localStorage['firstLoad'] = true;
+                    window.location.reload();
+                }
+                else
+                    localStorage.removeItem('firstLoad');
+            }
+        })();
+
         NgMap.getMap({id: 'drivers_map'}).then(function (map) {
             vm.map = map;
             if (vm.map && vm.map.data) {
@@ -25,17 +39,19 @@
                 fillColor: 'gray',
                 strokeWeight: 1,
                 strokeOpacity: .1,
-                fillOpacity: .1
+                fillOpacity: .1,
+                draggable: false,
+                editable: false
             });
             MapService.loadGeoJson({}, function (response) {
-                    vm.geoJSON = {}
-                    vm.geoJSON = response
+                    vm.geoJSON = {};
+                    vm.geoJSON = response;
                     vm.map.data.addGeoJson(vm.geoJSON);
 
                 }, function (error) {
                     console.log("error ", error)
                 }
-            )
+            );
         });
 
         $(document).ready(function(){

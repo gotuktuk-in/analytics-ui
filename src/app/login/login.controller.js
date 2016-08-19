@@ -6,30 +6,34 @@
     .controller('LoginController', LoginController);
 
   /** @ngInject */
-  function LoginController($scope, $log, $rootScope, $http, $state, LoginService, UserService, toastr, StaticDataService) {
+  function LoginController($scope, $log, $timeout, $rootScope, $http, $state, LoginService, UserService, toastr, StaticDataService, setNavByRoleService) {
     var vm = this;
     $scope.loginUser = function () {
       LoginService.doLogin($scope.user,
           function (response) {
-            vm.modules = response.resources;
+            
             console.log('vm.modules' , vm.modules);
             if (response.success) {
+              vm.modules = response.resources;
               UserService.setUser(response)
               $http.defaults.headers.common.Authorization = 'Basic '+response.token ;
              $rootScope.isAuthenticated = true;
-
-              $state.go("home.live" ,{city:  $rootScope.city , vehicleType:$rootScope.vehicleType})
+              setNavByRoleService.setNav(vm.modules);
+              $timeout(function() { 
+                $state.go("home.live" ,{city:  $rootScope.city , vehicleType:$rootScope.vehicleType})
+              }, 20);
+             
               toastr.success("You are successfully logged in.");
             }
             else
             {
               toastr.error(response.msg);
             }
-            setNavByRoleService.setNav(vm.modules);
+            
             /*$scope.$storage = $localStorage.$default({
               var nav = vm.modules
             });*/
-            //RoleBasedNavs.getNavs(vm.modules);
+            //setNavByRoleService.getNavs(vm.modules);
 
             //$rootScope.$broadcast('roleBasedShowModules', vm.modules);
 

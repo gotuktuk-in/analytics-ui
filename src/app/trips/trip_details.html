@@ -9,16 +9,9 @@
     }
 </style>
 <div class="content">
-    <div class="row" style="
-         z-index: 99;
-         position: fixed;
-         width: auto;
-         padding: 20px 0;
-         right: 20px;
-         ">
+    <div class="row" style="z-index: 99; position: fixed; width: auto; padding: 20px 0; right: 20px">
         <div class="col-md-12 col-sm-12 col-xs-12" ng-if="showHide">
             <span><a href="" ng-click="vm.getBid();">Show Candidates</a></span>
-
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12" ng-if="!showHide">
             <span><a href="" ng-click="vm.clearBid();">Clear Candidates</a></span>
@@ -26,15 +19,14 @@
     </div>
 
     <div class="content-div">
-        <ng-map id="driversMap" center="indore" style="height:100%;">
+        <ng-map id="driversMap" center="indore" style="width:100%; height:100%; position:fixed !important;">
             <!--<div>-->
-                <!--<marker ng-repeat="data in data"></marker>-->
+            <!--<marker ng-repeat="data in data"></marker>-->
             <!--</div>-->
         </ng-map>
 
         <div class="tabs-view-2">
-            <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}"
-                    class="btn btn-default tabs-toggle-btn map-btn " title="Show More...">
+            <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}" class="btn btn-default tabs-toggle-btn map-btn " title="Show More...">
                 <i class="fa fa-angle-double-right"></i>
             </button>
 
@@ -68,7 +60,6 @@
                                             <h3>For Trip</h3>
                                             <hr>
                                         </div>
-
                                         <div class="col-md-4 col-sm-4 col-xs-12">
                                             <div class="box">
                                                 <h4 class="number">{{(selectedTrip.disForTrip/1000) | number:2}} KM</h4>
@@ -87,8 +78,6 @@
                                                 <span>Speed</span>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -100,7 +89,6 @@
                                             <h3>In Trip</h3>
                                             <hr>
                                         </div>
-
                                         <div class="col-md-4 col-sm-4 col-xs-12">
                                             <div class="box">
                                                 <h4 class="number">{{(selectedTrip.disInTrip/1000) | number:2}} KM</h4>
@@ -119,8 +107,6 @@
                                                 <span>Speed </span>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -132,7 +118,6 @@
                                             <h3>Amount</h3>
                                             <hr>
                                         </div>
-
                                         <div class="col-md-4 col-sm-4 col-xs-12">
                                             <div class="box">
                                                 <h4 class="number">Rs. {{selectedTrip.driverFare}}</h4>
@@ -163,8 +148,12 @@
                                                 <!-- <span>Amount Total<small> / Cash / tCash</small></span> -->
                                             </div>
                                         </div>
-
-
+                                        <div class="col-md-4 col-sm-4 col-xs-12 pull-right">
+                                            <div class="box">
+                                                <h4 class="number">&nbsp;</h4>
+                                                <a href="javascript:void(0);" ng-click="openEditFareModal()">Edit</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -203,14 +192,16 @@
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.pickupOn ? (selectedTrip.pickupOn
                                             *1000 | date:"h:mma ") : 'N/A'}} / {{selectedTrip.dropOn ?
-                                            (selectedTrip.dropOn *1000| date:"h:mma ") : 'N/A'}}</h4>
+                                            (selectedTrip.dropOn *1000| date:"h:mma ") : 'N/A'}}
+                                        </h4>
                                         <span>Start Time / End Time</span>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.riderFeedback | number:2}} /
-                                            {{selectedTrip.driverFeedback | number:2}}</h4>
+                                            {{selectedTrip.driverFeedback | number:2}}
+                                        </h4>
                                         <span>Rider's / driver's Feedback</span>
                                     </div>
                                 </div>
@@ -220,7 +211,7 @@
                                         <span>driver's Feedback</span>
                                     </div>
                                 </div>
-                                
+
                                  <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">Rs.{{selectedTrip.driverFare}}</small></h4>
@@ -233,22 +224,15 @@
                                         <span>Priority Pricing (rider/driver)</span>
                                     </div>
                                 </div>
-
-
-
-
                             </div>
                         </div>
                     </uib-tab>
                     <uib-tab index="0" heading="Driver" ng-if="selectedTrip.driverInfo.id">
                         <div class="row tripInfo-driver-tab">
                             <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
-                                <div class="box box-heading box-0 text-center"
-                                     ng-class="{'box-online': selectedTrip.driverInfo.state== 22 || selectedTrip.driverInfo.state== 11, 'box-offline': selectedTrip.driverInfo.state== 10 } ">
-                                    <img ng-src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{selectedTrip.driverInfo.profileImage}}&container=focus&resize_w=75&resize_h=75&refresh=2592000"
-                                         class="iw-driver" height="50">
+                                <div class="box box-heading box-0 text-center" ng-class="{'box-online': selectedTrip.driverInfo.state== 22 || selectedTrip.driverInfo.state== 11, 'box-offline': selectedTrip.driverInfo.state== 10 } ">
+                                    <img ng-src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{selectedTrip.driverInfo.profileImage}}&container=focus&resize_w=75&resize_h=75&refresh=2592000" class="iw-driver" height="50">
                                     <!--  <h4 class="title" style="margin-top:10px;">{{selectedTrip.driverInfo.name}}</h4> -->
-
                                 </div>
                             </div>
                             <div class="col-md-10 col-sm-12 col-xs-12">
@@ -273,20 +257,20 @@
                                 <div class="col-md-8 col-sm-12 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.driverInfo.email ?
-                                            selectedTrip.driverInfo.email:'-'}}</h4>
+                                            selectedTrip.driverInfo.email:'-'}}
+                                        </h4>
                                         <span>Email</span>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.driverInfo.model.model}}</h4>
-                                        <span>Email</span>
+                                        <span>Device</span>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.driverInfo.joinedOn)*1000 | date:"MMM dd,
-                                            yyyy"}}</h4>
+                                        <h4 class="number">{{(selectedTrip.driverInfo.joinedOn)*1000 | date:"MMM dd, yyyy"}} </h4>
                                         <span>joined On</span>
                                     </div>
                                 </div>
@@ -310,21 +294,17 @@
                                         <span>Today's Ride</span>
                                     </div>
                                 </div> -->
-
                             </div>
                         </div>
                     </uib-tab>
                     <uib-tab index="0" heading="Rider">
                         <div class="row">
                             <!-- <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
-                                <div class="box box-heading box-0 text-center"
-                                ng-class="{'box-online': selectedTrip.riderInfo.state== 22 || selectedTrip.riderInfo.state== 11, 'box-offline': selectedTrip.riderInfo.state== 10 } ">
-                                <img ng-src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{selectedTrip.riderInfo.profileImage}}&container=focus&resize_w=75&resize_h=75&refresh=2592000"
-                                class="iw-driver" height="50">
-                                <h4 class="title" style="margin-top:10px;">{{selectedTrip.riderInfo.name}}</h4>
-
-                            </div>
-                        </div> -->
+                                <div class="box box-heading box-0 text-center" ng-class="{'box-online': selectedTrip.riderInfo.state== 22 || selectedTrip.riderInfo.state== 11, 'box-offline': selectedTrip.riderInfo.state== 10 } ">
+                                    <img ng-src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{selectedTrip.riderInfo.profileImage}}&container=focus&resize_w=75&resize_h=75&refresh=2592000" class="iw-driver" height="50">
+                                    <h4 class="title" style="margin-top:10px;">{{selectedTrip.riderInfo.name}}</h4>
+                                </div>
+                            </div> -->
                             <div class="col-md-10 col-sm-12 col-xs-12">
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
@@ -347,14 +327,16 @@
                                 <div class="col-md-12 col-sm-4 col-xs-12">
                                     <div class="box">
                                         <h4 class="number">{{selectedTrip.riderInfo.email ?
-                                            selectedTrip.riderInfo.email:'-'}}</h4>
+                                            selectedTrip.riderInfo.email:'-'}}
+                                        </h4>
                                         <span>Email</span>
                                     </div>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.riderInfo.joinedOn)*1000 | date:"MMM dd,
-                                            yyyy"}}</h4>
+                                        <h4 class="number">
+                                            {{(selectedTrip.riderInfo.joinedOn)*1000 | date:"MMM dd, yyyy"}}
+                                        </h4>
                                         <span>joined On</span>
                                     </div>
                                 </div>
@@ -386,3 +368,54 @@
         </div>
     </div>
 </div>
+<script type="text/ng-template" id="editFareModal.html">
+    <div class="modal-header">
+        <a class="pull-right cls-btn" href="javascript:void(0)" ng-click="cancel()">&#10005;
+        </a>
+        <h3 class="modal-title">Edit Fare</h3>
+    </div>
+    <div class="modal-body">
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
+                <h3>Driver  Fare (<span>{{drFare}}</span>)</h3>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="input-group">
+                    <select class="form-control">
+                        <option value="add">+</option>
+                        <option value="substract">-</option>                            
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-12">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="">
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="input-group">
+                    <textarea class="form-control" placeholder="Reason"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-10 col-xs-offset-1">
+            <hr>
+        </div>
+        <div class="col-xs-8 col-xs-offset-2">
+            <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
+                <h3>Rider  Fare (<span>{{rdFare}}</span>)</h3>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="input-group">
+                    <input class="form-control" type="text" placeholder="Tcash">
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="modal-footer">
+        <a class="pull-right cancel-farechanges-btn" href="javascript:void(0)" ng-click="cancel()">Cancel</a>
+        <button type="button" class="btn btn-primary save-farechanges-btn" ng-click="ok()">Save</button>
+        <div class="clearfix"></div>
+    </div>
+</script>

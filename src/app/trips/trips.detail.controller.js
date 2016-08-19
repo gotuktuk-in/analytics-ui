@@ -6,7 +6,7 @@
         .controller('TripDetailController', TripDetailController);
 
     /** @ngInject */
-    function TripDetailController($scope, $interval, $stateParams, TripsService, $rootScope, NgMap) {
+    function TripDetailController($scope, $interval, $stateParams, TripsService, $rootScope, NgMap, $uibModal) {
 
         var vm = this;
         $scope.showHide = true;
@@ -57,60 +57,6 @@
                     to: moment($scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString()
                 }, function (response) {
                     var detail = response;
-                    /*var content = '<div class="popup_container bid-driver-detail">' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.id + '</h4>' +
-                     '<span>Id</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.phone + '</h4>' +
-                     '<span>Phone</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.vehicle + '</h4>' +
-                     '<span>Vehicle Number</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.joinedOn + '</h4>' +
-                     '<span>Joined date</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.rides_today.total + ' / ' + detail.rides_today.unique_ride + '</h4>' +
-                     '<span>Ride / u</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.rides_total.total + ' / ' + detail.rides_total.unique_ride + '</h4>' +
-                     '<span>Total rides</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.today_distance.total + '</h4>' +
-                     '<span>distance</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.today_online.total_hours + '</h4>' +
-                     '<span>online hour</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.feedbackRating + '</h4>' +
-                     '<span>FEEDBACK</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.total_fare  + ' / '+ detail.today_fare + '</h4>' +
-                     '<span>total fare / fare</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.total_fare  + ' / '+ detail.today_fare + '</h4>' +
-                     '<span>total fare / fare</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.total_earning  + ' / '+ detail.today_earning + '</h4>' +
-                     '<span>total earning / earning</span>' +
-                     '</div>' +
-                     '<div class="col-md-6 col-sm-4 col-xs-12">' +
-                     '<h4 class="number ng-binding">' + detail.today_bid.total + '</h4>' +
-                     '<span>Bid' +
-                     '</div>' +
-                     '</div>';*/
                     vm.infowindows.setContent(content)
                     console.log('$scope.detail', detail);
 
@@ -132,7 +78,7 @@
                     vm.snapCodesFor = $scope.selectedTrip.forTripSnapCode;
                     vm.snapCodesIn = $scope.selectedTrip.inTripSnapCode;
                     //angular.element(document.querySelector('html')).toggleClass('left-arrow');
-                    vm.initialize();
+                    //vm.initialize();
                 }, function (err) {
                     console.log(err)
                     $scope.error = true;
@@ -252,12 +198,6 @@
                     });
 
                     google.maps.event.addListener(markers[i], 'click', function () {
-                        //console.log(this.index); // this will give correct index
-                        //console.log(i); //this will always give 10 for you
-                        //vm.drID = this.index;
-                        //console.log(vm.drID);
-                        //vm.getDriverDetail(vm.drID)     
-
                         infowindows[this.index].open(map, markers[this.index]);
                         map.panTo(markers[this.index].getPosition());
                     });
@@ -352,6 +292,40 @@
 
         getDetails();
 
+        $scope.openEditFareModal = function(){
+            var modalInstance = $uibModal.open({
+                animation : $scope.animationEnabled,
+                templateUrl : 'editFareModal.html',
+                controller : 'EditFareController',
+                windowClass : 'edit-fare-modal',
+                keyboard : false,
+                backdrop : 'static',
+                resolve : {
+                   DriverFare : function(){
+                    return $scope.selectedTrip.driverFare;
+                   },
+                   RiderFare : function(){
+                    return $scope.selectedTrip.riderFare;
+                   }
+                }
+                
+            })
+        }
     }
+    angular
+        .module('tuktukV2Dahboard')
+        .controller('EditFareController', EditFareController);
+     function EditFareController($scope, $uibModalInstance, DriverFare, RiderFare) {
+        $scope.drFare = DriverFare;
+        $scope.rdFare = RiderFare;
+        $scope.ok = function () {
+            $uibModalInstance.close($scope.selected.item);
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        }
+     }
+
 })();
 

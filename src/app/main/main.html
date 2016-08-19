@@ -2,58 +2,95 @@
     <div class="container-fluid">
         <div class="row">
             <div>
-                <a class="tg-menu" ng-click="toggle = !toggle"><img src="assets/images/menu.svg" title="Tuktuk"></a>
+                <a class="tg-menu" ng-click="toggle = !toggle">
+                    <img src="assets/images/menu.svg" title="Tuktuk">
+                </a>
             </div>
         </div>
     </div>
 </nav>
 
 <div class="sidenav" ng-class="{'open' : toggle}" style="z-index: 999999 !important;">
-    <a ng-click="toggle = !toggle" class="toggle-menu-close"><img src="assets/images/menu.svg" title="Tuktuk"></a>
+    <a ng-click="toggle = !toggle" class="toggle-menu-close">
+        <img src="assets/images/menu.svg" title="Tuktuk">
+    </a>
     <ul class="nav nav-stacked">
-        <li style="padding:2px 10px"><span class="pull-right" style="color: #333; padding: 15px 0px;">Admin
-          <span style="padding: 0;color:#333;" ng-click="logout()" id="admin" type="button" class=" "
-                uib-dropdown-toggle ng-disabled="disabled">[ Logout ] </span> </span><img height="30"
-                                                                                          style="margin:10px 12px"
-                                                                                          title="Tuktuk"
-                                                                                          src="assets/images/gotuktuk-play-logo.png">
+        <li style="padding:2px 10px">
+            <span class="pull-right" style="color: #333; padding: 15px 0px;">
+                Admin
+                <span style="padding: 0;color:#333;" ng-click="logout()" id="admin" type="button" class=" " uib-dropdown-toggle ng-disabled="disabled">
+                    [ Logout ] 
+                </span> 
+            </span>
+            <img height="30" style="margin:10px 12px" title="Tuktuk" src="assets/images/gotuktuk-play-logo.png">
         </li>
-        <li class="header"><span style="padding:5px 10px;">{{selectedVehicle.name}}</span> | <span
-                style="padding:5px 10px;">{{selectedCity.name}}</span></li>
-        <li ng-click="toggle = !toggle" ui-sref-active="active"><a
-                ui-sref="home.live({city: city,vehicleType: vehicleType})"> <span class="fa fa-heart"></span> Live</a>
+        <li class="header">
+            <span style="padding:5px 10px;">{{selectedVehicle.name}}</span> | <span
+            style="padding:5px 10px;">{{selectedCity.name}}</span>
         </li>
-        <li ng-click="toggle = !toggle" ui-sref-active="active"><a
-                ui-sref="home.drivers({city: city,vehicleType: vehicleType})"> <span class="fa fa-paper-plane"></span>
-            Drivers</a>
+    </ul>
+    <ul class="nav nav-stacked role-base-navs">
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.LIVE">
+            <a ui-sref="home.live({city: city,vehicleType: vehicleType})">
+                <span class="fa fa-heart"></span> Live
+            </a>
+        </li>
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.DRIVERS">
+            <a ui-sref="home.drivers({city: city,vehicleType: vehicleType})">
+                <span class="fa fa-paper-plane"></span> Drivers
+            </a>
             <!--<ul class="nav sub-nav">-->
             <!--<li><a ui-sref="home.onboarding({city: city,vehicleType: vehicleType})"><span class="fa fa-pencil-square-o"></span><strike>Onboarding</strike></a></li>-->
             <!--</ul>-->
         </li>
-        <li ng-click="toggle = !toggle" ui-sref-active="active"><a
-                ui-sref="home.maps({city: city,vehicleType: vehicleType})"> <span class="fa fa-map"></span>Maps</a>
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.MAPS">
+            <a ui-sref="home.maps({city: city,vehicleType: vehicleType})">
+                <span class="fa fa-map"></span>Maps
+            </a>
             <ul class="nav sub-nav">
-                <li><a ui-sref="home.demandsupply({city: city,vehicleType: vehicleType})"><span
-                        class="fa fa-line-chart"></span><strike>Demand / Supply</strike></a></li>
+                <li>
+                    <a ui-sref="home.demandsupply({city: city,vehicleType: vehicleType})">
+                        <span class="fa fa-line-chart"></span>
+                        <strike>Demand / Supply</strike>
+                    </a>
+                </li>
             </ul>
         </li>
-        <!--<li ng-click="toggle = !toggle" ui-sref-active="active"><a-->
-        <!--ui-sref="home.performance({city: city,vehicleType: vehicleType})"><span-->
-        <!--class="fa fa-area-chart "></span> <strike>Performance</strike> <sup-->
-        <!--class="text-lowercase">Beta</sup></a></li>-->
-        <li ng-click="toggle = !toggle" ui-sref-active="active"><a
-                ui-sref="home.trips({city: city,vehicleType: vehicleType})"> <span class="fa fa-map-pin"></span>
-            Trips</a></li>
-        <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.offers"> <span
-                class="fa fa-barcode"></span> Offers</a></li>
-        <!--<li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.riders"> <span-->
-        <!--class="fa fa-users"></span> <strike>Riders</strike></a></li>-->
-        <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.surge"> <span
-                class="fa fa-rupee"></span> Surge</a></li>
-        <li ng-click="toggle = !toggle" ui-sref-active="active"><a ui-sref="home.alert"> <span
-                class="fa fa-bell"></span>Alert</a></li>
+        <!--<li ng-click="toggle = !toggle" ui-sref-active="active">
+            <a ui-sref="home.performance({city: city,vehicleType: vehicleType})">
+                <span class="fa fa-area-chart "></span>
+                <strike>Performance</strike>
+                <sup class="text-lowercase">Beta</sup>
+            </a>
+        </li>-->
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.TRIP">
+            <a ui-sref="home.trips({city: city,vehicleType: vehicleType})">
+                <span class="fa fa-map-pin"></span>
+                Trips
+            </a>
+        </li>
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.OFFERS">
+            <a ui-sref="home.offers">
+                <span class="fa fa-barcode"></span> Offers
+            </a>
+        </li>
+        <!--<li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.RIDERS">-->
+            <!--<a ui-sref="home.riders">-->
+                <!--<span class="fa fa-users"></span>-->
+                <!--<strike>Riders</strike>-->
+            <!--</a>-->
+        <!--</li>-->
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.SURGE">
+            <a ui-sref="home.surge">
+                <span class="fa fa-rupee"></span> Surge
+            </a>
+        </li>
+        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.ALERT">
+            <a ui-sref="home.alert">
+                <span class="fa fa-bell"></span>Alert
+            </a>
+        </li>
     </ul>
-
 </div>
 <ui-view></ui-view>
 

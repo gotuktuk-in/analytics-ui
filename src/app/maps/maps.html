@@ -35,8 +35,6 @@
     <div class="content-div">
 
         <ng-map id="drivers_map" center="indore" style="height:100%; width:100%; position: fixed;" zoom="12">
-            <map-data load-geo-json={{vm.API_URL}}geofence>
-            </map-data>
             <div>
                 <marker ng-repeat="data in vm.data track by $index" title="{{data.id}}"
                         icon="{ url:'assets/images/icons/marker-green.svg', scaledSize:[30,30]}"
