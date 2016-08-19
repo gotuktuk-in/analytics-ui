@@ -82,7 +82,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span>
             <span class="text-center" ng-model="date"
-                  style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
+                  style="display: inline-block; padding: 7px 0;">{{dsDate}}</span> <span
                 ng-click="vm.changeDate('next')" ng-if="!vm.live"
                 style="display: inline-block; padding: 7px;">&#10095;</span>
         </div>
@@ -100,7 +100,6 @@
     </div>
     <ng-map click id="bidMap" center="indore" style="width:100%; height:100%; position:fixed"
     zoom="{{vm.selectedPrecision.value+8}}">
-
         <div ng-repeat="data in allHash" class="geo-hash-box">
             <shape name="rectangle"
                    editable="false"
@@ -111,7 +110,7 @@
                    stroke-weight="0.4"
                    stroke-opacity="0.5"
                    bounds={{data.hash.boxBounds}}
-                   clickable="true"   on-click="vm.shosGeoHashDetail()">
+                   clickable="true" on-click="vm.showGeoHashDetail()">
             </shape>
         </div>
         <!--<ng-map click id="bidMap" center="indore" style="width:100%; height:100%; position:fixed"-->
