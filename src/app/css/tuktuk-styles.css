@@ -1781,9 +1781,9 @@ span.img-top {
     /*background-position: center 20%;*/
 }
 .card-block{padding: 0px}
-.card-title{padding: 20px; background: #f9f9f9; margin: 0;}
+.card-title{padding: 20px; background: #f9f9f9; margin: 0}
 
-.role-base-navs{width:100%; overflow-y:auto}
+.role-base-navs{width:100%; overflow-y:auto; max-height: 85vh}
 @media only screen and (min-height:768px) {
     .role-base-navs{max-height:87.1vh}
 }
