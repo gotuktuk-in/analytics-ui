@@ -6,10 +6,11 @@
         .controller('TripDetailController', TripDetailController);
 
     /** @ngInject */
-    function TripDetailController($scope, $interval, $stateParams, TripsService, $rootScope, NgMap, $uibModal) {
+    function TripDetailController($scope, $interval, $stateParams, TripsService, $rootScope, NgMap) {
 
         var vm = this;
         $scope.showHide = true;
+        vm.editFareBox = false;
 
         $scope.selectedDates = {};
         $scope.selectedDates.startDate = moment().format("YYYY-MM-DD");
@@ -21,9 +22,70 @@
         vm.drID;
         vm.drID2;
 
-        /*vm.infowindows = new google.maps.InfoWindow({
-         maxWidth: 320
-         });*/
+        vm.renderEditForm = function () {
+            vm.reasonArr = [
+                {name: "Extra Luggage", value: 0},
+                {name: "Extra Passenger", value: 1},
+                {name: "No change with the driver", value: 2},
+                {name: "Miscommunication between driver and rider", value: 3},
+                {name: "Misunderstood the bill", value: 4},
+                {name: "Others", value: 5}
+            ];
+            vm.selectedReason = vm.reasonArr[0];
+            vm.fareTypeArr = [
+                {name: "+", value: 0},
+                {name: "-", value: 1}
+            ];
+            vm.selectedFareType = vm.fareTypeArr[0];
+            vm.inputFare = '';
+            vm.inputReason = '';
+            vm.inputTcash = '';
+        };
+
+        vm.renderEditForm();
+        vm.closeEditFareModal = function () {
+            vm.renderEditForm();
+            vm.editFareBox = false;
+        };
+
+        vm.openEditFareModal = function () {
+            vm.editFareBox = true;
+        };
+
+        vm.editFare = function () {
+            var obj = {};
+            if (vm.selectedReason.value == 5) {
+                vm.selectedReason.name = vm.inputReason;
+            }
+            if (vm.selectedFareType.value == 0) {
+                vm.selectedReasonNew = null;
+            } else {
+                vm.selectedReasonNew = '-';
+            }
+            obj.driver = $scope.selectedTrip.driverInfo.id,
+                obj.rider = $scope.selectedTrip.riderInfo.id,
+                obj.driverChangeFare = parseFloat(vm.selectedReasonNew + vm.inputFare),
+                obj.riderCashback = parseInt(vm.inputTcash),
+                obj.fareChangeReason = vm.selectedReason.name,
+                obj.requestOn = $scope.selectedTrip.requestOn;
+            console.log(obj);
+            TripsService.updateFare(
+                {
+                    id: $stateParams.id
+                }, obj, function (response) {
+                    getDetails();
+                    vm.renderEditForm();
+                    vm.closeEditFareModal();
+                    toastr.success("edited.");
+                }, function (error) {
+                    if (error.status == 500) {
+                        toastr.error("Permission Denied");
+                    } else {
+                        toastr.error(error);
+                    }
+
+                })
+        };
 
         vm.getBid = function () {
             TripsService.getBidDetail(
@@ -78,7 +140,7 @@
                     vm.snapCodesFor = $scope.selectedTrip.forTripSnapCode;
                     vm.snapCodesIn = $scope.selectedTrip.inTripSnapCode;
                     //angular.element(document.querySelector('html')).toggleClass('left-arrow');
-                    //vm.initialize();
+                    vm.initialize();
                 }, function (err) {
                     console.log(err)
                     $scope.error = true;
@@ -188,7 +250,7 @@
 
                     contents[i] = '<div class="popup_container">'
                         //+ '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].dr + '</h4><span>Id</span></div>'
-                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;"><a href="#/home/detail/'+$scope.selectedTripBid[i].dr+'">' + $scope.selectedTripBid[i].name + '</a></h4><span>Name</span></div>'
+                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;"><a href="#/home/detail/' + $scope.selectedTripBid[i].dr + '">' + $scope.selectedTripBid[i].name + '</a></h4><span>Name</span></div>'
                     + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;">' + $scope.bidConstants[$scope.selectedTripBid[i].bid] + '</h4><span>Bid</span><br></div>'
                     + '</div>';
 
@@ -292,40 +354,10 @@
 
         getDetails();
 
-        $scope.openEditFareModal = function(){
-            var modalInstance = $uibModal.open({
-                animation : $scope.animationEnabled,
-                templateUrl : 'editFareModal.html',
-                controller : 'EditFareController',
-                windowClass : 'edit-fare-modal',
-                keyboard : false,
-                backdrop : 'static',
-                resolve : {
-                   DriverFare : function(){
-                    return $scope.selectedTrip.driverFare;
-                   },
-                   RiderFare : function(){
-                    return $scope.selectedTrip.riderFare;
-                   }
-                }
-                
-            })
-        }
-    }
-    angular
-        .module('tuktukV2Dahboard')
-        .controller('EditFareController', EditFareController);
-     function EditFareController($scope, $uibModalInstance, DriverFare, RiderFare) {
-        $scope.drFare = DriverFare;
-        $scope.rdFare = RiderFare;
-        $scope.ok = function () {
-            $uibModalInstance.close($scope.selected.item);
-        };
 
-        $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-        }
-     }
+    }
+
+
 
 })();
 

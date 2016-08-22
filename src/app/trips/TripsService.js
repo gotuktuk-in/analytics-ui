@@ -47,7 +47,11 @@ function TripsService($q, $resource, API) {
                 method: 'GET',
                 url:   url + 'drivers/profile/:id',
                 isArray:false
-            }
+            },
+            updateFare: {
+                method: 'POST',
+                url:   url + 'trip/settled/:id'
+            },
 
         }
     );

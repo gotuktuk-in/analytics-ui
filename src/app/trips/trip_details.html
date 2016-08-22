@@ -1,11 +1,9 @@
 <style>
-    #driversMap {
-        height: 100% !important;
-        display: block !important;
-        width: 100% !important;
-        position: fixed !important;
-        overflow: hidden !important;
-        background-color: rgb(229, 227, 223);
+    .close-card {
+        position: relative;
+    }
+    .card-title {
+        background: #fff
     }
 </style>
 <div class="content">
@@ -25,8 +23,84 @@
             <!--</div>-->
         </ng-map>
 
-        <div class="tabs-view-2">
-            <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}" class="btn btn-default tabs-toggle-btn map-btn " title="Show More...">
+        <div class="card" ng-show="vm.editFareBox">
+            <div class="card-block">
+                <form class="form-inline">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                            <span class="fa fa-remove" ng-click="vm.closeEditFareModal()"  style="padding: 10px 0px;"></span>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <h4 style="margin-bottom: 20px;">Driver Fare (Rs. {{selectedTrip.driverFare}})</h4>
+                                <p class="help-block"></p>
+                            </div>
+                            <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                <div class="input-group ">
+                                    <select class="form-control" ng-change=""
+                                            ng-model="vm.selectedFareType"
+                                            ng-options="fareType.name for fareType  in  vm.fareTypeArr track by fareType.value">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-8 col-sm-8 col-xs-8">
+                                <div class="input-group " style="width: 100%;">
+                                    <input class="form-control" type="text" placeholder="Fare" name="inputFare"
+                                           ng-model="vm.inputFare">
+                                </div>
+                                <p class="help-block"></p>
+                            </div>
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                <div class="input-group">
+                                    <select class="form-control" ng-change=""
+                                            ng-model="vm.selectedReason"
+                                            ng-options="reason.name for reason  in  vm.reasonArr track by reason.value">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12" ng-if="vm.selectedReason.value==5">
+                                <div class="input-group" style="width: 100%;">
+                                    <div class="help-block text-center"> or</div>
+                                    <textarea class="form-control" placeholder="Reason" name="inputReason"
+                                              ng-model="vm.inputReason"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <hr>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <h4 style="margin-bottom: 20px;">Rider Fare (Rs. {{selectedTrip.riderFare}})</h4>
+                                <p class="help-block"></p>
+                            </div>
+                            <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                <div class="input-group" style="width: 100%;">
+                                    <input class="form-control" type="text" placeholder="Tcash" name="inputTcash"
+                                           ng-model="vm.inputTcash">
+                                </div>
+                                <p class="help-block"><br></p>
+                            </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <button type="button" class="btn btn-primary" ng-click="vm.editFare()">Save</button>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 text-right" style="line-height: 30px">
+                            <a class="text-right" href="javascript:void(0)" ng-click="vm.closeEditFareModal()">Cancel</a>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                    </form>
+            </div>
+            <!--/.Card content-->
+
+        </div>
+
+        <div class="tabs-view tabs-view-2">
+            <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}"
+                    class="btn btn-default tabs-toggle-btn map-btn " title="Show More...">
                 <i class="fa fa-angle-double-right"></i>
             </button>
 
@@ -43,7 +117,8 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yyyy 'at' hh:mm"}}</h4>
+                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yyyy 'at'
+                                            hh:mm"}}</h4>
                                         <span>date</span>
                                     </div>
                                 </div>
@@ -148,10 +223,11 @@
                                                 <!-- <span>Amount Total<small> / Cash / tCash</small></span> -->
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-sm-4 col-xs-12 pull-right">
+                                        <div class="col-md-4 col-sm-4 col-xs-12 pull-right"
+                                             ng-click="tabView = !tabView">
                                             <div class="box">
                                                 <h4 class="number">&nbsp;</h4>
-                                                <a href="javascript:void(0);" ng-click="openEditFareModal()">Edit</a>
+                                                <a href="javascript:void(0);" ng-click="vm.openEditFareModal()">Edit Fare</a>
                                             </div>
                                         </div>
                                     </div>
@@ -230,8 +306,10 @@
                     <uib-tab index="0" heading="Driver" ng-if="selectedTrip.driverInfo.id">
                         <div class="row tripInfo-driver-tab">
                             <div class="col-md-2 col-sm-12 col-xs-12 no-mr no-pd">
-                                <div class="box box-heading box-0 text-center" ng-class="{'box-online': selectedTrip.driverInfo.state== 22 || selectedTrip.driverInfo.state== 11, 'box-offline': selectedTrip.driverInfo.state== 10 } ">
-                                    <img ng-src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{selectedTrip.driverInfo.profileImage}}&container=focus&resize_w=75&resize_h=75&refresh=2592000" class="iw-driver" height="50">
+                                <div class="box box-heading box-0 text-center"
+                                     ng-class="{'box-online': selectedTrip.driverInfo.state== 22 || selectedTrip.driverInfo.state== 11, 'box-offline': selectedTrip.driverInfo.state== 10 } ">
+                                    <img ng-src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{selectedTrip.driverInfo.profileImage}}&container=focus&resize_w=75&resize_h=75&refresh=2592000"
+                                         class="iw-driver" height="50">
                                     <!--  <h4 class="title" style="margin-top:10px;">{{selectedTrip.driverInfo.name}}</h4> -->
                                 </div>
                             </div>
@@ -270,7 +348,8 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.driverInfo.joinedOn)*1000 | date:"MMM dd, yyyy"}} </h4>
+                                        <h4 class="number">{{(selectedTrip.driverInfo.joinedOn)*1000 | date:"MMM dd,
+                                            yyyy"}} </h4>
                                         <span>joined On</span>
                                     </div>
                                 </div>
@@ -372,18 +451,19 @@
     <div class="modal-header">
         <a class="pull-right cls-btn" href="javascript:void(0)" ng-click="cancel()">&#10005;
         </a>
+
         <h3 class="modal-title">Edit Fare</h3>
     </div>
     <div class="modal-body">
-        <div class="col-xs-8 col-xs-offset-2">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
-                <h3>Driver  Fare (<span>{{drFare}}</span>)</h3>
+                <h3>Driver Fare ({{drFare}})</h3>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="input-group">
                     <select class="form-control">
                         <option value="add">+</option>
-                        <option value="substract">-</option>                            
+                        <option value="substract">-</option>
                     </select>
                 </div>
             </div>
@@ -394,6 +474,23 @@
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="input-group">
+                    <!--<select class="form-control" ng-model="reason">-->
+                    <!--<option value="Extra Luggage">Extra Luggage</option>-->
+                    <!--<option value="Extra Passenger">Extra Passenger</option>-->
+                    <!--<option value="No change with the driver">No change with the driver</option>-->
+                    <!--<option value="Miscommunication between driver and rider">Miscommunication between driver and rider</option>-->
+                    <!--<option value="Misunderstood the bill">Misunderstood the bill</option>-->
+                    <!--<option value="Others">Others</option>-->
+                    <!--</select>-->
+                    <select ng-change=""
+                            ng-model="vm.selectedReason"
+                            ng-options="reason.name for reason  in  vm.reasonArr track by reason.value">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="input-group">{{reason}}
+                    <div class="help-block text-center"> or</div>
                     <textarea class="form-control" placeholder="Reason"></textarea>
                 </div>
             </div>
@@ -403,7 +500,7 @@
         </div>
         <div class="col-xs-8 col-xs-offset-2">
             <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
-                <h3>Rider  Fare (<span>{{rdFare}}</span>)</h3>
+                <h3>Rider Fare ({{rdFare}})</h3>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="input-group">

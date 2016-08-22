@@ -194,7 +194,7 @@
             counts: [],
             getData: function (params) {
                 // ajax request to api
-                var start = ((params.page() - 1) * 10) + 1;
+                var start = ((params.page() - 1) * 20) + 1;
                 console.log("**************************")
                 var dataObj = {}
                 dataObj.start = start;

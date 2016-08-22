@@ -29,8 +29,8 @@
             style="padding:5px 10px;">{{selectedCity.name}}</span>
         </li>
     </ul>
-    <ul class="nav nav-stacked role-base-navs">
-        <li ng-click="toggle = !toggle" ui-sref-active="active" ng-if="navsLister.navList.LIVE">
+    <ul class="nav nav-stacked role-base-navs" ng-click="toggle = !toggle">
+        <li  ui-sref-active="active" ng-if="navsLister.navList.LIVE">
             <a ui-sref="home.live({city: city,vehicleType: vehicleType})">
                 <span class="fa fa-heart"></span> Live
             </a>
@@ -51,7 +51,7 @@
                 <li>
                     <a ui-sref="home.demandsupply({city: city,vehicleType: vehicleType})">
                         <span class="fa fa-line-chart"></span>
-                        <strike>Demand / Supply</strike>
+                        Demand / Supply
                     </a>
                 </li>
             </ul>
