@@ -20,7 +20,7 @@
         vm.acquisitionChart.chart.xAxis.tickFormat = function (d) {
             return d3.time.format('%d %b %y')(new Date(d));
         };
-        $scope.date = moment().format("dddd, MMMM Do YYYY")
+        $scope.date = moment().format("ddd, MMM Do YYYY")
         $scope.datesForAcq = {}
         $scope.datesForAcq.startDate = moment().subtract(10, 'days').format("YYYY-MM-DD");
         $scope.datesForAcq.endDate = moment().format("YYYY-MM-DD");

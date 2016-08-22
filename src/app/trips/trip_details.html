@@ -15,7 +15,7 @@
             <!--</div>-->
         </ng-map>
 
-        <div class="tabs-view-2">
+        <div class="tabs-view tabs-view-2">
             <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}" class="btn btn-default tabs-toggle-btn map-btn " title="Show More...">
                 <i class="fa fa-angle-double-right"></i>
             </button>
@@ -367,7 +367,7 @@
     <div class="modal-body">
         <div class="col-xs-8 col-xs-offset-2">
             <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
-                <h3>Driver  Fare (<span>{{drFare}}</span>)</h3>
+                <h3>Driver  Fare ({{drFare}})</h3>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12">
                 <div class="input-group">
@@ -384,6 +384,23 @@
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="input-group">
+                    <!--<select class="form-control" ng-model="reason">-->
+                        <!--<option value="Extra Luggage">Extra Luggage</option>-->
+                        <!--<option value="Extra Passenger">Extra Passenger</option>-->
+                        <!--<option value="No change with the driver">No change with the driver</option>-->
+                        <!--<option value="Miscommunication between driver and rider">Miscommunication between driver and rider</option>-->
+                        <!--<option value="Misunderstood the bill">Misunderstood the bill</option>-->
+                        <!--<option value="Others">Others</option>-->
+                    <!--</select>-->
+                    <select ng-change=""
+                            ng-model="vm.selectedReason"
+                            ng-options="reason.name for reason  in  vm.reasonArr track by reason.value">
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="input-group">{{reason}}
+                    <div class="help-block text-center"> or </div>
                     <textarea class="form-control" placeholder="Reason"></textarea>
                 </div>
             </div>
@@ -393,7 +410,7 @@
         </div>
         <div class="col-xs-8 col-xs-offset-2">
             <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
-                <h3>Rider  Fare (<span>{{rdFare}}</span>)</h3>
+                <h3>Rider  Fare ({{rdFare}})</h3>
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="input-group">

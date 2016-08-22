@@ -10,7 +10,7 @@
         var vm = this;
         //range slider , Failed(2), Cancel(2), Success.
 
-        var today = moment()
+        var today = moment();
         var heatmap;
         vm.heatMapFilers = [{label: "In-Process", id: '20,22,30,40,50'}, {label: "Failed", id: '72,80,81,82'}, {
             label: "Cancel",
@@ -51,7 +51,7 @@
         $scope.ddSettings = {enableSearch: false};
         //range slider end
 
-        $scope.date = moment().format("dddd, MMMM Do YYYY")
+        $scope.date = moment().format("ddd, MMM Do YYYY")
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
         vm.newRidersChartOptions = angular.copy(ChartConfigService.multiBarChartOptions);

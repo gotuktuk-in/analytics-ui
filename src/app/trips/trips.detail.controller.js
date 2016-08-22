@@ -20,6 +20,15 @@
         vm.bidDr;
         vm.drID;
         vm.drID2;
+        vm.reasonArr = [
+            {name: "Extra Luggage", value: "Extra Luggage"},
+            {name: "Extra Passenger", value: "Extra Passenger"},
+            {name: "No change with the driver", value: "No change with the driver"},
+            {name: "Miscommunication between driver and rider", value: "Miscommunication between driver and rider"},
+            {name: "Misunderstood the bill", value: "Misunderstood the bill"},
+            {name: "Others", value: "Others"}
+        ];
+        vm.selectedReason= vm.reasonArr[0];
 
         /*vm.infowindows = new google.maps.InfoWindow({
          maxWidth: 320
@@ -78,7 +87,7 @@
                     vm.snapCodesFor = $scope.selectedTrip.forTripSnapCode;
                     vm.snapCodesIn = $scope.selectedTrip.inTripSnapCode;
                     //angular.element(document.querySelector('html')).toggleClass('left-arrow');
-                    //vm.initialize();
+                    vm.initialize();
                 }, function (err) {
                     console.log(err)
                     $scope.error = true;
@@ -188,7 +197,7 @@
 
                     contents[i] = '<div class="popup_container">'
                         //+ '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding">' + $scope.selectedTripBid[i].dr + '</h4><span>Id</span></div>'
-                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;"><a href="#/home/detail/'+$scope.selectedTripBid[i].dr+'">' + $scope.selectedTripBid[i].name + '</a></h4><span>Name</span></div>'
+                    + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;"><a href="#/home/detail/' + $scope.selectedTripBid[i].dr + '">' + $scope.selectedTripBid[i].name + '</a></h4><span>Name</span></div>'
                     + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;">' + $scope.bidConstants[$scope.selectedTripBid[i].bid] + '</h4><span>Bid</span><br></div>'
                     + '</div>';
 
@@ -292,30 +301,31 @@
 
         getDetails();
 
-        $scope.openEditFareModal = function(){
+        $scope.openEditFareModal = function () {
             var modalInstance = $uibModal.open({
-                animation : $scope.animationEnabled,
-                templateUrl : 'editFareModal.html',
-                controller : 'EditFareController',
-                windowClass : 'edit-fare-modal',
-                keyboard : false,
-                backdrop : 'static',
-                resolve : {
-                   DriverFare : function(){
-                    return $scope.selectedTrip.driverFare;
-                   },
-                   RiderFare : function(){
-                    return $scope.selectedTrip.riderFare;
-                   }
+                animation: $scope.animationEnabled,
+                templateUrl: 'editFareModal.html',
+                controller: 'EditFareController',
+                windowClass: 'edit-fare-modal',
+                keyboard: false,
+                backdrop: 'static',
+                resolve: {
+                    DriverFare: function () {
+                        return $scope.selectedTrip.driverFare;
+                    },
+                    RiderFare: function () {
+                        return $scope.selectedTrip.riderFare;
+                    }
                 }
-                
+
             })
         }
     }
+
     angular
         .module('tuktukV2Dahboard')
         .controller('EditFareController', EditFareController);
-     function EditFareController($scope, $uibModalInstance, DriverFare, RiderFare) {
+    function EditFareController($scope, $uibModalInstance, DriverFare, RiderFare) {
         $scope.drFare = DriverFare;
         $scope.rdFare = RiderFare;
         $scope.ok = function () {
@@ -325,7 +335,7 @@
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         }
-     }
+    }
 
 })();
 

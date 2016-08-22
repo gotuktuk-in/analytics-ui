@@ -863,6 +863,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     margin-left: 1px;
     border-radius: 0;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05);
+    max-height: 500px;
+    overflow: auto;
 }
 
 .tabs-view .tab-content {

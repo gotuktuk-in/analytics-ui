@@ -9,7 +9,7 @@
         var vm = this;
         vm.map;
         vm.show500 = false;
-        $scope.date = moment().format("dddd, MMMM Do YYYY");
+        $scope.date = moment().format("ddd, MMM Do YYYY");
         vm.geohashArray = [];
         vm.geohashGroups = [];
         vm.setting = {};
