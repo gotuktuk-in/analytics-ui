@@ -38,7 +38,7 @@
                             </div>
                             <div class="form-group col-md-4 col-sm-4 col-xs-4">
                                 <div class="input-group ">
-                                    <select class="form-control" ng-change=""
+                                    <select style="min-width: 80px" class="form-control" ng-change=""
                                             ng-model="vm.selectedFareType"
                                             ng-options="fareType.name for fareType  in  vm.fareTypeArr track by fareType.value">
                                     </select>
@@ -84,7 +84,7 @@
                             </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <button type="button" class="btn btn-primary" ng-click="vm.editFare()">Save</button>
+                            <button type="button" class="btn btn-primary" ng-click="vm.editFare()">Update</button>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6 text-right" style="line-height: 30px">
                             <a class="text-right" href="javascript:void(0)" ng-click="vm.closeEditFareModal()">Cancel</a>

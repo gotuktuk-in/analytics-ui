@@ -6,7 +6,7 @@
         .controller('TripDetailController', TripDetailController);
 
     /** @ngInject */
-    function TripDetailController($scope, $interval, $stateParams, TripsService, $rootScope, NgMap) {
+    function TripDetailController($scope, $interval, $stateParams, TripsService, $rootScope, NgMap, toastr) {
 
         var vm = this;
         $scope.showHide = true;
@@ -37,9 +37,9 @@
                 {name: "-", value: 1}
             ];
             vm.selectedFareType = vm.fareTypeArr[0];
-            vm.inputFare = '';
-            vm.inputReason = '';
-            vm.inputTcash = '';
+            vm.inputFare = 0;
+            vm.inputReason = 0;
+            vm.inputTcash = 0;
         };
 
         vm.renderEditForm();
@@ -58,7 +58,7 @@
                 vm.selectedReason.name = vm.inputReason;
             }
             if (vm.selectedFareType.value == 0) {
-                vm.selectedReasonNew = null;
+                vm.selectedReasonNew = '';
             } else {
                 vm.selectedReasonNew = '-';
             }
@@ -76,7 +76,7 @@
                     getDetails();
                     vm.renderEditForm();
                     vm.closeEditFareModal();
-                    toastr.success("edited.");
+                    toastr.success("edited");
                 }, function (error) {
                     if (error.status == 500) {
                         toastr.error("Permission Denied");
