@@ -33,7 +33,7 @@
         var hour = current.hour();
         var minute = current.minute();
         var newDate = new Date(year, month, date, hour);
-        var quarter = parseInt(minute / 15);
+        var quarter = parseInt(minute / 15) + 1 ;
         if (quarter == 0) {
             newDate = new Date(year, month, date, hour - 1);
             $scope.formatedDate = moment(newDate).format("YYYYMMDDHH") + 4;
