@@ -10,6 +10,10 @@
         word-wrap: break-word;
         max-width: 200px;
     }
+    .table-responsive.trip-detail-table {
+        max-width: 202px;
+        overflow: auto;
+    }
     .geo-hash-detail {
         float: right;
         position: relative;

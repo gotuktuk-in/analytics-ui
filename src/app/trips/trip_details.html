@@ -214,11 +214,35 @@
                                                 <!-- <span>Amount Total<small> / Cash / tCash</small></span> -->
                                             </div>
                                         </div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12" ng-if="selectedTrip.fareSettled.length>0">
+                                            <div class="table-responsive trip-detail-table">
+                                                <table ng-table="tableParams" class="table table-bordered">
+                                                    <tr class="truncate"
+                                                        ng-repeat="row in selectedTrip.fareSettled">
+                                                        <td data-title="'Date'" class="text-left">
+                                                            {{(row.updatedOn)*1000 | date:"dd.MM.yy h:mma"}}
+                                                        </td>
+                                                        <td data-title="'Driver Fare'"  class="text-right">
+                                                            {{row.driverChangeFare}}
+                                                        </td>
+                                                        <td data-title="'Reason'"  class="text-left">
+                                                            {{row.fareChangeReason}}
+                                                        </td>
+                                                        <td data-title="'Rider Cashback'"  class="text-right">
+                                                            {{row.riderCashback}}
+                                                        </td>
+                                                        <td data-title="'By'"  class="text-left">
+                                                            {{row.updatedBy}}
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    &nbsp;<br> &nbsp;
-                                    <hr style="margin:0">
+                                    <br><hr style="margin:0">
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">

@@ -130,8 +130,7 @@
 
         </select>
     </div>
-    <ng-map click id="bidMap" center="indore" style="width:100%; height:100%; position:fixed"
-    zoom="{{vm.selectedPrecision.value+8}}">
+    <ng-map click id="bidMap" center="indore" style="width:100%; height:100%; position:fixed" zoom="{{vm.selectedPrecision.value+7}}">
         <div>
             <marker ng-repeat="data in vm.data track by $index" title="{{data.id}}"
                     icon="{ url:'assets/images/icons/marker-green.svg', scaledSize:[30,30]}"
