@@ -106,17 +106,7 @@
                     window.alert('Geocoder failed due to: ' + status);
                 }
             });
-
-            //geocoder.geocode({'latLng': latlng}, function (results, status) {
-            //    if (status == google.maps.GeocoderStatus.OK) {
-            //        if (results[1]) {
-            //            vm.driver.address = results[1].formatted_address;
-            //        }
-            //    }
-            //});
-
             getProfile();
-            //vm.map.showInfoWindow('iw-drivers', index);
         };
 
         function getProfile() {

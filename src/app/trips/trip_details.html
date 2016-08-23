@@ -1,11 +1,3 @@
-<style>
-    .close-card {
-        position: relative;
-    }
-    .card-title {
-        background: #fff
-    }
-</style>
 <div class="content">
     <div class="row" style="z-index: 99; position: fixed; width: auto; padding: 20px 0; right: 20px">
         <div class="col-md-12 col-sm-12 col-xs-12" ng-if="showHide">
@@ -61,7 +53,7 @@
                             </div>
                             <div class="form-group col-md-12 col-sm-12 col-xs-12" ng-if="vm.selectedReason.value==5">
                                 <div class="input-group" style="width: 100%;">
-                                    <div class="help-block text-center"> or</div>
+                                    <p class="help-block text-center"></p>
                                     <textarea class="form-control" placeholder="Reason" name="inputReason"
                                               ng-model="vm.inputReason"></textarea>
                                 </div>
@@ -117,8 +109,7 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yyyy 'at'
-                                            hh:mm"}}</h4>
+                                        <h4 class="number">{{(selectedTrip.requestOn)*1000 | date:"MMM dd, yyyy 'at' hh:mm"}}</h4>
                                         <span>date</span>
                                     </div>
                                 </div>
@@ -190,7 +181,7 @@
                                 <div class="col-md-12 col-sm-12 col-xs-12">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
-                                            <h3>Amount</h3>
+                                            <h3>Amount ( <a class="pointer" ng-click="vm.openEditFareModal()">Edit Amount</a> ) </h3>
                                             <hr>
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -223,18 +214,35 @@
                                                 <!-- <span>Amount Total<small> / Cash / tCash</small></span> -->
                                             </div>
                                         </div>
-                                        <div class="col-md-4 col-sm-4 col-xs-12 pull-right"
-                                             ng-click="tabView = !tabView">
-                                            <div class="box">
-                                                <h4 class="number">&nbsp;</h4>
-                                                <a href="javascript:void(0);" ng-click="vm.openEditFareModal()">Edit Fare</a>
+                                        <div class="col-md-12 col-sm-12 col-xs-12" ng-if="selectedTrip.fareSettled.length>0">
+                                            <div class="table-responsive trip-detail-table">
+                                                <table ng-table="tableParams" class="table table-bordered">
+                                                    <tr class="truncate"
+                                                        ng-repeat="row in selectedTrip.fareSettled">
+                                                        <td data-title="'Date'" class="text-left">
+                                                            {{(row.updatedOn)*1000 | date:"dd.MM.yy h:mma"}}
+                                                        </td>
+                                                        <td data-title="'Driver Fare'"  class="text-right">
+                                                            {{row.driverChangeFare}}
+                                                        </td>
+                                                        <td data-title="'Reason'"  class="text-left">
+                                                            {{row.fareChangeReason}}
+                                                        </td>
+                                                        <td data-title="'Rider Cashback'"  class="text-right">
+                                                            {{row.riderCashback}}
+                                                        </td>
+                                                        <td data-title="'By'"  class="text-left">
+                                                            {{row.updatedBy}}
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    &nbsp;<br> &nbsp;
-                                    <hr style="margin:0">
+                                    <br><hr style="margin:0">
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
@@ -334,7 +342,7 @@
                                 </div>
                                 <div class="col-md-8 col-sm-12 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{selectedTrip.driverInfo.email ?
+                                        <h4 class="number email">{{selectedTrip.driverInfo.email ?
                                             selectedTrip.driverInfo.email:'-'}}
                                         </h4>
                                         <span>Email</span>
@@ -348,8 +356,7 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{(selectedTrip.driverInfo.joinedOn)*1000 | date:"MMM dd,
-                                            yyyy"}} </h4>
+                                        <h4 class="number">{{(selectedTrip.driverInfo.joinedOn)*1000 | date:"MMM dd, yyyy"}} </h4>
                                         <span>joined On</span>
                                     </div>
                                 </div>
@@ -405,7 +412,7 @@
                                 </div>
                                 <div class="col-md-12 col-sm-4 col-xs-12">
                                     <div class="box">
-                                        <h4 class="number">{{selectedTrip.riderInfo.email ?
+                                        <h4 class="number email">{{selectedTrip.riderInfo.email ?
                                             selectedTrip.riderInfo.email:'-'}}
                                         </h4>
                                         <span>Email</span>
@@ -447,72 +454,3 @@
         </div>
     </div>
 </div>
-<script type="text/ng-template" id="editFareModal.html">
-    <div class="modal-header">
-        <a class="pull-right cls-btn" href="javascript:void(0)" ng-click="cancel()">&#10005;
-        </a>
-
-        <h3 class="modal-title">Edit Fare</h3>
-    </div>
-    <div class="modal-body">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
-                <h3>Driver Fare ({{drFare}})</h3>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-12">
-                <div class="input-group">
-                    <select class="form-control">
-                        <option value="add">+</option>
-                        <option value="substract">-</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-9 col-sm-9 col-xs-12">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="">
-                </div>
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="input-group">
-                    <!--<select class="form-control" ng-model="reason">-->
-                    <!--<option value="Extra Luggage">Extra Luggage</option>-->
-                    <!--<option value="Extra Passenger">Extra Passenger</option>-->
-                    <!--<option value="No change with the driver">No change with the driver</option>-->
-                    <!--<option value="Miscommunication between driver and rider">Miscommunication between driver and rider</option>-->
-                    <!--<option value="Misunderstood the bill">Misunderstood the bill</option>-->
-                    <!--<option value="Others">Others</option>-->
-                    <!--</select>-->
-                    <select ng-change=""
-                            ng-model="vm.selectedReason"
-                            ng-options="reason.name for reason  in  vm.reasonArr track by reason.value">
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="input-group">{{reason}}
-                    <div class="help-block text-center"> or</div>
-                    <textarea class="form-control" placeholder="Reason"></textarea>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-10 col-xs-offset-1">
-            <hr>
-        </div>
-        <div class="col-xs-8 col-xs-offset-2">
-            <div class="col-md-12 col-sm-12 col-xs-12 heading-box1">
-                <h3>Rider Fare ({{rdFare}})</h3>
-            </div>
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Tcash">
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="modal-footer">
-        <a class="pull-right cancel-farechanges-btn" href="javascript:void(0)" ng-click="cancel()">Cancel</a>
-        <button type="button" class="btn btn-primary save-farechanges-btn" ng-click="ok()">Save</button>
-        <div class="clearfix"></div>
-    </div>
-</script>

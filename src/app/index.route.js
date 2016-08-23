@@ -29,7 +29,7 @@
                 controller: 'PerformanceController',
                 controllerAs: 'vm'
             })
-            .state('home.maps', {
+            /*.state('home.maps', {
                 url: '/maps/:city/:vehicleType',
                 templateUrl: 'app/maps/maps.html',
                 controller: 'MapsController',
@@ -38,6 +38,13 @@
             })
             .state('home.demandsupply', {
                 url: '/maps/demand-supply/:city/:vehicleType',
+                templateUrl: 'app/maps/demand-supply.html',
+                controller: 'DemandSupplyController',
+                controllerAs: 'vm',
+                cache: false
+            })*/
+            .state('home.map', {
+                url: '/maps/:city/:vehicleType',
                 templateUrl: 'app/maps/demand-supply.html',
                 controller: 'DemandSupplyController',
                 controllerAs: 'vm',
