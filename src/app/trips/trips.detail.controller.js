@@ -38,7 +38,7 @@
             ];
             vm.selectedFareType = vm.fareTypeArr[0];
             vm.inputFare = 0;
-            vm.inputReason = 0;
+            vm.inputReason = '';
             vm.inputTcash = 0;
         };
 
@@ -157,7 +157,7 @@
                 };
                 var myLatlng = new google.maps.LatLng(22.717081666666665, 75.87155666666666);
                 var myOptions = {
-                    zoom: 14,
+                    zoom: 13,
                     center: myLatlng,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
@@ -172,7 +172,7 @@
                     path: decodedPathFor,
                     //levels: decodedLevels,
                     strokeColor: "red",
-                    strokeOpacity: 1.0,
+                    strokeOpacity: 0.8,
                     strokeWeight: 3,
                     map: map
                 });
@@ -180,8 +180,8 @@
                     path: decodedPathIn,
                     //levels: decodedLevels,
                     strokeColor: "#8A87FC",
-                    strokeOpacity: 1.0,
-                    strokeWeight: 6,
+                    strokeOpacity: 0.8,
+                    strokeWeight: 3,
                     map: map
                 });
 

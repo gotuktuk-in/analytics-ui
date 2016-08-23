@@ -6,6 +6,10 @@
 }
 
 @media only screen and (max-width: 767px) {
+    .box h4.number.email {
+        word-wrap: break-word;
+        max-width: 200px;
+    }
     .geo-hash-detail {
         float: right;
         position: relative;
@@ -191,6 +195,10 @@
 }
 
 @media only screen and (max-width: 375px) {
+    .box h4.number.email {
+        word-wrap: break-word;
+        max-width: 200px;
+    }
     form {
         margin-bottom: 20px;
     }
@@ -251,6 +259,10 @@
 }
 
 @media only screen and (max-width: 320px) {
+    .box h4.number.email {
+        word-wrap: break-word;
+        max-width: 200px;
+    }
     form {
         margin-bottom: 20px;
     }
