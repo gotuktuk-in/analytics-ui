@@ -18,6 +18,7 @@
             }
         })();
 
+        $scope.dsGraph = false;
 
         var vm = this;
         vm.live = true;
@@ -35,7 +36,7 @@
         var hour = current.hour();
         var minute = current.minute();
         var newDate = new Date(year, month, date, hour);
-        var quarter = parseInt(minute / 15) + 1 ;
+        var quarter = parseInt(minute / 15) + 1;
         if (quarter == 0) {
             newDate = new Date(year, month, date, hour - 1);
             $scope.formatedDate = moment(newDate).format("YYYYMMDDHH") + 4;
@@ -46,6 +47,7 @@
         vm.precisionArr = [{name: "6", value: 6}, {name: "7", value: 7}];
         vm.selectedPrecision = vm.precisionArr[0];
         var defaultPrecesion = vm.selectedPrecision.value;
+
 
         vm.changeDate = function (to) {
             var newYear = $scope.formatedDate.substring(0, 4);
@@ -77,46 +79,22 @@
                 }
                 $scope.count--
             }
-            if ($scope.count<0){
+            if ($scope.count < 0) {
                 vm.live = false;
-            }else{
+            } else {
                 vm.live = true;
             }
             getDetail();
         };
 
-        NgMap.getMap({id: 'bidMap'}).then(function (map) {
-            vm.map = map;
-            google.maps.event.addDomListener(vm.map);
-
-            if (vm.map && vm.map.data) {
-                vm.map.data.forEach(function (feature) {
-                    vm.map.data.remove(feature);
-                });
-            }
-            map.data.setStyle({
-                fillColor: 'gray',
-                strokeWeight: 1,
-                strokeOpacity: .1,
-                fillOpacity: .1,
-                draggable: false,
-                editable: false
-            });
-            MapService.loadGeoJson({}, function (response) {
-                    vm.geoJSON = {};
-                    vm.geoJSON = response;
-                    vm.map.data.addGeoJson(vm.geoJSON);
-
-                }, function (error) {
-                    console.log("error ", error)
-                }
-            );
-        });
-
         vm.onPrecisionChange = function () {
             getDetail();
         };
+
         getAllDrivers();
+        getDetail();
+
+
         function getAllDrivers() {
             MapService.getAllDrivers({
                     city: $rootScope.city,
@@ -136,6 +114,7 @@
                 }
             )
         }
+
         vm.showDetail = function (e, driver, index) {
             vm.driver = driver;
             var lat = vm.driver.hash.boxBounds[0][0];
@@ -143,7 +122,7 @@
             var latlng = new google.maps.LatLng(lat, lng);
             var geocoder = new google.maps.Geocoder();
 
-            geocoder.geocode({'location': latlng}, function(results, status) {
+            geocoder.geocode({'location': latlng}, function (results, status) {
                 if (status === 'OK') {
                     if (results[1]) {
                         vm.driver.address = results[1].formatted_address;
@@ -159,7 +138,7 @@
 
         function getProfile() {
             MapService.getProfile({
-                id:vm.driver.id,
+                id: vm.driver.id,
                 from: moment($scope.startDate).startOf('day').format("YYYYMMDD").toString(),
                 to: moment($scope.endDate).endOf('day').format("YYYYMMDD").toString()
             }, function (response) {
@@ -171,6 +150,7 @@
                 $scope.error = true;
             });
         }
+
         vm.hideDetail = function () {
             vm.map.hideInfoWindow('iw-drivers');
         };
@@ -178,6 +158,7 @@
         vm.getAddress = function () {
             vm.map.hideInfoWindow('iw-drivers');
         };
+
         vm.showGeoHashDetail = function (e) {
             var currentGeoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
             vm.hashDetail = getGeoHashDetail(currentGeoHash);
@@ -217,17 +198,61 @@
                 _.each($scope.allHash, function (group) {
                     var newObj = group;
                     group.hash = getGeoHashObj(group.geo_hash);
-                    //group.color = genNewColor(group.rank);
-                    newObj.color = vm.colors[i];
                     i++;
                 });
+
             }, function (err) {
                 console.log(err);
                 $scope.error = true;
             });
         }
 
-        getDetail();
+        showGeofence();
+
+        function showGeofence() {
+
+            NgMap.getMap({id: 'bidMap'}).then(function (map) {
+                vm.map = map;
+                google.maps.event.addDomListener(vm.map);
+
+                if (vm.map && vm.map.data) {
+                    vm.map.data.forEach(function (feature) {
+                        vm.map.data.remove(feature);
+                    });
+                }
+                map.data.setStyle({
+                    fillColor: '#ccc',
+                    strokeWeight: 1,
+                    strokeOpacity: .1,
+                    fillOpacity: 0.2,
+                    draggable: false,
+                    editable: false,
+                    zIndex: -9999999
+                });
+                MapService.loadGeoJson({}, function (response) {
+                        vm.geoJSON = {};
+                        vm.geoJSON = response;
+                        vm.map.data.addGeoJson(vm.geoJSON);
+
+                    }, function (error) {
+                        console.log("error ", error)
+                    }
+                );
+            });
+
+        }
+
+        vm.showDSGraph = function () {
+            vm.hideCard();
+            $scope.dsGraph = true;
+            // demand supply graph function goes here
+        };
+        vm.hideDSGraph = function () {
+            $scope.dsGraph = false;
+        };
+        vm.hideCard = function () {
+            $(".card").hide();
+        };
 
         function getGeoHashObj(hash) {
             var obj = {};
@@ -236,8 +261,5 @@
             obj.boxBounds = [[bBox[0], bBox[1]], [bBox[2], bBox[3]]];
             return obj;
         }
-        $("#hide").click(function(){
-            $(".card").hide();
-        });
     }
 })();

@@ -14,6 +14,18 @@ body {
     -moz-osx-font-smoothing: auto;
 }
 
+.text-normal {
+    font-weight: 100
+}
+
+.text-bold {
+    font-weight: 600
+}
+
+.text-italic {
+    font-style: italic
+}
+
 .alert-container {
     background: #fff;
 }
@@ -48,7 +60,6 @@ input[type="radio"] {
     display: inline-block;
     position: relative;
     width: 100%;
-    /*padding-bottom: 100%; *//* aspect ratio */
     vertical-align: top;
     overflow: hidden;
 }
@@ -57,12 +68,6 @@ input[type="radio"] {
     pointer-events: none;
 }
 
-/*.ngdialog {*/
-/*z-index: 10000;*/
-/*width:100%;*/
-/*height:100%;*/
-/*background-color: rgba(0,0,0,0.5);*/
-/*}*/
 .ngdialog-close {
     position: absolute;
     right: 12px;
@@ -254,14 +259,12 @@ div.panel.panel-default div.panel-heading h4.title {
     width: 12px;
     z-index: 9999999;
 }
-
 .geo-hash-select {
     position: fixed;
-    right: 30px;
+    right: 9px;
     top: 12px;
-    z-index: 9999999;
+    z-index: 20;
 }
-
 .rzslider .rz-pointer.rz-active::after {
     background-color: #eee;
 }
@@ -1016,9 +1019,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     left: 28px;
     visibility: visible;
     z-index: 11;
-    /*max-width: 90%;*/
-    /*max-height: 600px;*/
-    /*overflow: hidden;*/
 }
 
 .tabs-toggle-btn {
@@ -1073,44 +1073,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     margin: 15px 0;
 }
 
-/*
-.ng-map-info-window {
-    width: 250px !important;
-} 
-.ng-map-info-window .gm-style-iw {
-    left: auto !important;
-    position: relative !important;
-    top: auto !important;
-    width: 238px !important;
-}
-
-
-.info-window .iw-header {
-    background-color: #373a3c;
-    height: 100px;
-    padding: 20px 10px;
-    text-align: center;
-}
-.info-window .iw-header h3 {
-    margin: 0px;
-    font-size: 20px;
-    color: #f6f6f6;
-    text-align: center;
-}
-/* 
-.info-window .iw-header .iw-driver {
-    border-radius: 100%;
-    height: 80px;
-    margin-top: 15px;
-    width: 80px;
-}
-.info-window .iw-content {
-    padding: 45px 0px 0px;
-    color: #5c5c5c;
-}
- */
-
-/* live */
 .navbar-fixed-top, .navbar-fixed-bottom {
     z-index: 12 !important;
 }
@@ -1527,13 +1489,6 @@ span.img-top {
     transition: all 0.1s ease;
 }
 
-/*.inpt-style input[type="radio"] + i:before { content: "\f10c"; }
-
-.inpt-style input[type="radio"]:checked + i:before { content: "\f111"; }
-
-.inpt-style input[type="radio"]:checked + i + span,
-.inpt-style input[type="radio"]:checked + i:before { color: rgba(0, 128, 128, 0.5); }*/
-
 .inpt-style input[type="radio"] + i:before {
     content: "\f096";
 }
@@ -1756,8 +1711,23 @@ span.img-top {
 .heading-box1 {
 }
 
+.ds-graph-div {
+    position: fixed;
+    height: 94%;
+    width: 100%;
+    z-index: 99999999;
+    background: rgba(255, 255, 255, 0.8);
+    top: 6%;
+}
+
+.close-ds-graph-div {
+    position: absolute;
+    top: 2%;
+    right: 1.5%;
+    cursor: pointer;
+}
+
 .cancelled-trip-quad1 h5 {
-    /*border-bottom: solid 1px rgba(51, 51, 51, 0.3);*/
     font-weight: 400;
     padding-bottom: 10px;
     text-align: center;
@@ -1771,27 +1741,20 @@ span.img-top {
     float: right;
     position: relative;
     z-index: 1111;
-    margin: 15px 100px 0 0;
+    margin: 17px 52px 0 0;
     font-size: 13px;
 }
 
 .geo-hash-detail span {
-    border-left: solid 1px #333;
-    padding: 0 10px;
+    padding: 0 5px;
     line-height: 22px;
     display: inline-block;
 }
+
 .geo-hash-detail span, .geo-hash-detail span b {
-    font-size: 18px !important;
-}
-.geo-hash-detail span:first-child {
-    border-left: 0
+    font-size: 14px !important;
 }
 
-/*.bid-driver-detail h4{px t-weight:400}
-.bid-driver-detail h4 + span{text-transform: uppercase;}
-.trip-in-detail-quad1, .trip-amount-detail-quad1{border-left:solid 1px rgba(153,153,153,0.5)}
-.trip-for-detail-quad1 h3, .trip-in-detail-quad1 h3, .trip-amount-detail-quad1 h3{margin-top:5px}*/
 .card {
     position: fixed;
     top: 54px;
@@ -1815,11 +1778,6 @@ span.img-top {
     width: 100%;
     height: 200px;
     overflow: hidden;
-    /*background: url("https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{vm.driver.profile.profileImage}}&container=focus&resize_w=200&resize_h=250&refresh=2592000"), url("assets/images/ajax-loader.gif");*/
-    /*background-color: #fff;*/
-    /*background-size: cover, 20px;*/
-    /*background-repeat: no-repeat;*/
-    /*background-position: center 20%;*/
 }
 
 .card-block {

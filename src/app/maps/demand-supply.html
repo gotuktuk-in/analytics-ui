@@ -24,6 +24,7 @@
         background-repeat: no-repeat;
         background-position: center 20%;
     }
+
     .close-card {
         position: absolute;
         right: 18px;
@@ -122,15 +123,18 @@
     <div class="geo-hash-detail" ng-if="vm.dsShow">
         <span>D: <b>{{vm.hashDetail.demand}}</b></span>
         <span>S: <b>{{vm.hashDetail.supply}}</b></span>
+        <span>|</span>
+        <span ng-click="vm.showDSGraph();">Show Graph</span>
     </div>
     <div class="geo-hash-select">
-        <select ng-change="vm.onPrecisionChange()" style="padding:5px 10px; border-radius: 4px;"
+        <select class="form-control" ng-change="vm.onPrecisionChange()" style="padding:5px 10px; border-radius: 4px;"
                 ng-model="vm.selectedPrecision"
                 ng-options="precision.name for precision  in  vm.precisionArr track by precision.value">
 
         </select>
     </div>
-    <ng-map click id="bidMap" center="indore" style="width:100%; height:100%; position:fixed" zoom="{{vm.selectedPrecision.value+7}}">
+    <ng-map click id="bidMap" center="indore" style="width:100%; height:100%; position:fixed"
+            zoom="{{vm.selectedPrecision.value+7}}">
         <div>
             <marker ng-repeat="data in vm.data track by $index" title="{{data.id}}"
                     icon="{ url:'assets/images/icons/marker-green.svg', scaledSize:[30,30]}"
@@ -139,8 +143,8 @@
                     position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}">
             </marker>
         </div>
-        <div ng-repeat="data in allHash" class="geo-hash-box">
-            <shape name="rectangle"
+        <div class="geo-hash-box">
+            <shape ng-repeat="data in allHash" name="rectangle"
                    editable="false"
                    draggable="false"
                    fill-color="#0000ff"
@@ -152,79 +156,60 @@
                    clickable="true" on-click="vm.showGeoHashDetail()">
             </shape>
         </div>
-
-        <!--<ng-map click id="bidMap" center="indore" style="width:100%; height:100%; position:fixed"-->
-        <!--zoom="13">-->
-
-        <!--<custom-marker class="custom-marker my1" ng-repeat="data in allHash" position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}"-->
-        <!--on-mouseover="mouseover()" on-mouseout="mouseout()"-->
-        <!--on-click="click()">-->
-        <!--<div class="my1">-->
-        <!--<div>D: {{data.demand}}, S: {{data.supply}}</div>-->
-        <!--</div>-->
-        <!--</custom-marker>-->
-
-        <!--<marker icon="{-->
-        <!--url:'assets/images/icons/marker-red.svg',-->
-        <!--scaledSize:[30,30]-->
-        <!--}" title="Demand: {{data.demand}}, Supply: {{data.supply}}" id="driver-{{$index}}"-->
-        <!--on-click="vm.map.showInfoWindow('iw-window', 'driver-'+$index)"-->
-        <!--position="{{(data.hash.boxBounds[0][0] + data.hash.boxBounds[1][0])/2}},{{(data.hash.boxBounds[0][1] + data.hash.boxBounds[1][1])/2}}">-->
-        <!--</marker>-->
-        <!--<info-window visible-on-marker="driver-{{$index}}" id="iw-window">-->
-        <!--<div ng-non-bindable>-->
-        <!--<div class="info-window">-->
-        <!--<div class="iw-wrapper">-->
-        <!--<div class="iw-content">-->
-        <!--Demand: {{data.demand}}<br>-->
-        <!--Supply: {{data.supply}}-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</info-window>-->
     </ng-map>
-    <div class="card" ng-show="vm.driver.profile">
-        <span class="fa fa-remove close-card" id="hide"></span>
+    <div class="ds-graph-div" ng-if="dsGraph">
+        <span ng-click="vm.hideDSGraph();" class="close-ds-graph-div"><i class="fa fa-remove"></i></span>
 
-        <!--Card image-->
-        <div class="view overlay hm-white-slight card-bg-img">
-            <!--<img image-on-load ng-src="{{vm.driver.profile.profileImage}}" class="img-fluid" alt="">-->
+        <div class="row" style="padding: 5%;">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 style="margin-top: 0" class="title">Demand Supply History</h4></div>
+                    <div class="panel-body">
+                        <div>
+                            <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!--/.Card image-->
 
-        <!--Card content-->
+    </div>
+    <div class="card" ng-show="vm.driver.profile">
+        <span class="fa fa-remove close-card" ng-click="vm.hideCard()"></span>
+
+        <div class="view overlay hm-white-slight card-bg-img">
+        </div>
         <div class="card-block">
-            <!--Title-->
             <h3 class="card-title">{{vm.driver.profile.name}}</h3>
-            <!--Text-->
-            <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+
             <div>
                 <table class="table">
                     <tbody>
                     <tr>
-                        <td class="text-center"><i class="fa fa-user"></i></td>
-                        <td>ID#</td>
+                        <!--<td class="text-center"><i class="fa fa-user"></i></td>-->
+                        <td class="text-bold" width="80">ID#</td>
                         <td>{{vm.driver.profile.id}}</td>
                     </tr>
                     <tr>
-                        <td class="text-center"><i class="fa fa-mobile-phone"></i></td>
-                        <td>Phone#</td>
+                        <!--<td class="text-center"><i class="fa fa-mobile-phone"></i></td>-->
+                        <td class="text-bold">Phone#</td>
                         <td>{{vm.driver.profile.phone}}</td>
                     </tr>
                     <tr>
-                        <td class="text-center"><i class="fa fa-taxi"></i></td>
-                        <td>Vehicle#</td>
+                        <!--<td class="text-center"><i class="fa fa-taxi"></i></td>-->
+                        <td class="text-bold">Vehicle#</td>
                         <td>{{vm.driver.profile.vehicle}}</td>
                     </tr>
                     <tr>
-                        <td class="text-center" width="10"><i class="fa fa-clock-o"></i></td>
-                        <td width="80">Time</td>
+                        <!--<td class="text-center" width="10"><i class="fa fa-clock-o"></i></td>-->
+                        <td class="text-bold">Time</td>
                         <td>{{vm.driver.time | date:'shortTime'}}</td>
                     </tr>
                     <tr>
-                        <td class="text-center"><i class="fa fa-map-marker"></i></td>
-                        <td>Location</td>
+                        <!--<td class="text-center"><i class="fa fa-map-marker"></i></td>-->
+                        <td class="text-bold">Location</td>
                         <td style="max-width:100px">
                             <span ng-if="vm.driver.address">{{vm.driver.address}}</span>
                         </td>
@@ -233,7 +218,6 @@
                 </table>
             </div>
         </div>
-        <!--/.Card content-->
 
     </div>
     <div class="tabs-view tabs-view-2">
@@ -245,25 +229,6 @@
             <uib-tabset active="active">
                 <uib-tab index="0" heading="Drivers">
                     <div class="row">
-                        <!--
-          <div class="col-md-4">
-                          <div class="pentagon total">
-                            <div class="text-center">
-                              <h4>Total</h4>
-                              <span>{{vm.allDrivers.total}}</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="col-md-6">
-                          <div class="pentagon occupied">
-                            <div class="text-center">
-                              <h4>Occupied</h4>
-                              <span>{{vm.allDrivers.occupied.total}}</span>
-                            </div>
-                          </div>
-                        </div>
-                         -->
                         <div class="col-md-12" style="min-height: 80px;">
                             <div class="pentagon available">
                                 <div class="text-center">
@@ -277,138 +242,4 @@
             </uib-tabset>
         </div>
     </div>
-    <!--<div class="row geo-fence-tbl" ng-if=" vm.groupCreation || vm.groupEdit">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="panel panel-default ">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title"><span class="pull-right"
-                                                                  ng-click="vm.onPrecisionChange()"><i
-                            aria-hidden="true" class="fa fa-plus"></i></span>Geo Hash</h4>
-                </div>
-                <div class="panel-body">
-                    <form role="form" class="form-horizontal" name="settingForm" novalidate>
-                        <div class="form-group time-picker">
-                            <label class="col-sm-3 control-label">Duration</label>
-
-                            <div class="col-sm-4">
-                                <uib-timepicker ng-model="vm.setting.startTime" ng-change="changed()"
-                                                hour-step="vm.hstep" minute-step="vm.mstep"
-                                                show-meridian="ismeridian"></uib-timepicker>
-                            </div>
-                            <div class="col-sm-4">
-                                <uib-timepicker ng-model="vm.setting.endTime" ng-change="changed()" hour-step="vm.hstep"
-                                                minute-step="vm.mstep" show-meridian="ismeridian"></uib-timepicker>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Geo Hash</label>
-
-                            <div class="col-sm-9">
-                                <div ng-if="vm.setting.geoHashArr.length>0">
-                                            <span ng-repeat="box in vm.setting.geoHashArr" class="label label-info">{{box.geoHash}}
-                                                &lt;!&ndash;<button class="label-btn" ng-click="vm.removeGeoHash($index)">&ndash;&gt;
-                                                &lt;!&ndash;x&ndash;&gt;
-                                            &lt;!&ndash;</button>&ndash;&gt;
-                                            </span>
-                                </div>
-                                <div ng-if="vm.setting.geoHashArr.length<=0">No geohash created</div>
-
-                                <p class="help-block"></p>
-                            </div>
-
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Type</label>
-
-                            <div class="col-md-9">
-                                <label class="radio-inline">
-                                    <input ng-model="vm.setting.type" type="radio" value="x" name="chargeType"
-                                           checked="checked" required>
-                                    x
-                                </label>
-                                <label class="radio-inline">
-                                    <input ng-model="vm.setting.type" type="radio" value="a" name="chargeType" required>
-                                    +
-                                </label>
-
-                                <p class="help-block"></p>
-
-                                <div ng-messages="settingForm.chargeType.$error"
-                                     ng-if="settingForm.chargeType.$touched">
-                                    <div ng-message="required">This field is required</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label" >Charge</label>
-
-                            <div class="col-sm-9">
-                                <input type="number" ng-model="vm.setting.value" placeholder="Charge" name="inputCharge"
-                                       class="form-control" required>
-
-                                <div ng-messages="settingForm.inputCharge.$error"
-                                     ng-if="settingForm.inputCharge.$touched">
-                                    <div ng-message="required">This field is required</div>
-                                </div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label" >Driver Value</label>
-
-                            <div class="col-sm-9">
-                                <input type="number" ng-model="vm.setting.driverValue" placeholder="Driver Value"
-                                       name="inputDriverValue" class="form-control" required>
-
-                                <div ng-messages="settingForm.inputDriverValue.$error"
-                                     ng-if="settingForm.inputDriverValue.$touched">
-                                    <div ng-message="required">This field is required</div>
-                                </div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label" >Group Name</label>
-
-                            <div class="col-sm-9">
-                                <input type="text" placeholder="Group Title" name="inputGroupTitle"
-                                       ng-model="vm.setting.groupTitle"
-                                       class="form-control" required>
-
-                                <div ng-messages="settingForm.inputGroupTitle.$error"
-                                     ng-if="settingForm.inputGroupTitle.$touched">
-                                    <div ng-message="required">This field is required</div>
-                                </div>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" ng-model="vm.setting.forceConfirm"
-                                               style="margin-top: 2px"> Force Confirm
-                                    </label>
-                                </div>
-                                <p class="help-block"></p>
-                                <button ng-click="vm.createSurge()"
-                                        ng-disabled="!vm.setting.geoHashArr.length>0 || settingForm.$invalid"
-                                        class="btn btn-success pull-left" type="submit">Save
-                                </button>
-                                <button ng-click="vm.removeGroup(vm.setting.groupId)"
-                                        ng-if="vm.setting.groupId"
-                                        class="btn btn-danger pull-right" type="button">Delete
-                                </button>
-
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>-->
 </div>
