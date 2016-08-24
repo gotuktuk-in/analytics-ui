@@ -60,21 +60,18 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             showYAxis: true,
             xAxis: {
                 tickSize: '10',
-                // axisLabel: 'Per Hour',
                 rotateLabels: '-90',
                 tickFormat: function (d) {
-                    //   return d3.time.format('%d %B %y')(new Date(d))
                     return d3.time.format('%d %b %I %p')(new Date(d))
                 },
 
                 showMaxMin: true,
                 staggerLabels: false,
-                axisLabelDistance: 0
+                axisLabelDistance: 10
             },
             x2Axis: {
                 axisLabel: 'Date',
                 tickFormat: function (d) {
-                    //   return d3.time.format('%d %B %y')(new Date(d))
                     return d3.time.format('%I %p')(new Date(d))
                 },
 
@@ -250,7 +247,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             y: function (d) {
                 return (d.value);
             },
-            valueFormat: function(d){
+            valueFormat: function (d) {
                 return d3.format(',.0f')(d);
             },
             showValues: true,
