@@ -2,7 +2,6 @@
     form {
         margin-bottom: 20px;
     }
-
 }
 
 @media only screen and (max-width: 767px) {
@@ -10,7 +9,9 @@
         word-wrap: break-word;
         max-width: 200px;
     }
-
+    .tripInfo-driver-tab .box.box-heading {
+        min-height: 128px;
+    }
     .close-ds-graph-div {
         top: 5%;
         right: 3%;

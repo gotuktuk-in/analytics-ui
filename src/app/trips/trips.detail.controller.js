@@ -6,7 +6,7 @@
         .controller('TripDetailController', TripDetailController);
 
     /** @ngInject */
-    function TripDetailController($scope, $interval, $stateParams, TripsService, $rootScope, NgMap, toastr) {
+    function TripDetailController($scope, $interval, $stateParams, TripsService, $rootScope, NgMap, toastr, $confirm) {
 
         var vm = this;
         $scope.showHide = true;
@@ -50,6 +50,18 @@
 
         vm.openEditFareModal = function () {
             vm.editFareBox = true;
+        };
+
+        $scope.confirmEdit = function () {
+            $confirm({
+                text: 'Are you sure want edit fare?',
+                title: 'Are you Sure?',
+                ok: 'Yes',
+                cancel: 'No'
+            })
+                .then(function () {
+                    vm.editFare();
+                });
         };
 
         vm.editFare = function () {
@@ -99,15 +111,15 @@
                     $scope.showHide = false;
                     vm.initialize()
                 }, function (err) {
-                    console.log(err)
+                    console.log(err);
                     $scope.error = true;
                 });
-        }
+        };
         vm.clearBid = function () {
             $scope.showHide = true;
             $scope.totalBid = [];
             vm.initialize();
-        }
+        };
 
         vm.getDriverDetail = function () {
             var z = vm.drID;
@@ -119,16 +131,16 @@
                     to: moment($scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString()
                 }, function (response) {
                     var detail = response;
-                    vm.infowindows.setContent(content)
+                    vm.infowindows.setContent(content);
                     console.log('$scope.detail', detail);
 
 
                 }, function (err) {
-                    console.log(err)
+                    console.log(err);
                     $scope.error = true;
                 }
             );
-        }
+        };
 
         function getDetails() {
 
@@ -142,7 +154,7 @@
                     //angular.element(document.querySelector('html')).toggleClass('left-arrow');
                     vm.initialize();
                 }, function (err) {
-                    console.log(err)
+                    console.log(err);
                     $scope.error = true;
                 });
 
@@ -154,7 +166,8 @@
                 function replaceAll(search, replacement) {
                     var target = this;
                     return target.split(search).join(replacement);
-                };
+                }
+
                 var myLatlng = new google.maps.LatLng(22.717081666666665, 75.87155666666666);
                 var myOptions = {
                     zoom: 13,
@@ -338,7 +351,7 @@
 
 
                 }
-            }
+            };
 
             //function decodeLevels(encodedLevelsString) {
             //    var decodedLevels = [];
@@ -356,7 +369,6 @@
 
 
     }
-
 
 
 })();
