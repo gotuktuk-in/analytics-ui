@@ -9,29 +9,29 @@
     function TripsController($scope, $interval, StaticDataService, ChartConfigService, PerformanceService, NgTableParams, $stateParams, TripsService, $rootScope, PerformanceHandler) {
 
         var vm = this;
-        var trips_heatmap
+        var trips_heatmap;
         var startDate, endDate;
-        vm.ranges = StaticDataService.ranges
+        vm.ranges = StaticDataService.ranges;
         $scope.tripDates = {};
-        $scope.tripDates.startDate = StaticDataService.ranges['Last 7 Days'][0]//moment().subtract(1, 'days').format("YYYY-MM-DD");
-        $scope.tripDates.endDate = StaticDataService.ranges['Last 7 Days'][1]//moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.tripDates.startDate = StaticDataService.ranges['Last 7 Days'][0]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.tripDates.endDate = StaticDataService.ranges['Last 7 Days'][1]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
 
         vm.timeFrequency = [{label: "Per Hour", value: "hour"}, {label: "Per Day", value: "day"}];
         vm.tripFrequency = {value: "day"};
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
         vm.tcashChartOptions = angular.copy(ChartConfigService.linePlusBarChartOptions);
-        vm.tcashChartOptions.chart.xAxis= {
+        vm.tcashChartOptions.chart.xAxis = {
             rotateLabels: '-90',
             axisLabel: '',
-                tickFormat: function(d) {
-                var dx =  vm.tcashData[0].values[d] &&  vm.tcashData[0].values[d].x || 0;
+            tickFormat: function (d) {
+                var dx = vm.tcashData[0].values[d] && vm.tcashData[0].values[d].x || 0;
                 if (dx > 0) {
                     return d3.time.format('%d %b %y')(new Date(dx))
                 }
                 return null;
             }
-        },
+        };
         vm.trips = [];
         vm.filterTerm = '';
         vm.filterFields = [{value: "id", name: "ID"},
@@ -41,26 +41,26 @@
             {value: "dvehicle", name: "Vehicle Number"},
             //      {value:"vehicleType",name:"Vehicle Type"},
             {value: "rname", name: "Rider Name"},
-            {value: "rphone", name: "Rider Phone"},
+            {value: "rphone", name: "Rider Phone"}
             /* {value:"pickUp",name:"Pick Up"},
              {value:"drop",name:"Drop"},
              {value:"amount",name:"Amount"},
              {value:"riderFeedbackRating",name:"Rider Feedback Rating "}*/
-        ]
-        vm.statusCodes = ''
+        ];
+        vm.statusCodes = '';
         vm.tripStatusFilters = [{name: 'All', value: "20,22,30,40,50,60,61,70,71,80,81,82"},
             {name: 'Fullfiled', value: "61"},
             {name: 'Cancelled ', value: '70,71'},
             {name: 'In Progress', value: '20,22,30,40,50,60'},
-            {name: 'Failed', value: '80,81,82'},
-        ]
+            {name: 'Failed', value: '80,81,82'}
+        ];
         vm.searchTable = function () {
             $scope.tableParams.reload()
-        }
+        };
         this.changeFrequency = function (section, freqModel) {
-            console.log("Frequency changed ", freqModel.value)
+            console.log("Frequency changed ", freqModel.value);
 
-            vm.tripChartOptions.chart.xAxis.axisLabel = freqModel
+            vm.tripChartOptions.chart.xAxis.axisLabel = freqModel;
             if (freqModel == 'hour') {
                 vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
                     return d3.time.format('%d %b %I %p')(new Date(d).addHours(1));
@@ -73,11 +73,11 @@
             }
             vm.getTrips()
 
-        }
+        };
         vm.onDateChange = function () {
-            vm.getTCash()
-            vm.getTrips()
-        }
+            vm.getTCash();
+            vm.getTrips();
+        };
         vm.getTCash = function () {
             TripsService.getTCash({
                 city: $rootScope.city,
@@ -86,69 +86,72 @@
                 vehicle: $rootScope.vehicleType
             }, {}, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
-                vm.tcashData = transformTCash(response).map(function(series) {
-                    series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });
+                vm.tcashData = transformTCash(response).map(function (series) {
+                    series.values = series.values.map(function (d) {
+                        return {x: d[0], y: d[1]}
+                    });
                     return series;
-                });;
+                });
                 console.log('response ', vm.tcashData)
             }, function (err) {
-                console.log(err)
+                console.log(err);
                 $scope.error = true;
             });
             //  $scope.tableParams.page(1)
             $scope.tableParams.reload();
         }
         function transformTCash(data) {
-            var transformed = []
+            var transformed = [];
             data = angular.fromJson(data);
-            var arr = ['tCash', 'Trip']
+            var arr = ['tCash', 'Trip'];
 
-            var newObj = {}
-            newObj.key = arr[0]
-            newObj.values = []
+            var newObj = {};
+            newObj.key = arr[0];
+            newObj.values = [];
             newObj.bar = true;
             for (var a = 0; a < data.length; a++) {
-                var x = moment(PerformanceHandler.getLongDate(data[a].date)).unix()*1000
-                newObj.values.push([x,data[a].tcash])
+                var x = moment(PerformanceHandler.getLongDate(data[a].date)).unix() * 1000;
+                newObj.values.push([x, data[a].tcash])
             }
             transformed.push(newObj);
 
-            var newObj = {}
-            newObj.key = arr[1]
-            newObj.values = []
+            var newObj = {};
+            newObj.key = arr[1];
+            newObj.values = [];
             for (var a = 0; a < data.length; a++) {
-                var x = moment(PerformanceHandler.getLongDate(data[a].date)).unix()*1000
+                var x = moment(PerformanceHandler.getLongDate(data[a].date)).unix() * 1000;
                 newObj.values.push([x, data[a].trip])
             }
             transformed.push(newObj);
 
             return transformed
         }
-       /* function transformTCash(data) {
-            var transformed = []
-            data = angular.fromJson(data);
-            var arr = ['tCash', 'Trip']
 
-            var newObj = {}
-            newObj.key = arr[0]
-            newObj.values = []
-            for (var a = 0; a < data.length; a++) {
-                var x = PerformanceHandler.getLongDate(data[a].date)
-                newObj.values.push({x: x, y: data[a].tcash})
-            }
-            transformed.push(newObj);
+        /* function transformTCash(data) {
+         var transformed = []
+         data = angular.fromJson(data);
+         var arr = ['tCash', 'Trip']
 
-            var newObj = {}
-            newObj.key = arr[1]
-            newObj.values = []
-            for (var a = 0; a < data.length; a++) {
-                var x = PerformanceHandler.getLongDate(data[a].date)
-                newObj.values.push({x: x, y: data[a].trip})
-            }
-            transformed.push(newObj);
+         var newObj = {}
+         newObj.key = arr[0]
+         newObj.values = []
+         for (var a = 0; a < data.length; a++) {
+         var x = PerformanceHandler.getLongDate(data[a].date)
+         newObj.values.push({x: x, y: data[a].tcash})
+         }
+         transformed.push(newObj);
 
-            return transformed
-        }*/
+         var newObj = {}
+         newObj.key = arr[1]
+         newObj.values = []
+         for (var a = 0; a < data.length; a++) {
+         var x = PerformanceHandler.getLongDate(data[a].date)
+         newObj.values.push({x: x, y: data[a].trip})
+         }
+         transformed.push(newObj);
+
+         return transformed
+         }*/
 
         vm.getTrips = function () {
             PerformanceService.getTrips({
@@ -160,18 +163,18 @@
                 rate: vm.tripFrequency.value
             }, {vehicle: $rootScope.vehicleType, frequency: vm.tripFrequency.value}, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
-                vm.trips = PerformanceHandler.getTrips(response[0].trip)
+                vm.trips = PerformanceHandler.getTrips(response[0].trip);
                 vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by rider)'}));
                 vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by driver)'}));
                 vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'tCash'}));
                 trips_heatmap = response[0].trip;
             }, function (err) {
-                console.log(err)
+                console.log(err);
                 $scope.error = true;
             });
-            $scope.tableParams.page(1)
+            $scope.tableParams.page(1);
             $scope.tableParams.reload();
-        }
+        };
         var sorting;
 
         function setDate() {
@@ -189,14 +192,14 @@
             else {
                 return '0'
             }
-        }
+        };
         $scope.tableParams = new NgTableParams({page: 1, count: 20}, {
             counts: [],
             getData: function (params) {
                 // ajax request to api
                 var start = ((params.page() - 1) * 20) + 1;
-                console.log("**************************")
-                var dataObj = {}
+                console.log("**************************");
+                var dataObj = {};
                 dataObj.start = start;
                 dataObj.count = params.count();
                 dataObj.startDate = moment($scope.tripDates.startDate).startOf('day').unix();
@@ -233,15 +236,15 @@
                 });
             }
         });
-        vm.onDateChange()
+        vm.onDateChange();
         //var interval = $interval(function () {
         //    vm.getTrips()
         //    $scope.tableParams.reload()
         //}, 30000)
         vm.refreshPage = function () {
-            vm.getTrips()
+            vm.getTrips();
             $scope.tableParams.reload()
-        }
+        };
         //$scope.$on('$destroy', function () {
         //    $interval.cancel(interval);
         //});
