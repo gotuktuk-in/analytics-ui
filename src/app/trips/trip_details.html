@@ -38,7 +38,7 @@
                             </div>
                             <div class="form-group col-md-8 col-sm-8 col-xs-8">
                                 <div class="input-group " style="width: 100%;">
-                                    <input class="form-control" type="text" placeholder="Fare" name="inputFare"
+                                    <input class="form-control" type="number" placeholder="Fare" name="inputFare"
                                            ng-model="vm.inputFare">
                                 </div>
                                 <p class="help-block"></p>
@@ -69,14 +69,14 @@
                             </div>
                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                 <div class="input-group" style="width: 100%;">
-                                    <input class="form-control" type="text" placeholder="Tcash" name="inputTcash"
+                                    <input class="form-control" type="number" placeholder="Tcash" name="inputTcash"
                                            ng-model="vm.inputTcash">
                                 </div>
                                 <p class="help-block"><br></p>
                             </div>
 
                         <div class="col-md-6 col-sm-6 col-xs-6">
-                            <button type="button" class="btn btn-primary" ng-click="vm.editFare()">Update</button>
+                            <button type="button" class="btn btn-primary" ng-click="confirmEdit()">Update</button>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6 text-right" style="line-height: 30px">
                             <a class="text-right" href="javascript:void(0)" ng-click="vm.closeEditFareModal()">Cancel</a>

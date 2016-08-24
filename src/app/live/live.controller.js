@@ -281,7 +281,7 @@
             }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
                 //  PerformanceHandler.trips = response[0].trip
                 vm.trips = PerformanceHandler.getTrips(response[0].trip)
-
+                console.log( vm.trips)
                 PerformanceService.getDrivers({
                     city: $rootScope.city,
                     startTime: moment(current).startOf('day'),

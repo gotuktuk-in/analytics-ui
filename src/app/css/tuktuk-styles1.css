@@ -2,7 +2,6 @@
     form {
         margin-bottom: 20px;
     }
-
 }
 
 @media only screen and (max-width: 767px) {
@@ -10,20 +9,30 @@
         word-wrap: break-word;
         max-width: 200px;
     }
+    .tripInfo-driver-tab .box.box-heading {
+        min-height: 128px;
+    }
+    .close-ds-graph-div {
+        top: 5%;
+        right: 3%;
+    }
+
     .table-responsive.trip-detail-table {
         max-width: 202px;
         overflow: auto;
     }
+
     .geo-hash-detail {
         float: right;
         position: relative;
         z-index: 1111;
-        margin: 15px 100px 0 0;
+        margin: 15px 79px 0 0;
         font-size: 13px;
         top: 39px;
         background: #fff;
         right: -69px;
     }
+
     .card {
         position: fixed;
         top: 54px;
@@ -32,11 +41,13 @@
         background: #fff;
         padding: 5px;
         width: 100%;
-        box-shadow: 0px 0px 40px rgba(0,0,0,0.1);
+        box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
         max-width: 400px;
         height: 100%;
         overflow: auto;
+        z-index: 999999;
     }
+
     .nav-tabs > li > a {
         padding: 10px;
     }
@@ -203,6 +214,7 @@
         word-wrap: break-word;
         max-width: 200px;
     }
+
     form {
         margin-bottom: 20px;
     }
@@ -267,6 +279,7 @@
         word-wrap: break-word;
         max-width: 200px;
     }
+
     form {
         margin-bottom: 20px;
     }
