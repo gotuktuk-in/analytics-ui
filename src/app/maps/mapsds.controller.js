@@ -5,7 +5,7 @@
         .module('tuktukV2Dahboard')
         .controller('DemandSupplyController', DemandSupplyController);
     /** @ngInject */
-    function DemandSupplyController($scope, $rootScope, NgMap, geohash, MapService, toastr, ngDialog, StaticDataService) {
+    function DemandSupplyController($scope, $rootScope, NgMap, geohash, MapService, toastr, ngDialog, DSHandler, ChartConfigService, StaticDataService) {
 
         (function () {
             if (window.localStorage) {
@@ -158,10 +158,11 @@
         vm.getAddress = function () {
             vm.map.hideInfoWindow('iw-drivers');
         };
-
+        vm.selectedGeohash = ''
         vm.showGeoHashDetail = function (e) {
             var currentGeoHash = geohash.encode(e.latLng.lat(), e.latLng.lng(), vm.selectedPrecision.value);
             vm.hashDetail = getGeoHashDetail(currentGeoHash);
+            vm.selectedGeohash = currentGeoHash
             vm.dsShow = true;
         };
 
@@ -241,10 +242,28 @@
             });
 
         }
+        vm.config = ChartConfigService.lineChartConfig;
+        vm.dsGraphOptions = angular.copy(ChartConfigService.lineChartOptions);
+        vm.dsGraphOptions.chart.xAxis.tickFormat = function (d) {
+            return d3.time.format('%I %p')(new Date(d));
+        };
 
+        vm.dsGraphData = [];
         vm.showDSGraph = function () {
             vm.hideCard();
             $scope.dsGraph = true;
+
+            MapService.getDemandSupplyHistory({geohash: vm.selectedGeohash,
+                    fromTime: moment(newDate).format("YYYYMMDD") + '000',
+                    toTime:  moment(newDate).format("YYYYMMDD") + '234'
+                }, function (response) {
+                    vm.dsGraphData = DSHandler.getDS(response)
+                    console.log(vm.dsGraphData)
+                    vm.dsGraphOptions.chart.xAxis.axisLabel =  vm.selectedGeohash + "("+response.title+ ")"
+                }, function (error) {
+                    console.log("error ", error)
+                }
+            );
             // demand supply graph function goes here
         };
         vm.hideDSGraph = function () {

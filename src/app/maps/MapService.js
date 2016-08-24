@@ -16,7 +16,7 @@ function MapService($q, $resource, API, AUTH_API) {
     var url = API;
     return $resource(
         "",
-        {id: "@id", precision: "@precision"},
+        {id: "@id", precision: "@precision", geohash:'@geohash'},
         {
             getDrivers: {
                 method: 'GET',
@@ -62,11 +62,17 @@ function MapService($q, $resource, API, AUTH_API) {
                 url: url + 'supply/demand/indore/auto/:precision',
                 isArray: true
             },
+            getDemandSupplyHistory: {
+                method: 'GET',
+                url: url + 'supply/demand/geohash/:geohash',
+                isArray: false
+            },
             getGroups: {
                 method: 'GET',
                 url: url + 'surge/group/',
                 isArray: true
             }
+
         }
     );
 }
