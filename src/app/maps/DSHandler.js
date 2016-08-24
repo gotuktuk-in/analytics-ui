@@ -59,8 +59,9 @@ function DSHandler() {
         var month = dateString.substring(4, 6);
         var day = dateString.substring(6, 8);
         var hour = dateString.substring(8, 10);
+        var minutes = (dateString.substring(10, 11)-1) * 15;
 
-        var newDate = new Date(year, month - 1, day, hour);
+        var newDate = new Date(year, month - 1, day, hour, minutes);
         return newDate
         //  return moment().unix(newDate)
 

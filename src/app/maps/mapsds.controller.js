@@ -245,8 +245,9 @@
         vm.config = ChartConfigService.lineChartConfig;
         vm.dsGraphOptions = angular.copy(ChartConfigService.lineChartOptions);
         vm.dsGraphOptions.chart.xAxis.tickFormat = function (d) {
-            return d3.time.format('%I %p')(new Date(d));
+            return d3.time.format('%H:%M')(new Date(d));
         };
+        vm.dsGraphOptions.chart.height = 600;
 
         vm.dsGraphData = [];
         vm.showDSGraph = function () {
