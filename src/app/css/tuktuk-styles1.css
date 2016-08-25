@@ -12,10 +12,10 @@
     .tripInfo-driver-tab .box.box-heading {
         min-height: 128px;
     }
-    .close-ds-graph-div {
-        top: 5%;
-        right: 3%;
-    }
+    /*.close-ds-graph-div {*/
+        /*top: 5%;*/
+        /*right: 3%;*/
+    /*}*/
 
     .table-responsive.trip-detail-table {
         max-width: 202px;
@@ -25,7 +25,7 @@
     .geo-hash-detail {
         float: right;
         position: relative;
-        z-index: 1111;
+        z-index: 90;
         margin: 15px 79px 0 0;
         font-size: 13px;
         top: 39px;
