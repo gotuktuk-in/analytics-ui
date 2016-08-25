@@ -22,13 +22,14 @@
 
         var vm = this;
         vm.live = true;
+        vm.liveDS = true;
         $scope.count = 0;
         vm.map;
         vm.dsShow = false;
         vm.allHash;
         var Geohash = {};
-
-        $scope.date = moment().format("YYYYMMDDhmm");
+        var today = moment();
+        $scope.date =  moment().format("ddd, MMM Do YYYY")
         var current = moment();
         var year = current.year();
         var month = current.month();
@@ -87,7 +88,27 @@
             }
             getDetail();
         };
+        vm.changeDateDS = function (to) {
 
+            if (to == 'next') {
+                current = moment(current).add(1, 'day')
+                $scope.date = moment(current).format("dddd, MMMM Do YYYY")
+
+            }
+            else {
+                current = moment(current).subtract(1, 'day')
+                $scope.date = moment(current).format("dddd, MMMM Do YYYY")
+
+                console.log('$scope.date ', $scope.date)
+            }
+            if (moment(current).unix() == moment(today).unix()) {
+                vm.liveDS = true;
+            }
+            else {
+                vm.liveDS = false;
+            }
+            vm.showDSGraph()
+        }
         vm.onPrecisionChange = function () {
             getDetail();
         };
@@ -256,8 +277,8 @@
             $scope.dsGraph = true;
 
             MapService.getDemandSupplyHistory({geohash: vm.selectedGeohash,
-                    fromTime: moment(newDate).format("YYYYMMDD") + '000',
-                    toTime:  moment(newDate).format("YYYYMMDD") + '234'
+                    fromTime: moment(current).format("YYYYMMDD") + '000',
+                    toTime:  moment(current).format("YYYYMMDD") + '234'
                 }, function (response) {
                     vm.dsGraphData = DSHandler.getDS(response);
                     console.log(vm.dsGraphData);
