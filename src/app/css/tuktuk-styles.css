@@ -1,6 +1,7 @@
 * {
     outline: none !important;
     font-size: 12px;
+    text-decoration: none;
 }
 
 body {
@@ -13,6 +14,7 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
 }
+a, a:hover, a:active, a:visited{text-decoration: none;}
 
 .text-normal {
     font-weight: 100
@@ -1718,14 +1720,15 @@ span.img-top {
     z-index: 99;
     background: rgba(255, 255, 255, 0.8);
     top: 54px;
+    overflow: auto;
 }
 
-.close-ds-graph-div {
-    position: absolute;
-    top: 2%;
-    right: 1.5%;
-    cursor: pointer;
-}
+/*.close-ds-graph-div {*/
+    /*position: absolute;*/
+    /*top: 2%;*/
+    /*right: 1.5%;*/
+    /*cursor: pointer;*/
+/*}*/
 
 .cancelled-trip-quad1 h5 {
     font-weight: 400;
@@ -1738,13 +1741,21 @@ span.img-top {
 }
 
 .geo-hash-detail {
-    float: right;
-    position: relative;
-    z-index: 1111;
-    margin: 17px 79px 0 0;
+    float: none;
+    position: fixed;
+    z-index: 90;
+    margin: 15px 44%;
     font-size: 13px;
 }
-
+.trip-state {
+    position: fixed;
+    z-index: 90;
+    margin: 18px 0;
+    font-size: 13px;
+    text-align: center;
+    width: 88%;
+    left: 38px;
+}
 .geo-hash-detail span {
     padding: 0 5px;
     line-height: 22px;

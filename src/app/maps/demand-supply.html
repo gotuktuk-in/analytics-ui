@@ -124,7 +124,7 @@
         <span>D: <b>{{vm.hashDetail.demand}}</b></span>
         <span>S: <b>{{vm.hashDetail.supply}}</b></span>
         <span>|</span>
-        <span ng-click="vm.showDSGraph();">Show Graph</span>
+        <span ng-click="vm.showDSGraph();">History</span>
     </div>
     <div class="geo-hash-select">
         <select class="form-control" ng-change="vm.onPrecisionChange()" style="padding:5px 10px; border-radius: 4px;"
@@ -158,16 +158,25 @@
         </div>
     </ng-map>
     <div class="ds-graph-div" ng-if="dsGraph">
-        <span ng-click="vm.hideDSGraph();" class="close-ds-graph-div"><i class="fa fa-remove"></i></span>
-
         <div class="row" style="padding:5% 10%;">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h4 style="margin-top: 0" class="title">Demand Supply History</h4></div>
+                        <span ng-click="vm.hideDSGraph();" class="close-ds-graph-div pull-right"><i class="fa fa-remove"></i></span>
+                        <h4 style="margin-top: 0" class="title">History</h4></div>
                     <div class="panel-body">
                         <div>
-                            <nvd3 options="vm.dsGraphOptions" data="vm.dsGraphData" config="vm.config"></nvd3>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                    <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span>
+            <span class="text-center" ng-model="date"
+                  style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
+                                        ng-click="vm.changeDate('next')" ng-if="!vm.live"
+                                        style="display: inline-block; padding: 7px;">&#10095;</span>
+                                </div>
+                            </div>
+                            <nvd3 options="vm.dsGraphOptions" data="vm.dsGraphData" config="vm.config" height="50%"></nvd3>
+                            <div class="text-center" style="padding: 10px 0"><h3 class="no-mr">{{vm.axisGeohash}}</h3><span ng-if="vm.axisTitle1">{{vm.axisTitle1}}</span><span ng-if="vm.axisTitle2"><br>{{vm.axisTitle2}}</span></div>
                         </div>
                         </a>
                     </div>

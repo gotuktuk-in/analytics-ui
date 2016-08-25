@@ -50,6 +50,7 @@
 
 
         vm.changeDate = function (to) {
+            $scope.dsGraph = false;
             var newYear = $scope.formatedDate.substring(0, 4);
             var newMonth = $scope.formatedDate.substring(4, 6);
             var newDay = $scope.formatedDate.substring(6, 8);
@@ -247,7 +248,7 @@
         vm.dsGraphOptions.chart.xAxis.tickFormat = function (d) {
             return d3.time.format('%H:%M')(new Date(d));
         };
-        vm.dsGraphOptions.chart.height = 600;
+        //vm.dsGraphOptions.chart.height = 400;
 
         vm.dsGraphData = [];
         vm.showDSGraph = function () {
@@ -258,9 +259,12 @@
                     fromTime: moment(newDate).format("YYYYMMDD") + '000',
                     toTime:  moment(newDate).format("YYYYMMDD") + '234'
                 }, function (response) {
-                    vm.dsGraphData = DSHandler.getDS(response)
-                    console.log(vm.dsGraphData)
-                    vm.dsGraphOptions.chart.xAxis.axisLabel =  vm.selectedGeohash + "("+response.title+ ")"
+                    vm.dsGraphData = DSHandler.getDS(response);
+                    console.log(vm.dsGraphData);
+                    vm.dsGraphOptions.chart.xAxis.axisLabel =  '';
+                    vm.axisGeohash =  vm.selectedGeohash;
+                    vm.axisTitle1=  response.title;
+                    vm.axisTitle2=  response.subTitle;
                 }, function (error) {
                     console.log("error ", error)
                 }
