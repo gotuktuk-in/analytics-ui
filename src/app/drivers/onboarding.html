@@ -1,249 +1,488 @@
 <style>
+
     body {
         background: #fff !important;
+    }
+
+    .nav-tabs > li > a {
+        background: none !important;
+    }
+
+    .nav-tabs {
+        background: #f9f9f9 !important;
+    }
+
+    label {
+        text-transform: uppercase;
+    }
+
+    @media only screen and (max-width: 375px) {
+        .alert-tabs-view .nav-tabs > li {
+            margin: 0 8px;
+        }
     }
 </style>
 <div class="container-fluid">
     <br>
     <br>
     <br>
-    <br><br>
+    <br>
 
+    <!--<div class="row">-->
+    <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+    <!--<h4 class="text-center">DRIVER ONBOARDING</h4>-->
+    <!--</div>-->
+    <!--</div>-->
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <h3 style="margin:0 0 20px" class="title text-center">DRIVER ONBOARDING</h3>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <form role="form" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputEmail3">Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" placeholder="Email" id="inputEmail3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
+        <div class="col-md-7 col-sm-12 col-xs-12">
+            <div class="tabs-view alert-tabs-view">
+                <uib-tabset active="active">
+                    <uib-tab index="0" heading="Basic">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Profile Photo</label><br>
+                                            <label class="btn btn-default pd-2-5">
+                                                <span class="fa fa-plus"></span> Add Image<input type="file"
+                                                                                                 style="display: none;">
+                                            </label>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputPassword3">Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" placeholder="Password" id="inputPassword3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="firstName">First Name</label>
+                                            <input type="text" class="form-control" id="firstName"
+                                                   placeholder="First Name"
+                                                   autocomplete="off">
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="exampleInputFile">File</label>
-                        <div class="col-sm-9">
-                            <input type="file" id="exampleInputFile">
-                            <p class="help-block">Example block-level help text here.</p>
-                        </div>
-                    </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="lastName">Last Name</label>
+                                            <input type="text" class="form-control" id="lastName"
+                                                   placeholder="Last Name"
+                                                   autocomplete="off">
 
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Active
-                                </label>
-                            </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <br>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Choices</label>
-                        <div class="col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" checked="" value="option1" id="optionsCheckbox1" name="optionsRadios">
-                                    Option one is this and that&mdash;be sure to include why it's great
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="option2" id="optionsCheckbox2" name="optionsRadios">
-                                    Option two can be something else and selecting it will deselect option one
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="gender">Gender</label>
+                                            <select class="form-control" id="gender">
+                                                <option label="Male" value="Male" selected>Male</option>
+                                                <option label="Female" value="Female">Female</option>
+                                            </select>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Sex</label>
-                        <div class="col-sm-9">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">
-                                    Male
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios">
-                                    Female
-                                </label>
-                            </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="DOB">DOB</label>
 
-                    <button class="btn btn-default pull-right" type="submit">Create User</button>
-                </form>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <form role="form" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputEmail3">Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" placeholder="Email" id="inputEmail3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
+                                            <div class='input-group date' id='DOB'>
+                                                <input type='text' class="form-control"
+                                                       style="border-radius: 4px 0px 0px 4px !important;"
+                                                       value="1980-01-01">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="bloodGroup">Blood Group</label>
+                                            <select class="form-control" id="bloodGroup">
+                                                <option label="O+" value="O+">O+</option>
+                                                <option label="O-" value="O-">O-</option>
+                                                <option label="A+" value="A+">A+</option>
+                                                <option label="A-" value="A-">A-</option>
+                                                <option label="B+" value="B+">B+</option>
+                                                <option label="B-" value="B-">B-</option>
+                                                <option label="AB+" value="AB+">AB+</option>
+                                                <option label="AB-" value="AB-">AB-</option>
+                                            </select>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputPassword3">Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" placeholder="Password" id="inputPassword3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="exampleInputFile">File</label>
-                        <div class="col-sm-9">
-                            <input type="file" id="exampleInputFile">
-                            <p class="help-block">Example block-level help text here.</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Active
-                                </label>
-                            </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Choices</label>
-                        <div class="col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" checked="" value="option1" id="optionsCheckbox1" name="optionsRadios">
-                                    Option one is this and that&mdash;be sure to include why it's great
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="option2" id="optionsCheckbox2" name="optionsRadios">
-                                    Option two can be something else and selecting it will deselect option one
-                                </label>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </div>
+                    </uib-tab>
+                    <uib-tab index="1" heading="Bank">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="accountHolder">Account Holder's
+                                                Name</label>
+                                            <input type="text" class="form-control" id="accountHolder"
+                                                   placeholder="Account Holder's Name"
+                                                   autocomplete="off">
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Sex</label>
-                        <div class="col-sm-9">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">
-                                    Male
-                                </label>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="accountNumber">Account Number</label>
+                                            <input type="text" class="form-control" id="accountNumber"
+                                                   placeholder="Account Number"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="bankName">Bank's Name</label>
+                                            <input type="text" class="form-control" id="bankName"
+                                                   placeholder="Bank's Name"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="ifscCode">IFSC Code</label>
+                                            <input type="text" class="form-control" id="ifscCode"
+                                                   placeholder="IFSC Code"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
                             </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios">
-                                    Female
-                                </label>
+
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="1" heading="Contact">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="mobileNumber">Mobile Number</label>
+                                            <input type="text" class="form-control" id="mobileNumber"
+                                                   placeholder="Mobile Number"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="mobileNumberAlt">Alternate Number</label>
+                                            <input type="text" class="form-control" id="mobileNumberAlt"
+                                                   placeholder="Alternate Number"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="addressOne">Address 1</label>
+                                            <input type="text" class="form-control" id="addressOne"
+                                                   placeholder="Address 1"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="addressTwo">Address 2</label>
+                                            <input type="text" class="form-control" id="addressTwo"
+                                                   placeholder="Address 2"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="city">City</label>
+                                            <input type="text" class="form-control" id="city"
+                                                   placeholder="City"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="state">State</label>
+                                            <input type="text" class="form-control" id="state"
+                                                   placeholder="State"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="pin">PIN</label>
+                                            <input type="text" class="form-control" id="pin"
+                                                   placeholder="PIN"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
                             </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
 
-                    <button class="btn btn-default pull-right" type="submit">Create User</button>
-                </form>
-            </div>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <form role="form" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputEmail3">Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" placeholder="Email" id="inputEmail3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
                         </div>
-                    </div>
+                    </uib-tab>
+                    <uib-tab index="2" heading="Vehicle">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="type">Type</label>
+                                            <select class="form-control" id="type">
+                                                <option label="Auto" value="Auto" selected>Auto</option>
+                                                <option label="Bike" value="Bike">Bike</option>
+                                            </select>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputPassword3">Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" placeholder="Password" id="inputPassword3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="vehicleNumber">Vehicle Number</label>
+                                            <input type="text" class="form-control" id="vehicleNumber"
+                                                   placeholder="Vehicle Number"
+                                                   autocomplete="off">
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="exampleInputFile">File</label>
-                        <div class="col-sm-9">
-                            <input type="file" id="exampleInputFile">
-                            <p class="help-block">Example block-level help text here.</p>
-                        </div>
-                    </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="ownership">Ownership</label>
+                                            <select class="form-control" id="ownership">
+                                                <option label="Self Owned" value="Self Owned" selected>Self Owned
+                                                </option>
+                                                <option label="Rented" value="Rented">Rented</option>
+                                            </select>
 
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Active
-                                </label>
-                            </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Choices</label>
-                        <div class="col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" checked="" value="option1" id="optionsCheckbox1" name="optionsRadios">
-                                    Option one is this and that&mdash;be sure to include why it's great
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="option2" id="optionsCheckbox2" name="optionsRadios">
-                                    Option two can be something else and selecting it will deselect option one
-                                </label>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">1073</label><br>
+                                            <label class="btn btn-default pd-2-5">
+                                                <span class="fa fa-plus"></span> Add Image<input type="file"
+                                                                                                 style="display: none;">
+                                            </label>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </div>
+                    </uib-tab>
+                    <uib-tab index="2" heading="License">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="licenseNumber">License Number</label>
+                                            <input type="text" class="form-control" id="licenseNumber"
+                                                   placeholder="Driving License"
+                                                   autocomplete="off">
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Sex</label>
-                        <div class="col-sm-9">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">
-                                    Male
-                                </label>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dlType">Type</label>
+                                            <select class="form-control" id="dlType">
+                                                <option label="Light Vehicle" value="Light Vehicle" selected>Light
+                                                    Vehicle
+                                                </option>
+                                                <option label="Heavy Vehicle" value="Heavy Vehicle">Heavy Vehicle
+                                                </option>
+                                                <option label="Other" value="Other">Other</option>
+                                            </select>
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="expiryDate">Expiry</label>
+
+                                            <div class='input-group date' id='expiryDate'>
+                                                <input type='text' class="form-control"
+                                                       style="border-radius: 4px 0px 0px 4px !important;"
+                                                       value="1980-01-01">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
                             </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios">
-                                    Female
-                                </label>
-                            </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
                         </div>
-                    </div>
+                    </uib-tab>
+                    <uib-tab index="2" heading="Identity">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">1073</label><br>
+                                            <label class="btn btn-default pd-2-5">
+                                                <span class="fa fa-plus"></span> Add Image<input type="file"
+                                                                                                 style="display: none;">
+                                            </label>
 
-                    <button class="btn btn-default pull-right" type="submit">Create User</button>
-                </form>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="identityType">Identity Type</label>
+                                            <select class="form-control" id="identityType">
+                                                <option label="Voter ID" value="Voter ID" selected>Voter ID</option>
+                                                <option label="Aadhar Card" value="Aadhar Card">Aadhar Card</option>
+                                            </select>
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="2" heading="Device">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="ownership">Ownership</label>
+                                            <select class="form-control" id="ownership">
+                                                <option label="Self" value="Self" selected>Self</option>
+                                                <option label="TukTuk" value="TukTuk">TukTuk</option>
+                                            </select>
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="model">Model</label>
+                                            <input type="text" class="form-control" id="model"
+                                                   placeholder="Model"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="make">Make</label>
+                                            <input type="text" class="form-control" id="make"
+                                                   placeholder="Make"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="imei">IMEI</label>
+                                            <input type="text" class="form-control" id="imei"
+                                                   placeholder="IMEI"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="2" heading="Others">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form>
+                                    <div class="col-md-12 col-sm-12  col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="comments">Comments</label>
+                                                <textarea class="form-control" id="comments"
+                                                          placeholder="comments" rows="10"></textarea>
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-success" name="submit" type="submit" value="Register">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
             </div>
 
         </div>
+        <div class="col-md-5 col-sm-12 col-xs-12"></div>
     </div>
 </div>

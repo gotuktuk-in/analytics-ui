@@ -919,6 +919,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     text-transform: uppercase;
     font-size: 14px;
     padding: 15px 5px;
+    border-bottom: 2px solid transparent;
 }
 
 .alert-tabs-view .tab-content {
@@ -1104,6 +1105,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .border {
     border: 1px solid #eee !important;
 }
+.no-border {
+    border: none !important;
+    box-shadow: none !important;
+}
 
 .no-lt-bdr {
     border-left: none !important;
@@ -1151,6 +1156,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 .pd-10 {
     padding: 10px !important;
+}
+.pd-2-5 {
+    padding:2px 5px !important;
 }
 
 .no-mr-lt {
