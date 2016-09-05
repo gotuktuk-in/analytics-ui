@@ -27,20 +27,33 @@
     <br>
     <br>
     <br>
-
-    <!--<div class="row">-->
-    <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
-    <!--<h4 class="text-center">DRIVER ONBOARDING</h4>-->
-    <!--</div>-->
-    <!--</div>-->
+    <br>
     <div class="row">
-        <div class="col-md-7 col-sm-12 col-xs-12">
+        <div class="col-md-2 col-sm-12 col-xs-12"></div>
+        <div class="col-md-8 col-sm-12 col-xs-12">
+            <h3> &nbsp; &nbsp;DRIVER ONBOARDING</h3>
+            <br>
             <div class="tabs-view alert-tabs-view">
                 <uib-tabset active="active">
                     <uib-tab index="0" heading="Basic">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <form>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="mobileNumber">Mobile Number</label>
+                                            <input type="text" class="form-control" id="mobileNumber"
+                                                   placeholder="Mobile Number"
+                                                   autocomplete="off">
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="mobileNumber">Mobile Number</label>
+                                            <input class="form-control btn btn-default btn-sm" name="submit" type="button" value="Verify">
+                                        </div>
+                                    </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Profile Photo</label><br>
@@ -74,7 +87,7 @@
                                     </div>
                                     <br>
 
-                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="gender">Gender</label>
                                             <select class="form-control" id="gender">
@@ -85,7 +98,7 @@
                                             <p class="help-block"><br></p>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="DOB">DOB</label>
 
@@ -100,7 +113,7 @@
                                             <p class="help-block"><br></p>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="bloodGroup">Blood Group</label>
                                             <select class="form-control" id="bloodGroup">
@@ -114,85 +127,7 @@
                                                 <option label="AB-" value="AB-">AB-</option>
                                             </select>
 
-                                            <p class="help-block"><br></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
-                                        <hr>
-                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </uib-tab>
-                    <uib-tab index="1" heading="Bank">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <form>
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label class="control-label" for="accountHolder">Account Holder's
-                                                Name</label>
-                                            <input type="text" class="form-control" id="accountHolder"
-                                                   placeholder="Account Holder's Name"
-                                                   autocomplete="off">
-
-                                            <p class="help-block"><br></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label class="control-label" for="accountNumber">Account Number</label>
-                                            <input type="text" class="form-control" id="accountNumber"
-                                                   placeholder="Account Number"
-                                                   autocomplete="off">
-
-                                            <p class="help-block"><br></p>
-                                        </div>
-                                    </div>
-                                    <br>
-
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label class="control-label" for="bankName">Bank's Name</label>
-                                            <input type="text" class="form-control" id="bankName"
-                                                   placeholder="Bank's Name"
-                                                   autocomplete="off">
-
-                                            <p class="help-block"><br></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label class="control-label" for="ifscCode">IFSC Code</label>
-                                            <input type="text" class="form-control" id="ifscCode"
-                                                   placeholder="IFSC Code"
-                                                   autocomplete="off">
-
-                                            <p class="help-block"><br></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
-                                        <hr>
-                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
-                                    </div>
-                                </form>
-                            </div>
-
-                        </div>
-                    </uib-tab>
-                    <uib-tab index="1" heading="Contact">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <form>
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label class="control-label" for="mobileNumber">Mobile Number</label>
-                                            <input type="text" class="form-control" id="mobileNumber"
-                                                   placeholder="Mobile Number"
-                                                   autocomplete="off">
-
-                                            <p class="help-block"><br></p>
+                                            <p class="help-block"><br><br><br></p>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-12 col-xs-12">
@@ -261,13 +196,177 @@
                                     </div>
                                 </form>
                             </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="1" heading="Bank">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="accountHolder">Account Holder's
+                                                Name</label>
+                                            <input type="text" class="form-control" id="accountHolder"
+                                                   placeholder="Account Holder's Name"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="accountNumber">Account Number</label>
+                                            <input type="text" class="form-control" id="accountNumber"
+                                                   placeholder="Account Number"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="bankName">Bank's Name</label>
+                                            <input type="text" class="form-control" id="bankName"
+                                                   placeholder="Bank's Name"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="ifscCode">IFSC Code</label>
+                                            <input type="text" class="form-control" id="ifscCode"
+                                                   placeholder="IFSC Code"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
+                            </div>
 
                         </div>
                     </uib-tab>
+                    <!--<uib-tab index="1" heading="Contact">-->
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+                                <!--<form>-->
+                                    <!--<div class="col-md-6 col-sm-12 col-xs-12">-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="control-label" for="mobileNumber">Mobile Number</label>-->
+                                            <!--<input type="text" class="form-control" id="mobileNumber"-->
+                                                   <!--placeholder="Mobile Number"-->
+                                                   <!--autocomplete="off">-->
+
+                                            <!--<p class="help-block"><br></p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-6 col-sm-12 col-xs-12">-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="control-label" for="mobileNumberAlt">Alternate Number</label>-->
+                                            <!--<input type="text" class="form-control" id="mobileNumberAlt"-->
+                                                   <!--placeholder="Alternate Number"-->
+                                                   <!--autocomplete="off">-->
+
+                                            <!--<p class="help-block"><br></p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-6 col-sm-12 col-xs-12">-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="control-label" for="addressOne">Address 1</label>-->
+                                            <!--<input type="text" class="form-control" id="addressOne"-->
+                                                   <!--placeholder="Address 1"-->
+                                                   <!--autocomplete="off">-->
+
+                                            <!--<p class="help-block"><br></p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-6 col-sm-12 col-xs-12">-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="control-label" for="addressTwo">Address 2</label>-->
+                                            <!--<input type="text" class="form-control" id="addressTwo"-->
+                                                   <!--placeholder="Address 2"-->
+                                                   <!--autocomplete="off">-->
+
+                                            <!--<p class="help-block"><br></p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-6 col-sm-12 col-xs-12">-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="control-label" for="city">City</label>-->
+                                            <!--<input type="text" class="form-control" id="city"-->
+                                                   <!--placeholder="City"-->
+                                                   <!--autocomplete="off">-->
+
+                                            <!--<p class="help-block"><br></p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-6 col-sm-12 col-xs-12">-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="control-label" for="state">State</label>-->
+                                            <!--<input type="text" class="form-control" id="state"-->
+                                                   <!--placeholder="State"-->
+                                                   <!--autocomplete="off">-->
+
+                                            <!--<p class="help-block"><br></p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-6 col-sm-12 col-xs-12">-->
+                                        <!--<div class="form-group">-->
+                                            <!--<label class="control-label" for="pin">PIN</label>-->
+                                            <!--<input type="text" class="form-control" id="pin"-->
+                                                   <!--placeholder="PIN"-->
+                                                   <!--autocomplete="off">-->
+
+                                            <!--<p class="help-block"><br></p>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-12 col-sm-12 col-xs-12 text-right">-->
+                                        <!--<hr>-->
+                                        <!--<input class="btn btn-primary" name="submit" type="submit" value="Save & Next">-->
+                                    <!--</div>-->
+                                <!--</form>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</uib-tab>-->
                     <uib-tab index="2" heading="Vehicle">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <form>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">1073</label><br>
+                                            <label class="btn btn-default pd-2-5">
+                                                <span class="fa fa-plus"></span> Add Image<input type="file"
+                                                                                                 style="display: none;">
+                                            </label>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="expiryDate">Expiry</label>
+
+                                            <div class='input-group date' id='expiryDate'>
+                                                <input type='text' class="form-control"
+                                                       style="border-radius: 4px 0px 0px 4px !important;"
+                                                       value="1980-01-01">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12"></div>
                                     <div class="col-md-4 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="type">Type</label>
@@ -292,25 +391,36 @@
                                     <div class="col-md-4 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="ownership">Ownership</label>
-                                            <select class="form-control" id="ownership">
-                                                <option label="Self Owned" value="Self Owned" selected>Self Owned
-                                                </option>
-                                                <option label="Rented" value="Rented">Rented</option>
+                                            <select class="form-control" id="ownership" ng-model="vm.selectedOwnership"
+                                                    ng-options="ownership.name for ownership  in  vm.ownershipArr track by ownership.value">
                                             </select>
 
                                             <p class="help-block"><br></p>
                                         </div>
                                     </div>
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label class="control-label">1073</label><br>
-                                            <label class="btn btn-default pd-2-5">
-                                                <span class="fa fa-plus"></span> Add Image<input type="file"
-                                                                                                 style="display: none;">
-                                            </label>
-                                            <p class="help-block"><br></p>
+                                    <div ng-if="vm.selectedOwnership.value==1">
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label" for="type">Owner Name</label>
+                                                <input type="text" class="form-control" id="ownerName"
+                                                       placeholder="Owner Name"
+                                                       autocomplete="off">
+
+                                                <p class="help-block"><br></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-12 col-xs-12">
+                                            <div class="form-group">
+                                                <label class="control-label" for="vehicleNumber">Owner's Phone Number</label>
+                                                <input type="text" class="form-control" id="ownerPhoneNumber"
+                                                       placeholder="Owner's Phone Number"
+                                                       autocomplete="off">
+
+                                                <p class="help-block"><br></p>
+                                            </div>
                                         </div>
                                     </div>
+
                                     <div class="col-md-12 col-sm-12 col-xs-12 text-right">
                                         <hr>
                                         <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
@@ -377,7 +487,7 @@
                                 <form>
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <label class="control-label">1073</label><br>
+                                            <label class="control-label">ID Scan Copy</label><br>
                                             <label class="btn btn-default pd-2-5">
                                                 <span class="fa fa-plus"></span> Add Image<input type="file"
                                                                                                  style="display: none;">
@@ -411,8 +521,8 @@
                                 <form>
                                     <div class="col-md-4 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <label class="control-label" for="ownership">Ownership</label>
-                                            <select class="form-control" id="ownership">
+                                            <label class="control-label" for="ownershipDevice">Ownership</label>
+                                            <select class="form-control" id="ownershipDevice">
                                                 <option label="Self" value="Self" selected>Self</option>
                                                 <option label="TukTuk" value="TukTuk">TukTuk</option>
                                             </select>
@@ -483,6 +593,6 @@
             </div>
 
         </div>
-        <div class="col-md-5 col-sm-12 col-xs-12"></div>
+        <div class="col-md-2 col-sm-12 col-xs-12"></div>
     </div>
 </div>

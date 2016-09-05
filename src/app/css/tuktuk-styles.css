@@ -330,6 +330,12 @@ div.panel.panel-default div.panel-heading h4.title {
     height: 18px;
     width: 20px;
 }
+.add-driver {
+    position: fixed;
+    right: 40px;
+    top: 17px;
+    z-index: 999999999 !important;
+}
 
 .reload {
     position: fixed;
