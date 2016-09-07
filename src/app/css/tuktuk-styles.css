@@ -336,7 +336,11 @@ div.panel.panel-default div.panel-heading h4.title {
     top: 17px;
     z-index: 999999999 !important;
 }
-
+.btn.btn-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
 .reload {
     position: fixed;
     right: 15px;
@@ -1736,6 +1740,17 @@ span.img-top {
     top: 54px;
     overflow: auto;
 }
+.add-vehicle-div {
+    position: fixed;
+    height: 95%;
+    width: 100%;
+    z-index: 99;
+    background: rgba(255, 255, 255, 0.8);
+    top: 54px;
+    overflow: auto;
+}
+
+
 
 /*.close-ds-graph-div {*/
     /*position: absolute;*/

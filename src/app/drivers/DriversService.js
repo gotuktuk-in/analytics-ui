@@ -16,7 +16,7 @@ function DriversService($q, $resource, API) {
   var url = API;
     return $resource(
         "",
-        {id:"@id"},
+        {id:"@id", mobile:"@mobile"},
         {
             getTopDrivers: {
                 method: 'GET',
@@ -38,6 +38,11 @@ function DriversService($q, $resource, API) {
                 url:   url + 'drivers/:id/trips',
                 isArray:false
             },
+            verifyDriver: {
+                method: 'GET',
+                url:   url + 'drivers/:mobile/',
+                isArray:false
+            }
 
 
         }
