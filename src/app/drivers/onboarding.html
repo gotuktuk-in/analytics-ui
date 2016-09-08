@@ -130,6 +130,7 @@
                                         <div class="form-group">
                                             <label class="control-label" for="gender">Gender</label>
                                             <select class="form-control"  ng-model="vm.basic.gender" name="gender" required="required">
+                                                <option value="" disabled>Select</option>
                                                 <option label="Male" value="Male" selected>Male</option>
                                                 <option label="Female" value="Female">Female</option>
                                             </select>
@@ -150,6 +151,7 @@
                                             <label class="control-label" for="bloodGroup">Blood Group</label>
                                             <select class="form-control" ng-model="vm.basic.bloodGroup" name="bloodGroup"
                                                     required="required">
+                                                <option value="" disabled>Select</option>
                                                 <option label="O+" value="O+">O+</option>
                                                 <option label="O-" value="O-">O-</option>
                                                 <option label="A+" value="A+">A+</option>
@@ -178,9 +180,11 @@
                                             <div class='input-group date' name="DOB">
                                                 <input type='text' class="form-control"  ng-model="vm.basic.dob"
                                                        style="border-radius: 4px 0px 0px 4px !important;"
-                                                       value="1980-01-01" required="required">
+                                                       value="1980-01-01" required="required" ng-click="vm.openCalender()"
+                                                       uib-datepicker-popup="dd-MMMM-yyyy" min-date="vm.calender.minDate"
+                                                       is-open="vm.calender.opened">
                                         <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
+                                            <span class="glyphicon glyphicon-calendar" ng-click="vm.openCalender()"></span>
                                         </span>
                                             </div>
                                             <div ng-messages="stopForm.stopDownTime.$error"
@@ -413,7 +417,7 @@
                     <uib-tab index="1" heading="Bank">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                <form name="bankForm" novalidate="novalidate">
+                                <form name="bankForm" novalidate>
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Account Holder's

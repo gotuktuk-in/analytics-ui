@@ -21,7 +21,7 @@ function OnboardingService($q, $resource, API) {
             saveDriverInfo: {
                 method: 'POST',
                 url:   url + 'drivers/BasicInfo',
-                isArray:true
+                isArray:false
             },
             getDriverInfo: {
                 method: 'GET',

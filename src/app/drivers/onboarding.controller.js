@@ -11,13 +11,20 @@
         var vm = this;
         vm.countryCode = 91;
         vm.basic = {}
+        vm.basic.dob = new Date()
         vm.bank = {}
         vm.vehicle = {}
         vm.licence = {}
         vm.identity = {}
         vm.device = {}
         vm.others = {}
-
+        vm.calender = {}
+        vm.calender.opened = false
+        vm.calender.minDate = new Date()
+        vm.openCalender = function()
+        {
+            vm.calender.opened = true
+        }
         vm.verifyDriver = function () {
             OnboardingService.verifyDriver({},{phone: "+"+vm.countryCode + '' + vm.basic.phone}, function (response) {
                 vm.basic = response.basic_info;
@@ -28,6 +35,7 @@
         vm.SaveBasicInfo = function () {
             OnboardingService.saveDriverInfo( vm.basic, function (response) {
                 toastr.success(response)
+                vm.driveId = response.id
             }, function (err) {
               toastr.error(err)
             });
