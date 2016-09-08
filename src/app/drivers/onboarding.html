@@ -41,7 +41,7 @@
                                 <form name="basicForm" novalidate="novalidate">
                                     <div class="col-md-2 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <input type="number" class="form-control" name="countryCodeVerify"
+                                            <input type="text" class="form-control" name="countryCodeVerify"
                                                    placeholder="Country Code" ng-model="vm.countryCodeVerify" disabled
                                                    required="required">
 
@@ -50,9 +50,10 @@
                                     </div>
                                     <div class="col-md-4 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <input type="number" class="form-control" name="mobileNumberVerify"
+                                            <input type="text" class="form-control"  name="mobileNumberVerify" ng-model="vm.mobile" placeholder="Enter Mobile Number">
+                                            <!--<input type="text" class="form-control" name="mobileNumberVerify"
                                                    placeholder="Enter Mobile Number" ng-model="vm.mobileNumber"
-                                                   autocomplete="off" required="required">
+                                                   autocomplete="off" required="required">-->
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-12 col-xs-12">
@@ -86,9 +87,9 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="firstName">First Name</label>
-                                            <input type="text" class="form-control" id="firstName" name="firstName"
-                                                   placeholder="First Name"
-                                                   autocomplete="off" required="required">
+                                            <input type="text" class="form-control" name="firstName"
+                                                   placeholder="First Name" model="vm.basic.firstName"
+                                                   required="required">
 
                                             <div ng-messages="stopForm.stopDownTime.$error"
                                                  ng-show="stopForm.stopDownTime.$touched" role="alert">
@@ -104,7 +105,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="lastName">Last Name</label>
-                                            <input type="text" class="form-control" id="lastName" name="lastName"
+                                            <input type="text" class="form-control"  model="vm.basic.lastName" name="lastName"
                                                    placeholder="Last Name"
                                                    autocomplete="off" required="required">
 
@@ -124,7 +125,7 @@
                                     <div class="col-md-3 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="gender">Gender</label>
-                                            <select class="form-control" id="gender" name="gender" required="required">
+                                            <select class="form-control"  model="vm.basic.gender" name="gender" required="required">
                                                 <option label="Male" value="Male" selected>Male</option>
                                                 <option label="Female" value="Female">Female</option>
                                             </select>
@@ -143,7 +144,7 @@
                                     <div class="col-md-3 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="bloodGroup">Blood Group</label>
-                                            <select class="form-control" id="bloodGroup" name="bloodGroup"
+                                            <select class="form-control" model="vm.basic.bloodGroup" name="bloodGroup"
                                                     required="required">
                                                 <option label="O+" value="O+">O+</option>
                                                 <option label="O-" value="O-">O-</option>
@@ -170,8 +171,8 @@
                                         <div class="form-group">
                                             <label class="control-label" for="DOB">DOB</label>
 
-                                            <div class='input-group date' id="DOB" name="DOB">
-                                                <input type='text' class="form-control"
+                                            <div class='input-group date' name="DOB">
+                                                <input type='text' class="form-control"  model="vm.basic.dob"
                                                        style="border-radius: 4px 0px 0px 4px !important;"
                                                        value="1980-01-01" required="required">
                                         <span class="input-group-addon">
@@ -193,7 +194,7 @@
                                     <div class="col-md-2 col-sm-12 col-xs-12">
                                         <div class="form-group disabled">
                                             <label class="control-label" for="countryCode">Country Code</label>
-                                            <input type="number" class="form-control " id="countryCode"
+                                            <input type="number" class="form-control "
                                                    name="countryCode"
                                                    placeholder="Country Code" ng-model="vm.countryCode"
                                                    autocomplete="off" disabled required="required">
@@ -212,9 +213,9 @@
                                     <div class="col-md-4 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="mobileNumber">Mobile Number</label>
-                                            <input type="number" class="form-control" id="mobileNumber"
-                                                   name="mobileNumber"
-                                                   placeholder="Mobile Number" ng-model="vm.mobileNumber"
+                                            <input type="text" class="form-control"
+                                                   name="primary"
+                                                   placeholder="Primary Mobile Number" ng-model="vm.basic.contacts.primary"
                                                    autocomplete="off" required="required">
 
                                             <div ng-messages="stopForm.stopDownTime.$error"
@@ -243,8 +244,8 @@
                                         <div class="form-group">
                                             <label class="control-label" for="mobileNumberAlt">Alternate Mobile
                                                 Number</label>
-                                            <input type="number" class="form-control" id="mobileNumberAlt"
-                                                   name="mobileNumberAlt"
+                                            <input type="text" class="form-control" ng-model="vm.basic.contacts.alternate"
+                                                   name="alternate"
                                                    placeholder="Alternate Mobile Number"
                                                    autocomplete="off">
 
@@ -254,7 +255,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="emailID">Email ID</label>
-                                            <input type="email" class="form-control" id="emailID" name="emailID"
+                                            <input type="email" class="form-control" model="vm.basic.emailID" name="emailID"
                                                    placeholder="Email ID"
                                                    autocomplete="off" required="required">
 
@@ -272,7 +273,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="addressOne">Address 1</label>
-                                            <input type="text" class="form-control" id="addressOne" name="addressOne"
+                                            <input type="text" class="form-control" model="vm.basic.address.address.line1" name="addressOne"
                                                    placeholder="Address 1"
                                                    autocomplete="off" required="required">
 
@@ -290,7 +291,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="addressTwo">Address 2</label>
-                                            <input type="text" class="form-control" id="addressTwo" name="addressTwo"
+                                            <input type="text" class="form-control"  model="vm.basic.address.address.line2" name="addressTwo"
                                                    placeholder="Address 2"
                                                    autocomplete="off">
 
@@ -300,7 +301,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="city">City</label>
-                                            <input type="text" class="form-control" id="city" name="city"
+                                            <input type="text" class="form-control" model="vm.basic.address.address.city" name="city"
                                                    placeholder="City"
                                                    autocomplete="off" required="required">
 
@@ -318,7 +319,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="state">State</label>
-                                            <input type="text" class="form-control" id="state" name="state"
+                                            <input type="text" class="form-control" model="vm.basic.address.address.state" name="state"
                                                    placeholder="State"
                                                    autocomplete="off" required="required">
 
