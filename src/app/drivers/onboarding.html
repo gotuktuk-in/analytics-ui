@@ -51,9 +51,7 @@
                                     <div class="col-md-4 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <input type="text" class="form-control"  name="mobileNumberVerify" ng-model="vm.mobile" placeholder="Enter Mobile Number">
-                                            <!--<input type="text" class="form-control" name="mobileNumberVerify"
-                                                   placeholder="Enter Mobile Number" ng-model="vm.mobileNumber"
-                                                   autocomplete="off" required="required">-->
+                                            <p class="help-block">9981600956<br></p>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-12 col-xs-12">
@@ -61,6 +59,12 @@
                                             <input class="form-control btn btn-warning" name="Verify" type="button"
                                                    value="Verify" ng-click="vm.verifyDriver()">
 
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <span class="alert alert info">{{vm.driverDetailOnboard.basic_info.ac_status}}</span>
                                             <p class="help-block"><br></p>
                                         </div>
                                     </div>
@@ -366,9 +370,9 @@
                                 <form name="bankForm" novalidate="novalidate">
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <label class="control-label" for="accountHolder">Account Holder's
+                                            <label class="control-label">Account Holder's
                                                 Name</label>
-                                            <input type="text" class="form-control" id="accountHolder"
+                                            <input type="text" class="form-control" ng-model="vm.bank.accountHolder"
                                                    name="accountHolder"
                                                    placeholder="Account Holder's Name"
                                                    autocomplete="off" required="required">
@@ -386,8 +390,8 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <label class="control-label" for="accountNumber">Account Number</label>
-                                            <input type="number" class="form-control" id="accountNumber"
+                                            <label class="control-label">Account Number</label>
+                                            <input type="number" class="form-control" ng-model="vm.bank.accountNumber"
                                                    name="accountNumber"
                                                    placeholder="Account Number"
                                                    autocomplete="off" required="required">
@@ -407,8 +411,8 @@
 
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <label class="control-label" for="bankName">Bank's Name</label>
-                                            <input type="text" class="form-control" id="bankName" name="bankName"
+                                            <label class="control-label">Bank's Name</label>
+                                            <input type="text" class="form-control" ng-model="vm.bank.bank" name="bankName"
                                                    placeholder="Bank's Name"
                                                    autocomplete="off" required="required">
 
@@ -425,8 +429,8 @@
                                     </div>
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <label class="control-label" for="ifscCode">IFSC Code</label>
-                                            <input type="text" class="form-control" id="ifscCode" name="ifscCode"
+                                            <label class="control-label">IFSC Code</label>
+                                            <input type="text" class="form-control" ng-model="vm.bank.ifsc" name="ifscCode"
                                                    placeholder="IFSC Code"
                                                    autocomplete="off" required="required">
 
