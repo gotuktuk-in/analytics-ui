@@ -18,31 +18,60 @@
         vm.device = {}
         vm.others = {}
 
-        /* vm.countryCodeVerify = 91;
-        $scope.AddVehicleForm = false;
-
-        vm.hideAddVehicleForm = function () {
-            $scope.AddVehicleForm = false;
-        };
-
-        vm.showAddVehicleForm = function () {
-            $scope.AddVehicleForm = true;
-        };
-
-        vm.renderOnboardingForm = function () {
-            vm.ownershipArr = [
-                {name: "Self Owned", value: 0},
-                {name: "Rented", value: 1}
-            ];
-            vm.selectedOwnership = vm.ownershipArr[0];
-        };
-        vm.renderOnboardingForm();
-*/
         vm.verifyDriver = function () {
             OnboardingService.verifyDriver({},{mobile: "+"+vm.countryCode + '' + vm.mobile}, function (response) {
                 vm.driverDetailOnboard = response;
             }, function (err) {
                 $scope.error = true;
+            });
+        };
+        vm.SaveBasicInfo = function () {
+            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+                toastr.success(response)
+            }, function (err) {
+              toastr.error(err)
+            });
+        };
+        vm.SaveBankInfo = function () {
+            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+                toastr.success(response)
+            }, function (err) {
+                toastr.error(err)
+            });
+        };
+        vm.SaveVehicleInfo = function () {
+            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+                toastr.success(response)
+            }, function (err) {
+                toastr.error(err)
+            });
+        };
+        vm.SaveLicenseInfo = function () {
+            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+                toastr.success(response)
+            }, function (err) {
+                toastr.error(err)
+            });
+        };
+        vm.SaveIdentityInfo = function () {
+            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+                toastr.success(response)
+            }, function (err) {
+                toastr.error(err)
+            });
+        };
+        vm.SaveDeviceInfo = function () {
+            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+                toastr.success(response)
+            }, function (err) {
+                toastr.error(err)
+            });
+        };
+        vm.SaveOthers = function () {
+            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+                toastr.success(response)
+            }, function (err) {
+                toastr.error(err)
             });
         };
     }

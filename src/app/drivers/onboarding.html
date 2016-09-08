@@ -232,7 +232,7 @@
                                     <div class="col-md-2 col-sm-12 col-xs-12">
                                         <div class="form-group disabled">
                                             <label class="control-label" for="countryCodeAlt">Country Code</label>
-                                            <input type="number" class="form-control " id="countryCodeAlt"
+                                            <input type="text" class="form-control " id="countryCodeAlt"
                                                    name="countryCodeAlt"
                                                    placeholder="Country Code" ng-model="vm.countryCode"
                                                    autocomplete="off" disabled>
@@ -255,7 +255,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="emailID">Email ID</label>
-                                            <input type="email" class="form-control" model="vm.basic.emailID" name="emailID"
+                                            <input type="email" class="form-control" ng-model="vm.basic.emailID" name="emailID"
                                                    placeholder="Email ID"
                                                    autocomplete="off" required="required">
 
@@ -273,7 +273,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="addressOne">Address 1</label>
-                                            <input type="text" class="form-control" model="vm.basic.address.address.line1" name="addressOne"
+                                            <input type="text" class="form-control" ng-model="vm.basic.address.address.line1" name="addressOne"
                                                    placeholder="Address 1"
                                                    autocomplete="off" required="required">
 
@@ -291,7 +291,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="addressTwo">Address 2</label>
-                                            <input type="text" class="form-control"  model="vm.basic.address.address.line2" name="addressTwo"
+                                            <input type="text" class="form-control"  ng-model="vm.basic.address.address.line2" name="addressTwo"
                                                    placeholder="Address 2"
                                                    autocomplete="off">
 
@@ -301,7 +301,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="city">City</label>
-                                            <input type="text" class="form-control" model="vm.basic.address.address.city" name="city"
+                                            <input type="text" class="form-control" ng-model="vm.basic.address.address.city" name="city"
                                                    placeholder="City"
                                                    autocomplete="off" required="required">
 
@@ -319,7 +319,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="state">State</label>
-                                            <input type="text" class="form-control" model="vm.basic.address.address.state" name="state"
+                                            <input type="text" class="form-control" ng-model="vm.basic.address.address.state" name="state"
                                                    placeholder="State"
                                                    autocomplete="off" required="required">
 
