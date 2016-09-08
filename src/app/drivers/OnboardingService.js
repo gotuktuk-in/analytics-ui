@@ -20,7 +20,7 @@ function OnboardingService($q, $resource, API) {
         {
             saveDriverInfo: {
                 method: 'POST',
-                url:   url + 'driver/basic/info',
+                url:   url + 'drivers/BasicInfo',
                 isArray:true
             },
             getDriverInfo: {
@@ -30,7 +30,7 @@ function OnboardingService($q, $resource, API) {
             },
             verifyDriver: {
                 method: 'POST',
-                url:   url + 'drivers/verify',
+                url:   url + 'driver/verify',
                 isArray:false
             },
             getTrips: {

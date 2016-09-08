@@ -42,29 +42,29 @@
                                     <div class="col-md-2 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="countryCodeVerify"
-                                                   placeholder="Country Code" ng-model="vm.countryCodeVerify" disabled
-                                                   required="required">
+                                                   placeholder="Country Code" ng-model="vm.countryCode" disabled
+                                                   >
 
                                             <p class="help-block"><br></p>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control"  name="mobileNumberVerify" ng-model="vm.mobile" placeholder="Enter Mobile Number">
+                                            <input type="text" class="form-control"  name="mobileNumberVerify" ng-model="vm.basic.phone" placeholder="Enter Mobile Number">
                                             <p class="help-block">9981600956<br></p>
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <input class="form-control btn btn-warning" name="Verify" type="button"
-                                                   value="Verify" ng-click="vm.verifyDriver()">
+                                                   value="Verify" ng-click="vm.verifyDriver()" ng-disabled="!vm.basic.phone">
 
                                             <p class="help-block"><br></p>
                                         </div>
                                     </div>
                                     <div class="col-md-4 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <span class="alert alert info">{{vm.driverDetailOnboard.basic_info.ac_status}}</span>
+                                            <span class="alert alert info">deete</span>
                                             <p class="help-block"><br></p>
                                         </div>
                                     </div>
@@ -92,7 +92,7 @@
                                         <div class="form-group">
                                             <label class="control-label" for="firstName">First Name</label>
                                             <input type="text" class="form-control" name="firstName"
-                                                   placeholder="First Name" model="vm.basic.firstName"
+                                                   placeholder="First Name" ng-model="vm.basic.firstName"
                                                    required="required">
 
                                             <div ng-messages="stopForm.stopDownTime.$error"
@@ -109,7 +109,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="lastName">Last Name</label>
-                                            <input type="text" class="form-control"  model="vm.basic.lastName" name="lastName"
+                                            <input type="text" class="form-control"  ng-model="vm.basic.lastName" name="lastName"
                                                    placeholder="Last Name"
                                                    autocomplete="off" required="required">
 
@@ -129,7 +129,7 @@
                                     <div class="col-md-3 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="gender">Gender</label>
-                                            <select class="form-control"  model="vm.basic.gender" name="gender" required="required">
+                                            <select class="form-control"  ng-model="vm.basic.gender" name="gender" required="required">
                                                 <option label="Male" value="Male" selected>Male</option>
                                                 <option label="Female" value="Female">Female</option>
                                             </select>
@@ -148,7 +148,7 @@
                                     <div class="col-md-3 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="bloodGroup">Blood Group</label>
-                                            <select class="form-control" model="vm.basic.bloodGroup" name="bloodGroup"
+                                            <select class="form-control" ng-model="vm.basic.bloodGroup" name="bloodGroup"
                                                     required="required">
                                                 <option label="O+" value="O+">O+</option>
                                                 <option label="O-" value="O-">O-</option>
@@ -176,7 +176,7 @@
                                             <label class="control-label" for="DOB">DOB</label>
 
                                             <div class='input-group date' name="DOB">
-                                                <input type='text' class="form-control"  model="vm.basic.dob"
+                                                <input type='text' class="form-control"  ng-model="vm.basic.dob"
                                                        style="border-radius: 4px 0px 0px 4px !important;"
                                                        value="1980-01-01" required="required">
                                         <span class="input-group-addon">
@@ -198,7 +198,7 @@
                                     <div class="col-md-2 col-sm-12 col-xs-12">
                                         <div class="form-group disabled">
                                             <label class="control-label" for="countryCode">Country Code</label>
-                                            <input type="number" class="form-control "
+                                            <input type="text" class="form-control "
                                                    name="countryCode"
                                                    placeholder="Country Code" ng-model="vm.countryCode"
                                                    autocomplete="off" disabled required="required">
@@ -256,7 +256,7 @@
                                             <p class="help-block"><br></p>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <!--<div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="emailID">Email ID</label>
                                             <input type="email" class="form-control" ng-model="vm.basic.emailID" name="emailID"
@@ -273,7 +273,7 @@
                                             </div>
                                             <p class="help-block"><br></p>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="addressOne">Address 1</label>
@@ -341,9 +341,55 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label" for="pin">PIN</label>
-                                            <input type="number" class="form-control" id="pin" name="pin"
-                                                   placeholder="PIN"
+                                            <input type="text" class="form-control" id="pin" name="pin"
+                                                   placeholder="PIN" ng-model="vm.basic.address.address.pin"
                                                    autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="pin">CURRENT</label>
+                                            <label>
+                                                <input type="radio" ng-model="vm.basic.address.address.current" value="true">
+                                                Yes
+                                            </label><br/>
+                                            <label>
+                                                <input type="radio" ng-model="vm.basic.address.address.current" ng-value="false">
+                                                No
+                                            </label>
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="pin">Type</label>
+                                            <label>
+                                                <input type="radio" ng-model="vm.basic.address.address.type" value="local">
+                                                Local
+                                            </label><br/>
+                                            <label>
+                                                <input type="radio" ng-model="vm.basic.address.address.type" ng-value="other">
+                                                Other
+                                            </label>
 
                                             <div ng-messages="stopForm.stopDownTime.$error"
                                                  ng-show="stopForm.stopDownTime.$touched" role="alert">
@@ -358,7 +404,7 @@
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12 text-right">
                                         <hr>
-                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                        <input class="btn btn-primary" ng-click="vm.SaveBasicInfo()" name="submit" type="button" value="Save & Next">
                                     </div>
                                 </form>
                             </div>
@@ -391,7 +437,7 @@
                                     <div class="col-md-6 col-sm-12 col-xs-12">
                                         <div class="form-group">
                                             <label class="control-label">Account Number</label>
-                                            <input type="number" class="form-control" ng-model="vm.bank.accountNumber"
+                                            <input type="text" class="form-control" ng-model="vm.bank.accountNumber"
                                                    name="accountNumber"
                                                    placeholder="Account Number"
                                                    autocomplete="off" required="required">
@@ -702,7 +748,7 @@
                                                                     <label class="control-label"
                                                                            for="vehicleNumber">Owner's Phone
                                                                         Number</label>
-                                                                    <input type="number" class="form-control"
+                                                                    <input type="text" class="form-control"
                                                                            id="ownerPhoneNumber"
                                                                            name="ownerPhoneNumber"
                                                                            placeholder="Owner's Phone Number"

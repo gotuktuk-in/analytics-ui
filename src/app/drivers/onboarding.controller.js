@@ -19,14 +19,14 @@
         vm.others = {}
 
         vm.verifyDriver = function () {
-            OnboardingService.verifyDriver({},{mobile: "+"+vm.countryCode + '' + vm.mobile}, function (response) {
-                vm.driverDetailOnboard = response;
+            OnboardingService.verifyDriver({},{phone: "+"+vm.countryCode + '' + vm.basic.phone}, function (response) {
+                vm.basic = response.basic_info;
             }, function (err) {
                 $scope.error = true;
             });
         };
         vm.SaveBasicInfo = function () {
-            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+            OnboardingService.saveDriverInfo( vm.basic, function (response) {
                 toastr.success(response)
             }, function (err) {
               toastr.error(err)
