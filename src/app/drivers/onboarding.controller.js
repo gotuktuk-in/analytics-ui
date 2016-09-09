@@ -21,29 +21,35 @@
         vm.calender = {}
         vm.calender.opened = false
         vm.calender.maxDate = new Date()
-        vm.numberVarified = false;
+        vm.canEdit= false;
+        vm.canCreate= false;
+        vm.canView= false;
         vm.DRIVER_ACCOUNT = {
             STATUS_DRAFT: 0,
             STATUS_ACTIVE: 1,
             STATUS_SUSPENDED: 2,
-            STATUS_DELETED: 3
+            STATUS_DELETED: 3,
+            NEW_ACCOUNT: -1
         }
+
         vm.openCalender = function()
         {
             vm.calender.opened = true
         }
         vm.verifyDriver = function () {
             OnboardingService.verifyDriver({},{phone: vm.countryCode + '' + vm.basic.phone}, function (response) {
-
-                if(response.ac_status == vm.DRIVER_ACCOUNT.STATUS_ACTIVE || response.ac_status == vm.DRIVER_ACCOUNT.STATUS_SUSPENDED)
+                if(response.ac_status == vm.DRIVER_ACCOUNT.NEW_ACCOUNT) {
+                    vm.canCreate= true;
+                }
+                else if(response.ac_status == vm.DRIVER_ACCOUNT.STATUS_DELETED || response.ac_status == vm.DRIVER_ACCOUNT.STATUS_DRAFT)
                 {
                     vm.basic = response.basic_info;
                     vm.basic.phone = vm.basic.phone.substring(3)
-                    vm.numberVarified = false;
+                    vm.canEdit = true;
                 }
                 else
                 {
-                    vm.numberVarified = true;
+                    vm.canView = true;
                 }
 
 
@@ -52,7 +58,9 @@
             });
         };
         vm.SaveBasicInfo = function () {
-            if(!vm.numberVarified)
+
+            vm.basic.phone =  vm.countryCode + '' + vm.basic.phone
+            if(vm.canCreate)
             {
                 OnboardingService.saveDriverInfo( vm.basic, function (response) {
                     toastr.success(response.message)
@@ -74,35 +82,35 @@
         };
         vm.SaveBankInfo = function () {
             vm.bank.driverId = vm.driveId;
-            OnboardingService.saveDriverInfo( vm.bank , function (response) {
+            OnboardingService.saveAccountInfo( vm.bank , function (response) {
                 toastr.success(response.message)
             }, function (err) {
                 toastr.error(err.message)
             });
         };
         vm.SaveVehicleInfo = function () {
-            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+            OnboardingService.saveVehicleInfo( vm.basic,{}, function (response) {
                 toastr.success(response.message)
             }, function (err) {
                 toastr.error(err)
             });
         };
         vm.SaveLicenseInfo = function () {
-            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+            OnboardingService.saveLicenseInfo( vm.basic,{}, function (response) {
                 toastr.success(response)
             }, function (err) {
                 toastr.error(err.message)
             });
         };
         vm.SaveIdentityInfo = function () {
-            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+            OnboardingService.saveIdentityInfo( vm.basic,{}, function (response) {
                 toastr.success(response.message)
             }, function (err) {
                 toastr.error(err)
             });
         };
         vm.SaveDeviceInfo = function () {
-            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
+            OnboardingService.saveDeviceInfo( vm.basic,{}, function (response) {
                 toastr.success(response)
             }, function (err) {
                 toastr.error(err.message)

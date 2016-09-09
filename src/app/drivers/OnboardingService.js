@@ -23,15 +23,41 @@ function OnboardingService($q, $resource, API) {
                 url:   url + 'drivers/BasicInfo',
                 isArray:false
             },
+
             updateDriverInfo: {
                 method: 'PUT',
                 url:   url + 'drivers/BasicInfo',
                 isArray:false
             },
-            getDriverInfo: {
-                method: 'GET',
-                url:   url + 'driver/basic/info',
-                isArray:true
+            saveAccountInfo: {
+                method: 'POST',
+                url:   url + 'drivers/AccountInfo',
+                isArray:false
+            },
+            saveVehicleInfo: {
+                method: 'POST',
+                url:   url + 'drivers/VehicleInfo',
+                isArray:false
+            },
+            saveLicenseInfo: {
+                method: 'POST',
+                url:   url + 'drivers/LicenseInfo',
+                isArray:false
+            },
+            saveIdentityInfo: {
+                method: 'POST',
+                url:   url + 'drivers/IdentityInfo',
+                isArray:false
+            },
+            saveDeviceInfo: {
+                method: 'POST',
+                url:   url + 'drivers/saveDeviceInfo',
+                isArray:false
+            },
+            saveOtherInfo: {
+                method: 'POST',
+                url:   url + 'drivers/AccountInfo',
+                isArray:false
             },
             verifyDriver: {
                 method: 'POST',
