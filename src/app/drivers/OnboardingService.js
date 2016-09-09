@@ -23,6 +23,11 @@ function OnboardingService($q, $resource, API) {
                 url:   url + 'drivers/BasicInfo',
                 isArray:false
             },
+            updateDriverInfo: {
+                method: 'PUT',
+                url:   url + 'drivers/BasicInfo',
+                isArray:false
+            },
             getDriverInfo: {
                 method: 'GET',
                 url:   url + 'driver/basic/info',

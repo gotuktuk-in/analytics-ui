@@ -181,7 +181,7 @@
                                                 <input type='text' class="form-control"  ng-model="vm.basic.dob"
                                                        style="border-radius: 4px 0px 0px 4px !important;"
                                                        value="1980-01-01" required="required" ng-click="vm.openCalender()"
-                                                       uib-datepicker-popup="dd-MMMM-yyyy" min-date="vm.calender.minDate"
+                                                       uib-datepicker-popup="dd-MMMM-yyyy" max-date="vm.calender.maxDate"
                                                        is-open="vm.calender.opened">
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar" ng-click="vm.openCalender()"></span>
@@ -497,7 +497,7 @@
                                     </div>
                                     <div class="col-md-12 col-sm-12 col-xs-12 text-right">
                                         <hr>
-                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                        <input class="btn btn-primary" ng-click="vm.SaveBankInfo()" name="submit" type="submit" value="Save & Next">
                                     </div>
                                 </form>
                             </div>

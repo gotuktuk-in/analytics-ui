@@ -20,7 +20,7 @@
         vm.others = {}
         vm.calender = {}
         vm.calender.opened = false
-        vm.calender.minDate = new Date()
+        vm.calender.maxDate = new Date()
         vm.numberVarified = false;
         vm.DRIVER_ACCOUNT = {
             STATUS_DRAFT: 0,
@@ -37,36 +37,52 @@
 
                 if(response.ac_status == vm.DRIVER_ACCOUNT.STATUS_ACTIVE || response.ac_status == vm.DRIVER_ACCOUNT.STATUS_SUSPENDED)
                 {
+                    vm.basic = response.basic_info;
+                    vm.basic.phone = vm.basic.phone.substring(3)
                     vm.numberVarified = false;
                 }
                 else
                 {
                     vm.numberVarified = true;
                 }
-                vm.basic = response.basic_info;
-                vm.basic.phone = vm.basic.phone.substring(3)
+
+
             }, function (err) {
                 $scope.error = true;
             });
         };
         vm.SaveBasicInfo = function () {
-            OnboardingService.saveDriverInfo( vm.basic, function (response) {
-                toastr.success(response.message)
-                vm.driveId = response.id
-            }, function (err) {
-              toastr.error(err.message)
-            });
+            if(!vm.numberVarified)
+            {
+                OnboardingService.saveDriverInfo( vm.basic, function (response) {
+                    toastr.success(response.message)
+                    vm.driveId = response.id
+                }, function (err) {
+                    toastr.error(err.message)
+                });
+            }
+            else
+            {
+                OnboardingService.updateDriverInfo( vm.basic, function (response) {
+                    toastr.success(response.message)
+                    vm.driveId = response.id
+                }, function (err) {
+                    toastr.error(err.message)
+                });
+            }
+
         };
         vm.SaveBankInfo = function () {
-            OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
-                toastr.success(response)
+            vm.bank.driverId = vm.driveId;
+            OnboardingService.saveDriverInfo( vm.bank , function (response) {
+                toastr.success(response.message)
             }, function (err) {
-                toastr.error(err)
+                toastr.error(err.message)
             });
         };
         vm.SaveVehicleInfo = function () {
             OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
-                toastr.success(response)
+                toastr.success(response.message)
             }, function (err) {
                 toastr.error(err)
             });
@@ -75,12 +91,12 @@
             OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
                 toastr.success(response)
             }, function (err) {
-                toastr.error(err)
+                toastr.error(err.message)
             });
         };
         vm.SaveIdentityInfo = function () {
             OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
-                toastr.success(response)
+                toastr.success(response.message)
             }, function (err) {
                 toastr.error(err)
             });
@@ -89,14 +105,14 @@
             OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
                 toastr.success(response)
             }, function (err) {
-                toastr.error(err)
+                toastr.error(err.message)
             });
         };
         vm.SaveOthers = function () {
             OnboardingService.saveDriverInfo( vm.basic,{}, function (response) {
-                toastr.success(response)
+                toastr.success(response.message)
             }, function (err) {
-                toastr.error(err)
+                toastr.error(err.message)
             });
         };
     }
