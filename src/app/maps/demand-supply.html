@@ -120,22 +120,43 @@
                 style="display: inline-block; padding: 7px;">&#10095;</span>
         </div>
     </div>
-    <div class="geo-hash-detail" ng-if="vm.dsShow">
+    <div class="geo-hash-detail text-center" ng-if="vm.dsShow">
+        <span ng-if="vm.axisGeohash">{{vm.axisGeohash}}<span ng-if="vm.axisTitle1">|</span> {{vm.axisTitle1}}<span
+                ng-if="vm.axisTitle2">|</span> {{vm.axisTitle2}}</span>
+        <br>
         <span>D: <b>{{vm.hashDetail.demand}}</b></span>
         <span>S: <b>{{vm.hashDetail.supply}}</b></span>
         <span>|</span>
-        <span ng-click="vm.showDSGraph();">History</span>
+        <span ng-click="vm.showDSGraph();" class="pointer text-primary">History</span>
     </div>
     <div class="geo-hash-select">
-        <select class="form-control" ng-change="vm.onPrecisionChange()" style="padding:5px 10px; border-radius: 4px;"
-                ng-model="vm.selectedPrecision"
-                ng-options="precision.name for precision  in  vm.precisionArr track by precision.value">
+        <form class="form-inline">
+            <div class="form-group">
+                <select name="mySelect" id="mySelect" class="form-control"
+                        ng-options="option.label for option in vm.heatMapFilers track by option.id"
+                        ng-model="vm.selected" ng-change="vm.loadHeatMap();"></select>
+                <span class="btn btn-default form-control disabled" style="text-align: left !important;">{{vm.heatMapDataLength}}</span>
+            </div>
+            <div class="form-group">
+                <select class="form-control" ng-change="vm.onPrecisionChange()"
+                        style="padding:5px 10px; border-radius: 4px;"
+                        ng-model="vm.selectedPrecision"
+                        ng-options="precision.name for precision  in  vm.precisionArr track by precision.value">
 
-        </select>
+                </select>
+                <input ng-click="vm.hideHeatmap()" ng-if="vm.heatmapView" type=button value="Hide Heatmap" class="form-control">
+                <input ng-click="vm.showHeatmap()" ng-if="!vm.heatmapView" type=button value="Show All Heatmap" class="form-control">
+                <input ng-click="vm.hideMarkers()" ng-if="vm.markersView" type=button value="Hide Markers" class="form-control">
+                <input ng-click="vm.showMarkers()" ng-if="!vm.markersView" type=button value="Show All Markers" class="form-control">
+                <input ng-click="vm.hideShapes()" ng-if="vm.shapesView" type=button value="Hide Shapes" class="form-control">
+                <input ng-click="vm.showShapes()" ng-if="!vm.shapesView" type=button value="Show All Shapes" class="form-control">
+            </div>
+        </form>
+
     </div>
     <ng-map click id="bidMap" center="indore" style="width:100%; height:100%; position:fixed"
             zoom="{{vm.selectedPrecision.value+7}}">
-        <div>
+        <div class="marker-box">
             <marker ng-repeat="data in vm.data track by $index" title="{{data.id}}"
                     icon="{ url:'assets/images/icons/marker-green.svg', scaledSize:[30,30]}"
                     id="free-driver-{{$index}}"
@@ -162,21 +183,26 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <span ng-click="vm.hideDSGraph();" class="close-ds-graph-div pull-right"><i class="fa fa-remove"></i></span>
+                        <span ng-click="vm.hideDSGraph();" class="close-ds-graph-div pull-right"><i
+                                class="fa fa-remove"></i></span>
                         <h4 style="margin-top: 0" class="title">History</h4></div>
                     <div class="panel-body">
                         <div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                                    <span ng-click="vm.changeDateDS('prev')" style="display: inline-block; padding: 7px;">&#10094;</span>
+                                    <span ng-click="vm.changeDateDS('prev')"
+                                          style="display: inline-block; padding: 7px;">&#10094;</span>
             <span class="text-center" ng-model="date"
                   style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
                                         ng-click="vm.changeDateDS('next')" ng-if="!vm.liveDS"
                                         style="display: inline-block; padding: 7px;">&#10095;</span>
                                 </div>
                             </div>
-                            <nvd3 options="vm.dsGraphOptions" data="vm.dsGraphData" config="vm.config" height="50%"></nvd3>
-                            <div class="text-center" style="padding: 10px 0"><h3 class="no-mr">{{vm.axisGeohash}}</h3><span ng-if="vm.axisTitle1">{{vm.axisTitle1}}</span><span ng-if="vm.axisTitle2"><br>{{vm.axisTitle2}}</span></div>
+                            <nvd3 options="vm.dsGraphOptions" data="vm.dsGraphData" config="vm.config"
+                                  height="50%"></nvd3>
+                            <div class="text-center" style="padding: 10px 0"><h3 class="no-mr">{{vm.axisGeohash}}</h3>
+                                <span ng-if="vm.axisTitle1">{{vm.axisTitle1}}</span><span ng-if="vm.axisTitle2"><br>{{vm.axisTitle2}}</span>
+                            </div>
                         </div>
                         </a>
                     </div>
@@ -251,4 +277,7 @@
             </uib-tabset>
         </div>
     </div>
+    <rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue"
+              rz-slider-options="slider.options">
+    </rzslider>
 </div>

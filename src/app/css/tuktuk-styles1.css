@@ -2,6 +2,12 @@
     form {
         margin-bottom: 20px;
     }
+    .geo-hash-select {
+        position: fixed;
+        right: 9px;
+        top: 12px;
+        z-index: 20;
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -22,17 +28,29 @@
         overflow: auto;
     }
 
-    .geo-hash-detail {
-        float: right;
-        position: relative;
-        z-index: 90;
-        margin: 15px 79px 0 0;
-        font-size: 13px;
-        top: 39px;
-        background: #fff;
-        right: -69px;
+    .geo-hash-select {
+        position: fixed;
+        left: 9px;
+        z-index: 20;
+        bottom: 0px;
     }
 
+    .geo-hash-detail {
+        float: right;
+        position: fixed;
+        z-index: 90;
+        margin: 0;
+        font-size: 13px;
+        bottom: 23px;
+        background: #fff;
+        right: 45px;
+        width: 79%;
+        text-align: left;
+        padding: 10px;
+        height: 94px;
+        border-radius: 2px;
+        box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    }
     .card {
         position: fixed;
         top: 54px;
