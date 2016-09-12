@@ -16,7 +16,7 @@ function OnboardingService($q, $resource, API) {
   var url = API;
     return $resource(
         "",
-        {id:"@id"},
+        {driverId:"@driverId"},
         {
             saveDriverInfo: {
                 method: 'POST',
@@ -26,7 +26,7 @@ function OnboardingService($q, $resource, API) {
 
             updateDriverInfo: {
                 method: 'PUT',
-                url:   url + 'drivers/BasicInfo',
+                url:   url + 'drivers/:driverId/BasicInfo',
                 isArray:false
             },
             saveAccountInfo: {

@@ -50,7 +50,10 @@
                                     </div>
                                     <div class="col-md-4 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control"  name="mobileNumberVerify" ng-model="vm.basic.phone" placeholder="Enter Mobile Number">
+                                            <input type="text" class="form-control"
+                                                   ng-minlength="10"
+                                                   ng-maxlength="10"
+                                                   name="mobileNumberVerify" ng-model="vm.basic.phone" placeholder="Enter Mobile Number">
                                             <p class="help-block">9981600956<br></p>
                                         </div>
                                     </div>
@@ -364,11 +367,11 @@
                                         <div class="form-group">
                                             <label class="control-label" for="pin">CURRENT</label>
                                             <label>
-                                                <input type="radio" ng-model="vm.basic.address.address.current" value="true">
+                                                <input type="radio" ng-model="vm.basic.address.address.current" ng-value="true">
                                                 Yes
                                             </label><br/>
                                             <label>
-                                                <input type="radio" ng-model="vm.basic.address.address.current" ng-value="false">
+                                                <input type="radio" ng-model="vm.basic.address.address.current" value="false">
                                                 No
                                             </label>
 

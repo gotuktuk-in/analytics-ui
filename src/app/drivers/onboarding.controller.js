@@ -59,21 +59,24 @@
         };
         vm.SaveBasicInfo = function () {
 
-            vm.basic.phone =  vm.countryCode + '' + vm.basic.phone
+            vm.basic.phone =  angular.copy(vm.countryCode + '' + vm.basic.phone)
             if(vm.canCreate)
             {
                 OnboardingService.saveDriverInfo( vm.basic, function (response) {
                     toastr.success(response.message)
                     vm.driveId = response.id
+                    vm.basic.phone = vm.basic.phone.substring(3)
+                    vm.canCreate= false;
+                    vm.canEdit = true;
                 }, function (err) {
                     toastr.error(err.message)
                 });
             }
             else
             {
-                OnboardingService.updateDriverInfo( vm.basic, function (response) {
+                OnboardingService.updateDriverInfo( {driveId: vm.driveId},vm.basic, function (response) {
                     toastr.success(response.message)
-                    vm.driveId = response.id
+                    vm.basic.phone = vm.basic.phone.substring(3)
                 }, function (err) {
                     toastr.error(err.message)
                 });
