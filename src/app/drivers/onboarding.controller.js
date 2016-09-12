@@ -88,7 +88,7 @@
             OnboardingService.saveAccountInfo( vm.bank , function (response) {
                 toastr.success(response.message)
             }, function (err) {
-                toastr.error(err.message)
+                toastr.error(err.data.message)
             });
         };
         vm.SaveVehicleInfo = function () {
@@ -126,6 +126,14 @@
                 toastr.error(err.message)
             });
         };
+
+        vm.showAddVehicleForm = function () {
+            ngDialog.open({
+                template: 'AddVehicleForm.html',
+                className: 'ngdialog-theme-plain',
+                scope: $scope
+            });
+        }
     }
 
 })();
