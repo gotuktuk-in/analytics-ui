@@ -126,6 +126,13 @@
                 toastr.error(err.message)
             });
         };
+        vm.SearchVehiclesByReg = function () {
+            OnboardingService.vehicleSearch( {vehicleRegNumber:vm.vehicle.vehicleRegNumber}, function (response) {
+                toastr.success(response.message)
+            }, function (err) {
+                toastr.error(err.message)
+            });
+        };
 
         vm.showAddVehicleForm = function () {
             ngDialog.open({

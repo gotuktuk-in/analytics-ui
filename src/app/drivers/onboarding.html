@@ -515,7 +515,7 @@
                                 <form name="vehicleForm" novalidate="novalidate">
                                     <div class="col-md-4 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" id="vehicleNumber"
+                                            <input type="text" class="form-control" ng-model="vm.vehicle.vehicleRegNumber"
                                                    name="vehicleNumber"
                                                    placeholder="Vehicle Number"
                                                    autocomplete="off" required="required">
@@ -533,8 +533,8 @@
                                     </div>
                                     <div class="col-md-2 col-sm-12 col-xs-12">
                                         <div class="form-group">
-                                            <input class="form-control btn btn-warning" name="Search" type="button"
-                                                   value="Search">
+                                            <input class="form-control btn btn-warning" name="Search" type="button" ng-disabled="!vm.vehicle.vehicleRegNumber"
+                                                   value="Search" ng-click="vm.SearchVehiclesByReg()">
 
                                             <p class="help-block"><br></p>
                                         </div>

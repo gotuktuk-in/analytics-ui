@@ -16,7 +16,7 @@ function OnboardingService($q, $resource, API) {
   var url = API;
     return $resource(
         "",
-        {driverId:"@driverId"},
+        {driverId:"@driverId",vehicleRegNumber:"@vehicleRegNumber"},
         {
             saveDriverInfo: {
                 method: 'POST',
@@ -64,9 +64,9 @@ function OnboardingService($q, $resource, API) {
                 url:   url + 'driver/verify',
                 isArray:false
             },
-            getTrips: {
+            vehicleSearch: {
                 method: 'GET',
-                url:   url + 'drivers/:id/trips',
+                url:   url + 'vehicle/:vehicleRegNumber',
                 isArray:false
             },
 
