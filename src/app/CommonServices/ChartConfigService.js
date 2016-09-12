@@ -22,7 +22,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
     factory.lineChartOptions = {
         chart: {
             type: 'lineChart',
-            height: '400',
+            height: 455,
             zoom: {
                 enabled: true
             },

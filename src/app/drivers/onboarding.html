@@ -1,249 +1,1083 @@
 <style>
+
     body {
         background: #fff !important;
+    }
+
+    .nav-tabs > li > a {
+        background: none !important;
+    }
+
+    .nav-tabs {
+        background: #f9f9f9 !important;
+    }
+
+    label {
+        text-transform: uppercase;
+    }
+
+    @media only screen and (max-width: 375px) {
+        .alert-tabs-view .nav-tabs > li {
+            margin: 0 8px;
+        }
     }
 </style>
 <div class="container-fluid">
     <br>
     <br>
     <br>
-    <br><br>
+    <br>
 
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <h3 style="margin:0 0 20px" class="title text-center">DRIVER ONBOARDING</h3>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <form role="form" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputEmail3">Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" placeholder="Email" id="inputEmail3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
+        <div class="col-md-8 col-sm-12 col-xs-12">
+            <h4> &nbsp; &nbsp;DRIVER ONBOARDING</h4>
+            <br>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputPassword3">Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" placeholder="Password" id="inputPassword3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
+            <div class="tabs-view alert-tabs-view">
+                <uib-tabset active="active">
+                    <uib-tab index="0" heading="Basic">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form name="basicForm" novalidate="novalidate">
+                                    <div class="col-md-2 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="countryCodeVerify"
+                                                   placeholder="Country Code" ng-model="vm.countryCode" disabled
+                                                   >
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="exampleInputFile">File</label>
-                        <div class="col-sm-9">
-                            <input type="file" id="exampleInputFile">
-                            <p class="help-block">Example block-level help text here.</p>
-                        </div>
-                    </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control"
+                                                   ng-minlength="10"
+                                                   ng-maxlength="10"
+                                                   name="mobileNumberVerify" ng-model="vm.basic.phone" placeholder="Enter Mobile Number">
+                                            <p class="help-block">9981600956<br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <input class="form-control btn btn-warning" name="Verify" type="button"
+                                                   value="Verify" ng-click="vm.verifyDriver()" ng-disabled="!vm.basic.phone">
 
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Active
-                                </label>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <span class="alert alert info">deete</span>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Profile Photo</label><br>
+                                            <label class="btn btn-default pd-2-5">
+                                                <span class="fa fa-plus"></span> Add Image<input type="file"
+                                                                                                 style="display: none;"
+                                                                                                 required="required">
+                                            </label>
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="firstName">First Name</label>
+                                            <input type="text" class="form-control" name="firstName"
+                                                   placeholder="First Name" ng-model="vm.basic.firstName"
+                                                   required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="lastName">Last Name</label>
+                                            <input type="text" class="form-control"  ng-model="vm.basic.lastName" name="lastName"
+                                                   placeholder="Last Name"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="gender">Gender</label>
+                                            <select class="form-control"  ng-model="vm.basic.gender" name="gender" required="required">
+                                                <option value="" disabled>Select</option>
+                                                <option label="Male" value="Male" selected>Male</option>
+                                                <option label="Female" value="Female">Female</option>
+                                            </select>
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="bloodGroup">Blood Group</label>
+                                            <select class="form-control" ng-model="vm.basic.bloodGroup" name="bloodGroup"
+                                                    required="required">
+                                                <option value="" disabled>Select</option>
+                                                <option label="O+" value="O+">O+</option>
+                                                <option label="O-" value="O-">O-</option>
+                                                <option label="A+" value="A+">A+</option>
+                                                <option label="A-" value="A-">A-</option>
+                                                <option label="B+" value="B+">B+</option>
+                                                <option label="B-" value="B-">B-</option>
+                                                <option label="AB+" value="AB+">AB+</option>
+                                                <option label="AB-" value="AB-">AB-</option>
+                                            </select>
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="DOB">DOB</label>
+
+                                            <div class='input-group date' name="DOB">
+                                                <input type='text' class="form-control"  ng-model="vm.basic.dob"
+                                                       style="border-radius: 4px 0px 0px 4px !important;"
+                                                       value="1980-01-01" required="required" ng-click="vm.openCalender()"
+                                                       uib-datepicker-popup="dd-MMMM-yyyy" max-date="vm.calender.maxDate"
+                                                       is-open="vm.calender.opened">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar" ng-click="vm.openCalender()"></span>
+                                        </span>
+                                            </div>
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2 col-sm-12 col-xs-12">
+                                        <div class="form-group disabled">
+                                            <label class="control-label" for="countryCode">Country Code</label>
+                                            <input type="text" class="form-control "
+                                                   name="countryCode"
+                                                   placeholder="Country Code" ng-model="vm.countryCode"
+                                                   autocomplete="off" disabled required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="mobileNumber">Mobile Number</label>
+                                            <input type="text" class="form-control"
+                                                   name="primary"
+                                                   placeholder="Primary Mobile Number" ng-model="vm.basic.contacts.primary"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 col-xs-12">
+                                        <div class="form-group disabled">
+                                            <label class="control-label" for="countryCodeAlt">Country Code</label>
+                                            <input type="text" class="form-control " id="countryCodeAlt"
+                                                   name="countryCodeAlt"
+                                                   placeholder="Country Code" ng-model="vm.countryCode"
+                                                   autocomplete="off" disabled>
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="mobileNumberAlt">Alternate Mobile
+                                                Number</label>
+                                            <input type="text" class="form-control" ng-model="vm.basic.contacts.alternate"
+                                                   name="alternate"
+                                                   placeholder="Alternate Mobile Number"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="emailID">Email ID</label>
+                                            <input type="email" class="form-control" ng-model="vm.basic.emailID" name="emailID"
+                                                   placeholder="Email ID"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>-->
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="addressOne">Address 1</label>
+                                            <input type="text" class="form-control" ng-model="vm.basic.address.address.line1" name="addressOne"
+                                                   placeholder="Address 1"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="addressTwo">Address 2</label>
+                                            <input type="text" class="form-control"  ng-model="vm.basic.address.address.line2" name="addressTwo"
+                                                   placeholder="Address 2"
+                                                   autocomplete="off">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="city">City</label>
+                                            <input type="text" class="form-control" ng-model="vm.basic.address.address.city" name="city"
+                                                   placeholder="City"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="state">State</label>
+                                            <input type="text" class="form-control" ng-model="vm.basic.address.address.state" name="state"
+                                                   placeholder="State"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="pin">PIN</label>
+                                            <input type="text" class="form-control" id="pin" name="pin"
+                                                   placeholder="PIN" ng-model="vm.basic.address.address.pin"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="pin">CURRENT</label>
+                                            <label>
+                                                <input type="radio" ng-model="vm.basic.address.address.current" ng-value="true">
+                                                Yes
+                                            </label><br/>
+                                            <label>
+                                                <input type="radio" ng-model="vm.basic.address.address.current" value="false">
+                                                No
+                                            </label>
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="pin">Type</label>
+                                            <label>
+                                                <input type="radio" ng-model="vm.basic.address.address.type" value="local">
+                                                Local
+                                            </label><br/>
+                                            <label>
+                                                <input type="radio" ng-model="vm.basic.address.address.type" ng-value="other">
+                                                Other
+                                            </label>
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" ng-if="vm.canCreate" ng-click="vm.SaveBasicInfo()" name="submit" type="button" value="Save & Next">
+                                        <input class="btn btn-primary" ng-if="vm.canEdit" ng-click="vm.SaveBasicInfo()" name="submit" type="button" value="Save & Next">
+                                        <input class="btn btn-primary" ng-if="vm.canView" ng-disabled="true" ng-click="vm.SaveBasicInfo()" name="submit" type="button" value="Save & Next">
+                                    </div>
+                                </form>
                             </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
                         </div>
-                    </div>
+                    </uib-tab>
+                    <uib-tab index="1" heading="Bank">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form name="bankForm" novalidate>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Account Holder's
+                                                Name</label>
+                                            <input type="text" class="form-control" ng-model="vm.bank.accountHolder"
+                                                   name="accountHolder"
+                                                   placeholder="Account Holder's Name"
+                                                   autocomplete="off" required="required">
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Choices</label>
-                        <div class="col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" checked="" value="option1" id="optionsCheckbox1" name="optionsRadios">
-                                    Option one is this and that&mdash;be sure to include why it's great
-                                </label>
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Account Number</label>
+                                            <input type="text" class="form-control" ng-model="vm.bank.accountNumber"
+                                                   name="accountNumber"
+                                                   placeholder="Account Number"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Bank's Name</label>
+                                            <input type="text" class="form-control" ng-model="vm.bank.bank" name="bankName"
+                                                   placeholder="Bank's Name"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">IFSC Code</label>
+                                            <input type="text" class="form-control" ng-model="vm.bank.ifsc" name="ifscCode"
+                                                   placeholder="IFSC Code"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" ng-click="vm.SaveBankInfo()" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="option2" id="optionsCheckbox2" name="optionsRadios">
-                                    Option two can be something else and selecting it will deselect option one
-                                </label>
+
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="2" heading="Vehicle">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form name="vehicleForm" novalidate="novalidate">
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" ng-model="vm.vehicle.vehicleRegNumber"
+                                                   name="vehicleNumber"
+                                                   placeholder="Vehicle Number"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <input class="form-control btn btn-warning" name="Search" type="button" ng-disabled="!vm.vehicle.vehicleRegNumber"
+                                                   value="Search" ng-click="vm.SearchVehiclesByReg()">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                    </div>
+                                    <div class="col-md-2 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <input class="form-control btn btn-default" name="addVehicle" type="button"
+                                                   value="Add Vehicle" ng-click="vm.showAddVehicleForm();">
+
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <div class="table-responsive">
+                                            <table ng-table="msgTableParams"
+                                                   class="table table-bordered table-striped text-center">
+                                                <tbody>
+                                                <tr>
+                                                    <td data-title="' '" class="text-left">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox" ng-model="vm.setting.forceConfirm" style="margin-top: 2px">
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td data-title="'ID'" class="text-left">
+                                                        {{row.id}}
+                                                    </td>
+                                                    <td data-title="'NUMBER'" class="text-left">
+                                                        {{row.number}}
+                                                    </td>
+                                                    <td data-title="'NAME'" class="text-left">
+                                                        {{row.name}}
+                                                    </td>
+                                                    <td data-title="'EXPIRY'" class="text-left">
+                                                        {{row.expiry}}
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
+                            </div>
+                            <script type="text/ng-template" id="AddVehicleForm.html">
+                            <div class="add-vehicle-div" >
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <span ng-click="vm.hideAddVehicleForm();"
+                                                      class="close-add-vehicle-div pull-right"><i
+                                                        class="fa fa-remove"></i></span>
+                                                <h4 style="margin-top: 0" class="title">ADD VEHICLE</h4></div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                                        <br>
+                                                        <form name="vehicleForm" novalidate="novalidate">
+                                                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">1073</label><br>
+                                                                    <label class="btn btn-default pd-2-5">
+                                                                        <span class="fa fa-plus"></span> Add
+                                                                        Image<input type="file"
+                                                                                    style="display: none;"
+                                                                                    required="required">
+                                                                    </label>
+
+                                                                    <p class="help-block"><br></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label" for="expiryDate">Expiry</label>
+
+                                                                    <div class='input-group date' id="expiryDate"
+                                                                         name="expiryDate">
+                                                                        <input type='text' class="form-control"
+                                                                               style="border-radius: 4px 0px 0px 4px !important;"
+                                                                               value="1980-01-01"
+                                                                               required="required">
+                                                                            <span class="input-group-addon">
+                                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                                            </span>
+                                                                    </div>
+                                                                    <div ng-messages="stopForm.stopDownTime.$error"
+                                                                         ng-show="stopForm.stopDownTime.$touched"
+                                                                         role="alert">
+                                                                        <div ng-message="required">Please enter a
+                                                                            value for this field.
+                                                                        </div>
+                                                                        <div ng-message="email">This field must be a
+                                                                            valid email address.
+                                                                        </div>
+                                                                        <div ng-message="maxlength">This field can
+                                                                            be at most 15 characters long.
+                                                                        </div>
+                                                                    </div>
+                                                                    <p class="help-block"><br></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12"></div>
+                                                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"
+                                                                           for="type">Type</label>
+                                                                    <select class="form-control" id="type"
+                                                                            name="type" required="required">
+                                                                        <option label="Auto" value="Auto" selected>
+                                                                            Auto
+                                                                        </option>
+                                                                        <option label="Bike" value="Bike">Bike
+                                                                        </option>
+                                                                    </select>
+
+                                                                    <div ng-messages="stopForm.stopDownTime.$error"
+                                                                         ng-show="stopForm.stopDownTime.$touched"
+                                                                         role="alert">
+                                                                        <div ng-message="required">Please enter a
+                                                                            value for this field.
+                                                                        </div>
+                                                                        <div ng-message="email">This field must be a
+                                                                            valid email address.
+                                                                        </div>
+                                                                        <div ng-message="maxlength">This field can
+                                                                            be at most 15 characters long.
+                                                                        </div>
+                                                                    </div>
+                                                                    <p class="help-block"><br></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"
+                                                                           for="vehicleNumber">Vehicle
+                                                                        Number</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="vehicleNumber" name="vehicleNumber"
+                                                                           placeholder="Vehicle Number"
+                                                                           autocomplete="off" required="required">
+
+                                                                    <div ng-messages="stopForm.stopDownTime.$error"
+                                                                         ng-show="stopForm.stopDownTime.$touched"
+                                                                         role="alert">
+                                                                        <div ng-message="required">Please enter a
+                                                                            value for this field.
+                                                                        </div>
+                                                                        <div ng-message="email">This field must be a
+                                                                            valid email address.
+                                                                        </div>
+                                                                        <div ng-message="maxlength">This field can
+                                                                            be at most 15 characters long.
+                                                                        </div>
+                                                                    </div>
+                                                                    <p class="help-block"><br></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label" for="ownership">Ownership</label>
+                                                                    <select class="form-control" id="ownership"
+                                                                            name="ownership"
+                                                                            ng-model="vm.selectedOwnership"
+                                                                            ng-options="ownership.name for ownership  in  vm.ownershipArr track by ownership.value"
+                                                                            required="required">
+                                                                    </select>
+
+                                                                    <div ng-messages="stopForm.stopDownTime.$error"
+                                                                         ng-show="stopForm.stopDownTime.$touched"
+                                                                         role="alert">
+                                                                        <div ng-message="required">Please enter a
+                                                                            value for this field.
+                                                                        </div>
+                                                                        <div ng-message="email">This field must be a
+                                                                            valid email address.
+                                                                        </div>
+                                                                        <div ng-message="maxlength">This field can
+                                                                            be at most 15 characters long.
+                                                                        </div>
+                                                                    </div>
+                                                                    <p class="help-block"><br></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label" for="type">Owner
+                                                                        Name</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="ownerName" name="ownerName"
+                                                                           placeholder="Owner Name"
+                                                                           autocomplete="off"
+                                                                           required="required">
+
+                                                                    <div ng-messages="stopForm.stopDownTime.$error"
+                                                                         ng-show="stopForm.stopDownTime.$touched"
+                                                                         role="alert">
+                                                                        <div ng-message="required">Please enter
+                                                                            a value for this field.
+                                                                        </div>
+                                                                        <div ng-message="email">This field must
+                                                                            be a valid email address.
+                                                                        </div>
+                                                                        <div ng-message="maxlength">This field
+                                                                            can be at most 15 characters long.
+                                                                        </div>
+                                                                    </div>
+                                                                    <p class="help-block"><br></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label"
+                                                                           for="vehicleNumber">Owner's Phone
+                                                                        Number</label>
+                                                                    <input type="text" class="form-control"
+                                                                           id="ownerPhoneNumber"
+                                                                           name="ownerPhoneNumber"
+                                                                           placeholder="Owner's Phone Number"
+                                                                           autocomplete="off"
+                                                                           required="required">
+
+                                                                    <div ng-messages="stopForm.stopDownTime.$error"
+                                                                         ng-show="stopForm.stopDownTime.$touched"
+                                                                         role="alert">
+                                                                        <div ng-message="required">Please enter
+                                                                            a value for this field.
+                                                                        </div>
+                                                                        <div ng-message="email">This field must
+                                                                            be a valid email address.
+                                                                        </div>
+                                                                        <div ng-message="maxlength">This field
+                                                                            can be at most 15 characters long.
+                                                                        </div>
+                                                                    </div>
+                                                                    <p class="help-block"><br></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                                                <hr>
+                                                                <input class="btn btn-primary" name="submit"
+                                                                       type="submit" value="ADD">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            </script>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="2" heading="License">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form name="licenseForm" novalidate="novalidate">
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="licenseNumber">License Number</label>
+                                            <input type="text" class="form-control" id="licenseNumber"
+                                                   name="licenseNumber"
+                                                   placeholder="Driving License"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dlType">Type</label>
+                                            <select class="form-control" id="dlType" name="dlType" required="required">
+                                                <option label="Light Vehicle" value="Light Vehicle" selected>Light
+                                                    Vehicle
+                                                </option>
+                                                <option label="Heavy Vehicle" value="Heavy Vehicle">Heavy Vehicle
+                                                </option>
+                                                <option label="Other" value="Other">Other</option>
+                                            </select>
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="expiryDateLi">Expiry</label>
+
+                                            <div class='input-group date' id="expiryDateLi" name="expiryDateLi">
+                                                <input type='text' class="form-control"
+                                                       style="border-radius: 4px 0px 0px 4px !important;"
+                                                       value="1980-01-01" required="required">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                            </div>
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </div>
+                    </uib-tab>
+                    <uib-tab index="2" heading="Identity">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form name="identityForm" novalidate="novalidate">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label">ID Scan Copy</label><br>
+                                            <label class="btn btn-default pd-2-5">
+                                                <span class="fa fa-plus"></span> Add Image<input type="file"
+                                                                                                 style="display: none;"
+                                                                                                 required="required">
+                                            </label>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Sex</label>
-                        <div class="col-sm-9">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">
-                                    Male
-                                </label>
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="identityType">Identity Type</label>
+                                            <select class="form-control" id="identityType" name="identityType"
+                                                    required="required">
+                                                <option label="Voter ID" value="Voter ID" selected>Voter ID</option>
+                                                <option label="Aadhar Card" value="Aadhar Card">Aadhar Card</option>
+                                            </select>
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
                             </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios">
-                                    Female
-                                </label>
-                            </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
                         </div>
-                    </div>
+                    </uib-tab>
+                    <uib-tab index="2" heading="Device">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form name="deviceForm" novalidate="novalidate">
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="ownershipDevice">Ownership</label>
+                                            <select class="form-control" id="ownershipDevice" name="ownershipDevice"
+                                                    required="required">
+                                                <option label="Self" value="Self" selected>Self</option>
+                                                <option label="TukTuk" value="TukTuk">TukTuk</option>
+                                            </select>
 
-                    <button class="btn btn-default pull-right" type="submit">Create User</button>
-                </form>
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="modelDevice">Model</label>
+                                            <input type="text" class="form-control" id="modelDevice" name="modelDevice"
+                                                   placeholder="Model"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="makeDevice">Make</label>
+                                            <input type="text" class="form-control" id="makeDevice" name="makeDevice"
+                                                   placeholder="Make"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="imeiDevice">IMEI</label>
+                                            <input type="text" class="form-control" id="imeiDevice" name="imeiDevice"
+                                                   placeholder="IMEI"
+                                                   autocomplete="off" required="required">
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-primary" name="submit" type="submit" value="Save & Next">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </uib-tab>
+                    <uib-tab index="2" heading="Others">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <form name="othersForm" novalidate="novalidate">
+                                    <div class="col-md-12 col-sm-12  col-xs-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="comments">Comments</label>
+                                                <textarea class="form-control" id="comments" name="comments"
+                                                          placeholder="comments" rows="10"
+                                                          required="required"></textarea>
+
+                                            <div ng-messages="stopForm.stopDownTime.$error"
+                                                 ng-show="stopForm.stopDownTime.$touched" role="alert">
+                                                <div ng-message="required">Please enter a value for this field.</div>
+                                                <div ng-message="email">This field must be a valid email address.</div>
+                                                <div ng-message="maxlength">This field can be at most 15 characters
+                                                    long.
+                                                </div>
+                                            </div>
+                                            <p class="help-block"><br></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <hr>
+                                        <input class="btn btn-success" name="submit" type="submit" value="Register">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </uib-tab>
+                </uib-tabset>
             </div>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <form role="form" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputEmail3">Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" placeholder="Email" id="inputEmail3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <h4> &nbsp; &nbsp;IN DRAFT MODE</h4>
+            <br>
 
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputPassword3">Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" placeholder="Password" id="inputPassword3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="exampleInputFile">File</label>
-                        <div class="col-sm-9">
-                            <input type="file" id="exampleInputFile">
-                            <p class="help-block">Example block-level help text here.</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Active
-                                </label>
-                            </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Choices</label>
-                        <div class="col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" checked="" value="option1" id="optionsCheckbox1" name="optionsRadios">
-                                    Option one is this and that&mdash;be sure to include why it's great
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="option2" id="optionsCheckbox2" name="optionsRadios">
-                                    Option two can be something else and selecting it will deselect option one
-                                </label>
+            <div class="tabs-view alert-tabs-view">
+                <uib-tabset active="active">
+                    <uib-tab index="2" heading="DRIVERS">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <table ng-table="msgTableParams"
+                                           class="table table-bordered table-striped text-center">
+                                        <tbody>
+                                        <tr>
+                                            <td data-title="'ID'" class="text-left">
+                                                {{row.id}}
+                                            </td>
+                                            <td data-title="'NAME'" class="text-left">
+                                                {{row.name}}
+                                            </td>
+                                            <td data-title="'NUMBER'" class="text-left">
+                                                {{row.number}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Sex</label>
-                        <div class="col-sm-9">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">
-                                    Male
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios">
-                                    Female
-                                </label>
-                            </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-default pull-right" type="submit">Create User</button>
-                </form>
+                    </uib-tab>
+                </uib-tabset>
             </div>
-            <div class="col-md-4 col-sm-12 col-xs-12">
-                <form role="form" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputEmail3">Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" placeholder="Email" id="inputEmail3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="inputPassword3">Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" placeholder="Password" id="inputPassword3" class="form-control">
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="exampleInputFile">File</label>
-                        <div class="col-sm-9">
-                            <input type="file" id="exampleInputFile">
-                            <p class="help-block">Example block-level help text here.</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Active
-                                </label>
-                            </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Choices</label>
-                        <div class="col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" checked="" value="option1" id="optionsCheckbox1" name="optionsRadios">
-                                    Option one is this and that&mdash;be sure to include why it's great
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="option2" id="optionsCheckbox2" name="optionsRadios">
-                                    Option two can be something else and selecting it will deselect option one
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Sex</label>
-                        <div class="col-sm-9">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" checked="" value="option1" id="optionsRadios1" name="optionsRadios">
-                                    Male
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" value="option2" id="optionsRadios2" name="optionsRadios">
-                                    Female
-                                </label>
-                            </div>
-                            <p class="help-block">Lorem ipsum dolor sit amet</p>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-default pull-right" type="submit">Create User</button>
-                </form>
-            </div>
-
         </div>
     </div>
 </div>

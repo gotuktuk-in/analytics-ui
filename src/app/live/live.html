@@ -183,19 +183,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Rides</h4></div>
-                <div class="panel-body">
-                    <div>
-                        <nvd3 options="vm.newRidersChartOptions" data="vm.newRiders" config="vm.config"></nvd3>
-                    </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
         <div class="col-md-6 col-sm-12 col-xs-12 cancelled-trip-quad1">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -214,39 +201,53 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-6 col-xs-12" ngsf-fullscreen>
-
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="pull-right">
-
-                        <select name="mySelect" id="mySelect"
-                                ng-options="option.label for option in vm.heatMapFilers track by option.id"
-                                ng-model="vm.selected" ng-change="vm.loadHeatMap();"></select>
-                        <span style="padding:0 10px 0 5px">{{vm.heatMapDataLength}}</span>
-                        <a ngsf-toggle-fullscreen show-if-fullscreen-enabled style="color:#ccc;">
-                            <i class="fa fa-arrows-alt" show-if-fullscreen=false></i>
-                            <i show-if-fullscreen=true>X</i>
-                        </a>
-                    </div>
-                    <h4 style="margin-top: 0" class="title">Heat Map</h4></div>
+                    <h4 style="margin-top: 0" class="title">Rides</h4></div>
                 <div class="panel-body">
-
                     <div>
-                        <ng-map id="live_map" zoom="14" center="[22.717081666666665, 75.87155666666666]"
-                                on-resized="vm.resizeMap()" trigger-resize="true" style="height:400px;">
-                            <!--   <heatmap-layer id="foo" data="'heatMapData'"></heatmap-layer>-->
-                        </ng-map>
-
-
-                        <rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue"
-                                  rz-slider-options="slider.options">
-                        </rzslider>
+                        <nvd3 options="vm.newRidersChartOptions" data="vm.newRiders" config="vm.config"></nvd3>
                     </div>
+                    </a>
                 </div>
-
             </div>
         </div>
+        <div class="clearfix"></div>
+
+        <!--<div class="col-md-6 col-sm-6 col-xs-12" ngsf-fullscreen>-->
+
+            <!--<div class="panel panel-default">-->
+                <!--<div class="panel-heading">-->
+                    <!--<div class="pull-right">-->
+
+                        <!--<select name="mySelect" id="mySelect"-->
+                                <!--ng-options="option.label for option in vm.heatMapFilers track by option.id"-->
+                                <!--ng-model="vm.selected" ng-change="vm.loadHeatMap();"></select>-->
+                        <!--<span style="padding:0 10px 0 5px">{{vm.heatMapDataLength}}</span>-->
+                        <!--<a ngsf-toggle-fullscreen show-if-fullscreen-enabled style="color:#ccc;">-->
+                            <!--<i class="fa fa-arrows-alt" show-if-fullscreen=false></i>-->
+                            <!--<i show-if-fullscreen=true>X</i>-->
+                        <!--</a>-->
+                    <!--</div>-->
+                    <!--<h4 style="margin-top: 0" class="title">Heat Map</h4></div>-->
+                <!--<div class="panel-body">-->
+
+                    <!--<div>-->
+                        <!--<ng-map id="live_map" zoom="14" center="[22.717081666666665, 75.87155666666666]"-->
+                                <!--on-resized="vm.resizeMap()" trigger-resize="true" style="height:400px;">-->
+                            <!--&lt;!&ndash;   <heatmap-layer id="foo" data="'heatMapData'"></heatmap-layer>&ndash;&gt;-->
+                        <!--</ng-map>-->
+
+
+                        <!--<rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue"-->
+                                  <!--rz-slider-options="slider.options">-->
+                        <!--</rzslider>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
     </div>
 </div>
 

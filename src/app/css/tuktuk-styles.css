@@ -14,7 +14,28 @@ body {
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: auto;
 }
-a, a:hover, a:active, a:visited{text-decoration: none;}
+
+.pointer {
+    cursor: pointer;
+}
+
+a, a:hover, a:active, a:visited {
+    text-decoration: none;
+}
+
+.btn-map-icon {
+    max-width: 45px !important;
+    width: 45px;
+}
+
+span.close-ds-detail {
+    display: none !important;
+}
+
+.inverse-btn {
+    text-decoration: line-through;
+    color: #ccc;
+}
 
 .text-normal {
     font-weight: 100
@@ -261,12 +282,7 @@ div.panel.panel-default div.panel-heading h4.title {
     width: 12px;
     z-index: 9999999;
 }
-.geo-hash-select {
-    position: fixed;
-    right: 9px;
-    top: 12px;
-    z-index: 20;
-}
+
 .rzslider .rz-pointer.rz-active::after {
     background-color: #eee;
 }
@@ -329,6 +345,19 @@ div.panel.panel-default div.panel-heading h4.title {
     line-height: 0;
     height: 18px;
     width: 20px;
+}
+
+.add-driver {
+    position: fixed;
+    right: 40px;
+    top: 17px;
+    z-index: 999999999 !important;
+}
+
+.btn.btn-warning {
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
 }
 
 .reload {
@@ -919,6 +948,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     text-transform: uppercase;
     font-size: 14px;
     padding: 15px 5px;
+    border-bottom: 2px solid transparent;
 }
 
 .alert-tabs-view .tab-content {
@@ -1105,6 +1135,11 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     border: 1px solid #eee !important;
 }
 
+.no-border {
+    border: none !important;
+    box-shadow: none !important;
+}
+
 .no-lt-bdr {
     border-left: none !important;
 }
@@ -1151,6 +1186,10 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 .pd-10 {
     padding: 10px !important;
+}
+
+.pd-2-5 {
+    padding: 2px 5px !important;
 }
 
 .no-mr-lt {
@@ -1723,11 +1762,21 @@ span.img-top {
     overflow: auto;
 }
 
+.add-vehicle-div {
+    position: fixed;
+    height: 95%;
+    width: 100%;
+    z-index: 99;
+    background: rgba(255, 255, 255, 0.8);
+    top: 54px;
+    overflow: auto;
+}
+
 /*.close-ds-graph-div {*/
-    /*position: absolute;*/
-    /*top: 2%;*/
-    /*right: 1.5%;*/
-    /*cursor: pointer;*/
+/*position: absolute;*/
+/*top: 2%;*/
+/*right: 1.5%;*/
+/*cursor: pointer;*/
 /*}*/
 
 .cancelled-trip-quad1 h5 {
@@ -1742,11 +1791,15 @@ span.img-top {
 
 .geo-hash-detail {
     float: none;
-    position: fixed;
+    position: absolute;
     z-index: 90;
-    margin: 15px 44%;
     font-size: 13px;
+    white-space: nowrap;
+    width: 80%;
+    text-align: center;
+    margin: 6px 10%;
 }
+
 .trip-state {
     position: fixed;
     z-index: 90;
@@ -1756,6 +1809,7 @@ span.img-top {
     width: 88%;
     left: 38px;
 }
+
 .geo-hash-detail span {
     padding: 0 5px;
     line-height: 22px;
