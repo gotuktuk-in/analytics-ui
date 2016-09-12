@@ -71,8 +71,12 @@ function MapService($q, $resource, API, AUTH_API) {
                 method: 'GET',
                 url: url + 'surge/group/',
                 isArray: true
+            },
+            heatmap: {
+                method: 'GET',
+                url: url + 'trips/heatmap',
+                isArray: true
             }
-
         }
     );
 }
