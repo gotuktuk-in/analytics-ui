@@ -224,8 +224,7 @@
                 obj.bar = true;
                 obj.values = [];
                 data.push(obj);
-                i++
-                console.log(riders[i].value[i] +':'+ i)
+                i++;
             });
             var obj = {};
             obj.key = labelsArr[i];

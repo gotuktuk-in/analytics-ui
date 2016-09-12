@@ -121,6 +121,7 @@
         </div>
     </div>
     <div class="geo-hash-detail text-center" ng-if="vm.dsShow">
+        <span ng-click="vm.hideDSDetail();" class="close-ds-detail pull-right" role="button" tabindex="0"><i class="fa fa-remove"></i></span>
         <span ng-if="vm.axisGeohash">{{vm.axisGeohash}}<span ng-if="vm.axisTitle1">|</span> {{vm.axisTitle1}}<span
                 ng-if="vm.axisTitle2">|</span> {{vm.axisTitle2}}</span>
         <br>
@@ -132,24 +133,28 @@
     <div class="geo-hash-select">
         <form class="form-inline">
             <div class="form-group">
-                <select name="mySelect" id="mySelect" class="form-control"
-                        ng-options="option.label for option in vm.heatMapFilers track by option.id"
-                        ng-model="vm.selected" ng-change="vm.loadHeatMap();"></select>
-                <span class="btn btn-default form-control disabled" style="text-align: left !important;">{{vm.heatMapDataLength}}</span>
-            </div>
-            <div class="form-group">
                 <select class="form-control" ng-change="vm.onPrecisionChange()"
                         style="padding:5px 10px; border-radius: 4px;"
                         ng-model="vm.selectedPrecision"
                         ng-options="precision.name for precision  in  vm.precisionArr track by precision.value">
 
                 </select>
-                <input ng-click="vm.hideHeatmap()" ng-if="vm.heatmapView" type=button value="Hide Heatmap" class="form-control">
-                <input ng-click="vm.showHeatmap()" ng-if="!vm.heatmapView" type=button value="Show All Heatmap" class="form-control">
-                <input ng-click="vm.hideMarkers()" ng-if="vm.markersView" type=button value="Hide Markers" class="form-control">
-                <input ng-click="vm.showMarkers()" ng-if="!vm.markersView" type=button value="Show All Markers" class="form-control">
-                <input ng-click="vm.hideShapes()" ng-if="vm.shapesView" type=button value="Hide Shapes" class="form-control">
-                <input ng-click="vm.showShapes()" ng-if="!vm.shapesView" type=button value="Show All Shapes" class="form-control">
+                </div>
+            <div class="form-group">
+                <select name="mySelect" id="mySelect" class="form-control"
+                        ng-options="option.label for option in vm.heatMapFilers track by option.id"
+                        ng-model="vm.selected" ng-change="vm.loadHeatMap();"></select>
+            </div>
+            <div class="form-group">
+                <div style="max-height: 34px; overflow: hidden;">
+                <button class="btn btn-default btn-map-icon"><span style="text-align: center !important;">{{vm.heatMapDataLength}}</span></button>
+                <button ng-click="vm.hideHeatmap()" ng-if="vm.heatmapView" title="Hide Heatmap" class="btn btn-default btn-map-icon"><i class="fa fa-fire" aria-hidden="true"></i></button>
+                <button ng-click="vm.showHeatmap()" ng-if="!vm.heatmapView" title="Show All Heatmap" class="btn btn-map-icon"><i class="fa fa-fire inverse-btn" aria-hidden="true"></i></button>
+                <button ng-click="vm.hideMarkers()" ng-if="vm.markersView" title="Hide Markers" class="btn btn-default btn-map-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
+                <button ng-click="vm.showMarkers()" ng-if="!vm.markersView" title="Show All Markers" class="btn btn-default btn-map-icon"><i class="fa fa-map-marker inverse-btn" aria-hidden="true"></i></button>
+                <button ng-click="vm.hideShapes()" ng-if="vm.shapesView" title="Hide Shapes" class="btn btn-default btn-map-icon"><i class="fa fa-clone" aria-hidden="true"></i></button>
+                <button ng-click="vm.showShapes()" ng-if="!vm.shapesView" title="Show All Shapes" class="btn btn-default btn-map-icon"><i class="fa fa-clone inverse-btn" aria-hidden="true"></i></button>
+                </div>
             </div>
         </form>
 
@@ -257,7 +262,7 @@
     </div>
     <div class="tabs-view tabs-view-2">
         <button ng-click="tabView = !tabView" ng-class="{'left-arrow' : tabView}"
-                class="btn btn-default tabs-toggle-btn map-btn" title="Show More...">
+                class="btn btn-default tabs-toggle-btn map-btn">
             <i class="fa fa-angle-double-right"></i>
         </button>
         <div class="tabs-toggle" ng-class="{'tabs-show' : !tabView}">
@@ -277,7 +282,13 @@
             </uib-tabset>
         </div>
     </div>
-    <rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue"
-              rz-slider-options="slider.options">
-    </rzslider>
+    <div class="row" style="position: absolute; bottom: 0px; width: 60%; margin: 0 20%;" ng-if="heatMapSlider">
+        <div class="col-md-12" >
+            <div class="text-center">
+                <rzslider rz-slider-model="slider.minValue" rz-slider-high="slider.maxValue"
+                          rz-slider-options="slider.options">
+                </rzslider>
+            </div>
+        </div>
+    </div>
 </div>

@@ -6,19 +6,8 @@
         .controller('DemandSupplyController', DemandSupplyController);
     /** @ngInject */
     function DemandSupplyController($scope, $rootScope, NgMap, geohash, MapService, toastr, ngDialog, DSHandler, ChartConfigService, StaticDataService) {
-
-        (function () {
-            if (window.localStorage) {
-                if (!localStorage.getItem('firstLoad')) {
-                    localStorage['firstLoad'] = true;
-                    window.location.reload();
-                }
-                else
-                    localStorage.removeItem('firstLoad');
-            }
-        })();
-
         $scope.dsGraph = false;
+        $scope.heatMapSlider = true;
 
         var vm = this;
         vm.live = true;
@@ -226,10 +215,12 @@
 
         vm.showHeatmap = function() {
             vm.heatmapView = true;
+            $scope.heatMapSlider = true;
             heatmap.setMap(vm.map);
         };
         vm.hideHeatmap = function() {
             vm.heatmapView = false;
+            $scope.heatMapSlider = false;
             heatmap.setMap(null);
         };
         vm.showMarkers = function() {
@@ -417,6 +408,9 @@
         vm.showDSGraph = function () {
             vm.hideCard();
             $scope.dsGraph = true;
+        };
+        vm.hideDSDetail = function () {
+            vm.dsShow = false;
         };
         vm.hideDSGraph = function () {
             $scope.dsGraph = false;

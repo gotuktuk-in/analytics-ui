@@ -2,11 +2,12 @@
     form {
         margin-bottom: 20px;
     }
+
     .geo-hash-select {
         position: fixed;
         right: 9px;
         top: 12px;
-        z-index: 20;
+        z-index: 91;
     }
 }
 
@@ -15,14 +16,19 @@
         word-wrap: break-word;
         max-width: 200px;
     }
+
+    span.close-ds-detail {
+        display: inline !important;
+    }
+
     .tripInfo-driver-tab .box.box-heading {
         min-height: 128px;
     }
-    /*.close-ds-graph-div {*/
-        /*top: 5%;*/
-        /*right: 3%;*/
-    /*}*/
 
+    /*.close-ds-graph-div {*/
+    /*top: 5%;*/
+    /*right: 3%;*/
+    /*}*/
     .table-responsive.trip-detail-table {
         max-width: 202px;
         overflow: auto;
@@ -31,7 +37,7 @@
     .geo-hash-select {
         position: fixed;
         left: 9px;
-        z-index: 20;
+        z-index: 91;
         bottom: 0px;
     }
 
@@ -41,16 +47,17 @@
         z-index: 90;
         margin: 0;
         font-size: 13px;
-        bottom: 23px;
+        bottom: 131px;
         background: #fff;
-        right: 45px;
-        width: 79%;
+        right: 10px;
+        width: 94%;
         text-align: left;
         padding: 10px;
         height: 94px;
         border-radius: 2px;
-        box-shadow: 0 0 4px rgba(0,0,0,0.1);
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
     }
+
     .card {
         position: fixed;
         top: 54px;
@@ -111,6 +118,7 @@
         z-index: 999999999 !important;
         padding: 10px;
     }
+
     .reload {
         position: fixed;
         right: 20px;
@@ -133,6 +141,7 @@
         font-size: 0;
         color: transparent;
     }
+
     .global-tbl td {
         border: none;
         border-bottom: 1px solid #eee;
@@ -241,6 +250,14 @@
         max-width: 200px;
     }
 
+    .btn-map-icon {
+        max-width: 26px !important;
+        width: 26px;
+        padding: 4px;
+        font-size: 12px;
+        height: 34px;;
+    }
+
     form {
         margin-bottom: 20px;
     }
@@ -272,6 +289,7 @@
         z-index: 999999999 !important;
         padding: 10px;
     }
+
     .reload {
         position: fixed;
         right: 20px;
@@ -346,6 +364,7 @@
         z-index: 999999999 !important;
         padding: 10px;
     }
+
     .reload {
         position: fixed;
         right: 20px;
@@ -368,6 +387,7 @@
         font-size: 0;
         color: transparent;
     }
+
     .ngdialog-content {
         left: 5%;
         max-width: 327px;
