@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "dependencies": {
     "angular-confirm": "^1.2.5",
+    "checklist-model": "^0.10.0",
     "gulp-htmlmin": "^1.3.0"
   },
   "scripts": {

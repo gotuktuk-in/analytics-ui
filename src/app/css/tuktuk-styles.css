@@ -1772,6 +1772,23 @@ span.img-top {
     overflow: auto;
 }
 
+.payout-daywise-div {
+    position: fixed;
+    height: 95%;
+    width: 100%;
+    z-index: 99;
+    background: rgba(255, 255, 255, 0.8);
+    top: 54px;
+    overflow: auto;
+}
+
+.close-payout-daywise-div {
+    position: absolute;
+    top: 2%;
+    right: 1.5%;
+    cursor: pointer;
+}
+
 /*.close-ds-graph-div {*/
 /*position: absolute;*/
 /*top: 2%;*/
