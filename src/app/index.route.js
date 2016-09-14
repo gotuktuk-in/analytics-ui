@@ -54,7 +54,7 @@
                     url: '/live/:city/:vehicleType',
                     templateUrl: 'app/live/live.html',
                     controller: 'LiveController',
-                    controllerAs: 'vm',
+                    controllerAs: 'vm'
                     /*resolve: {
                         heatmapResolve: function (LiveService) {
                             LiveService.heatmap({
@@ -76,6 +76,12 @@
                 url: '/drivers/onboarding/:city/:vehicleType',
                 templateUrl: 'app/drivers/onboarding.html',
                 controller: 'OnboardingController',
+                controllerAs: 'vm'
+            })
+            .state('home.payout', {
+                url: '/drivers/payout/:city/:vehicleType',
+                templateUrl: 'app/drivers/payout.html',
+                controller: 'PayoutController',
                 controllerAs: 'vm'
             })
             .state('home.offers', {

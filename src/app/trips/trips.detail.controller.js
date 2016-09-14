@@ -99,6 +99,35 @@
                 })
         };
 
+
+        $scope.confirmCancelTrip = function () {
+            $confirm({
+                text: 'Are you sure want cancel?',
+                title: 'Are you Sure?',
+                ok: 'Yes',
+                cancel: 'No'
+            })
+                .then(function () {
+                    vm.cancelTrip();
+                });
+        };
+
+        vm.cancelTrip = function () {
+            TripsService.cancelTrip(
+                {
+                    id: $stateParams.id
+                }, function (response) {
+                    toastr.success("Cancelled");
+                }, function (error) {
+                    if (error.status == 500) {
+                        toastr.error("Permission Denied");
+                    } else {
+                        toastr.error(error);
+                    }
+
+                })
+        };
+
         vm.getBid = function () {
             TripsService.getBidDetail(
                 {

@@ -24,6 +24,8 @@
             Failed(NDA)
         </span>
         <span ng-if="selectedTrip.state == 82" style="white-space: nowrap">Terminated</span>
+        <!--<span>&nbsp;|&nbsp;</span>-->
+        <!--<a href="" ng-click="confirmCancelTrip()">Cancel Trip</a>-->
         <span>&nbsp;|&nbsp;</span>
             <span ng-if="showHide"><a href="" ng-click="vm.getBid();">Show Candidates</a></span>
             <span ng-if="!showHide"><a href="" ng-click="vm.clearBid();">Clear Candidates</a></span>

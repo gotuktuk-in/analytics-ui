@@ -20,15 +20,15 @@ function LiveService($q, $resource, API) {
         {
             getOverview: {
                 method: 'GET',
-                url:   url + 'overview/live/',
+                url:   url + 'overview/live/'
             },
             getTrips: {
                 method: 'GET',
-                url:   url + 'trip/live/',
+                url:   url + 'trip/live/'
             },
             getDrivers: {
                 method: 'GET',
-                url:   url + 'driver/live/',
+                url:   url + 'driver/live/'
             },
             getCancelTripsDriver: {
                 method: 'GET',
