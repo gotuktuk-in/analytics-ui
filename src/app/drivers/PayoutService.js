@@ -37,6 +37,11 @@ function PayoutService($q, $resource, API) {
                 method: 'GET',
                 url:   url + 'drivers/invoice/detail/:drivers',
                 isArray:false
+            },
+            getWeeks: {
+                method: 'GET',
+                url:   url + 'payout/weeks',
+                isArray:true
             }
         }
     );

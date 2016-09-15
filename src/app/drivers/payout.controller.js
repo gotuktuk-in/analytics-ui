@@ -11,6 +11,8 @@
         var vm = this;
         $scope.dayWiseList = false;
         $scope.amountPaid = false;
+        $scope.publishAllBtn = false;
+
         var today = moment();
         vm.date = moment().format("ddd, MMM Do YYYY");
         var current = moment();
@@ -29,6 +31,20 @@
         vm.formattedEndWeekDs = vm.endWeek.format("ddd, MMM Do YYYY");
         vm.formattedEndWeek = vm.endWeek.format("YYYYMMDD");
 
+        PayoutService.getWeeks(
+            function (response) {
+                getWeeks(response);
+            }, function (err) {
+                console.log(err);
+                $scope.error = true;
+            });
+
+        function getWeeks(response) {
+            $scope.startOnCurrent = (response.length) - 1;
+            $scope.weekList = response;
+            console.log($scope.weekList);
+        }
+
         vm.changeDate = function (to) {
             if (to == 'next') {
 
@@ -38,7 +54,6 @@
 
             }
         };
-
 
         function getInvoiceListData() {
             PayoutService.getInvoiceList({
@@ -53,6 +68,32 @@
         }
 
         getInvoiceListData();
+
+        // checkbox start
+
+        $scope.addDriver = [];
+
+        $scope.checkedForPub = function (drID) {
+            if ($scope.addDriver.indexOf(drID) === -1) {
+                $scope.addDriver.push(drID);
+                $scope.publishAllBtn = true;
+            }
+            else {
+                $scope.addDriver.splice($scope.addDriver.indexOf(drID), 1);
+            }
+            console.log($scope.addDriver);
+        };
+
+        $scope.removeAllChecked = function () {
+            $scope.addDriver = [];
+            console.log($scope.addDriver);
+            $scope.publishAllBtn = false;
+            vm.setCheck = false;
+
+        };
+
+        //end
+
 
         $scope.confirmPublish = function (index) {
             $confirm({
@@ -69,11 +110,13 @@
         vm.invoiceListPublish = function (index) {
             PayoutService.invoiceListPublish(
                 {
-                    startDate: $scope.data[index].startDate,
-                    endDate: $scope.data[index].endDate,
-                    drivers: [$scope.data[index].driver]
+                    startDate: vm.formattedStartWeek,
+                    endDate: vm.formattedEndWeek,
+                    drivers: $scope.addDriver
                 },
                 function (response) {
+                    $scope.addDriver = [];
+                    $scope.publishAllBtn = false;
                     vm.msg = 'Success';
                     toastr.success(vm.msg);
                     getInvoiceListData();
@@ -98,11 +141,11 @@
         vm.invoiceListPaid = function (index) {
             PayoutService.invoiceListPaid(
                 {
-                    drivers:$scope.data[index].driver
-                },{
+                    drivers: $scope.data[index].driver
+                }, {
                     startDate: $scope.data[index].startDate,
                     endDate: $scope.data[index].endDate,
-                    paidAmount: vm.paidAmount
+                    paidAmount: $scope.data[index].closingBalance
                 },
                 function (response) {
                     vm.msg = 'Amount Paid';
@@ -115,17 +158,6 @@
                 });
         };
 
-        // checkbox start
-
-        vm.drForPublish = [];
-
-        //vm.check = function(value, drID) {
-        //    vm.drForPublish.push({drivers: drID});
-        //    console.log(vm.drForPublish);
-        //};
-
-        //end
-
 
         vm.viewDaywiseListData = function (index) {
             PayoutService.viewDaywiseList(
@@ -136,8 +168,10 @@
                 },
                 function (response) {
                     $scope.dataDay = response;
+                    $scope.dataSettledTrip = $scope.dataDay.settledTrip;
                     $scope.dayWiseList = true;
                     vm.emi = $scope.dataDay.emi;
+                    vm.settled = $scope.dataDay.settled;
                     vm.totalTripCount = $scope.dataDay.balance.totalTripCount;
                     vm.totalEarning = $scope.dataDay.balance.totalEarning;
                     vm.cashCollection = $scope.dataDay.balance.cashCollection;
