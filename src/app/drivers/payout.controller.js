@@ -11,6 +11,7 @@
         var vm = this;
         vm.prev = true;
         vm.next = false;
+        $scope.editable = true;
         $scope.dayWiseList = false;
         $scope.addFineModel = false;
         $scope.amountPaid = false;
@@ -71,6 +72,7 @@
                 vm.getDataList();
                 if (i == 0) {
                     vm.next = false;
+                    $scope.editable = true;
                 }
                 vm.prev = true;
             }
@@ -81,6 +83,7 @@
                     vm.prev = false;
                 }
                 vm.next = true;
+                $scope.editable = false;
             }
         };
 
