@@ -1,6 +1,7 @@
 <style>
     body {
         background: #fff !important;
+        overflow: auto;
     }
 
     .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
@@ -45,6 +46,24 @@
         margin: -5px 0 0 !important;
         border-color: #ddd !important;
     }
+    @media only screen and (min-width: 1440px) {
+        #scrollable-area {
+            margin: auto;
+            width: 100%;
+            height: 750px;
+            border: 0px solid #ccc;
+            overflow-y: scroll;
+        }
+    }
+    @media only screen and (max-width: 1280px) {
+        #scrollable-area {
+            margin: auto;
+            width: 100%;
+            height: 650px;
+            border: 0px solid #ccc;
+            overflow-y: scroll;
+        }
+    }
 </style>
 <div class="container-fluid">
     <div class="row" style="z-index:99; position:fixed; width:auto; padding:10px 0; left:53px;">
@@ -76,23 +95,26 @@
             <!--<i class="fa fa-share" aria-hidden="true"></i> Publish All </a>-->
 
 
-            <h4> &nbsp; &nbsp;DRIVER PAYOUT <a href="" data-toggle="tooltip"
-                                               tooltip="Publish All"
-                                               tooltip-placement="top" class="btn btn-default btn-xs pull-right"
-                                               ng-click="confirmPublish();"
-                                               style="margin: 10px 0 !important; padding: 5px !important;">
-                <i class="fa fa-share" aria-hidden="true"></i> Publish All </a></h4>
+            <h4> &nbsp; &nbsp;DRIVER PAYOUT</h4>
 
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="table-responsive data-table-payout" style="max-height: 800px;">
-                <table ng-table="payoutTableParams"
+            <div class="data-table-payout" id="scrollable-area">
+                <a href=""
+                   data-toggle="tooltip"
+                   tooltip="Publish All"
+                   tooltip-placement="top" class="btn btn-default btn-xs pull-right"
+                   ng-click="confirmPublish();"
+                   style="margin:0 !important;
+    padding: 5px !important;
+    position: absolute;
+    right: 15px;
+    top: -38px;">
+                    <i class="fa fa-share" aria-hidden="true"></i> Publish All </a>
+                <table ng-table="payoutTableParams" fixed-table-headers="scrollable-area"
                        class="table table-bordered table-striped text-center">
-                    <tbody>
+
                     <tr ng-repeat="row in dataNew track by $index">
-                        <!--<td data-title="'ID'" class="text-left" width="100">-->
-                        <!--{{row.driver}}-->
-                        <!--</td>-->
                         <td data-title="'Name'" sortable="'name'" class="text-left" width="100">
                             <a target="_blank"
                                ui-sref="home.drivers_detail({driverId:row.driver})">
@@ -102,15 +124,15 @@
                         <td data-title="'Trips'" sortable="'tripCount'" class="text-center" width="100">
                             {{row.tripCount}}
                         </td>
-                        <td data-title="'Earning&nbsp;-&nbsp;Trip'" sortable="'tripEarning'" class="text-right"
+                        <td data-title="'Trip&nbsp;Ear'" sortable="'tripEarning'" class="text-right"
                             width="100">
                             {{row.tripEarning | number:2}}
                         </td>
-                        <td data-title="'Earning&nbsp;-&nbsp;Offer'" sortable="'offerEarning'" class="text-right"
+                        <td data-title="'Offer&nbsp;Ear'" sortable="'offerEarning'" class="text-right"
                             width="100">
                             {{row.offerEarning | number:2}}
                         </td>
-                        <td data-title="'Earning&nbsp;-&nbsp;Bonus'" sortable="'bonusEarning'" class="text-right"
+                        <td data-title="'Bonus&nbsp;Ear'" sortable="'bonusEarning'" class="text-right"
                             width="100">
                             {{row.bonusEarning | number:2}}
                         </td>
@@ -136,11 +158,11 @@
                             </a>
 
                         </td>
-                        <td data-title="'Opening&nbsp;Balance'" sortable="'openingBalance'" class="text-right"
+                        <td data-title="'Balance&nbsp;Opn'" sortable="'openingBalance'" class="text-right"
                             width="100">
                             {{row.openingBalance | number:2}}
                         </td>
-                        <td data-title="'Closing&nbsp;Balance'" sortable="'closingBalance'" class="text-right"
+                        <td data-title="'Balance&nbsp;Cls'" sortable="'closingBalance'" class="text-right"
                             width="100">
                             {{row.closingBalance | number:2}}
                         </td>
@@ -152,10 +174,10 @@
                                 {{row.fine | number:2}}
                             </a>
                         </td>
-                        <td data-title="'Paid&nbsp;Amount'" class="text-right" ng-if="row.draft" width="100">
+                        <td data-title="'Paid&nbsp;Amt'" class="text-right" ng-if="!editable" width="100">
                             {{row.paidAmount | number:2}}
                         </td>
-                        <td data-title="'Paid&nbsp;Amount'" class="text-right" ng-if="!row.draft" width="100">
+                        <td data-title="'Paid&nbsp;Amt'" class="text-right" ng-if="editable" width="100">
                             <form class="form-inline text-left">
                                 <div class="form-group">
                                     <input class="form-control text-left"
@@ -177,10 +199,7 @@
                                 </div>
                             </form>
                         </td>
-                        <!--<td data-title="'Paid On'" class="text-left" width="100">-->
-                        <!--<span ng-if="row.paidOn">{{(row.paidOn)*1000 | date:"dd-MM-yy h:mma"}}</span>-->
-                        <!--</td>-->
-                        <td data-title="'Last&nbsp;Update'" class="text-left" width="100">
+                        <td data-title="'Last&nbsp;Upt'" class="text-left" width="100">
                             {{(row.updatedOn)*1000 | date:"dd-MM-yy h:mma"}}<span ng-if="row.updatedBy">,</span>
                             {{row.updatedBy}}
                         </td>
@@ -214,7 +233,6 @@
                         <!--</a>-->
                         <!--</td>-->
                     </tr>
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -422,7 +440,9 @@
                                               ng-model="vm.fineReason"></textarea>
                                         </div>
                                         <p class="help-block"></p>
-                                        <button type="button" class="btn btn-primary" ng-click="vm.addFine($index)">Save</button>
+                                        <button type="button" class="btn btn-primary" ng-click="vm.addFine($index)">
+                                            Save
+                                        </button>
 
                                     </div>
                                 </div>
