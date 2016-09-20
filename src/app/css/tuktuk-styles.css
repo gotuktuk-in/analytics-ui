@@ -1782,9 +1782,24 @@ span.img-top {
     height: 95%;
     width: 100%;
     z-index: 99;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.95);
     top: 54px;
     overflow: auto;
+}
+.payout-fine-div {
+    position: fixed;
+    height: 95%;
+    width: 100%;
+    z-index: 99;
+    background: rgba(255, 255, 255, 0.95);
+    top: 54px;
+    overflow: auto;
+}
+.close-payout-fine-div {
+    position: absolute;
+    top: 2%;
+    right: 1.5%;
+    cursor: pointer;
 }
 
 .close-payout-daywise-div {

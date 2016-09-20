@@ -23,9 +23,19 @@ function PayoutService($q, $resource, API) {
                 url:   url + 'drivers/invoice/publish',
                 isArray:false
             },
+            invoiceListPublishAll: {
+                method: 'PUT',
+                url:   url + 'allDrivers/invoice/publish',
+                isArray:false
+            },
             invoiceListPaid: {
                 method: 'POST',
                 url:   url + 'drivers/invoice/paid/:drivers',
+                isArray:false
+            },
+            addFine: {
+                method: 'PUT',
+                url:   url + 'drivers/invoice/fine/:drivers',
                 isArray:false
             },
             getInvoiceList: {
