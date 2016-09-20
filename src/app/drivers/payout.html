@@ -2,26 +2,55 @@
     body {
         background: #fff !important;
     }
+
     .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
         padding: 6px 4px;
-        line-height: 1.2;
-        font-size: 10px !important;
-        vertical-align: middle;
+        vertical-align: top;
     }
-    .table > thead > tr > th span{font-size: 10px !important;}
-    .form-control {
+
+    .table > thead > tr > th span {
+    }
+
+    div.data-table-payout .form-control {
         display: block;
         width: 100%;
         height: 24px;
         padding: 2px 4px;
-        font-size: 10px;
-        line-height: 24px;
+    }
+
+    div.data-table-payout .form-control {
+        max-width: 70px !important;
+        padding: 0 0 0 4px !important;
+        line-height: 0 !important;
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+        font-size: inherit !important;
+        vertical-align: top !important;
+        margin: -2px 0 0 !important;
+        height: 18px !important;
+        border-radius: 0 !important;
+    }
+
+    div.data-table-payout .form-inline {
+        padding: 0 !important;
+        margin: 0 !important;
+        vertical-align: top !important;
+        height: auto !important;
+    }
+
+    div.data-table-payout .btn.btn-default.btn-xs {
+        padding: 0px 4px !important;
+        font-size: 11px !important;
+        border-radius: 0 !important;
+        margin: -5px 0 0 !important;
+        border-color: #ddd !important;
     }
 </style>
 <div class="container-fluid">
     <div class="row" style="z-index:99; position:fixed; width:auto; padding:10px 0; left:53px;">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <span ng-click="vm.changeDate('prev')" ng-if="vm.prev" style="display: inline-block; padding: 7px;">&#10094;</span>
+            <span ng-click="vm.changeDate('prev')" ng-if="vm.prev"
+                  style="display: inline-block; padding: 7px;">&#10094;</span>
             <span class="text-center" ng-model="date"
                   style="display: inline-block; padding: 7px 0;">{{vm.formattedStartWeekDs}} - {{vm.formattedEndWeekDs}}</span> <span
                 ng-click="vm.changeDate('next')" ng-if="vm.next"
@@ -36,111 +65,154 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <!--<a href="" data-toggle="tooltip" ng-if="publishAllBtn"-->
-               <!--tooltip="Publish All"-->
-               <!--tooltip-placement="top" class="btn btn-default btn-xs pull-right"-->
-               <!--ng-click="removeAllChecked($index);">-->
-                <!--<i class="fa fa-remove" aria-hidden="true"></i> Clear All </a>-->
-            <a href="" data-toggle="tooltip" ng-if="publishAllBtn"
-                     tooltip="Publish All"
-                     tooltip-placement="top" class="btn btn-default btn-xs pull-right mr-rt-5"
-                     ng-click="confirmPublish();">
-                <i class="fa fa-share" aria-hidden="true"></i> Publish All </a>
+            <!--tooltip="Publish All"-->
+            <!--tooltip-placement="top" class="btn btn-default btn-xs pull-right"-->
+            <!--ng-click="removeAllChecked($index);">-->
+            <!--<i class="fa fa-remove" aria-hidden="true"></i> Clear All </a>-->
+            <!--<a href="" data-toggle="tooltip" ng-if="publishAllBtn"-->
+            <!--tooltip="Publish All"-->
+            <!--tooltip-placement="top" class="btn btn-default btn-xs pull-right mr-rt-5"-->
+            <!--ng-click="confirmPublish();">-->
+            <!--<i class="fa fa-share" aria-hidden="true"></i> Publish All </a>-->
 
-            <h4> &nbsp; &nbsp;DRIVER PAYOUT</h4>
+
+            <h4> &nbsp; &nbsp;DRIVER PAYOUT <a href="" data-toggle="tooltip"
+                                               tooltip="Publish All"
+                                               tooltip-placement="top" class="btn btn-default btn-xs pull-right"
+                                               ng-click="confirmPublish();"
+                                               style="margin: 10px 0 !important; padding: 5px !important;">
+                <i class="fa fa-share" aria-hidden="true"></i> Publish All </a></h4>
+
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="table-responsive" style="max-height: 800px;">
+            <div class="table-responsive data-table-payout" style="max-height: 800px;">
                 <table ng-table="payoutTableParams"
                        class="table table-bordered table-striped text-center">
                     <tbody>
-                    <tr ng-repeat="row in data track by $index">
-                        <td data-title="'ID'" class="text-left" width="100">
-                            {{row.driver}}
+                    <tr ng-repeat="row in dataNew track by $index">
+                        <!--<td data-title="'ID'" class="text-left" width="100">-->
+                        <!--{{row.driver}}-->
+                        <!--</td>-->
+                        <td data-title="'Name'" sortable="'name'" class="text-left" width="100">
+                            <a target="_blank"
+                               ui-sref="home.drivers_detail({driverId:row.driver})">
+                                {{row.name}}
+                            </a>
                         </td>
-                        <td data-title="'Name'" class="text-left" width="100">
-                            {{row.name}}
-                        </td>
-                        <td data-title="'Trip Count'" class="text-center" width="100">
+                        <td data-title="'Trips'" sortable="'tripCount'" class="text-center" width="100">
                             {{row.tripCount}}
                         </td>
-                        <td data-title="'Trip Earning'" class="text-right" width="100">
+                        <td data-title="'Earning&nbsp;-&nbsp;Trip'" sortable="'tripEarning'" class="text-right"
+                            width="100">
                             {{row.tripEarning | number:2}}
                         </td>
-                        <td data-title="'Cash Collected'" class="text-right" width="100">
-                            {{row.cashCollected | number:2}}
-                        </td>
-                        <td data-title="'Trip Tuktuk Commission'" class="text-right" width="100">
-                            {{row.tripTuktukCommission | number:2}}
-                        </td>
-                        <td data-title="'Bonus Earning'" class="text-right" width="100">
-                            {{row.bonusEarning | number:2}}
-                        </td>
-                        <td data-title="'Bonus Tuktuk Commission'" class="text-right" width="100">
-                            {{row.bonusTuktukCommission | number:2}}
-                        </td>
-                        <td data-title="'Offer Earning'" class="text-right" width="100">
+                        <td data-title="'Earning&nbsp;-&nbsp;Offer'" sortable="'offerEarning'" class="text-right"
+                            width="100">
                             {{row.offerEarning | number:2}}
                         </td>
-                        <td data-title="'Offer Tuktuk Commission'" class="text-right" width="100">
-                            {{row.offerTuktukCommission | number:2}}
+                        <td data-title="'Earning&nbsp;-&nbsp;Bonus'" sortable="'bonusEarning'" class="text-right"
+                            width="100">
+                            {{row.bonusEarning | number:2}}
                         </td>
-                        <td data-title="'tCash Earning'" class="text-right" width="100">
-                            {{row.tcashEarning | number:2}}
+                        <td data-title="'Cash'" sortable="'cash'" class="text-right" width="100">
+                            {{row.cashCollected | number:2}}
                         </td>
-
-                        <td data-title="'Trip Settled Amount'" class="text-right" width="100">
+                        <td data-title="'Commission'" class="text-right" width="100">
+                            {{(row.tripTuktukCommission + row.bonusTuktukCommission + row.offerTuktukCommission) |
+                            number:2}}
+                        </td>
+                        <td data-title="'Settlements'" sortable="'settlement'" class="text-right" width="100">
                             {{row.tripSettledAmount | number:2}}
                         </td>
-                        <td data-title="'Balance'" class="text-right" width="100">
-                            {{row.balance | number:2}}
+                        <td data-title="'tCash'" sortable="'tCASH'" class="text-right" width="100">
+                            {{row.tcashEarning | number:2}}
                         </td>
-                        <td data-title="'Opening Balance'" class="text-right" width="100">
-                            {{row.openingBalance | number:2}}
-                        </td>
-                        <td data-title="'Closing Balance'" class="text-right" width="100">
-                            {{row.closingBalance | number:2}}
-                        </td>
-
-                        <td data-title="'Paid Amount'" class="text-center" ng-if="row.draft" width="100">
-                            {{row.paidAmount | number:2}}
-                        </td>
-                        <td data-title="'Paid Amount'" class="text-center" ng-if="!row.draft" width="100">
-                            <input class="form-control" type="number" name="inputPaid" ng-value="row.closingBalance"
-                                   style="min-width: 100px"  ng-model="row.newClosingBalance" ng-change="vm.checkValueCB($index)">
-                        </td>
-                        <td data-title="'Paid On'" class="text-left" width="100">
-                            <span ng-if="row.paidOn">{{(row.paidOn)*1000 | date:"dd-MM-yy h:mma"}}</span>
-                        </td>
-                        <td data-title="'Updated On'" class="text-left" width="100">
-                            {{(row.updatedOn)*1000 | date:"dd-MM-yy h:mma"}}
-                        </td>
-                        <td data-title="'Updated By'" class="text-left" width="100">
-                            {{row.updatedBy}}
-                        </td>
-                        <!--<td data-title="'Status'" class="text-center">-->
-                            <!--{{row.draft}} {{!amountPaid}}-->
-                        <!--</td>-->
-                        <td data-title="'Action'" class="text-right" style="min-width: 90px !important;" width="100">
-                            <input ng-if="row.draft" type="checkbox" ng-model="drID.checked" ng-click="checkedForPub(row.driver)" ng-checked="vm.setCheck">
-                            <a href="" data-toggle="tooltip"
-                               tooltip="Pay"
-                               tooltip-placement="top" ng-if="!row.draft && !row.paidStatus" class="btn btn-success btn-xs"
-                               ng-click="confirmPaid($index);" style="padding:1px 8px;">
-                                <i class="fa fa-inr" aria-hidden="true"></i>
-                            </a>
-                            <a href="" data-toggle="tooltip"
-                               tooltip="Publish"
-                               tooltip-placement="top" ng-if="row.draft" class="btn btn-warning btn-xs"
-                               ng-click="confirmPublish($index);">
-                                <i class="fa fa-share" aria-hidden="true"></i>
-                            </a>
+                        <td data-title="'Balance'" sortable="'balance'" class="text-right" width="100">
                             <a href="" data-toggle="tooltip"
                                tooltip="View"
-                               tooltip-placement="top" class="btn btn-default btn-xs"
+                               tooltip-placement="top" class=""
                                ng-click="vm.viewDaywiseListData($index);">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                {{row.balance | number:2}}
+                            </a>
+
+                        </td>
+                        <td data-title="'Opening&nbsp;Balance'" sortable="'openingBalance'" class="text-right"
+                            width="100">
+                            {{row.openingBalance | number:2}}
+                        </td>
+                        <td data-title="'Closing&nbsp;Balance'" sortable="'closingBalance'" class="text-right"
+                            width="100">
+                            {{row.closingBalance | number:2}}
+                        </td>
+                        <td data-title="'Fine'" sortable="'fine'" class="text-right" width="100">
+                            <a href="" data-toggle="tooltip"
+                               tooltip="View"
+                               tooltip-placement="top" class=""
+                               ng-click="vm.showFineModel($index, row.driver, row.fine, row.fineReason);">
+                                {{row.fine | number:2}}
                             </a>
                         </td>
+                        <td data-title="'Paid&nbsp;Amount'" class="text-right" ng-if="row.draft" width="100">
+                            {{row.paidAmount | number:2}}
+                        </td>
+                        <td data-title="'Paid&nbsp;Amount'" class="text-right" ng-if="!row.draft" width="100">
+                            <form class="form-inline text-left">
+                                <div class="form-group">
+                                    <input class="form-control text-left"
+                                           type="number"
+                                           name="inputPaid"
+                                           ng-value="row.closingBalance | number:2"
+                                           ng-model="row.newClosingBalance"
+                                           ng-change="vm.checkValueCB($index)">
+                                </div>
+                                <div class="form-group">
+                                    <a href=""
+                                       data-toggle="tooltip"
+                                       tooltip="Pay"
+                                       tooltip-placement="top" ng-if="!row.draft && !row.paidStatus"
+                                       class="btn btn-default btn-xs"
+                                       ng-click="confirmPaid($index);"
+                                       style="padding:1px 8px;">Pay
+                                    </a>
+                                </div>
+                            </form>
+                        </td>
+                        <!--<td data-title="'Paid On'" class="text-left" width="100">-->
+                        <!--<span ng-if="row.paidOn">{{(row.paidOn)*1000 | date:"dd-MM-yy h:mma"}}</span>-->
+                        <!--</td>-->
+                        <td data-title="'Last&nbsp;Update'" class="text-left" width="100">
+                            {{(row.updatedOn)*1000 | date:"dd-MM-yy h:mma"}}<span ng-if="row.updatedBy">,</span>
+                            {{row.updatedBy}}
+                        </td>
+                        <!--<td data-title="'Updated By'" class="text-left" width="100">-->
+                        <!--{{row.updatedBy}}-->
+                        <!--</td>-->
+                        <!--<td data-title="'Status'" class="text-center">-->
+                        <!--{{row.draft}} {{!amountPaid}}-->
+                        <!--</td>-->
+                        <!--<td data-title="'Action'" class="text-right" style="min-width: 90px !important;" width="100">-->
+                        <!--<input ng-if="row.draft" type="checkbox" ng-model="drID.checked"-->
+                        <!--ng-click="checkedForPub(row.driver)" ng-checked="vm.setCheck">-->
+                        <!--<a href="" data-toggle="tooltip"-->
+                        <!--tooltip="Pay"-->
+                        <!--tooltip-placement="top" ng-if="!row.draft && !row.paidStatus"-->
+                        <!--class="btn btn-success btn-xs"-->
+                        <!--ng-click="confirmPaid($index);" style="padding:1px 8px;">-->
+                        <!--<i class="fa fa-inr" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                        <!--<a href="" data-toggle="tooltip"-->
+                        <!--tooltip="Publish"-->
+                        <!--tooltip-placement="top" ng-if="row.draft" class="btn btn-warning btn-xs"-->
+                        <!--ng-click="confirmPublish($index);">-->
+                        <!--<i class="fa fa-share" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                        <!--<a href="" data-toggle="tooltip"-->
+                        <!--tooltip="View"-->
+                        <!--tooltip-placement="top" class="btn btn-default btn-xs"-->
+                        <!--ng-click="vm.viewDaywiseListData($index);">-->
+                        <!--<i class="fa fa-eye" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                        <!--</td>-->
                     </tr>
                     </tbody>
                 </table>
@@ -151,168 +223,214 @@
                     class="fa fa-remove"></i></span>
 
             <div class="row" style="padding:5% 10%;">
-                <div class="col-md-2 col-sm-12 col-xs-12"></div>
-                <div class="col-md-8 col-sm-12 col-xs-12">
-                    <div class="table-responsive" style="background: #fff;">
-                        <table class="table table-bordered table-striped text-center">
-                            <thead>
-                            <tr>
-                                <th class="text-center" colspan="2" width="100">Date</th>
-                                <th class="text-center" width="100">Type</th>
-                                <th class="text-center" width="100">Trip Count</th>
-                                <th class="text-right" width="100">Earning</th>
-                                <th class="text-right" width="100">Cash Collected</th>
-                                <th class="text-right" width="100">Tuktuk Share</th>
-                                <th class="text-right" width="100">Balance</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="row in dataDay.trip">
-                                <td class="text-left" colspan="2" width="100">
-                                    {{(row.date)*1000 | date:"dd-MM-yy h:mma"}}
-                                </td>
-                                <td class="text-left" style="padding: 0 !important;" colspan="6">
-                                    <table class="table  table-striped text-center no-mr">
-                                        <tr ng-repeat="row1 in row.values">
-                                            <td class="text-center" width="100">
-                                                {{row1.action}}
-                                            </td>
-                                            <td class="text-center" width="100">
-                                                {{row1.tripCount}}
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                {{row1.earning | number:2}}
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                {{row1.cashCollected | number:2}}
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                {{row1.commission | number:2}}
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                {{row1.balance | number:2}}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="8" style="padding: 0">
-                                    <table class="table  table-striped text-center no-mr">
-                                        <tr>
-                                            <td class="text-center" colspan="2" width="100"></td>
-                                            <td class="text-left" width="100">
-                                                <b>EMI</b>
-                                            </td>
-                                            <td class="text-center" width="100">
+                <div class="col-md-1 col-sm-12 col-xs-12"></div>
+                <div class="col-md-10 col-sm-12 col-xs-12">
+                    <div style="background: #fff; padding:40px;">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped text-center">
+                                <thead>
+                                <tr>
+                                    <th class="text-center" colspan="2" width="100">Date</th>
+                                    <th class="text-center" width="100">Type</th>
+                                    <th class="text-center" width="100">Trip Count</th>
+                                    <th class="text-right" width="100">Earning</th>
+                                    <th class="text-right" width="100">Cash Collected</th>
+                                    <th class="text-right" width="100">Tuktuk Share</th>
+                                    <th class="text-right" width="100">Balance</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="row in dataDay.trip">
+                                    <td class="text-left" colspan="2" width="100">
+                                        {{(row.date)*1000 | date:"dd-MM-yy h:mma"}}
+                                    </td>
+                                    <td class="text-left" style="padding: 0 !important;" colspan="6">
+                                        <table class="table  table-striped text-center no-mr"
+                                               style="background: transparent !important;">
+                                            <tr ng-repeat="row1 in row.values"
+                                                style="background: transparent !important;">
+                                                <td class="text-center" width="100">
+                                                    {{row1.action}}
+                                                </td>
+                                                <td class="text-center" width="100">
+                                                    {{row1.tripCount}}
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    {{row1.earning | number:2}}
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    {{row1.cashCollected | number:2}}
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    {{row1.commission | number:2}}
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    {{row1.balance | number:2}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="8" style="padding: 0">
+                                        <table class="table  table-striped text-center no-mr">
+                                            <tr>
+                                                <td class="text-center" colspan="2" width="100"></td>
+                                                <td class="text-left" width="100">
+                                                    <b>EMI</b>
+                                                </td>
+                                                <td class="text-center" width="100">
 
-                                            </td>
-                                            <td class="text-right" width="100">
+                                                </td>
+                                                <td class="text-right" width="100">
 
-                                            </td>
-                                            <td class="text-right" width="100">
+                                                </td>
+                                                <td class="text-right" width="100">
 
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                <b> {{vm.emi | number:2}}</b>
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                <b> - {{vm.emi | number:2}}</b>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center" colspan="2" width="100"></td>
-                                            <td class="text-left" width="100">
-                                                <b>Settled</b>
-                                            </td>
-                                            <td class="text-center" width="100">
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    <b> {{vm.emi | number:2}}</b>
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    <b> - {{vm.emi | number:2}}</b>
+                                                </td>
+                                            </tr>
+                                            <tr style="background: transparent;">
+                                                <td class="text-center" colspan="2" width="100"></td>
+                                                <td class="text-left" width="100">
+                                                    <b>Settled</b>
+                                                </td>
+                                                <td class="text-center" width="100">
 
-                                            </td>
-                                            <td class="text-right" width="100">
+                                                </td>
+                                                <td class="text-right" width="100">
 
-                                            </td>
-                                            <td class="text-right" width="100">
+                                                </td>
+                                                <td class="text-right" width="100">
 
-                                            </td>
-                                            <td class="text-right" width="100">
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                <b>{{vm.settled | number:2}}</b>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="8" style="padding: 0">
-                                    <table class="table  table-striped text-center no-mr">
-                                        <tr>
-                                            <td class="text-center" colspan="2" width="100"></td>
-                                            <td class="text-left" width="100">
-                                                <b>Balance</b>
-                                            </td>
-                                            <td class="text-center" width="100">
-                                                <b>{{vm.totalTripCount}}</b>
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                <b>{{vm.totalEarning | number:2}}</b>
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                <b>{{vm.cashCollection | number:2}}</b>
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                <b>{{vm.totalShare | number:2}}</b>
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                <b>{{vm.totalBalance | number:2}}</b>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="table-responsive" style="background: #fff;">
-                        <table class="table table-bordered table-striped text-center">
-                            <thead>
-                            <tr>
-                                <th class="text-center" colspan="2" width="100">Settlement {{dataSettledTrip.sc}}</th>
-                                <th class="text-center" width="100">Trip ID</th>
-                                <th class="text-center" width="100">Updated On</th>
-                                <th class="text-right" width="100">Amount</th>
-                                <th class="text-right" width="100">Reason</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td class="text-left" colspan="2" width="100">
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    <b>{{vm.settled | number:2}}</b>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="8" style="padding: 0">
+                                        <table class="table  table-striped text-center no-mr">
+                                            <tr>
+                                                <td class="text-center" colspan="2" width="100"></td>
+                                                <td class="text-left" width="100">
+                                                    <b>Balance</b>
+                                                </td>
+                                                <td class="text-center" width="100">
+                                                    <b>{{vm.totalTripCount}}</b>
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    <b>{{vm.totalEarning | number:2}}</b>
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    <b>{{vm.cashCollection | number:2}}</b>
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    <b>{{vm.totalShare | number:2}}</b>
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    <b>{{vm.totalBalance | number:2}}</b>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped text-center">
+                                <thead>
+                                <tr>
+                                    <th class="text-center" colspan="2" width="100">Settlement {{dataSettledTrip.sc}}
+                                    </th>
+                                    <th class="text-center" width="100">Trip ID</th>
+                                    <th class="text-center" width="100">Updated On</th>
+                                    <th class="text-right" width="100">Amount</th>
+                                    <th class="text-right" width="100">Reason</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="text-left" colspan="2" width="100">
 
-                                </td>
-                                <td class="text-left" style="padding: 0 !important;" colspan="6">
-                                    <table class="table  table-striped text-center no-mr">
-                                        <tr ng-repeat="row3 in dataSettledTrip.va">
-                                            <td class="text-center" width="100">
-                                                {{row3.tr}}
-                                            </td>
-                                            <td class="text-center" width="100">
-                                                {{(row3.up)*1000 | date:"dd-MM-yy h:mma"}}
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                {{row3.am}}
-                                            </td>
-                                            <td class="text-right" width="100">
-                                                {{row3.re}}
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                    </td>
+                                    <td class="text-left" style="padding: 0 !important;" colspan="6">
+                                        <table class="table  table-striped text-center no-mr">
+                                            <tr ng-repeat="row3 in dataSettledTrip.va" style="background: transparent;">
+                                                <td class="text-center" width="100">
+                                                    {{row3.tr}}
+                                                </td>
+                                                <td class="text-center" width="100">
+                                                    {{(row3.up)*1000 | date:"dd-MM-yy h:mma"}}
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    {{row3.am}}
+                                                </td>
+                                                <td class="text-right" width="100">
+                                                    {{row3.re}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-12 col-xs-12"></div>
+                <div class="col-md-1 col-sm-12 col-xs-12"></div>
+            </div>
+        </div>
+        <div class="payout-fine-div" ng-if="addFineModel">
+            <span ng-click="vm.hideFineModel($index);" class="close-payout-fine-div pull-right"><i
+                    class="fa fa-remove"></i></span>
+
+            <div class="row" style="padding:5% 10%;">
+                <div class="col-md-3 col-sm-12 col-xs-12"></div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div style="background: #fff; padding:40px;">
+                        <form class="form-inline">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <h4 style="margin-bottom: 20px;">Add/Edit Fine</h4>
+
+                                        <p class="help-block"></p>
+                                    </div>
+                                    <div class="form-group col-md-8 col-sm-8 col-xs-8">
+                                        <div class="input-group " style="width: 100%;">
+                                            <input class="form-control" type="number" placeholder="Fine"
+                                                   name="inputFine"
+                                                   ng-model="vm.fineAmount">
+                                        </div>
+                                        <p class="help-block"></p>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="input-group" style="width: 100%;">
+                                    <textarea class="form-control" placeholder="Reason" name="inputReason"
+                                              ng-model="vm.fineReason"></textarea>
+                                        </div>
+                                        <p class="help-block"></p>
+                                        <button type="button" class="btn btn-primary" ng-click="vm.addFine($index)">Save</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 col-xs-12"></div>
             </div>
         </div>
     </div>

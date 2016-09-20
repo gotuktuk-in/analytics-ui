@@ -6,12 +6,13 @@
         .controller('PayoutController', PayoutController);
 
     /** @ngInject */
-    function PayoutController($scope, $stateParams, $log, $rootScope, $interval, StaticDataService, PayoutService, $resource, toastr, ngDialog, $confirm) {
+    function PayoutController($scope, $stateParams, $log, $rootScope, $interval, StaticDataService, PayoutService, NgTableParams, $resource, toastr, ngDialog, $confirm) {
 
         var vm = this;
         vm.prev = true;
         vm.next = false;
         $scope.dayWiseList = false;
+        $scope.addFineModel = false;
         $scope.amountPaid = false;
         $scope.publishAllBtn = false;
 
@@ -26,6 +27,8 @@
         var newDate = new Date(year, month, date, hour);
         vm.formattedStartWeek;
         vm.formattedEndWeek;
+        vm.fineAmount = '';
+        vm.fineReason = '';
 
         //vm.startWeek = moment(newDate).startOf('week').isoWeekday(5).subtract(7, 'day');
         //vm.formattedStartWeekDs = vm.startWeek.format("ddd, MMM Do YYYY");
@@ -48,6 +51,7 @@
         vm.getDataList();
 
         var i = 0;
+
         function getWeeks(response) {
             var weekList = [];
             vm.totalWeek = response.length;
@@ -58,9 +62,9 @@
             vm.formattedEndWeek = moment(eWN * 1000).format("YYYYMMDD");
             vm.formattedStartWeekDs = moment(sWN * 1000).format("ddd, MMM Do YYYY");
             vm.formattedEndWeekDs = moment(eWN * 1000).format("ddd, MMM Do YYYY");
-            console.log(vm.formattedStartWeek + ':' + vm.formattedEndWeek);
             getInvoiceListData();
         }
+
         vm.changeDate = function (to) {
             if (to == 'next') {
                 i--;
@@ -79,18 +83,68 @@
                 vm.next = true;
             }
         };
+
+        // call to get data for the tables
         function getInvoiceListData() {
-            PayoutService.getInvoiceList({
-                endDate: vm.formattedEndWeek,
-                startDate: vm.formattedStartWeek
-            }, function (response) {
-                $scope.data = response;
-                console.log($scope.data);
-            }, function (err) {
-                console.log(err);
-                $scope.error = true;
-            });
+            $scope.payoutTableParams = new NgTableParams({
+                    page: 1, count: 20, sorting: {name: 'ASC'}
+                },
+                {
+                    counts: [],
+                    getData: function (params) {
+                        // ajax request to api
+                        var start = params.page();
+                        console.log("**************************");
+                        var orderBy = '';
+                        var field = '';
+                        if (params.orderBy().length > 0) {
+                            orderBy = params.orderBy()[0].substr(0, 1);
+                            field = params.orderBy()[0].substr(1);
+                            if (orderBy === "+") {
+                                orderBy = "DESC"
+                            }
+                            else {
+                                orderBy = "ASC"
+                            }
+                        }
+                        var dataObj = {
+                            endDate: vm.formattedEndWeek,
+                            startDate: vm.formattedStartWeek,
+                            type: orderBy,
+                            order: field
+                            //, start: start
+                            //, count: params.count()
+                        };
+                        return PayoutService.getInvoiceList(dataObj).$promise.then(function (data) {
+
+                            params.total(data.total); // recal. page nav controls
+
+                            $scope.dataNew = data;
+
+                            console.log('all data: ', data);
+                            if (data.length > 0) {
+                                $scope.tblNoData = false
+                            }
+                            else {
+                                $scope.tblNoData = true
+                            }
+                            return data;
+                        });
+                    }
+                });
         }
+
+        //function getInvoiceListData() {
+        //    PayoutService.getInvoiceList({
+        //        endDate: vm.formattedEndWeek,
+        //        startDate: vm.formattedStartWeek
+        //    }, function (response) {
+        //        $scope.data = response;
+        //    }, function (err) {
+        //        console.log(err);
+        //        $scope.error = true;
+        //    });
+        //}
 
         // checkbox start
 
@@ -126,21 +180,37 @@
                 cancel: 'No'
             })
                 .then(function () {
-                    vm.invoiceListPublish(index);
+                    //vm.invoiceListPublish(index);
+                    vm.invoiceListPublishAll();
                 });
         };
 
-        vm.invoiceListPublish = function (index) {
-            PayoutService.invoiceListPublish(
+        //vm.invoiceListPublish = function (index) {
+        //    PayoutService.invoiceListPublish(
+        //        {
+        //            startDate: vm.formattedStartWeek,
+        //            endDate: vm.formattedEndWeek,
+        //            drivers: $scope.addDriver
+        //        },
+        //        function (response) {
+        //            $scope.addDriver = [];
+        //            $scope.publishAllBtn = false;
+        //            vm.msg = 'Success';
+        //            toastr.success(vm.msg);
+        //            getInvoiceListData();
+        //        }, function (err) {
+        //            vm.msg = 'Already Published.';
+        //            toastr.error(err.message);
+        //        });
+        //};
+
+        vm.invoiceListPublishAll = function (index) {
+            PayoutService.invoiceListPublishAll(
                 {
-                    startDate: vm.formattedStartWeek,
-                    endDate: vm.formattedEndWeek,
-                    drivers: $scope.addDriver
+                    startDate: vm.formattedStartWeek, endDate: vm.formattedEndWeek
                 },
                 function (response) {
-                    $scope.addDriver = [];
-                    $scope.publishAllBtn = false;
-                    vm.msg = 'Success';
+                    vm.msg = 'All drivers published successfully.';
                     toastr.success(vm.msg);
                     getInvoiceListData();
                 }, function (err) {
@@ -161,21 +231,21 @@
                 });
         };
 
-        vm.checkValueCB = function(index){
-            if($scope.data[index].closingBalance < $scope.data[index].newClosingBalance){
-                $scope.data[index].newClosingBalance = 0;
-                console.log($scope.data[index].closingBalance)
+        vm.checkValueCB = function (index) {
+            if ($scope.dataNew[index].closingBalance < $scope.dataNew[index].newClosingBalance) {
+                $scope.dataNew[index].newClosingBalance = $scope.dataNew[index].closingBalance;
+                console.log($scope.dataNew[index].closingBalance)
             }
         };
 
         vm.invoiceListPaid = function (index) {
             PayoutService.invoiceListPaid(
                 {
-                    drivers: $scope.data[index].driver
+                    drivers: $scope.dataNew[index].driver
                 }, {
-                    startDate: $scope.data[index].startDate,
-                    endDate: $scope.data[index].endDate,
-                    paidAmount: $scope.data[index].newClosingBalance
+                    startDate: vm.formattedStartWeek,
+                    endDate: vm.formattedEndWeek,
+                    paidAmount: $scope.dataNew[index].newClosingBalance
                 },
                 function (response) {
                     vm.msg = 'Amount Paid';
@@ -192,9 +262,9 @@
         vm.viewDaywiseListData = function (index) {
             PayoutService.viewDaywiseList(
                 {
-                    startDate: $scope.data[index].startDate,
-                    endDate: $scope.data[index].endDate,
-                    drivers: [$scope.data[index].driver]
+                    startDate: vm.formattedStartWeek,
+                    endDate: vm.formattedEndWeek,
+                    drivers: [$scope.dataNew[index].driver]
                 },
                 function (response) {
                     $scope.dataDay = response;
@@ -213,10 +283,41 @@
                 });
         };
 
+        vm.addFine = function (index) {
+            PayoutService.addFine(
+                {
+                    drivers: vm.newDriverID
+                }, {
+                    startDate: vm.formattedStartWeek,
+                    endDate: vm.formattedEndWeek,
+                    fine: vm.fineAmount,
+                    fineReason: vm.fineReason
+                },
+                function (response) {
+                    vm.msg = 'Amount Paid';
+                    $scope.addFineModel = true;
+                    toastr.success(vm.msg);
+                    getInvoiceListData();
+                }, function (err) {
+                    vm.msg = 'Already Published.';
+                    toastr.error(err.message);
+                });
+        };
+
+
         vm.hideDayWiseList = function (index) {
             $scope.dayWiseList = false;
-        }
+        };
 
+        vm.hideFineModel = function (index) {
+            $scope.addFineModel = false;
+        };
+        vm.showFineModel = function (index, newDriverID, fineAmount, fineReason) {
+            $scope.addFineModel = true;
+            vm.newDriverID = newDriverID;
+            vm.fineReason = fineReason;
+            vm.fineAmount = fineAmount;
+        }
     }
 
 })();

@@ -120,8 +120,9 @@
         });
         // call to get data for the tables
         $scope.tableParams = new NgTableParams({
-            page: 1, count: 20, sorting: {earning: 'desc'},
-        }, {
+            page: 1, count: 20, sorting: {earning: 'desc'}
+        },
+            {
             counts: [],
             getData: function (params) {
                 // ajax request to api
