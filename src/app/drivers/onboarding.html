@@ -587,10 +587,10 @@
                                     </div>
                                 </form>
                             </div>
-                            <script type="text/ng-template" id="AddVehicleForm.html">
-                            <div class="add-vehicle-div" >
+                            <div class="add-vehicle-div" ng-if="vm.AddVehicleForm">
                                 <div class="row">
-                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="col-md-2 col-sm-12 col-xs-12"></div>
+                                    <div class="col-md-8 col-sm-12 col-xs-12">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <span ng-click="vm.hideAddVehicleForm();"
@@ -792,10 +792,10 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-2 col-sm-12 col-xs-12"></div>
                                 </div>
 
                             </div>
-                            </script>
                         </div>
                     </uib-tab>
                     <uib-tab index="2" heading="License">
