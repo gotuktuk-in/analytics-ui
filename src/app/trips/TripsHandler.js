@@ -10,11 +10,12 @@
 
 angular
     .module('tuktukV2Dahboard')
-    .factory('PerformanceHandler', PerformanceHandler);
+    .factory('TripsHandler', TripsHandler);
 
-function PerformanceHandler() {
+function TripsHandler() {
     var factory = {};
     factory.trips = [];
+    factory.burn = [];
     factory.drivers = [];
     factory.riders = [];
     factory.filteredTrips = [
@@ -35,6 +36,14 @@ function PerformanceHandler() {
         {"key": "Failed (U)", "values": []}
     ];
 
+    factory.filteredBurn = [
+        {"key": "Trip", "values": []},
+        {"key": "Offer", "values": []},
+        {"key": "Bonus", "values": []},
+        {"key": "Tcash", "values": []},
+        {"key": "Total", "values": []}
+    ];
+
     factory.filteredDrivers = [
         {"key": "New Drivers", "values": []},
         {"key": "Active Drivers", "values": []},
@@ -45,6 +54,7 @@ function PerformanceHandler() {
         {"key": "Active Riders", "values": []},
         {"key": "Total Riders", "values": []}
     ];
+
     factory.getTrips = function (data) {
         var requests = [],
             unique_requests = [],
@@ -93,6 +103,33 @@ function PerformanceHandler() {
 
         return factory.filteredTrips
     };
+
+    factory.getBurn = function (data) {
+        var trip = [],
+            offer = [],
+            bonus = [],
+            tcash = [],
+            total = [];
+
+        _.each(data, function (value) {
+            var longDate = factory.getLongDateBurn(value.date);
+            trip.push([longDate, value.trip]);
+            offer.push([longDate, value.offer]);
+            bonus.push([longDate, value.bonus]);
+            tcash.push([longDate, value.tcash]);
+            total.push([longDate, value.total]);
+
+        });
+
+        factory.filteredBurn[0].values = trip;
+        factory.filteredBurn[1].values = offer;
+        factory.filteredBurn[2].values = bonus;
+        factory.filteredBurn[3].values = tcash;
+        factory.filteredBurn[4].values = total;
+        return factory.filteredBurn
+    };
+
+
     factory.getDrivers = function (data) {
         var new_drivers = [],
             active_drivers = [],
@@ -136,8 +173,18 @@ function PerformanceHandler() {
         var newDate = new Date(year, month - 1, day, hour);
         return newDate;
         //  return moment().unix(newDate)
-
     };
-    return factory
 
+    factory.getLongDateBurn = function (date) {
+        var dateString = date;
+        var year = dateString.substring(0, 4);
+        var month = dateString.substring(4, 6);
+        var day = dateString.substring(6, 8);
+
+        var newDate = new Date(year, month - 1, day);
+        return newDate;
+        //  return moment().unix(newDate)
+    };
+
+    return factory
 }

@@ -10,7 +10,7 @@
 
 angular
     .module('tuktukV2Dahboard')
-    .factory('TripsService', TripsService)
+    .factory('TripsService', TripsService);
 
 function TripsService($q, $resource, API) {
     var url = API;
@@ -18,10 +18,19 @@ function TripsService($q, $resource, API) {
         "",
         {frequency: "@frequency", vehicle: "@vehicle", id: '@id'},
         {
+            getTrips: {
+                method: 'GET',
+                url: url + 'trip/:frequency/:vehicle',
+                isArray: true
+            },
+            getBurn: {
+                method: 'GET',
+                url: url + 'burn',
+                isArray: true
+            },
             getAllTrips: {
                 method: 'GET',
                 url: url + 'trips'
-                //   isArray:true
             },
             getTripDetail: {
                 method: 'GET',

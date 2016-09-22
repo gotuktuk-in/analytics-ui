@@ -1,22 +1,30 @@
+<style>
+    .panel {
+        min-height: 550px;
+    }
+</style>
 <div class="container-fluid">
-    <div class="row">
-        <form class="form-inline date-selection date-selection-dr">
-            <div class="form-group ">
-                <input ng-change=" vm.onDateChange()" class="form-control cstm-width text-center" type="daterange"
-                       ng-model="tripDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
-            </div>
-        </form>
-        <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
-        <br>
-        <br>
-        <br>
-        <br><br>
-    </div>
+    <!--<div class="row">-->
+    <!--<form class="form-inline date-selection date-selection-dr">-->
+    <!--<div class="form-group ">-->
+    <!--<input ng-change=" vm.onDateChange()" class="form-control cstm-width text-center" type="daterange"-->
+    <!--ng-model="tripDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--<span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>-->
+    <!--</div>-->
+    <br>
+    <br>
+    <br>
+    <br><br>
+
     <div class="row">
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <form class="form-inline pull-right">
                     <div class="form-group ">
+
+
                         <div class="radio inpt-style">
                             <label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"
                                           name="optradio" ng-model="vm.tripFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
@@ -24,6 +32,19 @@
                                           name="optradio" ng-model="vm.tripFrequency.value" value="day"> <i></i> <span>Per Day</span></label>
 
                         </div>
+                        <input
+                                ng-change="vm.onDateChangeTrips()"
+                                class="form-control text-center"
+                                type="daterange"
+                                ng-model="tripDates"
+                                separator=" - "
+                                format="DD MMM YY"
+                                opens="right"
+                                ranges="vm.ranges"
+                                style="margin: -2px 10px 0 0 !important;
+                                        padding: 0px;
+                                        height: 20px;
+                                        width: auto; font-size: 11px;">
                     </div>
                 </form>
                 <div class="panel-heading">
@@ -36,6 +57,23 @@
         </div>
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
+                <form class="form-inline pull-right">
+                    <div class="form-group ">
+                        <input
+                                ng-change="vm.onDateChangeTcash()"
+                                class="form-control text-center"
+                                type="daterange"
+                                ng-model="tripDates"
+                                separator=" - "
+                                format="DD MMM YY"
+                                opens="right"
+                                ranges="vm.ranges"
+                                style="margin: 8px 10px 0px 0px !important;
+                                        padding: 0px;
+                                        height: 20px;
+                                        width: auto; font-size: 11px;">
+                    </div>
+                </form>
                 <div class="panel-heading">
                     <h4 style="margin-top: 0" class="title">tCash Burned</h4></div>
                 <div class="panel-body">
@@ -43,52 +81,150 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
+
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <form class="form-inline pull-right">
+                        <div class="form-group ">
+                            <input
+                                    ng-change="vm.onDateChangeRide()"
+                                    class="form-control text-center"
+                                    type="daterange"
+                                    ng-model="rideDates"
+                                    separator=" - "
+                                    format="DD MMM YY"
+                                    opens="right"
+                                    ranges="vm.ranges"
+                                    style="margin: -1px -2px 0px 0px !important;
+                                        padding: 0px;
+                                        height: 20px;
+                                        width: auto; font-size: 11px;">
+                        </div>
+                    </form>
+                    <div class="pull-right" style="position: absolute; right: 28px; top: 3px;" ng-if="">
+                <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">
+                    &#10094;
+                </span>
+                <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">
+                    {{date}}
+                </span>
+                <span ng-click="vm.changeDate('next')" ng-show="!vm.live" style="display: inline-block; padding: 7px;">
+                    &#10095;
+                </span>
+                    </div>
+                    <h4 style="margin-top: 0" class="title">Rides</h4></div>
+                <div class="panel-body">
+                    <div>
+                        <nvd3 options="vm.newRidersChartOptions" data="vm.newRiders" config="vm.config"></nvd3>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12 cancelled-trip-quad1">
+            <div class="panel panel-default">
+                <form class="form-inline pull-right">
+                    <div class="form-group ">
+                        <input
+                                ng-change="vm.onDateChangeTripsCancelled()"
+                                class="form-control text-center"
+                                type="daterange"
+                                ng-model="tripDates"
+                                separator=" - "
+                                format="DD MMM YY"
+                                opens="right"
+                                ranges="vm.ranges"
+                                style="margin: 8px 10px 0px 0px !important;
+                                        padding: 0px;
+                                        height: 20px;
+                                        width: auto; font-size: 11px;">
+                    </div>
+                </form>
+                <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">Cancelled Trips</h4></div>
+                <div class="panel-body">
+                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                        <h5>Driver {{totalCanDriver}}</h5>
+                        <nvd3 options="vm.cancelTripByDriverChartOptions" data="vm.cancelledTripByDriver"
+                              config="vm.config"></nvd3>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                        <h5>Rider {{totalCanRider}}</h5>
+                        <nvd3 options="vm.cancelTripByRiderChartOptions" data="vm.cancelledTripByRider"
+                              config="vm.config"></nvd3>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <form class="form-inline">
+            <div class="panel panel-default">
+                <form class="form-inline pull-right">
+                    <div class="form-group ">
+                        <input
+                                ng-change="vm.onDateChangeBurn()"
+                                class="form-control text-center"
+                                type="daterange"
+                                ng-model="tripDates"
+                                separator=" - "
+                                format="DD MMM YY"
+                                opens="right"
+                                ranges="vm.ranges"
+                                style="margin: 8px 10px 0px 0px !important;
+                                        padding: 0px;
+                                        height: 20px;
+                                        width: auto; font-size: 11px;">
+                    </div>
+                </form>
+                <div class="panel-heading">
 
-                <div class="input-group col-md-3 col-sm-4 col-xs-12">
-                    <select ng-model="vm.filterTerm" class="form-control"
-                            ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
-                        <option value="" disabled>Select Filter</option>
-                    </select>
+                    <h4 style="margin-top: 0" class="title">Burn</h4></div>
+                <div class="panel-body">
+                    <nvd3 options="vm.burnChartOptions" data="vm.burn" config="vm.config"></nvd3>
                 </div>
-                <div class="input-group col-md-3 col-sm-4 col-xs-12">
-                    <input ng-model="vm.searchTerm" class="form-control" placeholder="term"
-                           ng-disabled="!vm.filterTerm"/>
-                </div>
-                <div class="input-group col-md-1 col-sm-4 col-xs-12">
-                    <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-search"><span
-                            aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
-                </div>
-                <div class="input-group col-md-3 col-sm-4 col-xs-12">
-                    <select ng-model="vm.statusCodes" ng-change="vm.getTrips()" class="form-control"
-                            ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters track by statusFilter.value">
-                        <option value="" disabled>Select Status</option>
-                    </select>
-                </div>
-
-            </form>
+            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="min-height:10px ">
                 <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Trips Table</h4></div>
+                    <h4 style="margin-top: 0" class="title">Search</h4>
+                </div>
                 <div class="panel-body">
+                    <form class="form-inline no-mr pd-2-5">
+
+                        <div class="input-group col-md-3 col-sm-4 col-xs-12">
+                            <select ng-model="vm.filterTerm" class="form-control"
+                                    ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
+                                <option value="" disabled>Select Filter</option>
+                            </select>
+                        </div>
+                        <div class="input-group col-md-3 col-sm-4 col-xs-12">
+                            <input ng-model="vm.searchTerm" class="form-control" placeholder="term"
+                                   ng-disabled="!vm.filterTerm"/>
+                        </div>
+                        <div class="input-group col-md-1 col-sm-4 col-xs-12">
+                            <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()"
+                                    class="btn btn-search"><span
+                                    aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                        <div class="input-group col-md-3 col-sm-4 col-xs-12 pull-right">
+                            <select ng-model="vm.statusCodes" ng-change="vm.getTrips()" class="form-control"
+                                    ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters track by statusFilter.value">
+                                <option value="" disabled>Select Status</option>
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="panel-body" ng-if="vm.showTableData" style="min-height:400px">
                     <div class="table-responsive">
                         <table ng-table="tableParams" class="table table-bordered">
 
                             <tr class="truncate"
                                 ng-repeat="row in $data track by $index">
-                                <!-- <td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">
-                                     <a target="_blank"
-                                        ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">{{row.id}}
-                                     </a>
-                                 </td>-->
-                                <td data-title="'Date & Time'" sortable="'requestOn'" style="width: 145px;">
+                                <td data-title="'Date'" sortable="'requestOn'" style="width: 145px;">
                                     <a target="_blank"
                                        ui-sref="home.trip_detail({id: row.id})">
                                         <div>{{(row.requestOn)*1000 | date:"dd MMM yy h:mma"}}</div>
@@ -121,54 +257,20 @@
                                     </div>
                                     <div ng-if="row.tripState == 82" style="white-space: nowrap">Terminated</div>
                                 </td>
-                                <td data-title="'Driver Info'">
+                                <td data-title="'Driver'">
                                     <div>{{row.driverInfo.name}}<br>
-                                        <!--  <span class="small">{{row.driverInfo.phone}}</span>
-                                          <span class="small">{{row.driverInfo.vehicle}}</span>-->
                                     </div>
                                 </td>
-                                <!--<td data-title="'VType'" sortable="'vehicleType'" align="center">-->
-                                    <!--<div>{{row.vehicleType}}</div>-->
-                                <!--</td>-->
-                                <td data-title="'Rider  Info'">
+                                <td data-title="'Rider'">
                                     <div>{{row.riderInfo.name}}</div>
                                 </td>
-                                <!--<td data-title="'Pickup'" style="width:150px;">
-                                    <div class="truncate truncate-pick-drop">{{row.pickUp.line1 + ' ' + row.pickUp.line2}} {{row.drop.city + '
-                                        ' +row.pickUp.state + ' ' +
-                                        row.pickUp.country}}
-                                    </div>
-                                </td>
-                                <td data-title="'Drop'" style="width:150px;">
-                                    <div class="truncate truncate-pick-drop">{{row.drop.line1 + ' ' + row.drop.line2}} {{row.drop.city + ' '
-                                        +row.drop.state + ' ' +
-                                        row.drop.country}}
-                                    </div>
-                                </td>-->
-
                                 <td data-title="'Time'" sortable="'time'">
                                     <div>{{getTimeDiff(row.pickupOn,row.dropOn)| secondsToDateTime}}</div>
-                                    <!--<div>{{getTimeDiff(row.pickupOn,row.dropOn)| secondsToDateTime}}</div>-->
                                 </td>
 
                                 <td data-title="'Dist(KM)'" sortable="'disPickupDrop'" align="center">
                                     <div>{{(row.disPickupDrop)/1000 | number:2}}</div>
                                 </td>
-                                <!-- <td data-title="'Amt(Rs.)'" sortable="'amount'" align="right">
-                                     <div class="truncate truncate-amt"><b>{{row.amount.total}}</b>
-                                         <span class="small">Cash: {{row.amount.cash | number:2}}</span>
-                                         <span class="small">Citrus: {{row.amount.citrus | number:2}}</span>
-                                         <span class="small">Discount: {{row.amount.discount | number:2}} </span>
-                                     </div>
-                                 </td>
-                                 <td data-title="'Rating'" sortable="'riderFeedbackRating'" align="center">
-                                     <div>{{row.riderFeedbackRating | number:1}}</div>
-                                 </td>-->
-                                <!-- <td data-title="'Show'" align="center">
-                                     <button class="btn btn-xs btn-link" ng-click="showMore(row)"><i
-                                             ng-class="{'glyphicon-chevron-up':row.showMore,'glyphicon-chevron-down':!row.showMore}"
-                                             class="glyphicon glyphicon-chevron-down"></i></button>
-                                 </td>-->
                             </tr>
                         </table>
                         <table class="table table-bordered table-striped table-condensed" ng-show="tblNoData">
@@ -179,6 +281,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
