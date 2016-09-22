@@ -122,7 +122,7 @@
 
                             params.total(data.total); // recal. page nav controls
 
-                            $scope.dataNew = data;
+                            $scope.data = data;
 
                             console.log('all data: ', data);
                             if (data.length > 0) {
@@ -234,21 +234,20 @@
                 });
         };
 
-        vm.checkValueCB = function (index) {
-            if ($scope.dataNew[index].closingBalance < $scope.dataNew[index].newClosingBalance) {
-                $scope.dataNew[index].newClosingBalance = $scope.dataNew[index].closingBalance;
-                console.log($scope.dataNew[index].closingBalance)
-            }
-        };
+        //vm.checkValueCB = function (index) {
+        //    if ($scope.data[index].closingBalance < $scope.data[index].newClosingBalance) {
+        //        $scope.data[index].newClosingBalance = 0;
+        //    }
+        //};
 
         vm.invoiceListPaid = function (index) {
             PayoutService.invoiceListPaid(
                 {
-                    drivers: $scope.dataNew[index].driver
+                    drivers: $scope.data[index].driver
                 }, {
                     startDate: vm.formattedStartWeek,
                     endDate: vm.formattedEndWeek,
-                    paidAmount: $scope.dataNew[index].newClosingBalance
+                    paidAmount: $scope.data[index].newClosingBalance || $scope.data[index].closingBalance
                 },
                 function (response) {
                     vm.msg = 'Amount Paid';

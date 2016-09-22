@@ -11,36 +11,6 @@
         //range slider , Failed(2), Cancel(2), Success.
 
         var today = moment();
-        var heatmap;
-        vm.heatMapFilers = [{label: "In-Process", id: '20,22,30,40,50'}, {label: "Failed", id: '72,80,81,82'}, {
-            label: "Cancel",
-            id: '70,71'
-        }, {label: "Success", id: '61'}];
-        vm.selected = vm.heatMapFilers[0];
-        $scope.rangSlider = {
-            max: 24,
-            min: 0
-        };
-        $scope.slider = {
-            minValue: 0,
-            maxValue: 24,
-            options: {
-                floor: 0,
-                ceil: 24,
-                //precision:2,
-                showTicksValues: 0,
-                translate: function (value) {
-                    return value + 'h';
-                },
-                keyboardSupport: false,
-                onEnd: function (sliderId, modelValue, highValue, pointerType) {
-                    //    console.log(sliderId, modelValue, highValue, pointerType)
-                    $scope.rangSlider.min = modelValue;
-                    $scope.rangSlider.max = highValue;
-                    vm.loadHeatMap()
-                }
-            }
-        };
         Array.prototype.sum = function (prop) {
             var total = 0;
             for (var i = 0, _len = this.length; i < _len; i++) {
@@ -48,7 +18,6 @@
             }
             return total
         };
-        $scope.ddSettings = {enableSearch: false};
         //range slider end
 
         $scope.date = moment().format("ddd, MMM Do YYYY");
@@ -138,36 +107,29 @@
             }
             getLive();
             getNewRiders();
-            vm.loadHeatMap();
             getCanceledTripByDriver();
             getCanceledTripByRider();
         };
         /*** rest call for barchart for canceld trip by driver code starts ***/
-
-
         function getCanceledTripByDriver() {
             vm.canceledTripByDriver = [];
 
             LiveService.getCancelTripsDriver({
-                    startTime: moment(current).startOf('day'),
+                startTime: moment(current).startOf('day'),
                 endTime: moment(current).endOf('day'),
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType
             }, function (response) {
                 //console.log(response);
                 vm.canceledTripByDriver = LiveHandler.canTripDriver(response);
-
                 $scope.totalCanDriver = vm.canceledTripByDriver.sum("value");
-                console.log($scope.valueNew);
 
             }, function (err) {
                 console.log(err);
                 $scope.error = true;
             })
         }
-
         /*** rest call for barchart for canceld trip by driver code ends ***/
-
         /*** rest call for barchart for canceld trip by Rider code starts ***/
         function getCanceledTripByRider() {
             vm.canceledTripByRider = [];
@@ -186,9 +148,7 @@
                 $scope.error = true;
             })
         }
-
         /*** rest call for barchart for canceld trip by Rider code ends ***/
-
         function getOverviewLive() {
             LiveService.getOverview({
                 city: $rootScope.city,
@@ -371,7 +331,6 @@
         getOverviewLive();
         getCanceledTripByDriver();
         getCanceledTripByRider();
-        vm.loadHeatMap();
         var interval = $interval(function () {
             //vm.refreshPage()
         }, 30000);

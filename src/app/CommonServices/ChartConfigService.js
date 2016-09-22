@@ -41,7 +41,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             margin: {
                 top: 0,
                 right: 20,
-                bottom: 100,
+                bottom: 120,
                 left: 50
             },
             x: function (d) {
@@ -143,7 +143,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
     factory.multiBarChartOptions = {
         chart: {
             type: 'multiBarChart',
-            height: 400,
+            height: 450,
             margin: {
                 top: 30,
                 right: 50,
@@ -197,7 +197,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
     factory.linePlusBarChartOptions = {
         chart: {
             type: 'linePlusBarChart',
-            height: 400,
+            height: 465,
             focusEnable: false,
             legend: {
                 vers: 'classic',
@@ -213,7 +213,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             margin: {
                 top: 30,
                 right: 75,
-                bottom: 100,
+                bottom: 20,
                 left: 75
             },
             bars: {
