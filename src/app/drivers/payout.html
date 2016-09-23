@@ -127,15 +127,15 @@
                         <td data-title="'Trips'" sortable="'tripCount'" class="text-center" width="100">
                             {{row.tripCount}}
                         </td>
-                        <td data-title="'Trip&nbsp;Ear'" sortable="'tripEarning'" class="text-right"
+                        <td data-title="'Trip'" sortable="'tripEarning'" class="text-right"
                             width="100">
                             {{row.tripEarning | number:2}}
                         </td>
-                        <td data-title="'Offer&nbsp;Ear'" sortable="'offerEarning'" class="text-right"
+                        <td data-title="'Offer'" sortable="'offerEarning'" class="text-right"
                             width="100">
                             {{row.offerEarning | number:2}}
                         </td>
-                        <td data-title="'Bonus&nbsp;Ear'" sortable="'bonusEarning'" class="text-right"
+                        <td data-title="'Bonus'" sortable="'bonusEarning'" class="text-right"
                             width="100">
                             {{row.bonusEarning | number:2}}
                         </td>
@@ -161,11 +161,11 @@
                             </a>
 
                         </td>
-                        <td data-title="'Balance&nbsp;Opn'" sortable="'openingBalance'" class="text-right"
+                        <td data-title="'Opening&nbsp;Bal'" sortable="'openingBalance'" class="text-right"
                             width="100">
                             {{row.openingBalance | number:2}}
                         </td>
-                        <td data-title="'Balance&nbsp;Cls'" sortable="'closingBalance'" class="text-right"
+                        <td data-title="'Closing&nbsp;Bal'" sortable="'closingBalance'" class="text-right"
                             width="100">
                             {{row.closingBalance | number:2}}
                         </td>
@@ -186,7 +186,7 @@
                                     <input class="form-control text-left"
                                            type="number"
                                            name="inputPaid"
-                                           ng-value="row.closingBalance | number:2"
+                                           ng-value="row.closingBalance"
                                            ng-model="row.newClosingBalance">
                                            <!--ng-change="vm.checkValueCB($index)"-->
 
