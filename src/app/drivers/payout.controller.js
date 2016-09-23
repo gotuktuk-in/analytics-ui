@@ -266,7 +266,7 @@
                 {
                     startDate: vm.formattedStartWeek,
                     endDate: vm.formattedEndWeek,
-                    drivers: [$scope.dataNew[index].driver]
+                    drivers: [$scope.data[index].driver]
                 },
                 function (response) {
                     $scope.dataDay = response;
