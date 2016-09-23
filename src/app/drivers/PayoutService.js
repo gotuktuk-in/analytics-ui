@@ -10,7 +10,7 @@
 
 angular
     .module('tuktukV2Dahboard')
-    .factory('PayoutService', PayoutService)
+    .factory('PayoutService', PayoutService);
 
 function PayoutService($q, $resource, API) {
   var url = API;
