@@ -14,10 +14,10 @@ angular
   //  return new Date(1970, 0, 1).setSeconds(seconds);
    var  mydate =new Date(seconds*1000);
     var string = "";
-    var hours = mydate.getUTCHours()
+    var hours = mydate.getUTCHours();
 
-    var min = mydate.getUTCMinutes()
-    var sec = mydate.getUTCSeconds()
+    var min = mydate.getUTCMinutes();
+    var sec = mydate.getUTCSeconds();
     if(hours ) {string+= hours +":" }
       if(min ) {string+= min +":" }
         if(sec ) {string+=sec +"" }
@@ -25,6 +25,7 @@ angular
     return string;
   };
 }])
+
 .filter('toMinSec', function(){
         return function(input){
             var minutes = parseInt(input/60, 10);
@@ -33,3 +34,9 @@ angular
             return minutes+' Min.'+(seconds ? ' & '+seconds+' Sec.' : '');
         }
     })
+
+.filter('customNumber', function() {
+    return function(value) {
+        return parseInt(value, 10); //convert to int
+    }
+})
