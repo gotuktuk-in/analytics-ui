@@ -64,6 +64,9 @@
             overflow-y: scroll;
         }
     }
+    .selected {
+        background: #fff1df !important;
+    }
 </style>
 <div class="container-fluid">
     <div class="row" style="z-index:99; position:fixed; width:auto; padding:10px 0; left:53px;">
@@ -114,7 +117,7 @@
                 <table ng-table="payoutTableParams" fixed-table-headers="scrollable-area"
                        class="table table-bordered table-striped text-center">
 
-                    <tr ng-repeat="row in $data track by $index">
+                    <tr ng-repeat="row in $data track by $index" ng-click="vm.setSelected(row.driver)" ng-class="{selected : row.driver === vm.selectedRow}">
                         <td data-title="'ID'" class="text-left" width="100">
                             {{row.driver}}
                         </td>
@@ -124,14 +127,14 @@
                                 {{row.name}}
                             </a>
                         </td>
-                        <td data-title="'Trips'" sortable="'tripCount'" class="text-center" width="100">
+                        <td data-title="'Trips'" sortable="'tripCount'" class="text-center" width="50">
                             {{row.tripCount}}
                         </td>
                         <td data-title="'Trip'" sortable="'tripEarning'" class="text-right"
                             width="100">
                             {{row.tripEarning | number:2}}
                         </td>
-                        <td data-title="'Offer'" sortable="'offerEarning'" class="text-right"
+                        <td data-title="'MGP'" sortable="'offerEarning'" class="text-right"
                             width="100">
                             {{row.offerEarning | number:2}}
                         </td>
@@ -149,7 +152,7 @@
                         <td data-title="'Settlements'" sortable="'settlement'" class="text-right" width="100">
                             {{row.tripSettledAmount | number:2}}
                         </td>
-                        <td data-title="'tCash'" sortable="'tCASH'" class="text-right" width="100">
+                        <td data-title="'tCASH'" sortable="'tCASH'" class="text-right" width="100">
                             {{row.tcashEarning | number:2}}
                         </td>
                         <td data-title="'Balance'" sortable="'balance'" class="text-right" width="100">

@@ -6,7 +6,7 @@
         .controller('PayoutController', PayoutController);
 
     /** @ngInject */
-    function PayoutController($scope, $stateParams, $log, $rootScope, $interval, StaticDataService, PayoutService, NgTableParams, $resource, toastr, ngDialog, $confirm) {
+    function PayoutController($scope, $stateParams, $log, $rootScope, $interval, StaticDataService, PayoutService, NgTableParams, $resource, toastr, ngDialog, $confirm, $localStorage, $sessionStorage) {
 
         var vm = this;
         vm.prev = true;
@@ -31,6 +31,12 @@
         vm.fineAmount = '';
         vm.fineReason = '';
 
+        vm.selectedRow = null;
+        vm.setSelected = function (selectedRow) {
+            vm.selectedRow = selectedRow;
+            console.log(selectedRow);
+        };
+
         //vm.startWeek = moment(newDate).startOf('week').isoWeekday(5).subtract(7, 'day');
         //vm.formattedStartWeekDs = vm.startWeek.format("ddd, MMM Do YYYY");
         //vm.formattedStartWeek = vm.startWeek.format("YYYYMMDD");
@@ -39,6 +45,7 @@
         //vm.formattedEndWeekDs = vm.endWeek.format("ddd, MMM Do YYYY");
         //vm.formattedEndWeek = vm.endWeek.format("YYYYMMDD");
 
+        var i = 0;
 
         vm.getDataList = function () {
             PayoutService.getWeeks(
@@ -50,8 +57,6 @@
                 });
         };
         vm.getDataList();
-
-        var i = 0;
 
         function getWeeks(response) {
             var weekList = [];
@@ -97,7 +102,6 @@
                     getData: function (params) {
                         // ajax request to api
                         var start = params.page();
-                        console.log("**************************");
                         var orderBy = '';
                         var field = '';
                         if (params.orderBy().length > 0) {
@@ -119,12 +123,8 @@
                             //, count: params.count()
                         };
                         return PayoutService.getInvoiceList(dataObj).$promise.then(function (data) {
-
                             params.total(data.total); // recal. page nav controls
-
                             $scope.data = data;
-
-                            console.log('all data: ', data);
                             if (data.length > 0) {
                                 $scope.tblNoData = false
                             }
