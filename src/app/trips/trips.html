@@ -227,7 +227,7 @@
                                 <td data-title="'Date'" sortable="'requestOn'" style="width: 145px;">
                                     <a target="_blank"
                                        ui-sref="home.trip_detail({id: row.id})">
-                                        <div>{{(row.requestOn)*1000 | date:"dd MMM yy h:mma"}}</div>
+                                        <div>{{(row.requestOn)*1000 | date:"dd MMM yy"}}</div>
                                     </a>
 
                                 </td>
@@ -263,6 +263,9 @@
                                 </td>
                                 <td data-title="'Rider'">
                                     <div>{{row.riderInfo.name}}</div>
+                                </td>
+                                <td data-title="'Request On'">
+                                    <div>{{(row.requestOn)*1000 | date:"h:mma"}}</div>
                                 </td>
                                 <td data-title="'Time'" sortable="'time'">
                                     <div>{{getTimeDiff(row.pickupOn,row.dropOn)| secondsToDateTime}}</div>
