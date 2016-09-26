@@ -2,7 +2,27 @@
     .panel {
         min-height: 550px;
     }
+    .search-btn-trip {
+        position: fixed;
+        right: 9px;
+        top: 12px;
+        z-index: 91;
+    }
 </style>
+<div class="search-btn-trip">
+    <form class="form-inline">
+        <div class="form-group">
+            <div style="max-height: 34px; overflow: hidden;">
+                <a
+                        ui-sref="home.search({filterURL: filterURL, term: term})"
+                        title="Show All Shapes"
+                        class="btn btn-default">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
 <div class="container-fluid">
     <!--<div class="row">-->
     <!--<form class="form-inline date-selection date-selection-dr">-->
@@ -159,7 +179,7 @@
         </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
-                <form class="form-inline pull-right">
+                <form class="form-inline pull-right no-mr pd-2-">
                     <div class="form-group ">
                         <input
                                 ng-change="vm.onDateChangeBurn()"
@@ -192,7 +212,7 @@
                     <h4 style="margin-top: 0" class="title">Search</h4>
                 </div>
                 <div class="panel-body">
-                    <form class="form-inline no-mr pd-2-5">
+                    <form class="form-inline no-mr">
 
                         <div class="input-group col-md-3 col-sm-4 col-xs-12">
                             <select ng-model="vm.filterTerm" class="form-control"
@@ -210,7 +230,7 @@
                                     aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
                         </div>
                         <div class="input-group col-md-3 col-sm-4 col-xs-12 pull-right">
-                            <select ng-model="vm.statusCodes" ng-change="vm.getTrips()" class="form-control"
+                            <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
                                     ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters track by statusFilter.value">
                                 <option value="" disabled>Select Status</option>
                             </select>

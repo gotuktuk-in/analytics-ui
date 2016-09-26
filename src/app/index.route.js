@@ -30,19 +30,19 @@
                 controllerAs: 'vm'
             })
             /*.state('home.maps', {
-                url: '/maps/:city/:vehicleType',
-                templateUrl: 'app/maps/maps.html',
-                controller: 'MapsController',
-                controllerAs: 'vm',
-                cache: false
-            })
-            .state('home.demandsupply', {
-                url: '/maps/demand-supply/:city/:vehicleType',
-                templateUrl: 'app/maps/demand-supply.html',
-                controller: 'DemandSupplyController',
-                controllerAs: 'vm',
-                cache: false
-            })*/
+             url: '/maps/:city/:vehicleType',
+             templateUrl: 'app/maps/maps.html',
+             controller: 'MapsController',
+             controllerAs: 'vm',
+             cache: false
+             })
+             .state('home.demandsupply', {
+             url: '/maps/demand-supply/:city/:vehicleType',
+             templateUrl: 'app/maps/demand-supply.html',
+             controller: 'DemandSupplyController',
+             controllerAs: 'vm',
+             cache: false
+             })*/
             .state('home.map', {
                 url: '/maps/:city/:vehicleType',
                 templateUrl: 'app/maps/demand-supply.html',
@@ -51,27 +51,27 @@
                 cache: false
             })
             .state('home.live', {
-                    url: '/live/:city/:vehicleType',
-                    templateUrl: 'app/live/live.html',
-                    controller: 'LiveController',
-                    controllerAs: 'vm'
-                    /*resolve: {
-                        heatmapResolve: function (LiveService) {
-                            LiveService.heatmap({
-                                city: $rootScope.city,
-                                vehicle: $rootScope.vehicleType,
-                                from: from,
-                                to: to,
-                                state: vm.selected.id
-                            })
-                    }}*/
-                })
+                url: '/live/:city/:vehicleType',
+                templateUrl: 'app/live/live.html',
+                controller: 'LiveController',
+                controllerAs: 'vm'
+                /*resolve: {
+                 heatmapResolve: function (LiveService) {
+                 LiveService.heatmap({
+                 city: $rootScope.city,
+                 vehicle: $rootScope.vehicleType,
+                 from: from,
+                 to: to,
+                 state: vm.selected.id
+                 })
+                 }}*/
+            })
             .state('home.drivers', {
-                    url: '/drivers/:city/:vehicleType',
-                    templateUrl: 'app/drivers/drivers.html',
-                    controller: 'DriversController',
-                    controllerAs: 'vm'
-                })
+                url: '/drivers/:city/:vehicleType',
+                templateUrl: 'app/drivers/drivers.html',
+                controller: 'DriversController',
+                controllerAs: 'vm'
+            })
             .state('home.onboarding', {
                 url: '/drivers/onboarding/:city/:vehicleType',
                 templateUrl: 'app/drivers/onboarding.html',
@@ -103,11 +103,17 @@
                 controllerAs: 'vm'
             })
             .state('home.trip_detail', {
-                    url: '/tripdetail/:id',
-                    templateUrl: 'app/trips/trip_details.html',
-                    controller: 'TripDetailController',
-                    controllerAs: 'vm'
-                })
+                url: '/trip/detail/:id',
+                templateUrl: 'app/trips/trip_details.html',
+                controller: 'TripDetailController',
+                controllerAs: 'vm'
+            })
+            .state('home.search', {
+                url: '/trips/search/:filterURL/:term',
+                templateUrl: 'app/trips/trip_search.html',
+                controller: 'TripsSearchController',
+                controllerAs: 'vm'
+            })
             .state('home.riders', {
                 url: '/riders',
                 templateUrl: 'app/riders/riders.html',
