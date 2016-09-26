@@ -151,7 +151,7 @@
             {value: "dphone", name: "Driver Phone"},
             {value: "rphone", name: "Rider Phone"},
             {value: "dvehicle", name: "Vehicle Number"},
-            {value: "requestOn", name:"Date"}
+            {value: "date", name:"Date"}
         ];
         vm.statusCodes = '';
         vm.tripStatusFilters = [{name: 'All', value: "20,22,30,40,50,60,61,70,71,80,81,82"},
@@ -162,7 +162,7 @@
         ];
         vm.searchTable = function () {
             vm.showTableData = true;
-            $scope.tableParams.reload()
+            vm.getResult();
         };
         this.changeFrequency = function (section, freqModel) {
             console.log("Frequency changed ", freqModel.value);
@@ -297,8 +297,6 @@
                 console.log(err);
                 $scope.error = true;
             });
-            //  $scope.tableParams.page(1)
-            $scope.tableParams.reload();
         };
 
         function transformTCash(data) {
@@ -339,8 +337,6 @@
                 console.log(err);
                 $scope.error = true;
             });
-            $scope.tableParams.page(1);
-            $scope.tableParams.reload();
         };
 
         vm.getTrips = function () {
@@ -361,8 +357,6 @@
                 console.log(err);
                 $scope.error = true;
             });
-            $scope.tableParams.page(1);
-            $scope.tableParams.reload();
         };
         var sorting;
         $scope.getTimeDiff = function (dt1, dt2) {
@@ -377,49 +371,50 @@
                 return '0'
             }
         };
-        $scope.tableParams = new NgTableParams({page: 1, count: 20}, {
-            counts: [],
-            getData: function (params) {
-                // ajax request to api
-                var start = ((params.page() - 1) * 20) + 1;
-                console.log("**************************");
-                var dataObj = {};
-                dataObj.start = start;
-                dataObj.count = params.count();
-                dataObj.startDate = moment($scope.tripDates.startDate).startOf('day').unix();
-                dataObj.endDate = moment($scope.tripDates.endDate).endOf('day').unix();
+        vm.getResult = function (){
+            $scope.tableParams = new NgTableParams({page: 1, count: 20}, {
+                counts: [],
+                getData: function (params) {
+                    // ajax request to api
+                    var start = ((params.page() - 1) * 20) + 1;
+                    console.log("**************************");
+                    var dataObj = {};
+                    dataObj.start = start;
+                    dataObj.count = params.count();
 
-                if (params.orderBy().length > 0) {
-                    var orderby = params.orderBy()[0].substr(0, 1);
-                    dataObj.field = params.orderBy()[0].substr(1);
-                    if (orderby === "+") {
-                        dataObj.orderby = "ASC"
+                    if (params.orderBy().length > 0) {
+                        var orderby = params.orderBy()[0].substr(0, 1);
+                        dataObj.field = params.orderBy()[0].substr(1);
+                        if (orderby === "+") {
+                            dataObj.orderby = "ASC"
+                        }
+                        else {
+                            dataObj.orderby = "DESC"
+                        }
                     }
-                    else {
-                        dataObj.orderby = "DESC"
+
+                    if (vm.searchTerm && vm.searchTerm != '') {
+                        dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm
                     }
+                    if (vm.statusCodes.value != '') {
+                        dataObj.filterByStatus = vm.statusCodes.value
+                    }
+                    return TripsService.getAllTrips(dataObj).$promise.then(function (data) {
+
+                        params.total(data.total); // recal. page nav controls
+
+                        if (data.data.length > 0) {
+                            vm.tblNoData = false
+                        }
+                        else {
+                            vm.tblNoData = true
+                        }
+                        return data.data;
+                    });
                 }
+            });
 
-                if (vm.searchTerm && vm.searchTerm != '') {
-                    dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm
-                }
-                if (vm.statusCodes.value != '') {
-                    dataObj.filterByStatus = vm.statusCodes.value
-                }
-                return TripsService.getAllTrips(dataObj).$promise.then(function (data) {
-
-                    params.total(data.total); // recal. page nav controls
-
-                    if (data.data.length > 0) {
-                        $scope.tblNoData = false
-                    }
-                    else {
-                        $scope.tblNoData = true
-                    }
-                    return data.data;
-                });
-            }
-        });
+        }
         vm.onDateChange();
     }
 })();
