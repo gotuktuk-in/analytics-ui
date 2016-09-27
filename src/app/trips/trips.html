@@ -2,6 +2,7 @@
     .panel {
         min-height: 550px;
     }
+
     .search-btn-trip {
         position: fixed;
         right: 9px;
@@ -14,7 +15,7 @@
         <div class="form-group">
             <div style="max-height: 34px; overflow: hidden;">
                 <a
-                        ui-sref="home.search({filterURL: filterURL, term: term})"
+                        ui-sref="home.search({filterURL: 'date', term: dateURL})"
                         title="Show All Shapes"
                         class="btn btn-default">
                     <i class="fa fa-search" aria-hidden="true"></i>
@@ -43,8 +44,6 @@
             <div class="panel panel-default">
                 <form class="form-inline pull-right">
                     <div class="form-group ">
-
-
                         <div class="radio inpt-style">
                             <label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"
                                           name="optradio" ng-model="vm.tripFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
