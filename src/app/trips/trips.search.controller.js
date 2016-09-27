@@ -34,6 +34,7 @@
             {name: 'Failed', value: '80,81,82'},
             {name: 'In Progress', value: '20,22,30,40,50,60'}
         ];
+        vm.statusCodes = vm.tripStatusFilters[0];
 
         vm.checkMinChr = function (index) {
             if (vm.searchTerm.length > 2) {
@@ -42,6 +43,10 @@
                 vm.enblBtn = false;
             }
         };
+        vm.checkMinChr();
+
+        vm.selectedFilterFields = _.find(vm.filterFields, function(rw){ return rw.value == vm.filterURL });
+        vm.filterTerm = vm.selectedFilterFields;
 
         vm.searchTable = function () {
             $state.go('home.search', {filterURL: vm.filterTerm.value, term: vm.searchTerm});
@@ -96,9 +101,9 @@
                                 dataObj.orderby = "DESC"
                             }
                         }
-                        //if (vm.searchTerm != '' && vm.searchTerm != '') {
-                        //    dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm;
-                        //}
+                        if (vm.searchTerm != '' && vm.searchTerm != '') {
+                            dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm;
+                        }
                         if (vm.filterURL != '' && vm.termURL != '') {
                             dataObj.term = vm.filterURL + "|" + vm.termURL;
                         }else{
@@ -124,9 +129,7 @@
                         });
                     }
                 });
-
         };
-
         vm.getResult();
     }
 })();

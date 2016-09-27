@@ -46,7 +46,7 @@
                                     aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
                         </div>
                         <div class="input-group col-md-3 col-sm-4 col-xs-12 pull-right">
-                            <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
+                            <select ng-model="vm.statusCodes" ng-change="vm.getResult()" class="form-control"
                                     ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters">
                                 <option value="" disabled>Select Status</option>
                             </select>
@@ -70,7 +70,7 @@
                                 <td data-title="'Date'" sortable="'requestOn'" style="width: 145px;">
                                     <a target="_blank"
                                        ui-sref="home.trip_detail({id: row.id})">
-                                        <div>{{(row.requestOn)*1000 | date:"dd MMM yy"}}</div>
+                                        {{(row.requestOn)*1000 | date:"dd MMM yy"}}
                                     </a>
 
                                 </td>
@@ -101,22 +101,34 @@
                                     <div ng-if="row.tripState == 82" style="white-space: nowrap">Terminated</div>
                                 </td>
                                 <td data-title="'Driver'">
-                                    <div>{{row.driverInfo.name}}<br>
-                                    </div>
+                                    <a target="_blank"
+                                       ui-sref="home.drivers_detail({driverId:row.driverInfo.id})">
+                                        {{row.driverInfo.name}}
+                                    </a>
                                 </td>
                                 <td data-title="'Rider'">
-                                    <div>{{row.riderInfo.name}}</div>
+                                    {{row.riderInfo.name}}
                                 </td>
-                                <td data-title="'Request On'">
+                                <td data-title="'Driver Fare'" class="text-right">
+                                    <div>{{row.amount.driverFare | number:2}}<br>
+                                    </div>
+                                </td>
+                                <td data-title="'Rider Fare'" class="text-right">
+                                    <div>{{row.amount.riderFare | number:2}}</div>
+                                </td>
+                                <td data-title="'tCASH'" class="text-right">
+                                    <div>{{row.amount.tcash | number:2}}</div>
+                                </td>
+                                <td data-title="'Request On'" class="text-right">
                                     <div>{{(row.requestOn)*1000 | date:"h:mma"}}</div>
                                 </td>
-                                <td data-title="'Time'" sortable="'time'">
-                                    <div>{{getTimeDiff(row.pickupOn,row.dropOn)| secondsToDateTime}}</div>
-                                </td>
+                                <!--<td data-title="'Time'" sortable="'time'">-->
+                                    <!--<div>{{getTimeDiff(row.pickupOn,row.dropOn)| secondsToDateTime}}</div>-->
+                                <!--</td>-->
 
-                                <td data-title="'Dist(KM)'" sortable="'disPickupDrop'" align="center">
-                                    <div>{{(row.disPickupDrop)/1000 | number:2}}</div>
-                                </td>
+                                <!--<td data-title="'Dist(KM)'" sortable="'disPickupDrop'" align="center">-->
+                                    <!--<div>{{(row.disPickupDrop)/1000 | number:2}}</div>-->
+                                <!--</td>-->
                             </tr>
                         </table >
                         <table class="table table-bordered table-striped table-condensed no-mr" ng-show="vm.tblNoData">

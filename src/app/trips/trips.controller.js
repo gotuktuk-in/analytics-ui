@@ -15,6 +15,7 @@
         vm.ranges = StaticDataService.ranges;
         $scope.date = moment().format("dddd, MMMM Do YYYY");
         $scope.tripDates = {};
+        $scope.dateURL = moment().format("DD/MM/YYYY");
         $scope.tripDates.startDate = StaticDataService.ranges['Last 7 Days'][0]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
         $scope.tripDates.endDate = StaticDataService.ranges['Last 7 Days'][1]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
 
@@ -160,10 +161,10 @@
             {name: 'Failed', value: '80,81,82'},
             {name: 'In Progress', value: '20,22,30,40,50,60'}
         ];
-        vm.searchTable = function () {
-            vm.showTableData = true;
-            vm.getResult();
-        };
+        //vm.searchTable = function () {
+        //    vm.showTableData = true;
+        //    vm.getResult();
+        //};
         this.changeFrequency = function (section, freqModel) {
             console.log("Frequency changed ", freqModel.value);
 
@@ -358,63 +359,63 @@
                 $scope.error = true;
             });
         };
-        var sorting;
-        $scope.getTimeDiff = function (dt1, dt2) {
-            if (dt1 == 0 || dt2 == 0) {
-                return '0'
-            }
-            if (dt2) {
-                var diff = (dt2 - dt1);
-                return diff
-            }
-            else {
-                return '0'
-            }
-        };
-        vm.getResult = function (){
-            $scope.tableParams = new NgTableParams({page: 1, count: 20}, {
-                counts: [],
-                getData: function (params) {
-                    // ajax request to api
-                    var start = ((params.page() - 1) * 20) + 1;
-                    console.log("**************************");
-                    var dataObj = {};
-                    dataObj.start = start;
-                    dataObj.count = params.count();
-
-                    if (params.orderBy().length > 0) {
-                        var orderby = params.orderBy()[0].substr(0, 1);
-                        dataObj.field = params.orderBy()[0].substr(1);
-                        if (orderby === "+") {
-                            dataObj.orderby = "ASC"
-                        }
-                        else {
-                            dataObj.orderby = "DESC"
-                        }
-                    }
-
-                    if (vm.searchTerm && vm.searchTerm != '') {
-                        dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm
-                    }
-                    if (vm.statusCodes.value != '') {
-                        dataObj.filterByStatus = vm.statusCodes.value
-                    }
-                    return TripsService.getAllTrips(dataObj).$promise.then(function (data) {
-
-                        params.total(data.total); // recal. page nav controls
-
-                        if (data.data.length > 0) {
-                            vm.tblNoData = false
-                        }
-                        else {
-                            vm.tblNoData = true
-                        }
-                        return data.data;
-                    });
-                }
-            });
-
-        }
+        //var sorting;
+        //$scope.getTimeDiff = function (dt1, dt2) {
+        //    if (dt1 == 0 || dt2 == 0) {
+        //        return '0'
+        //    }
+        //    if (dt2) {
+        //        var diff = (dt2 - dt1);
+        //        return diff
+        //    }
+        //    else {
+        //        return '0'
+        //    }
+        //};
+        //vm.getResult = function (){
+        //    $scope.tableParams = new NgTableParams({page: 1, count: 20}, {
+        //        counts: [],
+        //        getData: function (params) {
+        //            // ajax request to api
+        //            var start = ((params.page() - 1) * 20) + 1;
+        //            console.log("**************************");
+        //            var dataObj = {};
+        //            dataObj.start = start;
+        //            dataObj.count = params.count();
+        //
+        //            if (params.orderBy().length > 0) {
+        //                var orderby = params.orderBy()[0].substr(0, 1);
+        //                dataObj.field = params.orderBy()[0].substr(1);
+        //                if (orderby === "+") {
+        //                    dataObj.orderby = "ASC"
+        //                }
+        //                else {
+        //                    dataObj.orderby = "DESC"
+        //                }
+        //            }
+        //
+        //            if (vm.searchTerm && vm.searchTerm != '') {
+        //                dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm
+        //            }
+        //            if (vm.statusCodes.value != '') {
+        //                dataObj.filterByStatus = vm.statusCodes.value
+        //            }
+        //            return TripsService.getAllTrips(dataObj).$promise.then(function (data) {
+        //
+        //                params.total(data.total); // recal. page nav controls
+        //
+        //                if (data.data.length > 0) {
+        //                    vm.tblNoData = false
+        //                }
+        //                else {
+        //                    vm.tblNoData = true
+        //                }
+        //                return data.data;
+        //            });
+        //        }
+        //    });
+        //
+        //}
         vm.onDateChange();
     }
 })();
