@@ -15,7 +15,7 @@
         <div class="form-group">
             <div style="max-height: 34px; overflow: hidden;">
                 <a
-                        ui-sref="home.search({filterURL: 'date', term: dateURL})"
+                        ui-sref="home.search({city: city,vehicleType: vehicleType, filterURL: 'date', term: dateURL})"
                         title="Show All Shapes"
                         class="btn btn-default">
                     <i class="fa fa-search" aria-hidden="true"></i>
@@ -42,64 +42,63 @@
     <div class="row">
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
-                <form class="form-inline pull-right">
-                    <div class="form-group ">
-                        <div class="radio inpt-style">
-                            <label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"
-                                          name="optradio" ng-model="vm.tripFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>
-                            <label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"
-                                          name="optradio" ng-model="vm.tripFrequency.value" value="day"> <i></i> <span>Per Day</span></label>
+                <div class="panel-heading">
+                    <form class="form-inline pull-right">
+                        <div class="form-group ">
+                            <!--<div class="radio inpt-style">-->
+                            <!--<label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"-->
+                            <!--name="optradio" ng-model="vm.tripFrequency.value" value="hour"><i></i> <span>Per Hour</span></label>-->
+                            <!--<label><input type="radio" ng-change="vm.changeFrequency('trip', vm.tripFrequency.value)"-->
+                            <!--name="optradio" ng-model="vm.tripFrequency.value" value="day"> <i></i> <span>Per Day</span></label>-->
 
-                        </div>
-                        <input
-                                ng-change="vm.onDateChangeTrips()"
-                                class="form-control text-center"
-                                type="daterange"
-                                ng-model="tripDates"
-                                separator=" - "
-                                format="DD MMM YY"
-                                opens="right"
-                                ranges="vm.ranges"
-                                style="margin: -2px 10px 0 0 !important;
+                            <!--</div>-->
+                            <input
+                                    ng-change="vm.onDateChangeTrips('trip')"
+                                    class="form-control text-center"
+                                    type="daterange"
+                                    ng-model="tripDates"
+                                    separator=" - "
+                                    format="DD MMM YY"
+                                    opens="right"
+                                    ranges="vm.ranges"
+                                    style="margin: -1px -2px 0px 0px !important;
                                         padding: 0px;
                                         height: 20px;
                                         width: auto; font-size: 11px;">
-                    </div>
-                </form>
-                <div class="panel-heading">
-
+                        </div>
+                    </form>
                     <h4 style="margin-top: 0" class="title">Trips</h4></div>
                 <div class="panel-body">
                     <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-                <form class="form-inline pull-right">
-                    <div class="form-group ">
-                        <input
-                                ng-change="vm.onDateChangeTcash()"
-                                class="form-control text-center"
-                                type="daterange"
-                                ng-model="tripDates"
-                                separator=" - "
-                                format="DD MMM YY"
-                                opens="right"
-                                ranges="vm.ranges"
-                                style="margin: 8px 10px 0px 0px !important;
-                                        padding: 0px;
-                                        height: 20px;
-                                        width: auto; font-size: 11px;">
-                    </div>
-                </form>
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">tCash Burned</h4></div>
-                <div class="panel-body">
-                    <nvd3 options="vm.tcashChartOptions" data="vm.tcashData" config="vm.config"></nvd3>
-                </div>
-            </div>
-        </div>
+        <!--<div class="col-md-6 col-sm-12 col-xs-12">-->
+            <!--<div class="panel panel-default">-->
+                <!--<form class="form-inline pull-right">-->
+                    <!--<div class="form-group ">-->
+                        <!--<input-->
+                                <!--ng-change="vm.onDateChangeTcash()"-->
+                                <!--class="form-control text-center"-->
+                                <!--type="daterange"-->
+                                <!--ng-model="tripDates"-->
+                                <!--separator=" - "-->
+                                <!--format="DD MMM YY"-->
+                                <!--opens="right"-->
+                                <!--ranges="vm.ranges"-->
+                                <!--style="margin: 8px 10px 0px 0px !important;-->
+                                        <!--padding: 0px;-->
+                                        <!--height: 20px;-->
+                                        <!--width: auto; font-size: 11px;">-->
+                    <!--</div>-->
+                <!--</form>-->
+                <!--<div class="panel-heading">-->
+                    <!--<h4 style="margin-top: 0" class="title">tCash Burned</h4></div>-->
+                <!--<div class="panel-body">-->
+                    <!--<nvd3 options="vm.tcashChartOptions" data="vm.tcashData" config="vm.config"></nvd3>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
@@ -132,7 +131,7 @@
                     &#10095;
                 </span>
                     </div>
-                    <h4 style="margin-top: 0" class="title">Rides</h4></div>
+                    <h4 style="margin-top: 0" class="title">Successful Rides</h4></div>
                 <div class="panel-body">
                     <div>
                         <nvd3 options="vm.newRidersChartOptions" data="vm.newRiders" config="vm.config"></nvd3>
@@ -176,7 +175,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <form class="form-inline pull-right no-mr pd-2-">
                     <div class="form-group ">
@@ -204,7 +203,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-if="">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default" style="min-height:10px ">
                 <div class="panel-heading">

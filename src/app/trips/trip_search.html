@@ -11,7 +11,7 @@
         <div class="form-group">
             <div style="max-height: 34px; overflow: hidden;">
                 <a
-                        ui-sref="home.trips({city: city,vehicleType: vehicleType})"
+                        ui-sref="home.trips()"
                         title="Show All Shapes"
                         class="btn btn-default">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
@@ -63,7 +63,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table ng-table="tableParams" class="table table-bordered"  ng-show="!vm.tblNoData">
+                        <table ng-table="tableParams" class="table table-bordered">
 
                             <tr class="truncate"
                                 ng-repeat="row in $data track by $index">
@@ -131,13 +131,11 @@
                                 <!--</td>-->
                             </tr>
                         </table >
-                        <table class="table table-bordered table-striped table-condensed no-mr" ng-show="vm.tblNoData">
-                            <tr>
-                                <td colspan="7">No data found</td>
-                            </tr>
-                        </table>
                     </div>
                 </div>
+            </div>
+            <div class="alert alert-warning fade in" ng-show="!vm.showTableData">
+                <strong>oops!</strong> no result found.
             </div>
 
         </div>

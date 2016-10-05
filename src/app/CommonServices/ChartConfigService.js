@@ -23,6 +23,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
         chart: {
             type: 'lineChart',
             height: 455,
+            //xDomain: [0,100],
             zoom: {
                 enabled: true
             },
@@ -87,6 +88,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 },
                 showMaxMin: true,
                 axisLabelDistance: 200
+
             }
         }
     };

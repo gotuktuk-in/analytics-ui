@@ -3,66 +3,58 @@
 
     angular
         .module('tuktukV2Dahboard')
-        .controller('TripsSearchController', TripsSearchController);
+        .controller('DriversSearchController', DriversSearchController);
 
     /** @ngInject */
-    function TripsSearchController($scope, $state, NgTableParams, $stateParams, TripsService, $rootScope, $interval) {
+    function DriversSearchController($scope, $rootScope, $state, $stateParams, StaticDataService, ChartConfigService, DriversService, NgTableParams) {
 
         var vm = this;
+        var today = moment();
+        var current = moment();
+
         vm.termURL = $stateParams.term;
         vm.filterURL = $stateParams.filterURL;
         vm.searchTerm = vm.termURL;
         vm.showTableData = true;
         vm.enblBtn = false;
-        vm.trips = [];
+
+        vm.ranges = StaticDataService.ranges;
+        vm.config = ChartConfigService.lineChartConfig;
+        $scope.date = moment().format("ddd, MMM Do YYYY");
+
         vm.filterTerm = '';
-        vm.filterFields = [
+        vm.filterFields = [{value: "id", name: "Driver ID"},
             {value: "dname", name: "Driver Name"},
-            {value: "rname", name: "Rider Name"},
-            {value: "id", name: "Trip ID"},
-            {value: "did", name: "Driver ID"},
-            {value: "remail", name: "Rider Email"},
-            {value: "dphone", name: "Driver Phone"},
-            {value: "rphone", name: "Rider Phone"},
-            {value: "dvehicle", name: "Vehicle Number"},
-            {value: "date", name: "Date"}
+            {value: "phone", name: "Driver Phone"},
+            {value: "vehicle", name: "Vehicle Number"},
+            //{value: "vehicleType", name: "Vehicle Type"},
+            //{value: "riderFeedbackRating", name: "Feedback Rating"},
+            {value: "joined", name: "Joined On"}
         ];
         vm.statusCodes = '';
-        vm.tripStatusFilters = [{name: 'All', value: "20,22,30,40,50,60,61,70,71,80,81,82"},
-            {name: 'Success', value: "61"},
-            {name: 'Cancelled ', value: '70,71'},
-            {name: 'Failed', value: '80,81,82'},
-            {name: 'In Progress', value: '20,22,30,40,50,60'}
+        vm.driverStatusFilters = [{name: 'All', value: "all"},
+            {name: 'Occupied', value: "22"},
+            {name: 'Unoccupied ', value: '11'},
+            {name: 'Offline', value: '10'}
         ];
-        vm.statusCodes = vm.tripStatusFilters[0];
-
         vm.checkMinChr = function (index) {
             if (vm.searchTerm.length > 2) {
                 vm.enblBtn = true;
-            }else{
+            } else {
                 vm.enblBtn = false;
             }
         };
         vm.checkMinChr();
 
-        vm.selectedFilterFields = _.find(vm.filterFields, function(rw){ return rw.value == vm.filterURL });
+        vm.selectedFilterFields = _.find(vm.filterFields, function (rw) {
+            return rw.value == vm.filterURL
+        });
         vm.filterTerm = vm.selectedFilterFields;
 
         vm.searchTable = function () {
-            $state.go('home.search', {filterURL: vm.filterTerm.value, term: vm.searchTerm});
+            $state.go('home.drivers_search', {filterURL: vm.filterTerm.value, term: vm.searchTerm});
         };
-        $scope.$back = function () {
-            window.history.back();
-        };
-        var interval = $interval(function () {
-            vm.tblNoData = false;
-        }, 8000);
 
-        $scope.$on('$destroy', function () {
-            $interval.cancel(interval);
-        });
-
-        vm.live = true;
         var sorting;
         $scope.getTimeDiff = function (dt1, dt2) {
             if (dt1 == 0 || dt2 == 0) {
@@ -77,17 +69,23 @@
             }
         };
         vm.getResult = function () {
-            $scope.tableParams = new NgTableParams(
-                {
+            $scope.tableParams = new NgTableParams({
                     page: 1,
-                    count: 20
-                }, {
+                    count: 20,
+                    noPager: true
+                },
+                {
                     counts: [],
+                    total: 1,
                     getData: function (params) {
                         // ajax request to api
-                        var start = ((params.page() - 1) * 20) + 1;
+                        var start = params.page();
                         console.log("**************************");
                         var dataObj = {};
+                        dataObj.city = $rootScope.city;
+                        dataObj.vehicle = $rootScope.vehicleType;
+                        dataObj.from = moment(current).startOf('day').format("YYYYMMDD").toString();
+                        dataObj.to = moment(current).endOf('day').format("YYYYMMDD").toString();
                         dataObj.start = start;
                         dataObj.count = params.count();
 
@@ -106,22 +104,20 @@
                         }
                         if (vm.filterURL != '' && vm.termURL != '') {
                             dataObj.term = vm.filterURL + "|" + vm.termURL;
-                        }else{
+                        } else {
                             dataObj.term = '';
                             return;
                         }
-                        if (vm.statusCodes.value != '') {
-                            dataObj.filterByStatus = vm.statusCodes.value;
-                        }
-                        return TripsService.getAllTrips(dataObj).$promise.then(function (data) {
+                        return DriversService.getTopDrivers(dataObj).$promise.then(function (data) {
                             params.total(data.total); // recal. page nav controls
-                            if (data.data.length > 0) {
+                            console.log(data);
+                            if (data.length > 0) {
                                 vm.showTableData = true;
                             }
                             else {
                                 vm.showTableData = false;
                             }
-                            return data.data;
+                            return data;
                         });
                     }
                 });
@@ -129,4 +125,3 @@
         vm.getResult();
     }
 })();
-
