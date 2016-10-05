@@ -464,7 +464,16 @@ input.daterangepicker-aqq-chart {
     max-width: 190px;
     min-width: 130px;
 }
-
+input.daterangepicker-leaderboard {
+    line-height: 16px;
+    padding: 0px;
+    margin: 0px;
+    height: 17px;
+    font-size: 11px;
+    line-height: 16px;
+    max-width: 190px;
+    min-width: 130px;
+}
 .daterangepicker .calendar-date, .daterangepicker td.start-date.end-date {
     border-radius: 0px;
 }

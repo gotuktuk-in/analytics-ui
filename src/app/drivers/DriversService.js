@@ -10,7 +10,7 @@
 
 angular
     .module('tuktukV2Dahboard')
-    .factory('DriversService', DriversService)
+    .factory('DriversService', DriversService);
 
 function DriversService($q, $resource, API) {
   var url = API;
@@ -23,9 +23,19 @@ function DriversService($q, $resource, API) {
                 url:   url + 'drivers/topdrivers',
                 isArray:true
             },
+            getLeaderboard: {
+                method: 'GET',
+                url:   url + 'drivers/leaderboard',
+                isArray:false
+            },
             getAcquisition: {
                 method: 'GET',
                 url:   url + 'drivers/acquisition',
+                isArray:true
+            },
+            getSupply: {
+                method: 'GET',
+                url:   url + 'drivers/supply/hours',
                 isArray:true
             },
             getProfile: {

@@ -1,19 +1,36 @@
-<div class="container-fluid">
-    <div class="row" style="z-index:99; position:fixed; width:auto; padding:10px 0; left:53px;">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span
-                class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span
-                ng-click="vm.changeDate('next')" ng-if="!vm.live"
-                style="display: inline-block; padding: 7px;">&#10095;</span>
+<style>
+    .search-btn-trip {
+        position: fixed;
+        right: 9px;
+        top: 12px;
+        z-index: 91;
+    }
+
+    div.daterangepicker-leaderboard-box .daterangepicker_end_input,
+    div.daterangepicker-leaderboard-box .calendar.second.right {
+        display: none;
+    }
+</style>
+<div class="search-btn-trip">
+    <form class="form-inline">
+        <div class="form-group">
+            <div style="max-height: 34px; overflow: hidden;">
+                <a
+                        ui-sref="home.drivers_search({city: city,vehicleType: vehicleType, filterURL: 'joined', term: dateURL})"
+                        class="btn btn-default">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </a>
+                <a class="btn btn-default" href="#/home/drivers/onboarding/indore/auto"><i class="fa fa-plus"
+                                                                                           aria-hidden="true"></i></a>
+            </div>
         </div>
-    </div>
-    <span class="live" ng-if="vm.live"> LIVE</span>
-    <span class="add-driver"><a href="#/home/drivers/onboarding/indore/auto" ><i class="fa fa-plus" aria-hidden="true"></i></a> </span>
-    <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+    </form>
+</div>
+<div class="container-fluid">
     <br>
     <br>
     <br>
-    <br><br>
+    <br>
 
     <div class="row overview-box">
         <div class="col-md-12 col-sm-12 col-xs-12 text-center">
@@ -59,9 +76,8 @@
             </div>
         </div>
     </div>
-
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="pull-right">
@@ -81,92 +97,233 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12" ngsf-fullscreen>
-            <form class="form-inline">
-                <div class="input-group col-md-3 col-sm-12 col-xs-12">
-                    <select ng-model="vm.filterTerm" class="form-control"
-                            ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
-                        <option value="" disabled>Select Filter</option>
-                    </select>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <form class="form-inline pull-right no-mr pd-2-">
+                    <div class="form-group ">
+                        <input
+                                ng-change="vm.getSupply()"
+                                class="form-control text-center"
+                                type="daterange"
+                                ng-model="driverSupplyDates"
+                                separator=" - "
+                                format="DD MMM YY"
+                                opens="left"
+                                ranges="vm.ranges"
+                                style="margin: 8px 10px 0px 0px !important;
+                                        padding: 0px;
+                                        height: 20px;
+                                        width: auto; font-size: 11px;">
+                    </div>
+                </form>
+                <div class="panel-heading">
+
+                    <h4 style="margin-top: 0" class="title">SUPPLY HOURS</h4></div>
+                <div class="panel-body">
+                    <nvd3 options="vm.supplyChartOptions" data="vm.supply" config="vm.config"></nvd3>
                 </div>
-                <div class="input-group col-md-3 col-sm-12 col-xs-12">
-                    <input ng-model="vm.searchTerm" class="form-control input-search-term" placeholder="term"
-                           ng-disabled="!vm.filterTerm"/>
-                </div>
-                <div class="input-group col-md-1 col-sm-12 col-xs-12">
-                    <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()" class="btn btn-small">Search
-                    </button>
-                </div>
-                <div class="input-group col-md-3 col-sm-12 col-xs-12">
-                    <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
-                            ng-options="statusFilter.name for statusFilter in vm.driverStatusFilters track by statusFilter.value">
-                        <option value="" disabled>Select Status</option>
-                    </select>
-                </div>
-            </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Top Drivers</h4></div>
+                    <div class="pull-right daterangepicker-leaderboard-box">
+                        <input name="birthdate" ng-change="vm.getLeaderboard()"
+                               class="form-control cstm-width text-center daterangepicker-leaderboard" type="daterange"
+                               ng-model="datesForLeaderboard" separator=" - " format="DD MMM YY" limit="0" opens="left">
+                    </div>
+                    <h4 style="margin-top: 0" class="title">Leaderboard</h4></div>
                 <div class="panel-body">
-
-                    <div class="table-responsive">
-                        <table ng-table="tableParams" class="table table-bordered table-striped text-center">
-                            <!--<thead>
-                                <tr>
-                                    <th width="120" style="text-align:left;">#ID</th>
-                                    <th width="200" style="text-align:left;">Name</th>
-                                    <th width="120" style="text-align:right;">Earning(Rs.)</th>
-                                    <th width="120">Rides</th>
-                                    <th style="text-align:left;">Online</th>
-
-                                </tr>
-                            </thead>-->
-                            <tbody>
-                            <tr ng-repeat="row in $data track by $index">
-                                <!--<td data-title="'#ID'" class="text-left"><a-->
-                                        <!--ui-sref="home.drivers_detail({driverId:row.driver_id})">{{row.driver_id}}</a>-->
-                                <!--</td>-->
-                                <td data-title="'Name'" sortable="'name'" class="text-left">
-                                    <a target="_blank"
-                                       ui-sref="home.drivers_detail({driverId:row.driver_id})">
-                                    {{row.name}}
-                                        </a>
-                                </td>
-                                <td data-title="'Phone'" class="text-right">
-                                    {{row.phone}}
-                                </td>
-                                <td data-title="'State'" sortable="'state'" class="text-center">
-                                <span ng-if="row.state== 22" class="text-warning">
-                                    Occupied
-                                </span>
-                                <span ng-if="row.state== 11" class="text-success">
-                                    Online
-                                </span>
-                                <span ng-if="row.state== 10" class="text-danger">
-                                    Offline
-                                </span>
-                                </td>
-                                <td data-title="'App Version'" class="text-right">
-                                    {{row.app_version}}
-                                </td>
-                                <td data-title="'Earning(Rs.)'" sortable="'earning'" class="text-right">
-                                    {{row.earning}}
-                                </td>
-                                <td data-title="'Rides'" sortable="'rides'">{{row.rides}}</td>
-                                <td class="text-left" data-title="'Online'">
-
-                                        <span ng-repeat="time in row.online"
-                                              class="label label-primary">{{time.start*1000 | date:'h:mma'}} - {{time.end*1000 | date:'h:mma'}}</span>
-
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
+                    <div class="alert alert-warning fade in" ng-show="vm.dataCount<3">
+                        <strong>oops!</strong> no result found.
+                    </div>
+                    <div class="row" ng-show="vm.dataCount>2">
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <h4>Max Trips</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped text-center no-mr">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-left">Name</th>
+                                        <th class="text-right" width="100">Trips</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="row in vm.leaderboradData.trip.maxTrip">
+                                        <td class="text-left">
+                                            <a target="_blank"
+                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                                {{row.dr}}
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            {{row.tc}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <h4>Largest Cancelled Trips</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped text-center">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-left">Name</th>
+                                        <th class="text-right"  width="100">Cancel / Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="row in vm.leaderboradData.trip.largestCan">
+                                        <td class="text-left">
+                                            <a target="_blank"
+                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                                {{row.dr}}
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            {{row.tc}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <h4>Longest Trip</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped text-center">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-left">Name</th>
+                                        <th class="text-right" width="100">KM</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="row in vm.leaderboradData.trip.longestTrip">
+                                        <td class="text-left">
+                                            <a target="_blank"
+                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                                {{row.dr}}
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            {{row.td}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <h4>Longest For Trip</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped text-center">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-left">Name</th>
+                                        <th class="text-right" width="100">KM</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="row in vm.leaderboradData.trip.longestForTrip">
+                                        <td class="text-left">
+                                            <a target="_blank"
+                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                                {{row.dr}}
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            {{row.td}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <h4>Max Hour</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped text-center">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-left">Name</th>
+                                        <th class="text-right" width="100">Hours</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="row in vm.leaderboradData.availability.maxHour">
+                                        <td class="text-left">
+                                            <a target="_blank"
+                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                                {{row.dr}}
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            {{row.hc}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <h4>Max Utilization</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped text-center no-mr">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-left">Name</th>
+                                        <th class="text-right" width="100">Hours</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="row in vm.leaderboradData.availability.maxUtilization">
+                                        <td class="text-left">
+                                            <a target="_blank"
+                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                                {{row.dr}}
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            {{row.tc}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                            <h4>Income</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped text-center no-mr">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-left">Name</th>
+                                        <th class="text-right" width="100">Income</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="row in vm.leaderboradData.income.topEarner">
+                                        <td class="text-left">
+                                            <a target="_blank"
+                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                                {{row.dr}}
+                                            </a>
+                                        </td>
+                                        <td class="text-right">
+                                            {{row.tc}}
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <br>
-                <br>
             </div>
         </div>
     </div>

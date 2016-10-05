@@ -72,6 +72,12 @@
                 controller: 'DriversController',
                 controllerAs: 'vm'
             })
+            .state('home.drivers_search', {
+                url: '/drivers/search/:city/:vehicleType/:filterURL/:term',
+                templateUrl: 'app/drivers/drivers_search.html',
+                controller: 'DriversSearchController',
+                controllerAs: 'vm'
+            })
             .state('home.onboarding', {
                 url: '/drivers/onboarding/:city/:vehicleType',
                 templateUrl: 'app/drivers/onboarding.html',
@@ -109,7 +115,7 @@
                 controllerAs: 'vm'
             })
             .state('home.search', {
-                url: '/trips/search/:filterURL/:term',
+                url: '/trips/search/:city/:vehicleType/:filterURL/:term',
                 templateUrl: 'app/trips/trip_search.html',
                 controller: 'TripsSearchController',
                 controllerAs: 'vm'

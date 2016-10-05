@@ -81,6 +81,8 @@
     <script src="../bower_components/angular-confirm-modal/angular-confirm.js"></script>
     <script src="../bower_components/ngstorage/ngStorage.js"></script>
     <script src="../bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="../bower_components/checklist-model/checklist-model.js"></script>
+    <script src="../bower_components/angular-bootstrap-checkbox/angular-bootstrap-checkbox.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -91,9 +93,12 @@
     <script src="app/components/navbar/navbar.directive.js"></script>
     <script src="app/components/malarkey/malarkey.directive.js"></script>
     <script src="app/components/githubContributor/githubContributor.service.js"></script>
+    <script src="app/trips/trips.search.controller.js"></script>
     <script src="app/trips/trips.detail.controller.js"></script>
     <script src="app/trips/trips.controller.js"></script>
     <script src="app/trips/TripsService.js"></script>
+    <script src="app/trips/TripsHandler.js"></script>
+    <script src="app/thirdparties/stickytableheaders.js"></script>
     <script src="app/surge/surge.controller.js"></script>
     <script src="app/surge/SurgeService.js"></script>
     <script src="app/riders/riders.controller.js"></script>
@@ -111,14 +116,20 @@
     <script src="app/main/main.controller.js"></script>
     <script src="app/login/login.controller.js"></script>
     <script src="app/login/LoginService.js"></script>
+    <script src="app/drivers/payout.controller.js"></script>
+    <script src="app/drivers/onboarding.controller.js"></script>
+    <script src="app/drivers/drivers.search.controller.js"></script>
+    <script src="app/drivers/drivers.detail.controller.js"></script>
+    <script src="app/drivers/drivers.controller.js"></script>
+    <script src="app/drivers/PayoutService.js"></script>
+    <script src="app/drivers/OnboardingService.js"></script>
+    <script src="app/drivers/DriversService.js"></script>
+    <script src="app/drivers/DriversHandler.js"></script>
     <script src="app/live/live.controller.js"></script>
     <script src="app/live/LiveService.js"></script>
     <script src="app/live/LiveHandler.js"></script>
-    <script src="app/drivers/onboarding.controller.js"></script>
-    <script src="app/drivers/drivers.detail.controller.js"></script>
-    <script src="app/drivers/drivers.controller.js"></script>
-    <script src="app/drivers/OnboardingService.js"></script>
-    <script src="app/drivers/DriversService.js"></script>
+    <script src="app/alert/alert.controller.js"></script>
+    <script src="app/alert/AlertService.js"></script>
     <script src="app/CommonServices/setNavByRoleService.js"></script>
     <script src="app/CommonServices/interceptor.js"></script>
     <script src="app/CommonServices/filters.js"></script>
@@ -126,8 +137,7 @@
     <script src="app/CommonServices/UserService.js"></script>
     <script src="app/CommonServices/StaticDataService.js"></script>
     <script src="app/CommonServices/ChartConfigService.js"></script>
-    <script src="app/alert/alert.controller.js"></script>
-    <script src="app/alert/AlertService.js"></script>
+    <script src="app/stickytableheaders.js"></script>
     <script src="app/index.run.js"></script>
     <script src="app/index.route.js"></script>
     <script src="app/index.constants.js"></script>
@@ -139,7 +149,8 @@
     <!-- angular templates will be automatically converted in js and inserted here -->
     <!-- endinject -->
     <!-- endbuild -->
-    <script src="app/dimple.v2.1.6.min.js"></script>
+    <!--<script src="app/dimple.v2.1.6.min.js"></script>-->
+    <!--<script src="app/thirdparties/stickytableheaders.js"></script>-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
     <style type="text/css">

@@ -6,170 +6,116 @@
         .controller('DriversController', DriversController);
 
     /** @ngInject */
-    function DriversController($scope, $log, $rootScope, $interval, StaticDataService, ChartConfigService, PerformanceService, PerformanceHandler, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversController($scope, $rootScope, StaticDataService, toastr, ChartConfigService, DriverHandler, DriversService, NgTableParams, LiveService) {
 
-        var vm = this
-        var today = moment()
-        var currentDate = moment()
-        var current = moment()
-        vm.live = true
-        vm.acquisitionData = []
-        vm.ranges = StaticDataService.ranges
+        var vm = this;
+        $scope.date = moment().format("ddd, MMM Do YYYY");
+        $scope.dateURL = moment().format("DD/MM/YYYY");
+        var today = moment();
+
+        vm.ranges = StaticDataService.ranges;
         vm.config = ChartConfigService.lineChartConfig;
-        vm.acquisitionChart = angular.copy(ChartConfigService.discreteBarChartOptions)
+
+        $scope.datesForLeaderboard = {};
+        $scope.datesForLeaderboard.startDate =  moment(today).subtract(1, 'days');
+        $scope.datesForLeaderboard.endDate =  moment(today).subtract(1, 'days');
+
+        $scope.datesForAcq = {};
+        $scope.datesForAcq.startDate = StaticDataService.ranges['Last 7 Days'][0];
+        $scope.datesForAcq.endDate = StaticDataService.ranges['Last 7 Days'][1];
+        vm.acquisitionData = [];
+        vm.acquisitionChart = angular.copy(ChartConfigService.discreteBarChartOptions);
         vm.acquisitionChart.chart.xAxis.tickFormat = function (d) {
             return d3.time.format('%d %b %y')(new Date(d));
         };
-        $scope.date = moment().format("ddd, MMM Do YYYY")
-        $scope.datesForAcq = {}
-        $scope.datesForAcq.startDate = moment().subtract(10, 'days').format("YYYY-MM-DD");
-        $scope.datesForAcq.endDate = moment().format("YYYY-MM-DD");
-        vm.changeDate = function (to) {
 
-            if (to == 'next') {
-                current = moment(current).add(1, 'day')
-                $scope.date = moment(current).format("dddd, MMMM Do YYYY")
+        $scope.driverSupplyDates = {};
+        $scope.driverSupplyDates.startDate = StaticDataService.ranges['Last 7 Days'][0]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.driverSupplyDates.endDate = StaticDataService.ranges['Last 7 Days'][1]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        vm.supplyChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+        vm.supplyChartOptions.chart.xAxis.tickFormat = function (d) {
+            return d3.time.format('%d %b %y')(new Date(d));
+        };
 
-            }
-            else {
-                current = moment(current).subtract(1, 'day')
-                $scope.date = moment(current).format("dddd, MMMM Do YYYY")
+        vm.supplyChartOptions.chart.yAxis.tickFormat = function (d) {
+            return d3.format('.3n')(d);
+        };
 
-                console.log('$scope.date ', $scope.date)
-            }
-            if (moment(current).unix() == moment(today).unix()) {
-                vm.live = true;
-            }
-            else {
-                vm.live = false;
-            }
-            $scope.tableParams.reload()
-            $scope.tableParams.page(1)
-            vm.getAcquisition()
-        }
-
-        vm.filterTerm = '';
-        vm.filterFields = [{value: "id", name: "Driver ID"},
-            //{filed:"requestOn",title:"Date"},
-            {value: "dname", name: "Driver Name"},
-            {value: "dphone", name: "Driver Phone"},
-            {value: "dvehicle", name: "Vehicle Number"},
-            {value: "vehicleType", name: "Vehicle Type"},
-            {value: "riderFeedbackRating", name: "Feedback Rating "}
-        ]
-        vm.statusCodes = ''
-        vm.driverStatusFilters = [{name: 'All', value: "all"},
-            {name: 'Occupied', value: "22"},
-            {name: 'Unoccupied ', value: '11'},
-            {name: 'Offline', value: '10'},
-        ]
-        vm.searchTable = function () {
-            $scope.tableParams.reload()
-        }
-        function getLive() {
+        vm.getLive = function() {
             LiveService.getOverview({
                 city: $rootScope.city,
-                vehicle: $rootScope.vehicleType,
+                vehicle: $rootScope.vehicleType
             }, function (response) {
                 vm.overview = response;
             }, function (err) {
-                console.log(err)
+                console.log(err);
                 $scope.error = true;
             });
-        }
+        };
+
+        vm.getLeaderboard = function () {
+            vm.leaderboradData = '';
+            DriversService.getLeaderboard(
+                {
+                    from: moment($scope.datesForLeaderboard.startDate).startOf('day').format("YYYYMMDD").toString()
+                },
+                function (response) {
+                    vm.leaderboradData = response;
+                    vm.dataCount = _.size(vm.leaderboradData);
+                }, function (err) {
+                    toastr.error(err.message);
+                });
+        };
+        vm.getLeaderboard();
 
         vm.getAcquisition = function () {
-            console.log($scope.datesForAcq)
+            console.log($scope.datesForAcq);
             DriversService.getAcquisition({
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
                 from: moment($scope.datesForAcq.startDate).startOf('day').format("YYYYMMDD").toString(),
                 to: moment($scope.datesForAcq.endDate).endOf('day').format("YYYYMMDD").toString()
             }, function (response) {
-                vm.acquisitionData = []
-                var values = []
+                vm.acquisitionData = [];
+                var values = [];
                 _.each(response, function (value) {
-                    values.push({label: PerformanceHandler.getLongDate(value.id), value: value.count})
-                })
-                vm.acquisitionData.push({key: 'Drivers', values: values})
+                    values.push({label: DriverHandler.getLongDate(value.id), value: value.count})
+                });
+                vm.acquisitionData.push({key: 'Drivers', values: values});
                 console.log('vm.acquisitionData ', vm.acquisitionData)
             }, function (err) {
-                console.log(err)
+                console.log(err);
                 $scope.error = true;
             });
-        }
+        };
 
-        getLive()
-        vm.getAcquisition()
-        //var interval = $interval(function () {
-        //    getLive()
-        //    vm.getAcquisition()
-        //    $scope.tableParams.reload()
-        //    $scope.tableParams.page(1)
-        //}, 30000)
+        vm.onDateChangeSupply = function () {
+            vm.getSupply();
+        };
+        vm.getLeaderboardLength = function (a) {
+            console.log(_.size(a));
+        };
 
-        vm.refreshPage = function () {
-            getLive()
-            vm.getAcquisition()
-            $scope.tableParams.reload()
-            $scope.tableParams.page(1)
-        }
+        vm.getSupply = function () {
+            DriversService.getSupply({
+                city: $rootScope.city,
+                vehicle: $rootScope.vehicleType,
+                from: moment($scope.driverSupplyDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+                to: moment($scope.driverSupplyDates.endDate).endOf('day').format("YYYYMMDD").toString()
+            }, function (response) {
+                DriverHandler.supply = response;
+                vm.supply = DriverHandler.getSupply(response);
+                vm.hourMax = DriverHandler.maxValueDNew;
+                vm.supplyChartOptions.chart.yDomain = [0, vm.hourMax];
+            }, function (err) {
+                console.log(err);
+                $scope.error = true;
+            });
+        };
 
-        $scope.$on('$destroy', function () {
-            $interval.cancel(interval);
-        });
-        // call to get data for the tables
-        $scope.tableParams = new NgTableParams({
-            page: 1, count: 20, sorting: {earning: 'desc'}
-        },
-            {
-            counts: [],
-            getData: function (params) {
-                // ajax request to api
-                var start = params.page()
-                console.log("**************************")
-                var orderBy = ''
-                var field = ''
-                if (params.orderBy().length > 0) {
-                    orderBy = params.orderBy()[0].substr(0, 1);
-                    field = params.orderBy()[0].substr(1);
-                    if (orderBy === "+") {
-                        orderBy = "ASC"
-                    }
-                    else {
-                        orderBy = "DESC"
-                    }
-                }
-                var dataObj = {
-                    city: $rootScope.city,
-                    vehicle: $rootScope.vehicleType,
-                    from: moment(current).startOf('day').format("YYYYMMDD").toString(),
-                    to: moment(current).endOf('day').format("YYYYMMDD").toString(),
-                    orderby: orderBy,
-                    field: field,
-                    start: start,
-                    count: params.count()
-                }
-                if (vm.searchTerm && vm.searchTerm != '') {
-                    dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm
-                }
-                if (vm.statusCodes.value != '') {
-                    dataObj.filterByStatus = vm.statusCodes.value
-                }
-                return DriversService.getTopDrivers(dataObj).$promise.then(function (data) {
 
-                        params.total(data.total); // recal. page nav controls
-
-                        console.log('trop ', data)
-                        if (data.length > 0) {
-                            $scope.tblNoData = false
-                        }
-                        else {
-                            $scope.tblNoData = true
-                        }
-                        return data;
-                    });
-            }
-        });
+        vm.getLive();
+        vm.getAcquisition();
+        vm.getSupply();
     }
 })();
