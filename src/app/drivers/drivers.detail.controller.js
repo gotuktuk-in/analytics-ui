@@ -6,73 +6,126 @@
         .controller('DriversDetailController', DriversDetailController);
 
     /** @ngInject */
-    function DriversDetailController($scope, $stateParams, $rootScope, $interval,StaticDataService, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversDetailController($scope, $window, $stateParams, $confirm, toastr, $interval, StaticDataService, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
-        var vm = this
-        var current = moment()
-        vm.ranges = StaticDataService.ranges
+        var vm = this;
+        var current = moment();
+        vm.ranges = StaticDataService.ranges;
         $scope.selectedDates = {};
         $scope.selectedDates.startDate = moment().format("YYYY-MM-DD");
         $scope.selectedDates.endDate = moment().format("YYYY-MM-DD");
         vm.getProfile = function () {
-            DriversService.getProfile({id:$stateParams.driverId,
-                from: moment( $scope.selectedDates.startDate).startOf('day').format("YYYYMMDD").toString(),
-                to: moment( $scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString()
+            DriversService.getProfile({
+                id: $stateParams.driverId
+                //from: moment( $scope.selectedDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+                //to: moment( $scope.selectedDates.endDate).endOf('day').format("YYYYMMDD").toString()
             }, function (response) {
                 vm.profile = response;
             }, function (err) {
-                console.log(err)
+                console.log(err);
                 $scope.error = true;
             });
-        }
+        };
 
-        vm.getProfile()
+        vm.getProfile();
         vm.getAllData = function () {
             vm.getProfile();
-          //  $scope.tableParams.page(1);
+            //  $scope.tableParams.page(1);
             $scope.tableParams.reload()
-        }
-        //var interval= $interval(function(){
-        //    vm.getAllData()
-        //}, 30000)
-        vm.refreshPage = function () {
-            vm.getAllData()
-        }
-        $scope.$on('$destroy', function () { $interval.cancel(interval); });
+        };
+        $scope.confirmSuspend = function () {
+            $confirm({
+                text: 'Are you sure want suspend?',
+                title: 'Are you sure?',
+                ok: 'Yes',
+                cancel: 'No'
+            })
+                .then(function () {
+                    vm.driverSuspend();
+                });
+        };
+        $scope.confirmDelete = function () {
+            $confirm({
+                text: 'Are you sure want delete?',
+                title: 'Are you sure?',
+                ok: 'Yes',
+                cancel: 'No'
+            })
+                .then(function () {
+                    vm.driverDelete();
+                });
+        };
+        vm.driverSuspend = function () {
+            DriversService.accountDriver(
+                {
+                    id: $stateParams.driverId
+                },{
+                    accountStatus: 2
+                },
+                function (response) {
+                    vm.msg = 'Driver Suspend';
+                    $scope.amountPaid = true;
+                    toastr.success(vm.msg);
+                    $window.close();
+                }, function (err) {
+                    vm.msg = 'Already Suspended.';
+                    toastr.error(err.message);
+                });
+        };
+        vm.driverDelete = function (dID) {
+            DriversService.accountDriver(
+                {
+                    id: $stateParams.driverId
+                }, {
+                    accountStatus: 3
+                },
+                function (response) {
+                    vm.msg = 'Driver Deleted';
+                    $scope.amountPaid = true;
+                    toastr.success(vm.msg);
+                    $window.close();
+                }, function (err) {
+                    vm.msg = 'Already Deleted.';
+                    toastr.error(err.message);
+                });
+        };
+
+
+        $scope.$on('$destroy', function () {
+            $interval.cancel(interval);
+        });
         $scope.getTimeDiff = function (dt1, dt2) {
-        var then;
-          if(dt1==0 )
-            {
+            var then;
+            if (dt1 == 0) {
                 return '0'
             }
-            
-            if(dt2==0)
-            {
-             then = new Date();
+
+            if (dt2 == 0) {
+                then = new Date();
             }
-            else
-            {
-            then = new Date(dt2 * 1000);
+            else {
+                then = new Date(dt2 * 1000);
             }
             var now = new Date(dt1 * 1000);
-        
+
             var diff = moment.utc(moment(now, "DD/MM/YYYY HH:mm:ss").diff(moment(then, "DD/MM/YYYY HH:mm:ss")));//.format("HH:mm:ss")
-            var timeInStr = ""
+            var timeInStr = "";
             if (diff.hours() > 0) {
-                timeInStr = diff.hours() + " hr "
+                timeInStr = diff.hours() + " hr ";
             }
-            timeInStr += diff.minute() + " min "
+            timeInStr += diff.minute() + " min ";
             return timeInStr;
-        }
-        $scope.tableParams = new NgTableParams({page:1,count: 20, sorting:{earning:'desc'}
+        };
+        $scope.tableParams = new NgTableParams({
+            page: 1, count: 20, sorting: {earning: 'desc'}
         }, {
             counts: [],
             getData: function (params) {
                 // ajax request to api
-                var  start = ((params.page() - 1) * 20) + 1;
-                console.log("**************************")
-                var orderBy= ''
-                var field = ''
+                var start = ((params.page() - 1) * 20) + 1;
+                console.log("**************************");
+                var orderBy = '';
+                var field = '';
                 if (params.orderBy().length > 0) {
                     orderBy = params.orderBy()[0].substr(0, 1);
                     field = params.orderBy()[0].substr(1);
@@ -86,27 +139,28 @@
 
                 return DriversService.getTrips(
                     {
-                       // city: $rootScope.city,
-                      //  vehicle: $rootScope.vehicleType,
-                        startDate: moment(  $scope.selectedDates.startDate).startOf('day').unix(),
-                        endDate: moment(  $scope.selectedDates.endDate).endOf('day').unix(),
-                        orderby:orderBy,
-                        field:field,
-                        start:start,
-                        count:params.count()
+                        // city: $rootScope.city,
+                        //  vehicle: $rootScope.vehicleType,
+                        startDate: moment($scope.selectedDates.startDate).startOf('day').unix(),
+                        endDate: moment($scope.selectedDates.endDate).endOf('day').unix(),
+                        orderby: orderBy,
+                        field: field,
+                        start: start,
+                        count: params.count()
 
                     },
-                    {id:$stateParams.driverId
+                    {
+                        id: $stateParams.driverId
                     }
                 ).$promise.then(function (data) {
 
                         params.total(data.total); // recal. page nav controls
 
-                        console.log('trop ',data)
-                        if(data.data.length > 0){
+                        console.log('trop ', data);
+                        if (data.data.length > 0) {
                             $scope.tblNoData = false
                         }
-                        else{
+                        else {
                             $scope.tblNoData = true
                         }
                         return data.data;

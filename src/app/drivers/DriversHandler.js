@@ -24,8 +24,8 @@ function DriverHandler() {
 
         _.each(data, function (value) {
             var longDate = factory.getLongDate(value.id);
-            totalOnline.push([longDate, _converts(value.totalOnline)]);
-            maxValueD.push(parseInt(_converts(value.totalOnline)));
+            totalOnline.push([longDate, secondsToTime(value.totalOnline)]);
+            maxValueD.push(parseInt(secondsToTime(value.totalOnline)));
         });
 
         factory.maxValueDNew = _.max(maxValueD, function(d){ return d });
@@ -44,6 +44,19 @@ function DriverHandler() {
         return newDate;
         //  return moment().unix(newDate)
     };
+
+    function secondsToTime(secs) {
+        var hours = Math.floor(secs / (60 * 60));
+
+        var divisor_for_minutes = secs % (60 * 60);
+        var minutes = Math.floor(divisor_for_minutes / 60);
+
+        var divisor_for_seconds = divisor_for_minutes % 60;
+        var seconds = Math.ceil(divisor_for_seconds);
+
+        var obj = hours + minutes + seconds;
+        return obj;
+    }
 
     function _converts(second) {
         var onlineHour = '-';
