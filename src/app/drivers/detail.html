@@ -1,26 +1,51 @@
-<div class="container-fluid">
-    <div class="row">
-        <form class="form-inline date-selection date-selection-dr">
-            <div class="form-group ">
-                <input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange"
-                       ng-model="selectedDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
+<style>
+    .search-btn-trip {
+        position: fixed;
+        right: 9px;
+        top: 12px;
+        z-index: 91;
+    }
+
+</style>
+<div class="search-btn-trip">
+    <form class="form-inline">
+        <div class="form-group">
+            <div style="max-height: 34px; overflow: hidden;">
+                <a ui-sref="home.drivers_search({city: city,vehicleType: vehicleType, filterURL: 'joined', term: dateURL})"
+                   class="btn btn-default disabled">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>
+                <a title="Suspend" ng-click="confirmSuspend();"
+                   class="btn btn-default">
+                    <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                </a>
+                <a title="Delete" ng-click="confirmDelete();" class="btn btn-default">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </a>
             </div>
-        </form>
-        <!--<div class="col-md-12 col-sm-12 col-xs-12">
-            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>
-        </div>-->
-    </div>
-    <span class="live" ng-if="vm.live"> LIVE</span>
-    <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+        </div>
+    </form>
+</div>
+<div class="container-fluid">
+    <!--<div class="row">-->
+    <!--<form class="form-inline date-selection date-selection-dr">-->
+    <!--<div class="form-group ">-->
+    <!--<input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange"-->
+    <!--ng-model="selectedDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+    <!--<span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<span class="live" ng-if="vm.live"> LIVE</span>-->
+    <!--<span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>-->
     <br>
     <br>
     <br>
-    <br><br>
+    <br>
 
     <div class="row overview-box">
-        <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i>
-</span>
-
         <div class="col-md-12 col-sm-12 col-xs-12 text-center">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -30,7 +55,6 @@
                             <img ng-src="https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url={{vm.profile.profileImage}}&container=focus&resize_w=75&resize_h=75&refresh=2592000"
                                  class="iw-driver" height="50">
                             <h4 class="title" style="margin-top:10px;">{{vm.profile.name}}</h4>
-
                         </div>
                     </div>
                     <div class="col-md-10 col-sm-12 col-xs-12">
@@ -52,18 +76,11 @@
                                 <span>vehicle number</span>
                             </div>
                         </div>
+
                         <div class="col-md-2 col-sm-4 col-xs-12">
                             <div class="box">
                                 <h4 class="number">{{vm.profile.joinedOn*1000 | date:'dd MMM yy'}}</h4>
                                 <span>joined On</span>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-12">
-                            <div class="box">
-                                <h4 class="number">{{vm.profile.rides_today.total}}
-                                    <small>/ {{vm.profile.rides_today.unique_ride}}</small>
-                                </h4>
-                                <span>ride / u</span>
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-4 col-xs-12">
@@ -75,55 +92,44 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{vm.profile.can_rides_total.total}}
+                                    <small>/ {{vm.profile.can_rides_total.unique_ride}}</small>
+                                </h4>
+                                <span>Total Cancellation</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{vm.profile.total_online}}</h4>
+                                <span>online hours</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-12" ng-if="vm.profile.utilization">
+                            <div class="box">
+                                <h4 class="number">{{vm.profile.utilization | number:2}}</h4>
+                                <span>utilization</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-12">
+                            <div class="box">
+                                <h4 class="number">{{vm.profile.total_earning}}</h4>
+                                <span>Total Trip Earning</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 col-sm-4 col-xs-12">
                             <div class="box" uib-popover-template="'myPopoverTemplate1.html'"
                                  popover-trigger="mouseenter" popover-placement="bottom">
-                                <h4 class="number">{{vm.profile.today_distance.total | number:2}}</h4>
+                                <h4 class="number">{{vm.profile.distance.total | number:2}}</h4>
                                 <span>distance</span>
                             </div>
                         </div>
-                        <div class="col-md-2 col-sm-4 col-xs-12">
-                            <div class="box" uib-popover-template="'myPopoverTemplate2.html'"
-                                 popover-trigger="mouseenter" popover-placement="bottom">
-                                <h4 class="number">{{vm.profile.today_online.total_hours | secondsToDateTime}}</h4>
-                                <span>online hour</span>
-                            </div>
-                        </div>
+
                         <div class="col-md-2 col-sm-4 col-xs-12">
                             <div class="box">
-                                <h4 class="number">{{vm.profile.feedbackRating | number:2}}</h4>
+                                <h4 class="number">{{vm.profile.feedbackRating}}</h4>
                                 <span>feedback</span>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-12">
-                            <div class="box">
-                                <h4 class="number">Rs. {{vm.profile.total_fare | number:0}}
-                                    <small>/ {{vm.profile.today_fare | number:0}}</small>
-                                </h4>
-                                <span>total fare / fare</span>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-12">
-                            <div class="box">
-                                <h4 class="number">Rs. {{vm.profile.total_earning | number:0}}
-                                    <small>/ {{vm.profile.today_earning | number:0}}</small>
-                                </h4>
-                                <span>total earning / earning</span>
-                            </div>
-                        </div>
-                        <!--
-<div class="col-md-2 col-sm-4 col-xs-12">
-                        <div class="box">
-                            <h4 class="number" ng-if="vm.profile.state== 22 || vm.profile.state== 11">Online</h4>
-                            <h4 class="number" ng-if="vm.profile.state== 10">Offline</h4>
-                            <span>Current Status</span>
-                        </div>
-                    </div>
- -->
-                        <div class="col-md-2 col-sm-4 col-xs-12">
-                            <div class="box" uib-popover-template="'myPopoverTemplate3.html'"
-                                 popover-trigger="mouseenter" popover-placement="bottom">
-                                <h4 class="number">{{vm.profile.today_bid.total}}</h4>
-                                <span>bid </span>
                             </div>
                         </div>
                     </div>
@@ -156,15 +162,16 @@
                             <tr ng-class="{'unTruncate':row.showMore,'truncate':!row.showMore}" class="truncate"
                                 ng-repeat="row in $data track by $index">
                                 <!--<td data-title="'Trip ID'" sortable="'id'" style="text-transform: inherit">-->
-                                    <!--<div style="white-space: normal;">-->
-                                        <!--<a >{{row.id}}</a>-->
-                                    <!--</div>-->
+                                <!--<div style="white-space: normal;">-->
+                                <!--<a >{{row.id}}</a>-->
+                                <!--</div>-->
                                 <!--</td>-->
                                 <td data-title="'Date & Time'" sortable="'requestOn'" style="width:150px;">
 
-                                        <a target="_blank" ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">
+                                    <a target="_blank"
+                                       ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">
                                         {{(row.requestOn)*1000 | date:"dd/MM/yy 'at' h:mma"}}
-                                        </a>
+                                    </a>
                                 </td>
 
                                 <td data-title="'Status'" sortable="'tripState'" style="width: 100px;">
@@ -184,20 +191,20 @@
                                 </td>
                                 <td data-title="'Rider Info'">
                                     {{row.riderInfo.name}}
-                                        <!--<br>{{row.riderInfo.phone}}-->
+                                    <!--<br>{{row.riderInfo.phone}}-->
 
                                 </td>
                                 <!--<td data-title="'Pickup'" style="max-width: 200px;">-->
-                                    <!--<div style="white-space: normal;">{{row.pickUp.line1 + ' ' + row.pickUp.line2}}-->
-                                        <!--{{row.pickUp.city + " " + row.pickUp.state + ' ' +-->
-                                        <!--row.pickUp.country}}-->
-                                    <!--</div>-->
+                                <!--<div style="white-space: normal;">{{row.pickUp.line1 + ' ' + row.pickUp.line2}}-->
+                                <!--{{row.pickUp.city + " " + row.pickUp.state + ' ' +-->
+                                <!--row.pickUp.country}}-->
+                                <!--</div>-->
                                 <!--</td>-->
                                 <!--<td data-title="'Drop'" style="max-width: 200px;">-->
-                                    <!--<div style="white-space: normal;">{{row.drop.line1 + ' ' + row.drop.line2}}-->
-                                        <!--{{row.pickUp.city + " " + row.drop.state + ' ' +-->
-                                        <!--row.drop.country}}-->
-                                    <!--</div>-->
+                                <!--<div style="white-space: normal;">{{row.drop.line1 + ' ' + row.drop.line2}}-->
+                                <!--{{row.pickUp.city + " " + row.drop.state + ' ' +-->
+                                <!--row.drop.country}}-->
+                                <!--</div>-->
                                 <!--</td>-->
                                 <td data-title="'Time'" align="center">
                                     {{getTimeDiff(row.dropOn,row.pickupOn)}}
@@ -207,10 +214,10 @@
                                 </td>
                                 <td data-title="'Amount (Rs.)'" align="right">
 
-                                        {{row.amount.total | number:2}}<br>
-                                        <!--<span class="small">Cash: {{row.amount.cash | number:2}}</span>-->
-                                        <!--<span class="small">Citrus: {{row.amount.citrus | number:2}}</span>-->
-                                        <!--<span class="small">Discount: {{row.amount.discount | number:2}}</span>-->
+                                    {{row.amount.total | number:2}}<br>
+                                    <!--<span class="small">Cash: {{row.amount.cash | number:2}}</span>-->
+                                    <!--<span class="small">Citrus: {{row.amount.citrus | number:2}}</span>-->
+                                    <!--<span class="small">Discount: {{row.amount.discount | number:2}}</span>-->
 
                                 </td>
                                 <!--<td data-title="'Rating'" sortable="'riderFeedbackRating'" align="center">
@@ -239,10 +246,10 @@
 <script type="text/ng-template" id="myPopoverTemplate1.html">
 
     <div class="box text-center">
-        <h4 class="number no-mr">{{vm.profile.today_distance.intrip | number:2}}</h4>
+        <h4 class="number no-mr">{{vm.profile.distance.inTrip | number:2}}</h4>
         <span>in trip</span>
         <br>
-        <h4 class="number no-mr pd10-tp">{{vm.profile.today_distance.forTrip | number:2}}</h4>
+        <h4 class="number no-mr pd10-tp">{{vm.profile.distance.forTrip | number:2}}</h4>
         <span>for trip</span>
 
     </div>
