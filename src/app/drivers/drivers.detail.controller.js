@@ -6,14 +6,63 @@
         .controller('DriversDetailController', DriversDetailController);
 
     /** @ngInject */
-    function DriversDetailController($scope, $window, $stateParams, $confirm, toastr, $interval, StaticDataService, DriversService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversDetailController($scope, $window, $stateParams, $confirm, toastr, $interval, StaticDataService, DriversService, DriverHandler,  NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this;
         var current = moment();
+
+        vm.prev = true;
+        vm.next = false;
+        vm.date = moment().format("ddd, MMM Do YYYY");
+        var year = current.year();
+        var month = current.month();
+        var date = current.date();
+        var hour = current.hour();
+        var minute = current.minute();
+        var newDate = new Date(year, month, date, hour);
+        vm.formattedStartWeek;
+        vm.formattedEndWeek;
+        $scope.dayWiseList = false;
+
         vm.ranges = StaticDataService.ranges;
         $scope.selectedDates = {};
         $scope.selectedDates.startDate = moment().format("YYYY-MM-DD");
         $scope.selectedDates.endDate = moment().format("YYYY-MM-DD");
+
+        //$scope.driverSupplyDates = {};
+        //$scope.driverSupplyDates.startDate = StaticDataService.ranges['Last 7 Days'][0]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        //$scope.driverSupplyDates.endDate = StaticDataService.ranges['Last 7 Days'][1]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        //vm.supplyChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+        //vm.supplyChartOptions.chart.xAxis.tickFormat = function (d) {
+        //    return d3.time.format('%d %b %y')(new Date(d));
+        //};
+        //
+        //vm.supplyChartOptions.chart.yAxis.tickFormat = function (d) {
+        //    return d3.format('.3n')(d);
+        //};
+        //
+        //vm.getTripsChart = function () {
+        //    DriversService.getTripsChart({
+        //        city: $rootScope.city,
+        //        vehicle: $rootScope.vehicleType,
+        //        from: moment($scope.driverSupplyDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+        //        to: moment($scope.driverSupplyDates.endDate).endOf('day').format("YYYYMMDD").toString()
+        //    }, function (response) {
+        //        DriverHandler.supply = response;
+        //        vm.supply = DriverHandler.getSupply(response);
+        //        vm.hourMax = DriverHandler.maxValueDNew;
+        //        vm.supplyChartOptions.chart.yDomain = [0, vm.hourMax];
+        //    }, function (err) {
+        //        console.log(err);
+        //        $scope.error = true;
+        //    });
+        //};
+
+
+
+
+
+
         vm.getProfile = function () {
             DriversService.getProfile({
                 id: $stateParams.driverId
@@ -59,7 +108,7 @@
             DriversService.accountDriver(
                 {
                     id: $stateParams.driverId
-                },{
+                }, {
                     accountStatus: 2
                 },
                 function (response) {
@@ -89,7 +138,140 @@
                     toastr.error(err.message);
                 });
         };
+        //invoice start------------------------------------
+        var i = 0;
 
+        vm.getDataList = function () {
+            DriversService.getWeeks(
+                function (response) {
+                    getWeeks(response);
+                }, function (err) {
+                    console.log(err);
+                    $scope.error = true;
+                });
+        };
+        vm.getDataList();
+
+        function getWeeks(response) {
+            var weekList = [];
+            vm.totalWeek = response.length;
+            var weekList = response;
+            var sWN = weekList[i].startOn;
+            var eWN = weekList[i].endOn;
+            vm.formattedStartWeek = moment(sWN * 1000).format("YYYYMMDD");
+            vm.formattedEndWeek = moment(eWN * 1000).format("YYYYMMDD");
+            vm.formattedStartWeekDs = moment(sWN * 1000).format("ddd, MMM Do YYYY");
+            vm.formattedEndWeekDs = moment(eWN * 1000).format("ddd, MMM Do YYYY");
+            getInvoiceListData();
+        }
+
+        vm.changeDate = function (to) {
+            if (to == 'next') {
+                i--;
+                vm.getDataList();
+                if (i == 0) {
+                    vm.next = false;
+                    $scope.editable = true;
+                }
+                vm.prev = true;
+            }
+            else {
+                i++;
+                vm.getDataList();
+                if (i >= vm.totalWeek - 1) {
+                    vm.prev = false;
+                }
+                vm.next = true;
+                $scope.editable = false;
+            }
+        };
+
+        // call to get data for the tables
+        vm.viewDaywiseListData = function (dID) {
+            DriversService.viewDaywiseList(
+                {
+                    startDate: vm.formattedStartWeek,
+                    endDate: vm.formattedEndWeek,
+                    drivers: dID
+                },
+                function (response) {
+                    $scope.dataDay = response;
+                    $scope.dataSettledTrip = $scope.dataDay.settledTrip;
+                    $scope.dayWiseList = true;
+                    vm.emi = $scope.dataDay.emi;
+                    vm.settled = $scope.dataDay.settled;
+                    vm.totalTripCount = $scope.dataDay.balance.totalTripCount;
+                    vm.totalEarning = $scope.dataDay.balance.totalEarning;
+                    vm.cashCollection = $scope.dataDay.balance.cashCollection;
+                    vm.totalShare = $scope.dataDay.balance.totalShare;
+                    vm.totalBalance = $scope.dataDay.balance.totalBalance;
+                    toastr.success(vm.msg);
+                }, function (err) {
+                    toastr.error(err.message);
+                });
+        };
+
+        vm.hideDayWiseList = function () {
+            $scope.dayWiseList = false;
+        };
+
+        function getInvoiceListData() {
+            $scope.payoutTableParams = new NgTableParams(
+                {
+                    page: 1,
+                    count: 20,
+                    sorting: {name: 'ASC'}
+                },
+                {
+                    counts: [],
+                    total: 1,
+                    getData: function (params) {
+                        console.log($stateParams.driverId);
+                        // ajax request to api
+                        var start = params.page();
+                        var orderBy = '';
+                        var field = '';
+                        if (params.orderBy().length > 0) {
+                            orderBy = params.orderBy()[0].substr(0, 1);
+                            field = params.orderBy()[0].substr(1);
+                            if (orderBy === "+") {
+                                orderBy = "DESC"
+                            }
+                            else {
+                                orderBy = "ASC"
+                            }
+                        }
+                        return DriversService.getInvoiceList(
+                            {
+                                // city: $rootScope.city,
+                                // vehicle: $rootScope.vehicleType,
+                                startDate: vm.formattedStartWeek,
+                                endDate: vm.formattedEndWeek
+                                //orderby: orderBy,
+                                //field: field,
+                                //start: start,
+                                //count: params.count()
+
+                            },
+                            {
+                                id: $stateParams.driverId
+                            }
+                        ).$promise.then(function (data) {
+                                params.total(data.total);
+                                $scope.dataInvoice = data;
+                                if (data.length > 0) {
+                                    $scope.tblNoData = false
+                                }
+                                else {
+                                    $scope.tblNoData = true
+                                }
+                                //console.log($scope.dataInvoice.driver);
+                                return data;
+                            });
+                    }
+                });
+        }
+        //invoice end------------------------------------
 
         $scope.$on('$destroy', function () {
             $interval.cancel(interval);
@@ -139,23 +321,20 @@
 
                 return DriversService.getTrips(
                     {
-                        // city: $rootScope.city,
-                        //  vehicle: $rootScope.vehicleType,
+                        //city: $rootScope.city,
+                        //vehicle: $rootScope.vehicleType,
                         startDate: moment($scope.selectedDates.startDate).startOf('day').unix(),
                         endDate: moment($scope.selectedDates.endDate).endOf('day').unix(),
                         orderby: orderBy,
                         field: field,
                         start: start,
                         count: params.count()
-
                     },
                     {
                         id: $stateParams.driverId
                     }
                 ).$promise.then(function (data) {
-
-                        params.total(data.total); // recal. page nav controls
-
+                        params.total(data.total);
                         console.log('trop ', data);
                         if (data.data.length > 0) {
                             $scope.tblNoData = false
@@ -169,93 +348,4 @@
         });
     }
 
-    // Heatmap graph
-
 })();
-InitChart();
-
-function InitChart() {
-
-    var lineData = [{
-        'x': 1,
-        'y': 5
-    }, {
-        'x': 20,
-        'y': 20
-    }, {
-        'x': 40,
-        'y': 10
-    }, {
-        'x': 60,
-        'y': 40
-    }, {
-        'x': 80,
-        'y': 5
-    }, {
-        'x': 100,
-        'y': 60
-    }];
-
-    var vis = d3.select("#visualisation"),
-        WIDTH = 1000,
-        HEIGHT = 500,
-        MARGINS = {
-            top: 20,
-            right: 20,
-            bottom: 20,
-            left: 50
-        },
-        xRange = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([d3.min(lineData, function (d) {
-            return d.x;
-        }),
-            d3.max(lineData, function (d) {
-                return d.x;
-            })
-        ]),
-
-        yRange = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([d3.min(lineData, function (d) {
-            return d.y;
-        }),
-            d3.max(lineData, function (d) {
-                return d.y;
-            })
-        ]),
-
-        xAxis = d3.svg.axis()
-            .scale(xRange)
-            .tickSize(5)
-            .tickSubdivide(true),
-
-        yAxis = d3.svg.axis()
-            .scale(yRange)
-            .tickSize(5)
-            .orient("left")
-            .tickSubdivide(true);
-
-
-    vis.append("svg:g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
-        .call(xAxis);
-
-    vis.append("svg:g")
-        .attr("class", "y axis")
-        .attr("transform", "translate(" + (MARGINS.left) + ",0)")
-        .call(yAxis);
-
-    var lineFunc = d3.svg.line()
-        .x(function (d) {
-            return xRange(d.x);
-        })
-        .y(function (d) {
-            return yRange(d.y);
-        })
-        .interpolate('linear');
-
-    vis.append("svg:path")
-        .attr("d", lineFunc(lineData))
-        .attr("stroke", "blue")
-        .attr("stroke-width", 2)
-        .attr("fill", "none");
-
-}

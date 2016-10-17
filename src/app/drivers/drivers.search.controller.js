@@ -95,8 +95,8 @@
         vm.getResult = function () {
             $scope.tableParams = new NgTableParams({
                     page: 1,
-                    count: 20,
-                    noPager: true
+                    count: 20
+                    //noPager: true
                 },
                 {
                     counts: [],

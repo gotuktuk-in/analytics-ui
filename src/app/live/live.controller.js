@@ -282,47 +282,46 @@
             vm.resizeMap = function () {
                 google.maps.event.trigger(vm.map, 'resize')
             };
-            vm.heatMapDataLength;
-
-            vm.loadHeatMap = function () {
-
-                var from = moment(current).hour($scope.rangSlider.min).unix();
-                var to = moment(current).hour($scope.rangSlider.max).unix();
-                LiveService.heatmap({
-                    city: $rootScope.city,
-                    vehicle: $rootScope.vehicleType,
-                    from: from,
-                    to: to,
-                    state: vm.selected.id
-                }, function (response) {
-                    //  PerformanceHandler.trips = response[0].trip
-                    vm.heatMapDataLength = response.length;
-                    var transformedData = [];
-                    var pointArray = [];
-                    _.forEach(response, function (item) {
-                        transformedData.push(new google.maps.LatLng(item.locPickupRequest.lt - 0, item.locPickupRequest.ln - 0));
-                    });
-                    //        $scope.heatMapData = transformedData;
-
-                    NgMap.getMap({id: 'live_map'}).then(function (map) {
-                        vm.map = map;
-                        //   heatmap = vm.map.heatmapLayers.foo;
-                        if (heatmap) {
-                            heatmap.setMap(null);
-                        }
-                        pointArray = new google.maps.MVCArray(transformedData);
-                        heatmap = new google.maps.visualization.HeatmapLayer({
-                            data: pointArray
-
-                        });
-                        heatmap.setMap(vm.map);
-                    });
-
-                }, function (err) {
-                    console.log(err);
-                    $scope.error = true;
-                });
-            }
+            //vm.heatMapDataLength;
+            //vm.loadHeatMap = function () {
+            //
+            //    var from = moment(current).hour($scope.rangSlider.min).unix();
+            //    var to = moment(current).hour($scope.rangSlider.max).unix();
+            //    LiveService.heatmap({
+            //        city: $rootScope.city,
+            //        vehicle: $rootScope.vehicleType,
+            //        from: from,
+            //        to: to,
+            //        state: vm.selected.id
+            //    }, function (response) {
+            //        //  PerformanceHandler.trips = response[0].trip
+            //        vm.heatMapDataLength = response.length;
+            //        var transformedData = [];
+            //        var pointArray = [];
+            //        _.forEach(response, function (item) {
+            //            transformedData.push(new google.maps.LatLng(item.locPickupRequest.lt - 0, item.locPickupRequest.ln - 0));
+            //        });
+            //        //        $scope.heatMapData = transformedData;
+            //
+            //        NgMap.getMap({id: 'live_map'}).then(function (map) {
+            //            vm.map = map;
+            //            //   heatmap = vm.map.heatmapLayers.foo;
+            //            if (heatmap) {
+            //                heatmap.setMap(null);
+            //            }
+            //            pointArray = new google.maps.MVCArray(transformedData);
+            //            heatmap = new google.maps.visualization.HeatmapLayer({
+            //                data: pointArray
+            //
+            //            });
+            //            heatmap.setMap(vm.map);
+            //        });
+            //
+            //    }, function (err) {
+            //        console.log(err);
+            //        $scope.error = true;
+            //    });
+            //}
 
 
         }
@@ -340,7 +339,7 @@
         });
         vm.refreshPage = function () {
             getLive();
-            vm.loadHeatMap();
+            //vm.loadHeatMap();
             getNewRiders();
             if (vm.live) {
                 getOverviewLive();

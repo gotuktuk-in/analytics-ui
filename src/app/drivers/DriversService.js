@@ -16,7 +16,7 @@ function DriversService($q, $resource, API) {
     var url = API;
     return $resource(
         "",
-        {id: "@id", mobile: "@mobile"},
+        {id: "@id", mobile: "@mobile", drivers:"@drivers"},
         {
             getTopDrivers: {
                 method: 'GET',
@@ -61,6 +61,21 @@ function DriversService($q, $resource, API) {
             getWeeks: {
                 method: 'GET',
                 url:   url + 'payout/weeks',
+                isArray: true
+            },
+            getInvoiceList: {
+                method: 'GET',
+                url:   url + 'drivers/invoice/:id',
+                isArray: false
+            },
+            viewDaywiseList: {
+                method: 'GET',
+                url:   url + 'drivers/invoice/detail/:drivers',
+                isArray:false
+            },
+            getTripsChart: {
+                method: 'GET',
+                url:   url + 'drivers/trip/chart/:drivers',
                 isArray:true
             }
         }
