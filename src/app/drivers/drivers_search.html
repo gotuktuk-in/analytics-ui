@@ -8,18 +8,28 @@
     .ng-table-pager {
         display: none;
     }
+    .selected {
+        background: #fff1df !important;
+    }
 </style>
 <div class="search-btn-trip">
     <form class="form-inline">
         <div class="form-group">
             <div style="max-height: 34px; overflow: hidden;">
+                <a ng-click="vm.getResult()"
+                   title="Reload" class="btn btn-default">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </a>
                 <a
                         ui-sref="home.drivers({city: city,vehicleType: vehicleType})"
-                        title="Show All Shapes"
+                        title="Back"
                         class="btn btn-default">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
                 </a>
-                <a class="btn btn-default" href="#/home/drivers/onboarding/indore/auto" ><i class="fa fa-plus" aria-hidden="true"></i></a>
+                <a class="btn btn-default"
+                   title="Add Driver"
+                   href="#/home/drivers/onboarding/indore/auto" >
+                    <i class="fa fa-plus" aria-hidden="true"></i></a>
             </div>
         </div>
     </form>
@@ -48,7 +58,7 @@
                     </button>
                 </div>
                 <div class="input-group col-md-3 col-sm-12 col-xs-12">
-                    <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
+                    <select ng-model="vm.statusCodes" ng-change="vm.getResult()" class="form-control"
                             ng-options="statusFilter.name for statusFilter in vm.driverStatusFilters track by statusFilter.value">
                         <option value="" disabled>Select Status</option>
                     </select>
@@ -56,6 +66,11 @@
             </form>
             <div class="panel panel-default" ng-show="vm.showTableData">
                 <div class="panel-heading">
+                    <div class="pull-right daterangepicker-leaderboard-box">
+                        <input ng-change="vm.getResult()"
+                               class="form-control cstm-width text-center daterangepicker-leaderboard" type="daterange"
+                               ng-model="datesForSearch" separator=" - " format="DD MMM YY" limit="0" opens="left">
+                    </div>
                     <h4 style="margin-top: 0" class="title">Top Drivers</h4></div>
                 <div class="panel-body">
 
@@ -72,7 +87,7 @@
                                 </tr>
                             </thead>-->
                             <tbody>
-                            <tr ng-repeat="row in $data track by $index">
+                            <tr ng-repeat="row in $data track by $index" ng-click="vm.setSelected(row.driver_id)"  ng-class="{selected : row.driver_id === vm.selectedRow}">
                                 <!--<td data-title="'#ID'" class="text-left"><a-->
                                         <!--ui-sref="home.drivers_detail({driverId:row.driver_id})">{{row.driver_id}}</a>-->
                                 <!--</td>-->
@@ -104,10 +119,7 @@
                                 </td>
                                 <td data-title="'Rides'" sortable="'rides'">{{row.rides}}</td>
                                 <td class="text-left" data-title="'Online'">
-
-                                        <span ng-repeat="time in row.online"
-                                              class="label label-primary">{{time.start*1000 | date:'h:mma'}} - {{time.end*1000 | date:'h:mma'}}</span>
-
+                                    {{row.online}}
                                 </td>
                             </tr>
                             </tbody>

@@ -74,11 +74,11 @@
             } else {
                 vm.selectedReasonNew = '-';
             }
-            obj.driver = $scope.selectedTrip.driverInfo.id,
-                obj.rider = $scope.selectedTrip.riderInfo.id,
-                obj.driverChangeFare = parseFloat(vm.selectedReasonNew + vm.inputFare),
-                obj.riderCashback = parseInt(vm.inputTcash),
-                obj.fareChangeReason = vm.selectedReason.name,
+            obj.driver = $scope.selectedTrip.driverInfo.id;
+                obj.rider = $scope.selectedTrip.riderInfo.id;
+                obj.driverChangeFare = parseFloat(vm.selectedReasonNew + vm.inputFare);
+                obj.riderCashback = parseInt(vm.inputTcash);
+                obj.fareChangeReason = vm.selectedReason.name;
                 obj.requestOn = $scope.selectedTrip.requestOn;
             console.log(obj);
             TripsService.updateFare(
@@ -143,6 +143,9 @@
                     console.log(err);
                     $scope.error = true;
                 });
+        };
+        vm.getForTrip = function () {
+
         };
         vm.clearBid = function () {
             $scope.showHide = true;
@@ -227,7 +230,10 @@
                     map: map
                 });
 
-
+                var iconForTrip = {
+                    url: "assets/images/icons/marker-green.svg", // url
+                    scaledSize: new google.maps.Size(30, 30) // scaled size
+                };
                 var iconForBidGot = {
                     url: "assets/images/icons/marker-green.svg", // url
                     scaledSize: new google.maps.Size(30, 30) // scaled size
@@ -272,6 +278,8 @@
                 };
                 for (i = 0; i < ($scope.totalBid || []).length; i++) {
 
+
+
                     if (($scope.selectedTrip.driverInfo || {}).id === $scope.totalBid[i].dr) {
                         markers[i] = new google.maps.Marker({
                             position: new google.maps.LatLng($scope.totalBid[i].lt, $scope.totalBid[i].ln),
@@ -279,7 +287,9 @@
                             title: 'Bid' + [i],
                             icon: iconForBidGot
                         });
-                    } else {
+                    }
+
+                    else {
                         markers[i] = new google.maps.Marker({
                             position: new google.maps.LatLng($scope.totalBid[i].lt, $scope.totalBid[i].ln),
                             map: map,
@@ -287,6 +297,9 @@
                             icon: iconBidder
                         });
                     }
+
+
+
 
                     markers[i].index = i;
 

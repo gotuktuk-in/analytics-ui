@@ -5,18 +5,13 @@
         top: 12px;
         z-index: 91;
     }
-
-    div.daterangepicker-leaderboard-box .daterangepicker_end_input,
-    div.daterangepicker-leaderboard-box .calendar.second.right {
-        display: none;
-    }
 </style>
 <div class="search-btn-trip">
     <form class="form-inline">
         <div class="form-group">
             <div style="max-height: 34px; overflow: hidden;">
                 <a
-                        ui-sref="home.drivers_search({city: city,vehicleType: vehicleType, filterURL: 'joined', term: dateURL})"
+                        ui-sref="home.drivers_search({city: city,vehicleType: vehicleType, filterURL: 'id', term: 'd'})"
                         class="btn btn-default">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </a>
@@ -130,7 +125,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="pull-right daterangepicker-leaderboard-box">
-                        <input name="birthdate" ng-change="vm.getLeaderboard()"
+                        <input ng-change="vm.getLeaderboard()"
                                class="form-control cstm-width text-center daterangepicker-leaderboard" type="daterange"
                                ng-model="datesForLeaderboard" separator=" - " format="DD MMM YY" limit="0" opens="left">
                     </div>

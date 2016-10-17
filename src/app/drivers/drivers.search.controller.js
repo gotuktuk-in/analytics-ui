@@ -6,7 +6,7 @@
         .controller('DriversSearchController', DriversSearchController);
 
     /** @ngInject */
-    function DriversSearchController($scope, $rootScope, $state, $stateParams, StaticDataService, ChartConfigService, DriversService, NgTableParams) {
+    function DriversSearchController($scope, $window, toastr, $rootScope, $state, $stateParams, StaticDataService, ChartConfigService, DriversService, NgTableParams) {
 
         var vm = this;
         var today = moment();
@@ -18,9 +18,19 @@
         vm.showTableData = true;
         vm.enblBtn = false;
 
+        vm.selectedRow = null;
+        vm.setSelected = function (selectedRow) {
+            vm.selectedRow = selectedRow;
+        };
+
         vm.ranges = StaticDataService.ranges;
         vm.config = ChartConfigService.lineChartConfig;
         $scope.date = moment().format("ddd, MMM Do YYYY");
+
+
+        $scope.datesForSearch = {};
+        $scope.datesForSearch.startDate =  moment(today);
+        $scope.datesForSearch.endDate =  moment(today);
 
         vm.filterTerm = '';
         vm.filterFields = [{value: "id", name: "Driver ID"},
@@ -68,11 +78,25 @@
                 return '0'
             }
         };
+
+        vm.getAllData = function () {
+            vm.getResult();
+            $scope.tableParams.reload();
+        };
+        vm.refreshPage = function () {
+            vm.getAllData()
+        };
+        vm.onFocus = function(){
+            vm.getAllData();
+        };
+
+        //$window.onfocus = vm.onFocus;
+
         vm.getResult = function () {
             $scope.tableParams = new NgTableParams({
                     page: 1,
-                    count: 20,
-                    noPager: true
+                    count: 20
+                    //noPager: true
                 },
                 {
                     counts: [],
@@ -84,8 +108,8 @@
                         var dataObj = {};
                         dataObj.city = $rootScope.city;
                         dataObj.vehicle = $rootScope.vehicleType;
-                        dataObj.from = moment(current).startOf('day').format("YYYYMMDD").toString();
-                        dataObj.to = moment(current).endOf('day').format("YYYYMMDD").toString();
+                        dataObj.from =  moment($scope.datesForSearch.startDate).startOf('day').format("YYYYMMDD").toString();
+                        dataObj.to =  moment($scope.datesForSearch.startDate).startOf('day').format("YYYYMMDD").toString();
                         dataObj.start = start;
                         dataObj.count = params.count();
 
@@ -104,13 +128,15 @@
                         }
                         if (vm.filterURL != '' && vm.termURL != '') {
                             dataObj.term = vm.filterURL + "|" + vm.termURL;
-                        } else {
+                        }else{
                             dataObj.term = '';
                             return;
                         }
+                        if (vm.statusCodes.value != '') {
+                            dataObj.filterByStatus = vm.statusCodes.value;
+                        }
                         return DriversService.getTopDrivers(dataObj).$promise.then(function (data) {
                             params.total(data.total); // recal. page nav controls
-                            console.log(data);
                             if (data.length > 0) {
                                 vm.showTableData = true;
                             }
