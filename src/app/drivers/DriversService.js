@@ -77,6 +77,11 @@ function DriversService($q, $resource, API) {
                 method: 'GET',
                 url:   url + 'drivers/trip/chart/:drivers',
                 isArray:true
+            },
+            getOnlineChart: {
+                method: 'GET',
+                url:   url + 'drivers/online/chart/:drivers',
+                isArray:true
             }
         }
     );
