@@ -27,19 +27,22 @@
     </form>
 </div>
 <div class="container-fluid">
-    <div class="row">
-        <form class="form-inline date-selection date-selection-dr">
-            <div class="form-group ">
-                <input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange"
-                       ng-model="selectedDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">
-            </div>
-        </form>
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span ng-click="vm.changeDate('next')" ng-if="!vm.live" style="display: inline-block; padding: 7px;">&#10095;</span>
-        </div>
-    </div>
-    <span class="live" ng-if="vm.live"> LIVE</span>
-    <span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>
+    <!--<div class="row">-->
+    <!--<form class="form-inline date-selection date-selection-dr">-->
+    <!--<div class="form-group ">-->
+    <!--<input ng-change="vm.getAllData()" class="form-control cstm-width text-center" type="daterange"-->
+    <!--ng-model="selectedDates" separator=" - " format="DD MMM YY" opens="right" ranges="vm.ranges">-->
+    <!--</div>-->
+    <!--</form>-->
+    <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+    <!--<span ng-click="vm.changeDate('prev')" style="display: inline-block; padding: 7px;">&#10094;</span> <span-->
+    <!--class="text-center" ng-model="date" style="display: inline-block; padding: 7px 0;">{{date}}</span> <span-->
+    <!--ng-click="vm.changeDate('next')" ng-if="!vm.live"-->
+    <!--style="display: inline-block; padding: 7px;">&#10095;</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<span class="live" ng-if="vm.live"> LIVE</span>-->
+    <!--<span class="reload" ng-click="vm.refreshPage()"><i class="fa fa-refresh" aria-hidden="true"></i></span>-->
     <br>
     <br>
     <br>
@@ -187,7 +190,8 @@
                                     {{dataInvoice.cashCollected | number:2}}
                                 </td>
                                 <td data-title="'Commission'" class="text-right" width="100">
-                                    {{(dataInvoice.tripTuktukCommission + dataInvoice.bonusTuktukCommission + dataInvoice.offerTuktukCommission)
+                                    {{(dataInvoice.tripTuktukCommission + dataInvoice.bonusTuktukCommission +
+                                    dataInvoice.offerTuktukCommission)
                                     |
                                     number:2}}
                                 </td>
@@ -257,7 +261,8 @@
                                 <!--</form>-->
                                 <!--</td>-->
                                 <td data-title="'Last&nbsp;Upt'" class="text-left" width="100">
-                                    {{(dataInvoice.updatedOn)*1000 | date:"dd-MM-yy h:mma"}}<span ng-if="dataInvoice.updatedBy">,</span>
+                                    {{(dataInvoice.updatedOn)*1000 | date:"dd-MM-yy h:mma"}}<span
+                                        ng-if="dataInvoice.updatedBy">,</span>
                                     {{dataInvoice.updatedBy}}
                                 </td>
                             </tr>
@@ -446,66 +451,31 @@
         </div>
     </div>
     <div class="row">
-
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
+                <form class="form-inline pull-right no-mr pd-2-">
+                    <div class="form-group ">
+                        <input
+                                ng-change="vm.onDateChangeTrips()"
+                                class="form-control text-center"
+                                type="daterange"
+                                ng-model="driverTripDates"
+                                separator=" - "
+                                format="DD MMM YY"
+                                opens="left"
+                                ranges="vm.ranges"
+                                style="margin: 8px 10px 0px 0px !important;
+                                        padding: 0px;
+                                        height: 20px;
+                                        width: auto; font-size: 11px;">
+                    </div>
+                </form>
                 <div class="panel-heading">
                     <h4 style="margin-top: 0" class="title">Trips</h4></div>
                 <div class="panel-body">
                     <div>
-                        <nvd3 options="vm.supplyChartOptions" data="vm.supply" config="vm.config"></nvd3>
+                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                     </div>
-
-                    <!--<div class="table-responsive">-->
-                    <!--<table ng-table="tableParams" class="table table-bordered table-striped">-->
-                    <!--<tr ng-class="{'unTruncate':row.showMore,'truncate':!row.showMore}" class="truncate"-->
-                    <!--ng-repeat="row in $data track by $index">-->
-                    <!--<td data-title="'Date & Time'" sortable="'requestOn'" style="width:150px;">-->
-
-                    <!--<a target="_blank"-->
-                    <!--ui-sref="home.trip_detail({id: row.id,driverId: row.driverInfo.id,riderId: row.riderInfo.id})">-->
-                    <!--{{(row.requestOn)*1000 | date:"dd/MM/yy 'at' h:mma"}}-->
-                    <!--</a>-->
-                    <!--</td>-->
-
-                    <!--<td data-title="'Status'" sortable="'tripState'" style="width: 100px;">-->
-                    <!--<div ng-if="row.tripState == 20" class="text-primary">Requested</div>-->
-                    <!--<div ng-if="row.tripState == 22">Allocated</div>-->
-                    <!--<div ng-if="row.tripState == 30">For Trip</div>-->
-                    <!--<div ng-if="row.tripState == 40">At Pickup</div>-->
-                    <!--<div ng-if="row.tripState == 60">At Destination</div>-->
-                    <!--<div ng-if="row.tripState == 50" class="text-info">In trip</div>-->
-                    <!--<div ng-if="row.tripState == 61" class="text-success">Successful</div>-->
-                    <!--<div ng-if="row.tripState == 70" class="text-warning">Can by Driver</div>-->
-                    <!--<div ng-if="row.tripState == 71" class="text-warning">Can by Rider</div>-->
-                    <!--<div ng-if="row.tripState == 80">No Drv Avlble</div>-->
-                    <!--<div ng-if="row.tripState == 81" class="text-danger">Failed (No Drivers Accepted)-->
-                    <!--</div>-->
-                    <!--<div ng-if="row.tripState == 82">Terminated</div>-->
-                    <!--</td>-->
-                    <!--<td data-title="'Rider Info'">-->
-                    <!--{{row.riderInfo.name}}-->
-                    <!--</td>-->
-                    <!--<td data-title="'Time'" align="center">-->
-                    <!--{{getTimeDiff(row.dropOn,row.pickupOn)}}-->
-                    <!--</td>-->
-                    <!--<td data-title="'Distance (KM)'" align="center">-->
-                    <!--{{(row.disPickupDrop)/1000 | number:2}}-->
-                    <!--</td>-->
-                    <!--<td data-title="'Amount (Rs.)'" align="right">-->
-
-                    <!--{{row.amount.total | number:2}}-->
-
-                    <!--</td>-->
-                    <!--</tr>-->
-                    <!--</table>-->
-                    <!--<table class="table table-bordered table-condensed" ng-show="tblNoData">-->
-                    <!--<tr>-->
-                    <!--<td colspan="9">No data found</td>-->
-                    <!--</tr>-->
-                    <!--</table>-->
-
-                    <!--</div>-->
                     <table ng-table="tableParams" class="table table-bordered">
 
                         <tr class="truncate"
@@ -559,21 +529,45 @@
                             <td data-title="'Request On'" class="text-right">
                                 <div>{{(row.requestOn)*1000 | date:"h:mma"}}</div>
                             </td>
-                            <!--<td data-title="'Time'" sortable="'time'">-->
-                            <!--<div>{{getTimeDiff(row.pickupOn,row.dropOn)| secondsToDateTime}}</div>-->
-                            <!--</td>-->
-
-                            <!--<td data-title="'Dist(KM)'" sortable="'disPickupDrop'" align="center">-->
-                            <!--<div>{{(row.disPickupDrop)/1000 | number:2}}</div>-->
-                            <!--</td>-->
                         </tr>
-                    </table >
+                    </table>
                 </div>
                 <br>
                 <br>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <form class="form-inline pull-right no-mr pd-2-">
+                    <div class="form-group ">
+                        <input
+                                ng-change="vm.onDateChangeTrips()"
+                                class="form-control text-center"
+                                type="daterange"
+                                ng-model="driverOnlineDates"
+                                separator=" - "
+                                format="DD MMM YY"
+                                opens="left"
+                                ranges="vm.ranges"
+                                style="margin: 8px 10px 0px 0px !important;
+                                        padding: 0px;
+                                        height: 20px;
+                                        width: auto; font-size: 11px;">
+                    </div>
+                </form>
+                <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">Online</h4></div>
+                <div class="panel-body">
+                    <div>
+                        <nvd3 options="vm.onlineChartOptions" data="vm.online" config="vm.config"></nvd3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <script type="text/ng-template" id="myPopoverTemplate1.html">
 

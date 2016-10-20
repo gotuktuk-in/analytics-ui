@@ -27,34 +27,49 @@ function DriverHandler() {
         {"key": "Allocated Trip", "values": []}
     ];
 
-    factory.getTrips = function () {
-        var booking = [], successful_total = [], successful_unique_riders = [], in_process = [],
-            cancelled_total = [], cancelled_unique_rider = [], failed_total = [], failed_unique_rider = [];
-        _.each(factory.trips, function (value) {
+    factory.getTripsFtr = function (data) {
+        var successful = [],
+            cancelled = [],
+            accepted_trip = [],
+            rejected_trip = [],
+            ignored_trip = [],
+            maxValueD = [],
+            allocated_trip = [];
 
-            var longDate = factory.getLongDate(value.id);
+        _.each(data, function (value) {
+            var longDate = factory.getLongDate(value.date);
+            successful.push([longDate, value.successful]);
+            cancelled.push([longDate, value.cancelled]);
 
-            booking.push([longDate, value.booking]);
-            successful_total.push([longDate, value.successful.total]);
+            accepted_trip.push([longDate, value.acceptedTrip]);
+            rejected_trip.push([longDate, value.rejectedTrip]);
 
-            successful_unique_riders.push([longDate, value.successful.unique_riders]);
-            in_process.push([longDate, value.in_process]);
-
-            cancelled_total.push([longDate, value.cancelled.total]);
-            cancelled_unique_rider.push([longDate, value.cancelled.unique_riders]);
-
-            failed_total.push([longDate, value.failed.total]);
-            failed_unique_rider.push([longDate, value.failed.unique_rider])
+            ignored_trip.push([longDate, value.ignoredTrip]);
+            allocated_trip.push([longDate, value.allocatedTrip]);
         });
-        factory.filteredTrips[0].values = booking;
-        factory.filteredTrips[1].values = successful_total;
-        factory.filteredTrips[2].values = successful_unique_riders;
-        factory.filteredTrips[3].values = in_process;
-        factory.filteredTrips[4].values = cancelled_total;
-        factory.filteredTrips[5].values = cancelled_unique_rider;
-        factory.filteredTrips[6].values = failed_total;
-        factory.filteredTrips[7].values = failed_unique_rider;
+        factory.filteredTrips[0].values = successful;
+        factory.filteredTrips[1].values = cancelled;
+        factory.filteredTrips[2].values = accepted_trip;
+        factory.filteredTrips[3].values = rejected_trip;
+        factory.filteredTrips[4].values = ignored_trip;
+        factory.filteredTrips[5].values = allocated_trip;
         return factory.filteredTrips
+    };
+
+    factory.online = [];
+    factory.filteredOnline = [
+        {"key": "Hours", "values": []}
+    ];
+
+    factory.getOnlineFtr = function (data) {
+        var onlineHours = [];
+
+        _.each(data, function (value) {
+            var longDate = factory.getLongDate(value.date);
+            onlineHours.push([longDate, value.successful]);
+        });
+        factory.filteredOnline[0].values = onlineHours;
+        return factory.filteredOnline
     };
 
 
@@ -64,8 +79,8 @@ function DriverHandler() {
         {"key": "Hours", "values": []}
     ];
     factory.getSupply = function (data) {
-        var totalOnline = [];
-        var maxValueD = [];
+        var totalOnline = [],
+            maxValueD = [];
 
         _.each(data, function (value) {
             var longDate = factory.getLongDate(value.id);

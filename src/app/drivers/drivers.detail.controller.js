@@ -6,10 +6,11 @@
         .controller('DriversDetailController', DriversDetailController);
 
     /** @ngInject */
-    function DriversDetailController($scope, $window, $stateParams, $confirm, toastr, $interval, StaticDataService, DriversService, DriverHandler,  NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversDetailController($scope, $rootScope, $window, $stateParams, $confirm, toastr, $interval, StaticDataService, DriversService, DriverHandler, ChartConfigService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this;
         var current = moment();
+        var today = moment();
 
         vm.prev = true;
         vm.next = false;
@@ -25,43 +26,67 @@
         $scope.dayWiseList = false;
 
         vm.ranges = StaticDataService.ranges;
+        vm.config = ChartConfigService.lineChartConfig;
+
         $scope.selectedDates = {};
         $scope.selectedDates.startDate = moment().format("YYYY-MM-DD");
         $scope.selectedDates.endDate = moment().format("YYYY-MM-DD");
 
-        //$scope.driverSupplyDates = {};
-        //$scope.driverSupplyDates.startDate = StaticDataService.ranges['Last 7 Days'][0]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
-        //$scope.driverSupplyDates.endDate = StaticDataService.ranges['Last 7 Days'][1]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
-        //vm.supplyChartOptions = angular.copy(ChartConfigService.lineChartOptions);
-        //vm.supplyChartOptions.chart.xAxis.tickFormat = function (d) {
-        //    return d3.time.format('%d %b %y')(new Date(d));
-        //};
-        //
-        //vm.supplyChartOptions.chart.yAxis.tickFormat = function (d) {
-        //    return d3.format('.3n')(d);
-        //};
-        //
-        //vm.getTripsChart = function () {
-        //    DriversService.getTripsChart({
-        //        city: $rootScope.city,
-        //        vehicle: $rootScope.vehicleType,
-        //        from: moment($scope.driverSupplyDates.startDate).startOf('day').format("YYYYMMDD").toString(),
-        //        to: moment($scope.driverSupplyDates.endDate).endOf('day').format("YYYYMMDD").toString()
-        //    }, function (response) {
-        //        DriverHandler.supply = response;
-        //        vm.supply = DriverHandler.getSupply(response);
-        //        vm.hourMax = DriverHandler.maxValueDNew;
-        //        vm.supplyChartOptions.chart.yDomain = [0, vm.hourMax];
-        //    }, function (err) {
-        //        console.log(err);
-        //        $scope.error = true;
-        //    });
-        //};
+        $scope.driverTripDates = {};
+        $scope.driverTripDates.startDate = moment(today).subtract(0, 'days'); //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.driverTripDates.endDate = moment(today).subtract(0, 'days'); //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+        vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
+            return d3.time.format('%d %b %y')(new Date(d));
+        };
 
+        vm.tripChartOptions.chart.yAxis.tickFormat = function (d) {
+            return d3.format('.3n')(d);
+        };
 
+        vm.getTripsChart = function () {
+            DriversService.getTripsChart({
+                city: $rootScope.city,
+                vehicle: $rootScope.vehicleType,
+                drivers: $stateParams.driverId,
+                from: moment($scope.driverTripDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+                to: moment($scope.driverTripDates.endDate).endOf('day').format("YYYYMMDD").toString()
+            }, function (response) {
+                DriverHandler.trips = response;
+                vm.trips = DriverHandler.getTripsFtr(response);
+            }, function (err) {
+                console.log(err);
+                $scope.error = true;
+            });
+        };
 
+        $scope.driverOnlineDates = {};
+        $scope.driverOnlineDates.startDate = moment(today).subtract(0, 'days'); //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.driverOnlineDates.endDate = moment(today).subtract(0, 'days'); //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        vm.onlineChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+        vm.onlineChartOptions.chart.xAxis.tickFormat = function (d) {
+            return d3.time.format('%d %b %y')(new Date(d));
+        };
 
+        vm.onlineChartOptions.chart.yAxis.tickFormat = function (d) {
+            return d3.format('.3n')(d);
+        };
 
+        vm.getOnlineChart = function () {
+            DriversService.getTripsChart({
+                city: $rootScope.city,
+                vehicle: $rootScope.vehicleType,
+                drivers: $stateParams.driverId,
+                from: moment($scope.driverOnlineDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+                to: moment($scope.driverOnlineDates.endDate).endOf('day').format("YYYYMMDD").toString()
+            }, function (response) {
+                DriverHandler.online = response;
+                vm.online = DriverHandler.getOnlineFtr(response);
+            }, function (err) {
+                console.log(err);
+                $scope.error = true;
+            });
+        };
 
         vm.getProfile = function () {
             DriversService.getProfile({
@@ -298,54 +323,64 @@
             timeInStr += diff.minute() + " min ";
             return timeInStr;
         };
-        $scope.tableParams = new NgTableParams({
-            page: 1, count: 20, sorting: {earning: 'desc'}
-        }, {
-            counts: [],
-            getData: function (params) {
-                // ajax request to api
-                var start = ((params.page() - 1) * 20) + 1;
-                console.log("**************************");
-                var orderBy = '';
-                var field = '';
-                if (params.orderBy().length > 0) {
-                    orderBy = params.orderBy()[0].substr(0, 1);
-                    field = params.orderBy()[0].substr(1);
-                    if (orderBy === "+") {
-                        orderBy = "ASC"
-                    }
-                    else {
-                        orderBy = "DESC"
-                    }
-                }
-
-                return DriversService.getTrips(
-                    {
-                        //city: $rootScope.city,
-                        //vehicle: $rootScope.vehicleType,
-                        startDate: moment($scope.selectedDates.startDate).startOf('day').unix(),
-                        endDate: moment($scope.selectedDates.endDate).endOf('day').unix(),
-                        orderby: orderBy,
-                        field: field,
-                        start: start,
-                        count: params.count()
-                    },
-                    {
-                        id: $stateParams.driverId
-                    }
-                ).$promise.then(function (data) {
-                        params.total(data.total);
-                        console.log('trop ', data);
-                        if (data.data.length > 0) {
-                            $scope.tblNoData = false
+        vm.getTripsList = function(){
+            $scope.tableParams = new NgTableParams({
+                page: 1, count: 20, sorting: {earning: 'desc'}
+            }, {
+                counts: [],
+                getData: function (params) {
+                    // ajax request to api
+                    var start = ((params.page() - 1) * 20) + 1;
+                    console.log("**************************");
+                    var orderBy = '';
+                    var field = '';
+                    if (params.orderBy().length > 0) {
+                        orderBy = params.orderBy()[0].substr(0, 1);
+                        field = params.orderBy()[0].substr(1);
+                        if (orderBy === "+") {
+                            orderBy = "ASC"
                         }
                         else {
-                            $scope.tblNoData = true
+                            orderBy = "DESC"
                         }
-                        return data.data;
-                    });
-            }
-        });
+                    }
+
+                    return DriversService.getTrips(
+                        {
+                            //city: $rootScope.city,
+                            //vehicle: $rootScope.vehicleType,
+                            startDate: moment($scope.driverTripDates.startDate).startOf('day').unix(),
+                            endDate: moment($scope.driverTripDates.endDate).endOf('day').unix(),
+                            orderby: orderBy,
+                            field: field,
+                            start: start,
+                            count: params.count()
+                        },
+                        {
+                            id: $stateParams.driverId
+                        }
+                    ).$promise.then(function (data) {
+                            params.total(data.total);
+                            console.log('trop ', data);
+                            if (data.data.length > 0) {
+                                $scope.tblNoData = false
+                            }
+                            else {
+                                $scope.tblNoData = true
+                            }
+                            return data.data;
+                        });
+                }
+            });
+        };
+        vm.onDateChangeTrips = function () {
+            vm.getTripsChart();
+            vm.getTripsList();
+            vm.getOnlineChart();
+        };
+
+        vm.onDateChangeTrips();
+
     }
 
 })();
