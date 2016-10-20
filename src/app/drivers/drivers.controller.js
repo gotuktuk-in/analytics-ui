@@ -37,9 +37,9 @@
             return d3.time.format('%d %b %y')(new Date(d));
         };
 
-        vm.supplyChartOptions.chart.yAxis.tickFormat = function (d) {
-            return d3.format('.3n')(d);
-        };
+        //vm.supplyChartOptions.chart.yAxis.tickFormat = function (d) {
+        //    return d3.format('.3n')(d);
+        //};
 
         vm.getLive = function() {
             LiveService.getOverview({

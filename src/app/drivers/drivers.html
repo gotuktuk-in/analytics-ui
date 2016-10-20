@@ -78,7 +78,7 @@
                     <div class="pull-right">
                         <input ng-change="vm.getAcquisition()"
                                class="form-control cstm-width text-center daterangepicker-aqq-chart" type="daterange"
-                               ng-model="datesForAcq" separator=" - " format="DD MMM YY" opens="left"
+                               ng-model="datesForAcq" separator=" - " format="DD MMM YY" opens="right"
                                ranges="vm.ranges">
                     </div>
                     <h4 style="margin-top: 0" class="title">Driver Acquisition</h4>
@@ -149,7 +149,7 @@
                                     <tr ng-repeat="row in vm.leaderboradData.trip.maxTrip">
                                         <td class="text-left">
                                             <a target="_blank"
-                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                               ui-sref="home.drivers_detail({driverId:row.id})">
                                                 {{row.dr}}
                                             </a>
                                         </td>
@@ -175,7 +175,7 @@
                                     <tr ng-repeat="row in vm.leaderboradData.trip.largestCan">
                                         <td class="text-left">
                                             <a target="_blank"
-                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                               ui-sref="home.drivers_detail({driverId:row.id})">
                                                 {{row.dr}}
                                             </a>
                                         </td>
@@ -201,7 +201,7 @@
                                     <tr ng-repeat="row in vm.leaderboradData.trip.longestTrip">
                                         <td class="text-left">
                                             <a target="_blank"
-                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                               ui-sref="home.drivers_detail({driverId:row.id})">
                                                 {{row.dr}}
                                             </a>
                                         </td>
@@ -227,7 +227,7 @@
                                     <tr ng-repeat="row in vm.leaderboradData.trip.longestForTrip">
                                         <td class="text-left">
                                             <a target="_blank"
-                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                               ui-sref="home.drivers_detail({driverId:row.id})">
                                                 {{row.dr}}
                                             </a>
                                         </td>
@@ -253,7 +253,7 @@
                                     <tr ng-repeat="row in vm.leaderboradData.availability.maxHour">
                                         <td class="text-left">
                                             <a target="_blank"
-                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                               ui-sref="home.drivers_detail({driverId:row.id})">
                                                 {{row.dr}}
                                             </a>
                                         </td>
@@ -279,7 +279,7 @@
                                     <tr ng-repeat="row in vm.leaderboradData.availability.maxUtilization">
                                         <td class="text-left">
                                             <a target="_blank"
-                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                               ui-sref="home.drivers_detail({driverId:row.id})">
                                                 {{row.dr}}
                                             </a>
                                         </td>
@@ -305,7 +305,7 @@
                                     <tr ng-repeat="row in vm.leaderboradData.income.topEarner">
                                         <td class="text-left">
                                             <a target="_blank"
-                                               ui-sref="home.drivers_detail({driverId:row.driver_id})">
+                                               ui-sref="home.drivers_detail({driverId:row.id})">
                                                 {{row.dr}}
                                             </a>
                                         </td>

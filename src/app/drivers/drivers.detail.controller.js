@@ -33,8 +33,8 @@
         $scope.selectedDates.endDate = moment().format("YYYY-MM-DD");
 
         $scope.driverTripDates = {};
-        $scope.driverTripDates.startDate = moment(today).subtract(0, 'days'); //moment().subtract(1, 'days').format("YYYY-MM-DD");
-        $scope.driverTripDates.endDate = moment(today).subtract(0, 'days'); //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.driverTripDates.startDate = StaticDataService.ranges['Last 7 Days'][0]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.driverTripDates.endDate = StaticDataService.ranges['Last 7 Days'][1]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
             return d3.time.format('%d %b %y')(new Date(d));
@@ -61,8 +61,8 @@
         };
 
         $scope.driverOnlineDates = {};
-        $scope.driverOnlineDates.startDate = moment(today).subtract(0, 'days'); //moment().subtract(1, 'days').format("YYYY-MM-DD");
-        $scope.driverOnlineDates.endDate = moment(today).subtract(0, 'days'); //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.driverOnlineDates.startDate = StaticDataService.ranges['Last 7 Days'][0]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
+        $scope.driverOnlineDates.endDate = StaticDataService.ranges['Last 7 Days'][1]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
         vm.onlineChartOptions = angular.copy(ChartConfigService.lineChartOptions);
         vm.onlineChartOptions.chart.xAxis.tickFormat = function (d) {
             return d3.time.format('%d %b %y')(new Date(d));
@@ -73,7 +73,7 @@
         };
 
         vm.getOnlineChart = function () {
-            DriversService.getTripsChart({
+            DriversService.getOnlineChart({
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
                 drivers: $stateParams.driverId,

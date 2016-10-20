@@ -171,11 +171,14 @@
         vm.changeFrequencyTrips = function (freqModel) {
             vm.tripChartOptions.chart.xAxis.axisLabel = freqModel;
             if (vm.diffDays < 4) {
+                vm.tripFrequency = {value: "hour"};
                 vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-                    return d3.time.format('%d %b %I %p')(new Date(d).addHours(1));
+                    //return d3.time.format('%d %b %I %p')(new Date(d).addHours(1));
+                    return d3.time.format('%I %p')(new Date(d).addHours(1));
                 };
             }
             else {
+                vm.tripFrequency = {value: "day"};
                 vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
                     return d3.time.format('%d %b %y')(new Date(d));
                 };
@@ -183,22 +186,23 @@
             vm.getTrips()
         };
 
-        vm.changeFrequency = function (section, freqModel) {
-            console.log("Frequency changed ", freqModel.value);
-
-            vm.tripChartOptions.chart.xAxis.axisLabel = freqModel;
-            if (freqModel == 'hour' || vm.diffDays < 3) {
-                vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-                    return d3.time.format('%d %b %I %p')(new Date(d).addHours(1));
-                };
-            }
-            else {
-                vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-                    return d3.time.format('%d %b %y')(new Date(d));
-                };
-            }
-            vm.getTrips()
-        };
+        //vm.changeFrequency = function (section, freqModel) {
+        //    console.log("Frequency changed ", freqModel.value);
+        //
+        //    vm.tripChartOptions.chart.xAxis.axisLabel = freqModel;
+        //    if (freqModel == 'hour' || vm.diffDays < 3) {
+        //        vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
+        //            //return d3.time.format('%d %b %I %p')(new Date(d).addHours(1));
+        //            return d3.time.format('%I %p')(new Date(d).addHours(1));
+        //        };
+        //    }
+        //    else {
+        //        vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
+        //            return d3.time.format('%d %b %y')(new Date(d));
+        //        };
+        //    }
+        //    vm.getTrips()
+        //};
 
         vm.onDateChangeRide = function () {
             getNewRiders();
@@ -226,12 +230,12 @@
         vm.live = true;
 
         function getNewRiders() {
-            var newRideStartDate = moment($scope.rideDates.startDate).unix();
-            var newRideEtartDate = moment($scope.rideDates.endDate).unix();
+            var newRideStartDate = moment($scope.rideDates.startDate).startOf('day').unix();
+            var newRideEndDate = moment($scope.rideDates.endDate).unix();
 
             LiveService.getNewRiders({
                 from: newRideStartDate,
-                to: newRideEtartDate
+                to: newRideEndDate
             }, function (response) {
                 vm.newRiders = transformNewRiders(response);
             }, function (err) {
