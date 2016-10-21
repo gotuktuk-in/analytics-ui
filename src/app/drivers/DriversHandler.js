@@ -66,7 +66,7 @@ function DriverHandler() {
 
         _.each(data, function (value) {
             var longDate = factory.getLongDate(value.date);
-            onlineHours.push([longDate, value.successful]);
+            onlineHours.push([longDate, secondsToTime(value.online)]);
         });
         factory.filteredOnline[0].values = onlineHours;
         return factory.filteredOnline
