@@ -379,6 +379,10 @@
             vm.getOnlineChart();
         };
 
+        vm.onDateChangeOnline = function () {
+            vm.getOnlineChart();
+        };
+
         vm.onDateChangeTrips();
 
     }
