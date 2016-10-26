@@ -79,25 +79,30 @@
 
         function transformTrips(data) {
             var transformed = [];
+            $scope.sT = 0;
+            $scope.cT = 0;
+            $scope.atT = 0;
+            $scope.rtT = 0;
+            $scope.iT = 0;
+            $scope.alT = 0;
             data = angular.fromJson(data);
             //var newTripData = data[0];
-            console.log(data)
             for (var a = 0; a < data.length; a++) {
-                $scope.sT = a + (data[a].successful);
-                $scope.cT = a + (data[a].cancelled);
-                $scope.atT = a + (data[a].acceptedTrip);
-                $scope.rtT = a + (data[a].rejectedTrip);
-                $scope.iT = a + (data[a].ignoredTrip);
-                $scope.alT = a + (data[a].allocatedTrip);
+                $scope.sT += data[a].successful;
+                $scope.cT += data[a].cancelled;
+                $scope.atT += data[a].acceptedTrip;
+                $scope.rtT += data[a].rejectedTrip;
+                $scope.iT += data[a].ignoredTrip;
+                $scope.alT += data[a].allocatedTrip;
             }
                 //
                 var arr = [
-                    'Successful: ' + $scope.sT ,
-                    'Cancelled: ' + $scope.cT ,
-                    'Accepted Trip: ' + $scope.atT ,
-                    'Rejected Trip: ' + $scope.rtT ,
-                    'Ignored Trip: ' + $scope.iT ,
-                    'Allocated Trip: ' + $scope.alT
+                    'Successful(' + $scope.sT + ')',
+                    'Cancelled(' + $scope.cT + ')',
+                    'Accepted Trip(' + $scope.atT + ')',
+                    'Rejected Trip(' + $scope.rtT + ')',
+                    'Ignored Trip(' + $scope.iT + ')',
+                    'Allocated Trip(' + $scope.alT + ')'
                 ];
                 var newObj = {};
                 newObj.key = arr[0];
