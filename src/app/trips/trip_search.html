@@ -13,8 +13,8 @@
                 <a
                         ui-sref="home.trips()"
                         title="Show All Shapes"
-                        class="btn btn-default">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                        class="btn btn-default no-border">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 </a>
             </div>
         </div>
@@ -26,26 +26,39 @@
     <br>
     <br>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-8 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <form class="form-inline no-mr">
-
-                        <div class="input-group col-md-3 col-sm-4 col-xs-12">
+                        <div class="input-group col-md-1">
+                            <h4>Search</h4>
+                        </div>
+                        <div class="input-group col-md-4">
                             <select ng-model="vm.filterTerm" class="form-control"
                                     ng-options="filterFields.name for filterFields in vm.filterFields">
-                                <option value="" disabled>Select Filter</option>
+                                <option value="" disabled>Search By</option>
                             </select>
                         </div>
-                        <div class="input-group col-md-3 col-sm-4 col-xs-12">
+                        <div class="input-group col-md-4">
                             <input ng-model="vm.searchTerm" class="form-control" placeholder="term" ng-change="vm.checkMinChr()" />
                         </div>
-                        <div class="input-group col-md-1 col-sm-4 col-xs-12">
+                        <div class="input-group col-md-1">
                             <button ng-disabled="!vm.enblBtn" ng-click="vm.searchTable()"
                                     class="btn btn-search"><span
                                     aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
                         </div>
-                        <div class="input-group col-md-3 col-sm-4 col-xs-12 pull-right">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-inline no-mr">
+                        <div class="input-group col-md-1">
+                            <h4>Filter</h4>
+                        </div>
+                        <div class="input-group col-md-10 pull-right">
                             <select ng-model="vm.statusCodes" ng-change="vm.getResult()" class="form-control"
                                     ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters">
                                 <option value="" disabled>Select Status</option>
@@ -55,18 +68,29 @@
                     </form>
                 </div>
             </div>
-            <br>
-
-            <div class="panel panel-default" style="min-height:10px" ng-show="vm.showTableData">
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default" style="min-height:10px">
                 <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Search Result</h4>
+                    <div class="pull-right daterangepicker-leaderboard-box">
+                        <input ng-change="vm.getResult()"
+                               class="form-control cstm-width text-center daterangepicker-leaderboard" type="daterange"
+                               ng-model="datesForSearch" separator=" - " format="DD MMM YY" opens="left" ranges="vm.ranges">
+                    </div>
+                    <h4 style="margin-top: 0" class="title">Results</h4>
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table ng-table="tableParams" class="table table-bordered">
+                        <table ng-table="tableParams" class="table table-bordered" ng-show="vm.showTableData">
 
                             <tr class="truncate"
-                                ng-repeat="row in $data track by $index">
+                                ng-repeat="row in $data track by $index"  ng-click="vm.setSelected(row.id)"  ng-class="{selected : row.id === vm.selectedRow}">
+                                <td data-title="'Date'" sortable="'requestOn'" style="width: 145px;">
+                                    <a target="_blank"
+                                       ui-sref="home.trip_detail({id: row.id})">
+                                        {{row.id}}
+                                    </a>
+                                </td>
                                 <td data-title="'Date'" sortable="'requestOn'" style="width: 145px;">
                                     <a target="_blank"
                                        ui-sref="home.trip_detail({id: row.id})">

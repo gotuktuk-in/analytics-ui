@@ -14,6 +14,7 @@ angular
 
 function ChartConfigService($q, $resource, API, PerformanceHandler) {
     var factory = {};
+    var vm = this;
     Date.prototype.addHours = function (h) {
         this.setHours(this.getHours() + h);
         return this;
@@ -36,7 +37,17 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                     right: 0,
                     bottom: 30,
                     left: 0
-                }
+                },
+                dispatch: {
+                    legendClick:
+                        function (t,u){
+
+                        },
+                    legendDblClick:
+                        function (t,u){
+
+                        }
+                    }
             },
             legendPosition: 'top',
             margin: {
@@ -163,7 +174,7 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                 }
             },
             legendPosition: 'top',
-            text: 'Credit Recovery',
+            text: '',
             x: function (d) {
                 return d.x;
             },

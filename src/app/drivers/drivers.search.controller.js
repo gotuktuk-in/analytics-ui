@@ -14,6 +14,9 @@
 
         vm.termURL = $stateParams.term;
         vm.filterURL = $stateParams.filterURL;
+        vm.statusURL = $stateParams.status;
+        vm.startDateURL = $stateParams.startDate;
+        vm.endDatefilterURL = $stateParams.endDate;
         vm.searchTerm = vm.termURL;
         vm.showTableData = true;
         vm.enblBtn = false;
@@ -61,9 +64,9 @@
         });
         vm.filterTerm = vm.selectedFilterFields;
 
-        vm.searchTable = function () {
-            $state.go('home.drivers_search', {filterURL: vm.filterTerm.value, term: vm.searchTerm});
-        };
+        //vm.searchTable = function () {
+        //    $state.go('home.drivers_search', {filterURL: vm.filterTerm.value, term: vm.searchTerm, startDate: vm.startDate, endDate:vm.endDate});
+        //};
 
         var sorting;
         $scope.getTimeDiff = function (dt1, dt2) {

@@ -6,7 +6,7 @@
         .controller('DriversDetailController', DriversDetailController);
 
     /** @ngInject */
-    function DriversDetailController($scope, $rootScope, $window, $stateParams, $confirm, toastr, $interval, StaticDataService, DriversService, DriverHandler, ChartConfigService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
+    function DriversDetailController($scope, $rootScope, $window, $state, $stateParams, $confirm, toastr, $interval, StaticDataService, DriversService, DriverHandler, ChartConfigService, NgTableParams, ngTableEventsChannel, LiveService, $resource) {
 
         var vm = this;
         var current = moment();
@@ -40,9 +40,8 @@
             return d3.time.format('%d %b %y')(new Date(d));
         };
 
-        vm.tripChartOptions.chart.yAxis.tickFormat = function (d) {
-            return d3.format('.3n')(d);
-        };
+        vm.tripChartOptions.chart.xAxis.tickFormat
+
 
         vm.getTripsChart = function () {
             DriversService.getTripsChart({
@@ -59,6 +58,25 @@
                 $scope.error = true;
             });
         };
+
+        vm.tripChartOptions.chart.legend.dispatch.legendClick = function (t, u) {
+            console.log(t.key);
+            if(u <= 1) {
+                $state.go(
+                    'home.search',
+                    {
+                        city: $rootScope.city,
+                        vehicleType: $rootScope.vehicleType,
+                        filterURL: 'did',
+                        term: $stateParams.driverId,
+                        startDate: moment($scope.driverTripDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+                        endDate: moment($scope.driverTripDates.endDate).endOf('day').format("YYYYMMDD").toString(),
+                        status: u + 1
+                    }
+                );
+            }
+        };
+
 
         $scope.driverOnlineDates = {};
         $scope.driverOnlineDates.startDate = StaticDataService.ranges['Last 7 Days'][0]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
@@ -296,11 +314,12 @@
                     }
                 });
         }
+
         //invoice end------------------------------------
 
-        $scope.$on('$destroy', function () {
-            $interval.cancel(interval);
-        });
+        //$scope.$on('$destroy', function () {
+        //    $interval.cancel(interval);
+        //});
         $scope.getTimeDiff = function (dt1, dt2) {
             var then;
             if (dt1 == 0) {
@@ -323,7 +342,7 @@
             timeInStr += diff.minute() + " min ";
             return timeInStr;
         };
-        vm.getTripsList = function(){
+        vm.getTripsList = function () {
             $scope.tableParams = new NgTableParams({
                 page: 1, count: 20, sorting: {earning: 'desc'}
             }, {
@@ -375,7 +394,7 @@
         };
         vm.onDateChangeTrips = function () {
             vm.getTripsChart();
-            vm.getTripsList();
+            //vm.getTripsList();
             vm.getOnlineChart();
         };
 

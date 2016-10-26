@@ -64,8 +64,12 @@ function TripsService($q, $resource, API) {
             cancelTrip: {
                 method: 'PUT',
                 url: url + 'trip/cancelled/:id'
+            },
+            getNewRiders: {
+                method: 'GET',
+                url: url + 'trips/newRiders',
+                isArray: true
             }
-
         }
     );
 }

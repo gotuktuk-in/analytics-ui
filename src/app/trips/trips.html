@@ -15,9 +15,9 @@
         <div class="form-group">
             <div style="max-height: 34px; overflow: hidden;">
                 <a
-                        ui-sref="home.search({city: city,vehicleType: vehicleType, filterURL: 'date', term: dateURL})"
+                        ui-sref="home.search({city: city,vehicleType: vehicleType, filterURL: '', term: '',status:vm.statusURL, startDate:vm.startDateURL, endDate:vm.endDateURL})"
                         title="Show All Shapes"
-                        class="btn btn-default">
+                        class="btn btn-default no-border">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </a>
             </div>
@@ -69,7 +69,7 @@
                     </form>
                     <h4 style="margin-top: 0" class="title">Trips</h4></div>
                 <div class="panel-body">
-                    <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+                    <nvd3 options="vm.tripChartOptions" data="vm.tripData" config="vm.config"></nvd3>
                 </div>
             </div>
         </div>
@@ -131,7 +131,7 @@
                     &#10095;
                 </span>
                     </div>
-                    <h4 style="margin-top: 0" class="title">Successful Rides</h4></div>
+                    <h4 style="margin-top: 0" class="title">Fulfillment</h4></div>
                 <div class="panel-body">
                     <div>
                         <nvd3 options="vm.newRidersChartOptions" data="vm.newRiders" config="vm.config"></nvd3>
@@ -183,7 +183,7 @@
                                 ng-change="vm.onDateChangeBurn()"
                                 class="form-control text-center"
                                 type="daterange"
-                                ng-model="tripDates"
+                                ng-model="burnDates"
                                 separator=" - "
                                 format="DD MMM YY"
                                 opens="right"
@@ -198,192 +198,10 @@
 
                     <h4 style="margin-top: 0" class="title">Burn</h4></div>
                 <div class="panel-body">
-                    <nvd3 options="vm.burnChartOptions" data="vm.burn" config="vm.config"></nvd3>
+                    <nvd3 options="vm.burnChartOptions" data="vm.burnData" config="vm.config"></nvd3>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row" ng-if="">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="panel panel-default" style="min-height:10px ">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Search</h4>
-                </div>
-                <div class="panel-body">
-                    <form class="form-inline no-mr">
 
-                        <div class="input-group col-md-3 col-sm-4 col-xs-12">
-                            <select ng-model="vm.filterTerm" class="form-control"
-                                    ng-options="statusFilter.name for statusFilter in vm.filterFields track by statusFilter.value">
-                                <option value="" disabled>Select Filter</option>
-                            </select>
-                        </div>
-                        <div class="input-group col-md-3 col-sm-4 col-xs-12">
-                            <input ng-model="vm.searchTerm" class="form-control" placeholder="term"
-                                   ng-disabled="!vm.filterTerm"/>
-                        </div>
-                        <div class="input-group col-md-1 col-sm-4 col-xs-12">
-                            <button ng-disabled="!vm.searchTerm" ng-click="vm.searchTable()"
-                                    class="btn btn-search"><span
-                                    aria-hidden="true" class="glyphicon glyphicon-search"></span></button>
-                        </div>
-                        <div class="input-group col-md-3 col-sm-4 col-xs-12 pull-right">
-                            <select ng-model="vm.statusCodes" ng-change="vm.searchTable()" class="form-control"
-                                    ng-options="statusFilter.name for statusFilter in vm.tripStatusFilters track by statusFilter.value">
-                                <option value="" disabled>Select Status</option>
-                            </select>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="panel-body" ng-if="vm.showTableData" style="min-height:400px">
-                    <div class="table-responsive">
-                        <table ng-table="tableParams" class="table table-bordered">
-
-                            <tr class="truncate"
-                                ng-repeat="row in $data track by $index">
-                                <td data-title="'Date'" sortable="'requestOn'" style="width: 145px;">
-                                    <a target="_blank"
-                                       ui-sref="home.trip_detail({id: row.id})">
-                                        <div>{{(row.requestOn)*1000 | date:"dd MMM yy"}}</div>
-                                    </a>
-
-                                </td>
-                                <td data-title="'Status'" sortable="'tripState'">
-                                    <div ng-if="row.tripState == 20" class="text-primary" style="white-space: nowrap">
-                                        Requested
-                                    </div>
-                                    <div ng-if="row.tripState == 22" style="white-space: nowrap">Allocated</div>
-                                    <div ng-if="row.tripState == 30" style="white-space: nowrap">For Trip</div>
-                                    <div ng-if="row.tripState == 40" style="white-space: nowrap">At Pickup</div>
-                                    <div ng-if="row.tripState == 60" style="white-space: nowrap">At Destination</div>
-                                    <div ng-if="row.tripState == 50" class="text-info" style="white-space: nowrap">In
-                                        trip
-                                    </div>
-                                    <div ng-if="row.tripState == 61" class="text-success" style="white-space: nowrap">
-                                        Successful
-                                    </div>
-                                    <div ng-if="row.tripState == 70" class="text-warning" style="white-space: nowrap">
-                                        Can by Driver
-                                    </div>
-                                    <div ng-if="row.tripState == 71" class="text-warning" style="white-space: nowrap">
-                                        Can by Rider
-                                    </div>
-                                    <div ng-if="row.tripState == 80" style="white-space: nowrap">No Drv Avlble</div>
-                                    <div ng-if="row.tripState == 81" class="text-danger" style="white-space: nowrap">
-                                        Failed (No Drivers Accepted)
-                                    </div>
-                                    <div ng-if="row.tripState == 82" style="white-space: nowrap">Terminated</div>
-                                </td>
-                                <td data-title="'Driver'">
-                                    <div>{{row.driverInfo.name}}<br>
-                                    </div>
-                                </td>
-                                <td data-title="'Rider'">
-                                    <div>{{row.riderInfo.name}}</div>
-                                </td>
-                                <td data-title="'Request On'">
-                                    <div>{{(row.requestOn)*1000 | date:"h:mma"}}</div>
-                                </td>
-                                <td data-title="'Time'" sortable="'time'">
-                                    <div>{{getTimeDiff(row.pickupOn,row.dropOn)| secondsToDateTime}}</div>
-                                </td>
-
-                                <td data-title="'Dist(KM)'" sortable="'disPickupDrop'" align="center">
-                                    <div>{{(row.disPickupDrop)/1000 | number:2}}</div>
-                                </td>
-                            </tr>
-                        </table>
-                        <table class="table table-bordered table-striped table-condensed" ng-show="tblNoData">
-                            <tr>
-                                <td colspan="11">No data found</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!--<div class="row">
-        <div class="col-md-6">
-            &lt;!&ndash;-Driver-&ndash;&gt;
-            <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6 text-right">
-                    <form class="form-inline">
-                        <div class="form-group " style="margin-top:15px">
-                            <div class="radio inpt-style">
-                                <label><input type="radio" name="optradio"
-                                              ng-change="vm.changeFrequency('driver',vm.driverFrequency.value)"
-                                              ng-model="vm.driverFrequency.value" value="hour"><i></i>
-                                    <span>Per Hour</span></label>
-                                <label><input type="radio" name="optradio"
-                                              ng-change="vm.changeFrequency('driver',vm.driverFrequency.value)"
-                                              ng-model="vm.driverFrequency.value" value="day"> <i></i>
-                                    <span>Per Day</span></label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <br>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h4 style="margin-top: 0">Driver</h4>
-                            <br>
-
-                            <div class="table-responsive">
-                                <nvd3 options="vm.driverChartOptions" data="vm.drivers" config="vm.config"></nvd3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            &lt;!&ndash;Rider&ndash;&gt;
-            <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6 text-right">
-                    <form class="form-inline">
-
-                        <div class="form-group " style="margin-top:15px">
-                            <div class="radio inpt-style">
-                                <label><input type="radio" name="optradio"
-                                              ng-change="vm.changeFrequency('rider', vm.riderFrequency.value)"
-                                              ng-model="vm.riderFrequency.value" value="hour"><i></i>
-                                    <span>Per Hour</span></label>
-                                <label><input type="radio" name="optradio"
-                                              ng-change="vm.changeFrequency('rider', vm.riderFrequency.value)"
-                                              ng-model="vm.riderFrequency.value" value="day"> <i></i>
-                                    <span>Per Day</span></label>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <br>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h4 style="margin-top: 0">Rider</h4>
-                            <br>
-
-                            <div class="table-responsive">
-                                <nvd3 options="vm.riderChartOptions" data="vm.riders" config="vm.config"></nvd3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
 </div>

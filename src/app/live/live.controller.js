@@ -7,9 +7,8 @@
 
     /** @ngInject */
     function LiveController($scope, $log, $rootScope, $state, $interval, $stateParams, NgMap, ChartConfigService, LiveService, PerformanceService, PerformanceHandler, LiveHandler) {
-        var vm = this;
-        //range slider , Failed(2), Cancel(2), Success.
 
+        var vm = this;
         var today = moment();
         Array.prototype.sum = function (prop) {
             var total = 0;
@@ -18,29 +17,10 @@
             }
             return total
         };
-        //range slider end
 
         $scope.date = moment().format("ddd, MMM Do YYYY");
         vm.config = ChartConfigService.lineChartConfig;
         vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
-        vm.newRidersChartOptions = angular.copy(ChartConfigService.multiBarChartOptions);
-        vm.newRidersChartOptions.chart.tooltip = {
-            contentGenerator: function (key, x, y, e, graph) { //return html content
-                var data = key.data;
-                var formateDate;
-                if (data.date === 'Others')
-                    formateDate = 'Above 7 days';
-                else
-                    formateDate = moment(PerformanceHandler.getLongDate(data.date.toString())).format('MMMM Do YYYY');
-                var str = '<div class="pd-10 text-left"><span><b>';
-                str += formateDate + ' </b></span>' + '';
-                //str += '<h6>New Rider Registered</h6>' + data.newRiderRegCount + ''
-                str += '<h3 class="no-mr">' + data.y + '<small style="color:#333;"> /' + data.uniqRides + '</small><br><small style="font-size:10px;color:#666;text-transform: uppercase;">Total Rides / Rides(U)</small></h3>'
-                // str += '<h1>Date</h1>' + data.date + '/n'
-                str += '</div>';
-                return str;
-            }
-        };
 
         /*** code starts for Chart of canceld trip by Driver ***/
         vm.drRideCancelReasonCode = {
@@ -52,7 +32,6 @@
         };
         vm.cancelTripByDriverChartOptions = angular.copy(ChartConfigService.pieChartOptions);
         vm.cancelTripByDriverChartOptions.chart.x = function (d) {
-            //console.log(vm.drRideCancelReasonCode[d.label]);
             return vm.drRideCancelReasonCode[d.label];
         };
         /*** code ends for Chart of canceld trip by Driver ***/
@@ -68,8 +47,6 @@
 
         vm.cancelTripByRiderChartOptions = angular.copy(ChartConfigService.pieChartOptions);
         vm.cancelTripByRiderChartOptions.chart.x = function (d) {
-            //console.log(d.label);
-            //return d.label
             return vm.rdRideCancelReasonCode[d.label];
         };
         /**/
@@ -106,7 +83,6 @@
                 getCanceledTripByRider();
             }
             getLive();
-            getNewRiders();
             getCanceledTripByDriver();
             getCanceledTripByRider();
         };
@@ -160,56 +136,6 @@
                 $scope.error = true;
             });
         }
-
-        function getNewRiders() {
-            LiveService.getNewRiders({
-                from: moment(current).subtract(6, 'days').startOf('day').unix(),
-                to: moment(current).endOf('day').unix()
-            }, function (response) {
-                vm.newRiders = transformNewRiders(response);
-            }, function (err) {
-                console.log(err);
-                $scope.error = true;
-            });
-        }
-
-        function transformNewRiders(ridresData) {
-            var data = [];
-            var riders = JSON.parse(angular.toJson(ridresData));
-            var count = 0;
-            var i = 0;
-            var labelsArr = ['today', '1 day ago', '2 day ago', '3 day ago', '4 day ago', '5 day ago', '6 day ago', 'Above 7 days'];
-            _.each(riders, function (rides) {
-                var obj = {};
-                obj.key = labelsArr[i];
-                obj.bar = true;
-                obj.values = [];
-                data.push(obj);
-                i++;
-            });
-            var obj = {};
-            obj.key = labelsArr[i];
-            obj.bar = true;
-            obj.values = [];
-            data.push(obj);
-            _.each(riders, function (rides) {
-                var ridesByDay = rides;
-                for (var a = 0; a <= 7; a++) {
-                    data[a].values[count] = {};
-                    data[a].values[count].x = PerformanceHandler.getLongDate(ridesByDay.date);
-                    data[a].values[count].y = Number(rides.value[a].totalRides);
-                    data[a].values[count].uniqRides = Number(rides.value[a].uniqRides);
-                    if (rides.value[a].id === 'Others')
-                        data[a].values[count].date = rides.value[a].id;
-                    else
-                        data[a].values[count].date = Number(rides.value[a].id);
-                }
-                count++
-            });
-            return data;
-        }
-
-        getNewRiders();
         function getOverviewBack() {
             LiveService.getOverview({
                 city: $rootScope.city,
@@ -224,123 +150,195 @@
             });
         }
 
-        function getLive() {
-            PerformanceService.getTrips({
-                city: $rootScope.city,
-                startTime: moment(current).startOf('day'),
-                endTime: moment(current).endOf('day'),
-                count: 1,
-                page: 1,
-                rate: 'hour'
-            }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
-                //  PerformanceHandler.trips = response[0].trip
-                vm.trips = PerformanceHandler.getTrips(response[0].trip);
-                PerformanceService.getDrivers({
+        //trip start
+        vm.tripChartOptions = angular.copy(ChartConfigService.multiBarChartOptions);
+        vm.tripFrequency = "hour";
+
+        vm.getTrips = function () {
+            LiveService.getTrips({
                     city: $rootScope.city,
+                    vehicle: $rootScope.vehicleType,
                     startTime: moment(current).startOf('day'),
                     endTime: moment(current).endOf('day'),
+                    rate: vm.tripFrequency,
                     count: 1,
-                    page: 1,
-                    rate: 'hour'
-                }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
-                    // PerformanceHandler.drivers = response
-                    vm.drivers = PerformanceHandler.getDrivers(response);
-                    vm.trips = _.union(vm.trips, vm.drivers);
-                    vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by rider)'}));
-                    vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by driver)'}));
-                    vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'tCash'}));
-                    vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'New Drivers'}));
-                    vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Active Drivers'}));
-                    vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Avg Trip/Driver'}));
-
+                    page: 1
+                }, {
+                    vehicle: $rootScope.vehicleType,
+                    frequency: vm.tripFrequency
+                },
+                function (response){
+                    vm.tripData = transformTrips(response).map(function (series) {
+                        series.values = series.values.map(function (d) {
+                            return {x: d[0], y: d[1]}
+                        });
+                        return series;
+                    });
                 }, function (err) {
                     console.log(err);
                     $scope.error = true;
                 });
-            }, function (err) {
-                console.log(err);
-                $scope.error = true;
-            });
+        };
 
-            var gradient = [
-                'rgba(0, 255, 255, 0)',
-                'rgba(0, 255, 255, 1)',
-                'rgba(0, 191, 255, 1)',
-                'rgba(0, 127, 255, 1)',
-                'rgba(0, 63, 255, 1)',
-                'rgba(0, 0, 255, 1)',
-                'rgba(0, 0, 223, 1)',
-                'rgba(0, 0, 191, 1)',
-                'rgba(0, 0, 159, 1)',
-                'rgba(0, 0, 127, 1)',
-                'rgba(63, 0, 91, 1)',
-                'rgba(127, 0, 63, 1)',
-                'rgba(191, 0, 31, 1)',
-                'rgba(255, 0, 0, 1)'
+        function transformTrips(data) {
+            var transformed = [];
+            data = angular.fromJson(data);
+            var newTripData = data[0].trip;
+
+            for (var a = 0; a < newTripData.length; a++) {
+                $scope.rT = a + (data[0].trip[a].requests.total);
+                $scope.rUT = a + (data[0].trip[a].requests.unique_riders);
+                $scope.cT = a + (data[0].trip[a].cancelled.total);
+                $scope.cUT = a + (data[0].trip[a].cancelled.unique);
+                $scope.fT = a + (data[0].trip[a].success.total);
+                $scope.fUT = a + (data[0].trip[a].success.unique_riders);
+                $scope.faT = a + (data[0].trip[a].failed.total);
+                $scope.faUT = a + (data[0].trip[a].failed.unique_riders);
+            }
+
+            //
+            var arr = [
+                'Requests: ' + $scope.rT ,
+                'Requests(U): ' + $scope.rUT ,
+                'Cancelled: ' + $scope.cT ,
+                'Cancelled(U): ' + $scope.cUT ,
+                'Fulfilled: ' + $scope.fT ,
+                'Fulfilled(U): ' + $scope.fUT ,
+                'Failed: ' + $scope.faT ,
+                'Failed(U): ' + $scope.faUT
             ];
-            // google.maps.event.addDomListener(window, 'resize', resizeMap);
-            vm.resizeMap = function () {
-                google.maps.event.trigger(vm.map, 'resize')
-            };
-            //vm.heatMapDataLength;
-            //vm.loadHeatMap = function () {
-            //
-            //    var from = moment(current).hour($scope.rangSlider.min).unix();
-            //    var to = moment(current).hour($scope.rangSlider.max).unix();
-            //    LiveService.heatmap({
-            //        city: $rootScope.city,
-            //        vehicle: $rootScope.vehicleType,
-            //        from: from,
-            //        to: to,
-            //        state: vm.selected.id
-            //    }, function (response) {
-            //        //  PerformanceHandler.trips = response[0].trip
-            //        vm.heatMapDataLength = response.length;
-            //        var transformedData = [];
-            //        var pointArray = [];
-            //        _.forEach(response, function (item) {
-            //            transformedData.push(new google.maps.LatLng(item.locPickupRequest.lt - 0, item.locPickupRequest.ln - 0));
-            //        });
-            //        //        $scope.heatMapData = transformedData;
-            //
-            //        NgMap.getMap({id: 'live_map'}).then(function (map) {
-            //            vm.map = map;
-            //            //   heatmap = vm.map.heatmapLayers.foo;
-            //            if (heatmap) {
-            //                heatmap.setMap(null);
-            //            }
-            //            pointArray = new google.maps.MVCArray(transformedData);
-            //            heatmap = new google.maps.visualization.HeatmapLayer({
-            //                data: pointArray
-            //
-            //            });
-            //            heatmap.setMap(vm.map);
-            //        });
-            //
-            //    }, function (err) {
-            //        console.log(err);
-            //        $scope.error = true;
-            //    });
-            //}
+            var newObj = {};
+            newObj.key = arr[0];
+            newObj.values = [];
+            newObj.bar = true;
+            for (var a = 0; a < newTripData.length; a++) {
+                var x = moment(LiveHandler.getLongDate(data[0].trip[a].id)).unix() * 1000;
+                newObj.values.push([x, data[0].trip[a].requests.total]);
+            }
+            transformed.push(newObj);
 
+            var newObj = {};
+            newObj.key = arr[1];
+            newObj.values = [];
+            newObj.bar = true;
+            for (var a = 0; a < newTripData.length; a++) {
+                var x = moment(LiveHandler.getLongDate(data[0].trip[a].id)).unix() * 1000;
+                newObj.values.push([x, data[0].trip[a].requests.unique_riders]);
+            }
+            transformed.push(newObj);
 
+            var newObj = {};
+            newObj.key = arr[2];
+            newObj.values = [];
+            newObj.bar = true;
+            for (var a = 0; a < newTripData.length; a++) {
+                var x = moment(LiveHandler.getLongDate(data[0].trip[a].id)).unix() * 1000;
+                newObj.values.push([x, data[0].trip[a].cancelled.total]);
+            }
+            transformed.push(newObj);
+
+            var newObj = {};
+            newObj.key = arr[3];
+            newObj.values = [];
+            newObj.bar = true;
+            for (var a = 0; a < newTripData.length; a++) {
+                var x = moment(LiveHandler.getLongDate(data[0].trip[a].id)).unix() * 1000;
+                newObj.values.push([x, data[0].trip[a].cancelled.unique]);
+            }
+            transformed.push(newObj);
+
+            var newObj = {};
+            newObj.key = arr[4];
+            newObj.values = [];
+            newObj.bar = true;
+            for (var a = 0; a < newTripData.length; a++) {
+                var x = moment(LiveHandler.getLongDate(data[0].trip[a].id)).unix() * 1000;
+                newObj.values.push([x, data[0].trip[a].success.total]);
+            }
+            transformed.push(newObj);
+
+            var newObj = {};
+            newObj.key = arr[5];
+            newObj.values = [];
+            newObj.bar = true;
+            for (var a = 0; a < newTripData.length; a++) {
+                var x = moment(LiveHandler.getLongDate(data[0].trip[a].id)).unix() * 1000;
+                newObj.values.push([x, data[0].trip[a].success.unique_riders]);
+            }
+            transformed.push(newObj);
+
+            var newObj = {};
+            newObj.key = arr[6];
+            newObj.values = [];
+            newObj.bar = true;
+            for (var a = 0; a < newTripData.length; a++) {
+                var x = moment(LiveHandler.getLongDate(data[0].trip[a].id)).unix() * 1000;
+                newObj.values.push([x, data[0].trip[a].failed.total]);
+            }
+            transformed.push(newObj);
+            var newObj = {};
+            newObj.key = arr[7];
+            newObj.values = [];
+            newObj.bar = true;
+            for (var a = 0; a < newTripData.length; a++) {
+                var x = moment(LiveHandler.getLongDate(data[0].trip[a].id)).unix() * 1000;
+                newObj.values.push([x, data[0].trip[a].failed.unique_riders]);
+            }
+            transformed.push(newObj);
+
+            return transformed;
         }
 
-        getLive();
+        vm.getTrips();
+        //trip end
+
+        //function getLive() {
+        //    PerformanceService.getTrips({
+        //        city: $rootScope.city,
+        //        startTime: moment(current).startOf('day'),
+        //        endTime: moment(current).endOf('day'),
+        //        count: 1,
+        //        page: 1,
+        //        rate: 'hour'
+        //    }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
+        //        //  PerformanceHandler.trips = response[0].trip
+        //        vm.trips = PerformanceHandler.getTrips(response[0].trip);
+        //        PerformanceService.getDrivers({
+        //            city: $rootScope.city,
+        //            startTime: moment(current).startOf('day'),
+        //            endTime: moment(current).endOf('day'),
+        //            count: 1,
+        //            page: 1,
+        //            rate: 'hour'
+        //        }, {vehicle: $rootScope.vehicleType, frequency: 'hour'}, function (response) {
+        //            vm.drivers = PerformanceHandler.getDrivers(response);
+        //            vm.trips = _.union(vm.trips, vm.drivers);
+        //            vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by rider)'}));
+        //            vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Cancelled trips (by driver)'}));
+        //            vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'tCash'}));
+        //            vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'New Drivers'}));
+        //            vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Active Drivers'}));
+        //            vm.trips = _.without(vm.trips, _.findWhere(vm.trips, {key: 'Avg Trip/Driver'}));
+        //
+        //        }, function (err) {
+        //            console.log(err);
+        //            $scope.error = true;
+        //        });
+        //    }, function (err) {
+        //        console.log(err);
+        //        $scope.error = true;
+        //    });
+        //
+        //}
+
+        //getLive();
         getOverviewLive();
         getCanceledTripByDriver();
         getCanceledTripByRider();
-        var interval = $interval(function () {
-            //vm.refreshPage()
-        }, 30000);
 
-        $scope.$on('$destroy', function () {
-            $interval.cancel(interval);
-        });
         vm.refreshPage = function () {
-            getLive();
-            //vm.loadHeatMap();
-            getNewRiders();
+            //getLive();
+            vm.getTrips();
             if (vm.live) {
                 getOverviewLive();
                 getCanceledTripByDriver();
