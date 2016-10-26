@@ -134,7 +134,7 @@
     <div class="geo-hash-select">
         <form class="form-inline">
             <div class="form-group">
-                <select name="mySelect" id="mySelect" class="form-control no-border"
+                <select name="mySelect" id="mySelect" class="form-control"
                         ng-options="option.label for option in vm.heatMapFilers track by option.id"
                         ng-model="vm.selected" ng-change="vm.loadHeatMap();" style=" min-width: 95px;"></select>
             </div>
@@ -143,12 +143,16 @@
                 <button class="btn btn-default btn-map-icon no-border"><span style="text-align: center !important;">{{vm.heatMapDataLength}}</span></button>
                 <button ng-click="vm.hideHeatmap()" ng-if="vm.heatmapView" title="Hide Heatmap" class="btn btn-default btn-map-icon no-border"><i class="fa fa-fire" aria-hidden="true"></i></button>
                 <button ng-click="vm.showHeatmap()" ng-if="!vm.heatmapView" title="Show All Heatmap" class="btn btn-map-icon no-border"><i class="fa fa-fire inverse-btn" aria-hidden="true"></i></button>
-                <button ng-click="vm.hideMarkers()" ng-if="vm.markersView" title="Hide Markers" class="btn btn-default btn-map-icon no-border"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
-                <button ng-click="vm.showMarkers()" ng-if="!vm.markersView" title="Show All Markers" class="btn btn-default btn-map-icon no-border"><i class="fa fa-map-marker inverse-btn" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="form-group" style="border-left: 1px solid #eee;border-right: 1px solid #eee; margin: 0 20px 0 10px;">
+                <div style="max-height: 34px; overflow: hidden;">
+                    <button ng-click="vm.hideMarkers()" ng-if="vm.markersView" title="Hide Markers" class="btn btn-default btn-map-icon no-border"><i class="fa fa-map-marker" aria-hidden="true"></i></button>
+                    <button ng-click="vm.showMarkers()" ng-if="!vm.markersView" title="Show All Markers" class="btn btn-default btn-map-icon no-border"><i class="fa fa-map-marker inverse-btn" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="form-group">
-                <select class="form-control no-border" ng-change="vm.onPrecisionChange()"
+                <select class="form-control" ng-change="vm.onPrecisionChange()"
                         style="padding:5px 10px; border-radius: 4px; min-width: 60px;"
                         ng-model="vm.selectedPrecision"
                         ng-options="precision.name for precision  in  vm.precisionArr track by precision.value">

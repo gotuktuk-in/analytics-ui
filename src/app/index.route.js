@@ -116,7 +116,8 @@
             })
             .state('home.search', {
                 //url: '/trips/search/:city/:vehicleType/',
-                url: '/trips/search/:city/:vehicleType/:filterURL/:term/:status/:startDate/:endDate/',
+                //url: '/trips/search/:city/:vehicleType/:filterURL/:term/:status/:startDate/:endDate/',
+                url: '/trips/search/:city/:vehicleType/:filterURL/:term/',
                 templateUrl: 'app/trips/trip_search.html',
                 controller: 'TripsSearchController',
                 controllerAs: 'vm'

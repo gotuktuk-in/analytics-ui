@@ -15,7 +15,7 @@
         <div class="form-group">
             <div style="max-height: 34px; overflow: hidden;">
                 <a
-                        ui-sref="home.search({city: city,vehicleType: vehicleType, filterURL: '', term: '',status:vm.statusURL, startDate:vm.startDateURL, endDate:vm.endDateURL})"
+                        ui-sref="home.search({city: city, vehicleType: vehicleType, startDate:vm.startDateURL, endDate:vm.endDateURL})"
                         title="Show All Shapes"
                         class="btn btn-default no-border">
                     <i class="fa fa-search" aria-hidden="true"></i>
@@ -53,7 +53,7 @@
 
                             <!--</div>-->
                             <input
-                                    ng-change="vm.onDateChangeTrips('trip')"
+                                    ng-change="vm.onDateChangeTrips()"
                                     class="form-control text-center"
                                     type="daterange"
                                     ng-model="tripDates"

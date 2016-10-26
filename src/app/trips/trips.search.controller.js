@@ -11,11 +11,13 @@
         var vm = this;
         var today = moment();
         var current = moment();
+
         vm.termURL = $stateParams.term;
         vm.filterURL = $stateParams.filterURL;
-        vm.statusURL = $stateParams.status;
-        vm.startDateURL = $stateParams.startDate;
-        vm.endDateURL = $stateParams.endDate;
+        //vm.statusURL = $stateParams.status;
+        //vm.startDateURL = $stateParams.startDate;
+        //vm.endDateURL = $stateParams.endDate;
+
         vm.searchTerm = vm.termURL;
         vm.showTableData = true;
         vm.enblBtn = false;
@@ -30,16 +32,18 @@
 
 
         $scope.datesForSearch = {};
-        if (vm.startDateURL !==''){
-            $scope.datesForSearch.startDate =  moment(TripsHandler.getLongDate(vm.startDateURL)).unix() * 1000;
-        } else{
-            $scope.datesForSearch.startDate =  StaticDataService.ranges['Last 7 Days'][0];
-        }
-        if (vm.endDateURL !==''){
-            $scope.datesForSearch.endDate =  moment(TripsHandler.getLongDate(vm.endDateURL)).unix() * 1000;
-        } else{
-            $scope.datesForSearch.endDate =  StaticDataService.ranges['Last 7 Days'][1];
-        }
+        $scope.datesForSearch.startDate =  StaticDataService.ranges['Last 7 Days'][0];
+        $scope.datesForSearch.endDate =  StaticDataService.ranges['Last 7 Days'][1];
+        //if (vm.startDateURL !==''){
+        //    $scope.datesForSearch.startDate =  moment(TripsHandler.getLongDate(vm.startDateURL)).unix() * 1000;
+        //} else{
+        //    $scope.datesForSearch.startDate =  StaticDataService.ranges['Last 7 Days'][0];
+        //}
+        //if (vm.endDateURL !==''){
+        //    $scope.datesForSearch.endDate =  moment(TripsHandler.getLongDate(vm.endDateURL)).unix() * 1000;
+        //} else{
+        //    $scope.datesForSearch.endDate =  StaticDataService.ranges['Last 7 Days'][1];
+        //}
 
         vm.trips = [];
         vm.filterTerm = '';
@@ -82,24 +86,24 @@
         vm.selectedFilterFields = _.find(vm.filterFields, function(rw){ return rw.value == vm.filterURL });
         vm.filterTerm = vm.selectedFilterFields;
 
-        //vm.searchTable = function () {
-        //    $state.go('home.search', {filterURL: vm.filterTerm.value, term:vm.searchTerm });
-        //};
-
         vm.searchTable = function () {
-            $state.go(
-                'home.search',
-                {
-                    city: $rootScope.city,
-                    vehicleType: $rootScope.vehicleType,
-                    filterURL: vm.filterTerm.value,
-                    term: vm.searchTerm,
-                    //startDate: moment($scope.datesForSearch.startDate).unix(),
-                    //endDate: moment($scope.datesForSearch.endDate).unix()
-                    //status: vm.statusCodes.value
-                }
-            );
+            $state.go('home.search', {filterURL: vm.filterTerm.value, term:vm.searchTerm });
         };
+
+        //vm.searchTable = function () {
+        //    $state.go(
+        //        'home.search',
+        //        {
+        //            city: $rootScope.city,
+        //            vehicleType: $rootScope.vehicleType,
+        //            filterURL: vm.filterTerm.value,
+        //            term: vm.searchTerm,
+        //            //startDate: moment($scope.datesForSearch.startDate).unix(),
+        //            //endDate: moment($scope.datesForSearch.endDate).unix()
+        //            //status: vm.statusCodes.value
+        //        }
+        //    );
+        //};
 
         $scope.$back = function () {
             window.history.back();
@@ -162,9 +166,9 @@
                             dataObj.term = '';
                             //return;
                         }
-                        if (vm.statusCodes.value != '') {
-                            dataObj.filterByStatus = vm.statusCodes.value;
-                        }
+                        //if (vm.statusCodes.value != '') {
+                        //    dataObj.filterByStatus = vm.statusCodes.value;
+                        //}
                         return TripsService.getAllTrips(dataObj).$promise.then(function (data) {
                             params.total(data.total); // recal. page nav controls
                             if (data.data.length > 0) {
