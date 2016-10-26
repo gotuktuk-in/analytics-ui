@@ -11,11 +11,11 @@
         <div class="form-group">
             <div style="max-height: 34px; overflow: hidden;">
                 <a
-                        ui-sref="home.drivers_search({city: city,vehicleType: vehicleType, filterURL: 'id', term: 'd'})"
-                        class="btn btn-default">
+                        ui-sref="home.drivers_search({city:city, vehicleType:vehicleType, filterURL: vm.filterURL, term:vm.termURL})"
+                        class="btn btn-default no-border">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </a>
-                <a class="btn btn-default" href="#/home/drivers/onboarding/indore/auto"><i class="fa fa-plus"
+                <a class="btn btn-default no-border" href="#/home/drivers/onboarding/indore/auto"><i class="fa fa-plus"
                                                                                            aria-hidden="true"></i></a>
             </div>
         </div>
@@ -87,7 +87,7 @@
 
                 <div class="panel-body">
                     <div>
-                        <nvd3 options="vm.acquisitionChart" data="vm.acquisitionData" config="vm.config"></nvd3>
+                        <nvd3 options="vm.acquisitionChart" data="vm.acquisition" config="vm.config"></nvd3>
                     </div>
                 </div>
             </div>

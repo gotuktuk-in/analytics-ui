@@ -6,14 +6,41 @@
         .controller('TripsSearchController', TripsSearchController);
 
     /** @ngInject */
-    function TripsSearchController($scope, $state, NgTableParams, $stateParams, TripsService, $rootScope, $interval) {
+    function TripsSearchController($scope, $state, StaticDataService, NgTableParams, $stateParams, TripsHandler, TripsService, $rootScope, $interval) {
 
         var vm = this;
+        var today = moment();
+        var current = moment();
         vm.termURL = $stateParams.term;
         vm.filterURL = $stateParams.filterURL;
+        vm.statusURL = $stateParams.status;
+        vm.startDateURL = $stateParams.startDate;
+        vm.endDateURL = $stateParams.endDate;
         vm.searchTerm = vm.termURL;
         vm.showTableData = true;
         vm.enblBtn = false;
+
+        vm.selectedRow = null;
+        vm.setSelected = function (selectedRow) {
+            vm.selectedRow = selectedRow;
+        };
+
+        vm.ranges = StaticDataService.ranges;
+        $scope.date = moment().format("dddd, MMMM Do YYYY");
+
+
+        $scope.datesForSearch = {};
+        if (vm.startDateURL !==''){
+            $scope.datesForSearch.startDate =  moment(TripsHandler.getLongDate(vm.startDateURL)).unix() * 1000;
+        } else{
+            $scope.datesForSearch.startDate =  StaticDataService.ranges['Last 7 Days'][0];
+        }
+        if (vm.endDateURL !==''){
+            $scope.datesForSearch.endDate =  moment(TripsHandler.getLongDate(vm.endDateURL)).unix() * 1000;
+        } else{
+            $scope.datesForSearch.endDate =  StaticDataService.ranges['Last 7 Days'][1];
+        }
+
         vm.trips = [];
         vm.filterTerm = '';
         vm.filterFields = [
@@ -24,8 +51,8 @@
             {value: "remail", name: "Rider Email"},
             {value: "dphone", name: "Driver Phone"},
             {value: "rphone", name: "Rider Phone"},
-            {value: "dvehicle", name: "Vehicle Number"},
-            {value: "date", name: "Date"}
+            {value: "dvehicle", name: "Vehicle Number"}
+            //{value: "date", name: "Date"}
         ];
         vm.statusCodes = '';
         vm.tripStatusFilters = [{name: 'All', value: "20,22,30,40,50,60,61,70,71,80,81,82"},
@@ -34,7 +61,12 @@
             {name: 'Failed', value: '80,81,82'},
             {name: 'In Progress', value: '20,22,30,40,50,60'}
         ];
-        vm.statusCodes = vm.tripStatusFilters[0];
+
+        if(vm.statusURL !== ''){
+            vm.statusCodes = vm.tripStatusFilters[vm.statusURL];
+        }else{
+            vm.statusCodes = vm.tripStatusFilters[0];
+        }
 
         vm.checkMinChr = function (index) {
             if (vm.searchTerm.length > 2) {
@@ -43,14 +75,32 @@
                 vm.enblBtn = false;
             }
         };
-        vm.checkMinChr();
+        //vm.checkMinChr();
+
+
 
         vm.selectedFilterFields = _.find(vm.filterFields, function(rw){ return rw.value == vm.filterURL });
         vm.filterTerm = vm.selectedFilterFields;
 
+        //vm.searchTable = function () {
+        //    $state.go('home.search', {filterURL: vm.filterTerm.value, term:vm.searchTerm });
+        //};
+
         vm.searchTable = function () {
-            $state.go('home.search', {filterURL: vm.filterTerm.value, term: vm.searchTerm});
+            $state.go(
+                'home.search',
+                {
+                    city: $rootScope.city,
+                    vehicleType: $rootScope.vehicleType,
+                    filterURL: vm.filterTerm.value,
+                    term: vm.searchTerm,
+                    //startDate: moment($scope.datesForSearch.startDate).unix(),
+                    //endDate: moment($scope.datesForSearch.endDate).unix()
+                    //status: vm.statusCodes.value
+                }
+            );
         };
+
         $scope.$back = function () {
             window.history.back();
         };
@@ -90,6 +140,8 @@
                         var dataObj = {};
                         dataObj.start = start;
                         dataObj.count = params.count();
+                        dataObj.startDate =  moment($scope.datesForSearch.startDate).unix();
+                        dataObj.endDate =  moment($scope.datesForSearch.endDate).unix();
 
                         if (params.orderBy().length > 0) {
                             var orderby = params.orderBy()[0].substr(0, 1);
@@ -101,14 +153,14 @@
                                 dataObj.orderby = "DESC"
                             }
                         }
-                        if (vm.filterTerm != '' && vm.searchTerm != '') {
+                        if (vm.filterTerm && vm.filterTerm != '' && vm.searchTerm != '') {
                             dataObj.term = vm.filterTerm.value + "|" + vm.searchTerm;
                         }
                         if (vm.filterURL != '' && vm.termURL != '') {
                             dataObj.term = vm.filterURL + "|" + vm.termURL;
                         }else{
                             dataObj.term = '';
-                            return;
+                            //return;
                         }
                         if (vm.statusCodes.value != '') {
                             dataObj.filterByStatus = vm.statusCodes.value;

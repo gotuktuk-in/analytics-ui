@@ -16,17 +16,18 @@
     <form class="form-inline">
         <div class="form-group">
             <div style="max-height: 34px; overflow: hidden;">
-                <a ng-click="vm.getResult()"
-                   title="Reload" class="btn btn-default">
-                    <i class="fa fa-refresh" aria-hidden="true"></i>
-                </a>
                 <a
                         ui-sref="home.drivers({city: city,vehicleType: vehicleType})"
                         title="Back"
-                        class="btn btn-default">
-                    <i class="fa fa-arrow-left" aria-hidden="true"></i> Back
+                        class="btn btn-default no-border">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
                 </a>
-                <a class="btn btn-default"
+                <a ng-click="vm.getResult()"
+                   title="Reload" class="btn btn-default no-border">
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </a>
+
+                <a class="btn btn-default no-border"
                    title="Add Driver"
                    href="#/home/drivers/onboarding/indore/auto" >
                     <i class="fa fa-plus" aria-hidden="true"></i></a>
@@ -71,7 +72,7 @@
                                class="form-control cstm-width text-center daterangepicker-leaderboard" type="daterange"
                                ng-model="datesForSearch" separator=" - " format="DD MMM YY" limit="0" opens="left">
                     </div>
-                    <h4 style="margin-top: 0" class="title">Top Drivers</h4></div>
+                    <h4 style="margin-top: 0" class="title">Results</h4></div>
                 <div class="panel-body">
 
                     <div class="table-responsive">
@@ -88,9 +89,9 @@
                             </thead>-->
                             <tbody>
                             <tr ng-repeat="row in $data track by $index" ng-click="vm.setSelected(row.driver_id)"  ng-class="{selected : row.driver_id === vm.selectedRow}">
-                                <!--<td data-title="'#ID'" class="text-left"><a-->
-                                        <!--ui-sref="home.drivers_detail({driverId:row.driver_id})">{{row.driver_id}}</a>-->
-                                <!--</td>-->
+                                <td data-title="'#ID'" class="text-left"><a
+                                        ui-sref="home.drivers_detail({driverId:row.driver_id})">{{row.driver_id}}</a>
+                                </td>
                                 <td data-title="'Name'" sortable="'name'" class="text-left">
                                     <a target="_blank"
                                        ui-sref="home.drivers_detail({driverId:row.driver_id})">
@@ -117,8 +118,8 @@
                                 <td data-title="'Earning(Rs.)'" sortable="'earning'" class="text-right">
                                     {{row.earning}}
                                 </td>
-                                <td data-title="'Rides'" sortable="'rides'">{{row.rides}}</td>
-                                <td class="text-left" data-title="'Online'">
+                                <td data-title="'Trips'" sortable="'rides'">{{row.rides}}</td>
+                                <td class="text-left" data-title="'Online Hours'">
                                     {{row.online}}
                                 </td>
                             </tr>

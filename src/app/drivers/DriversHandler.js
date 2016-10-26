@@ -17,7 +17,7 @@ function DriverHandler() {
 
     factory.trips = [];
     factory.filteredTrips = [
-        {"key": "Successful", "values": []},
+        {"key": "Successful" , "values": []},
         {"key": "Cancelled", "values": []},
 
         {"key": "Accepted Trip", "values": []},
@@ -73,6 +73,27 @@ function DriverHandler() {
     };
 
 
+    factory.acquisition = [];
+
+    factory.getAcquisition = function (data) {
+        var count = [],
+            i = 0;
+
+        _.each(data, function (value) {
+            var longDate = factory.getLongDate(value.id);
+            count.push([longDate, parseInt(value.count)]);
+            i = i + parseInt(value.count);
+        });
+        factory.totalDrivers = i;
+        factory.filteredAcquisition = [
+            {"key": "Drivers " + factory.totalDrivers, "values": []}
+        ];
+        factory.filteredAcquisition[0].values = count;
+        console.log(factory.filteredAcquisition);
+        return factory.filteredAcquisition;
+    };
+
+
 
     factory.supply = [];
     factory.filteredSupply = [
@@ -90,6 +111,7 @@ function DriverHandler() {
 
         factory.maxValueDNew = _.max(maxValueD, function(d){ return d });
         factory.filteredSupply[0].values = totalOnline;
+        console.log(factory.filteredSupply);
         return factory.filteredSupply;
     };
 
@@ -116,7 +138,6 @@ function DriverHandler() {
 
         //var obj = hours + minutes + seconds;
         var obj = hours;
-        console.log(obj);
         return obj;
     }
 

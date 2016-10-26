@@ -5,6 +5,15 @@
         top: 12px;
         z-index: 91;
     }
+    .payout-daywise-div {
+        position: fixed;
+        height: 100%;
+        width: 99%;
+        z-index: 99;
+        background: rgba(255, 255, 255, 0.95);
+        top: 0;
+        overflow: hidden;
+    }
 
 </style>
 <div class="search-btn-trip">
@@ -12,14 +21,14 @@
         <div class="form-group">
             <div style="max-height: 34px; overflow: hidden;">
                 <a ui-sref="home.drivers_search({city: city,vehicleType: vehicleType, filterURL: 'joined', term: dateURL})"
-                   class="btn btn-default disabled">
+                   class="btn btn-default disabled no-border">
                     <i class="fa fa-pencil" aria-hidden="true"></i>
                 </a>
                 <a title="Suspend" ng-click="confirmSuspend();"
-                   class="btn btn-default">
+                   class="btn btn-default no-border">
                     <i class="fa fa-minus-circle" aria-hidden="true"></i>
                 </a>
-                <a title="Delete" ng-click="confirmDelete();" class="btn btn-default">
+                <a title="Delete" ng-click="confirmDelete();" class="btn btn-default no-border">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </a>
             </div>
@@ -178,7 +187,7 @@
                                     width="100">
                                     {{dataInvoice.tripEarning | number:2}}
                                 </td>
-                                <td data-title="'MGP'" sortable="'offerEarning'" class="text-right"
+                                <td data-title="'Offer'" sortable="'offerEarning'" class="text-right"
                                     width="100">
                                     {{dataInvoice.offerEarning | number:2}}
                                 </td>
@@ -269,16 +278,14 @@
                         </table>
                     </div>
                 </div>
-                <br>
-                <br>
             </div>
             <div class="payout-daywise-div" ng-if="dayWiseList">
             <span ng-click="vm.hideDayWiseList();" class="close-payout-daywise-div pull-right"><i
                     class="fa fa-remove"></i></span>
 
                 <div class="row" style="padding:5% 10%;">
-                    <div class="col-md-1 col-sm-12 col-xs-12"></div>
-                    <div class="col-md-10 col-sm-12 col-xs-12">
+                    <div class="col-md-2 col-sm-12 col-xs-12"></div>
+                    <div class="col-md-8 col-sm-12 col-xs-12">
                         <div style="background: #fff; padding:40px;">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped text-center">
@@ -330,7 +337,7 @@
                                             <table class="table  table-striped text-center no-mr">
                                                 <tr>
                                                     <td class="text-center" colspan="2" width="100"></td>
-                                                    <td class="text-left" width="100">
+                                                    <td class="text-center" width="100">
                                                         <b>EMI</b>
                                                     </td>
                                                     <td class="text-center" width="100">
@@ -351,7 +358,7 @@
                                                 </tr>
                                                 <tr style="background: transparent;">
                                                     <td class="text-center" colspan="2" width="100"></td>
-                                                    <td class="text-left" width="100">
+                                                    <td class="text-center" width="100">
                                                         <b>Settled</b>
                                                     </td>
                                                     <td class="text-center" width="100">
@@ -377,7 +384,7 @@
                                             <table class="table  table-striped text-center no-mr">
                                                 <tr>
                                                     <td class="text-center" colspan="2" width="100"></td>
-                                                    <td class="text-left" width="100">
+                                                    <td class="text-center" width="100">
                                                         <b>Balance</b>
                                                     </td>
                                                     <td class="text-center" width="100">
@@ -445,13 +452,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-1 col-sm-12 col-xs-12"></div>
+                    <div class="col-md-2 col-sm-12 col-xs-12"></div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <form class="form-inline pull-right no-mr pd-2-">
                     <div class="form-group ">
@@ -476,7 +483,7 @@
                     <div>
                         <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
                     </div>
-                    <table ng-table="tableParams" class="table table-bordered">
+                    <table ng-if="" ng-table="tableParams" class="table table-bordered">
 
                         <tr class="truncate"
                             ng-repeat="row in $data track by $index">
@@ -532,13 +539,9 @@
                         </tr>
                     </table>
                 </div>
-                <br>
-                <br>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="panel panel-default">
                 <form class="form-inline pull-right no-mr pd-2-">
                     <div class="form-group ">
@@ -558,7 +561,7 @@
                     </div>
                 </form>
                 <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Online</h4></div>
+                    <h4 style="margin-top: 0" class="title">Online Hours</h4></div>
                 <div class="panel-body">
                     <div>
                         <nvd3 options="vm.onlineChartOptions" data="vm.online" config="vm.config"></nvd3>

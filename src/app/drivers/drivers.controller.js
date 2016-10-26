@@ -13,6 +13,12 @@
         $scope.dateURL = moment().format("DD/MM/YYYY");
         var today = moment();
 
+        vm.termURL = 'd';
+        vm.filterURL = 'id';
+        vm.statusURL = 0;
+        vm.startDateURL = moment(today).startOf('day').format("YYYYMMDD").toString();
+        vm.endDateURL = moment(today).endOf('day').format("YYYYMMDD").toString();
+
         vm.ranges = StaticDataService.ranges;
         vm.config = ChartConfigService.lineChartConfig;
 
@@ -24,7 +30,7 @@
         $scope.datesForAcq.startDate = StaticDataService.ranges['Last 7 Days'][0];
         $scope.datesForAcq.endDate = StaticDataService.ranges['Last 7 Days'][1];
         vm.acquisitionData = [];
-        vm.acquisitionChart = angular.copy(ChartConfigService.discreteBarChartOptions);
+        vm.acquisitionChart = angular.copy(ChartConfigService.lineChartOptions);
         vm.acquisitionChart.chart.xAxis.tickFormat = function (d) {
             return d3.time.format('%d %b %y')(new Date(d));
         };
@@ -69,20 +75,15 @@
         vm.getLeaderboard();
 
         vm.getAcquisition = function () {
-            console.log($scope.datesForAcq);
             DriversService.getAcquisition({
                 city: $rootScope.city,
                 vehicle: $rootScope.vehicleType,
                 from: moment($scope.datesForAcq.startDate).startOf('day').format("YYYYMMDD").toString(),
                 to: moment($scope.datesForAcq.endDate).endOf('day').format("YYYYMMDD").toString()
             }, function (response) {
-                vm.acquisitionData = [];
-                var values = [];
-                _.each(response, function (value) {
-                    values.push({label: DriverHandler.getLongDate(value.id), value: value.count})
-                });
-                vm.acquisitionData.push({key: 'Drivers', values: values});
-                console.log('vm.acquisitionData ', vm.acquisitionData)
+                DriverHandler.acquisition = response;
+                vm.acquisition = DriverHandler.getAcquisition(response);
+                vm.totalAqDrivers = DriverHandler.totalDrivers;
             }, function (err) {
                 console.log(err);
                 $scope.error = true;

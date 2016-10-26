@@ -14,10 +14,9 @@ angular
 
 function TripsHandler() {
     var factory = {};
+
+    //trips
     factory.trips = [];
-    factory.burn = [];
-    factory.drivers = [];
-    factory.riders = [];
     factory.filteredTrips = [
         {"key": "Requests", "values": []},
         {"key": "Requests (U)", "values": []},
@@ -34,25 +33,6 @@ function TripsHandler() {
         {"key": "tCash", "values": []},
         {"key": "Failed", "values": []},
         {"key": "Failed (U)", "values": []}
-    ];
-
-    factory.filteredBurn = [
-        {"key": "Trip", "values": []},
-        {"key": "Offer", "values": []},
-        {"key": "Bonus", "values": []},
-        {"key": "Tcash", "values": []},
-        {"key": "Total", "values": []}
-    ];
-
-    factory.filteredDrivers = [
-        {"key": "New Drivers", "values": []},
-        {"key": "Active Drivers", "values": []},
-        {"key": "Avg Trip/Driver", "values": []}
-    ];
-    factory.filteredRiders = [
-        {"key": "New Riders", "values": []},
-        {"key": "Active Riders", "values": []},
-        {"key": "Total Riders", "values": []}
     ];
 
     factory.getTrips = function (data) {
@@ -100,10 +80,19 @@ function TripsHandler() {
         factory.filteredTrips[8].values = tCash;
         factory.filteredTrips[9].values = failed_total;
         factory.filteredTrips[10].values = failed_unique_riders;
-
+        console.log(factory.filteredTrips);
         return factory.filteredTrips
     };
 
+    //burn
+    factory.burn = [];
+    factory.filteredBurn = [
+        {"key": "Trip", "values": []},
+        {"key": "Offer", "values": []},
+        {"key": "Bonus", "values": []},
+        {"key": "Tcash", "values": []},
+        {"key": "Total", "values": []}
+    ];
     factory.getBurn = function (data) {
         var trip = [],
             offer = [],
@@ -129,12 +118,18 @@ function TripsHandler() {
         return factory.filteredBurn
     };
 
-
+    //drivers
+    factory.drivers = [];
+    factory.filteredDrivers = [
+        {"key": "New Drivers", "values": []},
+        {"key": "Active Drivers", "values": []},
+        {"key": "Avg Trip/Driver", "values": []}
+    ];
     factory.getDrivers = function (data) {
         var new_drivers = [],
             active_drivers = [],
             average_rides_per_drivers = [];
-            //, total_availability=[]
+        //, total_availability=[]
 
         _.each(data, function (value) {
             var longDate = factory.getLongDate(value.id);
@@ -148,6 +143,14 @@ function TripsHandler() {
 
         return factory.filteredDrivers
     };
+
+    //riders
+    factory.riders = [];
+    factory.filteredRiders = [
+        {"key": "New Riders", "values": []},
+        {"key": "Active Riders", "values": []},
+        {"key": "Total Riders", "values": []}
+    ];
     factory.getRiders = function (data) {
         var new_riders = [],
             active_riders = [],

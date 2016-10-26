@@ -41,47 +41,6 @@ function LiveHandler() {
         {"key": "Total Riders", "values": []},
         {"key": "New Riders", "values": []}
     ];
-    /****returnable object for cancel trip by driver/ rider code starts*****/
-    /*factory.cancelledTripsDriver1 = [
-     {"key": "", "values": []}
-     ]*/
-    /*  factory.cancelledTripsDriver1 = []*/
-    /*  factory.cancelledTripsRider1 = [
-     {"key": "", "values": []}
-     ]*/
-    /*factory.cancelledTripsRider1 = []*/
-    /****returnable object for cancel trip by driver/ rider code ends*****/
-
-    //factory.getTrips = function () {
-    //    var booking = [], successful_total = [], successful_unique_riders = [], in_process = [],
-    //        cancelled_total = [], cancelled_unique_rider = [], failed_total = [], failed_unique_rider = [];
-    //    _.each(factory.trips, function (value) {
-    //
-    //        var longDate = factory.getLongDate(value.id);
-    //
-    //        booking.push([longDate, value.booking]);
-    //        successful_total.push([longDate, value.successful.total]);
-    //
-    //        successful_unique_riders.push([longDate, value.successful.unique_riders]);
-    //        in_process.push([longDate, value.in_process]);
-    //
-    //        cancelled_total.push([longDate, value.cancelled.total]);
-    //        cancelled_unique_rider.push([longDate, value.cancelled.unique_riders]);
-    //
-    //        failed_total.push([longDate, value.failed.total]);
-    //        failed_unique_rider.push([longDate, value.failed.unique_rider])
-    //    });
-    //    factory.filteredTrips[0].values = booking;
-    //    factory.filteredTrips[1].values = successful_total;
-    //    factory.filteredTrips[2].values = successful_unique_riders;
-    //    factory.filteredTrips[3].values = in_process;
-    //    factory.filteredTrips[4].values = cancelled_total;
-    //    factory.filteredTrips[5].values = cancelled_unique_rider;
-    //    factory.filteredTrips[6].values = failed_total;
-    //    factory.filteredTrips[7].values = failed_unique_rider;
-    //    return factory.filteredTrips
-    //};
-
     factory.getDrivers = function () {
         var total_count = [], free_driver = [], occupied_driver = [];
         _.each(factory.drivers, function (value) {
@@ -97,40 +56,26 @@ function LiveHandler() {
         return factory.filteredDrivers
     };
 
-    /*** handler function for canceld trip by Driver code starts ***/
+
     factory.canTripDriver = function (data) {
         factory.cancelledTripsDriver1 = [];
         var drCancelRide = [];
-        //var longDate = factory.getLongDate(data.drcan.date)
-        //factory.cancelledTripsDriver1[0].key = longDate
-        //var e = 1;
+
         _.each(data.drcan.data, function (value) {
-            //drCancelRide.push({label: value.reason_code , value : value.count});
-            //drCancelRide.push({label:'R'+ e++ , value : value.count});
             factory.cancelledTripsDriver1.push({label: value.reason_code, value: value.count});
 
         });
-        //factory.cancelledTripsDriver1[0].values = drCancelRide
         return factory.cancelledTripsDriver1
     };
-    /*** handler function for canceld trip by Driver code ends ***/
 
-    /*** handler function for canceld trip by Rider code starts ***/
     factory.canTripRider = function (data) {
         factory.cancelledTripsRider1 = [];
         var riderCancelRide = [];
-        //var longDate = factory.getLongDate(data.rican.date)
-        //factory.cancelledTripsRriver1[0].key = longDate
-        //var e = 1;
         _.each(data.rican.data, function (value) {
-            //riderCancelRide.push({label: value.reason_code , value : value.count});
-            //riderCancelRide.push({label:'R'+ e++ , value : value.count});
             factory.cancelledTripsRider1.push({label: value.reason_code, value: value.count});
         });
-        //factory.cancelledTripsRider1[0].values = riderCancelRide
         return factory.cancelledTripsRider1
     };
-    /*** handler function for canceld trip by Rider code ends ***/
 
     factory.getRiders = function () {
         var total_riders = [], new_rider_reg = [];
@@ -152,8 +97,6 @@ function LiveHandler() {
 
         var newDate = new Date(year, month - 1, day, hour);
         return newDate;
-        //  return moment().unix(newDate)
-
     };
     return factory
 

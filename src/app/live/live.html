@@ -63,7 +63,7 @@
 
                     <div class="col-md-2 col-sm-4 col-xs-12 no-mr no-pd">
                         <div class="box box-heading box-2 text-center">
-                            <h4 class="title">BOOKINGS</h4>
+                            <h4 class="title">Trips</h4>
                         </div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6">
@@ -177,7 +177,7 @@
                     <h4 style="margin-top: 0" class="title">Trips</h4></div>
                 <div class="panel-body">
                     <div>
-                        <nvd3 options="vm.tripChartOptions" data="vm.trips" config="vm.config"></nvd3>
+                        <nvd3 options="vm.tripChartOptions" data="vm.tripData" config="vm.config"></nvd3>
                     </div>
                     </a>
                 </div>
@@ -201,18 +201,18 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 style="margin-top: 0" class="title">Rides</h4></div>
-                <div class="panel-body">
-                    <div>
-                        <nvd3 options="vm.newRidersChartOptions" data="vm.newRiders" config="vm.config"></nvd3>
-                    </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+        <!--<div class="col-md-12 col-sm-12 col-xs-12">-->
+            <!--<div class="panel panel-default">-->
+                <!--<div class="panel-heading">-->
+                    <!--<h4 style="margin-top: 0" class="title">Rides</h4></div>-->
+                <!--<div class="panel-body">-->
+                    <!--<div>-->
+                        <!--<nvd3 options="vm.newRidersChartOptions" data="vm.newRiders" config="vm.config"></nvd3>-->
+                    <!--</div>-->
+                    <!--</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="clearfix"></div>
 
         <!--<div class="col-md-6 col-sm-6 col-xs-12" ngsf-fullscreen>-->

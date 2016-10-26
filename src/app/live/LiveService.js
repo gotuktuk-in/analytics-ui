@@ -13,46 +13,41 @@ angular
     .factory('LiveService', LiveService)
 
 function LiveService($q, $resource, API) {
-  var url = API;
+    var url = API;
     return $resource(
         "",
-        {},
+        {frequency: "@frequency", vehicle: "@vehicle", id: '@id', term: '@term', filterURL: '@filterURL'},
         {
             getOverview: {
                 method: 'GET',
-                url:   url + 'overview/live/'
+                url: url + 'overview/live/'
             },
             getTrips: {
                 method: 'GET',
-                url:   url + 'trip/live/'
+                url: url + 'trip/:frequency/:vehicle',
+                isArray: true
             },
             getDrivers: {
                 method: 'GET',
-                url:   url + 'driver/live/'
+                url: url + 'driver/live/'
             },
             getCancelTripsDriver: {
                 method: 'GET',
-                url:   url + 'drivers/cancelled'
+                url: url + 'drivers/cancelled'
             },
             getCancelTripsRider: {
                 method: 'GET',
-                url:   url + 'riders/cancelled'
+                url: url + 'riders/cancelled'
             },
             getRiders: {
                 method: 'GET',
-                url:   url + 'rider/live/',
+                url: url + 'rider/live/',
             },
-            getNewRiders: {
-                method: 'GET',
-                url:   url + 'trips/newRiders',
-                isArray:true
-            }
-            ,
             heatmap: {
-            method: 'GET',
-            url:   url + 'trips/heatmap',
-                isArray:true
-        },
+                method: 'GET',
+                url: url + 'trips/heatmap',
+                isArray: true
+            }
 
         }
     );
