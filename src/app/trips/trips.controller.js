@@ -12,13 +12,6 @@
         var today = moment();
         var current = moment();
 
-        vm.termURL = 'd';
-        vm.filterURL = 'id';
-        vm.statusURL = 0;
-        vm.startDateURL = moment(today).startOf('day').format("YYYYMMDD").toString();
-        vm.endDateURL = moment(today).endOf('day').format("YYYYMMDD").toString();
-
-
         vm.live = true;
         vm.showTableData = false;
         var startDate, endDate;
@@ -29,6 +22,12 @@
         $scope.tripDates = {};
         $scope.tripDates.startDate = StaticDataService.ranges['Last 7 Days'][0]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
         $scope.tripDates.endDate = StaticDataService.ranges['Last 7 Days'][1]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
+
+        //vm.termURL = 'd';
+        //vm.filterURL = 'id';
+        //vm.statusURL = 0;
+        //vm.startDateURL = moment($scope.tripDates.startDate).startOf('day').toString();
+        //vm.endDateURL = moment($scope.tripDates.endDate).endOf('day').toString();
 
         $scope.burnDates = {};
         $scope.burnDates.startDate = StaticDataService.ranges['Last 7 Days'][0]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
@@ -297,11 +296,13 @@
 
         //trip start
         vm.getTrips = function () {
+            var newTripsStartDate = moment($scope.tripDates.startDate).startOf('day').toString();
+            var newTripsEndDate = moment($scope.tripDates.endDate).endOf('day').toString();
             TripsService.getTrips({
                     city: $rootScope.city,
                     vehicle: $rootScope.vehicleType,
-                    startTime: $scope.tripDates.startDate,
-                    endTime: $scope.tripDates.endDate,
+                    startTime: newTripsStartDate,
+                    endTime: newTripsEndDate,
                     rate: vm.tripFrequency.value
                 }, {
                         vehicle: $rootScope.vehicleType,
@@ -322,30 +323,38 @@
 
         function transformTrips(data) {
             var transformed = [];
+            $scope.rT = 0;
+            $scope.rUT = 0;
+            $scope.cT = 0;
+            $scope.cUT = 0;
+            $scope.fT = 0;
+            $scope.fUT = 0;
+            $scope.faT = 0;
+            $scope.faUT = 0;
             data = angular.fromJson(data);
             var newTripData = data[0].trip;
 
             for (var a = 0; a < newTripData.length; a++) {
-                $scope.rT = a + (data[0].trip[a].requests.total);
-                $scope.rUT = a + (data[0].trip[a].requests.unique_riders);
-                $scope.cT = a + (data[0].trip[a].cancelled.total);
-                $scope.cUT = a + (data[0].trip[a].cancelled.unique);
-                $scope.fT = a + (data[0].trip[a].success.total);
-                $scope.fUT = a + (data[0].trip[a].success.unique_riders);
-                $scope.faT = a + (data[0].trip[a].failed.total);
-                $scope.faUT = a + (data[0].trip[a].failed.unique_riders);
+                $scope.rT += data[0].trip[a].requests.total;
+                $scope.rUT += data[0].trip[a].requests.unique_riders;
+                $scope.cT += data[0].trip[a].cancelled.total;
+                $scope.cUT += data[0].trip[a].cancelled.unique;
+                $scope.fT += data[0].trip[a].success.total;
+                $scope.fUT += data[0].trip[a].success.unique_riders;
+                $scope.faT += data[0].trip[a].failed.total;
+                $scope.faUT += data[0].trip[a].failed.unique_riders;
             }
 
             //
             var arr = [
-                'Requests: ' + $scope.rT ,
-                'Requests(U): ' + $scope.rUT ,
-                'Cancelled: ' + $scope.cT ,
-                'Cancelled(U): ' + $scope.cUT ,
-                'Fulfilled: ' + $scope.fT ,
-                'Fulfilled(U): ' + $scope.fUT ,
-                'Failed: ' + $scope.faT ,
-                'Failed(U): ' + $scope.faUT
+                'Requests(' + $scope.rT + ')',
+                'Requests(U ' + $scope.rUT + ')',
+                'Cancelled(' + $scope.cT + ')',
+                'Cancelled(U ' + $scope.cUT + ')',
+                'Fulfilled(' + $scope.fT + ')',
+                'Fulfilled(U ' + $scope.fUT + ')',
+                'Failed(' + $scope.faT + ')',
+                'Failed(U ' + $scope.faUT + ')'
             ];
             var newObj = {};
             newObj.key = arr[0];
@@ -466,24 +475,29 @@
 
         function transformBurns(data) {
             var transformedBurn = [];
+            $scope.trip = 0;
+            $scope.offer = 0;
+            $scope.bonus = 0;
+            $scope.tcash = 0;
+            $scope.total = 0;
             data = angular.fromJson(data);
             //var newTripData = data[0].trip;
 
             for (var a = 0; a < data.length; a++) {
-                $scope.trip = a + (data[a].trip);
-                $scope.offer = a + (data[a].offer);
-                $scope.bonus = a + (data[a].bonus);
-                $scope.tcash = a + (data[a].tcash);
-                $scope.total = a + (data[a].total);
+                $scope.trip += data[a].trip;
+                $scope.offer += data[a].offer;
+                $scope.bonus += data[a].bonus;
+                $scope.tcash += data[a].tcash;
+                $scope.total += data[a].total;
             }
 
             //
             var arrBurn = [
-                'Trip: ' + $filter('number')($scope.trip, 2),
-                'Offer: ' + $filter('number')($scope.offer, 2),
-                'Bonus: ' + $filter('number')($scope.bonus, 2),
-                'tCash: ' + $filter('number')($scope.tcash, 2),
-                'Total: ' + $filter('number')($scope.total, 2)
+                'Trip(' + $filter('number')($scope.trip, 2) + ')',
+                'Offer(' + $filter('number')($scope.offer, 2) + ')',
+                'Bonus(' + $filter('number')($scope.bonus, 2) + ')',
+                'tCash(' + $filter('number')($scope.tcash, 2) + ')',
+                'Total(' + $filter('number')($scope.total, 2) + ')'
             ];
             var newObj = {};
             newObj.key = arrBurn[0];

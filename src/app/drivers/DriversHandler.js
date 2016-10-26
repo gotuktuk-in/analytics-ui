@@ -37,6 +37,7 @@ function DriverHandler() {
             allocated_trip = [];
 
         _.each(data, function (value) {
+
             var longDate = factory.getLongDate(value.date);
             successful.push([longDate, value.successful]);
             cancelled.push([longDate, value.cancelled]);

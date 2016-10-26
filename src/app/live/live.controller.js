@@ -52,10 +52,7 @@
         /**/
         /*** code ends for Chart of canceld trip by Rider ***/
 
-        vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
-            return d3.time.format('%I %p')(new Date(d).addHours(1));
-        };
-        vm.trips = [];
+
 
         var current = moment();
         vm.live = true;
@@ -154,6 +151,11 @@
         vm.tripChartOptions = angular.copy(ChartConfigService.multiBarChartOptions);
         vm.tripFrequency = "hour";
 
+        vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
+            return d3.time.format('%I %p')(new Date(d).addHours(1));
+        };
+        vm.tripData = [];
+
         vm.getTrips = function () {
             LiveService.getTrips({
                     city: $rootScope.city,
@@ -182,30 +184,39 @@
 
         function transformTrips(data) {
             var transformed = [];
+            $scope.rT = 0;
+            $scope.rUT = 0;
+            $scope.cT =  0;
+            $scope.cUT = 0;
+            $scope.fT = 0;
+            $scope.fUT =  0;
+            $scope.faT =  0;
+            $scope.faUT =  0;
             data = angular.fromJson(data);
             var newTripData = data[0].trip;
-
+            console.log(newTripData.length);
             for (var a = 0; a < newTripData.length; a++) {
-                $scope.rT = a + (data[0].trip[a].requests.total);
-                $scope.rUT = a + (data[0].trip[a].requests.unique_riders);
-                $scope.cT = a + (data[0].trip[a].cancelled.total);
-                $scope.cUT = a + (data[0].trip[a].cancelled.unique);
-                $scope.fT = a + (data[0].trip[a].success.total);
-                $scope.fUT = a + (data[0].trip[a].success.unique_riders);
-                $scope.faT = a + (data[0].trip[a].failed.total);
-                $scope.faUT = a + (data[0].trip[a].failed.unique_riders);
+                $scope.rT += data[0].trip[a].requests.total;
+                $scope.rUT += data[0].trip[a].requests.unique_riders;
+                $scope.cT += data[0].trip[a].cancelled.total;
+                $scope.cUT += data[0].trip[a].cancelled.unique;
+                $scope.fT += data[0].trip[a].success.total;
+                $scope.fUT += data[0].trip[a].success.unique_riders;
+                $scope.faT += data[0].trip[a].failed.total;
+                $scope.faUT += data[0].trip[a].failed.unique_riders;
             }
+
 
             //
             var arr = [
-                'Requests: ' + $scope.rT ,
-                'Requests(U): ' + $scope.rUT ,
-                'Cancelled: ' + $scope.cT ,
-                'Cancelled(U): ' + $scope.cUT ,
-                'Fulfilled: ' + $scope.fT ,
-                'Fulfilled(U): ' + $scope.fUT ,
-                'Failed: ' + $scope.faT ,
-                'Failed(U): ' + $scope.faUT
+                'Requests(' + $scope.rT + ') ' ,
+                'Requests(U ' + $scope.rUT + ') ' ,
+                'Cancelled(' + $scope.cT + ') ' ,
+                'Cancelled(U ' + $scope.cUT + ') ' ,
+                'Fulfilled(' + $scope.fT + ') ' ,
+                'Fulfilled(U ' + $scope.fUT + ') ' ,
+                'Failed(' + $scope.faT + ') ' ,
+                'Failed(U ' + $scope.faUT + ') '
             ];
             var newObj = {};
             newObj.key = arr[0];

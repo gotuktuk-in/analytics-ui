@@ -35,47 +35,151 @@
         $scope.driverTripDates = {};
         $scope.driverTripDates.startDate = StaticDataService.ranges['Last 7 Days'][0]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
         $scope.driverTripDates.endDate = StaticDataService.ranges['Last 7 Days'][1]; //moment().subtract(1, 'days').format("YYYY-MM-DD");
-        vm.tripChartOptions = angular.copy(ChartConfigService.lineChartOptions);
+        vm.tripChartOptions = angular.copy(ChartConfigService.multiBarChartOptions);
         vm.tripChartOptions.chart.xAxis.tickFormat = function (d) {
             return d3.time.format('%d %b %y')(new Date(d));
         };
 
-        vm.tripChartOptions.chart.xAxis.tickFormat
+        //trip start
 
-
+        //vm.getTripsChart = function () {
+        //    DriversService.getTripsChart({
+        //        city: $rootScope.city,
+        //        vehicle: $rootScope.vehicleType,
+        //        drivers: $stateParams.driverId,
+        //        from: moment($scope.driverTripDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+        //        to: moment($scope.driverTripDates.endDate).endOf('day').format("YYYYMMDD").toString()
+        //    }, function (response) {
+        //        DriverHandler.trips = response;
+        //        vm.trips = DriverHandler.getTripsFtr(response);
+        //    }, function (err) {
+        //        console.log(err);
+        //        $scope.error = true;
+        //    });
+        //};
         vm.getTripsChart = function () {
             DriversService.getTripsChart({
-                city: $rootScope.city,
-                vehicle: $rootScope.vehicleType,
-                drivers: $stateParams.driverId,
-                from: moment($scope.driverTripDates.startDate).startOf('day').format("YYYYMMDD").toString(),
-                to: moment($scope.driverTripDates.endDate).endOf('day').format("YYYYMMDD").toString()
-            }, function (response) {
-                DriverHandler.trips = response;
-                vm.trips = DriverHandler.getTripsFtr(response);
-            }, function (err) {
-                console.log(err);
-                $scope.error = true;
-            });
+                    city: $rootScope.city,
+                    vehicle: $rootScope.vehicleType,
+                    drivers: $stateParams.driverId,
+                    from: moment($scope.driverTripDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+                    to: moment($scope.driverTripDates.endDate).endOf('day').format("YYYYMMDD").toString()
+                }, function (response){
+                    vm.tripData = transformTrips(response).map(function (series) {
+                        series.values = series.values.map(function (d) {
+                            return {x: d[0], y: d[1]}
+                        });
+                        return series;
+                    });
+                }, function (err) {
+                    console.log(err);
+                    $scope.error = true;
+                });
         };
 
-        vm.tripChartOptions.chart.legend.dispatch.legendClick = function (t, u) {
-            console.log(t.key);
-            if(u <= 1) {
-                $state.go(
-                    'home.search',
-                    {
-                        city: $rootScope.city,
-                        vehicleType: $rootScope.vehicleType,
-                        filterURL: 'did',
-                        term: $stateParams.driverId,
-                        startDate: moment($scope.driverTripDates.startDate).startOf('day').format("YYYYMMDD").toString(),
-                        endDate: moment($scope.driverTripDates.endDate).endOf('day').format("YYYYMMDD").toString(),
-                        status: u + 1
-                    }
-                );
+        function transformTrips(data) {
+            var transformed = [];
+            data = angular.fromJson(data);
+            //var newTripData = data[0];
+            console.log(data)
+            for (var a = 0; a < data.length; a++) {
+                $scope.sT = a + (data[a].successful);
+                $scope.cT = a + (data[a].cancelled);
+                $scope.atT = a + (data[a].acceptedTrip);
+                $scope.rtT = a + (data[a].rejectedTrip);
+                $scope.iT = a + (data[a].ignoredTrip);
+                $scope.alT = a + (data[a].allocatedTrip);
             }
-        };
+                //
+                var arr = [
+                    'Successful: ' + $scope.sT ,
+                    'Cancelled: ' + $scope.cT ,
+                    'Accepted Trip: ' + $scope.atT ,
+                    'Rejected Trip: ' + $scope.rtT ,
+                    'Ignored Trip: ' + $scope.iT ,
+                    'Allocated Trip: ' + $scope.alT
+                ];
+                var newObj = {};
+                newObj.key = arr[0];
+                newObj.values = [];
+                newObj.bar = true;
+                for (var a = 0; a < data.length; a++) {
+                    var x = moment(DriverHandler.getLongDate(data[a].date)).unix() * 1000;
+                    newObj.values.push([x, data[a].successful]);
+                }
+                transformed.push(newObj);
+
+                var newObj = {};
+                newObj.key = arr[1];
+                newObj.values = [];
+                newObj.bar = true;
+                for (var a = 0; a < data.length; a++) {
+                    var x = moment(DriverHandler.getLongDate(data[a].date)).unix() * 1000;
+                    newObj.values.push([x, data[a].cancelled]);
+                }
+                transformed.push(newObj);
+
+                var newObj = {};
+                newObj.key = arr[2];
+                newObj.values = [];
+                newObj.bar = true;
+                for (var a = 0; a < data.length; a++) {
+                    var x = moment(DriverHandler.getLongDate(data[a].date)).unix() * 1000;
+                    newObj.values.push([x, data[a].acceptedTrip]);
+                }
+                transformed.push(newObj);
+
+                var newObj = {};
+                newObj.key = arr[3];
+                newObj.values = [];
+                newObj.bar = true;
+                for (var a = 0; a < data.length; a++) {
+                    var x = moment(DriverHandler.getLongDate(data[a].date)).unix() * 1000;
+                    newObj.values.push([x, data[a].rejectedTrip]);
+                }
+                transformed.push(newObj);
+
+                var newObj = {};
+                newObj.key = arr[4];
+                newObj.values = [];
+                newObj.bar = true;
+                for (var a = 0; a < data.length; a++) {
+                    var x = moment(DriverHandler.getLongDate(data[a].date)).unix() * 1000;
+                    newObj.values.push([x, data[a].ignoredTrip]);
+                }
+                transformed.push(newObj);
+
+                var newObj = {};
+                newObj.key = arr[5];
+                newObj.values = [];
+                newObj.bar = true;
+                for (var a = 0; a < data.length; a++) {
+                    var x = moment(DriverHandler.getLongDate(data[a].date)).unix() * 1000;
+                    newObj.values.push([x, data[a].allocatedTrip]);
+                }
+                transformed.push(newObj);
+                console.log(transformed);
+                return transformed;
+            }
+            //trip end
+
+        //vm.tripChartOptions.chart.legend.dispatch.legendClick = function (t, u) {
+        //    console.log(t.key);
+        //    if(u <= 1) {
+        //        $state.go(
+        //            'home.search',
+        //            {
+        //                city: $rootScope.city,
+        //                vehicleType: $rootScope.vehicleType,
+        //                filterURL: 'did',
+        //                term: $stateParams.driverId,
+        //                startDate: moment($scope.driverTripDates.startDate).startOf('day').format("YYYYMMDD").toString(),
+        //                endDate: moment($scope.driverTripDates.endDate).endOf('day').format("YYYYMMDD").toString(),
+        //                status: u + 1
+        //            }
+        //        );
+        //    }
+        //};
 
 
         $scope.driverOnlineDates = {};
@@ -394,15 +498,13 @@
         };
         vm.onDateChangeTrips = function () {
             vm.getTripsChart();
-            //vm.getTripsList();
-            vm.getOnlineChart();
         };
+        vm.onDateChangeTrips();
 
         vm.onDateChangeOnline = function () {
             vm.getOnlineChart();
         };
-
-        vm.onDateChangeTrips();
+        vm.onDateChangeOnline();
 
     }
 
