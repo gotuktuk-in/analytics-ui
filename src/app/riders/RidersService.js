@@ -16,13 +16,13 @@ function RidersService($q, $resource, API) {
   var url = API;
     return $resource(
         "",
-        {id:"@id"},
+        {id:"@id", frequency: "@frequency"},
         {
             getRiders: {
                 method: 'GET',
-                url:   url + 'trips/riderChart',
+                url:   url + 'trips/:frequency/riderChart',
                 isArray:true
-            },
+            }
 /*            getAcquisition: {
                 method: 'GET',
                 url:   url + 'drivers/acquisition',
