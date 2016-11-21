@@ -66,11 +66,11 @@
             {name: 'In Progress', value: '20,22,30,40,50,60'}
         ];
 
-        if(vm.statusURL !== ''){
-            vm.statusCodes = vm.tripStatusFilters[vm.statusURL];
-        }else{
-            vm.statusCodes = vm.tripStatusFilters[0];
-        }
+        //if(vm.statusURL !== ''){
+        //    vm.statusCodes = vm.tripStatusFilters[vm.statusURL];
+        //}else{
+        //    vm.statusCodes = vm.tripStatusFilters[0];
+        //}
 
         vm.checkMinChr = function (index) {
             if (vm.searchTerm.length > 2) {
@@ -144,8 +144,8 @@
                         var dataObj = {};
                         dataObj.start = start;
                         dataObj.count = params.count();
-                        dataObj.startDate =  moment($scope.datesForSearch.startDate).unix();
-                        dataObj.endDate =  moment($scope.datesForSearch.endDate).unix();
+                        dataObj.startDate =  moment($scope.datesForSearch.startDate).startOf('day').unix();
+                        dataObj.endDate =  moment($scope.datesForSearch.endDate).endOf('day').unix();
 
                         if (params.orderBy().length > 0) {
                             var orderby = params.orderBy()[0].substr(0, 1);
@@ -166,9 +166,9 @@
                             dataObj.term = '';
                             //return;
                         }
-                        //if (vm.statusCodes.value != '') {
-                        //    dataObj.filterByStatus = vm.statusCodes.value;
-                        //}
+                        if (vm.statusCodes.value != '') {
+                            dataObj.filterByStatus = vm.statusCodes.value;
+                        }
                         return TripsService.getAllTrips(dataObj).$promise.then(function (data) {
                             params.total(data.total); // recal. page nav controls
                             if (data.data.length > 0) {

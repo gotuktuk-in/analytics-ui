@@ -40,6 +40,22 @@
             return d3.time.format('%d %b %y')(new Date(d));
         };
 
+        vm.tripChartOptions.chart.multibar.dispatch.elementClick = function (t, u) {
+            vm.newSearchDate = t.data.x
+            //vm.newSearchDate = moment(t.data.x).format("YYYYMMDD");
+            vm.searchTable();
+        };
+        vm.searchTable = function () {
+            $state.go('home.search', {
+                filterURL: 'did',
+                city: $rootScope.city,
+                vehicleType: $rootScope.vehicleType,
+                term: $stateParams.driverId,
+                startDate: vm.newSearchDate,
+                endDate:vm.newSearchDate
+            });
+        };
+
         //trip start
 
         //vm.getTripsChart = function () {

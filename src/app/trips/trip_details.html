@@ -238,6 +238,15 @@
                                                 <!-- <span>Amount Total<small> / Cash / tCash</small></span> -->
                                             </div>
                                         </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <div class="box">
+                                                <h4 class="number">Rs.
+                                                    {{selectedTrip.walletPayment}}
+                                                </h4>
+                                                <span>Wallet Payment</span>
+                                                <!-- <span>Amount Total<small> / Cash / tCash</small></span> -->
+                                            </div>
+                                        </div>
                                         <div class="col-md-12 col-sm-12 col-xs-12" ng-if="selectedTrip.fareSettled.length>0">
                                             <div class="table-responsive trip-detail-table">
                                                 <table ng-table="tableParams" class="table table-bordered">

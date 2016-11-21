@@ -11,6 +11,8 @@
     .selected {
         background: #fff1df !important;
     }
+    .showHrs .hrs-div{display: none;}
+    .showHrs:hover .hrs-div{display: block;}
 </style>
 <div class="search-btn-trip">
     <form class="form-inline">
@@ -92,7 +94,7 @@
                     <div class="pull-right daterangepicker-leaderboard-box">
                         <input ng-change="vm.getResult()"
                                class="form-control cstm-width text-center daterangepicker-leaderboard" type="daterange"
-                               ng-model="datesForSearch" separator=" - " format="DD MMM YY" limit="0" opens="left">
+                               ng-model="datesForSearch" separator=" - " format="DD MMM YY"  opens="left" ranges="vm.ranges">
                     </div>
                     <h4 style="margin-top: 0" class="title">Results</h4></div>
                 <div class="panel-body">
@@ -141,8 +143,11 @@
                                     {{row.earning}}
                                 </td>
                                 <td data-title="'Trips'" sortable="'rides'">{{row.rides}}</td>
-                                <td class="text-left" data-title="'Online Hours'">
+                                <td class="text-left showHrs" data-title="'Online Hours'" width="130">
                                     {{row.online}}
+                                    <div class="hrs-div">
+                                        <span ng-repeat="row1 in row.onlineTime" style="background:#f9f9f9; border:1px solid #eee; margin-bottom: 2px; padding: 2px; display: inline-block; color: #999;">{{(row1.start)*1000 | date:'HH:mm:ss'}} - {{(row1.end)*1000 | date:'HH:mm:ss'}}</span>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>

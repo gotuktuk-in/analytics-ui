@@ -39,15 +39,13 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
                     left: 0
                 },
                 dispatch: {
-                    legendClick:
-                        function (t,u){
+                    legendClick: function (t, u) {
 
-                        },
-                    legendDblClick:
-                        function (t,u){
+                    },
+                    legendDblClick: function (t, u) {
 
-                        }
                     }
+                }
             },
             legendPosition: 'top',
             margin: {
@@ -201,6 +199,14 @@ function ChartConfigService($q, $resource, API, PerformanceHandler) {
             yAxis: {
                 tickFormat: function (d) {
                     return d3.round(d);
+                }
+            },
+            multibar: {
+                dispatch: {
+                    elementClick: function (t, u) {
+                        console.log(t)
+                    }
+
                 }
             }
 
