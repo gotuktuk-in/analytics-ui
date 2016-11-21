@@ -16,7 +16,7 @@
         vm.filterURL = $stateParams.filterURL;
         vm.statusURL = $stateParams.status;
         vm.startDateURL = $stateParams.startDate;
-        vm.endDatefilterURL = $stateParams.endDate;
+        vm.endDateURL = $stateParams.endDate;
         vm.searchTerm = vm.termURL;
         vm.showTableData = true;
         vm.enblBtn = false;
@@ -31,9 +31,13 @@
         $scope.date = moment().format("ddd, MMM Do YYYY");
 
 
+        //$scope.datesForSearch = {};
+        //$scope.datesForSearch.startDate =  moment(today);
+        //$scope.datesForSearch.endDate =  moment(today);
+
         $scope.datesForSearch = {};
-        $scope.datesForSearch.startDate =  moment(today);
-        $scope.datesForSearch.endDate =  moment(today);
+        $scope.datesForSearch.startDate =  StaticDataService.ranges['Last 7 Days'][0];
+        $scope.datesForSearch.endDate =  StaticDataService.ranges['Last 7 Days'][1];
 
         vm.filterTerm = '';
         vm.filterFields = [{value: "id", name: "Driver ID"},
@@ -93,6 +97,7 @@
             vm.getAllData();
         };
 
+
         //$window.onfocus = vm.onFocus;
 
         vm.getResult = function () {
@@ -111,8 +116,18 @@
                         var dataObj = {};
                         dataObj.city = $rootScope.city;
                         dataObj.vehicle = $rootScope.vehicleType;
-                        dataObj.from =  moment($scope.datesForSearch.startDate).startOf('day').format("YYYYMMDD").toString();
-                        dataObj.to =  moment($scope.datesForSearch.startDate).startOf('day').format("YYYYMMDD").toString();
+                        if (vm.startDateURL){
+                            dataObj.from = vm.startDateURL;
+                        }else{
+                            dataObj.from =  moment($scope.datesForSearch.startDate).startOf('day').format("YYYYMMDD").toString();
+                        }
+                        if (vm.endDateURL){
+                            dataObj.to = vm.endDateURL;
+                        }else{
+                            dataObj.to =  moment($scope.datesForSearch.endDate).endOf('day').format("YYYYMMDD").toString();
+                        }
+
+
                         dataObj.start = start;
                         dataObj.count = params.count();
 

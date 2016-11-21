@@ -75,11 +75,11 @@
                 vm.selectedReasonNew = '-';
             }
             obj.driver = $scope.selectedTrip.driverInfo.id;
-                obj.rider = $scope.selectedTrip.riderInfo.id;
-                obj.driverChangeFare = parseFloat(vm.selectedReasonNew + vm.inputFare);
-                obj.riderCashback = parseInt(vm.inputTcash);
-                obj.fareChangeReason = vm.selectedReason.name;
-                obj.requestOn = $scope.selectedTrip.requestOn;
+            obj.rider = $scope.selectedTrip.riderInfo.id;
+            obj.driverChangeFare = parseFloat(vm.selectedReasonNew + vm.inputFare);
+            obj.riderCashback = parseInt(vm.inputTcash);
+            obj.fareChangeReason = vm.selectedReason.name;
+            obj.requestOn = $scope.selectedTrip.requestOn;
             console.log(obj);
             TripsService.updateFare(
                 {
@@ -230,6 +230,10 @@
                     map: map
                 });
 
+                var iconForRider = {
+                    url: "assets/images/icons/marker-blue.svg", // url
+                    scaledSize: new google.maps.Size(30, 30) // scaled size
+                };
                 var iconForTrip = {
                     url: "assets/images/icons/marker-green.svg", // url
                     scaledSize: new google.maps.Size(30, 30) // scaled size
@@ -260,12 +264,51 @@
                 };
 
 
-                //bid Marker start
-
                 var markers = [];
                 var contents = [];
                 var infowindows = [];
+                var a = 1000;
                 var i = 0;
+
+
+                //rider Marker start
+
+
+                if ($scope.selectedTrip.pickUp) {
+                    markers[a] = new google.maps.Marker({
+                        position: new google.maps.LatLng($scope.selectedTrip.pickUp.lt, $scope.selectedTrip.pickUp.ln),
+                        map: map,
+                        title: 'Rider Location',
+                        icon: iconForRider
+                    });
+
+                    if (($scope.selectedTrip.pickUp.sl).length > 0) {
+                        contents[a] = '<div class="popup_container">'
+                        + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;">' + $scope.selectedTrip.pickUp.sl + '</h4><span>Location</span></div>'
+                        + '</div>';
+                    } else {
+                        contents[a] = '<div class="popup_container">'
+                        + '<div class="col-md-12 col-sm-12 col-xs-12"><h4 class="number ng-binding" style="margin: 14px 0 0 0;">' + $scope.selectedTrip.pickUp.line1 + '</h4><span>Location</span></div>'
+                        + '</div>';
+                    }
+
+
+                    infowindows[a] = new google.maps.InfoWindow({
+                        content: contents[a],
+                        maxWidth: 300
+                    });
+
+                    google.maps.event.addListener(markers[a], 'click', function () {
+                        infowindows[a].open(map, markers[a]);
+                        map.panTo(markers[a].getPosition());
+                    });
+                }
+
+                //rider Marker end
+
+
+                //bid Marker start
+
 
                 $scope.bidConstants = {
                     "0": "Reject",
@@ -276,8 +319,8 @@
                     "-3": "Unknown",
                     "-4": "Retry Failed"
                 };
-                for (i = 0; i < ($scope.totalBid || []).length; i++) {
 
+                for (i = 0; i < ($scope.totalBid || []).length; i++) {
 
 
                     if (($scope.selectedTrip.driverInfo || {}).id === $scope.totalBid[i].dr) {
@@ -288,7 +331,6 @@
                             icon: iconForBidGot
                         });
                     }
-
                     else {
                         markers[i] = new google.maps.Marker({
                             position: new google.maps.LatLng($scope.totalBid[i].lt, $scope.totalBid[i].ln),
@@ -297,8 +339,6 @@
                             icon: iconBidder
                         });
                     }
-
-
 
 
                     markers[i].index = i;
