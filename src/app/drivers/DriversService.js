@@ -82,6 +82,11 @@ function DriversService($q, $resource, API) {
                 method: 'GET',
                 url:   url + 'drivers/online/chart/:drivers',
                 isArray:true
+            },
+            getDistance: {
+                method: 'POST',
+                url:   url + 'driver/trip/distance/:drivers',
+                isArray:true
             }
         }
     );
