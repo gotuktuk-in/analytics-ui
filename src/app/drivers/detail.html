@@ -152,6 +152,56 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-default">
+                <form class="form-inline pull-right no-mr pd-2-">
+                    <div class="form-group ">
+                        <input
+                                ng-change="vm.onDateDistance()"
+                                class="form-control text-center"
+                                type="daterange"
+                                ng-model="tripDistanceDates"
+                                separator=" - "
+                                format="DD MMM YY"
+                                opens="left"
+                                ranges="vm.ranges"
+                                style="margin: 8px 10px 0px 0px !important;
+                                        padding: 0px;
+                                        height: 20px;
+                                        width: auto; font-size: 11px;">
+                    </div>
+                </form>
+                <div class="panel-heading">
+                    <h4 style="margin-top: 0" class="title">Trip Distance</h4></div>
+                <div class="panel-body">
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="box text-center">
+                            <h4 class="number">{{vm.tripDistance[0].totalfortripdistance | number:2}} KM</h4>
+                            <span>Total For-Trip Distance</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="box text-center">
+                            <h4 class="number">{{vm.newForTime}}</h4>
+                            <span>Total For-Trip Time</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="box text-center">
+                            <h4 class="number">{{vm.tripDistance[0].totalintripdistance | number:2}} KM</h4>
+                            <span>Total In-Trip Distance</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="box text-center">
+                            <h4 class="number">{{vm.newInTime}}</h4>
+                            <span>Total In-Trip Time</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row" style="position:absolute;width:auto;margin: -5px 0 0;right: 20px;">
                         <div class="col-md-12 col-sm-12 col-xs-12">
