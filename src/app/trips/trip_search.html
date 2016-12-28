@@ -137,8 +137,11 @@
                                     <div>{{row.amount.driverFare | number:2}}<br>
                                     </div>
                                 </td>
-                                <td data-title="'Rider Fare'" class="text-right">
-                                    <div>{{row.amount.riderFare | number:2}}</div>
+                                <td data-title="'Wallet/Discount'" class="text-right">
+                                    <div>{{row.amount.walletPayment | number:2}}/{{row.amount.promoDiscountAmount | number:2}}</div>
+                                </td>
+                                <td data-title="'tCASH'" class="text-right">
+                                    <div>{{row.amount.tcash | number:2}}</div>
                                 </td>
                                 <td data-title="'tCASH'" class="text-right">
                                     <div>{{row.amount.tcash | number:2}}</div>
